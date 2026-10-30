@@ -1,0 +1,9 @@
+{
+  "task_id": "T001-leap",
+  "description": "code/leap_year.py 的 is_leap 对世纪年判断错误。只允许修改该文件，不允许修改测试。以实际测试结果判断是否修复。",
+  "allowed_paths": [
+    "code/leap_year.py"
+  ],
+  "test_command": "python -m pytest tests/ -v",
+  "max_repair_rounds": 3
+}
