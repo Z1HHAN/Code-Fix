@@ -36,3 +36,4 @@ python -m pytest day1-kit/tests/ -v
 - 提交规范：约定式提交（`feat:` / `fix:` / `docs:` / `test:` 等）
 - 不要提交 `runs/`、虚拟环境、日志、密钥（已在 `.gitignore` 中排除）
 - 提交前先拉取最新代码，避免冲突
+- （分支流程演示：这一行是在 `demo/readme-note` 分支上加的）
