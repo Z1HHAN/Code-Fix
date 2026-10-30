@@ -1,0 +1,6 @@
+{"ts": "2026-10-30T19:32:01.288+08:00", "event": "c_check_started", "scope": "c_reference_verification", "run_id": "C-20261030-193201-b32afc2e", "model_api_called": false}
+{"ts": "2026-10-30T19:32:01.289+08:00", "event": "c_test_started", "scope": "c_reference_verification", "kind": "bad"}
+{"ts": "2026-10-30T19:32:01.599+08:00", "event": "c_test_finished", "scope": "c_reference_verification", "kind": "bad", "call_id": "c001", "tool": "run_tests", "status": "failed", "exit_code": 1, "counts": {"passed": 3, "failed": 1}, "log_path": "runs/C-20261030-193201-b32afc2e/bad.log.txt", "duration_ms": 305}
+{"ts": "2026-10-30T19:32:01.599+08:00", "event": "c_test_started", "scope": "c_reference_verification", "kind": "reference"}
+{"ts": "2026-10-30T19:32:01.872+08:00", "event": "c_test_finished", "scope": "c_reference_verification", "kind": "reference", "call_id": "c002", "tool": "run_tests", "status": "passed", "exit_code": 0, "counts": {"passed": 4, "failed": 0}, "log_path": "runs/C-20261030-193201-b32afc2e/reference.log.txt", "duration_ms": 268}
+{"ts": "2026-10-30T19:32:01.874+08:00", "event": "c_check_finished", "scope": "c_reference_verification", "result": "passed", "model_api_called": false}

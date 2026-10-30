@@ -1,0 +1,174 @@
+{
+  "run_id": "C-20261030-193201-b32afc2e",
+  "created_at": "2026-10-30T19:32:01.289+08:00",
+  "completed_at": "2026-10-30T19:32:01.874+08:00",
+  "timezone": "Asia/Shanghai (+08:00)",
+  "c_environment_reference_verification": true,
+  "model_api_called": false,
+  "reference_source": "manual_provided_reference",
+  "result": "passed",
+  "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "python_executable": "F:\\sss\\C_Day1_20261030\\.venv\\Scripts\\python.exe",
+  "pytest_version": "8.3.5",
+  "paths_relative_to": "project_root",
+  "run_dir": "runs/C-20261030-193201-b32afc2e",
+  "reference_path": "reference/leap_year.py",
+  "original_hashes_before": {
+    "code": {
+      "__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "leap_year.py": "62e651c0dad7bfd034f11e76303d29a5830cd71c832713ad6a3eb909e48a70fa"
+    },
+    "tests": {
+      "test_leap.py": "26f88bb716343c945dfc6ebc8d33e6ed4911af7bb095811ade5d6675f86fcbef"
+    },
+    "reference": {
+      "leap_year.py": "a8399a35acf6811cde6ee14de457bb818dd3c49020afe5e4413431f9f5f44016"
+    }
+  },
+  "original_hashes_after": {
+    "code": {
+      "__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "leap_year.py": "62e651c0dad7bfd034f11e76303d29a5830cd71c832713ad6a3eb909e48a70fa"
+    },
+    "tests": {
+      "test_leap.py": "26f88bb716343c945dfc6ebc8d33e6ed4911af7bb095811ade5d6675f86fcbef"
+    },
+    "reference": {
+      "leap_year.py": "a8399a35acf6811cde6ee14de457bb818dd3c49020afe5e4413431f9f5f44016"
+    }
+  },
+  "copy_hashes_after": {
+    "bad": {
+      "code": {
+        "__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "leap_year.py": "62e651c0dad7bfd034f11e76303d29a5830cd71c832713ad6a3eb909e48a70fa"
+      },
+      "tests": {
+        "test_leap.py": "26f88bb716343c945dfc6ebc8d33e6ed4911af7bb095811ade5d6675f86fcbef"
+      }
+    },
+    "reference": {
+      "code": {
+        "__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "leap_year.py": "a8399a35acf6811cde6ee14de457bb818dd3c49020afe5e4413431f9f5f44016"
+      },
+      "tests": {
+        "test_leap.py": "26f88bb716343c945dfc6ebc8d33e6ed4911af7bb095811ade5d6675f86fcbef"
+      }
+    }
+  },
+  "runs": {
+    "bad": {
+      "kind": "bad",
+      "started_at": "2026-10-30T19:32:01.289+08:00",
+      "finished_at": "2026-10-30T19:32:01.594+08:00",
+      "command": [
+        "F:\\sss\\C_Day1_20261030\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/",
+        "-v",
+        "--junitxml=../bad.junit.xml",
+        "--color=no",
+        "-p",
+        "no:debugging"
+      ],
+      "cwd": "runs/C-20261030-193201-b32afc2e/work_bad",
+      "environment_overrides": {
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+        "PYTEST_ADDOPTS": "",
+        "PYTHONUTF8": "1",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "timeout_seconds": 60,
+      "tool_run": {
+        "call_id": "c001",
+        "tool": "run_tests",
+        "status": "failed",
+        "exit_code": 1,
+        "counts": {
+          "passed": 3,
+          "failed": 1
+        },
+        "log_path": "runs/C-20261030-193201-b32afc2e/bad.log.txt",
+        "duration_ms": 305
+      },
+      "tool_run_path": "runs/C-20261030-193201-b32afc2e/bad.toolrun.json",
+      "stdout_path": "runs/C-20261030-193201-b32afc2e/bad.stdout.txt",
+      "stderr_path": "runs/C-20261030-193201-b32afc2e/bad.stderr.txt",
+      "junit_path": "runs/C-20261030-193201-b32afc2e/bad.junit.xml",
+      "junit": {
+        "passed": 3,
+        "failed": 1,
+        "skipped": 0,
+        "failures": [
+          "test_1900_is_not_leap"
+        ],
+        "errors": []
+      },
+      "runner_problem": null
+    },
+    "reference": {
+      "kind": "reference",
+      "started_at": "2026-10-30T19:32:01.599+08:00",
+      "finished_at": "2026-10-30T19:32:01.867+08:00",
+      "command": [
+        "F:\\sss\\C_Day1_20261030\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests/",
+        "-v",
+        "--junitxml=../reference.junit.xml",
+        "--color=no",
+        "-p",
+        "no:debugging"
+      ],
+      "cwd": "runs/C-20261030-193201-b32afc2e/work_reference",
+      "environment_overrides": {
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+        "PYTEST_ADDOPTS": "",
+        "PYTHONUTF8": "1",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "timeout_seconds": 60,
+      "tool_run": {
+        "call_id": "c002",
+        "tool": "run_tests",
+        "status": "passed",
+        "exit_code": 0,
+        "counts": {
+          "passed": 4,
+          "failed": 0
+        },
+        "log_path": "runs/C-20261030-193201-b32afc2e/reference.log.txt",
+        "duration_ms": 268
+      },
+      "tool_run_path": "runs/C-20261030-193201-b32afc2e/reference.toolrun.json",
+      "stdout_path": "runs/C-20261030-193201-b32afc2e/reference.stdout.txt",
+      "stderr_path": "runs/C-20261030-193201-b32afc2e/reference.stderr.txt",
+      "junit_path": "runs/C-20261030-193201-b32afc2e/reference.junit.xml",
+      "junit": {
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "failures": [],
+        "errors": []
+      },
+      "runner_problem": null
+    }
+  },
+  "validations": {
+    "bad_counts_are_3_passed_1_failed": true,
+    "bad_exit_code_is_1": true,
+    "bad_failure_is_1900_only": true,
+    "reference_counts_are_4_passed_0_failed": true,
+    "reference_exit_code_is_0": true,
+    "no_errors_skips_or_missing_junit": true,
+    "original_files_unchanged": true,
+    "both_test_copies_unchanged": true,
+    "bad_code_copy_unchanged": true,
+    "reference_code_matches_provided_reference": true
+  }
+}

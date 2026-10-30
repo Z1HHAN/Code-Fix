@@ -1,0 +1,12 @@
+{
+  "call_id": "c001",
+  "tool": "run_tests",
+  "status": "failed",
+  "exit_code": 1,
+  "counts": {
+    "passed": 3,
+    "failed": 1
+  },
+  "log_path": "runs/C-20261030-193201-b32afc2e/bad.log.txt",
+  "duration_ms": 305
+}
