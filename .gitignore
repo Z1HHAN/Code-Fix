@@ -54,5 +54,7 @@ runs/
 
 # === 密钥 / 敏感信息 ===
 .env
+.env.*
+!.env.example
 *.key
 secrets/

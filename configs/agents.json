@@ -1,0 +1,68 @@
+{
+  "config_version": "iteration-0.2-draft",
+  "interface_version": "0.2-draft",
+  "status": "pending_BC_confirmation",
+  "model_policy": {
+    "shared_model_ref": "primary",
+    "note": "B绑定已解决的API。三个角色先使用同一个模型，不在此填写密钥。"
+  },
+  "control_only_tools": [
+    "apply_patch",
+    "run_tests",
+    "final_check"
+  ],
+  "agents": [
+    {
+      "agent_id": "locator",
+      "role": "定位员",
+      "enabled": true,
+      "model_ref": "primary",
+      "prompt_ref": "prompts/locator.md",
+      "tool_allowlist": [
+        "search_code",
+        "read_file",
+        "search_knowledge"
+      ],
+      "knowledge_ids": [
+        "project_structure",
+        "business_rules",
+        "testing"
+      ],
+      "output_schema": "LocatorOutput",
+      "responsibility": "读取当前代码与开发失败证据，输出位置、假设、证据编号和知识引用；不改代码、不宣布测试通过。"
+    },
+    {
+      "agent_id": "repairer",
+      "role": "修复员",
+      "enabled": true,
+      "model_ref": "primary",
+      "prompt_ref": "prompts/repairer.md",
+      "tool_allowlist": [
+        "read_file",
+        "search_knowledge"
+      ],
+      "knowledge_ids": [
+        "business_rules",
+        "testing"
+      ],
+      "output_schema": "RepairOutput",
+      "responsibility": "返回允许路径中的完整文件内容和修改说明；实际写文件和跑测试由控制程序完成。"
+    },
+    {
+      "agent_id": "reviewer",
+      "role": "审查员",
+      "enabled": false,
+      "model_ref": "primary",
+      "prompt_ref": "prompts/reviewer.md",
+      "tool_allowlist": [
+        "read_file"
+      ],
+      "knowledge_ids": [
+        "business_rules"
+      ],
+      "output_schema": "ReviewOutput",
+      "responsibility": "只审查修改风险并给建议，不批准越权修改，不代替真实测试。今天只预留配置。"
+    }
+  ],
+  "enforcement": "B在程序侧校验角色权限、输出和路径；提示词不能替代权限检查。模型不接触保留测试、参考实现、模型密钥或任意宿主机Shell。"
+}

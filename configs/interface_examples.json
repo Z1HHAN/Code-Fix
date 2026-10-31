@@ -1,0 +1,110 @@
+{
+  "interface_version": "0.2-draft",
+  "synthetic": true,
+  "purpose": "仅供B/C解析联调，不是真实运行证据；示例ID、版本和日志位置均不可用于成果登记。",
+  "TaskSpec": {
+    "task_id": "fixture-leap",
+    "project_id": "leap_demo",
+    "project_version": "fixture:baseline",
+    "description": "仅联调",
+    "allowed_paths": [
+      "code/leap_year.py"
+    ],
+    "test_profile": "leap_dev",
+    "knowledge_ids": [
+      "project_structure",
+      "business_rules",
+      "testing"
+    ],
+    "limits": {
+      "max_repair_rounds": 3,
+      "test_timeout_seconds": 60,
+      "total_run_seconds": null,
+      "max_tool_calls": null,
+      "daily_cost_limit": null
+    }
+  },
+  "AgentSpec": {
+    "agent_id": "locator",
+    "role": "定位员",
+    "enabled": true,
+    "model_ref": "primary",
+    "prompt_ref": "prompts/locator.md",
+    "tool_allowlist": [
+      "search_code",
+      "read_file",
+      "search_knowledge"
+    ],
+    "knowledge_ids": [
+      "project_structure",
+      "business_rules",
+      "testing"
+    ],
+    "output_schema": "LocatorOutput",
+    "responsibility": "读取当前代码与开发失败证据，输出位置、假设、证据编号和知识引用；不改代码、不宣布测试通过。"
+  },
+  "ToolResult": {
+    "call_id": "fixture-call-1",
+    "run_id": "fixture-run",
+    "task_id": "fixture-leap",
+    "tool": "run_tests",
+    "phase": "development",
+    "status": "failed",
+    "verification_status": "failed",
+    "failure_class": "assertion_failed",
+    "exit_code": 1,
+    "counts": {
+      "passed": 3,
+      "failed": 1,
+      "skipped": 0
+    },
+    "stdout_path": "fixture-only/stdout.txt",
+    "stderr_path": "fixture-only/stderr.txt",
+    "duration_ms": 1000,
+    "code_version": "fixture:v0",
+    "output_agent": null
+  },
+  "Evidence": {
+    "evidence_id": "fixture-evidence-1",
+    "run_id": "fixture-run",
+    "task_id": "fixture-leap",
+    "type": "development_test",
+    "source": "fixture-call-1",
+    "code_version": "fixture:v0",
+    "content_or_path": "fixture-only/stdout.txt",
+    "created_at": "2000-01-01T00:00:00Z"
+  },
+  "Decision": {
+    "decision_id": "fixture-decision-1",
+    "run_id": "fixture-run",
+    "code_version": "fixture:v0",
+    "evidence_ids": [
+      "fixture-evidence-1"
+    ],
+    "failure_class": "assertion_failed",
+    "action": "locate",
+    "target_agent": "locator",
+    "reason": "仅联调：开发断言失败返回定位",
+    "retries_left": 2,
+    "rule_id": "R13"
+  },
+  "RunSummary": {
+    "run_id": "fixture-run",
+    "config_version": "iteration-0.2-draft",
+    "model": "fixture-model",
+    "usage": {
+      "input_tokens": null,
+      "output_tokens": null
+    },
+    "cost_status": "unknown",
+    "cost_amount": null,
+    "dev_result": "failed",
+    "final_result": "not_run",
+    "status": "stopped",
+    "elapsed_ms": 1000,
+    "artifact_paths": [
+      "fixture-only/stdout.txt"
+    ],
+    "code_version": "fixture:v0"
+  }
+}

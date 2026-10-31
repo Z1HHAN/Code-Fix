@@ -1,0 +1,61 @@
+{
+  "plan_version": "iteration-0.2-draft",
+  "status": "planned_not_executed",
+  "first_gate": {
+    "task_id": "T001-leap",
+    "source": "day1-kit",
+    "expected_buggy_baseline": {
+      "passed": 3,
+      "failed": 1
+    },
+    "expected_development_after_repair": {
+      "passed": 4,
+      "failed": 0
+    },
+    "final_check": "C另行冻结的保留测试，仅评测端可读；未准备则final_result为not_run。"
+  },
+  "public_source": {
+    "url": "https://github.com/jkoppel/QuixBugs",
+    "commit": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+    "license": "MIT",
+    "license_file": "LICENSE",
+    "pin_checked_on": "2026-10-31",
+    "local_qualification": "not_run"
+  },
+  "public_tasks": [
+    {
+      "task_id": "QB-get_factors",
+      "order": 1,
+      "allowed_paths": [
+        "python_programs/get_factors.py"
+      ],
+      "test_path": "python_testcases/test_get_factors.py",
+      "purpose": "首个公开任务接入；环境资格通过后接模型。",
+      "qualification_status": "not_run"
+    },
+    {
+      "task_id": "QB-gcd",
+      "order": 2,
+      "allowed_paths": [
+        "python_programs/gcd.py"
+      ],
+      "test_path": "python_testcases/test_gcd.py",
+      "purpose": "环境资格及后续运行异常恢复验证；不是环境异常故障注入。",
+      "qualification_status": "not_run"
+    },
+    {
+      "task_id": "QB-max_sublist_sum",
+      "order": 3,
+      "allowed_paths": [
+        "python_programs/max_sublist_sum.py"
+      ],
+      "test_path": "python_testcases/test_max_sublist_sum.py",
+      "purpose": "环境资格及下一批算法任务。",
+      "qualification_status": "not_run"
+    }
+  ],
+  "qualification": "C在独立评测目录固定commit，逐题运行坏代码测试和--correct参考验证，记录实际计数、退出码、超时及跳过项；先不把3题全部送模型。",
+  "feedback_policy": "官方公开用例作为开发反馈，C单独准备并冻结额外保留用例；不得把公开全套测试称为秘密测试。--correct只用于评测端参考环境检查，绝非模型修复验收。",
+  "preparation": "完整QuixBugs仓库仅保留在C评测侧；Agent工作副本只导入选定的坏代码、开发用例、必要辅助文件和许可声明，不提供correct_python_programs、仓库历史或.git。",
+  "swe_bench": "今日不作为模型修复门槛。主链路稳定且有余力时，C最多90分钟用官方工具检查一条参考补丁环境；不得算模型成绩。"
+}

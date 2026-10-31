@@ -1,0 +1,69 @@
+{
+  "template_only": true,
+  "run_id": null,
+  "run_type": null,
+  "task_id": null,
+  "started_at": null,
+  "system_commit": null,
+  "config_version": null,
+  "interface_version": null,
+  "model": null,
+  "dataset_url": null,
+  "dataset_commit": null,
+  "task_baseline_version": null,
+  "patched_code_version": null,
+  "execution_environment": null,
+  "isolation_verified": null,
+  "limits_snapshot": {
+    "max_repair_rounds": null,
+    "test_timeout_seconds": null,
+    "total_run_seconds": null,
+    "max_tool_calls": null,
+    "daily_cost_limit": null
+  },
+  "dev_result": "not_run",
+  "final_result": "not_run",
+  "counts": {
+    "development": {
+      "passed": null,
+      "failed": null,
+      "skipped": null
+    },
+    "final_check": {
+      "passed": null,
+      "failed": null,
+      "skipped": null
+    }
+  },
+  "repair_rounds_used": null,
+  "model_calls": null,
+  "tool_calls": null,
+  "elapsed_ms": null,
+  "usage": {
+    "input_tokens": null,
+    "output_tokens": null
+  },
+  "cost_status": "unknown",
+  "cost_amount": null,
+  "cost_source": null,
+  "failure_class": null,
+  "decision_evidence_ids": [],
+  "artifacts": {
+    "config_snapshot": null,
+    "baseline_test": null,
+    "model_reply": null,
+    "patch": null,
+    "development_test": null,
+    "final_report": null,
+    "events": null
+  },
+  "independent_reviewer": null,
+  "review_result": "not_run",
+  "remaining_issues": [],
+  "status": null,
+  "budget_scope": {
+    "max_tool_calls": "per_run_including_model_requests_and_network_retries",
+    "daily_cost_limit": "team_shared_daily_across_runs",
+    "timezone": "Asia/Shanghai"
+  }
+}
