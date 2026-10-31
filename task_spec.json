@@ -1,0 +1,9 @@
+{
+  "task_id": "T001-leap",
+  "description": "is_leap 对世纪年判断错误",
+  "allowed_paths": [
+    "leap_app/leap_year.py"
+  ],
+  "test_command": "python -m pytest tests/ -v",
+  "max_repair_rounds": 3
+}

@@ -1,0 +1,6 @@
+{"ts": "2026-10-31T09:33:57+08:00", "event": "run_started", "run_id": "20261031-093357", "target_file": "leap_app/leap_year.py"}
+{"ts": "2026-10-31T09:33:59+08:00", "event": "test_run", "call_id": "t001", "status": "failed", "passed": 3, "failed": 1, "log_path": "test_before.log"}
+{"ts": "2026-10-31T09:34:04+08:00", "event": "model_call", "round": 1, "response_path": "model_response_round_1.txt"}
+{"ts": "2026-10-31T09:34:04+08:00", "event": "patch_applied", "round": 1, "file": "leap_app/leap_year.py"}
+{"ts": "2026-10-31T09:34:06+08:00", "event": "test_run", "round": 1, "call_id": "t002", "status": "passed", "passed": 4, "failed": 0, "log_path": "test_after_round_1.log"}
+{"ts": "2026-10-31T09:34:06+08:00", "event": "final", "result": "success", "rounds": 1}

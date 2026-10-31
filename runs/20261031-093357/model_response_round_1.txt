@@ -1,0 +1,3 @@
+def is_leap(year):
+    """闰年：能被4整除，且（不能被100整除，或能被400整除）"""
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)

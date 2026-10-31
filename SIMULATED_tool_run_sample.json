@@ -1,0 +1,12 @@
+{
+    "call_id": "t001",
+    "tool": "run_tests",
+    "status": "failed",
+    "exit_code": 1,
+    "counts": {
+        "passed": 3,
+        "failed": 1
+    },
+    "log_path": "runs/run_demo/log_t001.txt",
+    "duration_ms": 1420
+}
