@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>错误版复现成功 · C-20261030-193201-b32afc2e</title>
+<style>
+*{box-sizing:border-box} body{margin:0;background:#f2f5f7;color:#172536;font:17px/1.6 "Microsoft YaHei",sans-serif}
+main{max-width:1420px;margin:0 auto;padding:38px 42px 32px} .eyebrow{font-size:15px;color:#53697d;letter-spacing:2px}
+h1{margin:10px 0 10px;font-size:36px;line-height:1.3} .intro{margin:0;color:#405166}
+.meta{margin:18px 0 24px;padding:14px 18px;background:white;border:1px solid #d6dee6;border-radius:8px;font-size:14px;color:#405166}
+.summary{display:flex;align-items:baseline;gap:26px;margin:0 0 20px} .result{font-size:30px;font-weight:700;color:#b45309} .detail{font-size:15px;color:#526477}
+h2{font-size:18px;margin:14px 0 10px} pre{white-space:pre-wrap;overflow-wrap:anywhere;margin:0;padding:24px;background:#172331;color:#f1f5f9;border-radius:10px;font:15px/1.65 Consolas,"Microsoft YaHei",monospace}
+footer{margin-top:20px;font-size:13px;color:#546577} a{color:#245e88} .evidence{margin:12px 0 0;font-size:14px}
+</style><main>
+<div class="eyebrow">验链 · C 环境与复现 · 真实本地测试</div>
+<h1>错误版复现成功</h1><p class="intro">1900 年不是闰年。原始代码仅判断能否被 4 整除，测试准确捕获了这个缺陷。</p>
+<div class="meta">运行编号：C-20261030-193201-b32afc2e<br>完成时间：2026-10-30T19:32:01.594+08:00（北京时间）<br>环境：Python 3.14.6 · pytest 8.3.5 · Windows</div>
+<div class="summary"><span class="result">3 passed · 1 failed</span><span class="detail">pytest 退出码 1 · 进程耗时 305 ms</span></div>
+<h2>pytest 原始标准输出</h2><pre>============================= test session starts =============================
+platform win32 -- Python 3.14.6, pytest-8.3.5, pluggy-1.7.0 -- F:\sss\C_Day1_20261030\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: F:\sss\C_Day1_20261030\runs\C-20261030-193201-b32afc2e\work_bad
+collecting ... collected 4 items
+
+tests/test_leap.py::test_2024_is_leap PASSED                             [ 25%]
+tests/test_leap.py::test_2023_is_not_leap PASSED                         [ 50%]
+tests/test_leap.py::test_1900_is_not_leap FAILED                         [ 75%]
+tests/test_leap.py::test_2000_is_leap PASSED                             [100%]
+
+================================== FAILURES ===================================
+____________________________ test_1900_is_not_leap ____________________________
+
+    def test_1900_is_not_leap():   # 被100整除但不被400整除
+&gt;       assert is_leap(1900) == False
+E       assert True == False
+E        +  where True = is_leap(1900)
+
+tests\test_leap.py:13: AssertionError
+- generated xml file: F:\sss\C_Day1_20261030\runs\C-20261030-193201-b32afc2e\bad.junit.xml -
+=========================== short test summary info ===========================
+FAILED tests/test_leap.py::test_1900_is_not_leap - assert True == False
+========================= 1 failed, 3 passed in 0.09s =========================
+</pre>
+
+<p class="evidence"><a href="../runs/C-20261030-193201-b32afc2e/bad.stdout.txt">原始文本</a> · <a href="../runs/C-20261030-193201-b32afc2e/bad.toolrun.json">ToolRun JSON</a> · <a href="../runs/C-20261030-193201-b32afc2e/bad.junit.xml">JUnit XML</a></p>
+<footer>本页直接读取真实 pytest 日志；PNG 是本地日志展示页截图，不是原始终端截图。<br>本次仅验证 C 的环境与参考答案，未调用模型 API，不计为 AI 自动修复。原始代码与两份测试的哈希校验均通过。</footer>
+</main></html>

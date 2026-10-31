@@ -1,0 +1,12 @@
+{
+  "call_id": "c002",
+  "tool": "run_tests",
+  "status": "passed",
+  "exit_code": 0,
+  "counts": {
+    "passed": 4,
+    "failed": 0
+  },
+  "log_path": "runs/C-20261030-193201-b32afc2e/reference.log.txt",
+  "duration_ms": 268
+}
