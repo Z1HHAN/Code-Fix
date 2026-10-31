@@ -5,5 +5,12 @@
     "leap_app/leap_year.py"
   ],
   "test_command": "python -m pytest tests/ -v",
-  "max_repair_rounds": 3
+  "max_repair_rounds": 3,
+  "expected_test_count": 4,
+  "limits": {
+    "max_repair_rounds": 3,
+    "test_timeout_seconds": 60,
+    "max_tool_calls": 10,
+    "daily_cost_limit": null
+  }
 }

@@ -31,4 +31,4 @@ python run_task.py
 
 ## 已有真实运行
 
-`runs/20261031-093357/` 保存了此前真实模型调用：修复前 3 passed、1 failed，模型回复后 4 passed、0 failed，`events.jsonl` 最终结果为 success。历史运行证据中的 `log_path` 已整理为项目相对路径；后续新运行也会写入项目相对路径。
+`runs/20261031-093357/` 保存了此前真实模型调用：修复前 3 passed、1 failed，模型回复后 4 passed、0 failed，`events.jsonl` 最终结果为 success。历史运行证据的 `log_path` 已整理为项目相对路径；后续新运行也会写入项目相对路径。

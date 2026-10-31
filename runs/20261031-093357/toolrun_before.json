@@ -7,6 +7,6 @@
     "passed": 3,
     "failed": 1
   },
-  "log_path": "E:\\day1_repair_demo\\runs\\20261031-093357\\test_before.log",
+  "log_path": "runs/20261031-093357/test_before.log",
   "duration_ms": 2128
 }
