@@ -65,3 +65,33 @@ python -m pytest day1-kit/tests/ -v
 - 不提交真实密钥、虚拟环境和原始大型运行目录；关键证据检查后放`evidence/<run_id>/`或登记共享链接。
 - `configs/interface_examples.json`是模拟联调数据，`evaluation/run_record.template.json`是空模板，均不计实际成绩。
 - UI实现以[完整交付规格](docs/UI交付B完整提示词.md)为准；[早期生图模板](docs/UI草图生图提示词与操作步骤.md)只用于讨论。
+
+## B v0.2 本地检查
+
+当前仓库已加入最小 v0.2 接口检查组件，仍需 A/C 确认隔离环境、工具调用上限和当天费用上限后，才允许接真实模型自动运行。
+
+在仓库根目录执行：
+
+```powershell
+python -m pip install pytest
+python -m app.cli validate-config
+python -m app.cli decision-fixtures
+python -m pytest tests/ -q
+python -m pytest day1-kit/tests/ -v
+```
+
+`validate-config` 只检查草案配置能否解析；配置仍为 `pending_BC_confirmation`，不代表自动执行已经启用。修复员输出必须符合 v0.2 JSON 格式，不能把裸 Python 代码直接写入文件。可用以下命令检查一份输出：
+
+```powershell
+python -m app.cli parse-output repairer path/to/repair-response.json
+```
+
+组件位置：
+
+- `app/config.py`：TaskSpec 与草案配置检查；
+- `app/repair_output.py`：定位员/修复员 JSON 协议解析；
+- `app/security.py`：允许路径、禁止路径、路径穿越和软链接检查；
+- `app/decision.py`：按 `decision_rules.json` 顺序匹配 Decision；
+- `app/cli.py`：本地接口与规则夹具检查。
+
+尚未接通真实模型、隔离执行器、C 的独立验收报告和 UI；这些缺口必须保留在阶段结论中，不能用规则夹具当作真实运行证据。
