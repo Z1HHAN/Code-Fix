@@ -1,10 +1,10 @@
 {
-  "config_version": "iteration-0.2-draft",
-  "interface_version": "0.2-draft",
+  "config_version": "iteration-0.2-20261101-draft",
+  "interface_version": "0.2-20261101-draft",
   "status": "pending_BC_confirmation",
   "model_policy": {
     "shared_model_ref": "primary",
-    "note": "B绑定已解决的API。三个角色先使用同一个模型，不在此填写密钥。"
+    "note": "定位员和修复员先共用B绑定的模型；reviewer关闭；tester为确定性执行角色，不调用模型。此配置仍待B/C确认，不填写密钥。"
   },
   "control_only_tools": [
     "apply_patch",
@@ -29,7 +29,8 @@
         "testing"
       ],
       "output_schema": "LocatorOutput",
-      "responsibility": "读取当前代码与开发失败证据，输出位置、假设、证据编号和知识引用；不改代码、不宣布测试通过。"
+      "responsibility": "读取当前代码与开发失败证据，输出位置、假设、证据编号和知识引用；不改代码、不宣布测试通过。",
+      "role_type": "llm"
     },
     {
       "agent_id": "repairer",
@@ -46,7 +47,8 @@
         "testing"
       ],
       "output_schema": "RepairOutput",
-      "responsibility": "返回允许路径中的完整文件内容和修改说明；实际写文件和跑测试由控制程序完成。"
+      "responsibility": "返回允许路径中的完整文件内容和修改说明；实际写文件和跑测试由控制程序完成。",
+      "role_type": "llm"
     },
     {
       "agent_id": "reviewer",
@@ -61,8 +63,26 @@
         "business_rules"
       ],
       "output_schema": "ReviewOutput",
-      "responsibility": "只审查修改风险并给建议，不批准越权修改，不代替真实测试。今天只预留配置。"
+      "responsibility": "只审查修改风险并给建议，不批准越权修改，不代替真实测试。今天只预留配置。",
+      "role_type": "llm"
+    },
+    {
+      "agent_id": "tester",
+      "role": "测试与证据整理执行角色",
+      "role_type": "deterministic",
+      "enabled": true,
+      "model_ref": null,
+      "prompt_ref": null,
+      "execution_binding": null,
+      "implementation_status": "planned_pending_C",
+      "tool_allowlist": [
+        "run_tests"
+      ],
+      "knowledge_ids": [],
+      "output_schema": "ToolResult",
+      "responsibility": "由控制程序调用C执行器，执行预登记test_profile，产出JUnit、日志和绑定代码版本的结构化结果；不调用模型、不生成或修改目标测试、不把参考答案作为候选。"
     }
   ],
-  "enforcement": "B在程序侧校验角色权限、输出和路径；提示词不能替代权限检查。模型不接触保留测试、参考实现、模型密钥或任意宿主机Shell。"
+  "enforcement": "B在程序侧校验角色类型、工具权限、输出和路径。deterministic角色不进入模型客户端，不读取空prompt_ref；参考实现、控制端密钥和评测端工作区不进入模型输入。原生开发测试可按白名单提供，独立复验结果不回流本轮修复。",
+  "control_only_tool_policy": "control_only_tools只能由控制程序或已绑定的deterministic执行角色调用；llm角色不能直接应用补丁、运行测试或执行最终复验。执行绑定为空时拒绝自动运行，不回退为普通宿主机Shell。"
 }

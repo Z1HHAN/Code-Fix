@@ -1,5 +1,5 @@
 {
-  "interface_version": "0.2-draft",
+  "interface_version": "0.2-20261101-draft",
   "synthetic": true,
   "purpose": "仅供B/C解析联调，不是真实运行证据；示例ID、版本和日志位置均不可用于成果登记。",
   "TaskSpec": {
@@ -21,7 +21,9 @@
       "test_timeout_seconds": 60,
       "total_run_seconds": null,
       "max_tool_calls": null,
-      "daily_cost_limit": null
+      "daily_cost_limit": null,
+      "model_request_timeout_seconds": null,
+      "max_transport_retries": null
     }
   },
   "AgentSpec": {
@@ -41,7 +43,8 @@
       "testing"
     ],
     "output_schema": "LocatorOutput",
-    "responsibility": "读取当前代码与开发失败证据，输出位置、假设、证据编号和知识引用；不改代码、不宣布测试通过。"
+    "responsibility": "读取当前代码与开发失败证据，输出位置、假设、证据编号和知识引用；不改代码、不宣布测试通过。",
+    "role_type": "llm"
   },
   "ToolResult": {
     "call_id": "fixture-call-1",
@@ -56,13 +59,19 @@
     "counts": {
       "passed": 3,
       "failed": 1,
-      "skipped": 0
+      "skipped": 0,
+      "errors": 0,
+      "collected": 4
     },
     "stdout_path": "fixture-only/stdout.txt",
     "stderr_path": "fixture-only/stderr.txt",
     "duration_ms": 1000,
     "code_version": "fixture:v0",
-    "output_agent": null
+    "output_agent": null,
+    "expected_test_count": 4,
+    "test_suite_version": "fixture:four-cases",
+    "junit_path": "fixture-only/results.xml",
+    "junit_missing_reason": null
   },
   "Evidence": {
     "evidence_id": "fixture-evidence-1",
@@ -90,7 +99,7 @@
   },
   "RunSummary": {
     "run_id": "fixture-run",
-    "config_version": "iteration-0.2-draft",
+    "config_version": "iteration-0.2-20261101-draft",
     "model": "fixture-model",
     "usage": {
       "input_tokens": null,
@@ -105,6 +114,39 @@
     "artifact_paths": [
       "fixture-only/stdout.txt"
     ],
-    "code_version": "fixture:v0"
+    "code_version": "fixture:v0",
+    "interface_version": "0.2-20261101-draft",
+    "validation_scope": "native_tests_clean_rerun"
+  },
+  "TesterSpec": {
+    "agent_id": "tester",
+    "role": "测试与证据整理执行角色",
+    "role_type": "deterministic",
+    "enabled": true,
+    "model_ref": null,
+    "prompt_ref": null,
+    "execution_binding": null,
+    "implementation_status": "planned_pending_C",
+    "tool_allowlist": [
+      "run_tests"
+    ],
+    "knowledge_ids": [],
+    "output_schema": "ToolResult",
+    "responsibility": "由控制程序调用C执行器，执行预登记test_profile，产出JUnit、日志和绑定代码版本的结构化结果；不调用模型、不生成或修改目标测试、不把参考答案作为候选。"
+  },
+  "FinalFailureDecision": {
+    "decision_id": "fixture-final-failed",
+    "run_id": "fixture-run",
+    "code_version": "fixture:v1",
+    "phase": "final_check",
+    "failure_class": "final_check_failed",
+    "evidence_ids": [
+      "fixture-final-evidence"
+    ],
+    "action": "finish",
+    "target_agent": null,
+    "terminal_status": "failed",
+    "rule_id": "R08N",
+    "reason": "仅联调的独立复验失败示例，不是真实结果。"
   }
 }

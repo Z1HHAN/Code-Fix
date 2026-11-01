@@ -6,7 +6,7 @@
   "started_at": null,
   "system_commit": null,
   "config_version": null,
-  "interface_version": null,
+  "interface_version": "0.2-20261101-draft",
   "model": null,
   "dataset_url": null,
   "dataset_commit": null,
@@ -19,7 +19,9 @@
     "test_timeout_seconds": null,
     "total_run_seconds": null,
     "max_tool_calls": null,
-    "daily_cost_limit": null
+    "daily_cost_limit": null,
+    "model_request_timeout_seconds": null,
+    "max_transport_retries": null
   },
   "dev_result": "not_run",
   "final_result": "not_run",
@@ -27,12 +29,16 @@
     "development": {
       "passed": null,
       "failed": null,
-      "skipped": null
+      "skipped": null,
+      "errors": null,
+      "collected": null
     },
     "final_check": {
       "passed": null,
       "failed": null,
-      "skipped": null
+      "skipped": null,
+      "errors": null,
+      "collected": null
     }
   },
   "repair_rounds_used": null,
@@ -55,7 +61,10 @@
     "patch": null,
     "development_test": null,
     "final_report": null,
-    "events": null
+    "events": null,
+    "development_junit": null,
+    "final_check_junit": null,
+    "junit_missing_reason": null
   },
   "independent_reviewer": null,
   "review_result": "not_run",
@@ -65,5 +74,9 @@
     "max_tool_calls": "per_run_including_model_requests_and_network_retries",
     "daily_cost_limit": "team_shared_daily_across_runs",
     "timezone": "Asia/Shanghai"
-  }
+  },
+  "validation_scope": null,
+  "test_suite_version": null,
+  "expected_test_count": null,
+  "cost_currency": null
 }

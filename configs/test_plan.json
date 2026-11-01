@@ -1,5 +1,5 @@
 {
-  "plan_version": "iteration-0.2-draft",
+  "plan_version": "iteration-0.2-20261101-draft",
   "status": "planned_not_executed",
   "first_gate": {
     "task_id": "T001-leap",
@@ -12,7 +12,7 @@
       "passed": 4,
       "failed": 0
     },
-    "final_check": "C另行冻结的保留测试，仅评测端可读；未准备则final_result为not_run。"
+    "final_check": "在独立干净副本应用候选，重跑同一组预先登记的四条闰年测试；闰年是人工fixture，不计QuixBugs成绩。未执行为not_run，不代表新增秘密测试或额外覆盖。"
   },
   "public_source": {
     "url": "https://github.com/jkoppel/QuixBugs",
@@ -55,7 +55,30 @@
     }
   ],
   "qualification": "C在独立评测目录固定commit，逐题运行坏代码测试和--correct参考验证，记录实际计数、退出码、超时及跳过项；先不把3题全部送模型。",
-  "feedback_policy": "官方公开用例作为开发反馈，C单独准备并冻结额外保留用例；不得把公开全套测试称为秘密测试。--correct只用于评测端参考环境检查，绝非模型修复验收。",
+  "feedback_policy": "QuixBugs模型实验使用固定上游版本的预登记原生测试；Agent不生成或修改目标测试。开发阶段可反馈原生测试结果。结束后从相同干净起点应用候选、独立重跑同一套未修改测试；不把结果回流本轮修复，也不称为隐藏测试或额外覆盖。--correct仅供C环境资格检查，绝非模型成绩。",
   "preparation": "完整QuixBugs仓库仅保留在C评测侧；Agent工作副本只导入选定的坏代码、开发用例、必要辅助文件和许可声明，不提供correct_python_programs、仓库历史或.git。",
-  "swe_bench": "今日不作为模型修复门槛。主链路稳定且有余力时，C最多90分钟用官方工具检查一条参考补丁环境；不得算模型成绩。"
+  "swe_bench": "今日不作为模型修复门槛。主链路稳定且有余力时，C最多90分钟用官方工具检查一条参考补丁环境；不得算模型成绩。",
+  "interface_version": "0.2-20261101-draft",
+  "policy_version": "native-tests-clean-rerun-20261101",
+  "test_policy": {
+    "target_test_source": "pinned_upstream_native_tests",
+    "agent_may_generate_target_tests": false,
+    "agent_may_modify_target_tests": false,
+    "final_validation_scope": "native_tests_clean_rerun",
+    "final_result_feedback_to_repair_loop": false,
+    "platform_control_fixtures": "允许C编写分类、超时、权限、幂等和版本等平台检查；单列tool_check/fault_injection，不混入模型修复成绩。",
+    "coverage": "记录test_suite_version、预登记测试ID、expected_test_count、实际收集/执行/错误/跳过与超时；未知或缺测不默认通过。默认跳过不等于全部原生测试已执行。"
+  },
+  "experiment_policy": {
+    "pilot_tasks": [
+      "QB-get_factors",
+      "QB-gcd",
+      "QB-max_sublist_sum"
+    ],
+    "fixed": "一轮候选后结束，开发通过再独立复验；失败移交。",
+    "dynamic": "初次候选加最多2次重试，总候选最多3；规则式证据调度。",
+    "primary_metric": "同批预登记任务解决率：每模式以全部任务为分母，每任务最终通过记1，否则0。候选级通过率另列。",
+    "budget_caveat": "fixed一轮与dynamic三轮比较整体策略并报告成本；等预算上限对照和原scope单Agent组后续实现，不预设动态效果更好。",
+    "formal_sample_policy": "正式清单、资格排除、模型、提示词和测试在执行前冻结；保留失败，试跑三题不作为正式效果结论。"
+  }
 }

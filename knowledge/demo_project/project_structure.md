@@ -9,4 +9,4 @@ source_path: day1-kit/README.md
 这是人工构造的单文件演示任务。待修模块为code/leap_year.py，提供is_leap(year)。
 开发测试位于tests/test_leap.py。运行时由程序复制到独立任务副本，原始目录只读。
 代码版本由执行器计算并记录，文档逻辑版本不代替文件哈希。
-知识来源是本项目首日任务包，不包含参考实现或保留测试。
+知识来源是本项目首日任务包，不包含参考实现或评测端工作区；只绑定leap_demo，不自动用于QuixBugs。

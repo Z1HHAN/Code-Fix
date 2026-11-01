@@ -1,6 +1,6 @@
 {
-  "config_version": "iteration-0.2-draft",
-  "interface_version": "0.2-draft",
+  "config_version": "iteration-0.2-20261101-draft",
+  "interface_version": "0.2-20261101-draft",
   "status": "pending_BC_confirmation",
   "matching": "按数组顺序，when中的字段全部相等则命中第一条；B实现解释器及证据分类后才生效。此文件不是执行器。",
   "preconditions": {
@@ -24,16 +24,20 @@
   },
   "safety_policy": {
     "automatic_generated_code_requires": "verified_container_or_disposable_vm",
-    "heldout_feedback_to_repair_loop": false
+    "heldout_feedback_to_repair_loop": false,
+    "final_check_feedback_to_repair_loop": false,
+    "validation_scope": "native_tests_clean_rerun"
   },
   "limits": {
     "max_repair_rounds": 3,
     "test_timeout_seconds": 60,
     "total_run_seconds": null,
     "max_tool_calls": null,
-    "daily_cost_limit": null
+    "daily_cost_limit": null,
+    "model_request_timeout_seconds": null,
+    "max_transport_retries": null
   },
-  "limit_status": "3轮沿用现有配置；60秒是待确认建议；其余由A/B/C确认后填写。不得将null解释为无限；限制未确认前不自动运行新配置。",
+  "limit_status": "3轮为现有政策；测试60秒仍待B/C确认，其他运行上限与费用未批准。建议值仅在11月1日手册讨论，不得将null解释为无限或自动批准；未确认不开放自动付费运行。",
   "round_definition": "每次请求修复员生成候选修改时计1轮，哪怕输出无效或补丁被拒绝也计入；定位与网络重试另计工具/模型调用预算，网络重试还须独立有限上限。",
   "input_policy": "failure_class与各布尔条件由程序根据真实结果计算，模型文字不能直接赋值。每次Decision绑定evidence_ids、run_id和code_version。",
   "rules": [
@@ -80,6 +84,18 @@
       "reason": "独立验收实际通过且证据对应最终代码版本。"
     },
     {
+      "rule_id": "R08N",
+      "when": {
+        "phase": "final_check",
+        "failure_class": "final_check_failed",
+        "evidence_matches_current_version": true
+      },
+      "action": "finish",
+      "target_agent": null,
+      "terminal_status": "failed",
+      "reason": "干净副本独立复验实际失败且对应当前代码，结束本次运行；不把最终结果回流本轮修复。"
+    },
+    {
       "rule_id": "R08",
       "when": {
         "phase": "final_check",
@@ -89,7 +105,7 @@
       "action": "finish",
       "target_agent": null,
       "terminal_status": "failed",
-      "reason": "独立验收未通过；结束本次运行，保留测试细节不反哺修复循环。"
+      "reason": "兼容历史heldout_failed的独立验收失败；结束且不回流Agent。旧记录保留其原验证范围，新原生复验不宣称隐藏覆盖。"
     },
     {
       "rule_id": "R02",
@@ -173,7 +189,7 @@
       "action": "pause",
       "target_agent": null,
       "terminal_status": null,
-      "reason": "独立验收的异常或未识别结果交C核查，不调用任何Agent；业务失败应规范为heldout_failed，未运行不得通过。"
+      "reason": "独立复验异常或未识别结果交C核查，不调用Agent；已执行失败按提案规范为final_check_failed，兼容旧heldout_failed；未运行不得通过。"
     },
     {
       "rule_id": "R18",
@@ -256,5 +272,11 @@
   "unmatched": {
     "action": "pause",
     "reason": "状态未知、缺少证据、测试未运行、独立验收不可用或分类不确定，留给负责人检查；绝不默认通过。"
+  },
+  "failure_class_migration": {
+    "status": "proposal_pending_BC_confirmation",
+    "canonical_final_failure": "final_check_failed",
+    "legacy_final_failure": "heldout_failed",
+    "policy": "本草案为两者提供相同的final_check阶段及当前版本保护。新原生复验失败建议采用final_check_failed；历史heldout_failed原文保留，不重新解释为新增隐藏测试。B/C须共同确认生产、消费与版本适配后才能冻结。"
   }
 }
