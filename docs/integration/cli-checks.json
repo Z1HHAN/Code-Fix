@@ -1,0 +1,120 @@
+{
+  "run_type": "tool_check",
+  "source_code_commit": "3308cf1",
+  "model_api_called": false,
+  "independent_acceptance_executed": false,
+  "checks": [
+    {
+      "command": "validate-config",
+      "exit_code": 0,
+      "output": {
+        "task_id": "T001-leap-baseline",
+        "errors": []
+      }
+    },
+    {
+      "command": "decision-fixtures",
+      "exit_code": 0,
+      "output": [
+        {
+          "decision_id": "D001",
+          "run_id": "fixture-run",
+          "code_version": "fixture:v0",
+          "evidence_ids": [
+            "fixture-e1"
+          ],
+          "failure_class": "assertion_failed",
+          "action": "locate",
+          "target_agent": "locator",
+          "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+          "retries_left": 2,
+          "rule_id": "R13"
+        },
+        {
+          "decision_id": "D002",
+          "run_id": "fixture-run",
+          "code_version": "fixture:v0",
+          "evidence_ids": [
+            "fixture-e1"
+          ],
+          "failure_class": "syntax_error",
+          "action": "repair",
+          "target_agent": "repairer",
+          "reason": "待修文件语法错误，携带当前开发证据局部重修。",
+          "retries_left": 2,
+          "rule_id": "R12"
+        },
+        {
+          "decision_id": "D003",
+          "run_id": "fixture-run",
+          "code_version": "fixture:v0",
+          "evidence_ids": [
+            "fixture-e1"
+          ],
+          "failure_class": "environment_error",
+          "action": "pause",
+          "target_agent": null,
+          "reason": "依赖、测试收集、命令或执行环境异常，交C诊断；不让修复员改业务代码凑通过。",
+          "retries_left": 2,
+          "rule_id": "R03"
+        },
+        {
+          "decision_id": "D004",
+          "run_id": "fixture-run",
+          "code_version": "fixture:v0",
+          "evidence_ids": [
+            "fixture-e1"
+          ],
+          "failure_class": "timeout",
+          "action": "stop",
+          "target_agent": null,
+          "reason": "先清理完整执行任务，再记录超时，不能标通过。",
+          "retries_left": 2,
+          "rule_id": "R04"
+        }
+      ]
+    },
+    {
+      "command": "run-baseline",
+      "exit_code": 0,
+      "output": {
+        "run_id": "20261101-232029-954579",
+        "run_type": "tool_check",
+        "tool_result": {
+          "call_id": "t001",
+          "tool": "run_tests",
+          "status": "failed",
+          "verification_status": "failed",
+          "failure_class": "assertion_failed",
+          "exit_code": 1,
+          "counts": {
+            "passed": 3,
+            "failed": 1,
+            "skipped": null
+          },
+          "stdout_path": "t001.stdout.txt",
+          "stderr_path": "t001.stderr.txt",
+          "duration_ms": 3534,
+          "run_id": "20261101-232029-954579",
+          "task_id": "T001-leap-baseline",
+          "run_type": "tool_check",
+          "phase": "development",
+          "code_version": "sha256:7c93d27153edcde6",
+          "output_agent": null
+        },
+        "summary": {
+          "run_id": "20261101-232029-954579",
+          "task_id": "T001-leap-baseline",
+          "run_type": "tool_check",
+          "status": "stopped",
+          "dev_result": "failed",
+          "final_result": "not_run",
+          "code_version": "sha256:7c93d27153edcde6",
+          "reason": "仅检查原始任务基线；未调用模型，未执行独立验收。"
+        },
+        "evidence_path": "runs\\20261101-232029-954579"
+      }
+    }
+  ],
+  "artifact_availability": "Full runs directory is local and ignored; rerun documented CLI to reproduce, do not reuse this run_id as your result."
+}
