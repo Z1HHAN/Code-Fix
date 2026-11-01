@@ -1,0 +1,8 @@
+{
+  "task_id": "T001-leap-baseline",
+  "description": "仅检查 day1-kit 原始闰年坏代码与四条原生测试，不调用模型，不作为修复成绩。",
+  "allowed_paths": ["code/leap_year.py"],
+  "test_command": ["python", "-m", "pytest", "tests/", "-v"],
+  "max_repair_rounds": 3,
+  "expected_test_count": 4
+}
