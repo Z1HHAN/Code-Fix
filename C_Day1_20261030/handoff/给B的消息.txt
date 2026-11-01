@@ -1,0 +1,8 @@
+C 的环境和复现已完成。
+Python 3.14.6 + pytest 8.3.5。
+错误版：3 passed / 1 failed，失败项为 1900 年，退出码 1。
+参考答案：4 passed / 0 failed，退出码 0。
+run_id：C-20261030-193201-b32afc2e
+交付包里有两张日志展示页截图、真实 ToolRun、原始日志、JUnit、代码及离线依赖；另附明确标注模拟的接口样例。
+原始坏代码和四条测试已保留。此次是 C 的环境与参考答案验证，未调用模型，不计为 AI 自动修复。
+B 可以开始接 DS API 和串联主流程。解压后见 README.md；已有 Python 3.14 时运行 setup_C.cmd，再运行 run_C.cmd 可复现。

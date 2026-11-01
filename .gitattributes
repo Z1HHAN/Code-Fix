@@ -1,0 +1,5 @@
+# The archived C handoff is checked byte-for-byte; preserve Git blob bytes.
+# This rule applies only to this package, including its original runs evidence.
+C_Day1_20261030/** -text
+# Original captured logs contain repeated CR bytes; never format archived evidence.
+C_Day1_20261030/runs/** -whitespace
