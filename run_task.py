@@ -49,6 +49,10 @@ def add_event(path, **data):
 
 def code_version(work_dir, relative_path):
     import hashlib
+    # `relative_path` is one path, not a tuple of paths.  Normalize it here so
+    # callers may pass either a `Path` or a string without creating an invalid
+    # `Path / tuple` operation on Windows.
+    relative_path = Path(relative_path)
     digest = hashlib.sha256((work_dir / relative_path).read_bytes()).hexdigest()
     return "sha256:" + digest[:16]
 
@@ -213,7 +217,7 @@ def main():
             add_event(events, event="decision", run_id=run_id, round=round_number, action="repair", failure_class="invalid_model_output", reason=str(error), rounds_left=spec["max_repair_rounds"] - round_number)
             before["output"] = str(error)
             continue
-        add_event(events, event="patch_applied", run_id=run_id, round=round_number, file=target.as_posix(), code_version=code_version(work_dir, (target.as_posix(),)))
+        add_event(events, event="patch_applied", run_id=run_id, round=round_number, file=target.as_posix(), code_version=code_version(work_dir, target))
         after = run_tests(work_dir, run_dir / f"test_after_round_{round_number}.log", f"t{calls + 1:03d}", spec)
         calls += 1
         after_public = {k: v for k, v in after.items() if k != "output"}
