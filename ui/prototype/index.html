@@ -1,0 +1,679 @@
+<!doctype html>
+<!-- Imported from Z1HHAN/Code-Fix 43c333c5a79dccb5204a77f060da45c5c0f2763a.
+     Offline UI prototype only. All scenarios are synthetic, never run evidence. -->
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>验链 Code Fix · Python软件缺陷修复平台</title>
+  <style>
+    :root {
+      --blue: #1468e8;
+      --blue-dark: #0d4fb9;
+      --blue-soft: #eaf3ff;
+      --ink: #17243a;
+      --muted: #6f8098;
+      --line: #cad6e4;
+      --line-soft: #e7edf4;
+      --panel: #ffffff;
+      --bg: #f4f7fb;
+      --green: #1eaa62;
+      --green-soft: #e8f8ef;
+      --orange: #ed8a22;
+      --orange-soft: #fff3e5;
+      --red: #e94c4c;
+      --red-soft: #fff0f0;
+      --gray: #9aa9bc;
+      --shadow: 0 8px 22px rgba(32, 67, 111, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-width: 1180px;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      font-size: 14px;
+    }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: .5; }
+    .app { min-height: 100vh; }
+    .topbar {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 2px 10px rgba(30, 52, 82, .06);
+    }
+    .brand { display: flex; align-items: center; gap: 16px; }
+    .brand-title { font-size: 26px; font-weight: 800; letter-spacing: .2px; }
+    .brand-divider { width: 1px; height: 26px; background: #aebdd0; }
+    .brand-subtitle { font-size: 16px; font-weight: 700; }
+    .mode-wrap { display: flex; align-items: center; gap: 10px; }
+    .mode-badge {
+      padding: 9px 15px;
+      border-radius: 9px;
+      font-weight: 700;
+      color: #9b5c13;
+      background: var(--orange-soft);
+      border: 1px solid #ffc781;
+    }
+    .mode-badge.real { color: #0e7a46; background: var(--green-soft); border-color: #8edbb1; }
+    .mode-badge.wait { color: #2a5b9e; background: var(--blue-soft); border-color: #9bc4fb; }
+    .shell {
+      display: grid;
+      grid-template-columns: 28fr 35fr 37fr;
+      gap: 14px;
+      padding: 14px;
+      align-items: start;
+    }
+    .column { min-width: 0; }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .panel + .panel { margin-top: 12px; }
+    .panel-head {
+      min-height: 49px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      background: linear-gradient(#fff, #f5f8fb);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .panel-head h2 { margin: 0; font-size: 20px; letter-spacing: .2px; }
+    .panel-body { padding: 14px; }
+    .field { margin-bottom: 12px; }
+    .field label { display: block; margin-bottom: 6px; font-weight: 700; }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      border: 1px solid #bfd0e3;
+      border-radius: 7px;
+      color: var(--ink);
+      background: #fff;
+      padding: 10px 11px;
+      outline: none;
+    }
+    .field textarea { min-height: 70px; resize: vertical; line-height: 1.5; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(20, 104, 232, .10); }
+    .hint { margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .role-card { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    .role-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 11px; border-bottom: 1px solid var(--line-soft); }
+    .role-row:last-child { border-bottom: 0; }
+    .role-name { font-weight: 800; }
+    .role-desc { color: var(--muted); font-size: 12px; margin-top: 3px; }
+    .switch { position: relative; display: inline-flex; width: 46px; height: 25px; flex: 0 0 auto; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; inset: 0; background: #b7c2cf; border-radius: 99px; transition: .2s; }
+    .slider:before { content: ""; position: absolute; width: 19px; height: 19px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+    .switch input:checked + .slider { background: var(--blue); }
+    .switch input:checked + .slider:before { transform: translateX(21px); }
+    .callout { display: flex; gap: 9px; align-items: flex-start; padding: 10px 11px; border-radius: 7px; border: 1px solid #add5fb; background: var(--blue-soft); color: #13589f; line-height: 1.45; }
+    .callout.warning { border-color: #ffd29b; background: var(--orange-soft); color: #9b5c13; }
+    .callout.danger { border-color: #ffb0b0; background: var(--red-soft); color: #a72f2f; }
+    .button-row { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .btn { min-height: 38px; padding: 9px 12px; border-radius: 7px; border: 1px solid var(--blue); font-weight: 800; }
+    .btn-primary { color: #fff; background: var(--blue); }
+    .btn-primary:hover:not(:disabled) { background: var(--blue-dark); }
+    .btn-outline { color: var(--blue); background: #fff; }
+    .btn-danger { color: #a72f2f; background: var(--red-soft); border-color: #ffb0b0; }
+    .btn-muted { color: #52667d; background: #f3f6fa; border-color: #cad6e4; }
+    .status-strip { padding: 10px 12px; border: 1px solid #add5fb; border-radius: 7px; color: #15589d; background: var(--blue-soft); font-weight: 800; margin-bottom: 13px; }
+    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; padding: 11px 12px; background: #f7fafc; border: 1px solid var(--line-soft); border-radius: 8px; }
+    .kv { display: flex; justify-content: space-between; gap: 8px; line-height: 1.55; }
+    .kv b { color: var(--ink); }
+    .kv span { color: var(--muted); text-align: right; overflow-wrap: anywhere; }
+    .timeline { padding: 4px 0 3px 5px; }
+    .step { position: relative; display: grid; grid-template-columns: 30px 1fr; gap: 12px; min-height: 66px; }
+    .step:not(:last-child):before { content: ""; position: absolute; left: 14px; top: 29px; width: 2px; bottom: -5px; background: #c7d1dc; }
+    .step.done:not(:last-child):before { background: #79d7a2; }
+    .step.active:not(:last-child):before { background: linear-gradient(#f0a055, #c7d1dc); }
+    .dot { z-index: 1; display: grid; place-items: center; width: 29px; height: 29px; border-radius: 50%; border: 3px solid #bdc8d5; background: #fff; color: #fff; font-size: 14px; font-weight: 900; }
+    .step.done .dot { border-color: var(--green); background: var(--green); }
+    .step.active .dot { border-color: var(--orange); background: var(--orange); }
+    .step.failed .dot { border-color: var(--red); background: var(--red); }
+    .step-title { font-size: 16px; font-weight: 800; }
+    .step-desc { margin-top: 3px; color: var(--muted); line-height: 1.45; }
+    .step.active .step-title, .step.failed .step-title { color: var(--orange); }
+    .step.failed .step-title { color: var(--red); }
+    .decision { display: inline-flex; margin: 2px 0 11px 42px; padding: 6px 10px; border-radius: 999px; color: #a65a0b; background: var(--orange-soft); border: 1px solid #ffd09a; font-size: 12px; font-weight: 800; }
+    .history { margin-top: 12px; border-top: 1px solid var(--line-soft); padding-top: 12px; }
+    .history h3 { margin: 0 0 8px; font-size: 15px; }
+    .history-card { border: 1px solid var(--line); border-radius: 7px; padding: 9px 10px; margin-bottom: 7px; background: #fbfcfe; }
+    .history-card strong { display: block; margin-bottom: 4px; }
+    .history-card small { color: var(--muted); line-height: 1.45; }
+    .evidence { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+    .evidence-head { display: flex; justify-content: space-between; gap: 10px; padding: 10px 11px; background: linear-gradient(#fff, #f5f8fb); border-bottom: 1px solid var(--line-soft); font-weight: 800; }
+    .evidence-body { padding: 10px 11px; }
+    .evidence-body pre { margin: 0; padding: 10px; min-height: 48px; max-height: 165px; overflow: auto; color: #42556c; background: #f5f7fa; border-radius: 6px; font: 12px/1.55 Consolas, monospace; white-space: pre-wrap; }
+    .state-good { color: var(--green); } .state-warn { color: var(--orange); } .state-bad { color: var(--red); } .state-muted { color: var(--muted); }
+    .footer-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .demo-bar { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 12px; border-radius: 8px; color: #7f4f16; background: #fff8ec; border: 1px dashed #efb568; }
+    .demo-bar select { margin-left: auto; border: 1px solid #e5b56f; border-radius: 6px; padding: 6px 8px; color: #7f4f16; background: #fff; }
+    .modal-backdrop { position: fixed; inset: 0; display: none; place-items: center; background: rgba(18, 31, 50, .42); z-index: 5; }
+    .modal-backdrop.open { display: grid; }
+    .modal { width: min(760px, calc(100vw - 40px)); max-height: 78vh; overflow: auto; background: #fff; border-radius: 10px; box-shadow: 0 22px 60px rgba(0,0,0,.25); }
+    .modal-head { display: flex; justify-content: space-between; padding: 15px 18px; border-bottom: 1px solid var(--line-soft); font-weight: 800; font-size: 17px; }
+    .modal-body { padding: 18px; }
+    .close { border: 0; background: transparent; color: var(--muted); font-size: 22px; }
+    @media (max-width: 1300px) { body { min-width: 0; } .shell { grid-template-columns: 1fr; } .topbar { height: auto; min-height: 76px; gap: 15px; flex-wrap: wrap; padding: 14px 20px; } }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-title">验链 Code Fix</div>
+      <div class="brand-divider"></div>
+      <div class="brand-subtitle">Python 软件缺陷修复平台</div>
+    </div>
+    <div class="mode-wrap">
+      <span id="modeBadge" class="mode-badge">模拟状态 · 非运行证据</span>
+      <span id="headerStatus" class="state-muted">待运行</span>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="column">
+      <div class="demo-bar">
+        <span><b>独立原型演示：</b>未接后端、模型或执行器；下拉框只切换人工编写的状态快照，不执行任务。</span>
+        <select id="demoState" aria-label="切换演示状态">
+          <option value="idle">尚未启动</option>
+          <option value="running">运行中</option>
+          <option value="relocating">第1轮失败，准备第2轮定位</option>
+          <option value="waiting">等待步骤边界暂停</option>
+          <option value="paused">已暂停</option>
+          <option value="failed">独立复验失败并结束</option>
+          <option value="stopped">达到上限并停止</option>
+          <option value="success">独立验收通过</option>
+        </select>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h2>任务与配置</h2><span id="configMode" class="state-muted">可编辑</span></div>
+        <div class="panel-body">
+          <div class="two-col">
+            <div class="field"><label for="project">项目选择</label><select id="project"><option value="leap_demo">闰年演示 · day1-kit</option></select></div>
+            <div class="field"><label for="task">任务选择</label><select id="task"><option value="T001-leap">T001-leap · 闰年判断</option></select></div>
+          </div>
+          <div class="hint">示例路径相对day1-kit任务根目录，不接受任意仓库路径；本页不读取或修改这些文件。</div>
+          <div class="field"><label for="description">缺陷描述</label><textarea id="description">code/leap_year.py 的 is_leap 对世纪年判断错误。</textarea></div>
+          <div class="two-col">
+            <div class="field"><label for="allowed">允许修改路径</label><textarea id="allowed">code/leap_year.py</textarea><div class="hint">本原型只接受已登记的code/leap_year.py。</div></div>
+            <div class="field"><label for="blocked">禁止修改路径</label><textarea id="blocked">tests/</textarea><div class="hint">测试文件只读，候选越权将被拒绝。</div></div>
+          </div>
+          <div class="field"><label for="maxRounds">最大修复轮数</label><input id="maxRounds" type="number" min="1" max="3" value="3" /></div>
+
+          <div class="field">
+            <label>角色卡</label>
+            <div class="role-card">
+              <div class="role-row"><div><div class="role-name">定位员</div><div class="role-desc">负责问题定位与原因分析</div></div><label class="switch"><input id="roleLocator" type="checkbox" checked><span class="slider"></span></label></div>
+              <div class="role-row"><div><div class="role-name">修复员</div><div class="role-desc">返回候选修改；控制程序负责校验与应用</div></div><label class="switch"><input id="roleRepairer" type="checkbox" checked><span class="slider"></span></label></div>
+              <div class="role-row"><div><div class="role-name">测试执行角色</div><div class="role-desc">确定性工具，不调用LLM；执行绑定待接入</div></div><span class="state-muted">待接入</span></div>
+              <div class="role-row"><div><div class="role-name">审查员（本轮关闭）</div><div class="role-desc">可选风险审查，不承担独立复验；暂不支持启用</div></div><label class="switch"><input id="roleReviewer" type="checkbox" disabled><span class="slider"></span></label></div>
+            </div>
+          </div>
+
+          <div class="two-col">
+            <div class="field"><label>模型名称</label><input value="primary · 演示占位，未绑定API" readonly><div class="hint">本页不读取密钥或环境变量。</div></div>
+            <div class="field"><label>工具权限</label><input value="只读定位 / 候选修复 / 确定性测试" readonly><div class="hint">仅展示职责；实际权限强制由后端接入。</div></div>
+          </div>
+          <div class="field"><label>知识来源概况</label><input value="knowledge/demo_project · 仅示例，未检索" readonly></div>
+
+          <div id="validation" class="callout"><span>●</span><span>请先预览配置；预览不调用模型、不创建运行。</span></div>
+          <div class="button-row" style="margin-top: 11px;">
+            <button id="previewBtn" class="btn btn-primary">预览演示配置</button>
+            <button id="startBtn" class="btn btn-outline" disabled>启动演示</button>
+          </div>
+          <div class="hint" id="buttonHint" style="margin-top: 8px;">确认启动需要先完成配置预览。</div>
+          <details id="previewPanel" class="field" hidden style="margin-top: 12px;"><summary>本次演示配置快照</summary><pre id="previewEvidence" style="white-space: pre-wrap; overflow-wrap: anywhere;">未预览</pre></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="column">
+      <div class="panel">
+        <div class="panel-head"><h2>执行过程</h2><span id="runIdLabel" class="state-muted">run_id：未创建</span></div>
+        <div class="panel-body">
+          <div id="processStatus" class="status-strip">当前状态：待运行 · 请先预览配置</div>
+          <div class="summary-grid">
+            <div class="kv"><b>当前轮次</b><span id="roundValue">未运行</span></div>
+            <div class="kv"><b>修复轮数</b><span id="roundBudget">0 / 3</span></div>
+            <div class="kv"><b>当前步骤</b><span id="stepValue">配置等待</span></div>
+            <div class="kv"><b>剩余轮数</b><span id="roundsLeft">未知</span></div>
+            <div class="kv"><b>代码版本</b><span id="codeVersion">未知</span></div>
+            <div class="kv"><b>配置版本</b><span id="configVersion">未预览</span></div>
+          </div>
+
+          <div class="timeline" id="timeline" style="margin-top: 16px;"></div>
+          <div id="decisionChip" class="decision" style="display: none;">开发断言失败 · 返回定位</div>
+
+          <div class="history">
+            <h3>轮次历史</h3>
+            <div id="historyList"></div>
+          </div>
+
+          <div class="button-row" style="margin-top: 12px;">
+            <button id="pauseBtn" class="btn btn-muted" disabled title="后端尚未接入；只能用演示状态选择器查看暂停画面">请求暂停 · 待接入</button>
+            <button id="constraintBtn" class="btn btn-outline" disabled title="追加约束的校验、版本更新和恢复尚未实现">更新约束并继续 · 待接入</button>
+          </div>
+          <div id="pauseHint" class="hint" style="margin-top: 8px;">没有活动运行时，暂停和约束更新不可用。</div>
+
+          <div class="callout warning" style="margin-top: 13px;"><span>!</span><span>规则说明：环境异常应暂停自动修复；测试超时须停止执行并保留证据。本页不执行这些规则，也不能证明隔离或进程清理有效。</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="column">
+      <div class="panel">
+        <div class="panel-head"><h2>证据与结果</h2><span id="resultState" class="state-muted">待运行</span></div>
+        <div class="panel-body">
+          <div class="evidence"><div class="evidence-head"><span>当前代码版本</span><span id="codeState" class="state-muted">未知</span></div><div class="evidence-body"><pre id="codeEvidence">&lt;待运行&gt;</pre></div></div>
+          <div class="evidence"><div class="evidence-head"><span>修改差异</span><span id="diffState" class="state-muted">未知</span></div><div class="evidence-body"><pre id="diffEvidence">&lt;待运行&gt;</pre></div></div>
+          <div class="evidence"><div class="evidence-head"><span>开发测试</span><span id="devTestState" class="state-muted">未运行</span></div><div class="evidence-body"><div id="devTestBanner" class="callout warning" style="margin-bottom: 9px;"><span>!</span><span>尚未运行开发测试</span></div><pre id="logEvidence">开发日志（占位）\n[INFO] 运行前请先完成配置预览\n[INFO] 没有真实执行记录</pre></div></div>
+          <div class="evidence"><div class="evidence-head"><span>独立验收</span><span id="acceptState" class="state-muted">未运行</span></div><div class="evidence-body"><pre id="acceptEvidence">未运行</pre></div></div>
+          <div class="evidence"><div class="evidence-head"><span>调度依据</span><span id="decisionState" class="state-muted">未知</span></div><div class="evidence-body"><pre id="decisionEvidence">&lt;待运行&gt;</pre></div></div>
+          <div class="evidence"><div class="evidence-head"><span>知识引用</span><span class="state-muted">示例来源 · 未检索</span></div><div class="evidence-body"><pre>knowledge/demo_project/README.md
+project_structure.md / business_rules.md / testing.md
+本页未检索知识，也未向模型注入上下文。</pre></div></div>
+          <div class="evidence"><div class="evidence-head"><span>耗时与用量</span><span id="usageState" class="state-muted">未知</span></div><div class="evidence-body"><pre id="usageEvidence">实际耗时：未知\n调用次数：未知\nToken：未知\n费用：未知</pre></div></div>
+
+          <div class="footer-actions">
+            <button id="logsBtn" class="btn btn-primary" disabled>查看演示日志</button>
+            <button id="sourceBtn" class="btn btn-outline">查看示例来源</button>
+            <button id="reportBtn" class="btn btn-outline" disabled title="没有真实报告；待接入只读产物接口">下载报告 · 待接入</button>
+          </div>
+          <div class="footer-actions" style="margin-top: 8px;">
+            <button id="patchBtn" class="btn btn-outline" disabled title="只有演示差异，没有实际补丁文件">下载已应用修改 · 待接入</button>
+            <button id="newRunBtn" class="btn btn-muted" disabled style="grid-column: span 2;">新建演示</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-head"><span id="modalTitle">查看日志</span><button id="closeModal" class="close" aria-label="关闭">×</button></div>
+    <div class="modal-body"><pre id="modalContent" style="white-space: pre-wrap; margin:0; color:#42556c; line-height:1.6;"></pre></div>
+  </div>
+</div>
+
+<script>
+  // No backend, filesystem, model, timer-driven workflow or real execution is connected.
+  // Source UI: 43c333c5a79dccb5204a77f060da45c5c0f2763a; scenarios below are hand-authored fixtures.
+  const $ = (id) => document.getElementById(id);
+  const editableIds = ['project', 'task', 'description', 'allowed', 'blocked', 'maxRounds', 'roleLocator', 'roleRepairer'];
+  const state = {
+    demo: 'idle',
+    runId: null,
+    snapshot: null,
+    configVersion: null,
+    previewRevision: 0,
+    runSerial: 0,
+    sessionId: Date.now().toString(36)
+  };
+  const statuses = {
+    idle: { label: '待运行', css: 'state-muted' },
+    running: { label: '运行中（演示）', css: 'state-warn' },
+    relocating: { label: '返回定位（演示）', css: 'state-warn' },
+    waiting: { label: '等待步骤边界暂停（演示）', css: 'state-warn' },
+    paused: { label: '已暂停（演示）', css: 'state-warn' },
+    failed: { label: '独立复验失败，已结束（演示）', css: 'state-bad' },
+    stopped: { label: '达到修复轮数上限，已停止（演示）', css: 'state-bad' },
+    success: { label: '独立复验通过，已结束（演示）', css: 'state-good' }
+  };
+  const steps = [
+    ['定位', '读取代码与开发失败证据'],
+    ['生成修改', '修复员返回候选JSON'],
+    ['应用修改', '控制程序检查路径后应用候选'],
+    ['开发测试', '确定性执行器产出测试证据'],
+    ['决策', '展示调度器下一步'],
+    ['独立复验', '干净副本重跑同套冻结原生测试'],
+    ['结束', '保留已有结果，停止本次运行']
+  ];
+
+  function isActive() { return ['running', 'relocating', 'waiting', 'paused'].includes(state.demo); }
+  function setClass(element, value) { element.className = value; }
+  function pathsOf(value) { return value.split(/\r?\n/).map(item => item.trim()).filter(Boolean); }
+  function isRelativePath(value) {
+    return !value.includes('\\') && !value.startsWith('/') && !value.includes(':') &&
+      !value.split('/').some(part => part === '..' || part === '.');
+  }
+  function showMessage(message, error = false) {
+    $('validation').className = 'callout' + (error ? ' danger' : '');
+    $('validation').textContent = message;
+  }
+
+  function readConfig() {
+    const allowed = pathsOf($('allowed').value);
+    const blocked = pathsOf($('blocked').value);
+    const rounds = Number($('maxRounds').value);
+    if ($('project').value !== 'leap_demo' || $('task').value !== 'T001-leap') {
+      throw new Error('只支持已登记的闰年演示任务。');
+    }
+    if (!$('description').value.trim()) throw new Error('缺陷描述不能为空。');
+    if (!Number.isInteger(rounds) || rounds < 1 || rounds > 3) throw new Error('修复轮数必须是1至3的整数。');
+    if (allowed.length !== 1 || allowed[0] !== 'code/leap_year.py') {
+      throw new Error('允许路径只能是已登记的code/leap_year.py。');
+    }
+    if (!blocked.length || !blocked.every(isRelativePath) || !blocked.includes('tests/')) {
+      throw new Error('禁止路径须为相对路径，且必须包含只读tests/。');
+    }
+    if (blocked.some(item => {
+      const prefix = item.replace(/\/+$/, '');
+      return allowed.some(file => file === prefix || file.startsWith(prefix + '/'));
+    })) throw new Error('禁止路径与允许修改文件冲突。');
+    if (!$('roleLocator').checked || !$('roleRepairer').checked || $('roleReviewer').checked) {
+      throw new Error('本原型只支持定位员和修复员启用、审查员关闭。');
+    }
+    return {
+      mode: 'simulated',
+      evidence_status: '非运行证据',
+      project_id: 'leap_demo',
+      task_id: 'T001-leap',
+      task_root: 'day1-kit',
+      description: $('description').value.trim(),
+      allowed_paths: allowed,
+      blocked_paths: blocked,
+      max_repair_rounds: rounds,
+      roles: { locator: 'llm', repairer: 'llm', tester: 'deterministic_pending_binding', reviewer: 'disabled' },
+      model_ref: 'primary_unbound_demo',
+      test_profile: 'leap_dev_unbound_demo',
+      knowledge_sources: ['knowledge/demo_project/project_structure.md', 'knowledge/demo_project/business_rules.md', 'knowledge/demo_project/testing.md'],
+      isolation: '未验证',
+      runtime_budgets: '未确认',
+      backend_connected: false
+    };
+  }
+
+  function preparePreview() {
+    if (state.runId) return false;
+    state.snapshot = null;
+    state.configVersion = null;
+    try {
+      state.snapshot = readConfig();
+      state.previewRevision++;
+      state.configVersion = 'demo-config-' + state.previewRevision;
+      showMessage('演示字段校验通过，请核对下方快照。本页不验证隔离或运行预算，不创建真实任务。');
+      return true;
+    } catch (error) {
+      showMessage('配置错误：' + error.message, true);
+      return false;
+    }
+  }
+
+  function invalidatePreview() {
+    if (state.runId) return;
+    state.snapshot = null;
+    state.configVersion = null;
+    showMessage('配置已修改，旧预览失效；请重新预览。');
+    renderAll();
+  }
+
+  function createDemoRun() {
+    state.runSerial++;
+    state.runId = 'demo-' + state.sessionId + '-' + state.runSerial;
+    state.demo = 'running';
+  }
+
+  function resetDemo() {
+    if (isActive() || !state.runId) return;
+    state.demo = 'idle';
+    state.runId = null;
+    state.snapshot = null;
+    state.configVersion = null;
+    showMessage('请先预览演示配置；预览不调用模型、不创建真实运行。');
+  }
+
+  function viewData() {
+    const limit = state.snapshot ? state.snapshot.max_repair_rounds : 3;
+    const used = state.demo === 'idle' ? 0 : state.demo === 'stopped' ? limit :
+      state.demo === 'success' ? Math.min(2, limit) : 1;
+    const dev = ['running', 'waiting'].includes(state.demo) ? 'running' :
+      ['success', 'failed'].includes(state.demo) ? 'passed' : 'failed';
+    const final = state.demo === 'success' ? 'passed' : state.demo === 'failed' ? 'failed' : 'not_run';
+    const data = {
+      limit, used, dev, final,
+      codeVersion: state.demo === 'idle' ? null : 'demo-code-v' + used,
+      step: '配置等待', action: '待产生', failureClass: '未知', reason: '尚无演示决策',
+      decisionId: 'demo-decision-' + used, evidenceId: 'demo-dev-' + used
+    };
+    if (state.demo === 'running' || state.demo === 'waiting') {
+      data.step = '第1轮开发测试';
+      data.reason = '开发测试尚未完成，不能提前写通过';
+    } else if (state.demo === 'relocating') {
+      data.step = '第2轮定位（候选尚未生成）';
+      data.action = '重新定位';
+      data.failureClass = 'assertion_failed';
+      data.reason = '第1轮候选已应用，开发断言失败；已用1轮，准备第2轮';
+    } else if (state.demo === 'paused') {
+      data.step = '第1轮决策前的步骤边界暂停';
+      data.reason = '暂停画面仅供查看；尚无实际暂停/恢复接口';
+    } else if (state.demo === 'stopped') {
+      data.step = '结束';
+      data.action = '停止并移交人工复核';
+      data.failureClass = 'repair_limit';
+      data.reason = '已用' + used + '/' + limit + '轮，没有第' + (limit + 1) + '次修复请求';
+    } else if (state.demo === 'success') {
+      data.step = '结束';
+      data.action = '结束';
+      data.failureClass = 'passed';
+      data.reason = '演示开发与干净副本复验均通过；仅限同套冻结测试范围';
+      data.evidenceId = 'demo-final-' + used;
+    } else if (state.demo === 'failed') {
+      data.step = '结束';
+      data.action = '结束并移交C核查复验差异';
+      data.failureClass = 'final_check_failed';
+      data.reason = '演示独立复验报告失败；不向本轮Agent回传，不自动继续修复';
+      data.evidenceId = 'demo-final-' + used;
+    }
+    return data;
+  }
+
+  function stepHtml(title, description, status) {
+    const symbol = status === 'done' ? '✓' : status === 'active' || status === 'failed' ? '!' : '';
+    return '<div class="step ' + status + '"><div class="dot">' + symbol +
+      '</div><div><div class="step-title">' + title +
+      '</div><div class="step-desc">' + description + '</div></div></div>';
+  }
+
+  function renderTimeline(data) {
+    if (!state.runId) {
+      $('timeline').innerHTML = stepHtml('准备与基线测试', '待启动演示，未执行任何测试', '') +
+        steps.map(step => stepHtml(step[0], step[1], '')).join('');
+    } else {
+      let timeline = stepHtml('准备与基线测试（演示）', '示例：3 passed / 1 failed；不占修复轮数', 'done');
+      timeline += steps.map((step, index) => {
+        let status = index <= 2 ? 'done' : '';
+        if (index === 3) status = data.dev === 'running' ? 'active' : data.dev === 'passed' ? 'done' : 'failed';
+        if (index === 4) status = isActive() ? (state.demo === 'relocating' ? 'done' : state.demo === 'paused' ? 'active' : '') : 'done';
+        if (index === 5) status = data.final === 'passed' ? 'done' : data.final === 'failed' ? 'failed' : '';
+        if (index === 6 && !isActive()) status = 'done';
+        return stepHtml('第' + data.used + '轮 · ' + step[0], step[1], status);
+      }).join('');
+      if (state.demo === 'relocating') {
+        timeline += stepHtml('第2轮 · 定位', '当前步骤：重新定位；下一次候选尚未生成，仍已用1轮', 'active');
+      }
+      $('timeline').innerHTML = timeline;
+    }
+    $('decisionChip').style.display = state.demo === 'relocating' ? 'inline-flex' : 'none';
+    $('decisionChip').textContent = '第1轮已应用后断言失败 → 第2轮定位（演示）';
+  }
+
+  function renderHistory(data) {
+    if (!state.runId) {
+      $('historyList').innerHTML = '<div class="history-card"><small>尚未产生演示历史；没有真实运行记录。</small></div>';
+      return;
+    }
+    let history = '<div class="history-card"><strong>基线测试（演示）</strong><small>demo-baseline · 3 passed / 1 failed · 1900年</small></div>';
+    for (let round = 1; round <= data.used; round++) {
+      const result = round < data.used ? '开发测试失败，返回定位' :
+        data.dev === 'running' ? '开发测试进行中，尚无结论' :
+        data.dev === 'passed' ? '开发测试通过' : '开发测试失败';
+      history += '<div class="history-card"><strong>第' + round +
+        '轮（演示）</strong><small>定位完成 · 候选已生成并已应用 · ' + result +
+        ' · demo-code-v' + round + '</small></div>';
+    }
+    if (state.demo === 'relocating') {
+      history += '<div class="history-card"><strong>准备第2轮（演示）</strong><small>定位进行中；保留第1轮失败证据，未增加已用轮数。</small></div>';
+    }
+    if (data.final !== 'not_run') {
+      history += '<div class="history-card"><strong>独立复验（演示）</strong><small>' +
+        (data.final === 'passed' ? '通过' : '失败，停止并移交核查') + ' · ' + data.evidenceId + '</small></div>';
+    }
+    $('historyList').innerHTML = history;
+  }
+
+  function renderEvidence(data) {
+    const status = statuses[state.demo];
+    const labels = { running: '进行中', passed: '通过', failed: '失败', not_run: '未运行' };
+    $('resultState').textContent = status.label;
+    setClass($('resultState'), status.css);
+    $('processStatus').textContent = '当前状态：' + status.label + ' · 仅模拟，不是运行证据';
+    $('roundValue').textContent = !state.runId ? '未运行' : state.demo === 'relocating' ? '已用1轮，准备第2轮' : String(data.used);
+    $('roundBudget').textContent = !state.runId ? '未运行 / ' + data.limit : data.used + ' / ' + data.limit;
+    $('roundsLeft').textContent = !state.runId ? '未运行' : String(data.limit - data.used);
+    $('stepValue').textContent = data.step;
+    $('codeVersion').textContent = data.codeVersion || '未知';
+    $('configVersion').textContent = state.configVersion || '未预览';
+    $('runIdLabel').textContent = 'run_id：' + (state.runId || '未创建') + (state.runId ? '（演示编号）' : '');
+    $('codeState').textContent = data.codeVersion || '未知';
+    $('codeEvidence').textContent = !state.runId ? '<待运行>' :
+      '任务根目录：day1-kit\n文件：code/leap_year.py\n示例版本：' + data.codeVersion + '\n未读取或修改实际文件';
+    $('diffState').textContent = !state.runId ? '未知' : '已应用（演示）';
+    $('diffEvidence').textContent = !state.runId ? '<待运行>' : '示例差异，不是实际补丁产物：\n- return year % 4 == 0\n' +
+      (data.dev === 'passed' ? '+ return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)' :
+        '+ return year % 4 == 0 or year % 100 == 0') +
+      '\n示例第' + data.used + '轮候选已应用；开发测试结果见下方。';
+    const dev = state.runId ? data.dev : 'not_run';
+    $('devTestState').textContent = labels[dev];
+    setClass($('devTestState'), dev === 'passed' ? 'state-good' : dev === 'failed' ? 'state-bad' : 'state-muted');
+    $('devTestBanner').className = 'callout' + (dev === 'failed' ? ' danger' : dev === 'passed' ? '' : ' warning');
+    $('devTestBanner').textContent = !state.runId ? '尚无开发测试' : dev === 'running' ? '开发测试进行中（演示），尚无结果' :
+      dev === 'passed' ? '4 passed / 0 failed（演示）' : '3 passed / 1 failed（演示），已保留失败快照';
+    $('logEvidence').textContent = !state.runId ? '没有真实执行记录，也没有演示运行。' :
+      '[DEMO ONLY · 非运行证据]\nrun_id: ' + state.runId + '\ncode_version: ' + data.codeVersion +
+      '\n示例测试范围：冻结的四条闰年原生测试\n' +
+      (dev === 'running' ? '测试进行中，尚无结论' : dev === 'passed' ? '4 passed, 0 failed' : 'FAILED test_1900\n3 passed, 1 failed');
+    $('acceptState').textContent = labels[data.final];
+    setClass($('acceptState'), data.final === 'passed' ? 'state-good' : data.final === 'failed' ? 'state-bad' : 'state-muted');
+    $('acceptEvidence').textContent = data.final === 'not_run' ? '未运行。没有独立验收报告。' :
+      '演示报告：' + labels[data.final] + '\n示例代码版本：' + data.codeVersion +
+      '\n示例套件：demo-leap-suite-v1（同套四条原生测试）\n干净副本复验不增加隐藏覆盖；本页没有实际执行。';
+    $('decisionState').textContent = !state.runId || ['running', 'waiting', 'paused'].includes(state.demo) ? '待产生' :
+      data.decisionId + ' · ' + data.action;
+    $('decisionEvidence').textContent = !state.runId ? '<待运行>' :
+      ['running', 'waiting', 'paused'].includes(state.demo) ? '尚无下一步Decision（演示）。\n' + data.reason :
+      '演示Decision ID：' + data.decisionId + '\nrun_id：' + state.runId +
+      '\ncode_version：' + data.codeVersion + '\n分类：' + data.failureClass +
+      '\n触发证据：' + data.evidenceId + '\n下一步：' + data.action + '\n原因：' + data.reason;
+    $('usageState').textContent = '无实际调用';
+    $('usageEvidence').textContent = '实际耗时：未知\n模型/工具调用：本页未发起\nToken：未知\n费用：未知\n仅渲染人工编写的演示快照，不统计成果。';
+  }
+
+  function updateControls() {
+    const locked = Boolean(state.runId);
+    editableIds.forEach(id => $(id).disabled = locked);
+    $('roleReviewer').disabled = true;
+    $('configMode').textContent = locked ? '演示配置只读快照' : '可编辑（仅演示）';
+    $('previewBtn').disabled = locked;
+    $('startBtn').disabled = locked || !state.snapshot;
+    $('newRunBtn').disabled = !state.runId || isActive();
+    $('newRunBtn').title = isActive() ? '活动演示尚未结束，不能清空编号或重新启动' : '终态后显式回到配置预览';
+    for (const id of ['pauseBtn', 'constraintBtn', 'reportBtn', 'patchBtn']) $(id).disabled = true;
+    $('logsBtn').disabled = !state.runId;
+    $('buttonHint').textContent = locked ? '编号和配置已锁定；活动状态不能新建演示。结束后可新建，再预览启动。' :
+      state.snapshot ? '只启动本次预览的演示配置；不会创建真实运行或调用模型。' : '请先预览；修改任一执行字段后必须重新预览。';
+    $('pauseHint').textContent = '暂停、追加约束与下载均未接入。可用上方演示状态选择器查看画面，不代表功能完成。';
+    $('previewPanel').hidden = !state.snapshot;
+    $('previewEvidence').textContent = state.snapshot ? JSON.stringify(state.snapshot, null, 2) : '未预览或预览已失效';
+  }
+
+  function renderAll() {
+    $('modeBadge').textContent = '模拟状态 · 非运行证据';
+    $('modeBadge').className = 'mode-badge';
+    $('headerStatus').textContent = statuses[state.demo].label;
+    setClass($('headerStatus'), statuses[state.demo].css);
+    $('demoState').value = state.demo;
+    const data = viewData();
+    renderTimeline(data);
+    renderHistory(data);
+    renderEvidence(data);
+    updateControls();
+  }
+
+  editableIds.concat('roleReviewer').forEach(id => {
+    $(id).addEventListener('input', invalidatePreview);
+    $(id).addEventListener('change', invalidatePreview);
+  });
+  $('previewBtn').addEventListener('click', () => {
+    if (state.runId) return;
+    preparePreview();
+    renderAll();
+    $('previewPanel').open = Boolean(state.snapshot);
+  });
+  $('startBtn').addEventListener('click', () => {
+    if (state.runId || isActive() || !state.snapshot) return;
+    // This is an in-memory demo ID. No execution request is sent.
+    createDemoRun();
+    renderAll();
+  });
+  $('demoState').addEventListener('change', (event) => {
+    const next = event.target.value;
+    if (!Object.hasOwn(statuses, next)) { renderAll(); return; }
+    if (next === 'idle') {
+      if (isActive()) showMessage('活动演示不能清空。请先查看结束状态，再新建演示。', true);
+      else resetDemo();
+      renderAll();
+      return;
+    }
+    if (!state.runId && !state.snapshot && !preparePreview()) { renderAll(); return; }
+    if (next === 'relocating' && state.snapshot.max_repair_rounds < 2) {
+      showMessage('此画面需要至少2轮预算；当前上限1轮，不能返回第2轮定位。', true);
+      renderAll();
+      return;
+    }
+    if (!state.runId) createDemoRun();
+    state.demo = next;
+    renderAll();
+  });
+  $('newRunBtn').addEventListener('click', () => {
+    if (isActive() || !state.runId) return;
+    resetDemo();
+    renderAll();
+  });
+
+  function openModal(title, content) {
+    $('modalTitle').textContent = title;
+    $('modalContent').textContent = content;
+    $('modalBackdrop').classList.add('open');
+  }
+  $('closeModal').addEventListener('click', () => $('modalBackdrop').classList.remove('open'));
+  $('modalBackdrop').addEventListener('click', event => {
+    if (event.target === $('modalBackdrop')) $('modalBackdrop').classList.remove('open');
+  });
+  $('logsBtn').addEventListener('click', () => {
+    if (!state.runId) return;
+    openModal('演示日志 · ' + state.runId, $('logEvidence').textContent);
+  });
+  $('sourceBtn').addEventListener('click', () => openModal('示例来源 · 未检索',
+    '来源UI：43c333c5a79dccb5204a77f060da45c5c0f2763a\n' +
+    '配置参考：configs/agents.json、docs/接口确认清单.md\n' +
+    '知识示例：knowledge/demo_project/project_structure.md、business_rules.md、testing.md\n' +
+    '本页没有读取来源文件、检索知识或调用模型，所有状态和证据均为人工演示数据。'));
+
+  renderAll();
+</script>
+</body>
+</html>
