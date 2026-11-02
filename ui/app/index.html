@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>验链 Code Fix · 真实任务</title><link rel="stylesheet" href="/assets/theme.css">
+<style>body{min-width:0}pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:430px;overflow:auto}.wide{grid-column:1/-1}.shell{grid-template-columns:28fr 35fr 37fr}.panel-body{overflow-wrap:anywhere}select{max-width:100%}@media(max-width:950px){.shell{grid-template-columns:1fr}.topbar{height:auto;padding:16px;flex-wrap:wrap;gap:10px}}a{color:#1468e8}</style>
+<script src="/assets/app.js" defer></script></head>
+<body><div class="app"><header class="topbar"><div class="brand"><div class="brand-title">验链 Code Fix</div><div class="brand-subtitle">测试证据驱动修复</div></div><span id="connection" class="mode-badge wait">正在连接本机后端</span></header>
+<main class="shell">
+<section class="column"><div class="panel"><div class="panel-head"><h2>任务与配置</h2></div><div class="panel-body">
+<div class="field"><label for="mode">运行模式</label><select id="mode"><option value="baseline">真实基线检查（不调用模型）</option><option value="repair">真实模型修复（需要运行条件就绪）</option></select></div>
+<div class="field"><label for="description">缺陷描述</label><textarea id="description">code/leap_year.py 的 is_leap 对世纪年判断错误。</textarea></div>
+<div class="field"><label>已登记项目</label><input readonly value="闰年 · code/leap_year.py"><p class="hint">测试路径固定只读，不能由模型或页面修改。</p></div>
+<div class="two-col"><div class="field"><label for="rounds">最大修复轮数</label><input id="rounds" type="number" min="1" max="3" value="3"></div><div class="field"><label for="calls">模型调用上限</label><input id="calls" type="number" min="1" max="30" value="12"></div></div>
+<div class="field"><label for="seconds">任务总时限（秒）</label><input id="seconds" type="number" min="1" max="1800" value="300"></div>
+<div class="role-card"><div class="role-row">修复员：生成候选</div><div class="role-row">检测员：解释真实开发证据</div><div class="role-row">调度员：建议下一步；程序强制执行规则</div></div>
+<p class="hint">实际pytest与独立复验由执行器完成。模型密钥和付费配置由本机环境提供。</p>
+<div class="button-row"><button id="create" class="btn btn-primary">创建任务</button><button id="start" class="btn btn-outline" disabled>启动所选任务</button></div>
+<p id="error" role="alert"></p><details><summary>本机运行条件</summary><pre id="health">读取中</pre></details>
+</div></div></section>
+<section class="column"><div class="panel"><div class="panel-head"><h2>执行过程</h2></div><div class="panel-body">
+<div class="field"><label for="history">任务历史（刷新可恢复）</label><select id="history"><option value="">暂无任务</option></select></div>
+<div class="button-row"><button id="refresh" class="btn btn-outline">刷新结果</button><button id="pause" class="btn btn-outline" disabled>请求暂停</button><button id="stop" class="btn btn-outline" disabled>请求停止</button></div>
+<p class="hint">暂停和停止在当前步骤结束后生效；刷新页面不会重新启动或重复付费。</p>
+<div id="status" class="status-strip">尚未创建任务</div><pre id="summary">未运行</pre>
+<details open><summary>真实事件与Agent步骤</summary><pre id="events">尚无事件</pre></details>
+</div></div></section>
+<section class="column"><div class="panel"><div class="panel-head"><h2>证据与结果</h2></div><div class="panel-body">
+<div class="evidence"><div class="evidence-head">开发测试</div><div class="evidence-body"><pre id="development">未运行</pre></div></div>
+<div class="evidence"><div class="evidence-head">独立验收</div><div class="evidence-body"><pre id="final">未运行</pre></div></div>
+<div class="evidence"><div class="evidence-head">调度依据</div><div class="evidence-body"><pre id="decisions">未运行</pre></div></div>
+<div class="evidence"><div class="evidence-head">修改差异</div><div class="evidence-body"><pre id="patch">尚无已应用候选</pre></div></div>
+<div class="button-row"><button id="report" class="btn btn-primary" disabled>下载运行报告</button><button id="bundle" class="btn btn-outline" disabled>下载完整证据包</button></div>
+<p class="hint">费用缺失时为未知。开发测试通过后，仍需独立复验实际通过才能显示最终成功。</p>
+</div></div></section>
+</main></div></body></html>

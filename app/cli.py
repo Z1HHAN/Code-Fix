@@ -37,8 +37,22 @@ def main() -> int:
         command = sub.add_parser(name)
         command.add_argument('run_id')
     sub.add_parser('list-tasks')
+    sub.add_parser('doctor')
+    serve = sub.add_parser('serve')
+    serve.add_argument('--port', type=int, default=8000)
     args = parser.parse_args()
     try:
+        if args.command == 'doctor':
+            from .readiness import readiness
+            print(json.dumps(readiness(), ensure_ascii=False, indent=2))
+            return 0
+        if args.command == 'serve':
+            import uvicorn
+            from .api import create_app
+            if not 1024 <= args.port <= 65535:
+                raise ValueError('端口须为1024至65535')
+            uvicorn.run(create_app(), host='127.0.0.1', port=args.port)
+            return 0
         if args.command in {'create-task', 'start-task', 'task-status', 'task-report', 'list-tasks', 'interrupt-task'}:
             from .service import TaskService
             service = TaskService(os.environ.get('CODE_FIX_RUN_ROOT'))
@@ -86,7 +100,7 @@ def main() -> int:
                    for i, failure in enumerate(('assertion_failed', 'syntax_error', 'environment_error', 'timeout'), 1)]
         print(json.dumps(results, ensure_ascii=False, indent=2))
         return 0
-    except (ConfigError, InvalidModelOutput, ValueError, OSError) as exc:
+    except (ConfigError, InvalidModelOutput, ValueError, OSError, KeyError) as exc:
         print(json.dumps({'status': 'blocked', 'reason': str(exc)}, ensure_ascii=False))
         return 2
 

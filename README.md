@@ -1,5 +1,24 @@
 # 验链 Code Fix
 
+## V3开发分支：可运行的CLI、HTTP与真实基线页面
+
+当前`codex/development-v3`按队长提供的[745行V3要求](docs/开发要求V3.0.md)开发；main未被覆盖。[启动与模型配置](docs/V3运行与接口.md)、[阶段验收及版本记录](docs/V3开发与验收.md)。
+
+已真实验证：持久化任务创建/查询、防重复启动、原始闰年pytest、FastAPI、页面启动任务/显示真实失败日志/刷新恢复、报告与完整证据ZIP。真实模型传输、三角色协议、动态编排及候选隔离路径已编写，只有离线测试；本机没有模型密钥和Docker，真实模型候选修复及独立复验**尚未验收**。禁止以本轮基线演示宣称模型修复成功。
+
+Python3.14环境，在仓库根目录：
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-lock.txt
+.\.venv\Scripts\python.exe -m app.cli doctor
+.\.venv\Scripts\python.exe -m app.cli serve --port 8000
+```
+
+浏览器打开[本机任务页面](http://127.0.0.1:8000/)，选择“真实基线检查”→创建→启动。预期3通过1失败、独立验收未运行。密钥只配置到本机环境，不填进网页。
+
+以下为保留的v0.2接入与历史边界；新V3能力按上方验收记录区分，旧模拟入口及静态原型不改称真实模型平台。
+
 证据驱动的多 Agent 编排与验证平台，以 Python 软件缺陷修复为首个场景。
 
 ## 当前交付状态

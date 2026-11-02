@@ -5,3 +5,5 @@ C_Day1_20261030/** -text
 C_Day1_20261030/runs/** -whitespace
 # Registered fixtures are checked against exact frozen bytes.
 c_fixtures/** -text
+# Preserve the captain's exact V3 requirements bytes across checkouts.
+docs/开发要求V3.0.md -text

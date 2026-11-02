@@ -1,0 +1,13 @@
+{
+  "python": "3.14.6",
+  "baseline_available": true,
+  "model_configured": false,
+  "docker_available": false,
+  "isolation_verified": false,
+  "note": "每次修复任务启动时运行独立隔离探针；配置存在不等于验证通过",
+  "blockers": [
+    "需队长确认付费额度后设置CODE_FIX_LIVE_APPROVED=1",
+    "找不到Docker；候选不会回退到宿主执行",
+    "不可信代码执行授权未配置"
+  ]
+}

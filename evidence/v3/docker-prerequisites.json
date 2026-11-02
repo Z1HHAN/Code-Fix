@@ -1,0 +1,67 @@
+{
+  "checked_at": "2026-11-02T17:35:32.6625665+08:00",
+  "modifications_performed": false,
+  "os": {
+    "Caption": "Microsoft Windows 11 家庭版 中文版",
+    "OSArchitecture": "64 位",
+    "Version": "10.0.26100",
+    "TotalVisibleMemorySize": 33271672,
+    "FreePhysicalMemory": 16644616
+  },
+  "processor": {
+    "Name": "Intel(R) Core(TM) i9-14900HX",
+    "VirtualizationFirmwareEnabled": false,
+    "SecondLevelAddressTranslationExtensions": false,
+    "VMMonitorModeExtensions": false
+  },
+  "computer": {
+    "HypervisorPresent": true,
+    "TotalPhysicalMemory": 34070192128
+  },
+  "optional_features": [
+    {
+      "Name": "VirtualMachinePlatform",
+      "InstallState": 2
+    },
+    {
+      "Name": "Microsoft-Windows-Subsystem-Linux",
+      "InstallState": 2
+    }
+  ],
+  "disk_c": {
+    "Used": 144018255872,
+    "Free": 285479518208
+  },
+  "docker_executable": null,
+  "wsl_checks": [
+    {
+      "stdout": "",
+      "arguments": [
+        "--status"
+      ],
+      "exit_code": 50,
+      "stderr": "未安装适用于 Linux 的 Windows 子系统。可通过运行 “wsl.exe --install” 进行安装。\r\r\n有关详细信息，请访问 https://aka.ms/wslinstall\r\r\n",
+      "timeout": false
+    },
+    {
+      "stdout": "",
+      "arguments": [
+        "--version"
+      ],
+      "exit_code": 1,
+      "stderr": "未安装适用于 Linux 的 Windows 子系统。可通过运行 “wsl.exe --install” 进行安装。\r\r\n有关详细信息，请访问 https://aka.ms/wslinstall\r\r\n",
+      "timeout": false
+    },
+    {
+      "stdout": "",
+      "arguments": [
+        "--list",
+        "--verbose"
+      ],
+      "exit_code": 1,
+      "stderr": "未安装适用于 Linux 的 Windows 子系统。可通过运行 “wsl.exe --install” 进行安装。\r\r\n有关详细信息，请访问 https://aka.ms/wslinstall\r\r\n",
+      "timeout": false
+    }
+  ],
+  "conclusion": "Read-only observations; configuration readiness is not Docker isolation acceptance."
+}
