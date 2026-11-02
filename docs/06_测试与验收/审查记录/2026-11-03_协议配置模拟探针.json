@@ -1,0 +1,106 @@
+{
+  "scope": "协议/配置一致性专项审计；所有动态探针明确模拟，不是真实Agent修复",
+  "input_commit": "f64e8a38007f9d47e7d480e7c54a2df3b87088ce",
+  "results": [
+    {
+      "probe": "day1_locator",
+      "accepted": false,
+      "error": "模型输出字段不符合协议",
+      "synthetic_only": true
+    },
+    {
+      "probe": "json_locator",
+      "accepted": true,
+      "error": null,
+      "synthetic_only": true
+    },
+    {
+      "probe": "day1_raw_repair",
+      "accepted": false,
+      "error": "模型输出不是有效 JSON",
+      "synthetic_only": true
+    },
+    {
+      "probe": "json_repair",
+      "accepted": true,
+      "error": null,
+      "synthetic_only": true
+    },
+    {
+      "probe": "invalid_agents_config_selfcheck",
+      "duplicate_agent_id": true,
+      "all_roles_disabled": true,
+      "unbound_model_ref": true,
+      "validation_errors": [],
+      "finding": "校验器没有报告重复角色或未绑定模型等问题；这不是有效配置通过验收"
+    },
+    {
+      "probe": "v3_role_config_ignored",
+      "all_roles_disabled_in_copy": true,
+      "tool_allowlist_in_copy": [],
+      "model_ref_in_copy": "unbound-audit-model",
+      "knowledge_ids_in_copy": [],
+      "actual_knowledge_ids_source": "task catalog",
+      "actual_knowledge_ids": [
+        "business_rules",
+        "testing"
+      ],
+      "mock_call_count": 1,
+      "gateway_status": "ok",
+      "model_api_called": false,
+      "finding": "V3网关仍调用repairer；旧agents配置不是其执行配置"
+    },
+    {
+      "probe": "saved_call_provenance_fields",
+      "input_keys": [
+        "messages",
+        "role"
+      ],
+      "output_keys": [
+        "call_id",
+        "code_version",
+        "mode",
+        "model_api_called",
+        "parsed_output",
+        "raw_text",
+        "role",
+        "round",
+        "status"
+      ],
+      "prompt_text_saved_in_messages": true,
+      "explicit_protocol_version_present": false,
+      "explicit_prompt_hash_present": false,
+      "explicit_agent_config_snapshot_present": false
+    },
+    {
+      "probe": "malformed_output_rules_vs_workflow",
+      "status": "blocked",
+      "model_calls": 1,
+      "candidate_applied": false,
+      "rule_R15_exists": true,
+      "rule_R15_reached": false,
+      "final_result": "not_run",
+      "finding": "当前V3在无效模型输出后直接blocked，没有消费R15有限重修规则；安全停止不等于规则按配置生效"
+    }
+  ],
+  "tracked_files_byte_verified_unchanged": 598,
+  "file_sha256": {
+    "app/agents_v3.py": "ec94bdf2071c5f697104a33d9674e41b60adba08cd24e64a1651492f5fa2f8d3",
+    "app/model_context.py": "a846be7ea7075772e6739ded3ab622810c45a60e0c704552c60b06511a80bae3",
+    "app/repair_output.py": "cca4f5bb906d66b57435d9ade0c39c4f0fdac5f77cfa7ff832985fdf0e59fe71",
+    "app/config.py": "165ef951eac3963e5c48eda5141eebfb33b73d1f2acd63caf37d23d1f1639b43",
+    "app/workflow_v3.py": "1003a71ac8fca9ac7d72c9c96ec8afc68d29063c10c63c5db5cfb21f62182565",
+    "app/live_model.py": "69fbe4042daababc42c8c62370ac0c81f15f3affe74ef956c00b04d4976e1cb9",
+    "app/model_client.py": "b2d1f9c8795e3400c84514ab50323459727a6c1eafe3fb12a5d7ae5328f1e2cf",
+    "app/cli.py": "43effd2a480805af5738cfe952b602dd7f8ffce0b78c43566037a547f788e38f",
+    "configs/agents.json": "248a9a90e1cee14b9f6eddf208492eceb72b94ee7bc67dfcc7da3ad581550f18",
+    "configs/decision_rules.json": "cbae65a5b20fee23d0589bdceed370b41d546f962e4b99c8c3f8384130f21a05",
+    "day1-kit/prompts/locator.md": "9804657de23a7e94cae5fedda807e1aa6f3034ee97f377ac61f3c6d094772a56",
+    "day1-kit/prompts/repairer.md": "9b138089d81193aeaf1cb8f430c4f4b2f0ed37091c612fae6d068f0fa79970ad",
+    "prompts/locator.md": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+    "prompts/repairer.md": "5d78e4c3f12752b9a4d66584c1a95b1229fb3d023c92d9e6d736625dc2d8e177"
+  },
+  "paid_or_real_model_calls": 0,
+  "docker_pytest_public_or_candidate_code_executed": false,
+  "writes_scope": "仓库外独立审计输出；没有改业务、配置、提示词、测试或历史证据"
+}
