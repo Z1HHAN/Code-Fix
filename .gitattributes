@@ -7,3 +7,5 @@ C_Day1_20261030/runs/** -whitespace
 c_fixtures/** -text
 # Preserve the captain's exact V3 requirements bytes across checkouts.
 docs/开发要求V3.0.md -text
+# Runtime evidence hashes describe exact bytes, independent of core.autocrlf.
+evidence/v3/** -text
