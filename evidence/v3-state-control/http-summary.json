@@ -1,0 +1,16 @@
+{
+  "run_id": "run-b0cd5ade62444282b7fa3a04fe1dc85b",
+  "status": "paused",
+  "counts": {
+    "collected": 4,
+    "passed": 3,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "model_api_called": false,
+  "final_result": "not_run",
+  "files_verified": 14,
+  "bundle_sha256": "11aecf5362d25f02c9c335a966315d5b088ed3c7c56f7f4f1fc17f0f37308be1",
+  "scope": "real local HTTP and frozen baseline pytest only; not model repair"
+}

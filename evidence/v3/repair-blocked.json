@@ -1,0 +1,30 @@
+{
+  "run_id": "run-991a374a18ac48f6892668c1c8966fa5",
+  "task": {
+    "description": "修复闰年判断",
+    "max_calls": 12,
+    "max_rounds": 3,
+    "mode": "repair",
+    "project": "leap",
+    "total_seconds": 300
+  },
+  "status": "blocked",
+  "created_at": "2026-11-02T09:30:58.644173+00:00",
+  "updated_at": "2026-11-02T09:30:59.304388+00:00",
+  "result": {
+    "final_result": "not_run",
+    "dev_result": "not_run",
+    "rounds_used": 0,
+    "model_calls": 0,
+    "tool_calls": 0,
+    "model_api_called": false,
+    "mode": "live",
+    "isolation_ready": false,
+    "blockers": [
+      "需队长确认付费额度后设置CODE_FIX_LIVE_APPROVED=1",
+      "需确认不可信代码执行授权：CODE_FIX_EXECUTION_APPROVED=1"
+    ],
+    "reason": "运行前置条件未满足；未发起模型请求或候选执行"
+  },
+  "control": null
+}

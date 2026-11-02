@@ -1,0 +1,472 @@
+{
+  "schema_version": 1,
+  "repository": "https://github.com/jkoppel/QuixBugs",
+  "commit": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+  "retrieval": "GitHub connector pinned Git tree and read-only blobs",
+  "files": {
+    "LICENSE": {
+      "git_blob_sha": "5a3f250d1a2f33b23892a76eabcef6db0c180b2f",
+      "size": 1057
+    },
+    "conftest.py": {
+      "git_blob_sha": "e242368252171272b754f7021a066d05753b7ea9",
+      "size": 373
+    },
+    "json_testcases/bitcount.json": {
+      "git_blob_sha": "89635c95bbc74faea2feb08210f4d7c1d6196eea",
+      "size": 97
+    },
+    "json_testcases/bucketsort.json": {
+      "git_blob_sha": "5a04a02db3dbdcf6c43169bdd01a5d468cd4303c",
+      "size": 440
+    },
+    "json_testcases/find_first_in_sorted.json": {
+      "git_blob_sha": "9a6ae1076121d756595975d40bd7bef08cdbc7ae",
+      "size": 262
+    },
+    "json_testcases/find_in_sorted.json": {
+      "git_blob_sha": "2c0ad1b289c2f33429d2a9c18fa752051f71e740",
+      "size": 287
+    },
+    "json_testcases/flatten.json": {
+      "git_blob_sha": "cbc3f282a0fbf473b25cc22267824e791ed0b910",
+      "size": 299
+    },
+    "json_testcases/gcd.json": {
+      "git_blob_sha": "be94d203ec68e3492eb4a70d00617837f4d630c0",
+      "size": 100
+    },
+    "json_testcases/get_factors.json": {
+      "git_blob_sha": "0ba4ea9c6c8590f9a5a9349ea0a8735d77a15a65",
+      "size": 175
+    },
+    "json_testcases/hanoi.json": {
+      "git_blob_sha": "3f2417c55b07edd86efa2face81440d853d60bc7",
+      "size": 394
+    },
+    "json_testcases/is_valid_parenthesization.json": {
+      "git_blob_sha": "0db92da9bb04fcf0c3d9cb14cd9fcec89ef01c7a",
+      "size": 57
+    },
+    "json_testcases/kheapsort.json": {
+      "git_blob_sha": "d1a26a44d43cfae524f35fd3ad0eb017a0b5ec81",
+      "size": 162
+    },
+    "json_testcases/knapsack.json": {
+      "git_blob_sha": "3b2f1f66eff76be89ad2614159f94cd110c30252",
+      "size": 1280
+    },
+    "json_testcases/kth.json": {
+      "git_blob_sha": "2f1ba5d20f6c6fdaddb4a0006676d71edc143359",
+      "size": 236
+    },
+    "json_testcases/lcs_length.json": {
+      "git_blob_sha": "bfd1730bfb6679cd54f3f1489b3324937d9de39f",
+      "size": 238
+    },
+    "json_testcases/levenshtein.json": {
+      "git_blob_sha": "10d60030977eacbbb6d638837280385e49691fa8",
+      "size": 247
+    },
+    "json_testcases/lis.json": {
+      "git_blob_sha": "93b8e2902f8e256580290ff1081e7f87f81c91a0",
+      "size": 274
+    },
+    "json_testcases/longest_common_subsequence.json": {
+      "git_blob_sha": "85cc93221e82450a9e0a98af9df6e2861e3bbba0",
+      "size": 355
+    },
+    "json_testcases/max_sublist_sum.json": {
+      "git_blob_sha": "ef79f320e9594f2c141aaccf006175cdc26932fc",
+      "size": 180
+    },
+    "json_testcases/next_palindrome.json": {
+      "git_blob_sha": "ed3c581d0f4a294786f5502c75d93e4d7fb742b4",
+      "size": 194
+    },
+    "json_testcases/next_permutation.json": {
+      "git_blob_sha": "c379fba914a8818f615e11edb43ce6b15a77ba96",
+      "size": 274
+    },
+    "json_testcases/pascal.json": {
+      "git_blob_sha": "402adccfd8f3c563e9f8db1b1becd6d87305323d",
+      "size": 175
+    },
+    "json_testcases/possible_change.json": {
+      "git_blob_sha": "859d8026c553179c61f036e59537ed4506f1a161",
+      "size": 285
+    },
+    "json_testcases/powerset.json": {
+      "git_blob_sha": "d5393ca5457b0b46f7d95814eccb3008276cef47",
+      "size": 413
+    },
+    "json_testcases/rpn_eval.json": {
+      "git_blob_sha": "361bf1cc710a9688d03f65a948cfe680d8b5dfa4",
+      "size": 233
+    },
+    "json_testcases/shunting_yard.json": {
+      "git_blob_sha": "9bb197b402f574d1d4fce584ac624da2dec1ee59",
+      "size": 284
+    },
+    "json_testcases/sieve.json": {
+      "git_blob_sha": "d6e7c58dfc418c0a52b1582a378b02848a5c0ba1",
+      "size": 157
+    },
+    "json_testcases/sqrt.json": {
+      "git_blob_sha": "abd28e04f4cfae885527f0d93ab21beeaef5c430",
+      "size": 176
+    },
+    "json_testcases/subsequences.json": {
+      "git_blob_sha": "ccc1124362b283cdeaee60016cb6f00f2a69376e",
+      "size": 4447
+    },
+    "json_testcases/to_base.json": {
+      "git_blob_sha": "9c0f7d64c76549b911a03952bac1cfa4e29c53f2",
+      "size": 182
+    },
+    "json_testcases/wrap.json": {
+      "git_blob_sha": "bd8c2c8430256d22871372cf1d4e1c58fd41ec09",
+      "size": 9952
+    },
+    "python_programs/bitcount.py": {
+      "git_blob_sha": "cc14d0eeded8a9b6c148019be77eed01250f6bd4",
+      "size": 291
+    },
+    "python_programs/breadth_first_search.py": {
+      "git_blob_sha": "cd02a7fcdc620aa8142cb1d4904f68c4777e5f2b",
+      "size": 610
+    },
+    "python_programs/bucketsort.py": {
+      "git_blob_sha": "620e64e15eb04871a0fdeeafa020003704cffad6",
+      "size": 453
+    },
+    "python_programs/depth_first_search.py": {
+      "git_blob_sha": "72562c85483e3d895eaa7bc013a74cb5bbca275b",
+      "size": 524
+    },
+    "python_programs/detect_cycle.py": {
+      "git_blob_sha": "c2fb38b1b5b8608788c6f9c8c3a52bca575cee5e",
+      "size": 471
+    },
+    "python_programs/find_first_in_sorted.py": {
+      "git_blob_sha": "a131a0239cfcdf7ae9d8ef84c7d64e2c6a04b322",
+      "size": 561
+    },
+    "python_programs/find_in_sorted.py": {
+      "git_blob_sha": "223e209172fd0c00a28430e0ecff7207047595a7",
+      "size": 573
+    },
+    "python_programs/flatten.py": {
+      "git_blob_sha": "e3e79333670d0b4aff8a131f96efcfb97f613581",
+      "size": 470
+    },
+    "python_programs/gcd.py": {
+      "git_blob_sha": "d0a6618748c438590f33483cde37f82b5b276295",
+      "size": 340
+    },
+    "python_programs/get_factors.py": {
+      "git_blob_sha": "882bacb106ba7ededbe98c11a8157cf2d8c224f8",
+      "size": 509
+    },
+    "python_programs/hanoi.py": {
+      "git_blob_sha": "37438e0a3b8b7e71eb0e36492500c91daaaf9c32",
+      "size": 1138
+    },
+    "python_programs/is_valid_parenthesization.py": {
+      "git_blob_sha": "a339ac2c4cefb7547ab4beaecd791e96c678f8e4",
+      "size": 538
+    },
+    "python_programs/kheapsort.py": {
+      "git_blob_sha": "967926dda15e3020330b11a5a6d983e3c4666fcc",
+      "size": 881
+    },
+    "python_programs/knapsack.py": {
+      "git_blob_sha": "493c2d3fc71054c34c1af19b390ca44ef82d9088",
+      "size": 1063
+    },
+    "python_programs/kth.py": {
+      "git_blob_sha": "6105365d84d6a928f1d608dba24f84b5dc8960a3",
+      "size": 538
+    },
+    "python_programs/lcs_length.py": {
+      "git_blob_sha": "681c9644f181bbebaf1bdf5fc83637be1a4ddb37",
+      "size": 520
+    },
+    "python_programs/levenshtein.py": {
+      "git_blob_sha": "ba5c682177a5c2336c251ecc690f1020ae378a91",
+      "size": 1023
+    },
+    "python_programs/lis.py": {
+      "git_blob_sha": "82a571b1c6fed870d8af1ca3ae51b9a16d13255e",
+      "size": 664
+    },
+    "python_programs/longest_common_subsequence.py": {
+      "git_blob_sha": "dd763e5837fe172029070599f553d4a3bdb89643",
+      "size": 860
+    },
+    "python_programs/max_sublist_sum.py": {
+      "git_blob_sha": "b2d79601d42b4f4a7b91c747f2ed184b6853f6e1",
+      "size": 509
+    },
+    "python_programs/mergesort.py": {
+      "git_blob_sha": "14faff8abb707914cc722d349c0f81d694954c66",
+      "size": 691
+    },
+    "python_programs/minimum_spanning_tree.py": {
+      "git_blob_sha": "8c04afd6b1f697718bb5dc209426861c0cfa3ad6",
+      "size": 993
+    },
+    "python_programs/next_palindrome.py": {
+      "git_blob_sha": "ad7c11c80253b9a45a843dd3679b2c288b13ed4e",
+      "size": 957
+    },
+    "python_programs/next_permutation.py": {
+      "git_blob_sha": "0d69c8316561d544fd9428274c78aef8a4806266",
+      "size": 684
+    },
+    "python_programs/node.py": {
+      "git_blob_sha": "0f77eaada8515dbdfff1869588a7db74be5ca5a0",
+      "size": 541
+    },
+    "python_programs/pascal.py": {
+      "git_blob_sha": "caf2aea9f6a87a3a59cf92fca178c72c808dffb1",
+      "size": 565
+    },
+    "python_programs/possible_change.py": {
+      "git_blob_sha": "d99752a07a3fac77bbc1792579a63fb4378ba3cb",
+      "size": 814
+    },
+    "python_programs/powerset.py": {
+      "git_blob_sha": "b287c51e6ef19c9d086db76a243a424bbee80f2d",
+      "size": 614
+    },
+    "python_programs/quicksort.py": {
+      "git_blob_sha": "be7a1a37cb85bc9ed3699296c0ab582380e477f4",
+      "size": 330
+    },
+    "python_programs/reverse_linked_list.py": {
+      "git_blob_sha": "0793d0f784116e8180df8c5578bf439aefe3486e",
+      "size": 461
+    },
+    "python_programs/rpn_eval.py": {
+      "git_blob_sha": "b48db47a65ead158a38f44bd63dd9fbe0ef962df",
+      "size": 877
+    },
+    "python_programs/shortest_path_length.py": {
+      "git_blob_sha": "4bcc67736e9850124c5cda3de1c2341734c9db0c",
+      "size": 1711
+    },
+    "python_programs/shortest_path_lengths.py": {
+      "git_blob_sha": "80bdfb02331d0f608d807b3081d4daebf5880de1",
+      "size": 1046
+    },
+    "python_programs/shortest_paths.py": {
+      "git_blob_sha": "1097b07ec13a970223fd949666283cf39bc8b341",
+      "size": 1286
+    },
+    "python_programs/shunting_yard.py": {
+      "git_blob_sha": "174ac91e2a237fe1b26043019ec02255594de389",
+      "size": 1092
+    },
+    "python_programs/sieve.py": {
+      "git_blob_sha": "f267cc99a7f161f54972f7c9ffe986f0cae58295",
+      "size": 324
+    },
+    "python_programs/sqrt.py": {
+      "git_blob_sha": "c79dfa881f9e51b028ba673a96de95a258f9b5d6",
+      "size": 420
+    },
+    "python_programs/subsequences.py": {
+      "git_blob_sha": "53b119f81e2caf9952c4242385f31c79c0490a1c",
+      "size": 477
+    },
+    "python_programs/to_base.py": {
+      "git_blob_sha": "2abfa6add4b89d56f0500e80410779f47fc3e393",
+      "size": 512
+    },
+    "python_programs/topological_ordering.py": {
+      "git_blob_sha": "e304be7b1b1eb340823b16ab6647783d1d4df885",
+      "size": 611
+    },
+    "python_programs/wrap.py": {
+      "git_blob_sha": "60ce16c65684c43473cdda0c375d1b609568efb7",
+      "size": 924
+    },
+    "python_testcases/load_testdata.py": {
+      "git_blob_sha": "93c451ea735501506615c1265f4c837013697343",
+      "size": 320
+    },
+    "python_testcases/node.py": {
+      "git_blob_sha": "d13ac95aa89720d38a13b875d3e41495c23b8f84",
+      "size": 427
+    },
+    "python_testcases/test_bitcount.py": {
+      "git_blob_sha": "1c05b188db700b104a7d24ff7961a60f4d69e937",
+      "size": 396
+    },
+    "python_testcases/test_breadth_first_search.py": {
+      "git_blob_sha": "aeb1172c1db542f2764b8965f4c054fa6aa54b77",
+      "size": 1869
+    },
+    "python_testcases/test_bucketsort.py": {
+      "git_blob_sha": "235d2ceabcae1f94ee70549b892b768cffdfa83a",
+      "size": 410
+    },
+    "python_testcases/test_depth_first_search.py": {
+      "git_blob_sha": "d3e632c69bb39a9caa4930e2ce38fa22831c7875",
+      "size": 1851
+    },
+    "python_testcases/test_detect_cycle.py": {
+      "git_blob_sha": "07c3d4b9c6d610753a1f312030736b61887c9f8f",
+      "size": 1460
+    },
+    "python_testcases/test_find_first_in_sorted.py": {
+      "git_blob_sha": "d304531684542b86f1a53bf08b126538150a6004",
+      "size": 480
+    },
+    "python_testcases/test_find_in_sorted.py": {
+      "git_blob_sha": "ec03f19d9088de2caeefdbbaffe3809449b66c1e",
+      "size": 438
+    },
+    "python_testcases/test_flatten.py": {
+      "git_blob_sha": "b821c980ae8a0935c3d92844fb509e25ddf3bacd",
+      "size": 395
+    },
+    "python_testcases/test_gcd.py": {
+      "git_blob_sha": "be5b9cee6d7a381b8be939ed78fbea2a0d6ffac7",
+      "size": 361
+    },
+    "python_testcases/test_get_factors.py": {
+      "git_blob_sha": "dbe1a256cd1b8daad959b79f9f11a766958c0b8a",
+      "size": 417
+    },
+    "python_testcases/test_hanoi.py": {
+      "git_blob_sha": "2d04221ebfd0fe83037084b1328a2584095aca85",
+      "size": 444
+    },
+    "python_testcases/test_is_valid_parenthesization.py": {
+      "git_blob_sha": "6396dae0568a918a1fe7c631a3c9381f78238d3b",
+      "size": 515
+    },
+    "python_testcases/test_kheapsort.py": {
+      "git_blob_sha": "95f876716935e5f0bf0f6fb1232030b65c2010ef",
+      "size": 409
+    },
+    "python_testcases/test_knapsack.py": {
+      "git_blob_sha": "1d77c3917dbe16da4bea29f350e52bca5b11e390",
+      "size": 1265
+    },
+    "python_testcases/test_kth.py": {
+      "git_blob_sha": "05be0e546f85c91412e64cc34f663cdc3682f823",
+      "size": 361
+    },
+    "python_testcases/test_lcs_length.py": {
+      "git_blob_sha": "9eddf2fa22cf9f3b867f27e3ca5409be7274f122",
+      "size": 410
+    },
+    "python_testcases/test_levenshtein.py": {
+      "git_blob_sha": "63c42d75a1a095864e94f8b95286fb794d44951b",
+      "size": 591
+    },
+    "python_testcases/test_lis.py": {
+      "git_blob_sha": "f04cb796cbe0aa0edfefaedf9f879d173d02b3de",
+      "size": 361
+    },
+    "python_testcases/test_longest_common_subsequence.py": {
+      "git_blob_sha": "a0f90a66897982955096cb6266df9a44e0228f38",
+      "size": 522
+    },
+    "python_testcases/test_max_sublist_sum.py": {
+      "git_blob_sha": "c41f8e6f0634d4fc038246e0685b580739ec74b4",
+      "size": 445
+    },
+    "python_testcases/test_mergesort.py": {
+      "git_blob_sha": "1143326951b870a681f4d50610d6cf83fb77a72f",
+      "size": 403
+    },
+    "python_testcases/test_minimum_spanning_tree.py": {
+      "git_blob_sha": "27e46abbec97ece163be43eb6fcb82ac0714a33a",
+      "size": 1251
+    },
+    "python_testcases/test_next_palindrome.py": {
+      "git_blob_sha": "71d92e1c124bfcf1ed8df5bbd6c9aa71c2ef19b6",
+      "size": 445
+    },
+    "python_testcases/test_next_permutation.py": {
+      "git_blob_sha": "ce61b2eb78b79f32eb733f50a1969cd667ac4165",
+      "size": 452
+    },
+    "python_testcases/test_pascal.py": {
+      "git_blob_sha": "98ef6d1aaf04d75fc7ebfa9303a3ab78984d3c43",
+      "size": 382
+    },
+    "python_testcases/test_possible_change.py": {
+      "git_blob_sha": "f162b28a2d80fe34a7272c2473807863b79f8bde",
+      "size": 445
+    },
+    "python_testcases/test_powerset.py": {
+      "git_blob_sha": "34868958c2dc301182cbeeccb3afe37cf11fd669",
+      "size": 396
+    },
+    "python_testcases/test_quicksort.py": {
+      "git_blob_sha": "13df57ad5b60c88c3b4a475919f124b0858dc1f2",
+      "size": 403
+    },
+    "python_testcases/test_reverse_linked_list.py": {
+      "git_blob_sha": "82ab7c451962a943c4839cacb4d6cce2951ef648",
+      "size": 1203
+    },
+    "python_testcases/test_rpn_eval.py": {
+      "git_blob_sha": "fe96e38b3e201d9d08fae574bb7da8c5488a1df8",
+      "size": 396
+    },
+    "python_testcases/test_shortest_path_length.py": {
+      "git_blob_sha": "38449b9a382d8d4bc437f4f7c9fad6d11b1be42c",
+      "size": 1247
+    },
+    "python_testcases/test_shortest_path_lengths.py": {
+      "git_blob_sha": "7f669fc72f43751c06bcf5d4c1d6218c0b51dd81",
+      "size": 3288
+    },
+    "python_testcases/test_shortest_paths.py": {
+      "git_blob_sha": "ec119d5fa336feb992da3c47b81743aae4a16fcc",
+      "size": 1452
+    },
+    "python_testcases/test_shunting_yard.py": {
+      "git_blob_sha": "a77d27d857787c780bb85f937f7db7b90f4f279d",
+      "size": 431
+    },
+    "python_testcases/test_sieve.py": {
+      "git_blob_sha": "4267dcd5339e52747c15cab962f905facef68dd5",
+      "size": 375
+    },
+    "python_testcases/test_sqrt.py": {
+      "git_blob_sha": "70fe94dc44cf78f72e353cb3e46e440a8fc93fb4",
+      "size": 403
+    },
+    "python_testcases/test_subsequences.py": {
+      "git_blob_sha": "aa073c2f786fcfe568722873c154fcae6e9e57ac",
+      "size": 424
+    },
+    "python_testcases/test_to_base.py": {
+      "git_blob_sha": "1d92c21c893aa4043661b08b9e76583976fb7727",
+      "size": 389
+    },
+    "python_testcases/test_topological_ordering.py": {
+      "git_blob_sha": "dbafe1a43051e4673e62edb606045540edba2f1a",
+      "size": 2885
+    },
+    "python_testcases/test_wrap.py": {
+      "git_blob_sha": "e42668cb197ee3a458eaffd14c17736f1efb12a4",
+      "size": 368
+    },
+    "json_testcases/mergesort.json": {
+      "git_blob_sha": "9452f44e505ae9956919eb82890925720acffbec",
+      "size": 1158
+    },
+    "json_testcases/quicksort.json": {
+      "git_blob_sha": "0fff3e9a92984b2717a4810bc7a6248c049b908a",
+      "size": 1147
+    }
+  }
+}

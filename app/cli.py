@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 from .baseline import baseline_record
@@ -20,15 +21,76 @@ def run_baseline() -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description='Code-Fix组件与模拟联调；无真实API入口')
+    parser = argparse.ArgumentParser(description='Code-Fix V3任务与证据；模型调用需明确授权及配置')
     sub = parser.add_subparsers(dest='command', required=True)
     for name in ('validate-config', 'decision-fixtures', 'run-baseline', 'model-dry-run'):
         sub.add_parser(name)
     parse = sub.add_parser('parse-output')
     parse.add_argument('kind', choices=['locator', 'repairer'])
     parse.add_argument('path')
+    create = sub.add_parser('create-task')
+    create.add_argument('--mode', choices=['baseline', 'repair'], default='baseline')
+    create.add_argument('--description')
+    create.add_argument('--project', default='leap')
+    create.add_argument('--max-rounds', type=int, default=3)
+    create.add_argument('--max-calls', type=int, default=12)
+    create.add_argument('--total-seconds', type=int, default=300)
+    create.add_argument('--idempotency-key')
+    for name in ('start-task', 'task-status', 'task-report', 'interrupt-task'):
+        command = sub.add_parser(name)
+        command.add_argument('run_id')
+    sub.add_parser('list-tasks')
+    sub.add_parser('list-projects')
+    importer = sub.add_parser('import-quixbugs')
+    importer.add_argument('--source-bundle')
+    importer.add_argument('--write', action='store_true', help='默认只预览；指定后导入已校验资产并更新目录')
+    sub.add_parser('doctor')
+    serve = sub.add_parser('serve')
+    serve.add_argument('--port', type=int, default=8000)
     args = parser.parse_args()
     try:
+        if args.command == 'import-quixbugs':
+            from .quixbugs_import import BUNDLE, import_dataset
+            result = import_dataset(source_bundle=args.source_bundle or BUNDLE, write=args.write)
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
+        if args.command == 'list-projects':
+            from .tasks_v3 import list_tasks
+            print(json.dumps(list_tasks(), ensure_ascii=False, indent=2))
+            return 0
+        if args.command == 'doctor':
+            from .readiness import readiness
+            print(json.dumps(readiness(), ensure_ascii=False, indent=2))
+            return 0
+        if args.command == 'serve':
+            import uvicorn
+            from .api import create_app
+            if not 1024 <= args.port <= 65535:
+                raise ValueError('端口须为1024至65535')
+            uvicorn.run(create_app(), host='127.0.0.1', port=args.port)
+            return 0
+        if args.command in {'create-task', 'start-task', 'task-status', 'task-report', 'list-tasks', 'interrupt-task'}:
+            from .service import TaskService
+            service = TaskService(os.environ.get('CODE_FIX_RUN_ROOT'))
+            if args.command == 'create-task':
+                from .tasks_v3 import get_task
+                result = service.store.create({'mode': args.mode, 'project': args.project,
+                                               'description': args.description if args.description is not None else get_task(args.project).data['description'],
+                                               'max_rounds': args.max_rounds, 'max_calls': args.max_calls,
+                                               'total_seconds': args.total_seconds}, args.idempotency_key)
+            elif args.command == 'start-task':
+                result = service.execute(args.run_id)
+            elif args.command == 'task-status':
+                result = service.store.get(args.run_id)
+            elif args.command == 'task-report':
+                result = {'report_path': str(service.write_report(args.run_id))}
+            elif args.command == 'interrupt-task':
+                service.store.interrupt(args.run_id)
+                result = service.store.get(args.run_id)
+            else:
+                result = service.store.list()
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 2 if isinstance(result, dict) and result.get('status') in {'blocked', 'failed'} else 0
         if args.command == 'validate-config':
             task = load_task_spec(ROOT / 'configs/tasks/leap-baseline.json')
             errors = validate_draft_configs(ROOT)
@@ -57,7 +119,7 @@ def main() -> int:
                    for i, failure in enumerate(('assertion_failed', 'syntax_error', 'environment_error', 'timeout'), 1)]
         print(json.dumps(results, ensure_ascii=False, indent=2))
         return 0
-    except (ConfigError, InvalidModelOutput, ValueError, OSError) as exc:
+    except (ConfigError, InvalidModelOutput, ValueError, OSError, KeyError) as exc:
         print(json.dumps({'status': 'blocked', 'reason': str(exc)}, ensure_ascii=False))
         return 2
 

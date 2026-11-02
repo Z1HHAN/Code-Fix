@@ -5,3 +5,21 @@ C_Day1_20261030/** -text
 C_Day1_20261030/runs/** -whitespace
 # Registered fixtures are checked against exact frozen bytes.
 c_fixtures/** -text
+# Preserve the captain's exact V3 requirements bytes across checkouts.
+docs/开发要求V3.0.md -text
+# Runtime evidence hashes describe exact bytes, independent of core.autocrlf.
+evidence/v3/** -text
+# Preserve native CR/LF sequences in captured evidence without diff whitespace rewriting.
+evidence/v3/** -whitespace
+# Follow-up control acceptance is a separate immutable evidence batch.
+evidence/v3-state-control/** -text -whitespace
+# Native public-task inputs are checked byte-for-byte against pinned hashes.
+task_assets/** -text
+# Preserve upstream whitespace as well as line endings in public task inputs.
+task_assets/quixbugs/** -whitespace
+evidence/v3-public-tasks/** -text -whitespace
+# The verified upstream bundle and importer evidence also require exact bytes.
+datasets/quixbugs/** -text
+evidence/quixbugs-import/** -text -whitespace
+# Preserve raw main integration review outputs, including failed attempts.
+evidence/main-review-20261102/** -text -whitespace
