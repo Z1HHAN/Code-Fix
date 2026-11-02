@@ -1,5 +1,9 @@
 # 验链 Code Fix
 
+当前安排：[11月3日B/C任务分工](docs/11月3日执行手册与任务分工.md)、[3日台账](docs/daily/2026-11-03.md)、[当前任务与交接](docs/当前任务与交接.md)。A报告B电脑已装Docker（资格待验），B运行并补充程序，C测试留证；2日未完成项并入3日，尚未回传次日结果，付费仍未批准。
+
+B/C每次交分支按[提交与版本记录规范](docs/分支提交与版本记录规范.md)附[交付记录](docs/templates/BC分支交付记录模板.md)，说明完成内容、验证/证据、遗留及A需要同步的状态。统一[更迭日志](CHANGELOG.md)和[PPT/demo素材索引](docs/版本与演示素材索引.md)用于日终登记，不将模板/计划记为成果。
+
 ## V3主线：可运行的CLI、HTTP与真实基线页面
 
 V3在`codex/development-v3`按队长提供的[745行要求](docs/开发要求V3.0.md)开发，经队长本轮授权审核、干净检出复核后合入main，保留原提交和团队分支。[主线合并审核](docs/V3主线合并审核与复核-20261102.md)、[启动与模型配置](docs/V3运行与接口.md)、[阶段验收及版本记录](docs/V3开发与验收.md)。
@@ -39,9 +43,9 @@ C的历史闰年基线与手册参考版本已放入C_Day1_20261030；见[已有
 
 | 使用者 | 阅读与行动 |
 | --- | --- |
-| A队长 | [11月2日台账](docs/daily/2026-11-02.md)、[五天计划](docs/五天落地与参赛分工-20261101至1105.md)、[11月1日台账](docs/daily/2026-11-01.md) |
-| B开发 | [接口确认](docs/接口确认清单.md)、[角色配置](configs/agents.json)、[失败规则](configs/decision_rules.json)、[UI交付提示词](docs/UI交付B完整提示词.md) |
-| C测试 | [测试计划](configs/test_plan.json)、[已有成果](docs/已有成果与交接.md)、[成果登记](docs/成果登记与阶段结论.md) |
+| A队长 | [3日台账](docs/daily/2026-11-03.md)、[五天计划](docs/五天落地与参赛分工-20261101至1105.md)、[当前功能状态](docs/功能状态与优化待办.md) |
+| B开发/主执行机 | [3日任务与文件归属](docs/11月3日执行手册与任务分工.md)、[运行与接口](docs/V3运行与接口.md)、[待本人签收接口](docs/接口确认清单.md) |
+| C测试/复核 | [3日验收与交付](docs/11月3日执行手册与任务分工.md)、[40题登记](configs/tasks/catalog-v3.json)、[成果登记](docs/成果登记与阶段结论.md) |
 | 三人共同 | [材料与范围对齐](docs/11月1日需补齐材料与对齐记录.md)、[验收](docs/acceptance.md)、[实验协议](docs/experiment-protocol.md) |
 
 项目范围以根目录[scope.md](scope.md)为准；[差距对照](docs/执行方案与当前版本差距.md)区分历史基线、当前材料和待实现能力。
@@ -121,4 +125,4 @@ python -m pytest day1-kit/tests/ -v
 
 配置iteration-0.2-20261101-draft，接口0.2-20261101-draft，状态pending_BC_confirmation。测试角色为deterministic；固定夹具组件已接入，自动工作流配置执行绑定仍待B/C确认。新final_check_failed及旧heldout_failed兼容迁移仍待B/C签收。预算建议仅在手册，null不表示无限。
 
-[报告六章骨架](docs/研究报告六章骨架.md)、[demo脚本](docs/demo-script.md)、[PPT内容](presentation/README.md)、[11月1日材料发布复核](docs/11月1日材料发布复核记录.md)。旧[10月31日安排](docs/今天迭代与测试安排.md)和[旧阶段模板](docs/day2_decision.md)保留历史，当前行动见[11月2日交接](docs/integration/BC组件接入与模拟联调-20261102.md)。
+[报告六章骨架](docs/研究报告六章骨架.md)、[demo脚本](docs/demo-script.md)、[PPT内容](presentation/README.md)、[11月1日材料发布复核](docs/11月1日材料发布复核记录.md)。[10月31日历史安排](docs/历史迭代与测试安排-20261031.md)和[旧阶段模板](docs/day2_decision.md)保留历史，当前行动见[当前任务与交接](docs/当前任务与交接.md)。

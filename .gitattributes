@@ -23,3 +23,5 @@ datasets/quixbugs/** -text
 evidence/quixbugs-import/** -text -whitespace
 # Preserve raw main integration review outputs, including failed attempts.
 evidence/main-review-20261102/** -text -whitespace
+# Preserve original Git bytes when archiving the old undated daily plan.
+docs/历史迭代与测试安排-20261031.md -text

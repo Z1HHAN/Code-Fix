@@ -1,0 +1,29 @@
+{
+  "prepared_on": "2026-11-02",
+  "execution_date": "2026-11-03",
+  "record_kind": "documentation_validation_only",
+  "source_main": "76da3037f907f67bb5b9b3d61fa588589a860434",
+  "markdown_files_checked": 71,
+  "local_markdown_links_checked": 364,
+  "task_ids_aligned": [
+    "N03-01",
+    "N03-02",
+    "N03-03",
+    "N03-04",
+    "N03-05",
+    "N03-06",
+    "N03-07",
+    "N03-08",
+    "N03-09"
+  ],
+  "functional_and_historical_evidence_diff_empty": true,
+  "archived_old_plan_exact_git_bytes": true,
+  "archived_old_plan_sha256": "bf60bfa56670c99a8d5fe3c3915ffc00d19d0b6c8a3d7da54ffecafee7dae668",
+  "evidence_batches_rechecked": 5,
+  "public_assets_unchanged": true,
+  "B_docker_installed": "reported_by_A; actual_isolation_pending",
+  "paid_calls_authorized": false,
+  "nov03_runtime_results_received": false,
+  "tests_rerun": false,
+  "note": "Docs-only update. No new pytest/Agent/Docker result; no B/C signatures or paid execution approval."
+}
