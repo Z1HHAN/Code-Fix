@@ -19,6 +19,8 @@
   "file_sha256": {
     "baseline.png": "1927afeb996f30f49240a587bc04a6b7584a1887bb081744f2f0c019d96871ba",
     "browser-check.json": "589d381759d0b27cae81861648bae3783a1b3cdd95034f8a7d858230800dbc0d",
+    "clean-checkout.junit.xml": "13871735130079395d84e1738a1de15313ea8732b26a2b446b36a824f250fb02",
+    "clean-checkout.txt": "5996c7d02b76f9377c520aff6d19168593bc90e6e146a6c0752179ae6241b7b8",
     "docker-prerequisites.json": "f21bbd9ce6d6f0347a28381cdc7ae404829f851d8ecf2bad31efddafdf24c76e",
     "doctor.json": "4e94962f419cca32f5810a32d7b947e3396318db7d25460643c338ba508c15bf",
     "regression.junit.xml": "32efa3db6b1e581547dab596c77cd0fe9d002b4d3256977c50969f61417ae323",
@@ -86,9 +88,11 @@
     "tests/ui_prototype.test.cjs": "292fd864dd8d49d1d87f625e6da5aa1845437a6839f6847622a19746f738f4ef"
   },
   "hash_note": "Actual tested working-tree bytes; text EOL conversion can change hashes in another checkout.",
+  "validated_source_commit": "10b9340fbed82334b1d4195f4e8a713659739810",
   "committed_module_versions": {
     "v1.0-cli-baseline": "c48d940257f4b8673d337fa80322de3a9ef3b0c1",
     "dev-v3-agent-contracts": "61ee7375ff52ab1a4592658ce0eba6903d7952f7",
-    "dev-v3-workflow-offline": "20a84b67b796e3dd99289cdaeb9289766d82d9e8"
+    "dev-v3-workflow-offline": "20a84b67b796e3dd99289cdaeb9289766d82d9e8",
+    "v1.0-web-baseline": "02930713ee9b8f649a09127af425b5b0a6849335"
   }
 }

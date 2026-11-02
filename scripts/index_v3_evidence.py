@@ -27,8 +27,9 @@ value = {
     'archive_note': 'Complete original-baseline evidence only; not a model-repair result',
     'file_sha256': files, 'tested_source_sha256': sources,
     'hash_note': 'Actual tested working-tree bytes; text EOL conversion can change hashes in another checkout.',
+    'validated_source_commit': subprocess.check_output(['git','rev-parse','HEAD'], cwd=root, text=True).strip(),
     'committed_module_versions': {tag: subprocess.check_output(['git','rev-list','-n','1',tag], cwd=root, text=True).strip()
-                                  for tag in ('v1.0-cli-baseline','dev-v3-agent-contracts','dev-v3-workflow-offline')}
+                                  for tag in ('v1.0-cli-baseline','dev-v3-agent-contracts','dev-v3-workflow-offline','v1.0-web-baseline')}
 }
 (folder / 'index.json').write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding='utf-8')
 print(json.dumps(value['pytest']))

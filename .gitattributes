@@ -9,3 +9,5 @@ c_fixtures/** -text
 docs/开发要求V3.0.md -text
 # Runtime evidence hashes describe exact bytes, independent of core.autocrlf.
 evidence/v3/** -text
+# Preserve native CR/LF sequences in captured evidence without diff whitespace rewriting.
+evidence/v3/** -whitespace
