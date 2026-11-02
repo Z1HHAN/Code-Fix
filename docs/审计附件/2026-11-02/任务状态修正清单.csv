@@ -1,0 +1,13 @@
+﻿修正ID,易误读的旧状态,建议当前状态,证据,处理边界
+STATE-01,后端/HTTP尚未开始,T-001/T-008已实现，限定基线测试通过,app/cli.py;app/api.py;evidence/main-review-20261102/browser.json,历史原文保留，当前待办移除重复搭建
+STATE-02,首日/闰年尚未交付,T-011历史基线和参考记录已交付，T-002真实基线可复现,C_Day1_20261030/README.md;evidence/main-review-20261102/c-delivery.txt,3过1败是缺陷复现，不认定模型修好
+STATE-03,动态、知识、候选全部待实现,T-003—006组件已实现/离线通过，真实链待验,tests/test_workflow_v3.py;evidence/main-review-20261102/worktree.junit.xml,拆开发与真实验证，不重复开发
+STATE-04,所有UI已完成或全部未接,静态原型与真实基线已完成；真实修复UI、预览编辑、续跑另待办,ui/prototype/README.md;app/api.py;evidence/main-review-20261102/browser.json,T-008/T-014与T-036/T-042/T-044分列
+STATE-05,167项通过等于167个修复案例,168平台测试=167过1跳过，模型调用0,已读取工作区/干净检出JUnit及checks.json,不得写成功率；独立候选验收未运行
+STATE-06,40题导入即公开任务已跑,导入/哈希完成；278静态ID，2慢测禁用；生产公开资格待验证,configs/tasks/catalog-v3.json;evidence/main-review-20261102/import-preview.json,保留C包内历史三题资格，另列当前Docker资格
+STATE-07,B已装Docker即隔离通过,安装来自A报告；目标机Linux引擎/探针/限制/清理待验,docs/daily/2026-11-03.md,T-031受环境阻塞，不代签
+STATE-08,3日计划即已完成/今天,2日预编的次日任务与空记录，无3日运行成果,docs/11月3日执行手册与任务分工.md,只关联T-030以后待办；不复制2日结果
+STATE-09,API已解决即真实调用获批,旧阶段条件不构成当前服务商/模型/费用批准，实际请求0,docs/V3运行与接口.md;evidence/main-review-20261102/checks.json,T-033待确认，T-034受阻
+STATE-10,平台干净检出回归等于独立候选验收,干净检出167过1跳过是平台回归；真实候选final未运行,两真实run ZIP report.json final_result=not_run,所有真实候选final状态保持未运行
+STATE-11,规则R07 terminal_status旧缺陷仍待实现,现app/decision.py中命中返回terminal_status，V3实际消费；旧审计只代表旧commit,app/decision.py;app/workflow_v3.py;tests/test_workflow_v3.py,不把旧M04自动带成新待开发；真实整链仍待验
+STATE-12,研究报告把独立LLM调度仅放展望,已有scheduler角色协议/网关与替身测试；真实模型调用未验,prompts/scheduler.md;app/agents_v3.py;tests/test_agents_v3.py,调整成已实现组件/待真实验证，不宣传独立智能调度效果
