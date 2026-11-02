@@ -75,3 +75,5 @@ def test_detector_and_scheduler_cannot_invent_citations():
         parse_role('scheduler', json.dumps(data | {'action': 'success'}), ['e1'], [])
     with pytest.raises(ValueError):
         parse_role('scheduler', json.dumps(data | {'evidence_ids': []}), ['e1'], [])
+    with pytest.raises(ValueError):
+        parse_role('scheduler', json.dumps(data | {'action': []}), ['e1'], [])

@@ -30,9 +30,17 @@ class TaskService:
                 evidence = baseline_record(ROOT, output_root=destination)
                 result = {**evidence['summary'], 'evidence_path': evidence['evidence_path'],
                           'tool_result': evidence['tool_result']}
+                raw_root = Path(evidence['evidence_path'])
+                if not raw_root.is_absolute():
+                    raw_root = ROOT / raw_root
+                log_path = raw_root / 'artifacts' / evidence['tool_result'].get('stdout_path', 'missing')
+                if log_path.is_file():
+                    with log_path.open('rb') as log:
+                        result['stdout_excerpt'] = log.read(12000).decode('utf-8', errors='replace')
                 status = 'blocked' if evidence['tool_result']['verification_status'] == 'not_run' else 'stopped'
             else:
-                status, result = 'blocked', {'final_result': 'not_run', 'reason': '真实修复运行条件尚未接入'}
+                from .workflow_v3 import Workflow
+                status, result = Workflow(self.store).run(run_id)
             self.store.finish(run_id, status, result)
         except Exception as exc:
             self.store.finish(run_id, 'failed', {'final_result': 'not_run', 'error_type': type(exc).__name__,

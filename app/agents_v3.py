@@ -25,7 +25,7 @@ def parse_role(role, raw, evidence_ids, knowledge_ids):
             raise InvalidModelOutput('检测员输出缺少分析或分类')
     elif role == 'scheduler':
         _fields(value, {'action', 'reason', 'evidence_ids', 'knowledge_citations'})
-        if value['action'] not in {'repair', 'locate', 'final_check', 'pause', 'stop'} or not isinstance(value['reason'], str) or not value['reason'].strip():
+        if not isinstance(value['action'], str) or value['action'] not in {'repair', 'locate', 'final_check', 'pause', 'stop'} or not isinstance(value['reason'], str) or not value['reason'].strip():
             raise InvalidModelOutput('调度建议非法')
     else:
         raise InvalidModelOutput('未知角色')
@@ -61,6 +61,9 @@ class AgentGateway:
         except Exception as exc:
             record = {'status': 'blocked', 'failure_class': 'model_blocked', 'error_type': type(exc).__name__,
                       'model_api_called': False, 'mode': getattr(self.model, 'mode', 'unknown')}
+            from .live_model import ModelBlocked
+            if isinstance(exc, ModelBlocked):
+                record['reason'] = str(exc)
         record.update(role=role, code_version=version, call_id=call_id, round=round_number)
         if record['status'] == 'ok':
             try:

@@ -26,7 +26,7 @@ def validate_task(value):
     task = dict(description='修复闰年判断', project='leap', mode='baseline',
                 max_rounds=3, max_calls=12, total_seconds=300)
     task.update(value)
-    if task['project'] != 'leap' or task['mode'] not in {'baseline', 'repair'}:
+    if task['project'] != 'leap' or not isinstance(task['mode'], str) or task['mode'] not in {'baseline', 'repair'}:
         raise ValueError('只支持已登记的leap项目及baseline/repair模式')
     if not isinstance(task['description'], str) or not 1 <= len(task['description'].strip()) <= 2000:
         raise ValueError('任务描述长度必须为1至2000')
@@ -127,7 +127,7 @@ class RunStore:
         self.event(run_id, {'event': 'finished', 'status': status, 'result': result})
 
     def request_control(self, run_id, action):
-        if action not in {'pause', 'stop'}:
+        if not isinstance(action, str) or action not in {'pause', 'stop'}:
             raise ValueError('非法控制操作')
         self.get(run_id)
         with self.connect() as db:
