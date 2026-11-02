@@ -85,8 +85,8 @@ byId('project').onchange = () => {
   const project = projects.find(item => item.project === byId('project').value);
   if (!project) return;
   byId('description').value = project.description;
-  display('project-hint', `${project.source_paths.join('、')} · 原生测试${project.expected_test_count}项。` +
-    (project.requires_isolation ? '公开题目须隔离执行；条件未就绪会阻止运行。' : '本地冻结基线可直接检查。'));
+  display('project-hint', `${project.source_paths.join('、')} · 预登记原生测试${project.expected_test_count}项。` +
+    (project.admission_blocker || (project.requires_isolation ? '公开题目须隔离执行；尚待实际测试收集和基线验证。' : '本地冻结基线可直接检查。')));
 };
 byId('start').onclick = () => action(async () => { if (selected) await api(`/tasks/${selected}/start`, {method:'POST'}); });
 for (const operation of ['pause', 'stop']) byId(operation).onclick = () => action(async () => {
@@ -109,7 +109,8 @@ byId('report').onclick = () => download('report'); byId('bundle').onclick = () =
     projects = await (await api('/projects')).json();
     const choices = projects.map(project => {
       const option = document.createElement('option'); option.value = project.project;
-      option.textContent = project.title; return option;
+      option.textContent = project.title + (project.admission_blocker ? '（测试策略待确认）' : '');
+      option.disabled = Boolean(project.admission_blocker); return option;
     });
     byId('project').replaceChildren(...choices); byId('project').onchange();
     display('health', await (await api('/health')).json());

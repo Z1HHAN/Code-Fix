@@ -176,7 +176,7 @@ def test_model_call_limit_prevents_extra_role_and_final_check(tmp_path):
     assert runner.phases == ['development', 'development'] and result['final_result'] == 'not_run'
 
 
-@pytest.mark.parametrize('project', ['qb-get_factors', 'qb-gcd', 'qb-max_sublist_sum'])
+@pytest.mark.parametrize('project', ['qb-get_factors', 'qb-gcd', 'qb-max_sublist_sum', 'qb-breadth_first_search'])
 def test_public_task_routes_registered_source_and_clean_copy_with_stubs_only(tmp_path, project):
     from app.tasks_v3 import get_task
     definition = get_task(project)
@@ -193,3 +193,7 @@ def test_public_task_routes_registered_source_and_clean_copy_with_stubs_only(tmp
     assert list(material['current_code']) == [definition.source]
     assert material['task']['project'] == project
     assert 'knowledge-public_tasks' in [item['citation_id'] for item in material['knowledge_context']]
+    if project == 'qb-breadth_first_search':
+        assert list(material['readonly_code']) == ['python_testcases/node.py']
+        assert 'class Node' in material['readonly_code']['python_testcases/node.py']
+        assert not any(path.startswith('correct_') for path in material['readonly_code'])

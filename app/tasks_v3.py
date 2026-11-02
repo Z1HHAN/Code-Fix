@@ -29,12 +29,18 @@ class RegisteredTask:
     def requires_isolation(self):
         return self.data['requires_isolation']
 
+    @property
+    def admission_blocker(self):
+        return self.data.get('admission_blocker')
+
     def summary(self):
         return {'project': self.project, 'title': self.data['title'], 'description': self.data['description'],
                 'source_paths': self.profile['source_paths'], 'test_paths': self.profile['test_paths'],
                 'expected_test_count': len(self.profile['expected_nodeids']),
                 'test_suite_version': compute_test_suite_version(self.profile),
-                'requires_isolation': self.requires_isolation, 'source': self.data['source']}
+                'requires_isolation': self.requires_isolation, 'source': self.data['source'],
+                'admission_blocker': self.admission_blocker,
+                'qualification_status': self.data.get('qualification_status', 'reviewed_fixture_or_legacy_registration')}
 
     def verify(self, workspace, *, candidate=False):
         actual = _snapshot(workspace)

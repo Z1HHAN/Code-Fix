@@ -52,6 +52,13 @@ class AgentGateway:
                     'current_code': {source: code}, 'dev_evidence': [evidence],
                     'knowledge_context': knowledge, 'location_json': extra if role == 'repairer' else None,
                     'previous_analysis': extra if role != 'repairer' else None}
+        # Only explicitly registered interface helpers, never reference answers,
+        # whole test files, evaluation workspaces or the complete dataset bundle.
+        context = definition.data.get('context_paths', [])
+        if any(path not in definition.profile['approved_files'] or path == source or not path.endswith('/node.py') for path in context):
+            raise InvalidModelOutput('只读接口材料未登记')
+        if context:
+            material['readonly_code'] = {path: (work / path).read_text(encoding='utf-8') for path in context}
         messages = [{'role': 'system', 'content': prompt}, {'role': 'user', 'content': json.dumps(material, ensure_ascii=False)}]
         import uuid
         call_id = 'm-' + uuid.uuid4().hex

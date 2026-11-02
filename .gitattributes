@@ -15,4 +15,9 @@ evidence/v3/** -whitespace
 evidence/v3-state-control/** -text -whitespace
 # Native public-task inputs are checked byte-for-byte against pinned hashes.
 task_assets/** -text
+# Preserve upstream whitespace as well as line endings in public task inputs.
+task_assets/quixbugs/** -whitespace
 evidence/v3-public-tasks/** -text -whitespace
+# The verified upstream bundle and importer evidence also require exact bytes.
+datasets/quixbugs/** -text
+evidence/quixbugs-import/** -text -whitespace

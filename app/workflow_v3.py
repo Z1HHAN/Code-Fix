@@ -47,6 +47,8 @@ class Workflow:
 
         try:
             boundary()
+            if definition.admission_blocker:
+                return finish('blocked', definition.admission_blocker)
             settings = None
             blockers = []
             if self.model is None:

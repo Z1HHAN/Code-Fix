@@ -41,11 +41,19 @@ def main() -> int:
         command.add_argument('run_id')
     sub.add_parser('list-tasks')
     sub.add_parser('list-projects')
+    importer = sub.add_parser('import-quixbugs')
+    importer.add_argument('--source-bundle')
+    importer.add_argument('--write', action='store_true', help='默认只预览；指定后导入已校验资产并更新目录')
     sub.add_parser('doctor')
     serve = sub.add_parser('serve')
     serve.add_argument('--port', type=int, default=8000)
     args = parser.parse_args()
     try:
+        if args.command == 'import-quixbugs':
+            from .quixbugs_import import BUNDLE, import_dataset
+            result = import_dataset(source_bundle=args.source_bundle or BUNDLE, write=args.write)
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
         if args.command == 'list-projects':
             from .tasks_v3 import list_tasks
             print(json.dumps(list_tasks(), ensure_ascii=False, indent=2))

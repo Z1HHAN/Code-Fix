@@ -26,6 +26,8 @@ def run_public_baseline(store, run_id, runner=None):
 
     if stopped := boundary():
         return stopped
+    if task.admission_blocker:
+        return 'blocked', result | {'reason': task.admission_blocker}
     isolation = runner.preflight(directory / 'isolation')
     store.event(run_id, {'event': 'isolation_checked', **isolation})
     result['isolation_ready'] = isolation['isolation_ready']

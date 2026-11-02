@@ -18,12 +18,13 @@ PUBLIC = ['qb-get_factors', 'qb-gcd', 'qb-max_sublist_sum']
 
 def test_catalog_records_native_counts_and_pinned_provenance():
     tasks = list_tasks()
-    assert [task['expected_test_count'] for task in tasks] == [4, 11, 6, 6]
-    assert [task['project'] for task in tasks] == ['leap', *PUBLIC]
+    assert [task['expected_test_count'] for task in tasks[:4]] == [4, 11, 6, 6]
+    assert [task['project'] for task in tasks[:4]] == ['leap', *PUBLIC]
+    assert len(tasks) == 41
     for task in tasks[1:]:
         assert task['requires_isolation'] is True
         assert task['source']['commit'] == '4257f44b0ff1181dedaedee6a447e133219fcebf'
-        assert task['source']['upstream_redownloaded'] is False
+        assert task['source']['upstream_redownloaded'] is True
 
 
 @pytest.mark.parametrize('project', PUBLIC)
@@ -71,7 +72,7 @@ def test_candidate_cannot_cross_into_other_tasks_or_test_paths(tmp_path, project
 def test_http_catalog_task_selection_and_unknown_project_rejection(tmp_path):
     with TestClient(create_app(tmp_path)) as client:
         tasks = client.get('/api/v3/projects').json()
-        assert len(tasks) == 4
+        assert len(tasks) == 41
         token = client.get('/api/v3/session').json()['token']
         headers = {'X-Codefix-Token': token}
         for task in tasks:

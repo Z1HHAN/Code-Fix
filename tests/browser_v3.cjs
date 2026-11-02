@@ -60,15 +60,17 @@ let socket;
   const development=await evaluate("document.getElementById('development').textContent");
   const projects=await evaluate("Array.from(document.getElementById('project').options, option => option.value)");
   for (const project of ['leap','qb-get_factors','qb-gcd','qb-max_sublist_sum']) assert.ok(projects.includes(project));
-  await evaluate("document.getElementById('project').value='qb-gcd';document.getElementById('project').dispatchEvent(new Event('change'))");
-  assert.ok(await evaluate("document.getElementById('description').value.includes('gcd')"));
+  assert.equal(projects.length, 41);
+  assert.ok(await evaluate("Array.from(document.getElementById('project').options).filter(option=>option.disabled).length === 2"));
+  await evaluate("document.getElementById('project').value='qb-quicksort';document.getElementById('project').dispatchEvent(new Event('change'))");
+  assert.ok(await evaluate("document.getElementById('description').value.includes('quicksort')"));
   await evaluate("document.getElementById('create').click()");
   await wait(`document.getElementById('history')?.value !== '${rid}' && !document.getElementById('start').disabled`);
   const publicRid=await evaluate("document.getElementById('history').value");
   await evaluate("document.getElementById('start').click()");
   await wait("document.getElementById('status')?.textContent.includes('blocked')");
   const publicRun=await evaluate(`fetch('/api/v3/tasks/${publicRid}').then(response => response.json())`);
-  assert.equal(publicRun.task.project, 'qb-gcd');
+  assert.equal(publicRun.task.project, 'qb-quicksort');
   assert.equal(publicRun.result.model_api_called, false);
   assert.equal(publicRun.result.tool_calls, 0);
   assert.equal(publicRun.result.final_result, 'not_run');
@@ -82,7 +84,8 @@ let socket;
   const evidence={browser:version.Browser,run_id:rid,checks:{real_page_created_task:true,real_http_start:true,
     real_pytest_failure_shown:true,final_not_run:true,refresh_preserved_run:true,refresh_created_no_duplicate:true,
     public_projects_selectable:true,public_task_created:true,public_execution_blocked_without_docker:true,
-    public_model_and_tool_calls_zero:true,public_selection_survived_refresh:true},
+    public_model_and_tool_calls_zero:true,public_selection_survived_refresh:true,
+    all_40_public_tasks_listed:true,two_native_skip_policy_tasks_disabled:true},
     projects,public_run_id:publicRid,public_result:publicRun.result,
     status:await evaluate("document.getElementById('status').textContent"),
     development,
