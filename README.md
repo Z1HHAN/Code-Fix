@@ -4,19 +4,19 @@
 
 ## 当前交付状态
 
-经A授权，本轮 **执行工具组件、静态UI原型和C历史交付包** 集成版合入main，保留11月1日计划、范围与最新配置草案。已完成/部分完成/待完成状态见[功能状态与优化待办](docs/功能状态与优化待办.md)，来源与检查结果见[集成说明与验收](docs/集成版本说明与验收.md)。
-配置和接口仍待B/C确认与接入。UI未连接后端，模型调用尚未迁移到新组件，真实隔离与独立验收未确认。当前不发布正式v0.2功能标签。后续待完善/优化的功能，须先说明范围与验收条件并取得A确认，再修改。
+11月2日经A授权，已接入 **C结构化执行器及B模型适配层，完成模拟联调**。固定坏代码提供真实证据，模拟定位/修复产出JSON候选，候选不应用、不执行。启动和检查见[本次交接](docs/integration/BC组件接入与模拟联调-20261102.md)；状态见[功能状态与优化待办](docs/功能状态与优化待办.md)。
+接口仍待B/C本人签收。UI是静态原型；真实模型请求、隔离、候选执行、独立验收、Self-Loop及HTTP尚未启用。当前不发布正式v0.2功能标签。后续优化先说明范围与验收条件并取得A确认。
 
 A已确认启动会、B主执行机、模型API和B/C分支访问已解决。
 C的历史闰年基线与手册参考版本已放入C_Day1_20261030；见[已有成果与交接](docs/已有成果与交接.md)。它不等于本轮模型自动修复或候选的干净副本独立复验。
 
-另保留C于11月1日晚间直接提交main的Code-Fix-C-20261101.zip（abaf2fd）。该补充包内容待复核，未解压接入，不据此登记新增功能完成。
+保留Code-Fix-C-20261101.zip（abaf2fd）；[内容复核已完成](docs/integration/C压缩包复核-20261102.md)。选择性接入执行器、冻结夹具和控制检查，原包及历史证据未改写，参考资格检查不计模型成绩。
 
 ## 从这里开始
 
 | 使用者 | 阅读与行动 |
 | --- | --- |
-| A队长 | [五天计划](docs/五天落地与参赛分工-20261101至1105.md)、[今日手册](docs/11月1日执行手册与验收表.md)、[今日台账](docs/daily/2026-11-01.md) |
+| A队长 | [11月2日台账](docs/daily/2026-11-02.md)、[五天计划](docs/五天落地与参赛分工-20261101至1105.md)、[11月1日台账](docs/daily/2026-11-01.md) |
 | B开发 | [接口确认](docs/接口确认清单.md)、[角色配置](configs/agents.json)、[失败规则](configs/decision_rules.json)、[UI交付提示词](docs/UI交付B完整提示词.md) |
 | C测试 | [测试计划](configs/test_plan.json)、[已有成果](docs/已有成果与交接.md)、[成果登记](docs/成果登记与阶段结论.md) |
 | 三人共同 | [材料与范围对齐](docs/11月1日需补齐材料与对齐记录.md)、[验收](docs/acceptance.md)、[实验协议](docs/experiment-protocol.md) |
@@ -30,6 +30,9 @@ Code-Fix/
 ├── scope.md                  项目范围
 ├── .gitignore                密钥、缓存与运行产物忽略规则
 ├── app/                      配置、规则、权限、知识与执行工具组件
+├── c_runner/                 固定夹具执行器，拒绝模型候选执行
+├── c_fixtures/               按字节冻结的工具/参考/故障注入样例
+├── c_tests/                  JUnit、结构化证据和执行边界回归
 ├── tests/                    组件回归和原型交互检查
 ├── ui/prototype/             明确标模拟的静态原型
 ├── C_Day1_20261030/           C历史证据及交付校验器
@@ -43,18 +46,20 @@ Code-Fix/
     └── ui/                   原型参考图（非运行证据）
 ```
 
-安装检查依赖并运行组件：
+使用Python3.14和pytest8.3.5（执行器会检查Python版本），在仓库根目录：
 
 ```powershell
 python -m pip install -r requirements-dev.txt
-python -m pytest tests/ -q
+python -X utf8 -m pytest -q
 node --test tests/ui_prototype.test.cjs
 python -m app.cli validate-config
 python -m app.cli decision-fixtures
 python -m app.cli run-baseline
+python -X utf8 -m app.cli model-dry-run
+python -X utf8 scripts/check_c_controls.py --output-root runs/controls
 ```
 
-run-baseline仅检查人工闰年基线；原始3过1败是预期结果，不调用模型、不表示独立验收。UI启动见[原型说明](ui/prototype/README.md)。完整自动修复服务启动入口仍待B/C实现。
+run-baseline仅检查原始基线，3过1败是预期结果。model-dry-run仅验证真实基线证据与模拟角色接口，源码不变，final_result=not_run。UI启动见[原型说明](ui/prototype/README.md)。完整自动修复服务仍待实现。
 
 ## 验证首日任务基线
 
@@ -86,6 +91,6 @@ python -m pytest day1-kit/tests/ -v
 
 ## 当前版本与演示材料
 
-配置iteration-0.2-20261101-draft，接口0.2-20261101-draft，状态pending_BC_confirmation。测试角色为deterministic且执行绑定未实现；新final_check_failed及旧heldout_failed兼容迁移仍待B/C签收。预算建议仅在手册，null不表示无限。
+配置iteration-0.2-20261101-draft，接口0.2-20261101-draft，状态pending_BC_confirmation。测试角色为deterministic；固定夹具组件已接入，自动工作流配置执行绑定仍待B/C确认。新final_check_failed及旧heldout_failed兼容迁移仍待B/C签收。预算建议仅在手册，null不表示无限。
 
-[报告六章骨架](docs/研究报告六章骨架.md)、[demo脚本](docs/demo-script.md)、[PPT内容](presentation/README.md)、[11月1日材料发布复核](docs/11月1日材料发布复核记录.md)。旧[10月31日迭代安排](docs/今天迭代与测试安排.md)和[旧阶段模板](docs/day2_decision.md)保留历史背景，当前行动按11月1日入口。
+[报告六章骨架](docs/研究报告六章骨架.md)、[demo脚本](docs/demo-script.md)、[PPT内容](presentation/README.md)、[11月1日材料发布复核](docs/11月1日材料发布复核记录.md)。旧[10月31日安排](docs/今天迭代与测试安排.md)和[旧阶段模板](docs/day2_decision.md)保留历史，当前行动见[11月2日交接](docs/integration/BC组件接入与模拟联调-20261102.md)。

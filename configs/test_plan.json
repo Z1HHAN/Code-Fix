@@ -1,6 +1,14 @@
 {
   "plan_version": "iteration-0.2-20261101-draft",
-  "status": "planned_not_executed",
+  "status": "qualification_snapshot_rechecked_model_runs_not_started",
+  "qualification_review": {
+    "reviewed_on": "2026-11-02",
+    "source": "Code-Fix-C-20261101.zip",
+    "scope": "archive_snapshot_bad_and_reference_checks_only",
+    "upstream_redownloaded": false,
+    "model_api_called": false,
+    "report": "docs/integration/C压缩包复核-20261102.md"
+  },
   "first_gate": {
     "task_id": "T001-leap",
     "source": "day1-kit",
@@ -20,7 +28,7 @@
     "license": "MIT",
     "license_file": "LICENSE",
     "pin_checked_on": "2026-10-31",
-    "local_qualification": "not_run"
+    "local_qualification": "archive_snapshot_rechecked_not_platform_candidate_execution"
   },
   "public_tasks": [
     {
@@ -31,7 +39,8 @@
       ],
       "test_path": "python_testcases/test_get_factors.py",
       "purpose": "首个公开任务接入；环境资格通过后接模型。",
-      "qualification_status": "not_run"
+      "qualification_status": "archive_snapshot_rechecked",
+      "qualification_counts": {"native_tests": 11, "bad_passed": 1, "bad_failed": 10, "reference_passed": 11}
     },
     {
       "task_id": "QB-gcd",
@@ -41,7 +50,8 @@
       ],
       "test_path": "python_testcases/test_gcd.py",
       "purpose": "环境资格及后续运行异常恢复验证；不是环境异常故障注入。",
-      "qualification_status": "not_run"
+      "qualification_status": "archive_snapshot_rechecked",
+      "qualification_counts": {"native_tests": 6, "bad_passed": 1, "bad_failed": 5, "reference_passed": 6}
     },
     {
       "task_id": "QB-max_sublist_sum",
@@ -51,7 +61,8 @@
       ],
       "test_path": "python_testcases/test_max_sublist_sum.py",
       "purpose": "环境资格及下一批算法任务。",
-      "qualification_status": "not_run"
+      "qualification_status": "archive_snapshot_rechecked",
+      "qualification_counts": {"native_tests": 6, "bad_passed": 2, "bad_failed": 4, "reference_passed": 6}
     }
   ],
   "qualification": "C在独立评测目录固定commit，逐题运行坏代码测试和--correct参考验证，记录实际计数、退出码、超时及跳过项；先不把3题全部送模型。",

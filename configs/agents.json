@@ -74,7 +74,7 @@
       "model_ref": null,
       "prompt_ref": null,
       "execution_binding": null,
-      "implementation_status": "planned_pending_C",
+      "implementation_status": "fixed_fixture_component_integrated_binding_pending_BC",
       "tool_allowlist": [
         "run_tests"
       ],

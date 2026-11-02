@@ -1,0 +1,285 @@
+{
+  "checked_on": "2026-11-02",
+  "timezone": "Asia/Shanghai",
+  "run_type": "tool_check",
+  "model_api_called": false,
+  "isolation_ready": false,
+  "bc_signoff": "pending_BC_confirmation",
+  "source_code_commit": "5e665fa835f8ab10eb5d4237f871cf26a9d8985e",
+  "python_tests": {
+    "passed": 90,
+    "skipped": 1,
+    "note": "One symlink privilege skip; same result in core.autocrlf=true clean clone."
+  },
+  "clean_checkout": {
+    "core_autocrlf": true,
+    "python_passed": 90,
+    "python_skipped": 1,
+    "legacy_delivery_files": 47,
+    "legacy_delivery_links": 58,
+    "legacy_metadata_tests_passed": 3
+  },
+  "implementation_hash_note": "Hashes identify tested development working-tree file bytes before Git EOL conversion; clean-checkout code is independently tested at source_code_commit.",
+  "node_tests": {
+    "passed": 9,
+    "failed": 0
+  },
+  "implementation_files_sha256": {
+    "app/cli.py": "deac21e92ea5bb328f98aff3ffa5a5c99ab77014e14cc4574a561f10db87c64f",
+    "app/baseline.py": "e93d301263e3ad8f0633e10f597b9025e9256fca68f648ba254a90c969c77873",
+    "app/runner.py": "92b6a149047048e8939aeec9138c1a1e28a1d879b1485f2b9af280c70e30018c",
+    "app/config.py": "165ef951eac3963e5c48eda5141eebfb33b73d1f2acd63caf37d23d1f1639b43",
+    "app/model_client.py": "b10711aab450679e9d2389c8464680f9765d0ca389539bf86ed983485d01fb5c",
+    "app/model_context.py": "bab942b062788b0a18edb9290f4d104f80525e34f7411d192ae03d87f3cb13ee",
+    "app/mock_workflow.py": "cea71ca0fcbf287fc9336a3f5733e619b22ce257591e0de368f0a37d14aea792",
+    "app/repair_output.py": "cca4f5bb906d66b57435d9ade0c39c4f0fdac5f77cfa7ff832985fdf0e59fe71",
+    "c_runner/runner.py": "c8d8d1b13c8a8040749137ea32bda82d3d869de187b65296d6f049e8f4e20ad4",
+    "c_runner/pytest_entry.py": "d12064729c31eaa1b023152cda8c6b7bd44e0bccb414beef3d1894dd7c477660",
+    "c_runner/profiles.json": "efa0021668ae72bc2fa3daa69b8089c3e7a04629145d88bbdb275869fcec8475",
+    "scripts/check_c_controls.py": "da6bdb94f8910a9d65209074bca43db6560cf89dd1900f80c67cbf1d65c2ede6"
+  },
+  "baseline": {
+    "run_id": "20261102-155401-18f077c2",
+    "counts": {
+      "collected": 4,
+      "passed": 3,
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "exit_code": 1,
+    "status": "failed",
+    "verification_status": "failed",
+    "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+    "code_version_scheme": "sha256-canonical-files-v1",
+    "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "call_id": "c-cb0afa630eca492cb93d5b2f22b7e3f6",
+    "final_result": "not_run"
+  },
+  "mock": {
+    "run_id": "20261102-155359-9a833713",
+    "task_id": "T001-leap-baseline",
+    "run_type": "tool_check",
+    "status": "stopped",
+    "dev_result": "failed",
+    "final_result": "not_run",
+    "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+    "code_version_scheme": "sha256-canonical-files-v1",
+    "model_api_called": false,
+    "failure_class": null,
+    "reason": "模拟联调：开发基线仍失败；仅保存候选，不应用、不执行、不做独立验收。",
+    "mode": "mock",
+    "mock_integration_passed": true,
+    "candidate_applied": false,
+    "candidate_executed": false,
+    "isolation_ready": false,
+    "calls_used": 2,
+    "source_unchanged": true,
+    "budget_scope": "single_run_mock_model_attempts",
+    "max_mock_attempts": 2,
+    "max_attempts_per_call": 1
+  },
+  "c_controls": {
+    "run_id": "C-20261102-155402-e0728ed9",
+    "all_control_checks_passed": true,
+    "scenario_count": 12,
+    "scenarios": [
+      {
+        "scenario": "leap_bad",
+        "checks": {
+          "status": true,
+          "verification": true,
+          "failure_class": true,
+          "no_false_pass": true,
+          "output_agent_null": true,
+          "stdout_exists": true,
+          "stderr_exists": true,
+          "counts": true
+        },
+        "status": "failed",
+        "verification_status": "failed",
+        "failure_class": "assertion_failed"
+      },
+      {
+        "scenario": "leap_good",
+        "checks": {
+          "status": true,
+          "verification": true,
+          "failure_class": true,
+          "no_false_pass": true,
+          "output_agent_null": true,
+          "stdout_exists": true,
+          "stderr_exists": true,
+          "counts": true
+        },
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed"
+      },
+      {
+        "scenario": "output_timeout",
+        "checks": {
+          "status": true,
+          "verification": true,
+          "failure_class": true,
+          "no_false_pass": true,
+          "output_agent_null": true,
+          "stdout_exists": true,
+          "stderr_exists": true,
+          "partial_stdout": true,
+          "partial_stderr": true,
+          "no_fake_junit": true,
+          "unknown_outcomes": true,
+          "collected_truthful": true
+        },
+        "status": "timeout",
+        "verification_status": "inconclusive",
+        "failure_class": "timeout"
+      },
+      {
+        "scenario": "all_skipped",
+        "checks": {
+          "status": true,
+          "verification": true,
+          "failure_class": true,
+          "no_false_pass": true,
+          "output_agent_null": true,
+          "stdout_exists": true,
+          "stderr_exists": true
+        },
+        "status": "failed",
+        "verification_status": "inconclusive",
+        "failure_class": "not_reproduced"
+      },
+      {
+        "scenario": "zero_tests",
+        "checks": {
+          "status": true,
+          "verification": true,
+          "failure_class": true,
+          "no_false_pass": true,
+          "output_agent_null": true,
+          "stdout_exists": true,
+          "stderr_exists": true
+        },
+        "status": "failed",
+        "verification_status": "inconclusive",
+        "failure_class": "not_reproduced"
+      },
+      {
+        "scenario": "incomplete_tests",
+        "checks": {
+          "status": true,
+          "verification": true,
+          "failure_class": true,
+          "no_false_pass": true,
+          "output_agent_null": true,
+          "stdout_exists": true,
+          "stderr_exists": true
+        },
+        "status": "failed",
+        "verification_status": "inconclusive",
+        "failure_class": "not_reproduced"
+      },
+      {
+        "scenario": "dependency_error",
+        "checks": {
+          "status": true,
+          "verification": true,
+          "failure_class": true,
+          "no_false_pass": true,
+          "output_agent_null": true,
+          "stdout_exists": true,
+          "stderr_exists": true
+        },
+        "status": "failed",
+        "verification_status": "inconclusive",
+        "failure_class": "environment_error"
+      },
+      {
+        "scenario": "syntax_error",
+        "checks": {
+          "status": true,
+          "verification": true,
+          "failure_class": true,
+          "no_false_pass": true,
+          "output_agent_null": true,
+          "stdout_exists": true,
+          "stderr_exists": true
+        },
+        "status": "failed",
+        "verification_status": "failed",
+        "failure_class": "syntax_error"
+      },
+      {
+        "scenario": "runtime_error",
+        "checks": {
+          "status": true,
+          "verification": true,
+          "failure_class": true,
+          "no_false_pass": true,
+          "output_agent_null": true,
+          "stdout_exists": true,
+          "stderr_exists": true
+        },
+        "status": "failed",
+        "verification_status": "failed",
+        "failure_class": "code_runtime_error"
+      },
+      {
+        "scenario": "stale_version",
+        "checks": {
+          "status": true,
+          "verification": true,
+          "failure_class": true,
+          "no_false_pass": true,
+          "output_agent_null": true,
+          "stdout_exists": true,
+          "stderr_exists": true
+        },
+        "status": "blocked",
+        "verification_status": "not_run",
+        "failure_class": "permission_violation"
+      },
+      {
+        "scenario": "modified_tests",
+        "checks": {
+          "status": true,
+          "verification": true,
+          "failure_class": true,
+          "no_false_pass": true,
+          "output_agent_null": true,
+          "stdout_exists": true,
+          "stderr_exists": true
+        },
+        "status": "blocked",
+        "verification_status": "not_run",
+        "failure_class": "permission_violation"
+      },
+      {
+        "scenario": "model_candidate_blocked",
+        "checks": {
+          "status": true,
+          "verification": true,
+          "failure_class": true,
+          "no_false_pass": true,
+          "output_agent_null": true,
+          "stdout_exists": true,
+          "stderr_exists": true
+        },
+        "status": "blocked",
+        "verification_status": "not_run",
+        "failure_class": "permission_violation"
+      }
+    ]
+  },
+  "evidence": {
+    "full_artifacts_in_repository": false,
+    "root_relative_directories": [
+      "runs/20261102-155401-18f077c2",
+      "runs/20261102-155359-9a833713",
+      "runs/controls/C-20261102-155402-e0728ed9"
+    ],
+    "note": "Full per-call artifacts stay in the execution worktree runs directory; this portable index is a summary, not a full evidence bundle."
+  }
+}
