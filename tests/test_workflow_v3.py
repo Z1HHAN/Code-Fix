@@ -35,6 +35,7 @@ class ModelStub:
         self.scheduler = scheduler
     def call(self, messages, **kwargs):
         material = json.loads(messages[1]['content'])
+        source, content = next(iter(material['current_code'].items()))
         evidence = material['dev_evidence'][0]
         assert evidence['phase'] == 'development'
         common = {'evidence_ids': [evidence['evidence_id']], 'knowledge_citations': []}
@@ -47,10 +48,12 @@ class ModelStub:
             output = common | {'action': self.scheduler, 'reason': 'offline advice'}
         elif '定位员提示词' in prompt:
             role = 'locator'
-            output = common | {'file': SOURCE, 'function': 'is_leap', 'hypothesis': 'offline hypothesis'}
+            output = common | {'file': source, 'function': Path(source).stem, 'hypothesis': 'offline hypothesis'}
         else:
             role = 'repairer'
-            output = common | {'explanation': 'synthetic candidate', 'changes': [{'path': SOURCE, 'new_content': 'def is_leap(year):\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\n'}]}
+            synthetic = ('def is_leap(year):\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\n'
+                         if source == SOURCE else '# OFFLINE STUB: not a verified repair\n' + content)
+            output = common | {'explanation': 'synthetic candidate', 'changes': [{'path': source, 'new_content': synthetic}]}
         self.roles.append(role)
         return {'status': 'ok', 'mode': 'test_stub', 'model_api_called': False, 'raw_text': json.dumps(output)}
 
@@ -171,3 +174,22 @@ def test_model_call_limit_prevents_extra_role_and_final_check(tmp_path):
     assert status == 'blocked' and result['model_calls'] == 1
     assert model.roles == ['repairer']
     assert runner.phases == ['development', 'development'] and result['final_result'] == 'not_run'
+
+
+@pytest.mark.parametrize('project', ['qb-get_factors', 'qb-gcd', 'qb-max_sublist_sum'])
+def test_public_task_routes_registered_source_and_clean_copy_with_stubs_only(tmp_path, project):
+    from app.tasks_v3 import get_task
+    definition = get_task(project)
+    status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'assertion_failed', 'passed', 'passed'], {'project': project})
+    assert status == 'success' and result['mode'] == 'test_stub' and not result['model_api_called']
+    assert runner.phases == ['development', 'development', 'development', 'final_check']
+    assert model.roles == ['repairer', 'detector', 'scheduler', 'locator', 'repairer', 'detector', 'scheduler']
+    folder = store.directory(rid)
+    assert (folder / 'candidate-1' / definition.source).is_file()
+    definition.verify(folder / 'final-work', candidate=True)
+    assert not (folder / 'final-work/correct_python_programs').exists()
+    saved = json.loads(next((folder / 'calls').glob('*/input.json')).read_text(encoding='utf-8'))
+    material = json.loads(saved['messages'][1]['content'])
+    assert list(material['current_code']) == [definition.source]
+    assert material['task']['project'] == project
+    assert 'knowledge-public_tasks' in [item['citation_id'] for item in material['knowledge_context']]

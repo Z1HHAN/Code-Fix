@@ -3,7 +3,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 const {spawn} = require('node:child_process');
 const assert = require('node:assert/strict');
-const out = path.resolve('runs/v3-browser');
+const out = path.resolve(process.env.CODE_FIX_BROWSER_OUTPUT || 'runs/v3-browser');
+const base = process.env.CODE_FIX_BROWSER_BASE_URL || 'http://127.0.0.1:8765/';
+const targetUrl = new URL(base);
+assert.ok(targetUrl.protocol === 'http:' && ['127.0.0.1','localhost'].includes(targetUrl.hostname), 'Local server required');
+assert.ok(!fs.existsSync(out), 'Use a fresh output directory to preserve earlier browser evidence');
 fs.mkdirSync(out, {recursive:true});
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const browser = spawn('C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe', [
@@ -28,7 +32,7 @@ let socket;
   const send=(method,params={},sessionId) => new Promise((resolve,reject)=>{
     const mid=++id; pending.set(mid,{resolve,reject});socket.send(JSON.stringify({id:mid,method,params,sessionId}));
   });
-  const {targetId}=await send('Target.createTarget',{url:'http://127.0.0.1:8765/'});
+  const {targetId}=await send('Target.createTarget',{url:base});
   const {sessionId}=await send('Target.attachToTarget',{targetId,flatten:true});
   await send('Page.enable',{},sessionId);
   await send('Emulation.setDeviceMetricsOverride',{width:1600,height:1100,deviceScaleFactor:1,mobile:false},sessionId);
@@ -53,11 +57,36 @@ let socket;
   assert.equal(await evaluate("document.getElementById('history').options.length"),count);
   const screenshot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:true},sessionId);
   fs.writeFileSync(path.join(out,'baseline.png'),Buffer.from(screenshot.data,'base64'));
+  const development=await evaluate("document.getElementById('development').textContent");
+  const projects=await evaluate("Array.from(document.getElementById('project').options, option => option.value)");
+  for (const project of ['leap','qb-get_factors','qb-gcd','qb-max_sublist_sum']) assert.ok(projects.includes(project));
+  await evaluate("document.getElementById('project').value='qb-gcd';document.getElementById('project').dispatchEvent(new Event('change'))");
+  assert.ok(await evaluate("document.getElementById('description').value.includes('gcd')"));
+  await evaluate("document.getElementById('create').click()");
+  await wait(`document.getElementById('history')?.value !== '${rid}' && !document.getElementById('start').disabled`);
+  const publicRid=await evaluate("document.getElementById('history').value");
+  await evaluate("document.getElementById('start').click()");
+  await wait("document.getElementById('status')?.textContent.includes('blocked')");
+  const publicRun=await evaluate(`fetch('/api/v3/tasks/${publicRid}').then(response => response.json())`);
+  assert.equal(publicRun.task.project, 'qb-gcd');
+  assert.equal(publicRun.result.model_api_called, false);
+  assert.equal(publicRun.result.tool_calls, 0);
+  assert.equal(publicRun.result.final_result, 'not_run');
+  assert.ok(await evaluate("document.getElementById('summary').textContent.includes('隔离')"));
+  const publicScreenshot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:true},sessionId);
+  fs.writeFileSync(path.join(out,'public-blocked.png'),Buffer.from(publicScreenshot.data,'base64'));
+  await send('Page.reload',{ignoreCache:true},sessionId);
+  await wait("document.getElementById('status')?.textContent.includes('blocked')");
+  assert.equal(await evaluate("document.getElementById('history').value"), publicRid);
+  assert.equal(await evaluate("document.getElementById('history').options.length"), count+1);
   const evidence={browser:version.Browser,run_id:rid,checks:{real_page_created_task:true,real_http_start:true,
-    real_pytest_failure_shown:true,final_not_run:true,refresh_preserved_run:true,refresh_created_no_duplicate:true},
+    real_pytest_failure_shown:true,final_not_run:true,refresh_preserved_run:true,refresh_created_no_duplicate:true,
+    public_projects_selectable:true,public_task_created:true,public_execution_blocked_without_docker:true,
+    public_model_and_tool_calls_zero:true,public_selection_survived_refresh:true},
+    projects,public_run_id:publicRid,public_result:publicRun.result,
     status:await evaluate("document.getElementById('status').textContent"),
-    development:await evaluate("document.getElementById('development').textContent"),
-    completed_at:new Date().toISOString(),scope:'baseline only; no model or candidate execution'};
+    development,
+    completed_at:new Date().toISOString(),scope:'real reviewed leap baseline and blocked public-task UI only; no public code, model or candidate execution'};
   fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(evidence,null,2));
   console.log(JSON.stringify(evidence,null,2));
   await send('Browser.close');

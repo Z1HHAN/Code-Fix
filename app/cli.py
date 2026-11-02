@@ -21,7 +21,7 @@ def run_baseline() -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description='Code-Fix组件与模拟联调；无真实API入口')
+    parser = argparse.ArgumentParser(description='Code-Fix V3任务与证据；模型调用需明确授权及配置')
     sub = parser.add_subparsers(dest='command', required=True)
     for name in ('validate-config', 'decision-fixtures', 'run-baseline', 'model-dry-run'):
         sub.add_parser(name)
@@ -30,18 +30,26 @@ def main() -> int:
     parse.add_argument('path')
     create = sub.add_parser('create-task')
     create.add_argument('--mode', choices=['baseline', 'repair'], default='baseline')
-    create.add_argument('--description', default='修复闰年判断')
+    create.add_argument('--description')
+    create.add_argument('--project', default='leap')
     create.add_argument('--max-rounds', type=int, default=3)
+    create.add_argument('--max-calls', type=int, default=12)
+    create.add_argument('--total-seconds', type=int, default=300)
     create.add_argument('--idempotency-key')
     for name in ('start-task', 'task-status', 'task-report', 'interrupt-task'):
         command = sub.add_parser(name)
         command.add_argument('run_id')
     sub.add_parser('list-tasks')
+    sub.add_parser('list-projects')
     sub.add_parser('doctor')
     serve = sub.add_parser('serve')
     serve.add_argument('--port', type=int, default=8000)
     args = parser.parse_args()
     try:
+        if args.command == 'list-projects':
+            from .tasks_v3 import list_tasks
+            print(json.dumps(list_tasks(), ensure_ascii=False, indent=2))
+            return 0
         if args.command == 'doctor':
             from .readiness import readiness
             print(json.dumps(readiness(), ensure_ascii=False, indent=2))
@@ -57,8 +65,11 @@ def main() -> int:
             from .service import TaskService
             service = TaskService(os.environ.get('CODE_FIX_RUN_ROOT'))
             if args.command == 'create-task':
-                result = service.store.create({'mode': args.mode, 'description': args.description,
-                                               'max_rounds': args.max_rounds}, args.idempotency_key)
+                from .tasks_v3 import get_task
+                result = service.store.create({'mode': args.mode, 'project': args.project,
+                                               'description': args.description if args.description is not None else get_task(args.project).data['description'],
+                                               'max_rounds': args.max_rounds, 'max_calls': args.max_calls,
+                                               'total_seconds': args.total_seconds}, args.idempotency_key)
             elif args.command == 'start-task':
                 result = service.execute(args.run_id)
             elif args.command == 'task-status':

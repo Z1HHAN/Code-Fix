@@ -1,0 +1,40 @@
+{
+  "browser": "Edg/156.0.4314.58",
+  "run_id": "run-3404bcbc0d5c4bdab62e191f250affd1",
+  "checks": {
+    "real_page_created_task": true,
+    "real_http_start": true,
+    "real_pytest_failure_shown": true,
+    "final_not_run": true,
+    "refresh_preserved_run": true,
+    "refresh_created_no_duplicate": true,
+    "public_projects_selectable": true,
+    "public_task_created": true,
+    "public_execution_blocked_without_docker": true,
+    "public_model_and_tool_calls_zero": true,
+    "public_selection_survived_refresh": true
+  },
+  "projects": [
+    "leap",
+    "qb-get_factors",
+    "qb-gcd",
+    "qb-max_sublist_sum"
+  ],
+  "public_run_id": "run-3a115048b02445babfcb9a83842b713a",
+  "public_result": {
+    "project": "qb-gcd",
+    "mode": "baseline",
+    "model_api_called": false,
+    "model_calls": 0,
+    "tool_calls": 0,
+    "final_result": "not_run",
+    "dev_result": "not_run",
+    "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+    "isolation_ready": false,
+    "reason": "公开题目必须隔离执行；需确认不可信代码执行授权：CODE_FIX_EXECUTION_APPROVED=1"
+  },
+  "status": "run-3a115048b02445babfcb9a83842b713a\n状态：blocked · 题目：qb-gcd · 模式：baseline",
+  "development": "============================= test session starts =============================\r\nplatform win32 -- Python 3.14.6, pytest-8.3.5, pluggy-1.7.0 -- C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe\r\nrootdir: \\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-3404bcbc0d5c4bdab62e191f250affd1\\baseline\\20261102-182720-472fee54\\artifacts\\20261102-182720-472fee54\\c-dcf30cc9a4aa494eb8e1e71af6ec907a\\work\r\nconfigfile: ..\\pytest.ini\r\ncollecting ... collected 4 items\r\n\r\ntests/test_leap.py::test_2024_is_leap PASSED\r\ntests/test_leap.py::test_2023_is_not_leap PASSED\r\ntests/test_leap.py::test_1900_is_not_leap FAILED\r\ntests/test_leap.py::test_2000_is_leap PASSED\r\n\r\n================================== FAILURES ===================================\r\n____________________________ test_1900_is_not_leap ____________________________\r\n\r\n    def test_1900_is_not_leap():\r\n>       assert is_leap(1900) is False\r\nE       assert True is False\r\nE        +  where True = is_leap(1900)\r\n\r\ntests\\test_leap.py:21: AssertionError\r\n- generated xml file: \\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-3404bcbc0d5c4bdab62e191f250affd1\\baseline\\20261102-182720-472fee54\\artifacts\\20261102-182720-472fee54\\c-dcf30cc9a4aa494eb8e1e71af6ec907a\\junit.xml -\r\n=========================== short test summary info ===========================\r\nFAILED tests/test_leap.py::test_1900_is_not_leap - assert True is False\r\n========================= 1 failed, 3 passed in 0.31s =========================\r\n",
+  "completed_at": "2026-11-02T10:27:24.094Z",
+  "scope": "real reviewed leap baseline and blocked public-task UI only; no public code, model or candidate execution"
+}

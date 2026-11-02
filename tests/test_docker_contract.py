@@ -24,3 +24,21 @@ def test_candidate_command_has_no_writable_host_mount_or_inherited_key(tmp_path)
 def test_unverified_runner_never_executes_candidate(tmp_path):
     with pytest.raises(IsolationBlocked):
         DockerRunner().run(tmp_path, tmp_path / 'log', phase='development', timeout=1, expected_version='any')
+
+
+def test_public_native_test_path_is_forwarded_without_any_container_execution(tmp_path, monkeypatch):
+    from app.runner import code_version
+    from app.tasks_v3 import get_task
+    task = get_task('qb-gcd')
+    work = task.prepare(tmp_path / 'work')
+    runner = DockerRunner(task.project)
+    runner.ready = True  # Contract test only; no Docker certification.
+    seen = []
+    def offline_execute(work, output, extra, timeout, folder):
+        seen.extend(extra)
+        return {'timed_out': True, 'cleanup_passed': True, 'exit_code': None}
+    monkeypatch.setattr(runner, '_execute', offline_execute)
+    result = runner.run(work, tmp_path / 'evidence', phase='development', timeout=1,
+                        expected_version=code_version(work, (task.source,)))
+    assert seen == ['/harness.py', 'python_testcases/test_gcd.py']
+    assert result['expected_test_count'] == 6 and result['failure_class'] == 'timeout'

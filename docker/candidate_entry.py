@@ -6,7 +6,8 @@ import runpy
 import sys
 
 Path('/out/pytest.ini').write_text('[pytest]\n', encoding='utf-8')
-sys.argv = ['/entry.py', '/out/pytest_events.json', '/out/junit.xml', '/out/pytest.ini', 'tests']
+test_paths = sys.argv[1:] or ['tests']
+sys.argv = ['/entry.py', '/out/pytest_events.json', '/out/junit.xml', '/out/pytest.ini', *test_paths]
 exit_code = 2
 try:
     runpy.run_path('/entry.py', run_name='__main__')

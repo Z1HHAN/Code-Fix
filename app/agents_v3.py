@@ -5,6 +5,7 @@ from pathlib import Path
 from .knowledge import search_knowledge
 from .repair_output import InvalidModelOutput, _object, _fields, _citations, parse_repair_output
 from .security import validate_changes
+from .tasks_v3 import FORBIDDEN, get_task
 
 ROOT = Path(__file__).resolve().parents[1]
 ROLES = {'repairer', 'detector', 'scheduler', 'locator'}
@@ -42,11 +43,13 @@ class AgentGateway:
     def invoke(self, role, *, run_id, round_number, code, evidence, version, work, task, deadline, extra=None):
         if role not in ROLES or evidence['phase'] != 'development' or evidence['code_version'] != version:
             raise InvalidModelOutput('角色或当前开发证据不匹配')
-        knowledge = [x.to_dict() for x in search_knowledge(ROOT, ('business_rules', 'testing'), '闰年 测试')]
+        definition = get_task(task.get('project', 'leap'))
+        source = definition.source
+        knowledge = [x.to_dict() for x in search_knowledge(ROOT, tuple(definition.data['knowledge_ids']), definition.data['knowledge_query'])]
         prompt = (ROOT / 'prompts' / f'{role}.md').read_text(encoding='utf-8').split('任务与路径约束：', 1)[0]
-        material = {'task': {'description': task['description'], 'allowed_paths': ['code/leap_year.py'],
-                             'forbidden_paths': ['tests'], 'round': round_number, 'max_rounds': task['max_rounds']},
-                    'current_code': {'code/leap_year.py': code}, 'dev_evidence': [evidence],
+        material = {'task': {'project': definition.project, 'description': task['description'], 'allowed_paths': [source],
+                             'forbidden_paths': list(FORBIDDEN), 'round': round_number, 'max_rounds': task['max_rounds']},
+                    'current_code': {source: code}, 'dev_evidence': [evidence],
                     'knowledge_context': knowledge, 'location_json': extra if role == 'repairer' else None,
                     'previous_analysis': extra if role != 'repairer' else None}
         messages = [{'role': 'system', 'content': prompt}, {'role': 'user', 'content': json.dumps(material, ensure_ascii=False)}]
@@ -69,7 +72,9 @@ class AgentGateway:
             try:
                 record['parsed_output'] = parse_role(role, record['raw_text'], [evidence['evidence_id']], [k['citation_id'] for k in knowledge])
                 if role == 'repairer':
-                    validate_changes(record['parsed_output']['changes'], allowed_paths=('code/leap_year.py',), forbidden_paths=('tests',), work_root=work)
+                    validate_changes(record['parsed_output']['changes'], allowed_paths=(source,), forbidden_paths=FORBIDDEN, work_root=work)
+                if role == 'locator' and record['parsed_output']['file'] not in {'', source}:
+                    raise InvalidModelOutput('定位文件必须属于当前任务')
                 if role == 'detector' and record['parsed_output']['failure_class'] != evidence['failure_class']:
                     raise InvalidModelOutput('检测建议不能覆盖真实分类')
             except (ValueError, OSError) as exc:

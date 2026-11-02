@@ -12,8 +12,9 @@ import subprocess
 import time
 import uuid
 
-from c_runner.runner import _profile, compute_test_suite_version, parse_evidence
+from c_runner.runner import compute_test_suite_version, parse_evidence
 from .runner import code_version
+from .tasks_v3 import get_task
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -25,7 +26,8 @@ class IsolationBlocked(ValueError):
 class DockerRunner:
     mode = 'docker'
 
-    def __init__(self):
+    def __init__(self, project='leap'):
+        self.task = get_task(project)
         self.executable = shutil.which('docker')
         self.image = os.environ.get('CODE_FIX_DOCKER_IMAGE', '')
         self.ready = False
@@ -121,23 +123,21 @@ class DockerRunner:
         folder = Path(evidence_dir)
         folder.mkdir(parents=True, exist_ok=False)
         work = Path(work)
-        measured = code_version(work, ('code/leap_year.py',))
+        measured = code_version(work, self.task.profile['source_paths'])
         if measured != expected_version:
             raise IsolationBlocked('候选版本已改变')
         # Match native test bytes against reviewed registry before container start.
-        import hashlib
-        profile = _profile('leap_original')
-        for name, digest in profile['approved_files'].items():
-            if name != 'code/leap_year.py' and hashlib.sha256((work / name).read_bytes()).hexdigest() != digest:
-                raise IsolationBlocked('原生测试或辅助文件被修改')
+        profile = self.task.profile
+        self.task.verify(work, candidate=True)
         output = folder / 'output'
         output.mkdir()
         (output / 'pytest.ini').write_text('[pytest]\n', encoding='utf-8')
         # Bind output is dedicated to this call and contains no other run data.
         output.chmod(0o777)
         (output / 'pytest.ini').chmod(0o644)
-        result = self._execute(work, output, ['/harness.py'], timeout, folder)
+        result = self._execute(work, output, ['/harness.py', *profile['test_paths']], timeout, folder)
         result.update(phase=phase, code_version=measured, isolation_ready=True, execution_mode='docker',
+                      project=self.task.project,
                       test_suite_version=compute_test_suite_version(profile), expected_test_count=len(profile['expected_nodeids']),
                       junit_path='output/junit.xml', structured_path='output/pytest_events.json')
         if result['timed_out']:
@@ -159,7 +159,7 @@ class DockerRunner:
                     pass
             result.update(parse_evidence(output / 'junit.xml', output / 'pytest_events.json', profile, result['exit_code']))
             try:
-                compile((work / 'code/leap_year.py').read_bytes(), 'code/leap_year.py', 'exec')
+                compile((work / self.task.source).read_bytes(), self.task.source, 'exec')
             except SyntaxError:
                 result.update(status='failed', verification_status='inconclusive', failure_class='syntax_error')
         (folder / 'result.json').write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding='utf-8')

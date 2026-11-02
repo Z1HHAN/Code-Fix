@@ -69,6 +69,11 @@ def create_app(root=None):
         from .readiness import readiness
         return readiness()
 
+    @app.get('/api/v3/projects')
+    def projects():
+        from .tasks_v3 import list_tasks
+        return list_tasks()
+
     async def limited_body(request, limit):
         result = bytearray()
         async for chunk in request.stream():

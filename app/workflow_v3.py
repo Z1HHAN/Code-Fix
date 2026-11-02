@@ -4,12 +4,13 @@ from pathlib import Path
 import time
 
 from .agents_v3 import AgentGateway
-from .candidates import SOURCE, apply_candidate
+from .candidates import apply_candidate
 from .config import read_json
 from .decision import DecisionEngine
 from .docker_runner import DockerRunner, IsolationBlocked
 from .live_model import Ledger, LiveModel, LiveSettings, ModelBlocked
-from .runner import code_version, prepare_fixture
+from .runner import code_version
+from .tasks_v3 import get_task
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -17,18 +18,22 @@ ROOT = Path(__file__).resolve().parents[1]
 class Workflow:
     def __init__(self, store, runner=None, model=None):
         self.store = store
-        self.runner = runner or DockerRunner()
+        self.runner = runner
         self.model = model
         self.model_calls = 0
         self.tool_calls = 0
 
     def run(self, run_id):
         task = self.store.get(run_id)['task']
+        definition = get_task(task['project'])
+        source = definition.source
+        self.runner = self.runner or DockerRunner(task['project'])
         directory = self.store.directory(run_id)
         deadline = time.monotonic() + task['total_seconds']
         final = {'final_result': 'not_run', 'dev_result': 'not_run', 'rounds_used': 0,
                  'model_calls': 0, 'tool_calls': 0, 'model_api_called': False,
-                 'mode': getattr(self.model, 'mode', 'live'), 'isolation_ready': False}
+                 'mode': getattr(self.model, 'mode', 'live'), 'isolation_ready': False,
+                 'project': task['project'], 'test_suite_version': definition.summary()['test_suite_version']}
         def finish(status, reason):
             final.update(reason=reason, model_calls=self.model_calls, tool_calls=self.tool_calls)
             return status, final
@@ -62,9 +67,9 @@ class Workflow:
                 self.model = LiveModel(settings, Ledger(self.store.root))
             gateway = AgentGateway(self.model, self.store)
             engine = DecisionEngine(read_json(ROOT / 'configs/decision_rules.json'))
-            base = prepare_fixture('leap_original', directory / 'base')
+            base = definition.prepare(directory / 'base')
             current = base
-            version = code_version(current, (SOURCE,))
+            version = code_version(current, (source,))
             location = None
 
             def test(work, phase, name):
@@ -73,8 +78,8 @@ class Workflow:
                 folder = directory / name
                 result = self.runner.run(work, folder, phase=phase,
                                          timeout=max(.01, min(60, deadline-time.monotonic())),
-                                         expected_version=code_version(work, (SOURCE,)))
-                if result.get('code_version') != code_version(work, (SOURCE,)):
+                                         expected_version=code_version(work, (source,)))
+                if result.get('code_version') != code_version(work, (source,)):
                     raise IsolationBlocked('执行后证据版本不一致')
                 self.store.event(run_id, {'event': 'test_completed', 'evidence_path': name, **result})
                 return result, folder
@@ -100,7 +105,7 @@ class Workflow:
                     raise ModelBlocked('模型调用次数到达上限')
                 self.model_calls += 1
                 record = gateway.invoke(role, run_id=run_id, round_number=round_number,
-                                        code=(current / SOURCE).read_text(encoding='utf-8'), evidence=ev,
+                                        code=(current / source).read_text(encoding='utf-8'), evidence=ev,
                                         version=version, work=current, task=task, deadline=deadline, extra=extra)
                 final['model_api_called'] |= record.get('model_api_called', False)
                 # A stop/pause received while the model was in flight must be
@@ -119,7 +124,7 @@ class Workflow:
                 final['rounds_used'] = round_number
                 candidate = call('repairer', ev, round_number, location)
                 target = directory / f'candidate-{round_number}'
-                patch = apply_candidate(current, target, candidate['changes'], directory / f'patch-{round_number}')
+                patch = apply_candidate(current, target, candidate['changes'], directory / f'patch-{round_number}', project=task['project'])
                 current, version = target, patch['candidate_version']
                 self.store.event(run_id, {'event': 'candidate_applied', 'round': round_number, **patch})
                 result, folder = test(current, 'development', f'development-{round_number}')
@@ -148,8 +153,8 @@ class Workflow:
                 if decision['action'] == 'final_check':
                     # Replay full final source on original clean input, never reuse development workspace.
                     final_work = directory / 'final-work'
-                    apply_candidate(base, final_work, [{'path': SOURCE, 'new_content': (current / SOURCE).read_text(encoding='utf-8')}],
-                                    directory / 'final-patch')
+                    apply_candidate(base, final_work, [{'path': source, 'new_content': (current / source).read_text(encoding='utf-8')}],
+                                    directory / 'final-patch', project=task['project'])
                     checked, _ = test(final_work, 'final_check', 'final-check')
                     final['final_result'] = checked['verification_status']
                     boundary()

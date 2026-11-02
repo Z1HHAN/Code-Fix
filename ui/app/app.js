@@ -4,6 +4,7 @@ const display = (id, value) => { byId(id).textContent = typeof value === 'string
 const labels = {created:'已创建',running:'运行中',stopped:'已停止',blocked:'条件未就绪',failed:'失败',success:'独立验收通过',paused:'已暂停',interrupted:'已中断',not_run:'未运行',passed:'通过',inconclusive:'证据不足'};
 const label = value => labels[value] || value || '未知';
 let token = '', selected = localStorage.getItem('codefix.selected') || '', key = null, busy = false, refreshing = false;
+let projects = [];
 async function api(path, options = {}) {
   const response = await fetch('/api/v3' + path, { ...options, headers: {'Content-Type': 'application/json', 'X-Codefix-Token': token, ...(options.headers || {})} });
   if (!response.ok) {
@@ -27,7 +28,7 @@ async function refresh() {
     const history = byId('history'); history.replaceChildren();
     for (const run of runs) {
       const option = document.createElement('option'); option.value = run.run_id;
-      option.textContent = `${run.status} · ${run.task.mode} · ${run.run_id}`;
+      option.textContent = `${run.status} · ${run.task.project} · ${run.task.mode} · ${run.run_id}`;
       history.append(option);
     }
     if (!selected || !runs.some(run => run.run_id === selected)) selected = runs[0]?.run_id || '';
@@ -39,7 +40,7 @@ async function refresh() {
       api(`/tasks/${snapshot}`).then(x => x.json()), api(`/tasks/${snapshot}/events`).then(x => x.json())]);
     if (snapshot !== selected) return;
     const result = run.result || {};
-    display('status', `${run.run_id}\n状态：${run.status} · 模式：${run.task.mode}`);
+    display('status', `${run.run_id}\n状态：${run.status} · 题目：${run.task.project} · 模式：${run.task.mode}`);
     display('summary', [
       `运行模式：${run.task.mode === 'baseline' ? '原始基线检查' : '真实模型修复'}`,
       `修复轮次：${result.rounds_used || 0} / ${run.task.max_rounds}`,
@@ -73,12 +74,20 @@ async function refresh() {
 }
 byId('create').onclick = () => action(async () => {
   key ||= crypto.randomUUID();
-  const task = {project:'leap', mode:byId('mode').value, description:byId('description').value,
+  const task = {project:byId('project').value, mode:byId('mode').value, description:byId('description').value,
     max_rounds:Number(byId('rounds').value), max_calls:Number(byId('calls').value), total_seconds:Number(byId('seconds').value)};
   const run = await (await api('/tasks', {method:'POST', headers:{'Idempotency-Key':key}, body:JSON.stringify(task)})).json();
   selected = run.run_id; key = null;
 });
-for (const id of ['description', 'mode', 'rounds', 'calls', 'seconds']) byId(id).oninput = () => { key = null; };
+for (const id of ['description', 'project', 'mode', 'rounds', 'calls', 'seconds']) byId(id).oninput = () => { key = null; };
+byId('project').onchange = () => {
+  key = null;
+  const project = projects.find(item => item.project === byId('project').value);
+  if (!project) return;
+  byId('description').value = project.description;
+  display('project-hint', `${project.source_paths.join('、')} · 原生测试${project.expected_test_count}项。` +
+    (project.requires_isolation ? '公开题目须隔离执行；条件未就绪会阻止运行。' : '本地冻结基线可直接检查。'));
+};
 byId('start').onclick = () => action(async () => { if (selected) await api(`/tasks/${selected}/start`, {method:'POST'}); });
 for (const operation of ['pause', 'stop']) byId(operation).onclick = () => action(async () => {
   await api(`/tasks/${selected}/control`, {method:'POST', body:JSON.stringify({action:operation})});
@@ -97,6 +106,12 @@ byId('report').onclick = () => download('report'); byId('bundle').onclick = () =
 (async () => {
   try {
     token = (await (await api('/session')).json()).token;
+    projects = await (await api('/projects')).json();
+    const choices = projects.map(project => {
+      const option = document.createElement('option'); option.value = project.project;
+      option.textContent = project.title; return option;
+    });
+    byId('project').replaceChildren(...choices); byId('project').onchange();
     display('health', await (await api('/health')).json());
     display('connection', '已连接真实任务后端');
     await refresh(); setInterval(refresh, 1200);

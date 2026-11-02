@@ -13,3 +13,6 @@ evidence/v3/** -text
 evidence/v3/** -whitespace
 # Follow-up control acceptance is a separate immutable evidence batch.
 evidence/v3-state-control/** -text -whitespace
+# Native public-task inputs are checked byte-for-byte against pinned hashes.
+task_assets/** -text
+evidence/v3-public-tasks/** -text -whitespace

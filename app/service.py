@@ -27,7 +27,10 @@ class TaskService:
                                   {'final_result': 'not_run', 'reason': '按用户请求在执行前停止推进',
                                    'model_api_called': False, 'model_calls': 0, 'tool_calls': 0})
                 return
-            if task['mode'] == 'baseline':
+            if task['mode'] == 'baseline' and task['project'] != 'leap':
+                from .public_baseline import run_public_baseline
+                status, result = run_public_baseline(self.store, run_id)
+            elif task['mode'] == 'baseline':
                 destination = self.store.directory(run_id) / 'baseline'
                 # Preserve long evidence paths on Windows without changing C's
                 # historical directory layout or shortening its identifiers.
