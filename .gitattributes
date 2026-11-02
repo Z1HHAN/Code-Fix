@@ -21,3 +21,5 @@ evidence/v3-public-tasks/** -text -whitespace
 # The verified upstream bundle and importer evidence also require exact bytes.
 datasets/quixbugs/** -text
 evidence/quixbugs-import/** -text -whitespace
+# Preserve raw main integration review outputs, including failed attempts.
+evidence/main-review-20261102/** -text -whitespace

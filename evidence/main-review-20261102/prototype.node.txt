@@ -1,0 +1,17 @@
+✔ active demo cannot be reset or restarted, including direct handler dispatch (9.3706ms)
+✔ editing invalidates preview; startup consumes the reviewed snapshot (1.3903ms)
+✔ invalid fields and unsupported roles do not receive a successful preview (8.2355ms)
+✔ relocation preserves the failed applied candidate and highlights the next round (1.3808ms)
+✔ stopped snapshot reflects the configured cap and contains failure evidence (2.4799ms)
+✔ success and final-check failure have distinct consistent decisions (1.5062ms)
+✔ unimplemented controls remain disabled without downloads, model or tool calls (4.2791ms)
+✔ a terminal demo requires fresh preview and receives a new identity after reset (1.5095ms)
+✔ one-round cap cannot display a second repair round (1.2658ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 127.6209

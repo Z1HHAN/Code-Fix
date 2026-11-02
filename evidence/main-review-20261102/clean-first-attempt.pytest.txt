@@ -1,0 +1,1978 @@
+.EEE.EEEEEEEEEEE.......EEEE..EEEEEEEEEEEEE.....EEEEEEEEEEEEEEE.......EEE [ 42%]
+EEEEEEE.EEEEE......EEEEEEEEEEEE.EE.EEEEEEEEEEE...E.EEEEEEEEEEEEEEEEEEEEE [ 85%]
+EEEEEEEE.EEEEEEEEEEEEEEE                                                 [100%]
+=================================== ERRORS ====================================
+_ ERROR at setup of test_shared_ledger_reserves_before_call_and_blocks_unknown_cost _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+__ ERROR at setup of test_known_usage_is_persistent_and_call_count_enforced ___
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+__ ERROR at setup of test_http_protocol_is_offline_stub_and_secret_redacted ___
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+____ ERROR at setup of test_real_baseline_http_status_evidence_and_export _____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_______ ERROR at setup of test_http_repair_blocks_without_fake_success ________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+___________ ERROR at setup of test_request_boundary_and_validation ____________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_artifact_paths_cannot_escape_and_open_runs_cannot_export _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+____ ERROR at setup of test_selected_run_is_persisted_across_app_instances ____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_control_while_real_baseline_runs_preserves_evidence[pause-paused] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_control_while_real_baseline_runs_preserves_evidence[stop-stopped] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+___________ ERROR at setup of test_b_and_c_measure_the_same_version ___________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_registered_result_is_forwarded_with_its_artifact_base _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_arbitrary_command_api_is_no_longer_an_execution_entry _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+____ ERROR at setup of test_unregistered_profile_does_not_start_a_process _____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+____ ERROR at setup of test_in_root_symlink_is_rejected_before_resolution _____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_candidate_command_has_no_writable_host_mount_or_inherited_key _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+______ ERROR at setup of test_unverified_runner_never_executes_candidate ______
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_public_native_test_path_is_forwarded_without_any_container_execution _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_mock_roles_use_current_evidence_without_applying_candidate _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+______ ERROR at setup of test_invalid_mock_json_stops_without_candidate _______
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_____ ERROR at setup of test_version_recheck_error_preserves_failed_final _____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+______ ERROR at setup of test_mock_valid_output_does_not_apply_candidate ______
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+___ ERROR at setup of test_budget_shared_across_clients_and_failed_attempts ___
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+__ ERROR at setup of test_transport_failure_preserves_finite_attempt_records __
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_invalid_or_unauthorized_output_is_recorded_not_written[{"changes": [{"path": "code/a.py", "new_content": "x = 1\\n"}], "explanation": "fixture", "evidence_ids": ["unknown"], "knowledge_citations": ["k1"]}] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_invalid_or_unauthorized_output_is_recorded_not_written[{"changes": [{"path": "code/a.py", "new_content": "x = 1\\n"}], "explanation": "fixture", "evidence_ids": ["e1"], "knowledge_citations": ["unknown"]}] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_invalid_or_unauthorized_output_is_recorded_not_written[{"changes": [{"path": "tests/test_a.py", "new_content": "x"}], "explanation": "fixture", "evidence_ids": ["e1"], "knowledge_citations": ["k1"]}] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_invalid_or_unauthorized_output_is_recorded_not_written[{"changes": [{"path": "../escape.py", "new_content": "x"}], "explanation": "fixture", "evidence_ids": ["e1"], "knowledge_citations": ["k1"]}] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_invalid_or_unauthorized_output_is_recorded_not_written[{"changes": [{"path": "code/a.py", "new_content": "x = 1\\n"}], "explanation": 1, "evidence_ids": ["e1"], "knowledge_citations": ["k1"]}] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_invalid_or_unauthorized_output_is_recorded_not_written[not json] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_disabled_live_transport_does_not_import_sdk_or_spend_budget _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_locator_output_validates_citations_and_allowed_file __
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_invalid_output_uses_one_attempt_without_transport_retry _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+__ ERROR at setup of test_non_transport_exception_stops_and_redacts_message ___
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_____ ERROR at setup of test_oversized_json_integer_returns_failed_record _____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_context_only_contains_explicit_materials_and_no_environment _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_____ ERROR at setup of test_non_llm_or_unapproved_role_rejected[tester] ______
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+____ ERROR at setup of test_non_llm_or_unapproved_role_rejected[reviewer] _____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_____ ERROR at setup of test_non_llm_or_unapproved_role_rejected[unknown] _____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+________ ERROR at setup of test_rejects_unapproved_materials[disabled] ________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_________ ERROR at setup of test_rejects_unapproved_materials[prompt] _________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+______ ERROR at setup of test_rejects_unapproved_materials[final_check] _______
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_________ ERROR at setup of test_rejects_unapproved_materials[stale] __________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+__ ERROR at setup of test_rejects_unapproved_materials[extra_evidence_field] __
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+______ ERROR at setup of test_rejects_unapproved_materials[outside_code] ______
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_______ ERROR at setup of test_rejects_unapproved_materials[knowledge] ________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+__ ERROR at setup of test_preview_does_not_write_and_never_starts_a_process ___
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_import_is_idempotent_and_every_task_has_only_selected_assets _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_import_rejects_invalid_bundle_before_any_write[changed_bytes] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_import_rejects_invalid_bundle_before_any_write[changed_pin] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_import_rejects_invalid_bundle_before_any_write[missing] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_import_rejects_invalid_bundle_before_any_write[duplicate] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_import_rejects_invalid_bundle_before_any_write[reference] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_import_rejects_invalid_bundle_before_any_write[invalid_type] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+____ ERROR at setup of test_import_never_overwrites_changed_existing_task _____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_catalog_write_failure_leaves_complete_assets_and_can_retry _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_windows_permission_failure_is_bounded_and_registry_remains_safe[False] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_windows_permission_failure_is_bounded_and_registry_remains_safe[True] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_native_skip_task_blocks_before_any_probe_or_model[baseline] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_native_skip_task_blocks_before_any_probe_or_model[repair] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+___ ERROR at setup of test_atomic_idempotency_and_claim_across_connections ____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+__ ERROR at setup of test_real_baseline_survives_new_service_and_has_report ___
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_state_and_event_roll_back_together_if_event_write_fails[claim] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_state_and_event_roll_back_together_if_event_write_fails[finish] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_state_and_event_roll_back_together_if_event_write_fails[control] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+____ ERROR at setup of test_directory_failure_does_not_leave_task_running _____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+__________ ERROR at setup of test_stop_cannot_be_downgraded_to_pause __________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_queued_control_skips_baseline_execution[pause-paused] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_queued_control_skips_baseline_execution[stop-stopped] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_____ ERROR at setup of test_real_pytest_all_pass_without_failed_summary ______
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_______ ERROR at setup of test_missing_executable_is_environment_error ________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_________ ERROR at setup of test_timeout_preserves_stdout_stderr_once _________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+________ ERROR at setup of test_baseline_prepare_error_preserves_final ________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+______________ ERROR at setup of test_skipped_checks_do_not_pass ______________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_passing_tool_result_never_becomes_independent_success _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_prepare_verifies_exact_allowlist_and_rejects_modified_native_data[qb-get_factors] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_prepare_verifies_exact_allowlist_and_rejects_modified_native_data[qb-gcd] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_prepare_verifies_exact_allowlist_and_rejects_modified_native_data[qb-max_sublist_sum] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_public_baseline_without_docker_never_uses_host_or_model[qb-get_factors] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_public_baseline_without_docker_never_uses_host_or_model[qb-gcd] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_public_baseline_without_docker_never_uses_host_or_model[qb-max_sublist_sum] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_candidate_cannot_cross_into_other_tasks_or_test_paths[qb-get_factors] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_candidate_cannot_cross_into_other_tasks_or_test_paths[qb-gcd] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_candidate_cannot_cross_into_other_tasks_or_test_paths[qb-max_sublist_sum] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_http_catalog_task_selection_and_unknown_project_rejection _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_cli_selects_public_project_and_preserves_budget_flags _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_________________ ERROR at setup of test_permission_boundary __________________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_runner_does_not_mark_nonzero_or_wrong_count_as_pass __
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+______ ERROR at setup of test_runner_timeout_is_inconclusive_and_returns ______
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_stub_success_requires_independent_call_and_no_final_feedback _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+______ ERROR at setup of test_final_failure_ends_without_new_model_calls ______
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_failure_types_change_actual_next_role[syntax_error-success-roles0] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_failure_types_change_actual_next_role[assertion_failed-success-roles1] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_failure_types_change_actual_next_role[environment_error-paused-roles2] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_failure_types_change_actual_next_role[timeout-stopped-roles3] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_round_limit_stops_and_model_cannot_force_final_check _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_____ ERROR at setup of test_scheduler_can_pause_but_cannot_forge_success _____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+__________ ERROR at setup of test_patch_permissions_and_no_overwrite __________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+__ ERROR at setup of test_real_environment_blocks_without_execution_approval __
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_control_during_model_call_prevents_candidate_write[pause-paused] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_control_during_model_call_prevents_candidate_write[stop-stopped] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+____ ERROR at setup of test_pause_before_preflight_does_not_start_executor ____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+___ ERROR at setup of test_expired_total_budget_after_model_prevents_patch ____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_model_call_limit_prevents_extra_role_and_final_check _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-get_factors] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-gcd] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-max_sublist_sum] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-breadth_first_search] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+____ ERROR at setup of test_junit_success_cannot_override_structured_skip _____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+__ ERROR at setup of test_start_failure_has_result_and_missing_junit_reason ___
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+____________ ERROR at setup of test_unknown_profile_never_executes ____________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+______ ERROR at setup of test_version_accepts_single_path_and_path_list _______
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+__ ERROR at setup of test_temporary_permission_error_retries_atomic_replace ___
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+________ ERROR at setup of test_permanent_permission_error_is_bounded _________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_______ ERROR at setup of test_bad_baseline_is_three_passed_one_failed ________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+__ ERROR at setup of test_correct_fixture_is_passed_without_zero_failed_text __
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_control_failures_never_become_passed[leap_all_skipped] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+___ ERROR at setup of test_control_failures_never_become_passed[zero_tests] ___
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_control_failures_never_become_passed[incomplete_tests] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_control_failures_never_become_passed[collection_dependency_error] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_control_failures_never_become_passed[collection_syntax_error] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_control_failures_never_become_passed[code_runtime_error] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+____ ERROR at setup of test_timeout_keeps_partial_bytes_and_returns_record ____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+___ ERROR at setup of test_stale_code_version_blocks_before_test_execution ____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_________ ERROR at setup of test_untrusted_model_candidate_is_blocked _________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+____________ ERROR at setup of test_modified_test_file_is_blocked _____________
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_each_call_has_unique_paths_and_preserves_prior_results _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_missing_malformed_or_empty_junit_never_passes[None] __
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_missing_malformed_or_empty_junit_never_passes[<not-closed] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_ ERROR at setup of test_missing_malformed_or_empty_junit_never_passes[<testsuites/>] _
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+_____ ERROR at setup of test_prepare_fixture_refuses_existing_destination _____
+
+self = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/mreview/runs/t1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] 系统找不到指定的路径。: 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\mreview\\runs\\t1'
+
+..\..\..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\pathlib\__init__.py:1011: FileNotFoundError
+============================== warnings summary ===============================
+..\v3-venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\v3-venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-clean.junit.xml -
+=========================== short test summary info ===========================
+ERROR tests/test_agents_v3.py::test_shared_ledger_reserves_before_call_and_blocks_unknown_cost
+ERROR tests/test_agents_v3.py::test_known_usage_is_persistent_and_call_count_enforced
+ERROR tests/test_agents_v3.py::test_http_protocol_is_offline_stub_and_secret_redacted
+ERROR tests/test_api_v3.py::test_real_baseline_http_status_evidence_and_export
+ERROR tests/test_api_v3.py::test_http_repair_blocks_without_fake_success - Fi...
+ERROR tests/test_api_v3.py::test_request_boundary_and_validation - FileNotFou...
+ERROR tests/test_api_v3.py::test_artifact_paths_cannot_escape_and_open_runs_cannot_export
+ERROR tests/test_api_v3.py::test_selected_run_is_persisted_across_app_instances
+ERROR tests/test_api_v3.py::test_control_while_real_baseline_runs_preserves_evidence[pause-paused]
+ERROR tests/test_api_v3.py::test_control_while_real_baseline_runs_preserves_evidence[stop-stopped]
+ERROR tests/test_bc_contract.py::test_b_and_c_measure_the_same_version - File...
+ERROR tests/test_bc_contract.py::test_registered_result_is_forwarded_with_its_artifact_base
+ERROR tests/test_bc_contract.py::test_arbitrary_command_api_is_no_longer_an_execution_entry
+ERROR tests/test_bc_contract.py::test_unregistered_profile_does_not_start_a_process
+ERROR tests/test_control_boundaries.py::test_in_root_symlink_is_rejected_before_resolution
+ERROR tests/test_docker_contract.py::test_candidate_command_has_no_writable_host_mount_or_inherited_key
+ERROR tests/test_docker_contract.py::test_unverified_runner_never_executes_candidate
+ERROR tests/test_docker_contract.py::test_public_native_test_path_is_forwarded_without_any_container_execution
+ERROR tests/test_mock_workflow.py::test_mock_roles_use_current_evidence_without_applying_candidate
+ERROR tests/test_mock_workflow.py::test_invalid_mock_json_stops_without_candidate
+ERROR tests/test_mock_workflow.py::test_version_recheck_error_preserves_failed_final
+ERROR tests/test_model_client.py::test_mock_valid_output_does_not_apply_candidate
+ERROR tests/test_model_client.py::test_budget_shared_across_clients_and_failed_attempts
+ERROR tests/test_model_client.py::test_transport_failure_preserves_finite_attempt_records
+ERROR tests/test_model_client.py::test_invalid_or_unauthorized_output_is_recorded_not_written[{"changes": [{"path": "code/a.py", "new_content": "x = 1\\n"}], "explanation": "fixture", "evidence_ids": ["unknown"], "knowledge_citations": ["k1"]}]
+ERROR tests/test_model_client.py::test_invalid_or_unauthorized_output_is_recorded_not_written[{"changes": [{"path": "code/a.py", "new_content": "x = 1\\n"}], "explanation": "fixture", "evidence_ids": ["e1"], "knowledge_citations": ["unknown"]}]
+ERROR tests/test_model_client.py::test_invalid_or_unauthorized_output_is_recorded_not_written[{"changes": [{"path": "tests/test_a.py", "new_content": "x"}], "explanation": "fixture", "evidence_ids": ["e1"], "knowledge_citations": ["k1"]}]
+ERROR tests/test_model_client.py::test_invalid_or_unauthorized_output_is_recorded_not_written[{"changes": [{"path": "../escape.py", "new_content": "x"}], "explanation": "fixture", "evidence_ids": ["e1"], "knowledge_citations": ["k1"]}]
+ERROR tests/test_model_client.py::test_invalid_or_unauthorized_output_is_recorded_not_written[{"changes": [{"path": "code/a.py", "new_content": "x = 1\\n"}], "explanation": 1, "evidence_ids": ["e1"], "knowledge_citations": ["k1"]}]
+ERROR tests/test_model_client.py::test_invalid_or_unauthorized_output_is_recorded_not_written[not json]
+ERROR tests/test_model_client.py::test_disabled_live_transport_does_not_import_sdk_or_spend_budget
+ERROR tests/test_model_client.py::test_locator_output_validates_citations_and_allowed_file
+ERROR tests/test_model_client.py::test_invalid_output_uses_one_attempt_without_transport_retry
+ERROR tests/test_model_client.py::test_non_transport_exception_stops_and_redacts_message
+ERROR tests/test_model_client.py::test_oversized_json_integer_returns_failed_record
+ERROR tests/test_model_context.py::test_context_only_contains_explicit_materials_and_no_environment
+ERROR tests/test_model_context.py::test_non_llm_or_unapproved_role_rejected[tester]
+ERROR tests/test_model_context.py::test_non_llm_or_unapproved_role_rejected[reviewer]
+ERROR tests/test_model_context.py::test_non_llm_or_unapproved_role_rejected[unknown]
+ERROR tests/test_model_context.py::test_rejects_unapproved_materials[disabled]
+ERROR tests/test_model_context.py::test_rejects_unapproved_materials[prompt]
+ERROR tests/test_model_context.py::test_rejects_unapproved_materials[final_check]
+ERROR tests/test_model_context.py::test_rejects_unapproved_materials[stale]
+ERROR tests/test_model_context.py::test_rejects_unapproved_materials[extra_evidence_field]
+ERROR tests/test_model_context.py::test_rejects_unapproved_materials[outside_code]
+ERROR tests/test_model_context.py::test_rejects_unapproved_materials[knowledge]
+ERROR tests/test_quixbugs_import.py::test_preview_does_not_write_and_never_starts_a_process
+ERROR tests/test_quixbugs_import.py::test_import_is_idempotent_and_every_task_has_only_selected_assets
+ERROR tests/test_quixbugs_import.py::test_import_rejects_invalid_bundle_before_any_write[changed_bytes]
+ERROR tests/test_quixbugs_import.py::test_import_rejects_invalid_bundle_before_any_write[changed_pin]
+ERROR tests/test_quixbugs_import.py::test_import_rejects_invalid_bundle_before_any_write[missing]
+ERROR tests/test_quixbugs_import.py::test_import_rejects_invalid_bundle_before_any_write[duplicate]
+ERROR tests/test_quixbugs_import.py::test_import_rejects_invalid_bundle_before_any_write[reference]
+ERROR tests/test_quixbugs_import.py::test_import_rejects_invalid_bundle_before_any_write[invalid_type]
+ERROR tests/test_quixbugs_import.py::test_import_never_overwrites_changed_existing_task
+ERROR tests/test_quixbugs_import.py::test_catalog_write_failure_leaves_complete_assets_and_can_retry
+ERROR tests/test_quixbugs_import.py::test_windows_permission_failure_is_bounded_and_registry_remains_safe[False]
+ERROR tests/test_quixbugs_import.py::test_windows_permission_failure_is_bounded_and_registry_remains_safe[True]
+ERROR tests/test_quixbugs_import.py::test_native_skip_task_blocks_before_any_probe_or_model[baseline]
+ERROR tests/test_quixbugs_import.py::test_native_skip_task_blocks_before_any_probe_or_model[repair]
+ERROR tests/test_run_store.py::test_atomic_idempotency_and_claim_across_connections
+ERROR tests/test_run_store.py::test_real_baseline_survives_new_service_and_has_report
+ERROR tests/test_run_store.py::test_state_and_event_roll_back_together_if_event_write_fails[claim]
+ERROR tests/test_run_store.py::test_state_and_event_roll_back_together_if_event_write_fails[finish]
+ERROR tests/test_run_store.py::test_state_and_event_roll_back_together_if_event_write_fails[control]
+ERROR tests/test_run_store.py::test_directory_failure_does_not_leave_task_running
+ERROR tests/test_run_store.py::test_stop_cannot_be_downgraded_to_pause - File...
+ERROR tests/test_run_store.py::test_queued_control_skips_baseline_execution[pause-paused]
+ERROR tests/test_run_store.py::test_queued_control_skips_baseline_execution[stop-stopped]
+ERROR tests/test_runner_live.py::test_real_pytest_all_pass_without_failed_summary
+ERROR tests/test_runner_live.py::test_missing_executable_is_environment_error
+ERROR tests/test_runner_live.py::test_timeout_preserves_stdout_stderr_once - ...
+ERROR tests/test_runner_live.py::test_baseline_prepare_error_preserves_final
+ERROR tests/test_runner_live.py::test_skipped_checks_do_not_pass - FileNotFou...
+ERROR tests/test_runner_live.py::test_passing_tool_result_never_becomes_independent_success
+ERROR tests/test_tasks_v3.py::test_prepare_verifies_exact_allowlist_and_rejects_modified_native_data[qb-get_factors]
+ERROR tests/test_tasks_v3.py::test_prepare_verifies_exact_allowlist_and_rejects_modified_native_data[qb-gcd]
+ERROR tests/test_tasks_v3.py::test_prepare_verifies_exact_allowlist_and_rejects_modified_native_data[qb-max_sublist_sum]
+ERROR tests/test_tasks_v3.py::test_public_baseline_without_docker_never_uses_host_or_model[qb-get_factors]
+ERROR tests/test_tasks_v3.py::test_public_baseline_without_docker_never_uses_host_or_model[qb-gcd]
+ERROR tests/test_tasks_v3.py::test_public_baseline_without_docker_never_uses_host_or_model[qb-max_sublist_sum]
+ERROR tests/test_tasks_v3.py::test_candidate_cannot_cross_into_other_tasks_or_test_paths[qb-get_factors]
+ERROR tests/test_tasks_v3.py::test_candidate_cannot_cross_into_other_tasks_or_test_paths[qb-gcd]
+ERROR tests/test_tasks_v3.py::test_candidate_cannot_cross_into_other_tasks_or_test_paths[qb-max_sublist_sum]
+ERROR tests/test_tasks_v3.py::test_http_catalog_task_selection_and_unknown_project_rejection
+ERROR tests/test_tasks_v3.py::test_cli_selects_public_project_and_preserves_budget_flags
+ERROR tests/test_v02_core.py::test_permission_boundary - FileNotFoundError: [...
+ERROR tests/test_v02_core.py::test_runner_does_not_mark_nonzero_or_wrong_count_as_pass
+ERROR tests/test_v02_core.py::test_runner_timeout_is_inconclusive_and_returns
+ERROR tests/test_workflow_v3.py::test_stub_success_requires_independent_call_and_no_final_feedback
+ERROR tests/test_workflow_v3.py::test_final_failure_ends_without_new_model_calls
+ERROR tests/test_workflow_v3.py::test_failure_types_change_actual_next_role[syntax_error-success-roles0]
+ERROR tests/test_workflow_v3.py::test_failure_types_change_actual_next_role[assertion_failed-success-roles1]
+ERROR tests/test_workflow_v3.py::test_failure_types_change_actual_next_role[environment_error-paused-roles2]
+ERROR tests/test_workflow_v3.py::test_failure_types_change_actual_next_role[timeout-stopped-roles3]
+ERROR tests/test_workflow_v3.py::test_round_limit_stops_and_model_cannot_force_final_check
+ERROR tests/test_workflow_v3.py::test_scheduler_can_pause_but_cannot_forge_success
+ERROR tests/test_workflow_v3.py::test_patch_permissions_and_no_overwrite - Fi...
+ERROR tests/test_workflow_v3.py::test_real_environment_blocks_without_execution_approval
+ERROR tests/test_workflow_v3.py::test_control_during_model_call_prevents_candidate_write[pause-paused]
+ERROR tests/test_workflow_v3.py::test_control_during_model_call_prevents_candidate_write[stop-stopped]
+ERROR tests/test_workflow_v3.py::test_pause_before_preflight_does_not_start_executor
+ERROR tests/test_workflow_v3.py::test_expired_total_budget_after_model_prevents_patch
+ERROR tests/test_workflow_v3.py::test_model_call_limit_prevents_extra_role_and_final_check
+ERROR tests/test_workflow_v3.py::test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-get_factors]
+ERROR tests/test_workflow_v3.py::test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-gcd]
+ERROR tests/test_workflow_v3.py::test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-max_sublist_sum]
+ERROR tests/test_workflow_v3.py::test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-breadth_first_search]
+ERROR c_tests/test_evidence_integrity.py::test_junit_success_cannot_override_structured_skip
+ERROR c_tests/test_evidence_integrity.py::test_start_failure_has_result_and_missing_junit_reason
+ERROR c_tests/test_evidence_integrity.py::test_unknown_profile_never_executes
+ERROR c_tests/test_evidence_integrity.py::test_version_accepts_single_path_and_path_list
+ERROR c_tests/test_evidence_write.py::test_temporary_permission_error_retries_atomic_replace
+ERROR c_tests/test_evidence_write.py::test_permanent_permission_error_is_bounded
+ERROR c_tests/test_runner.py::test_bad_baseline_is_three_passed_one_failed - ...
+ERROR c_tests/test_runner.py::test_correct_fixture_is_passed_without_zero_failed_text
+ERROR c_tests/test_runner.py::test_control_failures_never_become_passed[leap_all_skipped]
+ERROR c_tests/test_runner.py::test_control_failures_never_become_passed[zero_tests]
+ERROR c_tests/test_runner.py::test_control_failures_never_become_passed[incomplete_tests]
+ERROR c_tests/test_runner.py::test_control_failures_never_become_passed[collection_dependency_error]
+ERROR c_tests/test_runner.py::test_control_failures_never_become_passed[collection_syntax_error]
+ERROR c_tests/test_runner.py::test_control_failures_never_become_passed[code_runtime_error]
+ERROR c_tests/test_runner.py::test_timeout_keeps_partial_bytes_and_returns_record
+ERROR c_tests/test_runner.py::test_stale_code_version_blocks_before_test_execution
+ERROR c_tests/test_runner.py::test_untrusted_model_candidate_is_blocked - Fil...
+ERROR c_tests/test_runner.py::test_modified_test_file_is_blocked - FileNotFou...
+ERROR c_tests/test_runner.py::test_each_call_has_unique_paths_and_preserves_prior_results
+ERROR c_tests/test_runner.py::test_missing_malformed_or_empty_junit_never_passes[None]
+ERROR c_tests/test_runner.py::test_missing_malformed_or_empty_junit_never_passes[<not-closed]
+ERROR c_tests/test_runner.py::test_missing_malformed_or_empty_junit_never_passes[<testsuites/>]
+ERROR c_tests/test_runner.py::test_prepare_fixture_refuses_existing_destination
+37 passed, 1 warning, 131 errors in 4.74s

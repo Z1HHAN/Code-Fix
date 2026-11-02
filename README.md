@@ -1,12 +1,14 @@
 # 验链 Code Fix
 
-## V3开发分支：可运行的CLI、HTTP与真实基线页面
+## V3主线：可运行的CLI、HTTP与真实基线页面
 
-当前`codex/development-v3`按队长提供的[745行V3要求](docs/开发要求V3.0.md)开发；main未被覆盖。[启动与模型配置](docs/V3运行与接口.md)、[阶段验收及版本记录](docs/V3开发与验收.md)。
+V3在`codex/development-v3`按队长提供的[745行要求](docs/开发要求V3.0.md)开发，经队长本轮授权审核、干净检出复核后合入main，保留原提交和团队分支。[主线合并审核](docs/V3主线合并审核与复核-20261102.md)、[启动与模型配置](docs/V3运行与接口.md)、[阶段验收及版本记录](docs/V3开发与验收.md)。
 
 已真实验证：持久化任务创建/查询、防重复启动、原始闰年pytest、FastAPI、页面启动任务/显示真实失败日志/刷新恢复、报告与完整证据ZIP。真实模型传输、三角色协议、动态编排及候选隔离路径已编写，只有离线测试；本机没有模型密钥和Docker，真实模型候选修复及独立复验**尚未验收**。禁止以本轮基线演示宣称模型修复成功。
 
 已从固定上游版本导入QuixBugs全部40道Python题目，连同闰年共41题；其中2道原生慢测题暂禁用，其余仍待Docker实际验证。公开代码仅导入和核验，必须隔离执行；当前环境会blocked。最新167项平台回归通过，不是167个修复案例；[数据集导入验收](docs/QuixBugs数据集导入与验收.md)、[V3全文完成与缺失对照](docs/V3全文完成情况与公开案例接入.md)说明实际范围。
+
+付费启用前仍需补强跨日未结费用阻断和绝对请求时限；本轮只登记，不批准付费/隔离，不发布完整平台稳定版。批量实验和固定/动态正式对照尚未完成。
 
 Python3.14环境，在仓库根目录：
 
@@ -23,7 +25,7 @@ python -m venv .venv
 
 证据驱动的多 Agent 编排与验证平台，以 Python 软件缺陷修复为首个场景。
 
-## 当前交付状态
+## v0.2历史交付状态（保留原阶段结论）
 
 11月2日经A授权，已接入 **C结构化执行器及B模型适配层，完成模拟联调**。固定坏代码提供真实证据，模拟定位/修复产出JSON候选，候选不应用、不执行。启动和检查见[本次交接](docs/integration/BC组件接入与模拟联调-20261102.md)；状态见[功能状态与优化待办](docs/功能状态与优化待办.md)。
 接口仍待B/C本人签收。UI是静态原型；真实模型请求、隔离、候选执行、独立验收、Self-Loop及HTTP尚未启用。当前不发布正式v0.2功能标签。后续优化先说明范围与验收条件并取得A确认。
@@ -56,6 +58,11 @@ Code-Fix/
 ├── c_tests/                  JUnit、结构化证据和执行边界回归
 ├── tests/                    组件回归和原型交互检查
 ├── ui/prototype/             明确标模拟的静态原型
+├── ui/app/                   V3真实本地任务页面
+├── docker/                   候选执行路径，待真实Docker资格验证
+├── task_assets/quixbugs/     40题白名单运行资产，仅隔离后可执行
+├── datasets/quixbugs/        固定上游数据包和对象锁
+├── evidence/                分阶段原始运行证据与哈希索引
 ├── C_Day1_20261030/           C历史证据及交付校验器
 ├── day1-kit/                 保留的v0.1任务与提示词
 ├── configs/                  v0.2草案：角色、决策、测试计划、联调样例
@@ -80,7 +87,7 @@ python -X utf8 -m app.cli model-dry-run
 python -X utf8 scripts/check_c_controls.py --output-root runs/controls
 ```
 
-run-baseline仅检查原始基线，3过1败是预期结果。model-dry-run仅验证真实基线证据与模拟角色接口，源码不变，final_result=not_run。UI启动见[原型说明](ui/prototype/README.md)。完整自动修复服务仍待实现。
+run-baseline仅检查原始基线，3过1败是预期结果。model-dry-run仅验证真实基线证据与模拟角色接口，源码不变，final_result=not_run。旧UI启动见[原型说明](ui/prototype/README.md)。V3真实任务页面使用上方新入口；完整真实模型修复闭环仍待验收。
 
 ## 验证首日任务基线
 
@@ -110,7 +117,7 @@ python -m pytest day1-kit/tests/ -v
 - `configs/interface_examples.json`是模拟联调数据，`evaluation/run_record.template.json`是空模板，均不计实际成绩。
 - UI实现以[完整交付规格](docs/UI交付B完整提示词.md)为准；[早期生图模板](docs/UI草图生图提示词与操作步骤.md)只用于讨论。
 
-## 当前版本与演示材料
+## v0.2历史版本与演示材料
 
 配置iteration-0.2-20261101-draft，接口0.2-20261101-draft，状态pending_BC_confirmation。测试角色为deterministic；固定夹具组件已接入，自动工作流配置执行绑定仍待B/C确认。新final_check_failed及旧heldout_failed兼容迁移仍待B/C签收。预算建议仅在手册，null不表示无限。
 

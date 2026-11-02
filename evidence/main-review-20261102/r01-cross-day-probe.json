@@ -1,0 +1,9 @@
+{
+  "synthetic_ledger_only": true,
+  "model_api_called": false,
+  "fees_authorized": false,
+  "finding": "R01",
+  "prior_day_unknown_present": true,
+  "new_reservation_was_accepted": true,
+  "consequence": "Cross-day unknown cost does not block a new reservation; real-paid enablement is blocked pending policy and fix"
+}
