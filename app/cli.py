@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 from .baseline import baseline_record
@@ -27,8 +28,36 @@ def main() -> int:
     parse = sub.add_parser('parse-output')
     parse.add_argument('kind', choices=['locator', 'repairer'])
     parse.add_argument('path')
+    create = sub.add_parser('create-task')
+    create.add_argument('--mode', choices=['baseline', 'repair'], default='baseline')
+    create.add_argument('--description', default='修复闰年判断')
+    create.add_argument('--max-rounds', type=int, default=3)
+    create.add_argument('--idempotency-key')
+    for name in ('start-task', 'task-status', 'task-report', 'interrupt-task'):
+        command = sub.add_parser(name)
+        command.add_argument('run_id')
+    sub.add_parser('list-tasks')
     args = parser.parse_args()
     try:
+        if args.command in {'create-task', 'start-task', 'task-status', 'task-report', 'list-tasks', 'interrupt-task'}:
+            from .service import TaskService
+            service = TaskService(os.environ.get('CODE_FIX_RUN_ROOT'))
+            if args.command == 'create-task':
+                result = service.store.create({'mode': args.mode, 'description': args.description,
+                                               'max_rounds': args.max_rounds}, args.idempotency_key)
+            elif args.command == 'start-task':
+                result = service.execute(args.run_id)
+            elif args.command == 'task-status':
+                result = service.store.get(args.run_id)
+            elif args.command == 'task-report':
+                result = {'report_path': str(service.write_report(args.run_id))}
+            elif args.command == 'interrupt-task':
+                service.store.interrupt(args.run_id)
+                result = service.store.get(args.run_id)
+            else:
+                result = service.store.list()
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 2 if isinstance(result, dict) and result.get('status') in {'blocked', 'failed'} else 0
         if args.command == 'validate-config':
             task = load_task_spec(ROOT / 'configs/tasks/leap-baseline.json')
             errors = validate_draft_configs(ROOT)
