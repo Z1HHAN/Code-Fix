@@ -4,5 +4,8 @@
   "allowed_paths": ["code/leap_year.py"],
   "test_command": ["python", "-m", "pytest", "tests/", "-v"],
   "max_repair_rounds": 3,
-  "expected_test_count": 4
+  "expected_test_count": 4,
+  "test_profile": "leap_original",
+  "code_version_scheme": "sha256-canonical-files-v1",
+  "execution_scope": "reviewed_fixture_only"
 }

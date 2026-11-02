@@ -3,3 +3,5 @@
 C_Day1_20261030/** -text
 # Original captured logs contain repeated CR bytes; never format archived evidence.
 C_Day1_20261030/runs/** -whitespace
+# Registered fixtures are checked against exact frozen bytes.
+c_fixtures/** -text

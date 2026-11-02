@@ -25,6 +25,7 @@ class TaskSpec:
     test_command: tuple[str,...]
     max_repair_rounds: int
     expected_test_count: int | None
+    test_profile: str | None = None
 
 def load_task_spec(path: Path)->TaskSpec:
     data=read_json(path)
@@ -33,7 +34,10 @@ def load_task_spec(path: Path)->TaskSpec:
     cmd=data['test_command']; cmd=tuple(cmd.split()) if isinstance(cmd,str) else tuple(map(str,cmd))
     if not cmd or not isinstance(data['allowed_paths'],list): raise ConfigError('TaskSpec 命令或允许路径无效')
     limits=data.get('limits') or {}
-    return TaskSpec(str(data['task_id']),str(data['description']),tuple(map(str,data['allowed_paths'])),cmd,int(limits.get('max_repair_rounds',data.get('max_repair_rounds',3))),int(data['expected_test_count']) if data.get('expected_test_count') is not None else None)
+    profile = data.get('test_profile')
+    if profile is not None and (not isinstance(profile, str) or not profile):
+        raise ConfigError('test_profile 必须是已登记的非空名称')
+    return TaskSpec(str(data['task_id']),str(data['description']),tuple(map(str,data['allowed_paths'])),cmd,int(limits.get('max_repair_rounds',data.get('max_repair_rounds',3))),int(data['expected_test_count']) if data.get('expected_test_count') is not None else None,profile)
 
 def validate_draft_configs(root: Path)->list[str]:
     agents=read_json(root/'configs/agents.json'); rules=read_json(root/'configs/decision_rules.json'); errors=[]

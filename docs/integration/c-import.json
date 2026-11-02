@@ -1,0 +1,31 @@
+{
+  "imported_on": "2026-11-02",
+  "source_commit": "abaf2fd",
+  "source_archive": "Code-Fix-C-20261101.zip",
+  "archive_sha256": "306b6bc7237773dadd87f8d82a81784d2c1e531d8197ebb6728d5da57c226907",
+  "original_files_sha256": {
+    "c_runner/profiles.json": "2d38a9f35b41042a0af45c84dcc3830a5da03ed67bfe48566bb15d5338e91f3a",
+    "c_runner/pytest_entry.py": "ab619a15739b4894f2b54be5399495e0c71e140d2397a33ca5a75e073524d889",
+    "c_runner/runner.py": "0366d2691dee824d37835f829444bdd8486d74ea90a72ba4cd4929b00ad3d0d5",
+    "c_runner/__init__.py": "fc46643ef998402deb32672642c5a5d98ad289f4549133df56907ec445a61b26",
+    "c_tests/conftest.py": "db6c944829b26381d0277184b86710d4cb63d20c5ebfb962665a6b2289cc0983",
+    "c_tests/test_evidence_integrity.py": "d814516dc6edf99745c3f6c1a17ae19e24d4184cd0ffe38b29b7456ae6f8b09a",
+    "c_tests/test_runner.py": "7a08b4d2db65d617864fe38fb9a4592895d7105711331dfd2c6611d504317987",
+    "scripts/run_c_acceptance.py": "da6bdb94f8910a9d65209074bca43db6560cf89dd1900f80c67cbf1d65c2ede6"
+  },
+  "changes": [
+    "runner.py adds explicit code_version_scheme",
+    "pytest_entry.py retries PermissionError on atomic replace at most three times",
+    "profiles.json adds leap_original from original day1-kit Git blobs; frozen bytes preserved with -text",
+    "test_runner.py uses valid structured data for missing/malformed/empty JUnit tests",
+    "test_evidence_write.py adds bounded replace retry checks",
+    "scripts/run_c_acceptance.py imported as scripts/check_c_controls.py"
+  ],
+  "not_imported": [
+    "archive runtime and wheels",
+    "correct reference implementations",
+    "full evaluation/history",
+    "old README/configs"
+  ],
+  "original_evidence_rewritten": false
+}

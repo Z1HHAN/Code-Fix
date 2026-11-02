@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "review_scope": "C controlled platform fixtures only; never model repair evidence",
+  "profiles": {
+    "leap_bad": {
+      "fixture_dir": "c_fixtures/leap_bad",
+      "source_paths": [
+        "leap_app/leap_year.py"
+      ],
+      "test_paths": [
+        "tests"
+      ],
+      "expected_nodeids": [
+        "tests/test_leap.py::test_2024_is_leap",
+        "tests/test_leap.py::test_2023_is_not_leap",
+        "tests/test_leap.py::test_1900_is_not_leap",
+        "tests/test_leap.py::test_2000_is_leap"
+      ],
+      "approved_files": {
+        "leap_app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "leap_app/leap_year.py": "c1972ac090e909c39ce65b10473009b651cdf3cf9d833fa7744eeae06e3e5bd8",
+        "tests/test_leap.py": "71563001e9a08484df277e08e1960a9a2c6825ab7278a3d446f7df6d0c4f4afb"
+      },
+      "run_type": "tool_check"
+    },
+    "leap_good": {
+      "fixture_dir": "c_fixtures/leap_good",
+      "source_paths": [
+        "leap_app/leap_year.py"
+      ],
+      "test_paths": [
+        "tests"
+      ],
+      "expected_nodeids": [
+        "tests/test_leap.py::test_2024_is_leap",
+        "tests/test_leap.py::test_2023_is_not_leap",
+        "tests/test_leap.py::test_1900_is_not_leap",
+        "tests/test_leap.py::test_2000_is_leap"
+      ],
+      "approved_files": {
+        "leap_app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "leap_app/leap_year.py": "ad96962ee92d52e3dafc377229badc51a0d55e013ff6cbcb36d392dc82fc421f",
+        "tests/test_leap.py": "71563001e9a08484df277e08e1960a9a2c6825ab7278a3d446f7df6d0c4f4afb"
+      },
+      "run_type": "reference_check"
+    },
+    "leap_all_skipped": {
+      "fixture_dir": "c_fixtures/leap_all_skipped",
+      "source_paths": [
+        "leap_app/leap_year.py"
+      ],
+      "test_paths": [
+        "tests"
+      ],
+      "expected_nodeids": [
+        "tests/test_leap.py::test_2024_is_leap",
+        "tests/test_leap.py::test_2023_is_not_leap",
+        "tests/test_leap.py::test_1900_is_not_leap",
+        "tests/test_leap.py::test_2000_is_leap"
+      ],
+      "approved_files": {
+        "leap_app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "leap_app/leap_year.py": "a4825587a3bac05823c0d01d8d47b7eac18d955a01d50661ed74ee8cd12a9487",
+        "tests/test_leap.py": "71563001e9a08484df277e08e1960a9a2c6825ab7278a3d446f7df6d0c4f4afb"
+      },
+      "run_type": "fault_injection"
+    },
+    "output_timeout": {
+      "fixture_dir": "c_fixtures/output_timeout",
+      "source_paths": [
+        "leap_app/leap_year.py"
+      ],
+      "test_paths": [
+        "tests"
+      ],
+      "expected_nodeids": [
+        "tests/test_timeout.py::test_output_timeout"
+      ],
+      "approved_files": {
+        "leap_app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "leap_app/leap_year.py": "92b9e8a6db622809b1193326d0f48aa7e715e4b23a012e35e65b91bb347b8c0c",
+        "tests/test_timeout.py": "5ec8aef413f2722b0b7154429387ffa1d274967bb0c5a954ac7f718ed53159c8"
+      },
+      "run_type": "fault_injection"
+    },
+    "zero_tests": {
+      "fixture_dir": "c_fixtures/zero_tests",
+      "source_paths": [
+        "leap_app/leap_year.py"
+      ],
+      "test_paths": [
+        "tests"
+      ],
+      "expected_nodeids": [],
+      "approved_files": {
+        "leap_app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "leap_app/leap_year.py": "9e5d0526cb2c0cd889be5d8f330f63b5da6f3d07600e93c8ac986b9c779b3deb",
+        "tests/test_empty.py": "2dc7b51e69fd7446ec64c7df51f142d6f549c73a6f20dfd36d677f110c389f55"
+      },
+      "run_type": "fault_injection"
+    },
+    "collection_dependency_error": {
+      "fixture_dir": "c_fixtures/collection_dependency_error",
+      "source_paths": [
+        "leap_app/leap_year.py"
+      ],
+      "test_paths": [
+        "tests"
+      ],
+      "expected_nodeids": [
+        "tests/test_leap.py::test_2024_is_leap",
+        "tests/test_leap.py::test_2023_is_not_leap",
+        "tests/test_leap.py::test_1900_is_not_leap",
+        "tests/test_leap.py::test_2000_is_leap"
+      ],
+      "approved_files": {
+        "leap_app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "leap_app/leap_year.py": "914902557a8389d5d82003c9f2a2ab54f5bfa50d1d119654ddb55d09fc38156d",
+        "tests/test_leap.py": "71563001e9a08484df277e08e1960a9a2c6825ab7278a3d446f7df6d0c4f4afb"
+      },
+      "run_type": "fault_injection"
+    },
+    "collection_syntax_error": {
+      "fixture_dir": "c_fixtures/collection_syntax_error",
+      "source_paths": [
+        "leap_app/leap_year.py"
+      ],
+      "test_paths": [
+        "tests"
+      ],
+      "expected_nodeids": [
+        "tests/test_leap.py::test_2024_is_leap",
+        "tests/test_leap.py::test_2023_is_not_leap",
+        "tests/test_leap.py::test_1900_is_not_leap",
+        "tests/test_leap.py::test_2000_is_leap"
+      ],
+      "approved_files": {
+        "leap_app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "leap_app/leap_year.py": "aafd53905af3c6e262c64585208d8666e833433ef718c77d87a6aafa235fdb0d",
+        "tests/test_leap.py": "71563001e9a08484df277e08e1960a9a2c6825ab7278a3d446f7df6d0c4f4afb"
+      },
+      "run_type": "fault_injection"
+    },
+    "code_runtime_error": {
+      "fixture_dir": "c_fixtures/code_runtime_error",
+      "source_paths": [
+        "leap_app/leap_year.py"
+      ],
+      "test_paths": [
+        "tests"
+      ],
+      "expected_nodeids": [
+        "tests/test_leap.py::test_2024_is_leap",
+        "tests/test_leap.py::test_2023_is_not_leap",
+        "tests/test_leap.py::test_1900_is_not_leap",
+        "tests/test_leap.py::test_2000_is_leap"
+      ],
+      "approved_files": {
+        "leap_app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "leap_app/leap_year.py": "a471a2c01c1d2282e231da69e760dd41f3dd86418d125d39f94d145d8d590cba",
+        "tests/test_leap.py": "71563001e9a08484df277e08e1960a9a2c6825ab7278a3d446f7df6d0c4f4afb"
+      },
+      "run_type": "fault_injection"
+    },
+    "incomplete_tests": {
+      "fixture_dir": "c_fixtures/incomplete_tests",
+      "source_paths": [
+        "leap_app/leap_year.py"
+      ],
+      "test_paths": [
+        "tests"
+      ],
+      "expected_nodeids": [
+        "tests/test_leap.py::test_2024_is_leap",
+        "tests/test_leap.py::test_2023_is_not_leap",
+        "tests/test_leap.py::test_1900_is_not_leap",
+        "tests/test_leap.py::test_2000_is_leap"
+      ],
+      "approved_files": {
+        "leap_app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "leap_app/leap_year.py": "c1972ac090e909c39ce65b10473009b651cdf3cf9d833fa7744eeae06e3e5bd8",
+        "tests/test_leap.py": "eb2dfb68c0cc11bee88032ebc262e893c4e28a9619b26ba74ced91e45585fe49"
+      },
+      "run_type": "fault_injection"
+    },
+    "leap_original": {
+      "fixture_dir": "c_fixtures/leap_original",
+      "source_paths": [
+        "code/leap_year.py"
+      ],
+      "test_paths": [
+        "tests"
+      ],
+      "expected_nodeids": [
+        "tests/test_leap.py::test_2024_is_leap",
+        "tests/test_leap.py::test_2023_is_not_leap",
+        "tests/test_leap.py::test_1900_is_not_leap",
+        "tests/test_leap.py::test_2000_is_leap"
+      ],
+      "approved_files": {
+        "code/leap_year.py": "0ec1efe58ae53f04f3cdcbc5f95e37d182b8074134ed0267ddb0fb2be00fa160",
+        "tests/test_leap.py": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+      },
+      "run_type": "tool_check",
+      "provenance": "Original day1-kit Git bytes at f94320a; never model repair evidence"
+    }
+  }
+}

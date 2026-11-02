@@ -1,5 +1,4 @@
 import json
-import sys
 import time
 from pathlib import Path
 import pytest
@@ -7,7 +6,7 @@ from app.config import load_task_spec,read_json
 from app.decision import DecisionEngine
 from app.repair_output import InvalidModelOutput,parse_repair_output
 from app.security import PermissionViolation,validate_changes
-from app.runner import run_tests
+from app.runner import run_tests, prepare_fixture, code_version
 ROOT=Path(__file__).resolve().parents[1]
 def test_configs_and_task_parse():
     assert read_json(ROOT/'configs/agents.json')['config_version']=='iteration-0.2-20261101-draft'
@@ -30,18 +29,28 @@ def test_repair_output_json_protocol():
     with pytest.raises(InvalidModelOutput): parse_repair_output('return year % 4 == 0')
 
 def test_runner_does_not_mark_nonzero_or_wrong_count_as_pass(tmp_path):
-    result = run_tests(tmp_path, [sys.executable, '-c', "print('4 passed, 0 failed'); raise SystemExit(1)"], 2, tmp_path/'logs', 't001', expected_test_count=4)
+    work = prepare_fixture('leap_bad', tmp_path / 'work')
+    result = run_tests(run_id='r', task_id='t001', workspace=work,
+                       test_profile='leap_bad', timeout_seconds=10,
+                       code_version=code_version(work, ('leap_app/leap_year.py',)), artifact_dir=tmp_path/'logs')
     assert result['status'] == 'failed'
     assert result['verification_status'] != 'passed'
-    result = run_tests(tmp_path, [sys.executable, '-c', "print('4 passed, 0 failed')"], 2, tmp_path/'logs', 't002', expected_test_count=3)
-    assert result['status'] == 'blocked'
-    assert result['failure_class'] == 'not_reproduced'
+    assert result['exit_code'] == 1
+    work = prepare_fixture('incomplete_tests', tmp_path / 'partial')
+    result = run_tests(run_id='r', task_id='t002', workspace=work,
+                       test_profile='incomplete_tests', timeout_seconds=10,
+                       code_version=code_version(work, ('leap_app/leap_year.py',)), artifact_dir=tmp_path/'logs')
+    assert result['verification_status'] == 'inconclusive'
+    assert result['coverage']['expected_collected_match'] is False
 
 def test_runner_timeout_is_inconclusive_and_returns(tmp_path):
     started = time.monotonic()
-    result = run_tests(tmp_path, [sys.executable, '-c', 'import time; time.sleep(5)'], 1, tmp_path/'logs', 't003')
-    assert time.monotonic() - started < 4
+    work = prepare_fixture('output_timeout', tmp_path / 'work')
+    result = run_tests(run_id='r', task_id='t003', workspace=work,
+                       test_profile='output_timeout', timeout_seconds=1,
+                       code_version=code_version(work, ('leap_app/leap_year.py',)), artifact_dir=tmp_path/'logs')
+    assert time.monotonic() - started < 15
     assert result['status'] == 'timeout'
     assert result['verification_status'] == 'inconclusive'
     assert result['failure_class'] == 'timeout'
-    assert result['exit_code'] is None
+    assert result['cleanup']['parent_reaped'] is True
