@@ -1,0 +1,276 @@
+{
+  "schema_version": "v3",
+  "run": {
+    "run_id": "run-b0cd5ade62444282b7fa3a04fe1dc85b",
+    "task": {
+      "description": "真实HTTP暂停与证据保留验收",
+      "max_calls": 12,
+      "max_rounds": 3,
+      "mode": "baseline",
+      "project": "leap",
+      "total_seconds": 300
+    },
+    "status": "paused",
+    "created_at": "2026-11-02T10:02:35.028678+00:00",
+    "updated_at": "2026-11-02T10:02:36.284669+00:00",
+    "result": {
+      "run_id": "20261102-180235-03f65275",
+      "task_id": "T001-leap-baseline",
+      "run_type": "tool_check",
+      "status": "stopped",
+      "dev_result": "failed",
+      "final_result": "not_run",
+      "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "code_version_scheme": "sha256-canonical-files-v1",
+      "model_api_called": false,
+      "failure_class": "assertion_failed",
+      "reason": "当前基线测试已结束；按用户请求停止后续推进",
+      "evidence_path": "\\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-b0cd5ade62444282b7fa3a04fe1dc85b\\baseline\\20261102-180235-03f65275",
+      "tool_result": {
+        "interface_version": "0.2-20261101-draft",
+        "interface_status": "pending_BC_confirmation",
+        "call_id": "c-74eef9f05f74461a9681cbccea3db705",
+        "run_id": "20261102-180235-03f65275",
+        "task_id": "T001-leap-baseline",
+        "tool": "run_tests",
+        "phase": "development",
+        "status": "failed",
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "exit_code": 1,
+        "counts": {
+          "collected": 4,
+          "passed": 3,
+          "failed": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "stdout_path": "20261102-180235-03f65275/c-74eef9f05f74461a9681cbccea3db705/stdout.txt",
+        "stderr_path": "20261102-180235-03f65275/c-74eef9f05f74461a9681cbccea3db705/stderr.txt",
+        "junit_path": "20261102-180235-03f65275/c-74eef9f05f74461a9681cbccea3db705/junit.xml",
+        "junit_missing_reason": null,
+        "structured_path": "20261102-180235-03f65275/c-74eef9f05f74461a9681cbccea3db705/pytest_events.json",
+        "duration_ms": 1160,
+        "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+        "requested_code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+        "expected_test_count": 4,
+        "output_agent": null,
+        "artifact_paths_relative_to": "artifact_dir",
+        "result_path": "20261102-180235-03f65275/c-74eef9f05f74461a9681cbccea3db705/result.json",
+        "isolation_ready": false,
+        "execution_mode": "reviewed_fixture",
+        "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "run_type": "tool_check",
+        "started_at": "2026-11-02T18:02:35.113+08:00",
+        "cleanup": {
+          "parent_reaped": true,
+          "pipes_drained": true,
+          "tree_termination_attempted": false,
+          "full_process_tree_verified": false,
+          "scope": "reviewed fixture parent; full process-tree isolation not certified"
+        },
+        "reason": "Frozen native fixture tests completed with a recorded failure",
+        "command": [
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+          "-I",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\pytest_entry.py",
+          "\\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-b0cd5ade62444282b7fa3a04fe1dc85b\\baseline\\20261102-180235-03f65275\\artifacts\\20261102-180235-03f65275\\c-74eef9f05f74461a9681cbccea3db705\\pytest_events.json",
+          "\\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-b0cd5ade62444282b7fa3a04fe1dc85b\\baseline\\20261102-180235-03f65275\\artifacts\\20261102-180235-03f65275\\c-74eef9f05f74461a9681cbccea3db705\\junit.xml",
+          "\\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-b0cd5ade62444282b7fa3a04fe1dc85b\\baseline\\20261102-180235-03f65275\\artifacts\\20261102-180235-03f65275\\c-74eef9f05f74461a9681cbccea3db705\\pytest.ini",
+          "tests"
+        ],
+        "test_profile": "leap_original",
+        "environment_policy": "minimal_allowlist_no_inherited_credentials_or_plugins",
+        "source_syntax_errors": [],
+        "process_id": 48256,
+        "coverage": {
+          "expected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap",
+            "tests/test_leap.py::test_2023_is_not_leap",
+            "tests/test_leap.py::test_1900_is_not_leap",
+            "tests/test_leap.py::test_2000_is_leap"
+          ],
+          "collected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap",
+            "tests/test_leap.py::test_2023_is_not_leap",
+            "tests/test_leap.py::test_1900_is_not_leap",
+            "tests/test_leap.py::test_2000_is_leap"
+          ],
+          "expected_collected_match": true,
+          "junit_identities": [
+            [
+              "tests.test_leap",
+              "test_2024_is_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_2023_is_not_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_1900_is_not_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_2000_is_leap"
+            ]
+          ],
+          "junit_expected_match": true,
+          "session_finished": true
+        },
+        "integrity": {
+          "executed_copy_unchanged": true,
+          "input_workspace_unchanged": true
+        },
+        "evidence_matches_current_version": true,
+        "finished_at": "2026-11-02T18:02:36.267+08:00"
+      },
+      "stdout_excerpt": "============================= test session starts =============================\r\nplatform win32 -- Python 3.14.6, pytest-8.3.5, pluggy-1.7.0 -- C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe\r\nrootdir: \\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-b0cd5ade62444282b7fa3a04fe1dc85b\\baseline\\20261102-180235-03f65275\\artifacts\\20261102-180235-03f65275\\c-74eef9f05f74461a9681cbccea3db705\\work\r\nconfigfile: ..\\pytest.ini\r\ncollecting ... collected 4 items\r\n\r\ntests/test_leap.py::test_2024_is_leap PASSED\r\ntests/test_leap.py::test_2023_is_not_leap PASSED\r\ntests/test_leap.py::test_1900_is_not_leap FAILED\r\ntests/test_leap.py::test_2000_is_leap PASSED\r\n\r\n================================== FAILURES ===================================\r\n____________________________ test_1900_is_not_leap ____________________________\r\n\r\n    def test_1900_is_not_leap():\r\n>       assert is_leap(1900) is False\r\nE       assert True is False\r\nE        +  where True = is_leap(1900)\r\n\r\ntests\\test_leap.py:21: AssertionError\r\n- generated xml file: \\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-b0cd5ade62444282b7fa3a04fe1dc85b\\baseline\\20261102-180235-03f65275\\artifacts\\20261102-180235-03f65275\\c-74eef9f05f74461a9681cbccea3db705\\junit.xml -\r\n=========================== short test summary info ===========================\r\nFAILED tests/test_leap.py::test_1900_is_not_leap - assert True is False\r\n========================= 1 failed, 3 passed in 0.27s =========================\r\n"
+    },
+    "control": "pause"
+  },
+  "events": [
+    {
+      "sequence": 8,
+      "created_at": "2026-11-02T10:02:35.063741+00:00",
+      "event": "started"
+    },
+    {
+      "sequence": 9,
+      "created_at": "2026-11-02T10:02:35.189684+00:00",
+      "event": "control_requested",
+      "action": "pause",
+      "effective_action": "pause"
+    },
+    {
+      "sequence": 10,
+      "created_at": "2026-11-02T10:02:36.287140+00:00",
+      "event": "finished",
+      "status": "paused",
+      "result": {
+        "run_id": "20261102-180235-03f65275",
+        "task_id": "T001-leap-baseline",
+        "run_type": "tool_check",
+        "status": "stopped",
+        "dev_result": "failed",
+        "final_result": "not_run",
+        "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "model_api_called": false,
+        "failure_class": "assertion_failed",
+        "reason": "当前基线测试已结束；按用户请求停止后续推进",
+        "evidence_path": "\\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-b0cd5ade62444282b7fa3a04fe1dc85b\\baseline\\20261102-180235-03f65275",
+        "tool_result": {
+          "interface_version": "0.2-20261101-draft",
+          "interface_status": "pending_BC_confirmation",
+          "call_id": "c-74eef9f05f74461a9681cbccea3db705",
+          "run_id": "20261102-180235-03f65275",
+          "task_id": "T001-leap-baseline",
+          "tool": "run_tests",
+          "phase": "development",
+          "status": "failed",
+          "verification_status": "failed",
+          "failure_class": "assertion_failed",
+          "exit_code": 1,
+          "counts": {
+            "collected": 4,
+            "passed": 3,
+            "failed": 1,
+            "errors": 0,
+            "skipped": 0
+          },
+          "stdout_path": "20261102-180235-03f65275/c-74eef9f05f74461a9681cbccea3db705/stdout.txt",
+          "stderr_path": "20261102-180235-03f65275/c-74eef9f05f74461a9681cbccea3db705/stderr.txt",
+          "junit_path": "20261102-180235-03f65275/c-74eef9f05f74461a9681cbccea3db705/junit.xml",
+          "junit_missing_reason": null,
+          "structured_path": "20261102-180235-03f65275/c-74eef9f05f74461a9681cbccea3db705/pytest_events.json",
+          "duration_ms": 1160,
+          "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+          "requested_code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+          "code_version_scheme": "sha256-canonical-files-v1",
+          "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+          "expected_test_count": 4,
+          "output_agent": null,
+          "artifact_paths_relative_to": "artifact_dir",
+          "result_path": "20261102-180235-03f65275/c-74eef9f05f74461a9681cbccea3db705/result.json",
+          "isolation_ready": false,
+          "execution_mode": "reviewed_fixture",
+          "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+          "run_type": "tool_check",
+          "started_at": "2026-11-02T18:02:35.113+08:00",
+          "cleanup": {
+            "parent_reaped": true,
+            "pipes_drained": true,
+            "tree_termination_attempted": false,
+            "full_process_tree_verified": false,
+            "scope": "reviewed fixture parent; full process-tree isolation not certified"
+          },
+          "reason": "Frozen native fixture tests completed with a recorded failure",
+          "command": [
+            "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+            "-I",
+            "-B",
+            "-X",
+            "utf8",
+            "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\pytest_entry.py",
+            "\\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-b0cd5ade62444282b7fa3a04fe1dc85b\\baseline\\20261102-180235-03f65275\\artifacts\\20261102-180235-03f65275\\c-74eef9f05f74461a9681cbccea3db705\\pytest_events.json",
+            "\\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-b0cd5ade62444282b7fa3a04fe1dc85b\\baseline\\20261102-180235-03f65275\\artifacts\\20261102-180235-03f65275\\c-74eef9f05f74461a9681cbccea3db705\\junit.xml",
+            "\\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-b0cd5ade62444282b7fa3a04fe1dc85b\\baseline\\20261102-180235-03f65275\\artifacts\\20261102-180235-03f65275\\c-74eef9f05f74461a9681cbccea3db705\\pytest.ini",
+            "tests"
+          ],
+          "test_profile": "leap_original",
+          "environment_policy": "minimal_allowlist_no_inherited_credentials_or_plugins",
+          "source_syntax_errors": [],
+          "process_id": 48256,
+          "coverage": {
+            "expected_nodeids": [
+              "tests/test_leap.py::test_2024_is_leap",
+              "tests/test_leap.py::test_2023_is_not_leap",
+              "tests/test_leap.py::test_1900_is_not_leap",
+              "tests/test_leap.py::test_2000_is_leap"
+            ],
+            "collected_nodeids": [
+              "tests/test_leap.py::test_2024_is_leap",
+              "tests/test_leap.py::test_2023_is_not_leap",
+              "tests/test_leap.py::test_1900_is_not_leap",
+              "tests/test_leap.py::test_2000_is_leap"
+            ],
+            "expected_collected_match": true,
+            "junit_identities": [
+              [
+                "tests.test_leap",
+                "test_2024_is_leap"
+              ],
+              [
+                "tests.test_leap",
+                "test_2023_is_not_leap"
+              ],
+              [
+                "tests.test_leap",
+                "test_1900_is_not_leap"
+              ],
+              [
+                "tests.test_leap",
+                "test_2000_is_leap"
+              ]
+            ],
+            "junit_expected_match": true,
+            "session_finished": true
+          },
+          "integrity": {
+            "executed_copy_unchanged": true,
+            "input_workspace_unchanged": true
+          },
+          "evidence_matches_current_version": true,
+          "finished_at": "2026-11-02T18:02:36.267+08:00"
+        },
+        "stdout_excerpt": "============================= test session starts =============================\r\nplatform win32 -- Python 3.14.6, pytest-8.3.5, pluggy-1.7.0 -- C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe\r\nrootdir: \\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-b0cd5ade62444282b7fa3a04fe1dc85b\\baseline\\20261102-180235-03f65275\\artifacts\\20261102-180235-03f65275\\c-74eef9f05f74461a9681cbccea3db705\\work\r\nconfigfile: ..\\pytest.ini\r\ncollecting ... collected 4 items\r\n\r\ntests/test_leap.py::test_2024_is_leap PASSED\r\ntests/test_leap.py::test_2023_is_not_leap PASSED\r\ntests/test_leap.py::test_1900_is_not_leap FAILED\r\ntests/test_leap.py::test_2000_is_leap PASSED\r\n\r\n================================== FAILURES ===================================\r\n____________________________ test_1900_is_not_leap ____________________________\r\n\r\n    def test_1900_is_not_leap():\r\n>       assert is_leap(1900) is False\r\nE       assert True is False\r\nE        +  where True = is_leap(1900)\r\n\r\ntests\\test_leap.py:21: AssertionError\r\n- generated xml file: \\\\?\\C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\platform\\run-b0cd5ade62444282b7fa3a04fe1dc85b\\baseline\\20261102-180235-03f65275\\artifacts\\20261102-180235-03f65275\\c-74eef9f05f74461a9681cbccea3db705\\junit.xml -\r\n=========================== short test summary info ===========================\r\nFAILED tests/test_leap.py::test_1900_is_not_leap - assert True is False\r\n========================= 1 failed, 3 passed in 0.27s =========================\r\n"
+      }
+    }
+  ]
+}

@@ -116,3 +116,58 @@ def test_real_environment_blocks_without_execution_approval(tmp_path, monkeypatc
     report = DockerRunner().preflight(tmp_path)
     assert not report['isolation_ready']
     assert (tmp_path / 'isolation.json').is_file()
+
+
+@pytest.mark.parametrize('action, expected', [('pause', 'paused'), ('stop', 'stopped')])
+def test_control_during_model_call_prevents_candidate_write(tmp_path, action, expected):
+    store = RunStore(tmp_path)
+    rid = store.create({'mode': 'repair'})['run_id']
+    store.claim(rid)
+    class ControlledModel(ModelStub):
+        def call(self, messages, **kwargs):
+            output = super().call(messages, **kwargs)
+            store.request_control(rid, action)
+            return output
+    runner, model = ExecutorStub(['assertion_failed']), ControlledModel()
+    status, result = Workflow(store, runner, model).run(rid)
+    assert status == expected and result['model_calls'] == 1
+    assert model.roles == ['repairer'] and runner.phases == ['development']
+    assert not (store.directory(rid) / 'candidate-1').exists()
+    assert not any(e['event'] == 'candidate_applied' for e in store.events(rid))
+    assert any(e['event'] == 'agent_call' for e in store.events(rid))
+
+
+def test_pause_before_preflight_does_not_start_executor(tmp_path):
+    store = RunStore(tmp_path)
+    rid = store.create({'mode': 'repair'})['run_id']
+    store.claim(rid)
+    store.request_control(rid, 'pause')
+    class ForbiddenExecutor:
+        def preflight(self, folder):
+            pytest.fail('control must precede Docker preflight')
+    status, result = Workflow(store, ForbiddenExecutor(), ModelStub()).run(rid)
+    assert status == 'paused' and result['model_calls'] == result['tool_calls'] == 0
+
+
+def test_expired_total_budget_after_model_prevents_patch(tmp_path, monkeypatch):
+    clock = [100.0]
+    monkeypatch.setattr('app.workflow_v3.time.monotonic', lambda: clock[0])
+    store = RunStore(tmp_path)
+    rid = store.create({'mode': 'repair', 'total_seconds': 1})['run_id']
+    store.claim(rid)
+    class SlowModel(ModelStub):
+        def call(self, messages, **kwargs):
+            output = super().call(messages, **kwargs)
+            clock[0] += 2
+            return output
+    status, result = Workflow(store, ExecutorStub(['assertion_failed']), SlowModel()).run(rid)
+    assert status == 'blocked' and result['model_calls'] == 1
+    assert '总时限' in result['reason']
+    assert not (store.directory(rid) / 'candidate-1').exists()
+
+
+def test_model_call_limit_prevents_extra_role_and_final_check(tmp_path):
+    status, result, runner, model, *_ = execute(tmp_path, ['assertion_failed', 'passed'], {'max_calls': 1})
+    assert status == 'blocked' and result['model_calls'] == 1
+    assert model.roles == ['repairer']
+    assert runner.phases == ['development', 'development'] and result['final_result'] == 'not_run'

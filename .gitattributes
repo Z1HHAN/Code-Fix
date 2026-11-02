@@ -11,3 +11,5 @@ docs/开发要求V3.0.md -text
 evidence/v3/** -text
 # Preserve native CR/LF sequences in captured evidence without diff whitespace rewriting.
 evidence/v3/** -whitespace
+# Follow-up control acceptance is a separate immutable evidence batch.
+evidence/v3-state-control/** -text -whitespace

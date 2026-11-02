@@ -21,6 +21,12 @@ class TaskService:
     def run_claimed(self, run_id):
         task = self.store.get(run_id)['task']
         try:
+            control = self.store.get(run_id)['control']
+            if control:
+                self.store.finish(run_id, 'paused' if control == 'pause' else 'stopped',
+                                  {'final_result': 'not_run', 'reason': '按用户请求在执行前停止推进',
+                                   'model_api_called': False, 'model_calls': 0, 'tool_calls': 0})
+                return
             if task['mode'] == 'baseline':
                 destination = self.store.directory(run_id) / 'baseline'
                 # Preserve long evidence paths on Windows without changing C's
@@ -38,6 +44,10 @@ class TaskService:
                     with log_path.open('rb') as log:
                         result['stdout_excerpt'] = log.read(12000).decode('utf-8', errors='replace')
                 status = 'blocked' if evidence['tool_result']['verification_status'] == 'not_run' else 'stopped'
+                control = self.store.get(run_id)['control']
+                if control:
+                    status = 'paused' if control == 'pause' else 'stopped'
+                    result['reason'] = '当前基线测试已结束；按用户请求停止后续推进'
             else:
                 from .workflow_v3 import Workflow
                 status, result = Workflow(self.store).run(run_id)
@@ -47,7 +57,7 @@ class TaskService:
                                                'reason': '运行异常，未完成独立验收'})
 
     def report(self, run_id):
-        return {'schema_version': 'v3', 'run': self.store.get(run_id), 'events': self.store.events(run_id)}
+        return {'schema_version': 'v3', **self.store.snapshot(run_id)}
 
     def write_report(self, run_id):
         target = self.store.directory(run_id) / 'report.json'

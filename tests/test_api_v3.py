@@ -2,6 +2,7 @@ import hashlib
 import io
 import json
 import time
+from threading import Event
 import zipfile
 
 from fastapi.testclient import TestClient
@@ -92,3 +93,46 @@ def test_selected_run_is_persisted_across_app_instances(tmp_path):
         run = client.post('/api/v3/tasks', headers=auth(client), json={}).json()
     with TestClient(create_app(tmp_path)) as restored:
         assert restored.get(f'/api/v3/tasks/{run["run_id"]}').json()['task'] == run['task']
+
+
+@pytest.mark.parametrize('action, expected', [('pause', 'paused'), ('stop', 'stopped')])
+def test_control_while_real_baseline_runs_preserves_evidence(tmp_path, monkeypatch, action, expected):
+    from app.service import baseline_record
+    entered, release = Event(), Event()
+    def gated_baseline(*args, **kwargs):
+        entered.set()
+        assert release.wait(5), 'test did not release baseline worker'
+        # Only the scheduling boundary is gated: this executes the real frozen pytest.
+        return baseline_record(*args, **kwargs)
+    monkeypatch.setattr('app.service.baseline_record', gated_baseline)
+    with TestClient(create_app(tmp_path)) as client:
+        headers = auth(client)
+        rid = client.post('/api/v3/tasks', headers=headers, json={'mode': 'baseline'}).json()['run_id']
+        try:
+            assert client.post(f'/api/v3/tasks/{rid}/start', headers=headers).status_code == 202
+            assert entered.wait(3)
+            response = client.post(f'/api/v3/tasks/{rid}/control', headers=headers, json={'action': action})
+            assert response.status_code == 200
+            assert response.json()['control'] == action
+        finally:
+            release.set()
+        deadline = time.monotonic() + 20
+        while time.monotonic() < deadline:
+            report = client.get(f'/api/v3/tasks/{rid}/report').json()
+            if report['run']['status'] != 'running':
+                break
+            time.sleep(.03)
+        assert report['run']['status'] == expected
+        assert report['run']['result']['tool_result']['counts']['passed'] == 3
+        assert report['run']['result']['tool_result']['counts']['failed'] == 1
+        assert report['run']['result']['model_api_called'] is False
+        assert report['run']['result']['final_result'] == 'not_run'
+        assert [e['event'] for e in report['events']] == ['started', 'control_requested', 'finished']
+        assert report['events'][-1]['status'] == expected
+        exported = client.get(f'/api/v3/tasks/{rid}/bundle')
+        assert exported.status_code == 200
+        with zipfile.ZipFile(io.BytesIO(exported.content)) as archive:
+            assert json.loads(archive.read('report.json'))['run']['status'] == expected
+            manifest = json.loads(archive.read('sha256.json'))
+            assert any(name.endswith('junit.xml') for name in manifest)
+            assert all(hashlib.sha256(archive.read(name)).hexdigest() == digest for name, digest in manifest.items())

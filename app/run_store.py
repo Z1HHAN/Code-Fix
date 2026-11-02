@@ -108,13 +108,14 @@ class RunStore:
         return path
 
     def claim(self, run_id):
+        directory = self.directory(run_id)
         with self.connect() as db:
             changed = db.execute("UPDATE runs SET status='running',updated_at=? WHERE run_id=? AND status='created'",
                                  (now(), run_id)).rowcount
             if changed != 1:
                 raise StateConflict('任务已启动或已结束，不能重复执行')
-        self.directory(run_id).mkdir(exist_ok=True)
-        self.event(run_id, {'event': 'started'})
+            directory.mkdir(exist_ok=True)
+            self._event(db, run_id, {'event': 'started'})
 
     def finish(self, run_id, status, result):
         if status not in {'stopped', 'blocked', 'failed', 'success', 'paused', 'interrupted'}:
@@ -124,28 +125,46 @@ class RunStore:
                                  (status, json.dumps(result, ensure_ascii=False), now(), run_id)).rowcount
             if not changed:
                 raise StateConflict('仅运行中的任务可以写入终态')
-        self.event(run_id, {'event': 'finished', 'status': status, 'result': result})
+            self._event(db, run_id, {'event': 'finished', 'status': status, 'result': result})
 
     def request_control(self, run_id, action):
         if not isinstance(action, str) or action not in {'pause', 'stop'}:
             raise ValueError('非法控制操作')
         self.get(run_id)
         with self.connect() as db:
-            if not db.execute("UPDATE runs SET control=?,updated_at=? WHERE run_id=? AND status='running'",
+            # Stop is irreversible within this run; a later pause cannot weaken it.
+            if not db.execute("UPDATE runs SET control=CASE WHEN control='stop' THEN 'stop' ELSE ? END,updated_at=? WHERE run_id=? AND status='running'",
                               (action, now(), run_id)).rowcount:
                 raise StateConflict('只能控制运行中的任务')
-        self.event(run_id, {'event': 'control_requested', 'action': action})
+            effective = db.execute('SELECT control FROM runs WHERE run_id=?', (run_id,)).fetchone()[0]
+            self._event(db, run_id, {'event': 'control_requested', 'action': action, 'effective_action': effective})
+
+    @staticmethod
+    def _event(db, run_id, payload):
+        db.execute('INSERT INTO events (run_id,created_at,payload) VALUES (?,?,?)',
+                   (run_id, now(), json.dumps(payload, ensure_ascii=False)))
 
     def event(self, run_id, payload):
         with self.connect() as db:
-            db.execute('INSERT INTO events (run_id,created_at,payload) VALUES (?,?,?)',
-                       (run_id, now(), json.dumps(payload, ensure_ascii=False)))
+            self._event(db, run_id, payload)
+
+    @staticmethod
+    def _events(db, run_id):
+        return [{'sequence': r['sequence'], 'created_at': r['created_at'], **json.loads(r['payload'])}
+                for r in db.execute('SELECT * FROM events WHERE run_id=? ORDER BY sequence', (run_id,))]
 
     def events(self, run_id):
         self.get(run_id)
         with self.connect() as db:
-            return [{'sequence': r['sequence'], 'created_at': r['created_at'], **json.loads(r['payload'])}
-                    for r in db.execute('SELECT * FROM events WHERE run_id=? ORDER BY sequence', (run_id,))]
+            return self._events(db, run_id)
+
+    def snapshot(self, run_id):
+        """Read status and events from one SQLite snapshot, including during finish."""
+        self.directory(run_id)
+        with self.connect() as db:
+            db.execute('BEGIN')
+            run = self._decode(db.execute('SELECT * FROM runs WHERE run_id=?', (run_id,)).fetchone())
+            return {'run': run, 'events': self._events(db, run_id)}
 
     def interrupt(self, run_id):
         """Explicit operator action after confirming the old worker has stopped."""

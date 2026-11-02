@@ -32,7 +32,16 @@ class Workflow:
         def finish(status, reason):
             final.update(reason=reason, model_calls=self.model_calls, tool_calls=self.tool_calls)
             return status, final
+
+        def boundary():
+            control = self.store.get(run_id)['control']
+            if control:
+                raise ControlRequested(control)
+            if time.monotonic() >= deadline:
+                raise ModelBlocked('任务总时限到达')
+
         try:
+            boundary()
             settings = None
             blockers = []
             if self.model is None:
@@ -43,6 +52,7 @@ class Workflow:
             isolation = self.runner.preflight(directory / 'isolation')
             self.store.event(run_id, {'event': 'isolation_checked', **isolation})
             final['isolation_ready'] = isolation['isolation_ready']
+            boundary()
             if not isolation['isolation_ready']:
                 blockers.append(isolation.get('reason', '隔离未就绪'))
             if blockers:
@@ -56,13 +66,6 @@ class Workflow:
             current = base
             version = code_version(current, (SOURCE,))
             location = None
-
-            def boundary():
-                if time.monotonic() >= deadline:
-                    raise ModelBlocked('任务总时限到达')
-                control = self.store.get(run_id)['control']
-                if control:
-                    raise ControlRequested(control)
 
             def test(work, phase, name):
                 boundary()
@@ -100,11 +103,15 @@ class Workflow:
                                         code=(current / SOURCE).read_text(encoding='utf-8'), evidence=ev,
                                         version=version, work=current, task=task, deadline=deadline, extra=extra)
                 final['model_api_called'] |= record.get('model_api_called', False)
+                # A stop/pause received while the model was in flight must be
+                # observed before applying its output or starting another step.
+                boundary()
                 if record['status'] != 'ok':
                     raise ModelBlocked('角色调用失败：' + record.get('failure_class', 'unknown'))
                 return record['parsed_output']
 
             result, folder = test(base, 'development', 'baseline')
+            boundary()
             if result.get('failure_class') != 'assertion_failed':
                 return finish('blocked', '原始缺陷未按预期复现；不算模型修复')
             for round_number in range(1, task['max_rounds'] + 1):
@@ -117,6 +124,7 @@ class Workflow:
                 self.store.event(run_id, {'event': 'candidate_applied', 'round': round_number, **patch})
                 result, folder = test(current, 'development', f'development-{round_number}')
                 final.update(dev_result=result['verification_status'], code_version=version)
+                boundary()
                 ev = evidence(result, folder, round_number + 1)
                 # Terminal safety branches take precedence over all model advice.
                 context = dict(phase='development', failure_class=result['failure_class'], isolation_ready=True,
@@ -144,6 +152,7 @@ class Workflow:
                                     directory / 'final-patch')
                     checked, _ = test(final_work, 'final_check', 'final-check')
                     final['final_result'] = checked['verification_status']
+                    boundary()
                     if checked['verification_status'] == 'passed' and checked['failure_class'] == 'passed':
                         return finish('success', '开发测试及干净副本同套原生测试均实际通过')
                     return finish('failed', '独立验收未通过；结果不回流本轮Agent')
