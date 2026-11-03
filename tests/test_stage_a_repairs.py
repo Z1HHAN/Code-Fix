@@ -86,3 +86,42 @@ def test_docker_readiness_without_report_is_rejected_and_cleaned(tmp_path, monke
     assert result['artifact_channel'] == 'rejected'
     assert calls == ['cp', 'inspect', 'rm']
     assert not (output / 'junit.xml').exists()
+
+
+def test_docker_inspect_failure_still_attempts_cleanup(tmp_path, monkeypatch):
+    runner = DockerRunner(); runner.executable = 'docker-contract-stub'
+    paths = [tmp_path / name for name in ('work', 'out', 'log')]
+    for path in paths: path.mkdir()
+    class Process:
+        def __init__(self, command, **kwargs):
+            self.stdin = io.BytesIO(); self.returncode = 0
+        def poll(self): return 0
+    calls = []
+    def execute(command, **kwargs):
+        calls.append(command[1])
+        if command[1] == 'inspect': raise subprocess.TimeoutExpired(command, 10)
+        return subprocess.CompletedProcess(command, 0, b'', b'')
+    monkeypatch.setattr('app.docker_runner.subprocess.Popen', Process)
+    monkeypatch.setattr('app.docker_runner.subprocess.run', execute)
+    result = runner._execute(*paths[:2], ['-c', 'pass'], 2, paths[2])
+    assert calls == ['inspect', 'rm']
+    assert result['exit_code'] == 0 and result['cleanup_passed']
+    assert 'TimeoutExpired' in (paths[2] / 'cleanup.json').read_text()
+
+
+def test_docker_cleanup_timeout_returns_failed_cleanup(tmp_path, monkeypatch):
+    runner = DockerRunner(); runner.executable = 'docker-contract-stub'
+    paths = [tmp_path / name for name in ('work', 'out', 'log')]
+    for path in paths: path.mkdir()
+    class Process:
+        def __init__(self, command, **kwargs):
+            self.stdin = io.BytesIO(); self.returncode = 0
+        def poll(self): return 0
+    def execute(command, **kwargs):
+        if command[1] == 'rm': raise subprocess.TimeoutExpired(command, 10)
+        return subprocess.CompletedProcess(command, 0, b'', b'')
+    monkeypatch.setattr('app.docker_runner.subprocess.Popen', Process)
+    monkeypatch.setattr('app.docker_runner.subprocess.run', execute)
+    result = runner._execute(*paths[:2], ['-c', 'pass'], 2, paths[2])
+    assert result['exit_code'] == 0 and not result['cleanup_passed']
+    assert 'TimeoutExpired' in (paths[2] / 'cleanup.json').read_text()

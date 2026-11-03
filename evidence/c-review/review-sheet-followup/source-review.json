@@ -1,0 +1,22 @@
+{
+  "review_id": "CF-REVIEW-20261103-01",
+  "review_doc_sha256": "cfeba5a8c8c201daa94f647616a984f51fc1c1b2e499eae05f6dc31a4d406b72",
+  "base_commit": "a9ad48cbb82b320c27bcc173c2e1109239b9b1be",
+  "source_sha256": {
+    "app/docker_runner.py": "efe339921e9b260ffd859e0716f79f11bafc55d572da2e5f68c4a549cd17b469",
+    "requirements.txt": "d36bb501c1c7510b408274e43aea616803731c5bf217f7bf05165cd1a0eeef21",
+    "tests/test_stage_a_repairs.py": "e3bd5cdf456199515b879c2e52c99d9bfadb83127fd2407d9e27f6d88861ff27"
+  },
+  "new_paid_calls": 0,
+  "real_docker": "not_run",
+  "scope": [
+    "CODE-15",
+    "VER-02",
+    "DOC-01",
+    "DOC-02 baseline clarification",
+    "DOC-06"
+  ],
+  "first_platform_result": "244 passed,1 failed,1 skipped; Windows rename additional retries",
+  "targeted_result": "30 passed",
+  "independent_member_signoff": "pending"
+}
