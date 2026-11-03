@@ -44,17 +44,25 @@ python -m venv .venv
 
 ```powershell
 .\.venv\Scripts\python.exe -B -X utf8 -m pytest -q --basetemp=runs/pcheck1 -o cache_dir=runs/pytest-cache
-node --test tests/ui_prototype.test.cjs
+node --test tests/ui_prototype.test.cjs tests/ui_budget.test.cjs
 ```
 
 本次完整平台结果及命令见[阶段A核验](evidence/contest-core/offline-a/verification.json)，历史191通过、1跳过证据保留于evidence/legacy-naming-review-20261103/，另有Node原型9通过；这些是对应版本的组件/平台结果，不是修复题数，也不能代替B/C对新版本本人复跑。编排测试使用的模型响应标为模拟。
 
-QuixBugs40题已固定导入，与闰年共41项选择；2道慢测题暂禁用。公开代码、候选和final必须在合格隔离环境执行，不得直接在宿主运行。当前未批准付费调用，模型与预算未确认；费用/时限与生产坏JSON守卫已完成离线专项；fixed入口、真实双服务商和流程面板等待办见唯一台账，不在README复制第二套状态表。
+QuixBugs40题已固定导入，与闰年共41项选择；2道慢测题暂禁用。公开代码、候选和final必须在合格隔离环境执行，不得直接在宿主运行。A现已批准硅基流动两个账号各累计16元、剩余估算3元提醒，五个指定模型已通过账号模型列表查询；首用Pro/DeepSeek-V3.2，其他模型未核实的价格/计费上限仍阻断；费用/时限与生产坏JSON守卫已完成离线专项；fixed入口、真实双服务商和流程面板等待办见唯一台账，不在README复制第二套状态表。
 
 ## 如何协作与更新
 
 B负责实现及执行机，C负责明确commit的测试/复核与证据，A负责范围、状态同步和合并。每次拉取记录基线及认领T-ID；在`codex/`开发分支提交，标题用“类型(范围): 具体动作”，正文说明任务、改动原因、实际验证和限制。每次提交都在固定交付日志追加记录，PR引用记录ID。A复核后正常合入main，核对远端SHA并同步台账、计划和受影响规范。详见[AGENTS](AGENTS.md)与[PR模板](.github/pull_request_template.md)。
 
-旧10月30日、11月1/2日资料的有效未完事项沿用任务ID结转；完成项保留代码/测试/验收证据并退出待办。46项任务的三种状态独立登记，不因改名或日期变新就勾选完成。旧daily/deliveries已归入历史，后续不再增加同类日期文件；实际时间写在固定日志条目中，原始运行证据仍用独立run_id保留。
+旧10月30日、11月1/2日资料的有效未完事项沿用任务ID结转；完成项保留代码/测试/验收证据并退出待办。47项任务的三种状态独立登记，不因改名或日期变新就勾选完成。旧daily/deliveries已归入历史，后续不再增加同类日期文件；实际时间写在固定日志条目中，原始运行证据仍用独立run_id保留。
 
 文档集中维护不改变运行布局：`app/`、`c_runner/`、`c_tests/`、`c_fixtures/`、`configs/`、`prompts/`、`ui/`、资产、原始证据和被程序引用的历史路径保持原位。V3原文、历史0.2配置版本和C原始证据保留真实内容；GitHub列表备注是最后一次提交说明，当前状态看台账中的核对日期与证据，不改写Git历史。
+
+## 硅基流动双账号接入
+
+两个账号属于同一服务商，各累计授权¥16、合计¥32；不是每日额度。剩余估算余额≤¥3时页面和本地账本提醒，不自动充值或切换账号。官方原余额接口已停用，因此这里只估算本项目消费，其他应用消费须到控制台核对。配置、密钥保存与命令见[运行指南](docs/2026-11-03_项目持续维护/项目运行指南.md#硅基流动双账号当前入口)。
+
+Windows可先运行隐藏输入脚本配置密钥，再用`./scripts/start_siliconflow.ps1 -Action check`查询模型、`-Action budget`看额度、`-Action serve`启动本机页面。密钥仅存本机DPAPI密文或环境变量，绝不提交Git。真实JSON接口测试与Agent修复/隔离测试分开留证，不能相互替代；最新批次见[evidence/siliconflow-budget](evidence/siliconflow-budget)。
+
+本轮完整回归240通过/1跳过、Node12通过；首轮文件占用失败保留。账号1真实JSON请求1次通过，21输入/5输出token，按登记价格估算¥0.000114；这是接口连通性证据，真实修复仍待B机隔离资格。每次手动烟测都会产生新请求，页面额度轮询不调用平台。

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Users\\lenovo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+    "-NoProfile",
+    "-File",
+    "scripts/start_siliconflow.ps1",
+    "-Action",
+    "smoke"
+  ],
+  "exit_code": 0,
+  "max_calls": 1,
+  "request_seconds": 30
+}

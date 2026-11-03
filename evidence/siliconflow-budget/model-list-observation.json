@@ -1,0 +1,20 @@
+{
+  "observation_source": "sanitized stdout from scripts/start_siliconflow.ps1 -Action check, observed 2026-11-03; not a raw provider response",
+  "provider": "siliconflow",
+  "provider_count": 1,
+  "accounts": [
+    {"account_id":"sf_account1","status":"ok","metadata_request_made":true,"scope":"live_metadata_only","model_api_called":false,"paid_chat_requests":0},
+    {"account_id":"sf_account2","status":"ok","metadata_request_made":true,"scope":"live_metadata_only","model_api_called":false,"paid_chat_requests":0}
+  ],
+  "available_for_both_accounts": [
+    "deepseek-ai/DeepSeek-V4.1-Flash",
+    "zai-org/GLM-5.3-Flash",
+    "Pro/deepseek-ai/DeepSeek-V3.2",
+    "Qwen/Qwen3.6-27B",
+    "Pro/zai-org/GLM-5.1"
+  ],
+  "unavailable_for_either_account": [],
+  "paid_chat_requests": 0,
+  "platform_balance_verified": false,
+  "limitation": "Models-list availability is not chat compatibility, live Agent repair or account balance verification."
+}

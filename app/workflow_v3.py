@@ -171,6 +171,10 @@ class Workflow:
                                         version=version, work=current, task=task, deadline=deadline, extra=extra,
                                         trace={k: step[k] for k in ('step_id', 'parent_step_id')})
                 final['model_api_called'] |= record.get('model_api_called', False)
+                budget = record.get('cost', {}).get('budget')
+                if budget and budget.get('alerts'):
+                    self.store.event(run_id, {'event': 'budget_alert', 'step_id': step['step_id'],
+                                             'budget': budget, 'reason': '人民币账号额度提醒；非平台实时余额'})
                 trace.complete(record['status'], call_id=record['call_id'],
                                artifact_path='calls/' + record['call_id'],
                                code_version=version, failure_class=record.get('failure_class'))

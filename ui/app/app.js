@@ -24,7 +24,8 @@ async function refresh() {
   if (refreshing) return;
   refreshing = true;
   try {
-    const runs = await (await api('/tasks')).json();
+    const [runs, budget] = await Promise.all([api('/tasks').then(x => x.json()), api('/budget').then(x => x.json())]);
+    display('budget', budgetText(budget));
     const history = byId('history'); history.replaceChildren();
     for (const run of runs) {
       const option = document.createElement('option'); option.value = run.run_id;
@@ -69,7 +70,7 @@ async function refresh() {
     byId('pause').disabled = byId('stop').disabled = busy || run.status !== 'running' || run.task.mode !== 'repair';
     byId('report').disabled = false;
     byId('bundle').disabled = ['created', 'running'].includes(run.status);
-  } catch (error) { display('error', error.message); }
+  } catch (error) { display('error', error.message); display('budget', '额度状态暂时无法刷新，请重新核对；旧余额不作当前余额。'); }
   finally { refreshing = false; }
 }
 byId('create').onclick = () => action(async () => {

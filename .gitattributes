@@ -31,3 +31,4 @@ task_assets/leap_legacy/** text=auto
 
 # Stage A raw results, source fingerprints and offline trace samples are immutable.
 evidence/contest-core/** -text -whitespace
+evidence/siliconflow-budget/** -text -whitespace

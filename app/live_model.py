@@ -45,6 +45,13 @@ class LiveSettings:
     provider_id: str = 'primary'
     price_version: str = 'operator-environment'
     token_limit_parameter: str = 'max_completion_tokens'
+    currency: str = 'USD'
+    account_id: str | None = None
+    account_limit: Decimal | None = None
+    warning_balance: Decimal | None = None
+    team_limit: Decimal | None = None
+    billable_output_tokens: int | None = None
+    request_parameters: dict | None = None
 
     @classmethod
     def from_env(cls):
@@ -82,16 +89,26 @@ class Ledger:
                                   ('price_version', 'legacy-unrecorded')):
                 if name not in columns:
                     db.execute(f"ALTER TABLE calls ADD COLUMN {name} TEXT NOT NULL DEFAULT '{default}'")
+            from .account_budget import AccountBudget
+            AccountBudget.initialize(db)
 
     def reserve(self, call_id, run_id, settings, max_calls, upper_input):
+        if settings.currency == 'CNY':
+            from .account_budget import AccountBudget
+            return AccountBudget(self.path).reserve(call_id, run_id, settings, max_calls, upper_input)
+        if settings.currency != 'USD':
+            raise ModelBlocked('未实现的费用币种')
         day = datetime.now(timezone(timedelta(hours=8))).date().isoformat()
         amount = int((upper_input * settings.input_per_million + settings.max_output_tokens * settings.output_per_million).to_integral_value(rounding=ROUND_CEILING))
         limit = int(settings.daily_limit * 1_000_000)
         with sqlite3.connect(self.path, timeout=10) as db:
             db.execute('BEGIN IMMEDIATE')
-            if db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone():
+            if (db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
+                    or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()):
                 raise ModelBlocked('存在进行中或费用未知请求，暂停新付费请求')
-            if db.execute('SELECT count(*) FROM calls WHERE run_id=?', (run_id,)).fetchone()[0] >= max_calls:
+            count = db.execute('SELECT count(*) FROM calls WHERE run_id=?', (run_id,)).fetchone()[0]
+            count += db.execute('SELECT count(*) FROM cny_calls WHERE run_id=?', (run_id,)).fetchone()[0]
+            if count >= max_calls:
                 raise ModelBlocked('达到本任务模型调用上限')
             used = db.execute('SELECT coalesce(sum(coalesce(actual_microusd,reserved_microusd)),0) FROM calls WHERE day=?', (day,)).fetchone()[0]
             if used + amount > limit:
@@ -102,6 +119,9 @@ class Ledger:
                         settings.model, settings.price_version))
 
     def settle(self, call_id, usage, settings):
+        if settings.currency == 'CNY':
+            from .account_budget import AccountBudget
+            return AccountBudget(self.path).settle(call_id, usage, settings)
         valid = isinstance(usage, dict) and all(type(usage.get(k)) is int and usage[k] >= 0 for k in ('prompt_tokens', 'completion_tokens'))
         amount = None
         if valid:
@@ -120,6 +140,10 @@ class Ledger:
         with sqlite3.connect(self.path) as db:
             rows = db.execute('''SELECT provider_id,status,actual_microusd,reserved_microusd
                                FROM calls WHERE run_id=? ORDER BY rowid''', (run_id,)).fetchall()
+        from .account_budget import AccountBudget
+        cny = AccountBudget(self.path).summary(run_id)
+        if cny['calls'] and not rows:
+            return cny
         providers = {}
         for provider, status, actual, reserved in rows:
             item = providers.setdefault(provider, {'calls': 0, 'estimated_microusd': 0,
@@ -131,9 +155,14 @@ class Ledger:
                 item['reserved_microusd'] += reserved
         unknown = any(x['unsettled_calls'] for x in providers.values())
         total = sum(x['estimated_microusd'] for x in providers.values())
-        return {'status': 'unknown' if unknown else 'estimated' if rows else 'not_called',
+        result = {'status': 'unknown' if unknown else 'estimated' if rows else 'not_called',
                 'amount_usd': None if unknown else str(Decimal(total) / 1_000_000),
                 'providers': providers, 'basis': 'operator_configured_rates; not provider invoice'}
+        if cny['calls']:
+            result = {'status': 'unknown' if unknown or cny['status'] == 'unknown' else 'mixed_currencies',
+                      'amount_usd': result['amount_usd'], 'amount_cny': cny['amount_cny'],
+                      'budget': cny['budget'], 'basis': 'separate_currencies_no_conversion'}
+        return result
 
 
 class LiveModel:
@@ -153,7 +182,8 @@ class LiveModel:
                 async with client.stream('POST', self.settings.base_url + '/chat/completions',
                         headers={'Authorization': 'Bearer ' + self.settings.api_key},
                         json={'model': self.settings.model, 'messages': messages,
-                              self.settings.token_limit_parameter: self.settings.max_output_tokens}) as response:
+                              self.settings.token_limit_parameter: self.settings.max_output_tokens,
+                              **(self.settings.request_parameters or {})}) as response:
                     response.raise_for_status()
                     payload = bytearray()
                     async for chunk in response.aiter_bytes():
@@ -186,6 +216,7 @@ class LiveModel:
                   'usage': None, 'cost': {'status': 'unknown', 'amount_usd': None},
                   'attempts': 1, 'max_attempts': 1, 'failure_class': 'model_transport_error'}
         started = time.monotonic()
+        settled = False
         try:
             remaining = min(deadline - time.monotonic(), self.settings.timeout)
             if remaining <= 0:
@@ -195,6 +226,7 @@ class LiveModel:
             value = asyncio.run(self._request(messages, remaining))
             record['usage'] = value.get('usage')
             record['cost'] = self.ledger.settle(call_id, record['usage'], self.settings)
+            settled = True
             content = value['choices'][0]['message']['content']
             if not isinstance(content, str) or not content.strip():
                 raise ValueError('缺少响应文本')
@@ -203,8 +235,8 @@ class LiveModel:
             if record['cost']['status'] == 'unknown':
                 record.update(status='blocked', failure_class='cost_unknown')
         except Exception as exc:
-            if record['cost']['status'] == 'unknown':
-                self.ledger.settle(call_id, None, self.settings)
+            if not settled:
+                record['cost'] = self.ledger.settle(call_id, None, self.settings)
             record['error_type'] = type(exc).__name__
             if isinstance(exc, (TimeoutError, httpx.TimeoutException)):
                 record['failure_class'] = 'model_request_timeout'

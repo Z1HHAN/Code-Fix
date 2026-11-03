@@ -3,7 +3,7 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>验链 Code Fix · 真实任务</title><link rel="stylesheet" href="/assets/theme.css">
 <style>body{min-width:0}pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:430px;overflow:auto}.wide{grid-column:1/-1}.shell{grid-template-columns:28fr 35fr 37fr}.panel-body{overflow-wrap:anywhere}select{max-width:100%}@media(max-width:950px){.shell{grid-template-columns:1fr}.topbar{height:auto;padding:16px;flex-wrap:wrap;gap:10px}}a{color:#1468e8}</style>
-<script src="/assets/app.js" defer></script></head>
+<script src="/assets/budget.js" defer></script><script src="/assets/app.js" defer></script></head>
 <body><div class="app"><header class="topbar"><div class="brand"><div class="brand-title">验链 Code Fix</div><div class="brand-subtitle">测试证据驱动修复</div></div><span id="connection" class="mode-badge wait">正在连接本机后端</span></header>
 <main class="shell">
 <section class="column"><div class="panel"><div class="panel-head"><h2>任务与配置</h2></div><div class="panel-body">
@@ -16,6 +16,7 @@
 <p class="hint">实际pytest与独立复验由执行器完成。模型密钥和付费配置由本机环境提供。</p>
 <div class="button-row"><button id="create" class="btn btn-primary">创建任务</button><button id="start" class="btn btn-outline" disabled>启动所选任务</button></div>
 <p id="error" role="alert"></p><details><summary>本机运行条件</summary><pre id="health">读取中</pre></details>
+<details open><summary>人民币账号额度与提醒</summary><pre id="budget" role="status" aria-live="polite">尚未读取；未核实平台实时余额</pre></details>
 </div></div></section>
 <section class="column"><div class="panel"><div class="panel-head"><h2>执行过程</h2></div><div class="panel-body">
 <div class="field"><label for="history">任务历史（刷新可恢复）</label><select id="history"><option value="">暂无任务</option></select></div>

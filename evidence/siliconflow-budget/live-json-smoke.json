@@ -1,0 +1,111 @@
+{
+  "role": null,
+  "mode": "live",
+  "model_api_called": true,
+  "model": "Pro/deepseek-ai/DeepSeek-V3.2",
+  "call_id": "m-a4ba111a8bed49d9813b47802927561d",
+  "status": "ok",
+  "provider_id": "siliconflow",
+  "price_version": "siliconflow-official-reference-2026-11-03;console-recheck-required",
+  "usage": {
+    "prompt_tokens": 21,
+    "completion_tokens": 5,
+    "total_tokens": 26,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 21
+  },
+  "cost": {
+    "status": "estimated",
+    "currency": "CNY",
+    "amount_cny": "0.000114",
+    "amount_usd": null,
+    "account_id": "sf_account1",
+    "basis": "configured_CNY_rates_not_provider_invoice",
+    "budget": {
+      "currency": "CNY",
+      "basis": "project_ledger_estimate_not_platform_balance",
+      "accounts": [
+        {
+          "account_id": "sf_account1",
+          "provider_id": "siliconflow",
+          "currency": "CNY",
+          "authorized_cny": "16",
+          "estimated_spent_cny": "0.000114",
+          "reserved_cny": "0",
+          "unsettled_calls": 0,
+          "estimated_remaining_cny": "15.999886",
+          "remaining_after_reservations_cny": "15.999886",
+          "warning_threshold_cny": "3",
+          "low_balance": false,
+          "status": "estimated"
+        }
+      ],
+      "alerts": [],
+      "paid_calls_blocked": false
+    }
+  },
+  "attempts": 1,
+  "max_attempts": 1,
+  "failure_class": null,
+  "transport_request_started": true,
+  "provider_model": "Pro/deepseek-ai/DeepSeek-V3.2",
+  "provider_response_id": "01a1a15820ca027932623d63b6dcd55a",
+  "duration_ms": 4754,
+  "run_id": "smoke-48e9af01b5454422885a5e62ed221900",
+  "scope": "JSON API smoke only; no Agents, candidate or tests executed",
+  "json_contract_passed": true,
+  "budget": {
+    "currency": "CNY",
+    "basis": "project_ledger_estimate_not_platform_balance",
+    "accounts": [
+      {
+        "account_id": "sf_account1",
+        "provider_id": "siliconflow",
+        "currency": "CNY",
+        "authorized_cny": "16",
+        "estimated_spent_cny": "0.000114",
+        "reserved_cny": "0",
+        "unsettled_calls": 0,
+        "estimated_remaining_cny": "15.999886",
+        "remaining_after_reservations_cny": "15.999886",
+        "warning_threshold_cny": "3",
+        "low_balance": false,
+        "status": "estimated"
+      },
+      {
+        "account_id": "sf_account2",
+        "provider_id": "siliconflow",
+        "currency": "CNY",
+        "status": "declared_not_started",
+        "authorized_cny": "16",
+        "estimated_spent_cny": "0",
+        "reserved_cny": "0",
+        "unsettled_calls": 0,
+        "estimated_remaining_cny": "16",
+        "warning_threshold_cny": "3",
+        "low_balance": false
+      }
+    ],
+    "alerts": [],
+    "paid_calls_blocked": false,
+    "platform_balance_verified": false,
+    "note": "仅本项目账本估算，包含预留；不含平台其他消费，真实余额请核对控制台"
+  },
+  "pricing": {
+    "currency": "CNY",
+    "price_version": "siliconflow-official-reference-2026-11-03;console-recheck-required",
+    "input_per_million": "4",
+    "output_per_million": "6",
+    "billable_output_tokens": 163840
+  },
+  "effective_parameters": {
+    "max_tokens": 64,
+    "enable_thinking": false
+  }
+}

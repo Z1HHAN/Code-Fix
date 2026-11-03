@@ -1,0 +1,43 @@
+[
+  {
+    "name": "platform",
+    "command": [
+      "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "-q",
+      "--basetemp=runs/sf3",
+      "-p",
+      "no:cacheprovider",
+      "--junitxml=evidence/siliconflow-budget/platform.junit.xml",
+      "--tb=short"
+    ],
+    "exit_code": 1
+  },
+  {
+    "name": "node",
+    "command": [
+      "node",
+      "--test",
+      "tests/ui_prototype.test.cjs",
+      "tests/ui_budget.test.cjs"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "config",
+    "command": [
+      "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "app.cli",
+      "validate-config"
+    ],
+    "exit_code": 0
+  }
+]

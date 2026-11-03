@@ -71,7 +71,7 @@ class AgentGateway:
         folder.mkdir(parents=True)
         safe = getattr(self.model, 'redact', lambda x: x)
         provenance = self.config.provenance(role)
-        provenance['model_binding'] = {'model_ref': agent['model_ref'], 'binding': 'live_env',
+        provenance['model_binding'] = {'model_ref': agent['model_ref'], **self.config.snapshot['models'][agent['model_ref']],
                                        'mode': getattr(self.model, 'mode', 'unknown'),
                                        'model': getattr(getattr(self.model, 'settings', None), 'model', None)}
         if hasattr(self.model, 'binding'):
