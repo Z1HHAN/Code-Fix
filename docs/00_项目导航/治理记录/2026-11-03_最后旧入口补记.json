@@ -1,0 +1,17 @@
+{
+  "input_commit": "00dba54",
+  "old_path": "docs/11月1日需补齐材料与对齐记录.md",
+  "new_path": "docs/99_历史归档/旧入口/11月1日需补齐材料与对齐记录.md",
+  "old_sha256": "93d77c0854b6b4f2c19fb1303a8cad70f6a433c7ac63736158d6d569305d37a6",
+  "new_sha256": "95482eca3627b450b6fa2f06aa00534028c91b536c6e1792a69ead8fdbc5131e",
+  "knowledge_old_sha256": "9edf780c1902ce5ba3af2a7c0d5e410ec9d447a49323071b184ae8f881d05624",
+  "knowledge_new_sha256": "6787521ffceb69d59e8a46f0c6aed6c3f5966cd39eb2e856b9b76d69bcf26453",
+  "scope": "source_path metadata only; business knowledge body and IDs unchanged",
+  "docs_root_files": [],
+  "tests_passed": 46,
+  "validate_config_errors": [],
+  "relative_links_checked": 707,
+  "missing_links": 0,
+  "junit": "evidence/last-document-entry-20261103/pytest.junit.xml",
+  "command": "runs/v3-venv/Scripts/python.exe -B -X utf8 -m pytest -q tests/test_knowledge_runner.py tests/test_model_context.py tests/test_mock_workflow.py tests/test_role_config.py --basetemp=runs/lst31 -o cache_dir=runs/last-doc-entry/cache --junitxml=runs/last-doc-entry/pytest.junit.xml --tb=short"
+}
