@@ -1,12 +1,12 @@
 # The archived C handoff is checked byte-for-byte; preserve Git blob bytes.
 # This rule applies only to this package, including its original runs evidence.
-C_Day1_20261030/** -text
+docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/** -text
 # Original captured logs contain repeated CR bytes; never format archived evidence.
-C_Day1_20261030/runs/** -whitespace
+docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/** -whitespace
 # Registered fixtures are checked against exact frozen bytes.
 c_fixtures/** -text
 # Preserve the captain's exact V3 requirements bytes across checkouts.
-docs/开发要求V3.0.md -text
+docs/01_需求与范围/开发要求V3.0.md -text
 # Runtime evidence hashes describe exact bytes, independent of core.autocrlf.
 evidence/v3/** -text
 # Preserve native CR/LF sequences in captured evidence without diff whitespace rewriting.
@@ -24,4 +24,4 @@ evidence/quixbugs-import/** -text -whitespace
 # Preserve raw main integration review outputs, including failed attempts.
 evidence/main-review-20261102/** -text -whitespace
 # Preserve original Git bytes when archiving the old undated daily plan.
-docs/历史迭代与测试安排-20261031.md -text
+docs/99_历史归档/2026-10/2026-10-31_迭代与测试安排.md -text

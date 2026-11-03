@@ -1,0 +1,32 @@
+{
+  "input_commit": "6c111fd38a1d18e6935aafef56c4d78d6152a5bc",
+  "moved_files": 124,
+  "original_git_files": 611,
+  "protected_files_unchanged": 467,
+  "relative_links_checked": 707,
+  "missing_links": 0,
+  "platform_tests": {
+    "passed": 191,
+    "skipped": 1,
+    "failed": 0
+  },
+  "node_prototype_tests": {
+    "passed": 9,
+    "scope": "explicit simulation"
+  },
+  "validate_config_errors": [],
+  "v3_sha256": "5d62dc0e75d1795f3b318f179f985f25d31b24cb42e01a66db87c87120a72d8b",
+  "runtime_config_tests_source_or_ui_logic_changed": false,
+  "new_compatibility_stubs": 1,
+  "public_or_candidate_code_executed": false,
+  "real_model_calls": 0,
+  "scan_limitations": "Some ignored caches/old temp directories inaccessible; both enumeration attempts recorded; all611 Git files read and traced",
+  "scope": "physical document/material classification and link repair; no functional implementation changes",
+  "archived_C_files": 48,
+  "archived_C_original_bytes_unchanged": true,
+  "active_component_readmes_updated": true,
+  "day1_compatibility_readme_updated": true,
+  "status_and_date_policy": "docs/04_开发与任务管理/合并后状态与日期维护规则.md",
+  "final_platform_junit": "platform-final.junit.xml",
+  "final_platform_command": "runs/v3-venv/Scripts/python.exe -B -X utf8 -m pytest -q --basetemp=runs/cl32 -o cache_dir=runs/classification-review/cache-final --junitxml=runs/classification-review/platform-final.junit.xml --tb=short"
+}
