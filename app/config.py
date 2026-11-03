@@ -46,4 +46,19 @@ def validate_draft_configs(root: Path)->list[str]:
     if not isinstance(agents.get('agents'),list): errors.append('agents.json.agents 必须是数组')
     if not isinstance(rules.get('rules'),list) or not rules['rules']: errors.append('decision_rules.json.rules 必须是非空数组')
     if not rules.get('preconditions',{}).get('required_context_fields'): errors.append('decision_rules.json 缺少 required_context_fields')
+    # Legacy mock profile remains separate from the production runtime profile.
+    rows = agents.get('agents')
+    if isinstance(rows, list):
+        ids = [x.get('agent_id') if isinstance(x, dict) else None for x in rows]
+        if any(not isinstance(x, str) or not x for x in ids) or len(set(x for x in ids if isinstance(x, str))) != len(ids):
+            errors.append('legacy agents角色ID必须唯一且非空')
+        for row in rows:
+            if isinstance(row, dict) and row.get('role_type') == 'llm' and row.get('model_ref') != 'primary':
+                errors.append('legacy model_ref未绑定primary')
+    from .role_config import RoleConfig
+    try:
+        runtime = RoleConfig(root)
+        runtime.preflight()
+    except (ConfigError, OSError, UnicodeError) as exc:
+        errors.append(str(exc))
     return errors
