@@ -69,6 +69,11 @@ def create_app(root=None):
         from .readiness import readiness
         return readiness()
 
+    @app.get('/api/v3/budget')
+    def budget():
+        from .siliconflow import budget_status
+        return budget_status(service.store.root)
+
     @app.get('/api/v3/projects')
     def projects():
         from .tasks_v3 import list_tasks

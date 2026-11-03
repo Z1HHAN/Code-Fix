@@ -1,0 +1,43 @@
+{
+  "stage": "doctor",
+  "argv": [
+    "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "app.cli",
+    "doctor"
+  ],
+  "cwd": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main",
+  "started_at": "2026-11-03T21:29:41.688+08:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "status": "passed",
+  "reason": null,
+  "stdout_path": "doctor/stdout.txt",
+  "stderr_path": "doctor/stderr.txt",
+  "cleanup": {
+    "parent_reaped": true,
+    "tree_termination_attempted": false,
+    "full_process_tree_verified": false
+  },
+  "pid": 39892,
+  "finished_at": "2026-11-03T21:29:41.932+08:00",
+  "duration_ms": 244,
+  "parsed_result": {
+    "python": "3.14.6",
+    "baseline_available": true,
+    "model_configured": false,
+    "docker_available": false,
+    "isolation_verified": false,
+    "note": "每次修复任务启动时运行独立隔离探针；配置存在不等于验证通过",
+    "blockers": [
+      "需队长确认付费额度后设置CODE_FIX_LIVE_APPROVED=1",
+      "找不到Docker；候选不会回退到宿主执行",
+      "不可信代码执行授权未配置"
+    ]
+  },
+  "scope": "Read-only environment inventory; not live-model or isolation acceptance"
+}

@@ -1,0 +1,20 @@
+✔ remaining three warns without claiming platform balance (0.85ms)
+✔ unknown charge is not rendered as zero balance (0.2011ms)
+✔ empty registry is explicit (0.2967ms)
+✔ active demo cannot be reset or restarted, including direct handler dispatch (9.2549ms)
+✔ editing invalidates preview; startup consumes the reviewed snapshot (1.4801ms)
+✔ invalid fields and unsupported roles do not receive a successful preview (8.1783ms)
+✔ relocation preserves the failed applied candidate and highlights the next round (1.4801ms)
+✔ stopped snapshot reflects the configured cap and contains failure evidence (3.026ms)
+✔ success and final-check failure have distinct consistent decisions (1.8634ms)
+✔ unimplemented controls remain disabled without downloads, model or tool calls (3.2678ms)
+✔ a terminal demo requires fresh preview and receives a new identity after reset (1.4585ms)
+✔ one-round cap cannot display a second repair round (1.2836ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 141.8159

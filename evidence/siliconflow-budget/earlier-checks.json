@@ -1,0 +1,8 @@
+{
+  "scope": "observations from prior tool outputs; not reconstructed raw logs",
+  "before_runtime_profile_activation": {"tests":"tests/test_agents_v3.py tests/test_contest_core.py tests/test_role_config.py","passed":59,"failed":0},
+  "first_budget_specialist": {"passed":18,"failed":1,"failure":"Windows DPAPI unavailable inside restricted sandbox; no real credentials used in this test"},
+  "dpapi_outside_sandbox": {"passed":1,"failed":0,"scope":"Fake credentials only, Windows current-user encryption roundtrip; no network"},
+  "paid_chat_requests_at_this_observation": 0,
+  "note": "First full-platform raw logs/JUnit are preserved separately as platform.*; import-only rerun as import-rerun.junit.xml."
+}

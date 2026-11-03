@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-04",
+  "scope": "Git synchronization diagnosis only; no provider API or model calls",
+  "development_commit": "2c98061ed4c71f76e444dfb2ecadef06cfbb5d9e",
+  "origin_repository": "Z1HHAN/Code-Fix",
+  "origin_protocol": "SSH",
+  "observations": [
+    {"transport":"original SSH","result":"no response; explicitly interrupted","remote_main_verified":false},
+    {"transport":"ssh.github.com:443, strict existing host-key validation","result":"bounded attempt timed out","exit_code":124,"remote_main_verified":false},
+    {"transport":"GitHub HTTPS connectivity only, unauthenticated HEAD","result":"HTTP404 response; connectivity established, repo access not proven"},
+    {"transport":"HTTPS Git using existing local credential helpers; interactive login disabled","exit_code":128,"result":"Cannot prompt because user interactivity has been disabled; unable to get password from user","remote_main_verified":false}
+  ],
+  "push_succeeded": false,
+  "merged_into_main": false,
+  "persistent_git_or_ssh_settings_modified": false,
+  "note": "Cached origin/main is not current remote verification. Authentication must be restored locally; no credential is stored in this observation."
+}

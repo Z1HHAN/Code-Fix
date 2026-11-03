@@ -1,0 +1,37 @@
+{
+  "scope": "classification and offline merge review; failed new gates retained; not stable or true repair acceptance",
+  "git_head_at_check": "b3f4e7a70383c26acf2a3d764c5b731f1b134758",
+  "original_files_preserved": 7,
+  "inventory_rows": 8713,
+  "zip_internal_hash_entries_verified": 8704,
+  "copies_unchanged": 67,
+  "existing_sources_unchanged_lf": 90,
+  "protected_files_unchanged": 548,
+  "v3_sha256": "5d62dc0e75d1795f3b318f179f985f25d31b24cb42e01a66db87c87120a72d8b",
+  "tasks": {
+    "total": 48,
+    "historical_scoped_done": 27,
+    "pending": 21
+  },
+  "current_links_checked": 482,
+  "anchors_checked": 120,
+  "platform": {
+    "tests": 241,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 240
+  },
+  "new_repair_gates": {
+    "tests": 25,
+    "failures": 23,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 2
+  },
+  "node_passed": 12,
+  "c_entry_complete": false,
+  "stable_acceptance": false,
+  "new_paid_requests": 0,
+  "errors": []
+}

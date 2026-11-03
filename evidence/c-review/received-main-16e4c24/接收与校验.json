@@ -1,0 +1,435 @@
+{
+  "record_id": "A-C交付整合-009",
+  "source_commit": "16e4c24d4790ed42ce48d78539ff24d6732c0c35",
+  "integration_base": "20f1085ae61a5a3b6457a12f07ae812930193346",
+  "archive": "docs/99_历史归档/2026-11/原始交付/C_20261103交付",
+  "original_files": 7,
+  "package_results": [
+    {
+      "archive": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip",
+      "sha256": "1c63410090492bc581fb53741889436cad36d9bdc0f4a7ec17fe837b477c7197",
+      "entries": 8698,
+      "internal_hash_entries_verified": 8697,
+      "crc_errors": null,
+      "credential_pattern_entries": []
+    },
+    {
+      "archive": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C验收脚本_20261103.zip",
+      "sha256": "66a034b37b96c30c2aaf9e124e3003de11a473d28505676cb4dd01011a21e95c",
+      "entries": 8,
+      "internal_hash_entries_verified": 7,
+      "crc_errors": null,
+      "credential_pattern_entries": []
+    }
+  ],
+  "inventory_entries": 8713,
+  "copies": [
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/c_controls/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/c_controls/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/c_controls/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/c_controls/stdout.txt",
+      "sha256": "25483f91f857dec95a57f016ce273385b691023e194afce9ee7e606f6d38999b",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/c_controls/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/c_controls/step.json",
+      "sha256": "76ff26ffc80c8e4b09f9387c683006c73bd795e4b87dd65823b5878cd691a189",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/doctor/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/doctor/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/doctor/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/doctor/stdout.txt",
+      "sha256": "4e94962f419cca32f5810a32d7b947e3396318db7d25460643c338ba508c15bf",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/doctor/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/doctor/step.json",
+      "sha256": "c3d6446d207e683545040de3d3274d28614dc246f5169b2e47c1bdb2ea36edbe",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/node_ui/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/node_ui/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/node_ui/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/node_ui/stdout.txt",
+      "sha256": "7b9f35ebcdc150ca197067e95d0388ae217cc80300058f0083ad4095100a37b9",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/node_ui/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/node_ui/step.json",
+      "sha256": "e7c0195ef6c9da583a197bc975b052861f35a3a5637d27f1b8d26898aef4a5fe",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/platform_pytest/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/platform_pytest/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/platform_pytest/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/platform_pytest/stdout.txt",
+      "sha256": "ab5df625bc76dbd4e163bed2dd888df828f90159bb93556525c31821b6541d46",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/platform_pytest/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/platform_pytest/step.json",
+      "sha256": "e6f50ae4eb0fc0c2a9421dea4e5f1f3989d56e7ef281f8386d0f5dc73b039fb8",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/repair_gates/junit.xml",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/repair_gates/junit.xml",
+      "sha256": "0e7ac3454d4ff16fd3c1f197a852982c5229c1ed90744b987c902bb79f34aaed",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/repair_gates/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/repair_gates/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/repair_gates/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/repair_gates/stdout.txt",
+      "sha256": "10fc44ee1d3ec4b52dc635b6a583d560aa0cb829440b8ef88e2e8504fad08628",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/repair_gates/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/repair_gates/step.json",
+      "sha256": "57da56904f4819da677b91441e65df73594db43d5e95569508cbbf351a6c5299",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/summary.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/summary.json",
+      "sha256": "0990da342fd84fc70e507f72fcc493318a63be895d2195d8a542e9aa3d118d27",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/validate_config/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/validate_config/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/validate_config/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/validate_config/stdout.txt",
+      "sha256": "e9ce20567beff51c59582fc35126e1ae0503ec08960cc6edcbeb617be315eae9",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212358-ec9a2574/validate_config/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212358-ec9a2574/validate_config/step.json",
+      "sha256": "ad590951af03247e53a2ecf02e493efc11f46e9a16af98b5f86abe0b4f53630e",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/c_controls/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/c_controls/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/c_controls/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/c_controls/stdout.txt",
+      "sha256": "bb9cfa6a62efcc844a71beae4c710aefc9800cee9ba96963c9e53f807f20dbd3",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/c_controls/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/c_controls/step.json",
+      "sha256": "c48b0a0864f8082f6faba206cd528f48da65f100c6fc83654b7d7312cdca1bf0",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/doctor/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/doctor/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/doctor/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/doctor/stdout.txt",
+      "sha256": "4e94962f419cca32f5810a32d7b947e3396318db7d25460643c338ba508c15bf",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/doctor/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/doctor/step.json",
+      "sha256": "d6c92a43987f2afba47433e667cbed7bdc39f0fcb2b41ef7127a511ad9d89a71",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/node_ui/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/node_ui/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/node_ui/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/node_ui/stdout.txt",
+      "sha256": "5747070bf0255f41221a4af4912a88659f2dace7817efb891da6a8b2679c0659",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/node_ui/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/node_ui/step.json",
+      "sha256": "fcac3cf3bfb7ae703c270a7ca7bae25601478382d8e18d4d4e4341b27d8201d6",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/platform_pytest/junit.xml",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/platform_pytest/junit.xml",
+      "sha256": "61801d15e2f732006c75e8786d0dc000435921ee4a20b3c37676d6a5c26afe7d",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/platform_pytest/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/platform_pytest/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/platform_pytest/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/platform_pytest/stdout.txt",
+      "sha256": "0911a171535a2bbc5dc27e9bc6c2614afaba4ff1e381258aa6c7766095a7b3dc",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/platform_pytest/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/platform_pytest/step.json",
+      "sha256": "c6aa357751910c8789bd640f13623f700bf3b0acad0a1073b2f8123d42a221e2",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/repair_gates/junit.xml",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/repair_gates/junit.xml",
+      "sha256": "b8f2be7a60554b1bf8631cba6d4fc53276822cf117413581162dd766dd9281b6",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/repair_gates/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/repair_gates/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/repair_gates/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/repair_gates/stdout.txt",
+      "sha256": "4944d44250b147bd0a23c1ad4ddd3121a4b360661daeea070064b29f8bb1fb02",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/repair_gates/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/repair_gates/step.json",
+      "sha256": "2c4b9a543051f3a20ec5d4393d675a8e2d55a2eebe13cec3e4d9eb2c221ab0c7",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/summary.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/summary.json",
+      "sha256": "f171ecc1994c68fb3e6eb49f25d552730e3a4c4e67e7ad3ac1bc9e81b393b223",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/validate_config/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/validate_config/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/validate_config/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/validate_config/stdout.txt",
+      "sha256": "e9ce20567beff51c59582fc35126e1ae0503ec08960cc6edcbeb617be315eae9",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212656-e783c36d/validate_config/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212656-e783c36d/validate_config/step.json",
+      "sha256": "cbf0bbbc2a55dd0f37bb6f94b0451964eb1d61c0ae31fb08197e22f3f5a1b840",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/c_controls/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/c_controls/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/c_controls/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/c_controls/stdout.txt",
+      "sha256": "beca27c60907317984952c4b951346f748d970d8249e1f4fc1faeda6bf1e0292",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/c_controls/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/c_controls/step.json",
+      "sha256": "1a86d81ddf7810d61054cdb7dfca4118799b12e2a4e17476c6d34a746381c207",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/doctor/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/doctor/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/doctor/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/doctor/stdout.txt",
+      "sha256": "4e94962f419cca32f5810a32d7b947e3396318db7d25460643c338ba508c15bf",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/doctor/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/doctor/step.json",
+      "sha256": "8790fb5587505eafa461964940cc4a4ffbd099f5356865e4170f370c41747679",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/node_ui/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/node_ui/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/node_ui/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/node_ui/stdout.txt",
+      "sha256": "fe4513381dac7d8d2485d32d098f3d6ba96010dad2c151d17316e1497e2e6ad0",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/node_ui/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/node_ui/step.json",
+      "sha256": "2ae0f059a9697f537571cc3c64e704da5fcb9191d3553509c1a2dd53023aae3a",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/platform_pytest/junit.xml",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/platform_pytest/junit.xml",
+      "sha256": "2714eab036588fc46fe90310d1aab3a5902830447ed2637121a001b65bb6e131",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/platform_pytest/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/platform_pytest/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/platform_pytest/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/platform_pytest/stdout.txt",
+      "sha256": "bc822d934f1f33242ff6a1d081b2ffd908f590f6b1ebfb86e8297ed80bfbdfe8",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/platform_pytest/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/platform_pytest/step.json",
+      "sha256": "d56b1eb2fcd188383196ca9633f1dc3b859f86efa0a2240d632e7549da4848c9",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/repair_gates/junit.xml",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/repair_gates/junit.xml",
+      "sha256": "5b9af8233766b38f4c20b6562c73cd86efae1603bd763d0059b1adcc5d1cc57b",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/repair_gates/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/repair_gates/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/repair_gates/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/repair_gates/stdout.txt",
+      "sha256": "32656e011cf5b53314e423ba3deb8a7003dd7707b1adfbee4a141b769877a19e",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/repair_gates/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/repair_gates/step.json",
+      "sha256": "d68cb5252b79f53ee9fdce7fc4c0b587c4e439812ec72cb8b5e137082eade098",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/summary.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/summary.json",
+      "sha256": "26eea85baf2d180717f8dab6de04295bedfc5215e603f9ac47b4eaee86fa2ed3",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/validate_config/stderr.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/validate_config/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/validate_config/stdout.txt",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/validate_config/stdout.txt",
+      "sha256": "e9ce20567beff51c59582fc35126e1ae0503ec08960cc6edcbeb617be315eae9",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C复核证据_20261103.zip::evidence/c-review/C-acceptance-20261103-212941-aab9cc78/validate_config/step.json",
+      "target": "evidence/c-review/received-main-16e4c24/C-acceptance-20261103-212941-aab9cc78/validate_config/step.json",
+      "sha256": "163ca96bb6204fadecb7965315c61ce53eeca08d0a0e2a06224d2b0bd1f22658",
+      "kind": "raw summary/JUnit/log, not a rerun"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C验收脚本_20261103.zip::acceptance_tests/README.md",
+      "target": "acceptance_tests/README.md",
+      "sha256": "12457fc36934e6e78e64fd2e8965a1589bf2f646567836c3819187cf7686d2c9",
+      "kind": "unchanged acceptance tooling; no production changes"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C验收脚本_20261103.zip::acceptance_tests/case_map.json",
+      "target": "acceptance_tests/case_map.json",
+      "sha256": "351e79759b57d635345d71c8eb3fa233f6ebd70374732e73677ec97a87bc4aea",
+      "kind": "unchanged acceptance tooling; no production changes"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C验收脚本_20261103.zip::acceptance_tests/conftest.py",
+      "target": "acceptance_tests/conftest.py",
+      "sha256": "46d46abf884219da58987df3038cbbd4cf5f65bf3114a7d079dd47d4ef98f47e",
+      "kind": "unchanged acceptance tooling; no production changes"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C验收脚本_20261103.zip::acceptance_tests/test_repair_gates.py",
+      "target": "acceptance_tests/test_repair_gates.py",
+      "sha256": "3ea9c8bce883516392c2760ae3d896db708591672a4fd4d786db8622e7e481d2",
+      "kind": "unchanged acceptance tooling; no production changes"
+    },
+    {
+      "source": "docs/99_历史归档/2026-11/原始交付/C_20261103交付/C验收脚本_20261103.zip::scripts/c_acceptance.py",
+      "target": "scripts/c_acceptance.py",
+      "sha256": "3e3c72b6f78abab2a156f505c94524c91b1cef20f74eaac6de7db2e3e765154a",
+      "kind": "unchanged acceptance tooling; no production changes"
+    }
+  ],
+  "top_level_manifest_missing_file": "发群文字.txt (present with matching hash inside evidence ZIP; original list not modified)",
+  "historical_C_source": "40fca6c declared by ZIP, not independently checked-out commit",
+  "production_patch_applied": false,
+  "new_paid_requests": 0,
+  "stable_acceptance": false
+}

@@ -10,15 +10,43 @@ from .role_config import checked_file, digest
 FIELDS = {'provider_id', 'model', 'base_url', 'api_key_env', 'approval_env',
           'input_price_env', 'output_price_env', 'request_seconds_env',
           'price_version', 'max_input_tokens', 'max_output_tokens', 'token_limit_parameter'}
+CNY_FIELDS = {'currency', 'account_ref', 'billable_output_tokens', 'request_parameters'}
+
+
+def _amount(value):
+    try:
+        return positive_decimal(value)
+    except ModelBlocked as exc:
+        raise ConfigError(str(exc)) from None
 
 
 def load_profiles(root):
     data = read_json(checked_file(root, 'configs/model_profiles.json'))
-    if (set(data) != {'schema_version', 'profiles'} or data['schema_version'] != '1.0.0'
-            or not isinstance(data['profiles'], dict)):
+    cny = data.get('schema_version') == '1.1.0'
+    expected = {'schema_version', 'profiles', 'accounts', 'currency', 'team_total_limit_cny'} if cny else {'schema_version', 'profiles'}
+    if (set(data) != expected or data['schema_version'] not in {'1.0.0', '1.1.0'} or not isinstance(data['profiles'], dict)):
         raise ConfigError('模型档案格式无效')
+    if cny:
+        if data['currency'] != 'CNY' or not isinstance(data['accounts'], dict) or not data['accounts']:
+            raise ConfigError('人民币账号配置无效')
+        team = _amount(data['team_total_limit_cny'])
+        total = 0
+        for aid, account in data['accounts'].items():
+            if (not re.fullmatch(r'[a-z][a-z0-9_\-]{0,63}', aid) or not isinstance(account, dict)
+                    or set(account) != {'provider_id', 'api_key_env', 'total_limit_cny', 'warning_balance_cny'}):
+                raise ConfigError('账号ID或字段无效')
+            if not isinstance(account['provider_id'], str) or not account['provider_id']:
+                raise ConfigError('账号服务商无效')
+            if not isinstance(account['api_key_env'], str) or not re.fullmatch(r'CODE_FIX_[A-Z][A-Z0-9_]+', account['api_key_env']):
+                raise ConfigError('账号密钥只允许环境变量引用')
+            limit, warning = _amount(account['total_limit_cny']), _amount(account['warning_balance_cny'])
+            if warning >= limit:
+                raise ConfigError('提醒余额须小于账号额度')
+            total += limit
+        if team > total:
+            raise ConfigError('队伍总额度不能超过账号累计额度之和')
     for ref, profile in data['profiles'].items():
-        if not re.fullmatch(r'[a-z][a-z0-9_\-]{0,63}', ref) or not isinstance(profile, dict) or set(profile) != FIELDS:
+        if not re.fullmatch(r'[a-z][a-z0-9_\-]{0,63}', ref) or not isinstance(profile, dict) or set(profile) != FIELDS | (CNY_FIELDS if cny else set()):
             raise ConfigError('模型档案ID或字段无效')
         if any(not isinstance(profile[k], str) or not profile[k].strip()
                for k in FIELDS - {'max_input_tokens', 'max_output_tokens'}):
@@ -37,25 +65,53 @@ def load_profiles(root):
         if any(type(profile[k]) is not int or not 1 <= profile[k] <= 1_000_000
                for k in ('max_input_tokens', 'max_output_tokens')):
             raise ConfigError('档案输入输出上限无效')
+        if cny:
+            aid = profile['account_ref']
+            if profile['currency'] != 'CNY' or not isinstance(aid, str) or aid not in data['accounts']:
+                raise ConfigError('档案未绑定已登记人民币账号')
+            account = data['accounts'][aid]
+            if profile['api_key_env'] != account['api_key_env'] or profile['provider_id'] != account['provider_id']:
+                raise ConfigError('模型与账号服务商/密钥引用不匹配')
+            bound = profile['billable_output_tokens']
+            if bound is not None and (type(bound) is not int or not profile['max_output_tokens'] <= bound <= 2_097_152):
+                raise ConfigError('计费输出上限须覆盖可见回复与思考token')
+            params = profile['request_parameters']
+            if not isinstance(params, dict) or set(params) - {'enable_thinking'} or any(type(v) is not bool for v in params.values()):
+                raise ConfigError('未实现的供应商参数')
     return data
 
 
-def profile_settings(profile):
+def profile_settings(profile, registry=None):
     if os.environ.get('CODE_FIX_LIVE_APPROVED') != '1' or os.environ.get(profile['approval_env']) != '1':
-        raise ModelBlocked('队伍或模型档案费用授权未批准')
-    key = os.environ.get(profile['api_key_env'])
+        raise ModelBlocked('本进程尚未启用已批准模型调用配置')
+    from .local_credentials import read_secret
+    try:
+        key = read_secret(profile['api_key_env'])
+    except (ValueError, OSError):
+        raise ModelBlocked('本机加密凭证不可读取；需原Windows用户或本机环境变量配置') from None
     if not key:
         raise ModelBlocked('模型档案密钥未配置')
     timeout = positive_decimal(os.environ.get(profile['request_seconds_env']))
     if timeout > 120:
         raise ModelBlocked('模型单请求时限不能超过120秒')
+    native = {}
+    if profile.get('currency') == 'CNY':
+        if profile['billable_output_tokens'] is None:
+            raise ModelBlocked('模型计费输出上限未核实，拒绝未经预留的思考费用')
+        account = registry['accounts'][profile['account_ref']]
+        native = dict(currency='CNY', account_id=profile['account_ref'],
+                      account_limit=positive_decimal(account['total_limit_cny']),
+                      warning_balance=positive_decimal(account['warning_balance_cny']),
+                      team_limit=positive_decimal(registry['team_total_limit_cny']),
+                      billable_output_tokens=profile['billable_output_tokens'],
+                      request_parameters=profile['request_parameters'])
     return LiveSettings(api_key=key, model=profile['model'], base_url=profile['base_url'].rstrip('/'),
-        timeout=float(timeout), daily_limit=positive_decimal(os.environ.get('CODE_FIX_DAILY_USD')),
+        timeout=float(timeout), daily_limit=native.get('team_limit') or positive_decimal(os.environ.get('CODE_FIX_DAILY_USD')),
         input_per_million=positive_decimal(os.environ.get(profile['input_price_env'])),
         output_per_million=positive_decimal(os.environ.get(profile['output_price_env'])),
         max_input_tokens=profile['max_input_tokens'], max_output_tokens=profile['max_output_tokens'],
         provider_id=profile['provider_id'], price_version=profile['price_version'],
-        token_limit_parameter=profile['token_limit_parameter'])
+        token_limit_parameter=profile['token_limit_parameter'], **native)
 
 
 class ModelRouter:
@@ -74,7 +130,13 @@ class ModelRouter:
                 profile = registry['profiles'].get(binding['profile_ref'])
                 if profile is None:
                     raise ConfigError('角色引用的模型档案不存在')
-                settings[ref] = profile_settings(profile)
+                settings[ref] = profile_settings(profile, registry)
+        accounts = {}
+        for setting in settings.values():
+            if setting.account_id:
+                previous = accounts.setdefault(setting.api_key, setting.account_id)
+                if previous != setting.account_id:
+                    raise ModelBlocked('同一密钥不能登记为两个账号并重复额度')
         return settings, registry
 
     def __init__(self, config, ledger, resolved=None, *, transports=None):
@@ -91,7 +153,7 @@ class ModelRouter:
     def binding(self, role):
         ref = self.config.require(role)['model_ref']
         s = self.clients[ref].settings
-        return {'model_ref': ref, **self.config.snapshot['models'][ref], 'mode': self.mode,
+        binding = {'model_ref': ref, **self.config.snapshot['models'][ref], 'mode': self.mode,
                 'provider_id': s.provider_id, 'model': s.model, 'price_version': s.price_version,
                 'base_url': s.base_url,
                 'profiles_sha256': self.registry_sha256,
@@ -99,6 +161,15 @@ class ModelRouter:
                 'request_seconds': s.timeout, 'daily_shared_usd': str(s.daily_limit),
                 'input_usd_per_million': str(s.input_per_million),
                 'output_usd_per_million': str(s.output_per_million)}
+        if s.currency == 'CNY':
+            for old in ('daily_shared_usd', 'input_usd_per_million', 'output_usd_per_million'):
+                binding.pop(old)
+            binding.update(currency='CNY', account_id=s.account_id, total_account_cny=str(s.account_limit),
+                           total_team_cny=str(s.team_limit), warning_balance_cny=str(s.warning_balance),
+                           input_cny_per_million=str(s.input_per_million), output_cny_per_million=str(s.output_per_million),
+                           billable_output_tokens=s.billable_output_tokens,
+                           effective_parameters={s.token_limit_parameter: s.max_output_tokens, **(s.request_parameters or {})})
+        return binding
 
     def call_for_role(self, role, messages, **kwargs):
         ref = self.config.require(role)['model_ref']

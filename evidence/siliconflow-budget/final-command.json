@@ -1,0 +1,18 @@
+{
+  "command": [
+    "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "--basetemp=C:\\Users\\lenovo\\AppData\\Local\\Temp\\cf-sf-99c90e55",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=evidence/siliconflow-budget/final-platform.junit.xml",
+    "--tb=short"
+  ],
+  "exit_code": 0,
+  "temporary_directory": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\cf-sf-99c90e55"
+}

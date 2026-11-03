@@ -1,0 +1,191 @@
+{
+  "stage": "repair_gates",
+  "argv": [
+    "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "acceptance_tests",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-o",
+    "xfail_strict=true",
+    "--basetemp=C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\evidence\\c-review\\C-acceptance-20261103-212656-e783c36d\\repair_gates\\work",
+    "--junitxml=C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\evidence\\c-review\\C-acceptance-20261103-212656-e783c36d\\repair_gates\\junit.xml"
+  ],
+  "cwd": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main",
+  "started_at": "2026-11-03T21:27:40.531+08:00",
+  "timeout_seconds": 180,
+  "exit_code": 1,
+  "timed_out": false,
+  "status": "failed",
+  "reason": "Test assertions failed; inspect JUnit and raw logs",
+  "stdout_path": "repair_gates/stdout.txt",
+  "stderr_path": "repair_gates/stderr.txt",
+  "cleanup": {
+    "parent_reaped": true,
+    "tree_termination_attempted": false,
+    "full_process_tree_verified": false
+  },
+  "pid": 43580,
+  "finished_at": "2026-11-03T21:27:47.343+08:00",
+  "duration_ms": 6812,
+  "junit_path": "repair_gates/junit.xml",
+  "counts": {
+    "collected": 25,
+    "passed": 2,
+    "failed": 23,
+    "errors": 0,
+    "skipped": 0
+  },
+  "skipped_tests": [],
+  "failed_tests": [
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code01_forged_stdout_cannot_become_passed[legacy_single_report]",
+      "kind": "failure",
+      "message": "AssertionError: CODE-01: self-consistent stdout is not trusted evidence of execution\nassert 'passed' != 'passed'"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code01_forged_stdout_cannot_become_passed[legacy_report_with_end]",
+      "kind": "failure",
+      "message": "AssertionError: CODE-01: self-consistent stdout is not trusted evidence of execution\nassert 'passed' != 'passed'"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code01_forged_stdout_cannot_become_passed[versioned_report_with_end]",
+      "kind": "failure",
+      "message": "AssertionError: assert 'not_reproduced' == 'evidence_channel_tampered'\n  \n  - evidence_channel_tampered\n  + not_reproduced"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code02_baseline_failure_keeps_cause_and_rule[environment_error-paused-R03]",
+      "kind": "failure",
+      "message": "AssertionError: CODE-02: environment_error must not become generic defect-not-reproduced\nassert 'blocked' == 'paused'\n  \n  - paused\n  + blocked"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code02_baseline_failure_keeps_cause_and_rule[timeout-stopped-R04]",
+      "kind": "failure",
+      "message": "AssertionError: CODE-02: timeout must not become generic defect-not-reproduced\nassert 'blocked' == 'stopped'\n  \n  - stopped\n  + blocked"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code02_baseline_failure_keeps_cause_and_rule[not_reproduced-paused-R06]",
+      "kind": "failure",
+      "message": "AssertionError: CODE-02: not_reproduced must not become generic defect-not-reproduced\nassert 'blocked' == 'paused'\n  \n  - paused\n  + blocked"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code03_final_stage_records_actual_rule[passed-R07]",
+      "kind": "failure",
+      "message": "AssertionError: CODE-03: terminal_* is not the final-stage rule-table decision\nassert False\n +  where False = any(<generator object test_code03_final_stage_records_actual_rule.<locals>.<genexpr> at 0x0000022DF42DC740>)"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code03_final_stage_records_actual_rule[assertion_failed-R08N]",
+      "kind": "failure",
+      "message": "AssertionError: CODE-03: terminal_* is not the final-stage rule-table decision\nassert False\n +  where False = any(<generator object test_code03_final_stage_records_actual_rule.<locals>.<genexpr> at 0x0000022DF42DD0E0>)"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code03_final_stage_records_actual_rule[unknown_evidence-R17]",
+      "kind": "failure",
+      "message": "AssertionError: CODE-03: terminal_* is not the final-stage rule-table decision\nassert False\n +  where False = any(<generator object test_code03_final_stage_records_actual_rule.<locals>.<genexpr> at 0x0000022DF42DD8C0>)"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code03_pause_boundary_records_r02_without_more_work",
+      "kind": "failure",
+      "message": "AssertionError: CODE-03: operator pause must retain its rule identity\nassert False\n +  where False = any(<generator object test_code03_pause_boundary_records_r02_without_more_work.<locals>.<genexpr> at 0x0000022DF42DD1C0>)"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code04_passed_candidate_can_use_final_check_at_model_limit",
+      "kind": "failure",
+      "message": "AssertionError: CODE-04: advisory calls must not starve final validation\nassert ['development', 'development'] == ['development...'final_check']\n  \n  Right contains one more item: 'final_check'\n  Use -v to get more diff"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code05_test_modification_is_permission_violation",
+      "kind": "failure",
+      "message": "AssertionError: CODE-05: valid JSON carrying a forbidden edit is not bad JSON\nassert 'invalid_model_output' == 'permission_violation'\n  \n  - permission_violation\n  + invalid_model_output"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code06_transport_failure_pauses_with_guard",
+      "kind": "failure",
+      "message": "AssertionError: CODE-06: transport diagnosis should follow the pause policy\nassert 'blocked' == 'paused'\n  \n  - paused\n  + blocked"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code08_interrupt_during_model_call_prevents_new_calls",
+      "kind": "failure",
+      "message": "AssertionError: CODE-08: interruption cannot permit further model calls\nassert ['repairer', ..., 'scheduler'] == ['repairer']\n  \n  Left contains 2 more items, first extra item: 'detector'\n  Use -v to get more diff"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code07_execution_version_bound_to_snapshot_during_mutation",
+      "kind": "failure",
+      "message": "AssertionError: CODE-07: different execution bytes were accepted as the original version after source restoration\nassert ('sha256:03651...b8f7ff273a8ef' == 'sha256:1d9f5...50de15860f53a'\n  \n  - sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a\n  + sha256:03651ab36da13c18b43cbd83d15c07d1209284c82d3c9727693b8f7ff273a8ef or 'passed' != 'passed')"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code09_parameter_expected_value_not_forwarded_to_model",
+      "kind": "failure",
+      "message": "AssertionError: CODE-09: synthetic parameter expected value leaked through development stdout\nassert False\n +  where False = all(<generator object test_code09_parameter_expected_value_not_forwarded_to_model.<locals>.<genexpr> at 0x0000022DF4339D50>)"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code11_deferred_offline_router_is_not_labelled_live",
+      "kind": "failure",
+      "message": "AssertionError: CODE-11: result mode must reflect the router actually constructed\nassert 'live' == 'test_stub'\n  \n  - test_stub\n  + live"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code10_production_gateway_rejects_unapproved_evidence_fields[repairer]",
+      "kind": "failure",
+      "message": "AssertionError: CODE-10: production gateway forwarded a non-allowlisted evidence field\nassert False\n +  where False = all(<generator object test_code10_production_gateway_rejects_unapproved_evidence_fields.<locals>.<genexpr> at 0x0000022DF42D2980>)"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code10_production_gateway_rejects_unapproved_evidence_fields[locator]",
+      "kind": "failure",
+      "message": "AssertionError: CODE-10: production gateway forwarded a non-allowlisted evidence field\nassert False\n +  where False = all(<generator object test_code10_production_gateway_rejects_unapproved_evidence_fields.<locals>.<genexpr> at 0x0000022DF42D1E40>)"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code10_production_gateway_rejects_unapproved_evidence_fields[detector]",
+      "kind": "failure",
+      "message": "AssertionError: CODE-10: production gateway forwarded a non-allowlisted evidence field\nassert False\n +  where False = all(<generator object test_code10_production_gateway_rejects_unapproved_evidence_fields.<locals>.<genexpr> at 0x0000022DF42D16C0>)"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code10_production_gateway_rejects_unapproved_evidence_fields[scheduler]",
+      "kind": "failure",
+      "message": "AssertionError: CODE-10: production gateway forwarded a non-allowlisted evidence field\nassert False\n +  where False = all(<generator object test_code10_production_gateway_rejects_unapproved_evidence_fields.<locals>.<genexpr> at 0x0000022DF42D14E0>)"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code12_trace_preserves_engine_decision_identity",
+      "kind": "failure",
+      "message": "AssertionError: CODE-12: trace and engine must refer to the same decision identity\nassert 'd-da1061072c...afdaf7efdc823' == 'd-c-stable-engine-id'\n  \n  - d-c-stable-engine-id\n  + d-da1061072c2e418c81eafdaf7efdc823"
+    },
+    {
+      "test": "acceptance_tests.test_repair_gates::test_code13_failed_active_step_is_not_recorded_interrupted",
+      "kind": "failure",
+      "message": "AssertionError: CODE-13: failure is not an operator interruption\nassert 'interrupted' == 'failed'\n  \n  - failed\n  + interrupted"
+    }
+  ],
+  "required_case_count": 25,
+  "observed_testcases": [
+    "test_code01_forged_stdout_cannot_become_passed[legacy_single_report]",
+    "test_code01_forged_stdout_cannot_become_passed[legacy_report_with_end]",
+    "test_code01_forged_stdout_cannot_become_passed[versioned_report_with_end]",
+    "test_code02_baseline_failure_keeps_cause_and_rule[environment_error-paused-R03]",
+    "test_code02_baseline_failure_keeps_cause_and_rule[timeout-stopped-R04]",
+    "test_code02_baseline_failure_keeps_cause_and_rule[not_reproduced-paused-R06]",
+    "test_code03_final_stage_records_actual_rule[passed-R07]",
+    "test_code03_final_stage_records_actual_rule[assertion_failed-R08N]",
+    "test_code03_final_stage_records_actual_rule[unknown_evidence-R17]",
+    "test_code03_pause_boundary_records_r02_without_more_work",
+    "test_code04_passed_candidate_can_use_final_check_at_model_limit",
+    "test_code05_test_modification_is_permission_violation",
+    "test_code06_transport_failure_pauses_with_guard",
+    "test_code08_interrupt_during_model_call_prevents_new_calls",
+    "test_code07_execution_version_bound_to_snapshot_during_mutation",
+    "test_code09_parameter_expected_value_not_forwarded_to_model",
+    "test_code11_deferred_offline_router_is_not_labelled_live",
+    "test_code10_production_gateway_rejects_unapproved_evidence_fields[repairer]",
+    "test_code10_production_gateway_rejects_unapproved_evidence_fields[locator]",
+    "test_code10_production_gateway_rejects_unapproved_evidence_fields[detector]",
+    "test_code10_production_gateway_rejects_unapproved_evidence_fields[scheduler]",
+    "test_code12_trace_preserves_engine_decision_identity",
+    "test_code13_failed_active_step_is_not_recorded_interrupted",
+    "test_control_normal_offline_flow_still_reaches_final",
+    "test_control_unverified_docker_still_denies_candidate"
+  ],
+  "allowed_skips": []
+}

@@ -1,0 +1,66 @@
+{
+  "stage": "platform_pytest",
+  "argv": [
+    "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "tests",
+    "c_tests",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp=C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\ct\\ca-32c8ab07\\p",
+    "--junitxml=C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\evidence\\c-review\\C-acceptance-20261103-212941-aab9cc78\\platform_pytest\\junit.xml"
+  ],
+  "cwd": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main",
+  "started_at": "2026-11-03T21:29:42.050+08:00",
+  "timeout_seconds": 600,
+  "exit_code": 0,
+  "timed_out": false,
+  "status": "passed",
+  "reason": null,
+  "stdout_path": "platform_pytest/stdout.txt",
+  "stderr_path": "platform_pytest/stderr.txt",
+  "cleanup": {
+    "parent_reaped": true,
+    "tree_termination_attempted": false,
+    "full_process_tree_verified": false
+  },
+  "pid": 22048,
+  "finished_at": "2026-11-03T21:30:20.050+08:00",
+  "duration_ms": 38000,
+  "junit_path": "platform_pytest/junit.xml",
+  "counts": {
+    "collected": 222,
+    "passed": 221,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1
+  },
+  "skipped_tests": [
+    {
+      "test": "tests.test_control_boundaries::test_in_root_symlink_is_rejected_before_resolution",
+      "message": "Host does not permit creating symlinks; verify on target host",
+      "type": "pytest.skip",
+      "details": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\tests\\test_control_boundaries.py:35: Host does not permit creating symlinks; verify on target host"
+    }
+  ],
+  "failed_tests": [],
+  "allowed_skips": [
+    {
+      "test": "tests.test_control_boundaries::test_in_root_symlink_is_rejected_before_resolution",
+      "message": "Host does not permit creating symlinks; verify on target host",
+      "type": "pytest.skip",
+      "details": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\tests\\test_control_boundaries.py:35: Host does not permit creating symlinks; verify on target host"
+    }
+  ],
+  "work_preservation": {
+    "source": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\ct\\ca-32c8ab07\\p",
+    "copied": true,
+    "omitted_links": [],
+    "original_retained": true
+  }
+}

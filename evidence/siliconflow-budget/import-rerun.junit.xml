@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="1.341" timestamp="2026-11-03T20:13:33.481874+08:00" hostname="LAPTOP-8477LI5E"><testcase classname="tests.test_quixbugs_import" name="test_windows_permission_failure_is_bounded_and_registry_remains_safe[False]" time="0.523"><failure message="assert ([0.05, 0.05, 0.05] == [0.05]&#10;  &#10;  Left contains 2 more items, first extra item: 0.05&#10;  Use -v to get more diff)">tests\test_quixbugs_import.py:148: in test_windows_permission_failure_is_bounded_and_registry_remains_safe
+    assert waits == [0.05] and len(attempts) == 41
+E   assert ([0.05, 0.05, 0.05] == [0.05]
+E     
+E     Left contains 2 more items, first extra item: 0.05
+E     Use -v to get more diff)</failure></testcase><testcase classname="tests.test_quixbugs_import" name="test_windows_permission_failure_is_bounded_and_registry_remains_safe[True]" time="0.598" /></testsuite></testsuites>

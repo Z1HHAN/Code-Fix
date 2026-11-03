@@ -45,10 +45,20 @@ def main() -> int:
     importer.add_argument('--source-bundle')
     importer.add_argument('--write', action='store_true', help='默认只预览；指定后导入已校验资产并更新目录')
     sub.add_parser('doctor')
+    sub.add_parser('provider-check', help='仅查询已登记账号的模型列表，不调用付费聊天')
+    sub.add_parser('budget-status', help='本项目人民币额度估算，不是平台实时余额')
+    smoke = sub.add_parser('provider-smoke', help='一次有上限的JSON接口测试；不是修复闭环')
+    smoke.add_argument('--profile', default='sf_account1_v32')
     serve = sub.add_parser('serve')
     serve.add_argument('--port', type=int, default=8000)
     args = parser.parse_args()
     try:
+        if args.command in {'provider-check', 'provider-smoke', 'budget-status'}:
+            from .siliconflow import check_models, smoke, budget_status
+            root = Path(os.environ.get('CODE_FIX_RUN_ROOT') or ROOT / 'runs/platform')
+            result = check_models() if args.command == 'provider-check' else budget_status(root) if args.command == 'budget-status' else smoke(root, args.profile)
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0 if args.command != 'provider-smoke' or result['json_contract_passed'] else 2
         if args.command == 'import-quixbugs':
             from .quixbugs_import import BUNDLE, import_dataset
             result = import_dataset(source_bundle=args.source_bundle or BUNDLE, write=args.write)

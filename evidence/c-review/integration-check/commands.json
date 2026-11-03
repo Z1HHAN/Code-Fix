@@ -1,0 +1,34 @@
+[
+  {
+    "name": "repair-gates",
+    "command": [
+      "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "acceptance_tests",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "-o",
+      "xfail_strict=true",
+      "--basetemp=C:\\Users\\lenovo\\AppData\\Local\\Temp\\cg-84a7394d",
+      "--junitxml=C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\c-review\\integration-check\\repair-gates.junit.xml"
+    ],
+    "exit_code": 1,
+    "scope": "offline test doubles / reviewed UI tests; not true repair or member signoff"
+  },
+  {
+    "name": "node-ui",
+    "command": [
+      "node",
+      "--test",
+      "tests/ui_prototype.test.cjs",
+      "tests/ui_budget.test.cjs"
+    ],
+    "exit_code": 0,
+    "scope": "offline test doubles / reviewed UI tests; not true repair or member signoff"
+  }
+]
