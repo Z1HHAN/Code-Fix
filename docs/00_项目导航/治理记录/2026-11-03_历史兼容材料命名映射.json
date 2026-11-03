@@ -1,0 +1,85 @@
+{
+  "input_commit": "ccf452890acb5af05f36f02e1cca64c60a749eff",
+  "old_directory": "day1-kit",
+  "new_directory": "task_assets/leap_legacy",
+  "files": [
+    {
+      "old_path": "day1-kit/README.md",
+      "new_path": "task_assets/leap_legacy/README.md",
+      "old_sha256": "cf05413e6b3edfc99c8fc7dc43b590c60cf36f6e3ba36ccff2701234d279543b",
+      "new_sha256": "f1fb9722895e92f5a57732c98483cdca42b9148c0198b23db4b9fb71e8bda429"
+    },
+    {
+      "old_path": "day1-kit/code/leap_year.py",
+      "new_path": "task_assets/leap_legacy/code/leap_year.py",
+      "old_sha256": "0ec1efe58ae53f04f3cdcbc5f95e37d182b8074134ed0267ddb0fb2be00fa160",
+      "new_sha256": "0ec1efe58ae53f04f3cdcbc5f95e37d182b8074134ed0267ddb0fb2be00fa160"
+    },
+    {
+      "old_path": "day1-kit/configs/task.json",
+      "new_path": "task_assets/leap_legacy/configs/task.json",
+      "old_sha256": "82af35717a1e5e8856d1cccff8e35cc98225faadaeb631ce0c34d70e086d2985",
+      "new_sha256": "82af35717a1e5e8856d1cccff8e35cc98225faadaeb631ce0c34d70e086d2985"
+    },
+    {
+      "old_path": "day1-kit/prompts/locator.md",
+      "new_path": "task_assets/leap_legacy/prompts/locator.md",
+      "old_sha256": "9804657de23a7e94cae5fedda807e1aa6f3034ee97f377ac61f3c6d094772a56",
+      "new_sha256": "9804657de23a7e94cae5fedda807e1aa6f3034ee97f377ac61f3c6d094772a56"
+    },
+    {
+      "old_path": "day1-kit/prompts/repairer.md",
+      "new_path": "task_assets/leap_legacy/prompts/repairer.md",
+      "old_sha256": "9b138089d81193aeaf1cb8f430c4f4b2f0ed37091c612fae6d068f0fa79970ad",
+      "new_sha256": "9b138089d81193aeaf1cb8f430c4f4b2f0ed37091c612fae6d068f0fa79970ad"
+    },
+    {
+      "old_path": "day1-kit/tests/test_leap.py",
+      "new_path": "task_assets/leap_legacy/tests/test_leap.py",
+      "old_sha256": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271",
+      "new_sha256": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+    },
+    {
+      "old_path": "day1-kit/接口说明.md",
+      "new_path": "task_assets/leap_legacy/接口说明.md",
+      "old_sha256": "b10bed72a96b4f597e3cd29edc4d1e9f47734581fe0ccc18c547f0cc573c9aa3",
+      "new_sha256": "b10bed72a96b4f597e3cd29edc4d1e9f47734581fe0ccc18c547f0cc573c9aa3"
+    },
+    {
+      "old_path": "day1-kit/队长今日执行与台账.md",
+      "new_path": "task_assets/leap_legacy/队长今日执行与台账.md",
+      "old_sha256": "8ee052e736c7cf574f829d3e77a4751fa18904dc3c182cc6239b2c299ee6da5e",
+      "new_sha256": "d54602e56dd607e9f373c6b30e7f2ddd2827264ad3550cfbea7fafde239a2b0d"
+    }
+  ],
+  "gitignore_patterns_unchanged": true,
+  "interfaces_or_execution_logic_changed": false,
+  "live_reference_changes": [
+    "tests/test_knowledge_runner.py",
+    "tests/test_v02_core.py",
+    "tests/test_role_config.py",
+    "knowledge/demo_project/business_rules.md",
+    "knowledge/demo_project/project_structure.md",
+    "configs/test_plan.json",
+    "configs/tasks/leap-baseline.json"
+  ],
+  "historical_provenance_not_rewritten": true,
+  "relative_links_checked": 712,
+  "missing_links": 0,
+  "gitignore_patterns_verified_equal": true,
+  "platform_tests": {
+    "passed": 191,
+    "skipped": 1,
+    "failed": 0
+  },
+  "node_prototype_tests": {
+    "passed": 9,
+    "scope": "explicit simulation"
+  },
+  "validate_config_errors": [],
+  "command": "runs/v3-venv/Scripts/python.exe -B -X utf8 -m pytest -q --basetemp=runs/nm31 -o cache_dir=runs/naming-review/cache --junitxml=runs/naming-review/platform.junit.xml --tb=short",
+  "junit": "evidence/legacy-naming-review-20261103/platform.junit.xml",
+  "real_model_calls": 0,
+  "public_or_candidate_code_executed": false,
+  "unchanged_git_blobs_verified": 6
+}

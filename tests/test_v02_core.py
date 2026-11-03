@@ -11,7 +11,7 @@ ROOT=Path(__file__).resolve().parents[1]
 def test_configs_and_task_parse():
     assert read_json(ROOT/'configs/agents.json')['config_version']=='iteration-0.2-20261101-draft'
     assert read_json(ROOT/'configs/decision_rules.json')['interface_version']=='0.2-20261101-draft'
-    assert load_task_spec(ROOT/'day1-kit/configs/task.json').allowed_paths
+    assert load_task_spec(ROOT/'task_assets/leap_legacy/configs/task.json').allowed_paths
 def test_rules_distinguish_failures():
     engine=DecisionEngine(read_json(ROOT/'configs/decision_rules.json')); base={'phase':'development','isolation_ready':True,'user_pause_requested':False,'evidence_matches_current_version':True,'repair_budget_available':True,'execution_budget_available':True,'needs_new_repair':True,'next_action_requires_execution_budget':True,'output_agent':None,'retries_left':2}
     assertion=engine.decide({**base,'failure_class':'assertion_failed'},run_id='r',code_version='v',evidence_ids=['e'],decision_id='D1')

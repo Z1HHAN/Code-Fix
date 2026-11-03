@@ -2,7 +2,7 @@
 doc_id: business_rules
 project_id: leap_demo
 source_version: leap-fixture-v1
-source_path: day1-kit/code/leap_year.py
+source_path: task_assets/leap_legacy/code/leap_year.py
 ---
 # 闰年业务规则和接口约束
 
