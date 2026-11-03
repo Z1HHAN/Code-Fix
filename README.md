@@ -66,3 +66,5 @@ B负责实现及执行机，C负责明确commit的测试/复核与证据，A负�
 Windows可先运行隐藏输入脚本配置密钥，再用`./scripts/start_siliconflow.ps1 -Action check`查询模型、`-Action budget`看额度、`-Action serve`启动本机页面。密钥仅存本机DPAPI密文或环境变量，绝不提交Git。真实JSON接口测试与Agent修复/隔离测试分开留证，不能相互替代；最新批次见[evidence/siliconflow-budget](evidence/siliconflow-budget)。
 
 本轮完整回归240通过/1跳过、Node12通过；首轮文件占用失败保留。账号1真实JSON请求1次通过，21输入/5输出token，按登记价格估算¥0.000114；这是接口连通性证据，真实修复仍待B机隔离资格。每次手动烟测都会产生新请求，页面额度轮询不调用平台。
+
+2026-11-04发布核对：上述实现与复核已上传[开发分支](https://github.com/Z1HHAN/Code-Fix/tree/codex/siliconflow-accounts-budget)，实现提交为`2c98061`，首次发布分支为`a3bc7d2`。main尚未合并：远端新增`16e4c24`，本机接收对象时解包停滞，尚不能完整审核其内容；已停止被拒绝的筛选拉取操作。当前发布依据见[分支发布记录](evidence/siliconflow-budget/branch-publication.json)及固定日志A-硅基分支发布-008，不将缓存main当作远端最新版本。

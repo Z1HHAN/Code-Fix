@@ -1,5 +1,9 @@
 # 版本更迭日志
 
+## 2026-11-04 双账号开发分支已发布，主线合并待复核
+
+本机认证恢复后，`codex/siliconflow-accounts-budget`成功推送，远端核对首次发布为`a3bc7d2`，包含实现`2c98061`。远端main已到`16e4c24`；获取其文件对象时解包停滞，不能完成内容复核，因此未合并或覆盖main。筛选拉取请求被用户拒绝且未执行，不再重试该操作。证据见[发布观察](evidence/siliconflow-budget/branch-publication.json)、[本轮静态检查](evidence/siliconflow-budget/branch-publication-review.json)及固定日志A-硅基分支发布-008。本轮仅更新发布状态，未新增模型调用或重跑业务测试；以下早前阻塞条目保留当时事实。
+
 ## 2026-11-04 双账号提交复核与发布阻塞登记
 
 开发提交2c98061已保存，91源码与20份原始证据指纹复核通过，详见[提交复核](evidence/siliconflow-budget/commit-review.json)。本轮仅登记与复核，不重发模型请求。GitHub SSH超时、HTTPS缺登录凭证，尚未推送/合入main；需本机恢复认证后继续正常同步，不改写历史或打稳定标签。

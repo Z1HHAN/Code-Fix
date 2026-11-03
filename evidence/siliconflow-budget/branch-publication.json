@@ -1,0 +1,50 @@
+{
+  "record_id": "A-硅基分支发布-008",
+  "observation_date": "2026-11-04",
+  "scope": "Branch publication only; no new model calls or target execution",
+  "implementation_commit": "2c98061ed4c71f76e444dfb2ecadef06cfbb5d9e",
+  "first_published_branch_commit": "a3bc7d2cf78495176a745136044149352913ef45",
+  "branch": "codex/siliconflow-accounts-budget",
+  "remote_main_observed": "16e4c24d4790ed42ce48d78539ff24d6732c0c35",
+  "local_main_and_cached_origin_main": "40fca6cc98ef06659925dd25421fbd4463a90006",
+  "branch_push_confirmed": true,
+  "main_merged": false,
+  "main_content_review_complete": false,
+  "blocker": "Incoming main object reception stalled at unpack-objects; interrupted. Authentication, branch push and reference queries succeeded.",
+  "rejected_operation": {
+    "operation": "filtered fetch for investigation",
+    "rejected_by": "user",
+    "executed": false,
+    "retried_after_rejection": false
+  },
+  "push_observation": {
+    "command": [
+      "git",
+      "push",
+      "-u",
+      "origin",
+      "codex/siliconflow-accounts-budget"
+    ],
+    "transport": "ssh.github.com:443, strict existing host-key validation",
+    "exit_code": 0,
+    "timed_out": false,
+    "stdout": "branch 'codex/siliconflow-accounts-budget' set up to track 'origin/codex/siliconflow-accounts-budget'.\n"
+  },
+  "heads_observation": {
+    "command": [
+      "git",
+      "ls-remote",
+      "origin",
+      "refs/heads/main",
+      "refs/heads/codex/siliconflow-accounts-budget"
+    ],
+    "transport": "ssh.github.com:443, strict existing host-key validation",
+    "exit_code": 0,
+    "timed_out": false,
+    "stdout": "a3bc7d2cf78495176a745136044149352913ef45\trefs/heads/codex/siliconflow-accounts-budget\n16e4c24d4790ed42ce48d78539ff24d6732c0c35\trefs/heads/main\n"
+  },
+  "history_or_global_settings_changed": false,
+  "new_paid_requests": 0,
+  "b_c_signoff": "pending",
+  "stable_tag_created": false
+}
