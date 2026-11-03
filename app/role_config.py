@@ -45,12 +45,24 @@ class RoleConfig:
         data = document.get('runtime_v3')
         if not isinstance(data, dict) or set(data) != {'config_version', 'protocol', 'models', 'agents'}:
             raise ConfigError('runtime_v3字段不完整或存在未知字段')
-        if data['protocol'] != PROTOCOL or data['config_version'] != '1.0.0':
+        if data['protocol'] != PROTOCOL or data['config_version'] not in {'1.0.0', '1.1.0'}:
             raise ConfigError('不支持的生产协议或配置版本；Day1仅供历史查阅')
         # This release binds one shared live client via LiveSettings.from_env.
         # No credentials, URLs or executable import paths are accepted in JSON.
-        if data['models'] != {'primary': {'binding': 'live_env'}}:
-            raise ConfigError('models仅支持primary/live_env；模型名与预算由受控环境绑定')
+        if data['config_version'] == '1.0.0':
+            if data['models'] != {'primary': {'binding': 'live_env'}}:
+                raise ConfigError('1.0.0仅支持primary/live_env')
+        else:
+            from .model_profiles import load_profiles
+            profiles = load_profiles(root)['profiles']
+            if not isinstance(data['models'], dict) or not data['models']:
+                raise ConfigError('1.1.0至少需要一个模型绑定')
+            for ref, binding in data['models'].items():
+                if (not isinstance(ref, str) or not ref.replace('_', '').isalnum()
+                        or not isinstance(binding, dict) or set(binding) != {'binding', 'profile_ref'}
+                        or binding['binding'] != 'approved_profile'
+                        or not isinstance(binding['profile_ref'], str) or binding['profile_ref'] not in profiles):
+                    raise ConfigError('1.1.0模型必须绑定已登记的受控档案')
         if not isinstance(data['agents'], list):
             raise ConfigError('runtime_v3.agents须为数组')
         self.agents, self.prompts = {}, {}

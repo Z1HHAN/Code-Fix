@@ -4,17 +4,17 @@ No SDK retries or proxy inheritance. Uncertain charges retain the reservation
 and block further paid calls until an operator reconciles the ledger.
 """
 from dataclasses import dataclass
+import asyncio
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal, InvalidOperation, ROUND_CEILING
 import json
 import os
 from pathlib import Path
-import socket
 import sqlite3
 import time
-from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
-from urllib.request import HTTPRedirectHandler, HTTPSHandler, ProxyHandler, Request, build_opener
+
+import httpx
 
 
 class ModelBlocked(ValueError):
@@ -42,6 +42,9 @@ class LiveSettings:
     output_per_million: Decimal
     max_output_tokens: int = 2048
     max_input_tokens: int = 16000
+    provider_id: str = 'primary'
+    price_version: str = 'operator-environment'
+    token_limit_parameter: str = 'max_completion_tokens'
 
     @classmethod
     def from_env(cls):
@@ -69,9 +72,16 @@ class Ledger:
         self.path = Path(root) / 'model-ledger.sqlite3'
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with sqlite3.connect(self.path) as db:
+            db.execute('BEGIN IMMEDIATE')
             db.execute('''CREATE TABLE IF NOT EXISTS calls (
                 call_id TEXT PRIMARY KEY, run_id TEXT NOT NULL, day TEXT NOT NULL,
                 reserved_microusd INTEGER NOT NULL, status TEXT NOT NULL, actual_microusd INTEGER)''')
+            # Additive migration preserves earlier cost records, including unknowns.
+            columns = {r[1] for r in db.execute('PRAGMA table_info(calls)')}
+            for name, default in (('provider_id', 'primary'), ('model', 'legacy-unrecorded'),
+                                  ('price_version', 'legacy-unrecorded')):
+                if name not in columns:
+                    db.execute(f"ALTER TABLE calls ADD COLUMN {name} TEXT NOT NULL DEFAULT '{default}'")
 
     def reserve(self, call_id, run_id, settings, max_calls, upper_input):
         day = datetime.now(timezone(timedelta(hours=8))).date().isoformat()
@@ -79,14 +89,17 @@ class Ledger:
         limit = int(settings.daily_limit * 1_000_000)
         with sqlite3.connect(self.path, timeout=10) as db:
             db.execute('BEGIN IMMEDIATE')
-            if db.execute("SELECT 1 FROM calls WHERE day=? AND status IN ('pending','unknown')", (day,)).fetchone():
+            if db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone():
                 raise ModelBlocked('存在进行中或费用未知请求，暂停新付费请求')
             if db.execute('SELECT count(*) FROM calls WHERE run_id=?', (run_id,)).fetchone()[0] >= max_calls:
                 raise ModelBlocked('达到本任务模型调用上限')
             used = db.execute('SELECT coalesce(sum(coalesce(actual_microusd,reserved_microusd)),0) FROM calls WHERE day=?', (day,)).fetchone()[0]
             if used + amount > limit:
                 raise ModelBlocked('达到队伍每日共享费用上限')
-            db.execute('INSERT INTO calls VALUES (?,?,?,?,?,NULL)', (call_id, run_id, day, amount, 'pending'))
+            db.execute('''INSERT INTO calls (call_id,run_id,day,reserved_microusd,status,
+                       provider_id,model,price_version) VALUES (?,?,?,?,?,?,?,?)''',
+                       (call_id, run_id, day, amount, 'pending', settings.provider_id,
+                        settings.model, settings.price_version))
 
     def settle(self, call_id, usage, settings):
         valid = isinstance(usage, dict) and all(type(usage.get(k)) is int and usage[k] >= 0 for k in ('prompt_tokens', 'completion_tokens'))
@@ -103,16 +116,51 @@ class Ledger:
                 'basis': 'operator_configured_rates; not provider invoice'}
 
 
-class NoRedirect(HTTPRedirectHandler):
-    def redirect_request(self, req, fp, code, msg, headers, newurl):
-        raise ModelBlocked('拒绝模型请求重定向')
+    def summary(self, run_id):
+        with sqlite3.connect(self.path) as db:
+            rows = db.execute('''SELECT provider_id,status,actual_microusd,reserved_microusd
+                               FROM calls WHERE run_id=? ORDER BY rowid''', (run_id,)).fetchall()
+        providers = {}
+        for provider, status, actual, reserved in rows:
+            item = providers.setdefault(provider, {'calls': 0, 'estimated_microusd': 0,
+                                                  'unsettled_calls': 0, 'reserved_microusd': 0})
+            item['calls'] += 1
+            item['estimated_microusd'] += actual or 0
+            if status != 'known':
+                item['unsettled_calls'] += 1
+                item['reserved_microusd'] += reserved
+        unknown = any(x['unsettled_calls'] for x in providers.values())
+        total = sum(x['estimated_microusd'] for x in providers.values())
+        return {'status': 'unknown' if unknown else 'estimated' if rows else 'not_called',
+                'amount_usd': None if unknown else str(Decimal(total) / 1_000_000),
+                'providers': providers, 'basis': 'operator_configured_rates; not provider invoice'}
 
 
 class LiveModel:
     mode = 'live'
 
-    def __init__(self, settings, ledger):
+    def __init__(self, settings, ledger, *, transport=None):
         self.settings, self.ledger = settings, ledger
+        self.transport = transport
+        self.mode = 'live' if transport is None else 'test_transport'
+
+    async def _request(self, messages, seconds):
+        # The outer deadline cancels headers AND the entire body stream. A peer
+        # sending one byte per read timeout cannot keep this request alive.
+        async with asyncio.timeout(seconds):
+            async with httpx.AsyncClient(transport=self.transport, trust_env=False,
+                                        follow_redirects=False, timeout=seconds) as client:
+                async with client.stream('POST', self.settings.base_url + '/chat/completions',
+                        headers={'Authorization': 'Bearer ' + self.settings.api_key},
+                        json={'model': self.settings.model, 'messages': messages,
+                              self.settings.token_limit_parameter: self.settings.max_output_tokens}) as response:
+                    response.raise_for_status()
+                    payload = bytearray()
+                    async for chunk in response.aiter_bytes():
+                        payload.extend(chunk)
+                        if len(payload) > 1_048_576:
+                            raise ValueError('响应超过上限')
+                    return json.loads(payload)
 
     def redact(self, value):
         if isinstance(value, str):
@@ -132,23 +180,19 @@ class LiveModel:
         if upper_input > self.settings.max_input_tokens:
             raise ModelBlocked('输入过长，拒绝未经计账的截断')
         self.ledger.reserve(call_id, run_id, self.settings, max_calls, upper_input)
-        record = {'role': None, 'mode': 'live', 'model_api_called': False,
+        record = {'role': None, 'mode': self.mode, 'model_api_called': False,
                   'model': self.settings.model, 'call_id': call_id, 'status': 'failed',
+                  'provider_id': self.settings.provider_id, 'price_version': self.settings.price_version,
                   'usage': None, 'cost': {'status': 'unknown', 'amount_usd': None},
                   'attempts': 1, 'max_attempts': 1, 'failure_class': 'model_transport_error'}
         started = time.monotonic()
         try:
-            request = Request(self.settings.base_url + '/chat/completions',
-                              data=json.dumps({'model': self.settings.model, 'messages': messages,
-                                               'max_completion_tokens': self.settings.max_output_tokens}).encode(),
-                              headers={'Authorization': 'Bearer ' + self.settings.api_key, 'Content-Type': 'application/json'})
-            opener = build_opener(ProxyHandler({}), HTTPSHandler(), NoRedirect())
-            record['model_api_called'] = True
-            with opener.open(request, timeout=min(remaining, self.settings.timeout)) as response:
-                payload = response.read(1_048_577)
-            if len(payload) > 1_048_576:
-                raise ValueError('响应超过上限')
-            value = json.loads(payload)
+            remaining = min(deadline - time.monotonic(), self.settings.timeout)
+            if remaining <= 0:
+                raise TimeoutError()
+            record['model_api_called'] = self.transport is None
+            record['transport_request_started'] = True
+            value = asyncio.run(self._request(messages, remaining))
             record['usage'] = value.get('usage')
             record['cost'] = self.ledger.settle(call_id, record['usage'], self.settings)
             content = value['choices'][0]['message']['content']
@@ -158,10 +202,12 @@ class LiveModel:
                           provider_model=value.get('model'), provider_response_id=value.get('id'))
             if record['cost']['status'] == 'unknown':
                 record.update(status='blocked', failure_class='cost_unknown')
-        except (HTTPError, URLError, OSError, socket.timeout, ValueError, KeyError, IndexError, TypeError, ModelBlocked) as exc:
+        except Exception as exc:
             if record['cost']['status'] == 'unknown':
                 self.ledger.settle(call_id, None, self.settings)
             record['error_type'] = type(exc).__name__
+            if isinstance(exc, (TimeoutError, httpx.TimeoutException)):
+                record['failure_class'] = 'model_request_timeout'
         finally:
             record['duration_ms'] = round((time.monotonic() - started) * 1000)
         return self.redact(record)

@@ -42,12 +42,10 @@ class AgentGateway:
         self.model, self.store = model, store
         self.config = config or RoleConfig(ROOT)
 
-    def invoke(self, role, *, run_id, round_number, code, evidence, version, work, task, deadline, extra=None):
+    def invoke(self, role, *, run_id, round_number, code, evidence, version, work, task, deadline, extra=None, trace=None):
         if role not in ROLES or evidence['phase'] != 'development' or evidence['code_version'] != version:
             raise InvalidModelOutput('角色或当前开发证据不匹配')
         agent = self.config.require(role)
-        # model_ref is resolved through the validated primary/live_env binding.
-        # The injected offline client uses the same binding for component tests.
         definition = get_task(task.get('project', 'leap'))
         source = definition.source
         ids = tuple(k for k in definition.data['knowledge_ids'] if k in agent['knowledge_ids'])
@@ -76,9 +74,13 @@ class AgentGateway:
         provenance['model_binding'] = {'model_ref': agent['model_ref'], 'binding': 'live_env',
                                        'mode': getattr(self.model, 'mode', 'unknown'),
                                        'model': getattr(getattr(self.model, 'settings', None), 'model', None)}
+        if hasattr(self.model, 'binding'):
+            provenance['model_binding'] = self.model.binding(role)
         (folder / 'input.json').write_text(json.dumps(safe({'role': role, 'messages': messages, 'provenance': provenance}), ensure_ascii=False, indent=2), encoding='utf-8')
         try:
-            record = self.model.call(messages, run_id=run_id, call_id=call_id, max_calls=task['max_calls'], deadline=deadline)
+            kwargs = dict(run_id=run_id, call_id=call_id, max_calls=task['max_calls'], deadline=deadline)
+            record = (self.model.call_for_role(role, messages, **kwargs) if hasattr(self.model, 'call_for_role')
+                      else self.model.call(messages, **kwargs))
         except Exception as exc:
             record = {'status': 'blocked', 'failure_class': 'model_blocked', 'error_type': type(exc).__name__,
                       'model_api_called': False, 'mode': getattr(self.model, 'mode', 'unknown')}
@@ -86,6 +88,7 @@ class AgentGateway:
             if isinstance(exc, ModelBlocked):
                 record['reason'] = str(exc)
         record.update(role=role, code_version=version, call_id=call_id, round=round_number, provenance=provenance)
+        record.update(trace or {})
         if record['status'] == 'ok':
             try:
                 record['parsed_output'] = parse_role(role, record['raw_text'], [evidence['evidence_id']], [k['citation_id'] for k in knowledge])

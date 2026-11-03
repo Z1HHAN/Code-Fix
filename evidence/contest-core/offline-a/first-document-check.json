@@ -1,0 +1,1144 @@
+{
+  "scope": "Stage A OFFLINE component acceptance only; no live API, Docker or public/candidate execution",
+  "date": "2026-11-03",
+  "development_base_commit": "399b046b947849120b91a4541e5b32fd60c69f09",
+  "git_head_at_check": "399b046b947849120b91a4541e5b32fd60c69f09",
+  "branch_at_check": "codex/contest-core-foundation",
+  "tested_identity": "source_hashes; current worktree, not a B/C independent signature",
+  "final_pytest_command": "runs/v3-venv/Scripts/python.exe -B -X utf8 -m pytest -q --basetemp=runs/ca5 -o cache_dir=runs/contest-core/cache --junitxml=runs/contest-core/final-platform.junit.xml --tb=short",
+  "pytest_results": {
+    "first-specialist.junit.xml": {
+      "tests": 28,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 27
+    },
+    "intermediate-platform.junit.xml": {
+      "tests": 220,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 219
+    },
+    "final-platform.junit.xml": {
+      "tests": 222,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 221
+    }
+  },
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "app.cli",
+        "validate-config"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"task_id\": \"T001-leap-baseline\",\n  \"errors\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "app.cli",
+        "doctor"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"python\": \"3.14.6\",\n  \"baseline_available\": true,\n  \"model_configured\": false,\n  \"docker_available\": false,\n  \"isolation_verified\": false,\n  \"note\": \"每次修复任务启动时运行独立隔离探针；配置存在不等于验证通过\",\n  \"blockers\": [\n    \"需队长确认付费额度后设置CODE_FIX_LIVE_APPROVED=1\",\n    \"找不到Docker；候选不会回退到宿主执行\",\n    \"不可信代码执行授权未配置\"\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "tests/ui_prototype.test.cjs"
+      ],
+      "exit_code": 0,
+      "stdout": "✔ active demo cannot be reset or restarted, including direct handler dispatch (9.5256ms)\n✔ editing invalidates preview; startup consumes the reviewed snapshot (1.528ms)\n✔ invalid fields and unsupported roles do not receive a successful preview (9.1645ms)\n✔ relocation preserves the failed applied candidate and highlights the next round (1.4508ms)\n✔ stopped snapshot reflects the configured cap and contains failure evidence (2.5567ms)\n✔ success and final-check failure have distinct consistent decisions (1.4169ms)\n✔ unimplemented controls remain disabled without downloads, model or tool calls (3.3469ms)\n✔ a terminal demo requires fresh preview and receives a new identity after reset (1.4928ms)\n✔ one-round cap cannot display a second repair round (1.5353ms)\nℹ tests 9\nℹ suites 0\nℹ pass 9\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 131.9801\n",
+      "stderr": ""
+    }
+  ],
+  "frozen_originals_preserved": 552,
+  "frozen_original_paths": [
+    ".gitignore",
+    "app/__init__.py",
+    "app/baseline.py",
+    "app/candidates.py",
+    "app/cli.py",
+    "app/config.py",
+    "app/decision.py",
+    "app/docker_runner.py",
+    "app/knowledge.py",
+    "app/mock_workflow.py",
+    "app/model_client.py",
+    "app/model_context.py",
+    "app/public_baseline.py",
+    "app/quixbugs_import.py",
+    "app/repair_output.py",
+    "app/runner.py",
+    "app/security.py",
+    "app/tasks_v3.py",
+    "c_fixtures/code_runtime_error/leap_app/__init__.py",
+    "c_fixtures/code_runtime_error/leap_app/leap_year.py",
+    "c_fixtures/code_runtime_error/tests/test_leap.py",
+    "c_fixtures/collection_dependency_error/leap_app/__init__.py",
+    "c_fixtures/collection_dependency_error/leap_app/leap_year.py",
+    "c_fixtures/collection_dependency_error/tests/test_leap.py",
+    "c_fixtures/collection_syntax_error/leap_app/__init__.py",
+    "c_fixtures/collection_syntax_error/leap_app/leap_year.py",
+    "c_fixtures/collection_syntax_error/tests/test_leap.py",
+    "c_fixtures/incomplete_tests/leap_app/__init__.py",
+    "c_fixtures/incomplete_tests/leap_app/leap_year.py",
+    "c_fixtures/incomplete_tests/tests/test_leap.py",
+    "c_fixtures/leap_all_skipped/leap_app/__init__.py",
+    "c_fixtures/leap_all_skipped/leap_app/leap_year.py",
+    "c_fixtures/leap_all_skipped/tests/test_leap.py",
+    "c_fixtures/leap_bad/leap_app/__init__.py",
+    "c_fixtures/leap_bad/leap_app/leap_year.py",
+    "c_fixtures/leap_bad/tests/test_leap.py",
+    "c_fixtures/leap_good/leap_app/__init__.py",
+    "c_fixtures/leap_good/leap_app/leap_year.py",
+    "c_fixtures/leap_good/tests/test_leap.py",
+    "c_fixtures/leap_original/code/leap_year.py",
+    "c_fixtures/leap_original/tests/test_leap.py",
+    "c_fixtures/output_timeout/leap_app/__init__.py",
+    "c_fixtures/output_timeout/leap_app/leap_year.py",
+    "c_fixtures/output_timeout/tests/test_timeout.py",
+    "c_fixtures/zero_tests/leap_app/__init__.py",
+    "c_fixtures/zero_tests/leap_app/leap_year.py",
+    "c_fixtures/zero_tests/tests/test_empty.py",
+    "c_runner/__init__.py",
+    "c_runner/profiles.json",
+    "c_runner/pytest_entry.py",
+    "c_runner/runner.py",
+    "c_tests/conftest.py",
+    "c_tests/test_evidence_integrity.py",
+    "c_tests/test_evidence_write.py",
+    "c_tests/test_runner.py",
+    "configs/agents.json",
+    "configs/decision_rules.json",
+    "configs/interface_examples.json",
+    "configs/tasks/catalog-v3.json",
+    "configs/tasks/leap-baseline.json",
+    "configs/test_plan.json",
+    "datasets/quixbugs/source-bundle.json",
+    "datasets/quixbugs/upstream-lock.json",
+    "docker/.dockerignore",
+    "docker/candidate_entry.py",
+    "docker/runner.Dockerfile",
+    "docs/00_项目导航/治理记录/2026-11-03_交付文件哈希.csv",
+    "docs/00_项目导航/治理记录/2026-11-03_全Git文件归类核对.csv",
+    "docs/00_项目导航/治理记录/2026-11-03_全Git文件核对.csv",
+    "docs/00_项目导航/治理记录/2026-11-03_历史兼容材料命名映射.json",
+    "docs/00_项目导航/治理记录/2026-11-03_原文归档记录.csv",
+    "docs/00_项目导航/治理记录/2026-11-03_实际归类核对.json",
+    "docs/00_项目导航/治理记录/2026-11-03_实际归类移动映射.csv",
+    "docs/00_项目导航/治理记录/2026-11-03_文档处置映射.csv",
+    "docs/00_项目导航/治理记录/2026-11-03_最后旧入口补记.json",
+    "docs/00_项目导航/治理记录/2026-11-03_静态验证记录.json",
+    "docs/01_需求与范围/开发要求V3.0.md",
+    "docs/05_UI与交互/设计参考/三栏界面参考.png",
+    "docs/06_测试与验收/审查记录/2026-11-03_协议专项文档验证.json",
+    "docs/06_测试与验收/审查记录/2026-11-03_协议配置模拟探针.json",
+    "docs/99_历史归档/2026-10/2026-10-31_v0.2候选材料复核记录.md",
+    "docs/99_历史归档/2026-10/2026-10-31_两天阶段结论.md",
+    "docs/99_历史归档/2026-10/2026-10-31_迭代与测试安排.md",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/README.md",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/code/__init__.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/code/leap_year.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/examples/README.md",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/examples/SIMULATED_toolrun_failed.json",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/handoff/01_错误版测试.html",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/handoff/01_错误版测试.png",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/handoff/02_参考答案测试.html",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/handoff/02_参考答案测试.png",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/handoff/文件校验清单.json",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/handoff/文件索引.md",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/handoff/给B的消息.txt",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/reference/leap_year.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/requirements-lock.txt",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/requirements.txt",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/run_C.cmd",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/bad.junit.xml",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/bad.log.txt",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/bad.stderr.txt",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/bad.stdout.txt",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/bad.toolrun.json",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/events.jsonl",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/manifest.json",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/reference.junit.xml",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/reference.log.txt",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/reference.stderr.txt",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/reference.stdout.txt",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/reference.toolrun.json",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/report.md",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/work_bad/code/__init__.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/work_bad/code/leap_year.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/work_bad/tests/test_leap.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/work_reference/code/__init__.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/work_reference/code/leap_year.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/work_reference/tests/test_leap.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/scripts/build_handoff.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/scripts/run_c_checks.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/scripts/test_verify_delivery.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/scripts/verify_delivery.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/setup_C.cmd",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/tests/test_leap.py",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/wheelhouse/colorama-0.4.6-py2.py3-none-any.whl",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/wheelhouse/iniconfig-2.3.1-py3-none-any.whl",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/wheelhouse/packaging-26.3-py3-none-any.whl",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/wheelhouse/pluggy-1.7.0-py3-none-any.whl",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/wheelhouse/pytest-8.3.5-py3-none-any.whl",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/修订说明.txt",
+    "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/整改对照.md",
+    "docs/99_历史归档/2026-10/已有成果与交接.md",
+    "docs/99_历史归档/2026-10/执行方案与当前版本差距.md",
+    "docs/99_历史归档/2026-11/2026-11-01_v0.2组件与原型集成.md",
+    "docs/99_历史归档/2026-11/2026-11-01_执行手册与验收表.md",
+    "docs/99_历史归档/2026-11/2026-11-01_材料与范围对齐记录.md",
+    "docs/99_历史归档/2026-11/2026-11-01_材料发布复核记录.md",
+    "docs/99_历史归档/2026-11/2026-11-02_Docker安装条件检查.md",
+    "docs/99_历史归档/2026-11/2026-11-02_V3主线合并审核与复核.md",
+    "docs/99_历史归档/2026-11/2026-11-02_V3全文完成情况与公开案例接入.md",
+    "docs/99_历史归档/2026-11/2026-11-02_仓库真实能力审查.md",
+    "docs/99_历史归档/2026-11/2026-11-03_入口切换前文档原文.zip",
+    "docs/99_历史归档/2026-11/2026-11-03_实际归类前文档原文.zip",
+    "docs/99_历史归档/2026-11/V3开发与验收.md",
+    "docs/99_历史归档/2026-11/V3状态控制与证据验收.md",
+    "docs/99_历史归档/2026-11/V3编排组件验收.md",
+    "docs/99_历史归档/2026-11/原始交付/Code-Fix-C-20261101.zip",
+    "docs/99_历史归档/文档治理审计/2026-11-02/主工作树Git文件清单.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/主工作树Markdown清单.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/代码配置与指令路径影响.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/任务原始条目与来源.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/任务归并与来源映射.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/任务文字去重关联.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/任务状态修正清单.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/全仓库逐文件清单.csv.gz",
+    "docs/99_历史归档/文档治理审计/2026-11-02/全目录清单.csv.gz",
+    "docs/99_历史归档/文档治理审计/2026-11-02/全部文档清单.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/历史测试逐项证据.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/压缩包内文档索引.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/完全相同文档组.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/审计交付文件哈希.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/已完成组件与历史任务记录_草案.md",
+    "docs/99_历史归档/文档治理审计/2026-11-02/当前待办视图_草案.md",
+    "docs/99_历史归档/文档治理审计/2026-11-02/当前文档与跨日交付规则_补充方案.md",
+    "docs/99_历史归档/文档治理审计/2026-11-02/当前文档失效链接.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/扫描与审计统计.json",
+    "docs/99_历史归档/文档治理审计/2026-11-02/文件移动映射.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/文件重命名映射.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/文档冲突与审批事项.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/文档合并映射.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/文档审计与重构方案.md",
+    "docs/99_历史归档/文档治理审计/2026-11-02/文档引用关系.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/旧版本与历史归档清单.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/本机绝对路径引用.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/第一阶段验证记录.json",
+    "docs/99_历史归档/文档治理审计/2026-11-02/绝对路径引用上传处置.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/统一任务台账_审批草案.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/统一任务台账_审批草案.md",
+    "docs/99_历史归档/文档治理审计/2026-11-02/补充方案文件哈希.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/补充方案验证记录.json",
+    "docs/99_历史归档/文档治理审计/2026-11-02/证据核对摘要.json",
+    "docs/99_历史归档/文档治理审计/2026-11-02/语义重叠与合并比较.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/近似重复文档线索.csv",
+    "docs/99_历史归档/文档治理审计/2026-11-02/重点名称与正文线索.csv",
+    "docs/99_历史归档/旧入口/11月1日需补齐材料与对齐记录.md",
+    "docs/99_历史归档/旧入口/11月3日执行手册与任务分工.md",
+    "docs/99_历史归档/旧入口/BC分支交付记录模板.md",
+    "docs/99_历史归档/旧入口/UI交付B完整提示词.md",
+    "docs/99_历史归档/旧入口/UI草图生图提示词与操作步骤.md",
+    "docs/99_历史归档/旧入口/V3运行与接口.md",
+    "docs/99_历史归档/旧入口/acceptance.md",
+    "docs/99_历史归档/旧入口/demo-script.md",
+    "docs/99_历史归档/旧入口/experiment-protocol.md",
+    "docs/99_历史归档/旧入口/scope.md",
+    "docs/99_历史归档/旧入口/五天落地与参赛分工-20261101至1105.md",
+    "docs/99_历史归档/旧入口/今天迭代与测试安排.md",
+    "docs/99_历史归档/旧入口/分支提交与版本记录规范.md",
+    "docs/99_历史归档/旧入口/功能状态与优化待办.md",
+    "docs/99_历史归档/旧入口/当前任务与交接.md",
+    "docs/99_历史归档/旧入口/成果登记与阶段结论.md",
+    "docs/99_历史归档/旧入口/接口确认清单.md",
+    "docs/99_历史归档/旧入口/版本与演示素材索引.md",
+    "docs/99_历史归档/旧入口/研究报告六章骨架.md",
+    "docs/integration/BC组件接入与模拟联调-20261102.md",
+    "docs/integration/C压缩包复核-20261102.md",
+    "docs/integration/c-import.json",
+    "docs/integration/cli-checks.json",
+    "docs/integration/nov02-checks.json",
+    "docs/integration/nov03-planning-checks.json",
+    "docs/integration/progress.md",
+    "docs/integration/task_plan.md",
+    "evaluation/run_record.template.json",
+    "evidence/classification-review-20261103/platform-final.junit.xml",
+    "evidence/classification-review-20261103/platform.junit.xml",
+    "evidence/classification-review-20261103/verification.json",
+    "evidence/last-document-entry-20261103/pytest.junit.xml",
+    "evidence/legacy-naming-review-20261103/platform.junit.xml",
+    "evidence/main-governance-review-20261103/focused.junit.xml",
+    "evidence/main-governance-review-20261103/verification.json",
+    "evidence/main-review-20261102/baseline.png",
+    "evidence/main-review-20261102/browser.json",
+    "evidence/main-review-20261102/c-delivery.txt",
+    "evidence/main-review-20261102/checks.json",
+    "evidence/main-review-20261102/clean-first-attempt.junit.xml",
+    "evidence/main-review-20261102/clean-first-attempt.pytest.txt",
+    "evidence/main-review-20261102/clean-rerun.junit.xml",
+    "evidence/main-review-20261102/clean-rerun.pytest.txt",
+    "evidence/main-review-20261102/doctor.json",
+    "evidence/main-review-20261102/documentation-checks.json",
+    "evidence/main-review-20261102/import-preview.json",
+    "evidence/main-review-20261102/index.json",
+    "evidence/main-review-20261102/projects.json",
+    "evidence/main-review-20261102/prototype.node.txt",
+    "evidence/main-review-20261102/public-blocked.png",
+    "evidence/main-review-20261102/r01-cross-day-probe.json",
+    "evidence/main-review-20261102/run-1184030215e044e69b522bb3c51e5b24.zip",
+    "evidence/main-review-20261102/run-19d94a6b58a84bd9a9101f59438507b8.zip",
+    "evidence/main-review-20261102/worktree.junit.xml",
+    "evidence/main-review-20261102/worktree.pytest.txt",
+    "evidence/protocol-fix-20261103/regression.junit.xml",
+    "evidence/protocol-fix-20261103/verification.json",
+    "evidence/quixbugs-import/baseline.png",
+    "evidence/quixbugs-import/browser.json",
+    "evidence/quixbugs-import/focused.junit.xml",
+    "evidence/quixbugs-import/host-read-probe.json",
+    "evidence/quixbugs-import/import-result.json",
+    "evidence/quixbugs-import/index.json",
+    "evidence/quixbugs-import/permission-focused.junit.xml",
+    "evidence/quixbugs-import/permission-repair.json",
+    "evidence/quixbugs-import/portability-import.json",
+    "evidence/quixbugs-import/pre-permission-fix-index.json",
+    "evidence/quixbugs-import/projects.json",
+    "evidence/quixbugs-import/public-blocked.png",
+    "evidence/quixbugs-import/regression-before-publish-retry.junit.xml",
+    "evidence/quixbugs-import/regression-final.junit.xml",
+    "evidence/quixbugs-import/regression-final.txt",
+    "evidence/quixbugs-import/regression.junit.xml",
+    "evidence/quixbugs-import/regression.txt",
+    "evidence/quixbugs-import/reimport-result.json",
+    "evidence/quixbugs-import/run-47db96c53d014f738f8e1cdaf416c666.zip",
+    "evidence/quixbugs-import/run-db3b322d653b427a8aa16fdf8eef37bc.zip",
+    "evidence/v3-public-tasks/baseline.png",
+    "evidence/v3-public-tasks/browser.json",
+    "evidence/v3-public-tasks/focused.junit.xml",
+    "evidence/v3-public-tasks/index.json",
+    "evidence/v3-public-tasks/projects.json",
+    "evidence/v3-public-tasks/public-blocked.png",
+    "evidence/v3-public-tasks/regression.junit.xml",
+    "evidence/v3-public-tasks/regression.txt",
+    "evidence/v3-public-tasks/run-3404bcbc0d5c4bdab62e191f250affd1.zip",
+    "evidence/v3-public-tasks/run-3a115048b02445babfcb9a83842b713a.zip",
+    "evidence/v3-state-control/focused.junit.xml",
+    "evidence/v3-state-control/http-report.json",
+    "evidence/v3-state-control/http-summary.json",
+    "evidence/v3-state-control/http.junit.xml",
+    "evidence/v3-state-control/index.json",
+    "evidence/v3-state-control/regression.junit.xml",
+    "evidence/v3-state-control/regression.txt",
+    "evidence/v3-state-control/run-b0cd5ade62444282b7fa3a04fe1dc85b.zip",
+    "evidence/v3/baseline.png",
+    "evidence/v3/browser-check.json",
+    "evidence/v3/clean-checkout.junit.xml",
+    "evidence/v3/clean-checkout.txt",
+    "evidence/v3/docker-prerequisites.json",
+    "evidence/v3/doctor.json",
+    "evidence/v3/index.json",
+    "evidence/v3/regression.junit.xml",
+    "evidence/v3/regression.txt",
+    "evidence/v3/repair-blocked.json",
+    "evidence/v3/run-3255f2d3640c40e88289c84e490414ac.zip",
+    "evidence/v3/ui-prototype-tests.txt",
+    "pytest.ini",
+    "requirements-dev.txt",
+    "requirements-lock.txt",
+    "requirements.txt",
+    "scripts/archive_v3_evidence.py",
+    "scripts/check_c_controls.py",
+    "scripts/check_docker_prerequisites.ps1",
+    "scripts/index_v3_evidence.py",
+    "scripts/verify_v3_control.py",
+    "task_assets/leap_legacy/code/leap_year.py",
+    "task_assets/leap_legacy/configs/task.json",
+    "task_assets/leap_legacy/tests/test_leap.py",
+    "task_assets/quixbugs/bitcount/LICENSE",
+    "task_assets/quixbugs/bitcount/conftest.py",
+    "task_assets/quixbugs/bitcount/json_testcases/bitcount.json",
+    "task_assets/quixbugs/bitcount/python_programs/bitcount.py",
+    "task_assets/quixbugs/bitcount/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/bitcount/python_testcases/test_bitcount.py",
+    "task_assets/quixbugs/breadth_first_search/LICENSE",
+    "task_assets/quixbugs/breadth_first_search/conftest.py",
+    "task_assets/quixbugs/breadth_first_search/python_programs/breadth_first_search.py",
+    "task_assets/quixbugs/breadth_first_search/python_testcases/node.py",
+    "task_assets/quixbugs/breadth_first_search/python_testcases/test_breadth_first_search.py",
+    "task_assets/quixbugs/bucketsort/LICENSE",
+    "task_assets/quixbugs/bucketsort/conftest.py",
+    "task_assets/quixbugs/bucketsort/json_testcases/bucketsort.json",
+    "task_assets/quixbugs/bucketsort/python_programs/bucketsort.py",
+    "task_assets/quixbugs/bucketsort/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/bucketsort/python_testcases/test_bucketsort.py",
+    "task_assets/quixbugs/depth_first_search/LICENSE",
+    "task_assets/quixbugs/depth_first_search/conftest.py",
+    "task_assets/quixbugs/depth_first_search/python_programs/depth_first_search.py",
+    "task_assets/quixbugs/depth_first_search/python_testcases/node.py",
+    "task_assets/quixbugs/depth_first_search/python_testcases/test_depth_first_search.py",
+    "task_assets/quixbugs/detect_cycle/LICENSE",
+    "task_assets/quixbugs/detect_cycle/conftest.py",
+    "task_assets/quixbugs/detect_cycle/python_programs/detect_cycle.py",
+    "task_assets/quixbugs/detect_cycle/python_testcases/node.py",
+    "task_assets/quixbugs/detect_cycle/python_testcases/test_detect_cycle.py",
+    "task_assets/quixbugs/find_first_in_sorted/LICENSE",
+    "task_assets/quixbugs/find_first_in_sorted/conftest.py",
+    "task_assets/quixbugs/find_first_in_sorted/json_testcases/find_first_in_sorted.json",
+    "task_assets/quixbugs/find_first_in_sorted/python_programs/find_first_in_sorted.py",
+    "task_assets/quixbugs/find_first_in_sorted/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/find_first_in_sorted/python_testcases/test_find_first_in_sorted.py",
+    "task_assets/quixbugs/find_in_sorted/LICENSE",
+    "task_assets/quixbugs/find_in_sorted/conftest.py",
+    "task_assets/quixbugs/find_in_sorted/json_testcases/find_in_sorted.json",
+    "task_assets/quixbugs/find_in_sorted/python_programs/find_in_sorted.py",
+    "task_assets/quixbugs/find_in_sorted/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/find_in_sorted/python_testcases/test_find_in_sorted.py",
+    "task_assets/quixbugs/flatten/LICENSE",
+    "task_assets/quixbugs/flatten/conftest.py",
+    "task_assets/quixbugs/flatten/json_testcases/flatten.json",
+    "task_assets/quixbugs/flatten/python_programs/flatten.py",
+    "task_assets/quixbugs/flatten/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/flatten/python_testcases/test_flatten.py",
+    "task_assets/quixbugs/gcd/LICENSE",
+    "task_assets/quixbugs/gcd/conftest.py",
+    "task_assets/quixbugs/gcd/json_testcases/gcd.json",
+    "task_assets/quixbugs/gcd/python_programs/gcd.py",
+    "task_assets/quixbugs/gcd/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/gcd/python_testcases/test_gcd.py",
+    "task_assets/quixbugs/get_factors/LICENSE",
+    "task_assets/quixbugs/get_factors/conftest.py",
+    "task_assets/quixbugs/get_factors/json_testcases/get_factors.json",
+    "task_assets/quixbugs/get_factors/python_programs/get_factors.py",
+    "task_assets/quixbugs/get_factors/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/get_factors/python_testcases/test_get_factors.py",
+    "task_assets/quixbugs/hanoi/LICENSE",
+    "task_assets/quixbugs/hanoi/conftest.py",
+    "task_assets/quixbugs/hanoi/json_testcases/hanoi.json",
+    "task_assets/quixbugs/hanoi/python_programs/hanoi.py",
+    "task_assets/quixbugs/hanoi/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/hanoi/python_testcases/test_hanoi.py",
+    "task_assets/quixbugs/is_valid_parenthesization/LICENSE",
+    "task_assets/quixbugs/is_valid_parenthesization/conftest.py",
+    "task_assets/quixbugs/is_valid_parenthesization/json_testcases/is_valid_parenthesization.json",
+    "task_assets/quixbugs/is_valid_parenthesization/python_programs/is_valid_parenthesization.py",
+    "task_assets/quixbugs/is_valid_parenthesization/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/is_valid_parenthesization/python_testcases/test_is_valid_parenthesization.py",
+    "task_assets/quixbugs/kheapsort/LICENSE",
+    "task_assets/quixbugs/kheapsort/conftest.py",
+    "task_assets/quixbugs/kheapsort/json_testcases/kheapsort.json",
+    "task_assets/quixbugs/kheapsort/python_programs/kheapsort.py",
+    "task_assets/quixbugs/kheapsort/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/kheapsort/python_testcases/test_kheapsort.py",
+    "task_assets/quixbugs/knapsack/LICENSE",
+    "task_assets/quixbugs/knapsack/conftest.py",
+    "task_assets/quixbugs/knapsack/json_testcases/knapsack.json",
+    "task_assets/quixbugs/knapsack/python_programs/knapsack.py",
+    "task_assets/quixbugs/knapsack/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/knapsack/python_testcases/test_knapsack.py",
+    "task_assets/quixbugs/kth/LICENSE",
+    "task_assets/quixbugs/kth/conftest.py",
+    "task_assets/quixbugs/kth/json_testcases/kth.json",
+    "task_assets/quixbugs/kth/python_programs/kth.py",
+    "task_assets/quixbugs/kth/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/kth/python_testcases/test_kth.py",
+    "task_assets/quixbugs/lcs_length/LICENSE",
+    "task_assets/quixbugs/lcs_length/conftest.py",
+    "task_assets/quixbugs/lcs_length/json_testcases/lcs_length.json",
+    "task_assets/quixbugs/lcs_length/python_programs/lcs_length.py",
+    "task_assets/quixbugs/lcs_length/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/lcs_length/python_testcases/test_lcs_length.py",
+    "task_assets/quixbugs/levenshtein/LICENSE",
+    "task_assets/quixbugs/levenshtein/conftest.py",
+    "task_assets/quixbugs/levenshtein/json_testcases/levenshtein.json",
+    "task_assets/quixbugs/levenshtein/python_programs/levenshtein.py",
+    "task_assets/quixbugs/levenshtein/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/levenshtein/python_testcases/test_levenshtein.py",
+    "task_assets/quixbugs/lis/LICENSE",
+    "task_assets/quixbugs/lis/conftest.py",
+    "task_assets/quixbugs/lis/json_testcases/lis.json",
+    "task_assets/quixbugs/lis/python_programs/lis.py",
+    "task_assets/quixbugs/lis/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/lis/python_testcases/test_lis.py",
+    "task_assets/quixbugs/longest_common_subsequence/LICENSE",
+    "task_assets/quixbugs/longest_common_subsequence/conftest.py",
+    "task_assets/quixbugs/longest_common_subsequence/json_testcases/longest_common_subsequence.json",
+    "task_assets/quixbugs/longest_common_subsequence/python_programs/longest_common_subsequence.py",
+    "task_assets/quixbugs/longest_common_subsequence/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/longest_common_subsequence/python_testcases/test_longest_common_subsequence.py",
+    "task_assets/quixbugs/max_sublist_sum/LICENSE",
+    "task_assets/quixbugs/max_sublist_sum/conftest.py",
+    "task_assets/quixbugs/max_sublist_sum/json_testcases/max_sublist_sum.json",
+    "task_assets/quixbugs/max_sublist_sum/python_programs/max_sublist_sum.py",
+    "task_assets/quixbugs/max_sublist_sum/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/max_sublist_sum/python_testcases/test_max_sublist_sum.py",
+    "task_assets/quixbugs/mergesort/LICENSE",
+    "task_assets/quixbugs/mergesort/conftest.py",
+    "task_assets/quixbugs/mergesort/json_testcases/mergesort.json",
+    "task_assets/quixbugs/mergesort/python_programs/mergesort.py",
+    "task_assets/quixbugs/mergesort/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/mergesort/python_testcases/test_mergesort.py",
+    "task_assets/quixbugs/minimum_spanning_tree/LICENSE",
+    "task_assets/quixbugs/minimum_spanning_tree/conftest.py",
+    "task_assets/quixbugs/minimum_spanning_tree/python_programs/minimum_spanning_tree.py",
+    "task_assets/quixbugs/minimum_spanning_tree/python_testcases/test_minimum_spanning_tree.py",
+    "task_assets/quixbugs/next_palindrome/LICENSE",
+    "task_assets/quixbugs/next_palindrome/conftest.py",
+    "task_assets/quixbugs/next_palindrome/json_testcases/next_palindrome.json",
+    "task_assets/quixbugs/next_palindrome/python_programs/next_palindrome.py",
+    "task_assets/quixbugs/next_palindrome/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/next_palindrome/python_testcases/test_next_palindrome.py",
+    "task_assets/quixbugs/next_permutation/LICENSE",
+    "task_assets/quixbugs/next_permutation/conftest.py",
+    "task_assets/quixbugs/next_permutation/json_testcases/next_permutation.json",
+    "task_assets/quixbugs/next_permutation/python_programs/next_permutation.py",
+    "task_assets/quixbugs/next_permutation/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/next_permutation/python_testcases/test_next_permutation.py",
+    "task_assets/quixbugs/pascal/LICENSE",
+    "task_assets/quixbugs/pascal/conftest.py",
+    "task_assets/quixbugs/pascal/json_testcases/pascal.json",
+    "task_assets/quixbugs/pascal/python_programs/pascal.py",
+    "task_assets/quixbugs/pascal/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/pascal/python_testcases/test_pascal.py",
+    "task_assets/quixbugs/possible_change/LICENSE",
+    "task_assets/quixbugs/possible_change/conftest.py",
+    "task_assets/quixbugs/possible_change/json_testcases/possible_change.json",
+    "task_assets/quixbugs/possible_change/python_programs/possible_change.py",
+    "task_assets/quixbugs/possible_change/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/possible_change/python_testcases/test_possible_change.py",
+    "task_assets/quixbugs/powerset/LICENSE",
+    "task_assets/quixbugs/powerset/conftest.py",
+    "task_assets/quixbugs/powerset/json_testcases/powerset.json",
+    "task_assets/quixbugs/powerset/python_programs/powerset.py",
+    "task_assets/quixbugs/powerset/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/powerset/python_testcases/test_powerset.py",
+    "task_assets/quixbugs/quicksort/LICENSE",
+    "task_assets/quixbugs/quicksort/conftest.py",
+    "task_assets/quixbugs/quicksort/json_testcases/quicksort.json",
+    "task_assets/quixbugs/quicksort/python_programs/quicksort.py",
+    "task_assets/quixbugs/quicksort/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/quicksort/python_testcases/test_quicksort.py",
+    "task_assets/quixbugs/reverse_linked_list/LICENSE",
+    "task_assets/quixbugs/reverse_linked_list/conftest.py",
+    "task_assets/quixbugs/reverse_linked_list/python_programs/reverse_linked_list.py",
+    "task_assets/quixbugs/reverse_linked_list/python_testcases/node.py",
+    "task_assets/quixbugs/reverse_linked_list/python_testcases/test_reverse_linked_list.py",
+    "task_assets/quixbugs/rpn_eval/LICENSE",
+    "task_assets/quixbugs/rpn_eval/conftest.py",
+    "task_assets/quixbugs/rpn_eval/json_testcases/rpn_eval.json",
+    "task_assets/quixbugs/rpn_eval/python_programs/rpn_eval.py",
+    "task_assets/quixbugs/rpn_eval/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/rpn_eval/python_testcases/test_rpn_eval.py",
+    "task_assets/quixbugs/shortest_path_length/LICENSE",
+    "task_assets/quixbugs/shortest_path_length/conftest.py",
+    "task_assets/quixbugs/shortest_path_length/python_programs/shortest_path_length.py",
+    "task_assets/quixbugs/shortest_path_length/python_testcases/node.py",
+    "task_assets/quixbugs/shortest_path_length/python_testcases/test_shortest_path_length.py",
+    "task_assets/quixbugs/shortest_path_lengths/LICENSE",
+    "task_assets/quixbugs/shortest_path_lengths/conftest.py",
+    "task_assets/quixbugs/shortest_path_lengths/python_programs/shortest_path_lengths.py",
+    "task_assets/quixbugs/shortest_path_lengths/python_testcases/test_shortest_path_lengths.py",
+    "task_assets/quixbugs/shortest_paths/LICENSE",
+    "task_assets/quixbugs/shortest_paths/conftest.py",
+    "task_assets/quixbugs/shortest_paths/python_programs/shortest_paths.py",
+    "task_assets/quixbugs/shortest_paths/python_testcases/test_shortest_paths.py",
+    "task_assets/quixbugs/shunting_yard/LICENSE",
+    "task_assets/quixbugs/shunting_yard/conftest.py",
+    "task_assets/quixbugs/shunting_yard/json_testcases/shunting_yard.json",
+    "task_assets/quixbugs/shunting_yard/python_programs/shunting_yard.py",
+    "task_assets/quixbugs/shunting_yard/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/shunting_yard/python_testcases/test_shunting_yard.py",
+    "task_assets/quixbugs/sieve/LICENSE",
+    "task_assets/quixbugs/sieve/conftest.py",
+    "task_assets/quixbugs/sieve/json_testcases/sieve.json",
+    "task_assets/quixbugs/sieve/python_programs/sieve.py",
+    "task_assets/quixbugs/sieve/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/sieve/python_testcases/test_sieve.py",
+    "task_assets/quixbugs/sqrt/LICENSE",
+    "task_assets/quixbugs/sqrt/conftest.py",
+    "task_assets/quixbugs/sqrt/json_testcases/sqrt.json",
+    "task_assets/quixbugs/sqrt/python_programs/sqrt.py",
+    "task_assets/quixbugs/sqrt/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/sqrt/python_testcases/test_sqrt.py",
+    "task_assets/quixbugs/subsequences/LICENSE",
+    "task_assets/quixbugs/subsequences/conftest.py",
+    "task_assets/quixbugs/subsequences/json_testcases/subsequences.json",
+    "task_assets/quixbugs/subsequences/python_programs/subsequences.py",
+    "task_assets/quixbugs/subsequences/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/subsequences/python_testcases/test_subsequences.py",
+    "task_assets/quixbugs/to_base/LICENSE",
+    "task_assets/quixbugs/to_base/conftest.py",
+    "task_assets/quixbugs/to_base/json_testcases/to_base.json",
+    "task_assets/quixbugs/to_base/python_programs/to_base.py",
+    "task_assets/quixbugs/to_base/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/to_base/python_testcases/test_to_base.py",
+    "task_assets/quixbugs/topological_ordering/LICENSE",
+    "task_assets/quixbugs/topological_ordering/conftest.py",
+    "task_assets/quixbugs/topological_ordering/python_programs/topological_ordering.py",
+    "task_assets/quixbugs/topological_ordering/python_testcases/node.py",
+    "task_assets/quixbugs/topological_ordering/python_testcases/test_topological_ordering.py",
+    "task_assets/quixbugs/wrap/LICENSE",
+    "task_assets/quixbugs/wrap/conftest.py",
+    "task_assets/quixbugs/wrap/json_testcases/wrap.json",
+    "task_assets/quixbugs/wrap/python_programs/wrap.py",
+    "task_assets/quixbugs/wrap/python_testcases/load_testdata.py",
+    "task_assets/quixbugs/wrap/python_testcases/test_wrap.py",
+    "tests/browser_v3.cjs",
+    "tests/test_api_v3.py",
+    "tests/test_bc_contract.py",
+    "tests/test_control_boundaries.py",
+    "tests/test_docker_contract.py",
+    "tests/test_knowledge_runner.py",
+    "tests/test_mock_workflow.py",
+    "tests/test_model_client.py",
+    "tests/test_model_context.py",
+    "tests/test_quixbugs_import.py",
+    "tests/test_role_config.py",
+    "tests/test_run_store.py",
+    "tests/test_runner_live.py",
+    "tests/test_tasks_v3.py",
+    "tests/test_v02_core.py",
+    "tests/test_workflow_v3.py",
+    "tests/ui_prototype.test.cjs",
+    "ui/app/app.js",
+    "ui/app/index.html",
+    "ui/app/theme.css",
+    "ui/prototype/index.html"
+  ],
+  "authorized_runtime_changes_vs_governance_baseline": [
+    {
+      "path": ".gitattributes",
+      "governance_baseline_sha256": "18740144e68711d2234a5cddca28084dcbe1374e9dd01306469f237fdd70fa22",
+      "current_raw_sha256": "c634a7fbd88bf4598cc3fedbbb4b2bad996bb3231e3fa5a68635ed6e551050fb"
+    },
+    {
+      "path": "app/agents_v3.py",
+      "governance_baseline_sha256": "76bf729bda1d9b225a0df271dd9ec66d53c27f273cefb3e6183cf85198c2fd18",
+      "current_raw_sha256": "fae0293937df504a68bfd38b8078b808ba016589fa60e13bc695a39796d515ef"
+    },
+    {
+      "path": "app/api.py",
+      "governance_baseline_sha256": "5ff94d3554ebb7e65b3e30b9aba7b8db44cb948672b99a207f4fc798813a33df",
+      "current_raw_sha256": "a2f8bb7290c404e5b419942ad3f59d98a5fb45658f55a81df30e508106bd4ffb"
+    },
+    {
+      "path": "app/live_model.py",
+      "governance_baseline_sha256": "69fbe4042daababc42c8c62370ac0c81f15f3affe74ef956c00b04d4976e1cb9",
+      "current_raw_sha256": "0d98e34581f90918fbc0074a34da1758e502046ad7bc9eab0d6bedfb12afb10e"
+    },
+    {
+      "path": "app/readiness.py",
+      "governance_baseline_sha256": "9e2b943990ce4da6537cb13d18a0a6dcd4671c6c9df1544283d5160767f1f954",
+      "current_raw_sha256": "f19a6f4c9e4aaf94708c1bb2479e2486fe2fad3131a398f4e07d137dd07a1f64"
+    },
+    {
+      "path": "app/role_config.py",
+      "governance_baseline_sha256": "396ca92207be1ddefca219d0b35662d940b56b4f7a6cae34d20b92093c242c54",
+      "current_raw_sha256": "0431a95f9dc7f6daf6ff7dca75f6a5852de3c0213d16527744a8b91c962ded4a"
+    },
+    {
+      "path": "app/run_store.py",
+      "governance_baseline_sha256": "05ab7a2b243784e05d3a9bef964aa70760e4fd7ebb8d0c061ce1536fa5027a25",
+      "current_raw_sha256": "64005c002c8195a2f0034c3e31fc7f6acb8bef9a832f4c9005caac9a82465a19"
+    },
+    {
+      "path": "app/service.py",
+      "governance_baseline_sha256": "55e0768a5c295bb7e0f3bacf4230ea15d6fd375f68da03cf9d3ee950fd9f73b1",
+      "current_raw_sha256": "79f4351f2038848bb55e40253f1a1819b7b3579f217e89306b56557e13a195d5"
+    },
+    {
+      "path": "app/workflow_v3.py",
+      "governance_baseline_sha256": "802cfba602d608baa117b6ea2fdb720a2b14ae35acb65f0da1fb2274bd1dcab7",
+      "current_raw_sha256": "aaf5d063127f8a0c9fea96081eeb59a672ce70f2f0177897574f4f696e29cb11"
+    },
+    {
+      "path": "tests/test_agents_v3.py",
+      "governance_baseline_sha256": "4ef89e3132d1ae95e5e593c26d14b0ac95e9301fd98fd045810357b665fef693",
+      "current_raw_sha256": "439006325ac8e2362d1b710362e4d7c2f6a1f8d1c25b796141ae8fc441c88261"
+    }
+  ],
+  "v3_sha256": "5d62dc0e75d1795f3b318f179f985f25d31b24cb42e01a66db87c87120a72d8b",
+  "tasks": {
+    "total": 46,
+    "completed_scoped": 26,
+    "pending": 20
+  },
+  "current_links_checked": 334,
+  "anchors_checked": 94,
+  "source_hashes": {
+    "app/__init__.py": {
+      "raw_sha256": "173fc1a5a6bcb3b1b746e4ea38b6faf62a8b5e86ba81b1197b41de7c5ba607c2",
+      "lf_normalized_sha256": "80d3559255b5cdd4849dcda41ea54065c0a66b77beba13568551c6ec7cff2f72"
+    },
+    "app/agents_v3.py": {
+      "raw_sha256": "fae0293937df504a68bfd38b8078b808ba016589fa60e13bc695a39796d515ef",
+      "lf_normalized_sha256": "0e1db97dac6ff1274293028fc1b6722913c9ee22d7a250a0e592b71afdc83c59"
+    },
+    "app/api.py": {
+      "raw_sha256": "a2f8bb7290c404e5b419942ad3f59d98a5fb45658f55a81df30e508106bd4ffb",
+      "lf_normalized_sha256": "a2f8bb7290c404e5b419942ad3f59d98a5fb45658f55a81df30e508106bd4ffb"
+    },
+    "app/baseline.py": {
+      "raw_sha256": "881d85af46a34c73d2019f5a0186dd37183e06d06d01350c29c9678a2724fcb9",
+      "lf_normalized_sha256": "e93d301263e3ad8f0633e10f597b9025e9256fca68f648ba254a90c969c77873"
+    },
+    "app/candidates.py": {
+      "raw_sha256": "9bf6529736072b97e84e4dc2d768d0693e2f160a018dcf69fcf8f22590b4d7d0",
+      "lf_normalized_sha256": "9bf6529736072b97e84e4dc2d768d0693e2f160a018dcf69fcf8f22590b4d7d0"
+    },
+    "app/cli.py": {
+      "raw_sha256": "43effd2a480805af5738cfe952b602dd7f8ffce0b78c43566037a547f788e38f",
+      "lf_normalized_sha256": "e20761cf1a341b3226f840863c1e7740599d373d9cd6f5a061c40f96d3180169"
+    },
+    "app/config.py": {
+      "raw_sha256": "290a332077f5c582b2e74a5994891679de5a29cb6d688de7381cff32cc913a59",
+      "lf_normalized_sha256": "8194726148a7dc2a851805ede8082c9c7e90ce20f5f8fc6b2155d1046dd9a9ce"
+    },
+    "app/decision.py": {
+      "raw_sha256": "e8b195a02ce3b323cd327d6211214f8f5d524609c4eb3e7a9ef152ce98c28346",
+      "lf_normalized_sha256": "62fbfd2f301f3be2c15420e6b8854a19456a7af6c7cb62b36b411007061bb7c1"
+    },
+    "app/docker_runner.py": {
+      "raw_sha256": "a9cc470ff13a867c2b08196b9556da65397ad28e8637d746a53949eafe56d2ac",
+      "lf_normalized_sha256": "a9cc470ff13a867c2b08196b9556da65397ad28e8637d746a53949eafe56d2ac"
+    },
+    "app/knowledge.py": {
+      "raw_sha256": "1e0fee91eb44bab3952021eaefb045183693c86d690e6216921ea1f94ed0978a",
+      "lf_normalized_sha256": "5b80374d2bedd063f3088369c8526b0a9d11a2559ebb02ccc81454f6825bffe5"
+    },
+    "app/live_model.py": {
+      "raw_sha256": "0d98e34581f90918fbc0074a34da1758e502046ad7bc9eab0d6bedfb12afb10e",
+      "lf_normalized_sha256": "0d98e34581f90918fbc0074a34da1758e502046ad7bc9eab0d6bedfb12afb10e"
+    },
+    "app/mock_workflow.py": {
+      "raw_sha256": "924184ef228850b4fafbfce6770624ada885d39df05e77a4a5f8e380f6a8a8e8",
+      "lf_normalized_sha256": "cea71ca0fcbf287fc9336a3f5733e619b22ce257591e0de368f0a37d14aea792"
+    },
+    "app/model_client.py": {
+      "raw_sha256": "b2d1f9c8795e3400c84514ab50323459727a6c1eafe3fb12a5d7ae5328f1e2cf",
+      "lf_normalized_sha256": "b10711aab450679e9d2389c8464680f9765d0ca389539bf86ed983485d01fb5c"
+    },
+    "app/model_context.py": {
+      "raw_sha256": "a846be7ea7075772e6739ded3ab622810c45a60e0c704552c60b06511a80bae3",
+      "lf_normalized_sha256": "bab942b062788b0a18edb9290f4d104f80525e34f7411d192ae03d87f3cb13ee"
+    },
+    "app/model_profiles.py": {
+      "raw_sha256": "683a8750f403fe3656188e7c8826a2233b5658d60d76e79c2dfa9a6250d577b7",
+      "lf_normalized_sha256": "683a8750f403fe3656188e7c8826a2233b5658d60d76e79c2dfa9a6250d577b7"
+    },
+    "app/public_baseline.py": {
+      "raw_sha256": "2d8bb8485ad25ae810f899ccfbbc2f4c0988555f5f4fad3b4453dcb1476c9618",
+      "lf_normalized_sha256": "2d8bb8485ad25ae810f899ccfbbc2f4c0988555f5f4fad3b4453dcb1476c9618"
+    },
+    "app/quixbugs_import.py": {
+      "raw_sha256": "af2d57b139d84bd5866573dc163978880cac0bccdfa76b4ef127f66dc4297165",
+      "lf_normalized_sha256": "af2d57b139d84bd5866573dc163978880cac0bccdfa76b4ef127f66dc4297165"
+    },
+    "app/readiness.py": {
+      "raw_sha256": "f19a6f4c9e4aaf94708c1bb2479e2486fe2fad3131a398f4e07d137dd07a1f64",
+      "lf_normalized_sha256": "f19a6f4c9e4aaf94708c1bb2479e2486fe2fad3131a398f4e07d137dd07a1f64"
+    },
+    "app/repair_output.py": {
+      "raw_sha256": "cca4f5bb906d66b57435d9ade0c39c4f0fdac5f77cfa7ff832985fdf0e59fe71",
+      "lf_normalized_sha256": "ac9fb86e22648b0286bb625ef87b77d8bc36bcb0d39ccc3e603c58af750826e7"
+    },
+    "app/role_config.py": {
+      "raw_sha256": "0431a95f9dc7f6daf6ff7dca75f6a5852de3c0213d16527744a8b91c962ded4a",
+      "lf_normalized_sha256": "4fc5280c97c07d8459247ea90e8ecf5d21d16435c726723ed3ca5a721218366b"
+    },
+    "app/run_store.py": {
+      "raw_sha256": "64005c002c8195a2f0034c3e31fc7f6acb8bef9a832f4c9005caac9a82465a19",
+      "lf_normalized_sha256": "64005c002c8195a2f0034c3e31fc7f6acb8bef9a832f4c9005caac9a82465a19"
+    },
+    "app/runner.py": {
+      "raw_sha256": "e3b58aeec2eea18e723af88345d01cd08c1b81343ffa0806b870df4bcc0d3a27",
+      "lf_normalized_sha256": "92b6a149047048e8939aeec9138c1a1e28a1d879b1485f2b9af280c70e30018c"
+    },
+    "app/security.py": {
+      "raw_sha256": "6ca01964d8f314045e871ab31cd14a367636497c9fa9a37cb9e97c96262df75e",
+      "lf_normalized_sha256": "61fe7c5f32ef8386ebaf7efe6c63b7c38da60ee360d720de94aabd42521e33b5"
+    },
+    "app/service.py": {
+      "raw_sha256": "79f4351f2038848bb55e40253f1a1819b7b3579f217e89306b56557e13a195d5",
+      "lf_normalized_sha256": "79f4351f2038848bb55e40253f1a1819b7b3579f217e89306b56557e13a195d5"
+    },
+    "app/tasks_v3.py": {
+      "raw_sha256": "20215bb2bdb61ad035922bd8d0c593e07863dfc3c46eed872332043180bc8fb8",
+      "lf_normalized_sha256": "20215bb2bdb61ad035922bd8d0c593e07863dfc3c46eed872332043180bc8fb8"
+    },
+    "app/trace.py": {
+      "raw_sha256": "0a5a2dcfed85586def39fb24debb1cadd561bf1cb7ab6abb530c38eed7ae8546",
+      "lf_normalized_sha256": "0a5a2dcfed85586def39fb24debb1cadd561bf1cb7ab6abb530c38eed7ae8546"
+    },
+    "app/workflow_v3.py": {
+      "raw_sha256": "aaf5d063127f8a0c9fea96081eeb59a672ce70f2f0177897574f4f696e29cb11",
+      "lf_normalized_sha256": "a0eda295792b9850d33d69185e758742820120e34c65242739cca995ea4c0367"
+    },
+    "c_runner/__init__.py": {
+      "raw_sha256": "1164d633d056b2c43a0e47ec7bf2654aee9b16a9c409fe8be94ae4b1690fd975",
+      "lf_normalized_sha256": "fc46643ef998402deb32672642c5a5d98ad289f4549133df56907ec445a61b26"
+    },
+    "c_runner/profiles.json": {
+      "raw_sha256": "059533b8ca91d1b1863035f15dfc3f007beb24a1bc1dc5e3204a2ddc66fc3de1",
+      "lf_normalized_sha256": "efa0021668ae72bc2fa3daa69b8089c3e7a04629145d88bbdb275869fcec8475"
+    },
+    "c_runner/pytest_entry.py": {
+      "raw_sha256": "09550a848f7e2ba8e8aaeeedf11e9792ff42cfc9ffc828ee0efdba5dfb2571f8",
+      "lf_normalized_sha256": "d12064729c31eaa1b023152cda8c6b7bd44e0bccb414beef3d1894dd7c477660"
+    },
+    "c_runner/README.md": {
+      "raw_sha256": "f7c02549961655038fbb30ac4867edaedfa1c939a5724f8e35a372d4f9668c07",
+      "lf_normalized_sha256": "1e616cf8fc4efb72e7c70ee4bd428f17c6e6ce7c741097e1cadea348bf5827f1"
+    },
+    "c_runner/runner.py": {
+      "raw_sha256": "41a22669e23e66a1a5c17655802c158d7eeb242d3bc09b27c7577af0d6463882",
+      "lf_normalized_sha256": "c8d8d1b13c8a8040749137ea32bda82d3d869de187b65296d6f049e8f4e20ad4"
+    },
+    "c_tests/conftest.py": {
+      "raw_sha256": "b4eb060d0c12310a834335f626e3997522e9196545c24856d49c5a6b6fba1b8c",
+      "lf_normalized_sha256": "db6c944829b26381d0277184b86710d4cb63d20c5ebfb962665a6b2289cc0983"
+    },
+    "c_tests/README.md": {
+      "raw_sha256": "d02afa11f3a28bd84c8a4d6db0e725c374f97f4ea5093a79d1686a492dc65b91",
+      "lf_normalized_sha256": "af1059f41ade803facd743aa46f81dab65a35095b57aebd327fb1d29c045a867"
+    },
+    "c_tests/test_evidence_integrity.py": {
+      "raw_sha256": "7dcb05e8d7c54ccc3279095ab4d4da54155210dc192c21c36be38bc70e8773cb",
+      "lf_normalized_sha256": "d814516dc6edf99745c3f6c1a17ae19e24d4184cd0ffe38b29b7456ae6f8b09a"
+    },
+    "c_tests/test_evidence_write.py": {
+      "raw_sha256": "83f3b5f3bb016e741906ac8fa1363853468e0308eba6623a9f2dffe5905f8131",
+      "lf_normalized_sha256": "43a8e0bca25fd897403f46a8c6c911d669522eb8401786002dfe2c93db3409d7"
+    },
+    "c_tests/test_runner.py": {
+      "raw_sha256": "623443700da93602f140074513925f7af9c85857001232330919a46f93d92741",
+      "lf_normalized_sha256": "6a5244e6bc1d75afc20c69ca669a7dbdc01b794fecf706614150082238143d87"
+    },
+    "configs/agents.json": {
+      "raw_sha256": "d9b67baaedff7acf1a2574b25b87f02683ac1ba8a8ff19f183a2921847c86d84",
+      "lf_normalized_sha256": "500854e8c5711b6a1692f11edcc2acbee0ab572c2beb657c2dd523f62dbbf0c5"
+    },
+    "configs/decision_rules.json": {
+      "raw_sha256": "cbae65a5b20fee23d0589bdceed370b41d546f962e4b99c8c3f8384130f21a05",
+      "lf_normalized_sha256": "81326761897f3ceead2c128e06236f9ffd3c02792c12171ca7fab0ce9c127001"
+    },
+    "configs/interface_examples.json": {
+      "raw_sha256": "0b58a56061aeee0c4914e1be2967e37434fa4a0ca1438e098d3efbc9a912721d",
+      "lf_normalized_sha256": "e02b91e113a96553f8abf5cf4a50302ef8859da1398e5cc690ca123619a7e43e"
+    },
+    "configs/model_profiles.json": {
+      "raw_sha256": "99d491694f11e7b63c44c96995e3d3af348f66832b035494bb90dce84c527868",
+      "lf_normalized_sha256": "99d491694f11e7b63c44c96995e3d3af348f66832b035494bb90dce84c527868"
+    },
+    "configs/tasks/catalog-v3.json": {
+      "raw_sha256": "b4b30f23625d8ae33d6db8b8633ed5efb95e580de1155c8d9e93e5118aeda173",
+      "lf_normalized_sha256": "540c236d797098da4b66000aa3eb64aa054819e4070198ecbfc6e8befc54344f"
+    },
+    "configs/tasks/leap-baseline.json": {
+      "raw_sha256": "623049f5f4a0acd22508ea7742a576916ff165b5dd293ac43c20a84695987044",
+      "lf_normalized_sha256": "465d74aecdab70de552b7fe94af19af46636290021f314114468d3c95804e90b"
+    },
+    "configs/test_plan.json": {
+      "raw_sha256": "ee4930bdbc82822b1a70800a7fdc44dbb03fd98da6420e6d246bedc91fe9d3fd",
+      "lf_normalized_sha256": "a4055b32530351e6e03f6a23740288f0fd5721a3233fda27a8600a670f0e1b88"
+    },
+    "prompts/detector.md": {
+      "raw_sha256": "6efdcb821ae1464cb0ac6e3972c39746a35bbbd0683f7e0937ef46dd443a9926",
+      "lf_normalized_sha256": "6efdcb821ae1464cb0ac6e3972c39746a35bbbd0683f7e0937ef46dd443a9926"
+    },
+    "prompts/locator.md": {
+      "raw_sha256": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+      "lf_normalized_sha256": "bdc608ab82376807b472a1d7bb6cd112118e8fdd9b55f970294b60a886c068e4"
+    },
+    "prompts/repairer.md": {
+      "raw_sha256": "5d78e4c3f12752b9a4d66584c1a95b1229fb3d023c92d9e6d736625dc2d8e177",
+      "lf_normalized_sha256": "638ba6f34303cee630fd9304cc46ce12bd6775ad08c780ae95e920f93aafc6ab"
+    },
+    "prompts/reviewer.md": {
+      "raw_sha256": "2fbfa806f864797cf3bd51ce04447215c464f477ac9ceffeac80f0953f91f61c",
+      "lf_normalized_sha256": "802150b12c70312be27e5fdd60430b4d11cd8b808b78b34b021245a3e641ea3f"
+    },
+    "prompts/scheduler.md": {
+      "raw_sha256": "345b41671e2e47938111ac6ff5d93ab28bc2cd4e6dc289594eaa8c889d8eb79a",
+      "lf_normalized_sha256": "345b41671e2e47938111ac6ff5d93ab28bc2cd4e6dc289594eaa8c889d8eb79a"
+    },
+    "pytest.ini": {
+      "raw_sha256": "de189d43b9c8943095e8ec1df3be466296dd961bb026024512f39b204ddf410f",
+      "lf_normalized_sha256": "da3381a16e839df1163d26c6580156614c7ad45834f2a3afc7e28a1355ba17b1"
+    },
+    "requirements-lock.txt": {
+      "raw_sha256": "4cb7b17a16684b26b87ce103056cf5c9cf42d1d77c383dacdd64ae2d2270b50b",
+      "lf_normalized_sha256": "9d56c0d75eca8950c27161fc6641430812f119926780bddc2934b39c80c48dc1"
+    },
+    "requirements.txt": {
+      "raw_sha256": "feafd3f269d4e48a746e86cdd489379ab4cc47d70a1104bf489ec7441c35b580",
+      "lf_normalized_sha256": "feafd3f269d4e48a746e86cdd489379ab4cc47d70a1104bf489ec7441c35b580"
+    },
+    "tests/browser_v3.cjs": {
+      "raw_sha256": "ba94bf34ae3ea1e06f29f85df2906968c88415e6d18c007d6a45c605829318e0",
+      "lf_normalized_sha256": "ba94bf34ae3ea1e06f29f85df2906968c88415e6d18c007d6a45c605829318e0"
+    },
+    "tests/test_agents_v3.py": {
+      "raw_sha256": "439006325ac8e2362d1b710362e4d7c2f6a1f8d1c25b796141ae8fc441c88261",
+      "lf_normalized_sha256": "439006325ac8e2362d1b710362e4d7c2f6a1f8d1c25b796141ae8fc441c88261"
+    },
+    "tests/test_api_v3.py": {
+      "raw_sha256": "02dc8f0a1e9507a2c1e28e171d89774a2db9a71b46cb0842a99491fb075b5dc4",
+      "lf_normalized_sha256": "02dc8f0a1e9507a2c1e28e171d89774a2db9a71b46cb0842a99491fb075b5dc4"
+    },
+    "tests/test_bc_contract.py": {
+      "raw_sha256": "aaf0bf1437db3079db40971658c5e3abccef63b4d4f59d74ddd728cf2d6e382a",
+      "lf_normalized_sha256": "9552e7941dfe84e65af3a0f3f2c85e765448f5a100035a4b848dfc23317dc733"
+    },
+    "tests/test_contest_core.py": {
+      "raw_sha256": "cbe6054dd1d5c1ca826dd0f4ccb303d26812377b2a61b01540b307903280ab84",
+      "lf_normalized_sha256": "cbe6054dd1d5c1ca826dd0f4ccb303d26812377b2a61b01540b307903280ab84"
+    },
+    "tests/test_control_boundaries.py": {
+      "raw_sha256": "839d62f44d91d938efb08c995adae42d3556fa831c120cbb5a00513db7c37883",
+      "lf_normalized_sha256": "40f0f61c42cf30ab13da4c7ec2f4496fcc6f96f892f1714f40637eda52b35953"
+    },
+    "tests/test_docker_contract.py": {
+      "raw_sha256": "d7be68f0e2debfaeb3aba3796f4cd55f8775672f090e77a43a2d37807da99804",
+      "lf_normalized_sha256": "d7be68f0e2debfaeb3aba3796f4cd55f8775672f090e77a43a2d37807da99804"
+    },
+    "tests/test_knowledge_runner.py": {
+      "raw_sha256": "4540e95d84d8fe5f48b13902b02009663d5a399cd497733bb9707da37ca9da5c",
+      "lf_normalized_sha256": "d57cebb5cfdc28807eaf41caa940facabfa07c3626e078cfcbedfab4b3dc7b3f"
+    },
+    "tests/test_mock_workflow.py": {
+      "raw_sha256": "f9dfbed48038ca612e2aee0daab79410c8921c1d8b00cc4f4e3dc9d08f74d190",
+      "lf_normalized_sha256": "c422720b5dbc9107f75936c4158c040ab0453581b2cadcaf6e75a4fe2520c34b"
+    },
+    "tests/test_model_client.py": {
+      "raw_sha256": "471938159e7377a3c21322eaa4f6bcc8ec42819648b0d631df2a63c0e5b669a5",
+      "lf_normalized_sha256": "e0a50dd05313a087c841953cdaa5d5f146ced1b4395bf4966903ec5b1125e2a3"
+    },
+    "tests/test_model_context.py": {
+      "raw_sha256": "34e3fbd0656b390c563991b0b4650ee2df79a2e8b8d8ee9ceac8f75f78f1dea6",
+      "lf_normalized_sha256": "514debf33a019d4a664f9d5b9e2fda58539352366b88eb35c0de15dac396f8c9"
+    },
+    "tests/test_quixbugs_import.py": {
+      "raw_sha256": "25a46a39593f9a3d7be5d50b31a40d0606fcbc1992e9c94433f772ee3226d9d5",
+      "lf_normalized_sha256": "25a46a39593f9a3d7be5d50b31a40d0606fcbc1992e9c94433f772ee3226d9d5"
+    },
+    "tests/test_role_config.py": {
+      "raw_sha256": "ddb158371c311c705f12aea8097cf0d4bf581a28edabb5ea140b5a75b0b0d972",
+      "lf_normalized_sha256": "8876f4b00240c1dc1f460ecd312947164ae3c122effe79ca72066402912f3145"
+    },
+    "tests/test_run_store.py": {
+      "raw_sha256": "dc6d1bd0aed4e4b38aad0e230b611c05b596f12993107c996bdc9461dc32a0cb",
+      "lf_normalized_sha256": "dc6d1bd0aed4e4b38aad0e230b611c05b596f12993107c996bdc9461dc32a0cb"
+    },
+    "tests/test_runner_live.py": {
+      "raw_sha256": "91f22e3b0867cae3d0779b21ff02f1d4c102d27a2e7e9fd5d1c759bb513419d3",
+      "lf_normalized_sha256": "51e3fa41ede30bf0bf8e0a6a0bc8b6e13fa1f97aae58866e2873179e96a08086"
+    },
+    "tests/test_tasks_v3.py": {
+      "raw_sha256": "20d1024def3d48a0800ebb3d05fdd6dc526b56d4380f304f92447403559edcab",
+      "lf_normalized_sha256": "20d1024def3d48a0800ebb3d05fdd6dc526b56d4380f304f92447403559edcab"
+    },
+    "tests/test_v02_core.py": {
+      "raw_sha256": "3740f51dc1d9a45244d4f9e2b7d0f5dd91053eb4cc756fe99f3f60f5b4506fd4",
+      "lf_normalized_sha256": "bd319849a5f8245c0dcfeec506a03edf25a63c68c5933d740c4e03f0455cfd4f"
+    },
+    "tests/test_workflow_v3.py": {
+      "raw_sha256": "26971b7b761c7d5eeb26243afdc6e4efe6b36d5b6c38175ec93e9937b4788ed8",
+      "lf_normalized_sha256": "26971b7b761c7d5eeb26243afdc6e4efe6b36d5b6c38175ec93e9937b4788ed8"
+    },
+    "tests/ui_prototype.test.cjs": {
+      "raw_sha256": "292fd864dd8d49d1d87f625e6da5aa1845437a6839f6847622a19746f738f4ef",
+      "lf_normalized_sha256": "fe6bfb3f5ed0b58c77066bb883a5532c213ebeb217b847719865dbe809268fed"
+    }
+  },
+  "artifact_sha256": {
+    "final-platform.junit.xml": "5af581bf25292a02fbf7a95590237e39b78fb5f4883020a08669f4c2a5dffbbb",
+    "first-specialist.junit.xml": "4f85b76c2cd0d12cd52dcdc764e33c0cee1621a76f2714fd54a781d89b308602",
+    "intermediate-platform.junit.xml": "90f686934f51c6ee4b30959563edc8b2881a92a740fae78dc719b39f7fa08eb1",
+    "offline_stub_samples/advice_pause/handoff.json": "e6ba08b48ac48c372369f0cfc5f695b0ef481146c6b65274a4fab2793d4d8064",
+    "offline_stub_samples/advice_pause/sample.json": "1479234c68591bfeed767c87c687ddd9fce9f2d8509722196fdfb078ceeb44bb",
+    "offline_stub_samples/advice_pause/trace/configuration.json": "ba052291cb402e76ea518981cfe87952458756db6e6c8df04a52bdb9d7e96943",
+    "offline_stub_samples/advice_pause/trace/decisions/d-383c87a83b1747e69ae04367706782c9.json": "993fc08a8498f7d182e72d15c980f8ed59dc6da09c121dda1d7d40f66e6ab97e",
+    "offline_stub_samples/advice_pause/trace/decisions/d-5bc583b2af8f4b2297ba90df13c22528.json": "48932c16ceb0d1b9ad10ce122f5e8382aead13782e02e5ae06f0d1bc3b9e65f5",
+    "offline_stub_samples/advice_pause/trace/steps/s-0d681f2b81ce49a7824ce79cb319d4af.json": "e84468b599c6c77906ab4056c9f36d6a12251104a93d40b3a3e8cc14b86375ef",
+    "offline_stub_samples/advice_pause/trace/steps/s-11a4441c301547e7bb458e2897572420.json": "8b75a00fb196a040912801aab5fa73abbbeb50500ea69bfe42fe1a0f9994067e",
+    "offline_stub_samples/advice_pause/trace/steps/s-11dd4a1123f44a29a63228b59545366d.json": "7eff6701d8a1284939cd2cff2e7127c0d4ba4a18265b40c0c3d60e506042c4f2",
+    "offline_stub_samples/advice_pause/trace/steps/s-494073e730bf4a45b2e41d818d3eb6c3.json": "629449e8a9b842a5c10d3a3eb05489f85f0684a9919d8bcc9e6fd3ed058b41b1",
+    "offline_stub_samples/advice_pause/trace/steps/s-4c32ecd0939a4cf985a19bc4e6b21a64.json": "b5c2cf6acc3f9c2e77dbc373190244d49e3d8c44f65833be6383272ef16d7259",
+    "offline_stub_samples/advice_pause/trace/steps/s-7726fc42df584ef1b5aeb7cbdac478d6.json": "37f85e2e5bf22726b9d7c8ad57d67f30985e135a34fa8733f2d58cb791be548f",
+    "offline_stub_samples/advice_pause/trace/steps/s-7dd1ccb64c344d6fac6c2b92a366f921.json": "1600e32c3f44f387e4548bfff6af78c01bf864499cf6608494d795386de3e106",
+    "offline_stub_samples/advice_pause/trace/steps/s-d177bf35034b49dcaf142eba4eb8723f.json": "16ad08aa77994a3d15c2afa96a65cab4164c73acab19d6edbc3f4644d390abbb",
+    "offline_stub_samples/advice_pause/trace/steps/s-d2b1de1b3b524009b9f62a90bacf7aae.json": "c864ae7bc0d2214d135202df26479aca0ec35df0204c06965bb98b95b2506915",
+    "offline_stub_samples/final_failure/handoff.json": "f584db3ba7c5109d14a7d1419687a51d9e73c900ff0889542da130191d582442",
+    "offline_stub_samples/final_failure/sample.json": "b798705978bb753f3aa4fd184f5af49056c5972cae4cb85f19159c1be11ddbbb",
+    "offline_stub_samples/final_failure/trace/configuration.json": "ba052291cb402e76ea518981cfe87952458756db6e6c8df04a52bdb9d7e96943",
+    "offline_stub_samples/final_failure/trace/decisions/d-74e67786ff1d4087962ccf2d9aa7e6ab.json": "167ccae384de2e0f6df7d886a81e8a7fc6baee0eaeb23cb27d92eacbcb907992",
+    "offline_stub_samples/final_failure/trace/decisions/d-e146afc1fcdf4a6cb6f548a339eee192.json": "f4a1ff59db447e18304975f0c7694c7737d73c7838023e120b8bd5736717d625",
+    "offline_stub_samples/final_failure/trace/steps/s-0483eb0e63124d0db48a8c567185cf78.json": "7d8b8bd68f2edb81a8afb128d7befdfbc3b611ccf3b2c2b60859fd64e22cfbd2",
+    "offline_stub_samples/final_failure/trace/steps/s-58571bf1ab184ef39b851b632f224581.json": "35f32b8df81e8ee4a31cfb34499b544a6228cf2c92d879029d49b279ceabf3d5",
+    "offline_stub_samples/final_failure/trace/steps/s-7e3755fd016c4d0cb328797cfc010eed.json": "aae1b654713ad511dd9ddbd227beb0bbea4dc9c15171710145ca3bec7854b3b8",
+    "offline_stub_samples/final_failure/trace/steps/s-945ce7ab42b44ababa5700ee314a6015.json": "517ae5d7f62234179be66f40295abd55438fcde243f52ecca89aae72d6da0636",
+    "offline_stub_samples/final_failure/trace/steps/s-9e8e15c13e04420bb1611a059b225e74.json": "72e25f2a345e8ac6881856e7a64d501ab3e2a68df8f29b373a3daeacd1709613",
+    "offline_stub_samples/final_failure/trace/steps/s-af9f370580fd4f6eb9420e5e6b05ff9e.json": "a936b791e9b3b8df2369a687fce38e452821d87d14a1c9eccdf69e64f1a9f29e",
+    "offline_stub_samples/final_failure/trace/steps/s-d0dfd5dcee174348842d69d82e47b6ce.json": "65f9edb7be30a3850786416609133018e9f103158aa0421163c328f11c072aab",
+    "offline_stub_samples/final_failure/trace/steps/s-d4b97762ffbc420c9e9e55a052443e78.json": "13d2dda71488e424d2364181efe6c96249ece22a0681a41a79a5ba353096010c",
+    "offline_stub_samples/final_failure/trace/steps/s-ef1150a5e63e4ab79ae010ae16216733.json": "d7093bc5b4fb6ac97795f401172641bb1c4c0f4f7b3c8c2416ebf86bd121c6ec",
+    "offline_stub_samples/final_failure/trace/steps/s-f07b14729e8941d98d10e987d602ba4e.json": "85210a0372dd1ec7287373d70c4e8046d1df010905d9b5f48916a949984e6262",
+    "offline_stub_samples/human/handoff.json": "04660b5c405069ed66e2f65279d48a561e3ccdfa7b1e9e1f3e7f4e4e9bfd8991",
+    "offline_stub_samples/human/sample.json": "ec3db34f1138b06093878be47b44ecbd20aa67bcd8f86e499a225aecc6dc093d",
+    "offline_stub_samples/human/trace/configuration.json": "ba052291cb402e76ea518981cfe87952458756db6e6c8df04a52bdb9d7e96943",
+    "offline_stub_samples/human/trace/decisions/d-88e81ca234994ac0bdcbd2499c1a2b3c.json": "22539e758feb74d8e9f623b7b26c8d652d858368f867c25b14f7c5d0751af9b8",
+    "offline_stub_samples/human/trace/decisions/d-d74238f32aeb47159658007215a6ce7d.json": "63d1d434ae4c3b959c26d0ff5d06e6e3943e3324057ea3df9ac51c4bd672c357",
+    "offline_stub_samples/human/trace/steps/s-2ada0c008c0b4f88869414e56726375f.json": "edcf467f64cbf32f3b2fa24f21c04f04de62a6b4b3251cb9601780134c03d58e",
+    "offline_stub_samples/human/trace/steps/s-3f942ebd8f7c4e14ad0aef76c361c559.json": "dea558c4e7d16a69d6b7dd15f31b5dd3311a386c68635e1f1d9edf88771dd888",
+    "offline_stub_samples/human/trace/steps/s-43448946819c4c8980a6f38a4bc63150.json": "b7271651f973fe187eddae15f1c3911e37ed8123969d8011a39492b1f24c2132",
+    "offline_stub_samples/human/trace/steps/s-74eacb0f350e4613a21b978158a424b7.json": "44ea5334f6e9809316ac733c1a656ba3ed9187cf229c3e0f77ed76a824239971",
+    "offline_stub_samples/human/trace/steps/s-9803d4761fa044569c1777e429a6a792.json": "159850eae7132eb6eb80f0a8f605f2f93baade4f325b63db4e140d3abddba6f9",
+    "offline_stub_samples/human/trace/steps/s-e1925416497d467e949d568296982388.json": "714f7065c8f0e893614d952dc19337650664c393f389b7fcb8d40687417938e6",
+    "offline_stub_samples/human/trace/steps/s-f1a6b4d5f0bd4a55a59af77b64f6b37a.json": "8c8eba67ca3b483ccca2bc0fc628740e35859943c52fe29825ed7fb42a613bea",
+    "offline_stub_samples/limit/handoff.json": "a15bda220c6ae39960f49ac51ab946bca440d63d93e45705b7409e54531133f8",
+    "offline_stub_samples/limit/sample.json": "156c65e6910f616b3b5a52f16cd3f12649ed470cd7af80d0ad152bb2c1e22fe2",
+    "offline_stub_samples/limit/trace/configuration.json": "ba052291cb402e76ea518981cfe87952458756db6e6c8df04a52bdb9d7e96943",
+    "offline_stub_samples/limit/trace/decisions/d-27073d6455ad4ac4aef548803aa051b6.json": "20f910083c3e110fee56f4ec03961aa66f3cf393cd72303aa56a28fd16b97f3c",
+    "offline_stub_samples/limit/trace/decisions/d-adb0c7b322644652b38b47cb70dc64dc.json": "7e466d5cab199434816af28d9212f7a1a707c11a8cbf949d652cadcd6a4f5b5b",
+    "offline_stub_samples/limit/trace/steps/s-047f002c6abd4eea8057e152298903ca.json": "20dbd4dde76b5eac9fda39f6c9efb9e0f951ea3fe0f8fff51d963ff5e432a4f8",
+    "offline_stub_samples/limit/trace/steps/s-12ce590c5cb74c929424aaae8aaed74e.json": "ad96db034231fb884e79b40fb7a16bee672ad01e465ff17a722760f63b768e65",
+    "offline_stub_samples/limit/trace/steps/s-3635129ae86b45e692da0f3be257e566.json": "c478ead4bad55b36a78a85c5fb64582fa3b4c3ab07928b4fe30bae0972068412",
+    "offline_stub_samples/limit/trace/steps/s-5bafd761685947a28b1d53edad1d289f.json": "86770579489b1bb7d09a9dfa2bc8bd3baba35e63bb9842d4c4ee8343bd253045",
+    "offline_stub_samples/limit/trace/steps/s-917ffe283cbb458787682e953d104480.json": "b25994c54956917c73ecd4fd9db6d820370bafc778c4dc9248a1f33a4e56a074",
+    "offline_stub_samples/limit/trace/steps/s-aafcdedca0c04a148c2ad75b7364a60b.json": "9062a5c1b285139c892938042192e514b6bf38991fe59452c536a39e2e7c7169",
+    "offline_stub_samples/limit/trace/steps/s-ec43d190f2d94b7ebae326a029985465.json": "c2bb6f850c8327caeb219e5e85c69e8d5f4e21cc6ebd81e68b7a269e7e8b4a5a",
+    "offline_stub_samples/retry/sample.json": "7e943623ef4617fc18d3a51b05aad1e6e2285b440a1d10a4a18e9e36a85448e0",
+    "offline_stub_samples/retry/trace/configuration.json": "ba052291cb402e76ea518981cfe87952458756db6e6c8df04a52bdb9d7e96943",
+    "offline_stub_samples/retry/trace/decisions/d-0b8b984062b748bba4c4e8d67088059d.json": "2a1d79738d2411b491d94521302797a0939fb05688060d733d5aa00b2d6c6289",
+    "offline_stub_samples/retry/trace/decisions/d-2f7223a63b0540b5b0e78a7d714a2e3c.json": "dcd08f3c3fd51232f515e40e7dae4ceb587c96ffb37b19d4ea7f791b6bc31738",
+    "offline_stub_samples/retry/trace/decisions/d-621285fede9642dea03d215a4748d5ce.json": "93706b1b79bc7d44512cde511a0184bbd953d776c2b7f2e3009345a6ab961863",
+    "offline_stub_samples/retry/trace/steps/s-09f8589148d04b6594311b2188df256a.json": "dc14c3dcb6b2d5c6ba60d345b2386df8d9ba0e9a8b1e15d95e729e1e7625a393",
+    "offline_stub_samples/retry/trace/steps/s-0bae5c73b6fb45b6bed58e8f697377c1.json": "a2b1190b826aa00bdb881afac351251f5fc481185e7dec7de3e1a5fa9618612f",
+    "offline_stub_samples/retry/trace/steps/s-1fb89e4bcfe84a3dbaa8a84abc69a7f3.json": "3c5eeaad160b2a0fdc3725009daa807b0163affdc1f3ccbca6bdb4b86e5e356f",
+    "offline_stub_samples/retry/trace/steps/s-222bba594385485ab97746f19688e015.json": "4c896cbda2ad87d59abf636dab24de72677cfb36d61648bd76884523bc8d5b98",
+    "offline_stub_samples/retry/trace/steps/s-2afad7334daa409c8a7627d906e7ebb5.json": "3a6e7e7f073b31452379ca1dd5fa7665da733b0bab553a6c6a06a3971bdb066b",
+    "offline_stub_samples/retry/trace/steps/s-4731a11243774ed38f1949d233ab7db3.json": "12ee08782f864226aaf042dd47847580a3f4c73a4a3e06dbed42a522c57f7bc9",
+    "offline_stub_samples/retry/trace/steps/s-506c9f47a0934dbfaf4eded4e53391d1.json": "f4c56d345fec7fbc35e1dfbb6ffc66be7a6430ba9ea3a0048ffa0015656c9f20",
+    "offline_stub_samples/retry/trace/steps/s-92ab3bb51d50412ba224a84975232a98.json": "2b7febdefedf1b63fe1092c438983d0cf295e941128876ac02e9e747f49f1232",
+    "offline_stub_samples/retry/trace/steps/s-a138d6fcfc174452aecec5bc18573ab9.json": "a43cda77fbb0b48d18c808183e2315305ae2b6b1ccc335ef7457bbdf3165c769",
+    "offline_stub_samples/retry/trace/steps/s-a7ccec275ae74997b5194fefd1831213.json": "ea0fc2cf6fc4c6a2e324f729e720f47dc07f1d9d616ae4fdfff4c43eae5aaa88",
+    "offline_stub_samples/retry/trace/steps/s-ab05ba19072c4269bc4a2dcde2d15ffb.json": "349397573a87d9c6c8f537894468edf88d24ede4d3786b10a9c8ebd95cdd10be",
+    "offline_stub_samples/retry/trace/steps/s-bb41993c61624ab1a431b2203dcb9007.json": "58c0bc32cc4aeae1a63a8f126ee73ab63fb5fcb6f6a3342047c1280f34130af7",
+    "offline_stub_samples/retry/trace/steps/s-d9e916c1ad1e472b87f9e0ffa23737f9.json": "32a8287f55e36fa0dbf8635c53510c103bcf42c9679c045e1bc685b9945aa2b3",
+    "offline_stub_samples/retry/trace/steps/s-df0d4c8ebc7d41149c01bab04ee8f6ad.json": "b37b22182e87397550fe28175fa5c86f08ed480408b80ee35b97f9bb076243d9",
+    "offline_stub_samples/retry/trace/steps/s-e2f1fbff0de345d18ca51bfc7b0b84d7.json": "9e3377b26ac7952769680cfd038b5ebc903a2d600414c30466c8da01be584c19",
+    "offline_stub_samples/retry/trace/steps/s-e7d2371df2204d79b5e5977fcc586758.json": "9d40f7d63238ef804ac94d88a20bbc41204b5725b4ea9a7e6674c7b52e72e52b",
+    "offline_stub_samples/retry/trace/steps/s-fa79076d80034bd0aeff88d70e6a040f.json": "72440a3a7ebcad1daa44cbdc1ae5377432ffbfbd5de50b2e676416157124a8cb",
+    "offline_stub_samples/success/sample.json": "02acbf77af2a2486844c2f4f6bcaca6e7e4a1c8f956e0cf0405a034c6bcf7ce8",
+    "offline_stub_samples/success/trace/configuration.json": "ba052291cb402e76ea518981cfe87952458756db6e6c8df04a52bdb9d7e96943",
+    "offline_stub_samples/success/trace/decisions/d-2bf8bf3bb8234354947a61d4e70a7cab.json": "a3d62471d53100d2318b802fd76a9a96d012ef531f7c13eaee4ccd2acaf1f612",
+    "offline_stub_samples/success/trace/decisions/d-946539edd9e24d2facb371dc9eece951.json": "b9b6946b7afd693b50b9bca88078a9aba8a869a2d5ddd5c512a3c12f37a36f1e",
+    "offline_stub_samples/success/trace/steps/s-34065c8cef4f43208811b06a3084917c.json": "993560623396a834a9c796183233c768320169de734a8caf7093cc6b6a62fbb2",
+    "offline_stub_samples/success/trace/steps/s-625c783556e846b4817b55d38b1b4bd7.json": "bfec589cad9cf5dbbd6aacafd12eef0fad87356ae5f5ec981e671361ef70e852",
+    "offline_stub_samples/success/trace/steps/s-7f47dd1e195d4ff2a2b2d1db66441941.json": "cc4127f20267a5a7aad26cd9436f1797245b9c79478fbe57ff42277944724026",
+    "offline_stub_samples/success/trace/steps/s-8ea1f4ac20ff4056bbad5e6bbf4239b5.json": "71ec6e2dfa0e2e4a3c18c7e21c3b5d5eeaef395e233a1f81354e2e9f9afa2229",
+    "offline_stub_samples/success/trace/steps/s-90a4670d8e3046c39a63bc8ccc80743c.json": "9889de276680b7a8d929cef1d6d929c8f70b5dab099e21fa29d4ce05aae7c493",
+    "offline_stub_samples/success/trace/steps/s-dc3cd307d1754777835413f545826324.json": "379b6dbcebc15dc1743d0e8edb83d034e0f05f9a693f1a6bc82704b87d0d2b95",
+    "offline_stub_samples/success/trace/steps/s-e62683b4833647e0b109599432d3b5e7.json": "7ef2a270ee7a8efb9f9c82a54412f6a37ea7b50ffd915bb5b015d2d28e8998c4",
+    "offline_stub_samples/success/trace/steps/s-e89b5e96b68e48529eac676aa602cb4d.json": "c69c82769880523049ed173662c23b1f3705924af300b64c92e876e32bf5fb85",
+    "offline_stub_samples/success/trace/steps/s-f6489d1b53d8494bbc2dde88aa29784f.json": "a1467203d2deac015124355e24bf0965594545bd5009d042889b039fcbea90a9",
+    "offline_stub_samples/success/trace/steps/s-f843c42671a243b3be0a33f8abcce738.json": "21f5ae9dd80e0f250108d1881fc965e52cee89dffd720b1260116db759cf3e05",
+    "verify.py": "a5ba24d3f684c8f4d6c9d4188b4500d3d316107a41482768eca28b06df0e0199"
+  },
+  "limitations": [
+    "live model and paid budget NOT authorized",
+    "no Docker on this machine",
+    "B execution-host qualification not received",
+    "native candidate final NOT independently verified",
+    "two approved providers NOT live verified",
+    "fixed entry and trace UI NOT implemented",
+    "offline samples are excerpts; their original tool/code paths refer to ignored runs workspaces",
+    "one existing platform skip and dependency deprecation warning retained in JUnit",
+    "earlier governance-only validator and JSON retain their original scope"
+  ],
+  "errors": [
+    {
+      "kind": "broken_link",
+      "detail": {
+        "path": "docs/2026-11-03_项目持续维护/Agent协议与动态调度.md",
+        "url": "../../evidence/contest-core/offline-a/verification.json"
+      }
+    },
+    {
+      "kind": "broken_link",
+      "detail": {
+        "path": "docs/2026-11-03_项目持续维护/当前测试与验收计划.md",
+        "url": "../../evidence/contest-core/offline-a/verification.json"
+      }
+    },
+    {
+      "kind": "broken_link",
+      "detail": {
+        "path": "docs/2026-11-03_项目持续维护/接口与路径规范.md",
+        "url": "../../evidence/contest-core/offline-a/verification.json"
+      }
+    },
+    {
+      "kind": "broken_link",
+      "detail": {
+        "path": "docs/2026-11-03_项目持续维护/版本与演示素材索引.md",
+        "url": "../../evidence/contest-core/offline-a/verification.json"
+      }
+    },
+    {
+      "kind": "broken_link",
+      "detail": {
+        "path": "docs/2026-11-03_项目持续维护/系统架构与实现边界.md",
+        "url": "../../evidence/contest-core/offline-a/verification.json"
+      }
+    },
+    {
+      "kind": "broken_link",
+      "detail": {
+        "path": "docs/2026-11-03_项目持续维护/运行配置与版本关系.md",
+        "url": "../../evidence/contest-core/offline-a/verification.json"
+      }
+    },
+    {
+      "kind": "broken_link",
+      "detail": {
+        "path": "docs/2026-11-03_项目持续维护/项目运行指南.md",
+        "url": "../../evidence/contest-core/offline-a/verification.json"
+      }
+    },
+    {
+      "kind": "broken_link",
+      "detail": {
+        "path": "README.md",
+        "url": "evidence/contest-core/offline-a/verification.json"
+      }
+    },
+    {
+      "kind": "broken_link",
+      "detail": {
+        "path": "CHANGELOG.md",
+        "url": "evidence/contest-core/offline-a/verification.json"
+      }
+    }
+  ]
+}

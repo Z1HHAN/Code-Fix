@@ -28,3 +28,6 @@ docs/99_历史归档/2026-10/2026-10-31_迭代与测试安排.md -text
 
 # Legacy handoff keeps its original Git text normalization; native public assets above remain frozen.
 task_assets/leap_legacy/** text=auto
+
+# Stage A raw results, source fingerprints and offline trace samples are immutable.
+evidence/contest-core/** -text -whitespace

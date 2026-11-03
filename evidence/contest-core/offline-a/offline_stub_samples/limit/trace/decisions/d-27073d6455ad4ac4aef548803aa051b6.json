@@ -1,0 +1,51 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-cf0312f028194bfa8763e481d46f6c8e",
+  "step_id": "s-aafcdedca0c04a148c2ad75b7364a60b",
+  "parent_step_id": "s-917ffe283cbb458787682e953d104480",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "development",
+  "evidence_ids": [
+    "test-development-1"
+  ],
+  "decision_id": "d-27073d6455ad4ac4aef548803aa051b6",
+  "program_decision": {
+    "decision_id": "d-1",
+    "run_id": "run-cf0312f028194bfa8763e481d46f6c8e",
+    "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "failure_class": "assertion_failed",
+    "action": "stop",
+    "target_agent": null,
+    "reason": "修复候选达到上限，不发第4轮请求。",
+    "retries_left": 0,
+    "rule_id": "R10",
+    "terminal_status": "stopped"
+  },
+  "model_advice": null,
+  "action": "stop",
+  "effective_action": "stop",
+  "reason": "修复候选达到上限，不发第4轮请求。",
+  "override_reason": null,
+  "rule_id": "R10",
+  "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "counters": {
+    "model_calls": 1,
+    "tool_calls": 2,
+    "rounds_used": 1,
+    "cost": {
+      "status": "not_applicable",
+      "amount_usd": null
+    },
+    "remaining_seconds": 299.6827922000084,
+    "limits": {
+      "max_rounds": 1,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}

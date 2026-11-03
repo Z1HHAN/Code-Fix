@@ -1,0 +1,41 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-cf0312f028194bfa8763e481d46f6c8e",
+  "step_id": "s-047f002c6abd4eea8057e152298903ca",
+  "parent_step_id": "s-aafcdedca0c04a148c2ad75b7364a60b",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "development",
+  "evidence_ids": [
+    "test-development-1"
+  ],
+  "decision_id": "d-adb0c7b322644652b38b47cb70dc64dc",
+  "program_decision": {
+    "action": "stop",
+    "rule_id": "terminal_stopped",
+    "reason": "修复候选达到上限，不发第4轮请求。"
+  },
+  "model_advice": null,
+  "action": "stop",
+  "effective_action": "stop",
+  "reason": "修复候选达到上限，不发第4轮请求。",
+  "override_reason": null,
+  "rule_id": "terminal_stopped",
+  "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "counters": {
+    "model_calls": 1,
+    "tool_calls": 2,
+    "rounds_used": 1,
+    "cost": {
+      "status": "not_applicable",
+      "amount_usd": null
+    },
+    "remaining_seconds": 299.6379786999896,
+    "limits": {
+      "max_rounds": 1,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}

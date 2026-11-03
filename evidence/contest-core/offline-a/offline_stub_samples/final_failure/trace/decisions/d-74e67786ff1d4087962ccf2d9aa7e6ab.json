@@ -1,0 +1,58 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+  "step_id": "s-d0dfd5dcee174348842d69d82e47b6ce",
+  "parent_step_id": "s-9e8e15c13e04420bb1611a059b225e74",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "development",
+  "evidence_ids": [
+    "test-development-1"
+  ],
+  "decision_id": "d-74e67786ff1d4087962ccf2d9aa7e6ab",
+  "program_decision": {
+    "decision_id": "d-1",
+    "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+    "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "failure_class": "passed",
+    "action": "final_check",
+    "target_agent": null,
+    "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+    "retries_left": 2,
+    "rule_id": "R16",
+    "terminal_status": null
+  },
+  "model_advice": {
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "knowledge_citations": [],
+    "action": "repair",
+    "reason": "offline advice"
+  },
+  "action": "final_check",
+  "effective_action": "final_check",
+  "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+  "override_reason": "模型建议不能覆盖工具证据与强制规则",
+  "rule_id": "R16",
+  "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "counters": {
+    "model_calls": 3,
+    "tool_calls": 2,
+    "rounds_used": 1,
+    "cost": {
+      "status": "not_applicable",
+      "amount_usd": null
+    },
+    "remaining_seconds": 299.5048499000259,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}

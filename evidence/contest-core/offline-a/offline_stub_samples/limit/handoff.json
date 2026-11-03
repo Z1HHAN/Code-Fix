@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run-cf0312f028194bfa8763e481d46f6c8e",
+  "handling_status": "pending_human",
+  "automation_stopped": true,
+  "run_status": "stopped",
+  "reason": "修复候选达到上限，不发第4轮请求。",
+  "project": "leap",
+  "mode": "test_stub",
+  "model_api_called": false,
+  "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+  "code_path": "candidate-1/code/leap_year.py",
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "dev_result": "failed",
+  "final_result": "not_run",
+  "evidence_ids": [
+    "test-baseline",
+    "test-development-1"
+  ],
+  "decision_paths": [
+    "trace/decisions/d-27073d6455ad4ac4aef548803aa051b6.json",
+    "trace/decisions/d-adb0c7b322644652b38b47cb70dc64dc.json"
+  ],
+  "consumption": {
+    "rounds_used": 1,
+    "model_calls": 1,
+    "tool_calls": 2,
+    "cost": {
+      "status": "not_applicable",
+      "amount_usd": null
+    }
+  },
+  "limits": {
+    "max_rounds": 1,
+    "max_calls": 12,
+    "total_seconds": 300
+  },
+  "next_steps": [
+    "核对停止原因及关联证据",
+    "B/C对明确代码与测试版本复核",
+    "满足授权与隔离条件后创建新任务；本运行不自动恢复"
+  ],
+  "accepted_by": null
+}

@@ -1,0 +1,21 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+  "step_id": "s-2ada0c008c0b4f88869414e56726375f",
+  "parent_step_id": "s-74eacb0f350e4613a21b978158a424b7",
+  "node_id": "pytest",
+  "round": 1,
+  "phase": "development",
+  "evidence_ids": [
+    "test-baseline"
+  ],
+  "status": "ok",
+  "verification_status": "failed",
+  "evidence_id": "test-development-1",
+  "failure_class": "environment_error",
+  "evidence_path": "development-1",
+  "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+  "test_suite_version": null,
+  "registered_test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "duration_ms": 32
+}

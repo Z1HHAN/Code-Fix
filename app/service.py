@@ -22,7 +22,7 @@ class TaskService:
         task = self.store.get(run_id)['task']
         try:
             control = self.store.get(run_id)['control']
-            if control:
+            if control and task['mode'] == 'baseline':
                 self.store.finish(run_id, 'paused' if control == 'pause' else 'stopped',
                                   {'final_result': 'not_run', 'reason': '按用户请求在执行前停止推进',
                                    'model_api_called': False, 'model_calls': 0, 'tool_calls': 0})
