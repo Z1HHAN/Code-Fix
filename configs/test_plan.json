@@ -11,7 +11,7 @@
   },
   "first_gate": {
     "task_id": "T001-leap",
-    "source": "day1-kit",
+    "source": "task_assets/leap_legacy",
     "expected_buggy_baseline": {
       "passed": 3,
       "failed": 1

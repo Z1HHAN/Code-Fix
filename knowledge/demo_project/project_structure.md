@@ -2,7 +2,7 @@
 doc_id: project_structure
 project_id: leap_demo
 source_version: leap-fixture-v1
-source_path: day1-kit/README.md
+source_path: task_assets/leap_legacy/README.md
 ---
 # 闰年项目结构
 

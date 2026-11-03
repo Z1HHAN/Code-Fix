@@ -44,7 +44,7 @@ def test_default_config_and_legacy_version_remain_valid(root):
     lambda d: d['agents'].pop(),
     lambda d: d['agents'][1].update(model_ref='missing'),
     lambda d: d['agents'][1].update(model_ref=[]),
-    lambda d: d['agents'][1].update(prompt_ref='day1-kit/prompts/repairer.md'),
+    lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
     lambda d: d['agents'][1].update(output_schema='BarePython'),
     lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
     lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
