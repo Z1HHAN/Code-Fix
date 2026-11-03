@@ -1,0 +1,8 @@
+﻿主题,来源,需求比较,实现比较,验收比较,时间与版本比较,处理建议
+当前任务/状态,day1-kit/队长今日执行与台账.md;docs/integration/task_plan.md;docs/功能状态与优化待办.md;docs/daily/2026-11-02.md;docs/11月3日执行手册与任务分工.md,真实闭环、停止、知识、UI反复出现,V3已有组件与基线，不再重复开发,真实模型/目标机/独立验收拆为T-030—037,10月31日/11月1日/2日历史/3日未来不能混作当前,统一T-ID+来源别名；历史条目留存，日记只引用
+UI交付,docs/UI交付B完整提示词.md;docs/UI草图生图提示词与操作步骤.md;ui/prototype/README.md;ui/app/,三栏/预览/暂停/证据存在重叠,原型和真实基线分别已交付；编辑/续跑未完成,原型Node、Edge基线、真实模型UI分开,旧双LLM角色与V3三模型角色要内容对齐,合入UI交付规范；原型/参考图不替代实际验收
+测试/验收,docs/acceptance.md;docs/成果登记与阶段结论.md;docs/experiment-protocol.md;configs/test_plan.json,开发与final分离、原生冻结、分母和预算,矩阵组件已测，不再按旧表判未实现,独立真实候选仍未运行，历史原生资格不删除,旧heldout词保留原始语义，不倒推隐藏测试,规则分别入测试规范/实验规范/证据登记，结果只链接
+需求与范围,docs/开发要求V3.0.md;scope.md;docs/11月1日需补齐材料与对齐记录.md,核心闭环一致，角色与范围描述有阶段差异,新三角色协议已实现，真实调用未验,不按文件日期覆盖基线,需求基线V3.0与0.2范围/接口不是同一版本轴,V3原文冻结；当前有效需求列已采纳/扩展/延后/冲突四类
+运行入口,README.md;docs/V3运行与接口.md;docs/UI交付B完整提示词.md;ui/prototype/README.md,旧可无HTTP与新FastAPI指南并存,实际生产入口app.cli serve；原型静态服务另列,基线通过不算真实修复通过,同8000端口示例可能误开原型,当前运行指南唯一，原型操作仅保留在原型章节
+版本与签收,configs/agents.json;configs/decision_rules.json;docs/接口确认清单.md;evaluation/run_record.template.json,0.2草案版本与当前代码并存,部分字段仍运行消费，不是可删旧配置,组件通过不代表B/C本人确认,0.2-20261101-draft保持真实字符串,配置版本矩阵登记消费端；不改JSON/模板或伪升级
+比赛材料,presentation/README.md;docs/研究报告六章骨架.md;docs/demo-script.md;scope.md,五天初稿和19日内部提交目标,仅骨架/基线素材，无正式成品,正式model demo/统计未验,20号前为未核实线索，不设官方硬截止,建立比赛交付清单，所有未知明确待确认

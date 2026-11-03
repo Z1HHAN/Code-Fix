@@ -11,6 +11,8 @@ from .docker_runner import DockerRunner, IsolationBlocked
 from .live_model import Ledger, LiveModel, LiveSettings, ModelBlocked
 from .runner import code_version
 from .tasks_v3 import get_task
+from .role_config import RoleConfig
+from .config import ConfigError
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -49,6 +51,8 @@ class Workflow:
             boundary()
             if definition.admission_blocker:
                 return finish('blocked', definition.admission_blocker)
+            config = RoleConfig(ROOT)
+            config.preflight()
             settings = None
             blockers = []
             if self.model is None:
@@ -67,7 +71,7 @@ class Workflow:
                 return finish('blocked', '运行前置条件未满足；未发起模型请求或候选执行')
             if self.model is None:
                 self.model = LiveModel(settings, Ledger(self.store.root))
-            gateway = AgentGateway(self.model, self.store)
+            gateway = AgentGateway(self.model, self.store, config)
             engine = DecisionEngine(read_json(ROOT / 'configs/decision_rules.json'))
             base = definition.prepare(directory / 'base')
             current = base
@@ -171,7 +175,7 @@ class Workflow:
             return finish('stopped', '达到最大修复轮次')
         except ControlRequested as exc:
             return finish('paused' if exc.action == 'pause' else 'stopped', '按用户请求在步骤边界停止推进')
-        except (ModelBlocked, IsolationBlocked) as exc:
+        except (ModelBlocked, IsolationBlocked, ConfigError) as exc:
             return finish('blocked', str(exc))
         except (OSError, ValueError) as exc:
             final['error_type'] = type(exc).__name__

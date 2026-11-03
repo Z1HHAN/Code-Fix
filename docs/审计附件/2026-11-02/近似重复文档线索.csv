@@ -1,0 +1,8 @@
+﻿文件A,文件B,五字片段Jaccard,较短文档包含率,比较处理
+prompts/locator.md,prompts/repairer.md,0.2737,0.468,仅近似重复线索，需求/实现/验收/日期逐项见合并映射；原始证据和历史决策不合并
+day1-kit/prompts/locator.md,day1-kit/prompts/repairer.md,0.2496,0.4058,仅近似重复线索，需求/实现/验收/日期逐项见合并映射；原始证据和历史决策不合并
+knowledge/demo_project/business_rules.md,knowledge/demo_project/project_structure.md,0.1888,0.331,仅近似重复线索，需求/实现/验收/日期逐项见合并映射；原始证据和历史决策不合并
+prompts/detector.md,prompts/scheduler.md,0.1746,0.316,仅近似重复线索，需求/实现/验收/日期逐项见合并映射；原始证据和历史决策不合并
+prompts/repairer.md,prompts/reviewer.md,0.1148,0.2644,仅近似重复线索，需求/实现/验收/日期逐项见合并映射；原始证据和历史决策不合并
+prompts/locator.md,prompts/reviewer.md,0.1084,0.228,仅近似重复线索，需求/实现/验收/日期逐项见合并映射；原始证据和历史决策不合并
+C_Day1_20261030/README.md,C_Day1_20261030/handoff/文件索引.md,0.0948,0.426,仅近似重复线索，需求/实现/验收/日期逐项见合并映射；原始证据和历史决策不合并

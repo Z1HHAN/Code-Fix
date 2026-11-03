@@ -1,4 +1,15 @@
 {
+  "runtime_v3": {
+    "config_version": "1.0.0",
+    "protocol": "codefix-json-v1",
+    "models": {"primary": {"binding": "live_env"}},
+    "agents": [
+      {"agent_id": "locator", "enabled": true, "role_type": "llm", "model_ref": "primary", "prompt_ref": "prompts/locator.md", "tool_allowlist": ["read_file", "search_knowledge"], "knowledge_ids": ["project_structure", "business_rules", "testing", "public_tasks"], "output_schema": "LocatorOutput"},
+      {"agent_id": "repairer", "enabled": true, "role_type": "llm", "model_ref": "primary", "prompt_ref": "prompts/repairer.md", "tool_allowlist": ["read_file", "search_knowledge"], "knowledge_ids": ["business_rules", "testing", "public_tasks"], "output_schema": "RepairOutput"},
+      {"agent_id": "detector", "enabled": true, "role_type": "llm", "model_ref": "primary", "prompt_ref": "prompts/detector.md", "tool_allowlist": ["read_file", "search_knowledge"], "knowledge_ids": ["business_rules", "testing", "public_tasks"], "output_schema": "DetectorOutput"},
+      {"agent_id": "scheduler", "enabled": true, "role_type": "llm", "model_ref": "primary", "prompt_ref": "prompts/scheduler.md", "tool_allowlist": ["read_file", "search_knowledge"], "knowledge_ids": ["business_rules", "testing", "public_tasks"], "output_schema": "SchedulerOutput"}
+    ]
+  },
   "config_version": "iteration-0.2-20261101-draft",
   "interface_version": "0.2-20261101-draft",
   "status": "pending_BC_confirmation",

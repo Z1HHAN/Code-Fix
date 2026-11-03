@@ -1,0 +1,36 @@
+{
+  "input_commit": "b0ae33db5890b80be3274e7996d362f3925cbcf5",
+  "scope": "approved T-051/052/053/055 component repair; not real model repair",
+  "python_tests": {
+    "passed": 191,
+    "skipped": 1,
+    "failed": 0
+  },
+  "new_contract_tests": 24,
+  "ui_prototype_tests": {
+    "passed": 9,
+    "scope": "explicit simulation"
+  },
+  "validate_config_errors": [],
+  "code_sha256": {
+    "app/role_config.py": "2de1701b113155decbc1582f639b60c7c25f83e6020816a84c1daf1d3c18ccab",
+    "app/agents_v3.py": "17bb17249341cc119490bebf31bea7ec604115766330078a99d66be6eec6ae63",
+    "app/config.py": "290a332077f5c582b2e74a5994891679de5a29cb6d688de7381cff32cc913a59",
+    "app/workflow_v3.py": "e0b52106c87bb2b4e9c3c6b3bb6350dcb6175e194e5af06ccffc47d920754b8b",
+    "configs/agents.json": "d9b67baaedff7acf1a2574b25b87f02683ac1ba8a8ff19f183a2921847c86d84",
+    "tests/test_role_config.py": "8efda51a69659a64d69a7ee0793f4e15b6c241580849220940f2be1747c94d09"
+  },
+  "v3_original_sha256": "5d62dc0e75d1795f3b318f179f985f25d31b24cb42e01a66db87c87120a72d8b",
+  "real_model_calls": 0,
+  "public_or_candidate_code_executed": false,
+  "trusted_registered_fixture_pytest_executed": true,
+  "independent_candidate_acceptance": "not_run",
+  "docker_validation": "not_run",
+  "attempts": [
+    "default temp permissions: 9 passed/59 setup errors",
+    "focused: 64 passed/4 failed; public_tasks whitelist fixed",
+    "long temp full: 187 passed/4 failed/1 skipped; WinError267",
+    "short temp full:191 passed/1 skipped"
+  ],
+  "command": "runs/v3-venv/Scripts/python.exe -B -X utf8 -m pytest -q --basetemp=runs/p3 -o cache_dir=runs/protocol-fix-20261103/cache-short --junitxml=runs/protocol-fix-20261103/regression-short.xml --tb=short"
+}

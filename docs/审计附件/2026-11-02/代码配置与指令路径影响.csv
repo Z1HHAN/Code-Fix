@@ -1,0 +1,336 @@
+﻿来源,行号,引用内容,限制
+C_Day1_20261030/handoff/文件校验清单.json,21,"""examples/README.md"": ""cbe3e65ec5ae14d02fc9db2481f2922a7c1ad1528110c232f704ab027a420db7"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+C_Day1_20261030/handoff/文件校验清单.json,29,"""README.md"": ""dab41e5aead733397ec3a902310ff3f524bb20f35bfc59a758afb28a033610b6"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+C_Day1_20261030/runs/C-20261030-193201-b32afc2e/manifest.json,11,"""python_executable"": ""F:\\sss\\C_Day1_20261030\\.venv\\Scripts\\python.exe"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+C_Day1_20261030/runs/C-20261030-193201-b32afc2e/manifest.json,66,"""F:\\sss\\C_Day1_20261030\\.venv\\Scripts\\python.exe"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+C_Day1_20261030/runs/C-20261030-193201-b32afc2e/manifest.json,117,"""F:\\sss\\C_Day1_20261030\\.venv\\Scripts\\python.exe"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+C_Day1_20261030/scripts/build_handoff.py,129,"(ROOT / ""README.md"").write_text(readme, encoding=""utf-8"")",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+C_Day1_20261030/scripts/build_handoff.py,137,B 可以开始接 DS API 和串联主流程。解压后见 README.md；已有 Python 3.14 时运行 setup_C.cmd，再运行 run_C.cmd 可复现。,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+C_Day1_20261030/scripts/test_verify_delivery.py,19,self.root = Path(self.temporary.name) / 'C_Day1_20261030',代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+C_Day1_20261030/scripts/verify_delivery.py,50,"ids = re.findall(r'C-\d{8}-\d{6}-[a-f0-9]{8}', (ROOT / 'README.md').read_text(encoding='utf-8'))",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+C_Day1_20261030/scripts/verify_delivery.py,91,"for p in [ROOT / 'README.md', ROOT / 'handoff/给B的消息.txt', *list((ROOT / 'handoff').glob('*.html'))]:",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/agents_v3.py,5,from .knowledge import search_knowledge,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/agents_v3.py,14,"def parse_role(role, raw, evidence_ids, knowledge_ids):",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/agents_v3.py,16,"return parse_repair_output(raw, allowed_evidence_ids=evidence_ids, allowed_knowledge_ids=knowledge_ids)",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/agents_v3.py,19,"return parse_locator_output(raw, allowed_evidence_ids=evidence_ids, allowed_knowledge_ids=knowledge_ids)",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/agents_v3.py,22,"_fields(value, {'analysis', 'failure_class', 'suggested_checks', 'evidence_ids', 'knowledge_citations'})",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/agents_v3.py,28,"_fields(value, {'action', 'reason', 'evidence_ids', 'knowledge_citations'})",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/agents_v3.py,33,"_citations(value, evidence_ids, knowledge_ids)",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/agents_v3.py,48,"knowledge = [x.to_dict() for x in search_knowledge(ROOT, tuple(definition.data['knowledge_ids']), definition.data['knowledge_query'])]",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/agents_v3.py,49,"prompt = (ROOT / 'prompts' / f'{role}.md').read_text(encoding='utf-8').split('任务与路径约束：', 1)[0]",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/agents_v3.py,53,"'knowledge_context': knowledge, 'location_json': extra if role == 'repairer' else None,",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/agents_v3.py,80,"record['parsed_output'] = parse_role(role, record['raw_text'], [evidence['evidence_id']], [k['citation_id'] for k in knowledge])",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/api.py,187,return FileResponse(ROOT / 'ui/app/index.html'),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/api.py,189,"app.mount('/assets', StaticFiles(directory=ROOT / 'ui/app'), name='assets')",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/baseline.py,20,task = load_task_spec(root / 'configs/tasks/leap-baseline.json'),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/cli.py,95,task = load_task_spec(ROOT / 'configs/tasks/leap-baseline.json'),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/cli.py,111,engine = DecisionEngine(read_json(ROOT / 'configs/decision_rules.json')),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/config.py,43,agents=read_json(root/'configs/agents.json'); rules=read_json(root/'configs/decision_rules.json'); errors=[],代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/knowledge.py,8,knowledge_id: str,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/knowledge.py,13,"def search_knowledge(root: Path, knowledge_ids: tuple[str,...], query: str)->list[Citation]:",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/knowledge.py,15,for kid in knowledge_ids:,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/knowledge.py,16,path=root/'knowledge'/'demo_project'/f'{kid}.md',代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/knowledge.py,20,"lines=text.splitlines(); results.append(Citation(f'knowledge-{kid}',kid,path.relative_to(root).as_posix(),lines[0].lstrip('# ') if lines else kid,'\n'.join(lines[:12])[:1200]))",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/mock_workflow.py,9,from .knowledge import search_knowledge,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/mock_workflow.py,35,agents = read_json(root / 'configs/agents.json'),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/mock_workflow.py,36,task_spec = load_task_spec(root / 'configs/tasks/leap-baseline.json'),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/mock_workflow.py,41,"bindings = [set(a['knowledge_ids']) for a in agents['agents'] if a['agent_id'] in ('locator', 'repairer')]",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/mock_workflow.py,43,"knowledge = [{k: getattr(c, k) for k in ('citation_id', 'knowledge_id', 'source_path', 'excerpt')}",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/mock_workflow.py,44,"for c in search_knowledge(root, ids, '闰年 测试')]",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/mock_workflow.py,45,if not knowledge:,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/mock_workflow.py,46,raise ValueError('No reviewed shared knowledge'),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/mock_workflow.py,47,refs = [c['citation_id'] for c in knowledge],代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/mock_workflow.py,52,"'evidence_ids': ['e001'], 'knowledge_citations': refs}",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/mock_workflow.py,57,"'evidence_ids': ['e001'], 'knowledge_citations': refs}",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/mock_workflow.py,64,"evidence=evidence, knowledge=knowledge, work_root=work,",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_client.py,160,allowed_knowledge_ids=context.knowledge_ids),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,4,knowledge text must be supplied explicitly by the trusted control program.,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,27,knowledge_ids: frozenset[str],代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,58,"knowledge: list[dict], work_root: Path, code_version: str,",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,70,prompt_ref = f'prompts/{role}.md',代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,98,"_items(knowledge, 'knowledge')",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,107,available_knowledge = agent.get('knowledge_ids'),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,108,"if not isinstance(available_knowledge, list) or any(not _text(x) for x in available_knowledge):",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,110,for item in knowledge:,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,111,"if set(item) != {'citation_id', 'knowledge_id', 'source_path', 'excerpt'}:",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,113,kid = item['knowledge_id'],代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,114,if kid not in available_knowledge or not _text(item['excerpt']):,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,116,if item['source_path'] != f'knowledge/demo_project/{kid}.md':,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,118,"knowledge_ids = _unique_ids(knowledge, 'citation_id')",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,124,allowed_knowledge_ids=knowledge_ids),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,141,"'knowledge_context': knowledge, 'location_json': location}",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/model_context.py,145,"knowledge_ids, work_root, code_version)",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/quixbugs_import.py,122,catalog_path = root / 'configs/tasks/catalog-v3.json',代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/quixbugs_import.py,163,"'knowledge_ids': ['public_tasks', 'testing'], 'knowledge_query': '公开 Python 算法 测试'}",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/repair_output.py,48,"def _citations(value, evidence, knowledge):",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/repair_output.py,50,"_references(value, 'knowledge_citations', knowledge)",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/repair_output.py,54,allowed_knowledge_ids: Collection[str] | None = None) -> dict:,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/repair_output.py,56,"_fields(value, {'file', 'function', 'hypothesis', 'evidence_ids', 'knowledge_citations'})",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/repair_output.py,61,"_citations(value, allowed_evidence_ids, allowed_knowledge_ids)",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/repair_output.py,66,allowed_knowledge_ids: Collection[str] | None = None) -> dict:,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/repair_output.py,68,"_fields(value, {'changes', 'explanation', 'evidence_ids', 'knowledge_citations'})",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/repair_output.py,82,"_citations(value, allowed_evidence_ids, allowed_knowledge_ids)",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/tasks_v3.py,67,data = json.loads((ROOT / 'configs/tasks/catalog-v3.json').read_text(encoding='utf-8')),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+app/workflow_v3.py,71,engine = DecisionEngine(read_json(ROOT / 'configs/decision_rules.json')),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+c_runner/profiles.json,6,"""fixture_dir"": ""c_fixtures/leap_bad"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+c_runner/profiles.json,27,"""fixture_dir"": ""c_fixtures/leap_good"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+c_runner/profiles.json,48,"""fixture_dir"": ""c_fixtures/leap_all_skipped"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+c_runner/profiles.json,69,"""fixture_dir"": ""c_fixtures/output_timeout"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+c_runner/profiles.json,87,"""fixture_dir"": ""c_fixtures/zero_tests"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+c_runner/profiles.json,103,"""fixture_dir"": ""c_fixtures/collection_dependency_error"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+c_runner/profiles.json,124,"""fixture_dir"": ""c_fixtures/collection_syntax_error"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+c_runner/profiles.json,145,"""fixture_dir"": ""c_fixtures/code_runtime_error"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+c_runner/profiles.json,166,"""fixture_dir"": ""c_fixtures/incomplete_tests"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+c_runner/profiles.json,187,"""fixture_dir"": ""c_fixtures/leap_original"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+c_runner/profiles.json,205,"""provenance"": ""Original day1-kit Git bytes at f94320a; never model repair evidence""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/agents.json,20,"""prompt_ref"": ""prompts/locator.md"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/agents.json,24,"""search_knowledge""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/agents.json,26,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/agents.json,40,"""prompt_ref"": ""prompts/repairer.md"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/agents.json,43,"""search_knowledge""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/agents.json,45,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/agents.json,58,"""prompt_ref"": ""prompts/reviewer.md"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/agents.json,62,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/agents.json,81,"""knowledge_ids"": [],",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/interface_examples.json,14,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/interface_examples.json,34,"""prompt_ref"": ""prompts/locator.md"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/interface_examples.json,38,"""search_knowledge""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/interface_examples.json,40,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/interface_examples.json,133,"""knowledge_ids"": [],",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,12,"""fixture_dir"": ""c_fixtures/leap_original"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,30,"""provenance"": ""Original day1-kit Git bytes at f94320a; never model repair evidence""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,32,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,36,"""knowledge_query"": ""闰年 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,87,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,91,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,137,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,141,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,187,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,191,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,240,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,244,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,290,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,294,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,341,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,345,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,391,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,395,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,442,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,446,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,493,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,497,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,544,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,548,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,595,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,599,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,647,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,651,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,694,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,698,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,742,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,746,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,796,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,800,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,847,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,851,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,900,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,904,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,951,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,955,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1007,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1011,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1061,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1065,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1119,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1123,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1164,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1168,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1213,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1217,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1265,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1269,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1314,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1318,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1368,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1372,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1417,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1421,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1474,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1478,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1522,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1526,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1572,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1576,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1621,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1625,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1667,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1671,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1712,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1716,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1762,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1766,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1812,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1816,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1863,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1867,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1919,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1923,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1973,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,1977,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,2021,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,2025,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,2070,"""knowledge_ids"": [",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/catalog-v3.json,2074,"""knowledge_query"": ""公开 Python 算法 测试""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/tasks/leap-baseline.json,3,"""description"": ""仅检查 day1-kit 原始闰年坏代码与四条原生测试，不调用模型，不作为修复成绩。"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/test_plan.json,10,"""report"": ""docs/integration/C压缩包复核-20261102.md""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+configs/test_plan.json,14,"""source"": ""day1-kit"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+docs/integration/c-import.json,19,"""profiles.json adds leap_original from original day1-kit Git blobs; frozen bytes preserved with -text"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,45,"""README.md"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,60,"""configs/tasks/catalog-v3.json"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,66,"""\""docs/Docker\\345\\256\\211\\350\\243\\205\\346\\235\\241\\344\\273\\266\\346\\243\\200\\346\\237\\245-20261102.md\"""",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,67,"""\""docs/QuixBugs\\346\\225\\260\\346\\215\\256\\351\\233\\206\\345\\257\\274\\345\\205\\245\\344\\270\\216\\351\\252\\214\\346\\224\\266.md\"""",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,68,"""\""docs/V3\\345\\205\\250\\346\\226\\207\\345\\256\\214\\346\\210\\220\\346\\203\\205\\345\\206\\265\\344\\270\\216\\345\\205\\254\\345\\274\\200\\346\\241\\210\\344\\276\\213\\346\\216\\245\\345\\205\\245.md\"""",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,69,"""\""docs/V3\\345\\274\\200\\345\\217\\221\\344\\270\\216\\351\\252\\214\\346\\224\\266.md\"""",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,70,"""\""docs/V3\\347\\212\\266\\346\\200\\201\\346\\216\\247\\345\\210\\266\\344\\270\\216\\350\\257\\201\\346\\215\\256\\351\\252\\214\\346\\224\\266.md\"""",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,71,"""\""docs/V3\\347\\274\\226\\346\\216\\222\\347\\273\\204\\344\\273\\266\\351\\252\\214\\346\\224\\266.md\"""",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,72,"""\""docs/V3\\350\\277\\220\\350\\241\\214\\344\\270\\216\\346\\216\\245\\345\\217\\243.md\"""",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,73,"""\""docs/\\344\\273\\223\\345\\272\\223\\347\\234\\237\\345\\256\\236\\350\\203\\275\\345\\212\\233\\345\\256\\241\\346\\237\\245-20261102.md\"""",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,74,"""\""docs/\\345\\212\\237\\350\\203\\275\\347\\212\\266\\346\\200\\201\\344\\270\\216\\344\\274\\230\\345\\214\\226\\345\\276\\205\\345\\212\\236.md\"""",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,75,"""\""docs/\\345\\274\\200\\345\\217\\221\\350\\246\\201\\346\\261\\202V3.0.md\"""",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,126,"""knowledge/demo_project/public_tasks.md"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,127,"""prompts/detector.md"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,128,"""prompts/scheduler.md"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,372,"""ui/app/app.js"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,373,"""ui/app/index.html"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/checks.json,374,"""ui/app/theme.css""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/index.json,40,"""configs/tasks/catalog-v3.json"": ""4857a750e5d60327f4d8188cc6b98b99eb0c7a4c"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/index.json,52,"""ui/app/app.js"": ""b360b1958376f270d7638a9ee336242c527d314b"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/index.json,53,"""ui/app/index.html"": ""76004c9170b21f7e7cc49b4b3a174ba54ccea22b"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/main-review-20261102/index.json,54,"""ui/app/theme.css"": ""ccaf0e4c60331716b2a449dd670047131a18a7f0""",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,61,"""app/knowledge.py"": ""1e0fee91eb44bab3952021eaefb045183693c86d690e6216921ea1f94ed0978a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,80,"""configs/agents.json"": ""248a9a90e1cee14b9f6eddf208492eceb72b94ee7bc67dfcc7da3ad581550f18"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,81,"""configs/decision_rules.json"": ""cbae65a5b20fee23d0589bdceed370b41d546f962e4b99c8c3f8384130f21a05"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,82,"""configs/interface_examples.json"": ""0b58a56061aeee0c4914e1be2967e37434fa4a0ca1438e098d3efbc9a912721d"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,83,"""configs/tasks/catalog-v3.json"": ""b4b30f23625d8ae33d6db8b8633ed5efb95e580de1155c8d9e93e5118aeda173"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,84,"""configs/tasks/leap-baseline.json"": ""244f2018e58d4b58edd76474e690738810b6d8dcbb5e3f60fd4c729a34a9a753"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,85,"""configs/test_plan.json"": ""6465ec4f0637d355f060138b427122f87f3f388330b19e1a9a398c3a916b7a6c"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,86,"""prompts/detector.md"": ""6efdcb821ae1464cb0ac6e3972c39746a35bbbd0683f7e0937ef46dd443a9926"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,87,"""prompts/locator.md"": ""181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,88,"""prompts/repairer.md"": ""5d78e4c3f12752b9a4d66584c1a95b1229fb3d023c92d9e6d736625dc2d8e177"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,89,"""prompts/reviewer.md"": ""2fbfa806f864797cf3bd51ce04447215c464f477ac9ceffeac80f0953f91f61c"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,90,"""prompts/scheduler.md"": ""345b41671e2e47938111ac6ff5d93ab28bc2cd4e6dc289594eaa8c889d8eb79a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,91,"""knowledge/demo_project/business_rules.md"": ""b30bfcf6ffdc630f8cbfc1976d4ed8bf58305f62d7c5b37feffe7983807b0cf9"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,92,"""knowledge/demo_project/project_structure.md"": ""f13c2c0be0644693dd2cee5816699c660416449a991216873aa3f94ce52a2119"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,93,"""knowledge/demo_project/public_tasks.md"": ""b9d6ba5cbfb29b8e43a45e77231ce5d970ed41948167e893aeef9a6095b9e66f"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,94,"""knowledge/demo_project/README.md"": ""060a69d41f87803d7a0d1fe4ff96c7b1da74c8c1010ea71121da1688b7e8cb68"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,95,"""knowledge/demo_project/testing.md"": ""9edf780c1902ce5ba3af2a7c0d5e410ec9d447a49323071b184ae8f881d05624"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,96,"""ui/app/app.js"": ""bf3f80864c311184679e037465019e50de854cc17aa4fea8227471b1cfc0dbf8"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,97,"""ui/app/index.html"": ""1b75088b88232258da7a149f96944a3410487dd9cc5bae809652ea27862cc50a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,98,"""ui/app/theme.css"": ""7f19545713af1281fcbc219e3521abaf97c0b71d577d43cc9e71e57bc653e668"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/index.json,108,"""tests/test_knowledge_runner.py"": ""a85960dfed5e68f32ca9ea25d90d01972798b4d9cbc6d1740a2e5049b365d1cf"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,53,"""app/knowledge.py"": ""1e0fee91eb44bab3952021eaefb045183693c86d690e6216921ea1f94ed0978a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,72,"""configs/agents.json"": ""248a9a90e1cee14b9f6eddf208492eceb72b94ee7bc67dfcc7da3ad581550f18"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,73,"""configs/decision_rules.json"": ""cbae65a5b20fee23d0589bdceed370b41d546f962e4b99c8c3f8384130f21a05"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,74,"""configs/interface_examples.json"": ""0b58a56061aeee0c4914e1be2967e37434fa4a0ca1438e098d3efbc9a912721d"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,75,"""configs/tasks/catalog-v3.json"": ""b4b30f23625d8ae33d6db8b8633ed5efb95e580de1155c8d9e93e5118aeda173"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,76,"""configs/tasks/leap-baseline.json"": ""244f2018e58d4b58edd76474e690738810b6d8dcbb5e3f60fd4c729a34a9a753"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,77,"""configs/test_plan.json"": ""6465ec4f0637d355f060138b427122f87f3f388330b19e1a9a398c3a916b7a6c"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,78,"""prompts/detector.md"": ""6efdcb821ae1464cb0ac6e3972c39746a35bbbd0683f7e0937ef46dd443a9926"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,79,"""prompts/locator.md"": ""181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,80,"""prompts/repairer.md"": ""5d78e4c3f12752b9a4d66584c1a95b1229fb3d023c92d9e6d736625dc2d8e177"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,81,"""prompts/reviewer.md"": ""2fbfa806f864797cf3bd51ce04447215c464f477ac9ceffeac80f0953f91f61c"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,82,"""prompts/scheduler.md"": ""345b41671e2e47938111ac6ff5d93ab28bc2cd4e6dc289594eaa8c889d8eb79a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,83,"""knowledge/demo_project/business_rules.md"": ""b30bfcf6ffdc630f8cbfc1976d4ed8bf58305f62d7c5b37feffe7983807b0cf9"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,84,"""knowledge/demo_project/project_structure.md"": ""f13c2c0be0644693dd2cee5816699c660416449a991216873aa3f94ce52a2119"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,85,"""knowledge/demo_project/public_tasks.md"": ""b9d6ba5cbfb29b8e43a45e77231ce5d970ed41948167e893aeef9a6095b9e66f"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,86,"""knowledge/demo_project/README.md"": ""060a69d41f87803d7a0d1fe4ff96c7b1da74c8c1010ea71121da1688b7e8cb68"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,87,"""knowledge/demo_project/testing.md"": ""9edf780c1902ce5ba3af2a7c0d5e410ec9d447a49323071b184ae8f881d05624"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,88,"""ui/app/app.js"": ""bf3f80864c311184679e037465019e50de854cc17aa4fea8227471b1cfc0dbf8"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,89,"""ui/app/index.html"": ""1b75088b88232258da7a149f96944a3410487dd9cc5bae809652ea27862cc50a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,90,"""ui/app/theme.css"": ""7f19545713af1281fcbc219e3521abaf97c0b71d577d43cc9e71e57bc653e668"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/quixbugs-import/pre-permission-fix-index.json,100,"""tests/test_knowledge_runner.py"": ""a85960dfed5e68f32ca9ea25d90d01972798b4d9cbc6d1740a2e5049b365d1cf"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,43,"""app/knowledge.py"": ""1e0fee91eb44bab3952021eaefb045183693c86d690e6216921ea1f94ed0978a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,61,"""configs/agents.json"": ""248a9a90e1cee14b9f6eddf208492eceb72b94ee7bc67dfcc7da3ad581550f18"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,62,"""configs/decision_rules.json"": ""cbae65a5b20fee23d0589bdceed370b41d546f962e4b99c8c3f8384130f21a05"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,63,"""configs/interface_examples.json"": ""0b58a56061aeee0c4914e1be2967e37434fa4a0ca1438e098d3efbc9a912721d"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,64,"""configs/tasks/catalog-v3.json"": ""6027181d42fc14c369607973d7ed30fd6513021911958fe8910b6f0c693583ea"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,65,"""configs/tasks/leap-baseline.json"": ""244f2018e58d4b58edd76474e690738810b6d8dcbb5e3f60fd4c729a34a9a753"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,66,"""configs/test_plan.json"": ""6465ec4f0637d355f060138b427122f87f3f388330b19e1a9a398c3a916b7a6c"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,67,"""prompts/detector.md"": ""6efdcb821ae1464cb0ac6e3972c39746a35bbbd0683f7e0937ef46dd443a9926"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,68,"""prompts/locator.md"": ""181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,69,"""prompts/repairer.md"": ""5d78e4c3f12752b9a4d66584c1a95b1229fb3d023c92d9e6d736625dc2d8e177"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,70,"""prompts/reviewer.md"": ""2fbfa806f864797cf3bd51ce04447215c464f477ac9ceffeac80f0953f91f61c"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,71,"""prompts/scheduler.md"": ""345b41671e2e47938111ac6ff5d93ab28bc2cd4e6dc289594eaa8c889d8eb79a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,72,"""knowledge/demo_project/business_rules.md"": ""b30bfcf6ffdc630f8cbfc1976d4ed8bf58305f62d7c5b37feffe7983807b0cf9"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,73,"""knowledge/demo_project/project_structure.md"": ""f13c2c0be0644693dd2cee5816699c660416449a991216873aa3f94ce52a2119"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,74,"""knowledge/demo_project/public_tasks.md"": ""b9d6ba5cbfb29b8e43a45e77231ce5d970ed41948167e893aeef9a6095b9e66f"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,75,"""knowledge/demo_project/README.md"": ""060a69d41f87803d7a0d1fe4ff96c7b1da74c8c1010ea71121da1688b7e8cb68"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,76,"""knowledge/demo_project/testing.md"": ""9edf780c1902ce5ba3af2a7c0d5e410ec9d447a49323071b184ae8f881d05624"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,77,"""ui/app/app.js"": ""b68a823ddb88094b527f894c979787d5b2a1e43176182bb2dd849493811767ff"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,78,"""ui/app/index.html"": ""1b75088b88232258da7a149f96944a3410487dd9cc5bae809652ea27862cc50a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,79,"""ui/app/theme.css"": ""7f19545713af1281fcbc219e3521abaf97c0b71d577d43cc9e71e57bc653e668"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-public-tasks/index.json,89,"""tests/test_knowledge_runner.py"": ""a85960dfed5e68f32ca9ea25d90d01972798b4d9cbc6d1740a2e5049b365d1cf"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,40,"""app/knowledge.py"": ""1e0fee91eb44bab3952021eaefb045183693c86d690e6216921ea1f94ed0978a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,56,"""configs/agents.json"": ""248a9a90e1cee14b9f6eddf208492eceb72b94ee7bc67dfcc7da3ad581550f18"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,57,"""configs/decision_rules.json"": ""cbae65a5b20fee23d0589bdceed370b41d546f962e4b99c8c3f8384130f21a05"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,58,"""configs/interface_examples.json"": ""0b58a56061aeee0c4914e1be2967e37434fa4a0ca1438e098d3efbc9a912721d"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,59,"""configs/tasks/leap-baseline.json"": ""244f2018e58d4b58edd76474e690738810b6d8dcbb5e3f60fd4c729a34a9a753"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,60,"""configs/test_plan.json"": ""6465ec4f0637d355f060138b427122f87f3f388330b19e1a9a398c3a916b7a6c"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,61,"""prompts/detector.md"": ""6efdcb821ae1464cb0ac6e3972c39746a35bbbd0683f7e0937ef46dd443a9926"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,62,"""prompts/locator.md"": ""181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,63,"""prompts/repairer.md"": ""5d78e4c3f12752b9a4d66584c1a95b1229fb3d023c92d9e6d736625dc2d8e177"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,64,"""prompts/reviewer.md"": ""2fbfa806f864797cf3bd51ce04447215c464f477ac9ceffeac80f0953f91f61c"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,65,"""prompts/scheduler.md"": ""345b41671e2e47938111ac6ff5d93ab28bc2cd4e6dc289594eaa8c889d8eb79a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,66,"""ui/app/app.js"": ""cc80594b5a756ca93ee47072a9c04e699119ec19934fc3fd845377634533b42a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,67,"""ui/app/index.html"": ""0dc5856aed1a4a34990ceefa818bd4b0573fc641a2b9e7600557322cd54714b7"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,68,"""ui/app/theme.css"": ""7f19545713af1281fcbc219e3521abaf97c0b71d577d43cc9e71e57bc653e668"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3-state-control/index.json,78,"""tests/test_knowledge_runner.py"": ""a85960dfed5e68f32ca9ea25d90d01972798b4d9cbc6d1740a2e5049b365d1cf"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,42,"""app/knowledge.py"": ""1e0fee91eb44bab3952021eaefb045183693c86d690e6216921ea1f94ed0978a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,58,"""configs/agents.json"": ""248a9a90e1cee14b9f6eddf208492eceb72b94ee7bc67dfcc7da3ad581550f18"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,59,"""configs/decision_rules.json"": ""cbae65a5b20fee23d0589bdceed370b41d546f962e4b99c8c3f8384130f21a05"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,60,"""configs/interface_examples.json"": ""0b58a56061aeee0c4914e1be2967e37434fa4a0ca1438e098d3efbc9a912721d"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,61,"""configs/tasks/leap-baseline.json"": ""244f2018e58d4b58edd76474e690738810b6d8dcbb5e3f60fd4c729a34a9a753"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,62,"""configs/test_plan.json"": ""6465ec4f0637d355f060138b427122f87f3f388330b19e1a9a398c3a916b7a6c"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,63,"""prompts/detector.md"": ""6efdcb821ae1464cb0ac6e3972c39746a35bbbd0683f7e0937ef46dd443a9926"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,64,"""prompts/locator.md"": ""181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,65,"""prompts/repairer.md"": ""5d78e4c3f12752b9a4d66584c1a95b1229fb3d023c92d9e6d736625dc2d8e177"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,66,"""prompts/reviewer.md"": ""2fbfa806f864797cf3bd51ce04447215c464f477ac9ceffeac80f0953f91f61c"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,67,"""prompts/scheduler.md"": ""345b41671e2e47938111ac6ff5d93ab28bc2cd4e6dc289594eaa8c889d8eb79a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,68,"""ui/app/app.js"": ""cc80594b5a756ca93ee47072a9c04e699119ec19934fc3fd845377634533b42a"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,69,"""ui/app/index.html"": ""0dc5856aed1a4a34990ceefa818bd4b0573fc641a2b9e7600557322cd54714b7"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,70,"""ui/app/theme.css"": ""7f19545713af1281fcbc219e3521abaf97c0b71d577d43cc9e71e57bc653e668"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+evidence/v3/index.json,80,"""tests/test_knowledge_runner.py"": ""a85960dfed5e68f32ca9ea25d90d01972798b4d9cbc6d1740a2e5049b365d1cf"",",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+scripts/index_v3_evidence.py,14,"for directory in ('app', 'c_runner', 'configs', 'prompts', 'ui/app', 'docker', 'tests'):",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_agents_v3.py,70,"data = {'action': 'repair', 'reason': 'assertion', 'evidence_ids': ['e1'], 'knowledge_citations': []}",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_control_boundaries.py,16,engine = DecisionEngine(read_json(Path(__file__).resolve().parents[1] / 'configs/decision_rules.json')),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_knowledge_runner.py,1,from app.knowledge import search_knowledge,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_knowledge_runner.py,5,def test_knowledge_returns_citation():,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_knowledge_runner.py,6,"results=search_knowledge(ROOT,('business_rules','testing'),'闰年 测试')",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_knowledge_runner.py,7,assert results and results[0].citation_id.startswith('knowledge-'),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_knowledge_runner.py,9,"assert code_version(ROOT,('day1-kit/code/leap_year.py',)).startswith('sha256:')",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_mock_workflow.py,22,original = (ROOT / 'c_fixtures/leap_original/code/leap_year.py').read_bytes(),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_mock_workflow.py,33,assert material['knowledge_context'],代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_model_client.py,14,agents = json.loads((ROOT / 'configs/agents.json').read_text(encoding='utf-8')),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_model_client.py,20,"knowledge=[{'citation_id': 'k1', 'knowledge_id': 'business_rules', 'source_path': 'knowledge/demo_project/business_rules.md', 'excerpt': 'fixture'}],",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_model_client.py,27,"'explanation': 'fixture', 'evidence_ids': ['e1'], 'knowledge_citations': ['k1']}",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_model_client.py,59,"@pytest.mark.parametrize('payload', [repair(evidence_ids=['unknown']), repair(knowledge_citations=['unknown']),",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_model_client.py,108,"value = {'file': 'code/a.py', 'function': 'f', 'hypothesis': 'fixture', 'evidence_ids': ['e1'], 'knowledge_citations': ['k1']}",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_model_context.py,14,"agents_config=json.loads((ROOT / 'configs/agents.json').read_text(encoding='utf-8')),",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_model_context.py,18,"knowledge=[{'citation_id': 'k1', 'knowledge_id': 'testing', 'source_path': 'knowledge/demo_project/testing.md', 'excerpt': 'fixture'}])",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_model_context.py,27,assert ctx.knowledge_ids == frozenset({'k1'}),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_model_context.py,37,"@pytest.mark.parametrize('mutation', ['disabled', 'prompt', 'final_check', 'stale', 'extra_evidence_field', 'outside_code', 'knowledge'])",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_model_context.py,46,if mutation == 'knowledge': data['knowledge'][0]['knowledge_id'] = 'reference_answers',代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_model_context.py,53,"'evidence_ids': value, 'knowledge_citations': []}",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_model_context.py,59,"'explanation': 'fixture', 'evidence_ids': [], 'knowledge_citations': []}",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_quixbugs_import.py,11,path = tmp_path / 'configs/tasks/catalog-v3.json',代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_quixbugs_import.py,13,original = json.loads((ROOT / 'configs/tasks/catalog-v3.json').read_bytes()),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_quixbugs_import.py,22,current = json.loads((ROOT / 'configs/tasks/catalog-v3.json').read_bytes()),代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_v02_core.py,12,assert read_json(ROOT/'configs/agents.json')['config_version']=='iteration-0.2-20261101-draft',代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_v02_core.py,13,assert read_json(ROOT/'configs/decision_rules.json')['interface_version']=='0.2-20261101-draft',代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_v02_core.py,14,assert load_task_spec(ROOT/'day1-kit/configs/task.json').allowed_paths,代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_v02_core.py,16,"engine=DecisionEngine(read_json(ROOT/'configs/decision_rules.json')); base={'phase':'development','isolation_ready':True,'user_pause_requested':False,'evidence_matches_current_version':True,'repair_budget_available':True,'execution_budget_available':True,'needs_new_repair':True,'next_action_requires_execution_budget':True,'output_agent':None,'retries_left':2}",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_v02_core.py,22,"result=DecisionEngine(read_json(ROOT/'configs/decision_rules.json')).decide({},run_id='r',code_version='v',evidence_ids=[],decision_id='D1'); assert result['action']=='pause'",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_v02_core.py,28,"payload={'changes':[{'path':'leap_app/leap_year.py','new_content':'x'}],'explanation':'fix','evidence_ids':[],'knowledge_citations':[]}; assert parse_repair_output(json.dumps(payload))['changes']",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_workflow_v3.py,41,"common = {'evidence_ids': [evidence['evidence_id']], 'knowledge_citations': []}",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/test_workflow_v3.py,195,assert 'knowledge-public_tasks' in [item['citation_id'] for item in material['knowledge_context']],代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位
+tests/ui_prototype.test.cjs,8,"const html = fs.readFileSync(path.join(__dirname, '../ui/prototype/index.html'), 'utf8');",代码/配置路径不改；被依赖的提示词、知识、Day1、夹具、运行UI保留原位

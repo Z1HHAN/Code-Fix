@@ -1,0 +1,27 @@
+{
+  "main_input": "e63b322919cdbe5f31156cfc9c1f315eb0092af9",
+  "source_commit": "add07a5ba0bb989e3871933bdd27a68436c365b8",
+  "review_tests": {
+    "passed": 43,
+    "failed": 0
+  },
+  "test_command": "runs/v3-venv/Scripts/python.exe -B -X utf8 -m pytest -q tests/test_role_config.py tests/test_workflow_v3.py --basetemp=runs/mr1103 -o cache_dir=runs/main-governance-review/cache --junitxml=runs/main-governance-review/focused.junit.xml --tb=short",
+  "validate_config_errors": [],
+  "current_doc_links_checked": 391,
+  "missing_links": 0,
+  "functional_blobs_match_source": true,
+  "protected_paths_unchanged": [
+    "AGENTS.md",
+    "day1-kit",
+    "C_Day1_20261030",
+    "docs/开发要求V3.0.md",
+    "c_runner",
+    "configs/decision_rules.json"
+  ],
+  "real_model_calls": 0,
+  "public_or_candidate_code_executed": false,
+  "full_platform_rerun_this_merge": false,
+  "prior_full_regression": "add07a5:191 passed/1 skipped; Node9 passed",
+  "stable_release": false,
+  "commit_identity": "the merge commit containing this record; remote main is authoritative"
+}

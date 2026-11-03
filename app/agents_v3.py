@@ -1,4 +1,4 @@
-"""V3 role contracts; old v0.2 role configuration remains unchanged."""
+"""V3 JSON contracts, configured capabilities and versioned call evidence."""
 import json
 from pathlib import Path
 
@@ -6,6 +6,7 @@ from .knowledge import search_knowledge
 from .repair_output import InvalidModelOutput, _object, _fields, _citations, parse_repair_output
 from .security import validate_changes
 from .tasks_v3 import FORBIDDEN, get_task
+from .role_config import RoleConfig
 
 ROOT = Path(__file__).resolve().parents[1]
 ROLES = {'repairer', 'detector', 'scheduler', 'locator'}
@@ -37,16 +38,22 @@ def parse_role(role, raw, evidence_ids, knowledge_ids):
 
 
 class AgentGateway:
-    def __init__(self, model, store):
+    def __init__(self, model, store, config=None):
         self.model, self.store = model, store
+        self.config = config or RoleConfig(ROOT)
 
     def invoke(self, role, *, run_id, round_number, code, evidence, version, work, task, deadline, extra=None):
         if role not in ROLES or evidence['phase'] != 'development' or evidence['code_version'] != version:
             raise InvalidModelOutput('角色或当前开发证据不匹配')
+        agent = self.config.require(role)
+        # model_ref is resolved through the validated primary/live_env binding.
+        # The injected offline client uses the same binding for component tests.
         definition = get_task(task.get('project', 'leap'))
         source = definition.source
-        knowledge = [x.to_dict() for x in search_knowledge(ROOT, tuple(definition.data['knowledge_ids']), definition.data['knowledge_query'])]
-        prompt = (ROOT / 'prompts' / f'{role}.md').read_text(encoding='utf-8').split('任务与路径约束：', 1)[0]
+        ids = tuple(k for k in definition.data['knowledge_ids'] if k in agent['knowledge_ids'])
+        knowledge = ([x.to_dict() for x in search_knowledge(self.config.root, ids, definition.data['knowledge_query'])]
+                     if 'search_knowledge' in agent['tool_allowlist'] else [])
+        prompt = self.config.prompts[role][0]
         material = {'task': {'project': definition.project, 'description': task['description'], 'allowed_paths': [source],
                              'forbidden_paths': list(FORBIDDEN), 'round': round_number, 'max_rounds': task['max_rounds']},
                     'current_code': {source: code}, 'dev_evidence': [evidence],
@@ -65,7 +72,11 @@ class AgentGateway:
         folder = self.store.directory(run_id) / 'calls' / call_id
         folder.mkdir(parents=True)
         safe = getattr(self.model, 'redact', lambda x: x)
-        (folder / 'input.json').write_text(json.dumps(safe({'role': role, 'messages': messages}), ensure_ascii=False, indent=2), encoding='utf-8')
+        provenance = self.config.provenance(role)
+        provenance['model_binding'] = {'model_ref': agent['model_ref'], 'binding': 'live_env',
+                                       'mode': getattr(self.model, 'mode', 'unknown'),
+                                       'model': getattr(getattr(self.model, 'settings', None), 'model', None)}
+        (folder / 'input.json').write_text(json.dumps(safe({'role': role, 'messages': messages, 'provenance': provenance}), ensure_ascii=False, indent=2), encoding='utf-8')
         try:
             record = self.model.call(messages, run_id=run_id, call_id=call_id, max_calls=task['max_calls'], deadline=deadline)
         except Exception as exc:
@@ -74,7 +85,7 @@ class AgentGateway:
             from .live_model import ModelBlocked
             if isinstance(exc, ModelBlocked):
                 record['reason'] = str(exc)
-        record.update(role=role, code_version=version, call_id=call_id, round=round_number)
+        record.update(role=role, code_version=version, call_id=call_id, round=round_number, provenance=provenance)
         if record['status'] == 'ok':
             try:
                 record['parsed_output'] = parse_role(role, record['raw_text'], [evidence['evidence_id']], [k['citation_id'] for k in knowledge])
