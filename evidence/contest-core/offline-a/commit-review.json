@@ -1,0 +1,15 @@
+{
+  "reviewed_commit": "6784e7f77f9d569379b575ab5eeed9b55db7b06d",
+  "review_kind": "Codex static/committed-content review; not C independent acceptance",
+  "source_files_matched_to_tested_lf_fingerprints": 71,
+  "raw_evidence_files_matched": 96,
+  "working_tree_clean": true,
+  "test_result": {
+    "tests": 222,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 221
+  },
+  "errors": []
+}
