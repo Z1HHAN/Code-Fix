@@ -1,5 +1,6 @@
 """Evidence-driven repair state machine; final-check feedback never enters agents."""
 import json
+import re
 from pathlib import Path
 import time
 
@@ -56,10 +57,10 @@ class Workflow:
         def finish(status, reason):
             final.update(reason=reason, model_calls=self.model_calls, tool_calls=self.tool_calls,
                          cost=counters()['cost'])
-            trace.complete('interrupted', reason=reason)
+            trace.complete('failed' if status == 'failed' else 'interrupted', reason=reason)
             action = 'finish' if status in {'success', 'failed'} else 'pause' if status == 'paused' else 'stop'
             trace.decision(program={'action': action,
-                                    'rule_id': final.get('guard_id', 'terminal_' + status), 'reason': reason},
+                                    'rule_id': final.get('rule_id', final.get('guard_id', 'terminal_' + status)), 'reason': reason},
                            effective_action=action,
                            reason=reason, evidence_ids=latest_evidence, version=final.get('code_version'),
                            suite_version=final['test_suite_version'],
@@ -72,7 +73,10 @@ class Workflow:
             return status, final
 
         def boundary():
-            control = self.store.get(run_id)['control']
+            stored = self.store.get(run_id)
+            if stored['status'] not in {'created', 'running'}:
+                raise ControlRequested('stop')
+            control = stored['control']
             if control:
                 raise ControlRequested(control)
             if time.monotonic() >= deadline:
@@ -104,6 +108,7 @@ class Workflow:
                 return finish('blocked', '运行前置条件未满足；未发起模型请求或候选执行')
             if self.model is None:
                 self.model = ModelRouter(config, Ledger(self.store.root), resolved)
+            final['mode'] = getattr(self.model, 'mode', 'unknown')
             rules = read_json(ROOT / 'configs/decision_rules.json')
             trace.write('trace/configuration.json', {'roles': config.snapshot, 'config_sha256': config.sha256,
                         'bindings': {role: self.model.binding(role) for role in config.agents}
@@ -114,6 +119,22 @@ class Workflow:
                         'provenance': {role: config.provenance(role) for role in config.agents}})
             gateway = AgentGateway(self.model, self.store, config)
             engine = DecisionEngine(rules)
+            def route(failure, phase='development', pause=False):
+                context = dict(phase=phase, failure_class=failure, isolation_ready=True,
+                               user_pause_requested=pause, evidence_matches_current_version=True,
+                               repair_budget_available=final['rounds_used'] < task['max_rounds'],
+                               execution_budget_available=time.monotonic() < deadline,
+                               needs_new_repair=failure != 'passed', next_action_requires_execution_budget=True,
+                               output_agent=None, retries_left=task['max_rounds']-final['rounds_used'])
+                import uuid
+                decision = engine.decide(context, run_id=run_id, code_version=final.get('code_version'),
+                                         evidence_ids=latest_evidence, decision_id='d-'+uuid.uuid4().hex)
+                final['rule_id'] = decision['rule_id']
+                trace.decision(program=decision, effective_action=decision['action'], reason=decision['reason'],
+                               evidence_ids=latest_evidence, version=final.get('code_version'),
+                               suite_version=final['test_suite_version'], counters=counters(),
+                               round_number=final['rounds_used'], phase=phase)
+                return decision
             base = definition.prepare(directory / 'base')
             current = base
             version = code_version(current, (source,))
@@ -153,7 +174,11 @@ class Workflow:
                         return ''
                     with path.open('rb') as stream:
                         text = stream.read(6000).decode('utf-8', errors='replace')
-                    return '\n'.join(line for line in text.splitlines() if not line.startswith('CODEFIX_REPORT:'))
+                    # Native parameterized nodeids embed expected values; never
+                    # forward those values or assertion diffs as model context.
+                    return '\n'.join(re.sub(r'\[[^\]\n]*\]', '[parameters redacted]', line)
+                                     for line in text.splitlines()
+                                     if not line.startswith(('CODEFIX_REPORT:', 'E ', '> ', 'assert ')))
                 summary = {'counts': result.get('counts'), 'exit_code': result.get('exit_code'),
                            'failure_class': result['failure_class'], 'stdout': excerpt('stdout_path'),
                            'stderr': excerpt('stderr_path')}
@@ -185,6 +210,10 @@ class Workflow:
                     final['failure_class'] = record.get('failure_class', 'unknown')
                     if final['failure_class'] == 'invalid_model_output':
                         final['guard_id'] = 'V3_INVALID_MODEL_OUTPUT_STOP'
+                    elif final['failure_class'] in {'permission_violation', 'model_transport_error'}:
+                        final['guard_id'] = 'V3_' + final['failure_class'].upper()
+                        routed = route(final['failure_class'])
+                        raise RoutedFailure('paused' if routed['action'] == 'pause' else 'stopped', record.get('reason', routed['reason']))
                     raise ModelBlocked('角色调用失败：' + record.get('failure_class', 'unknown')
                                        + ('；' + record['reason'] if record.get('reason') else ''))
                 return record['parsed_output']
@@ -192,7 +221,10 @@ class Workflow:
             result, folder = test(base, 'development', 'baseline')
             boundary()
             if result.get('failure_class') != 'assertion_failed':
-                return finish('blocked', '原始缺陷未按预期复现；不算模型修复')
+                failure = result.get('failure_class', 'unknown_evidence')
+                final['baseline_failure_class'] = failure
+                routed = route('not_reproduced' if failure == 'passed' else failure)
+                return finish('stopped' if routed['action'] == 'stop' else 'paused', routed['reason'])
             for round_number in range(1, task['max_rounds'] + 1):
                 ev = evidence(result, folder, round_number)
                 final['rounds_used'] = round_number
@@ -223,8 +255,13 @@ class Workflow:
                                    evidence_ids=[ev['evidence_id']], version=version,
                                    suite_version=final['test_suite_version'], counters=counters(), round_number=round_number)
                     return finish('paused' if decision['action'] == 'pause' else 'stopped', decision['reason'])
-                detector = call('detector', ev, round_number)
-                advice = call('scheduler', ev, round_number, detector)
+                # Advisory model calls must not consume the last chance to
+                # validate an already passing candidate with the tool executor.
+                if decision['action'] == 'final_check' and task['max_calls']-self.model_calls < 2:
+                    advice = {'action': 'final_check', 'reason': '开发通过；预算不足时跳过非必需模型建议'}
+                else:
+                    detector = call('detector', ev, round_number)
+                    advice = call('scheduler', ev, round_number, detector)
                 effective = advice['action'] if advice['action'] in {'pause', 'stop'} else decision['action']
                 reason = advice['reason'] if effective in {'pause', 'stop'} else decision['reason']
                 override = ('模型要求保守停止，程序允许停止；不采纳推进动作'
@@ -249,9 +286,13 @@ class Workflow:
                     checked, _ = test(final_work, 'final_check', 'final-check')
                     final['final_result'] = checked['verification_status']
                     boundary()
+                    final_failure = checked['failure_class']
+                    if final_failure in {'assertion_failed', 'syntax_error', 'code_runtime_error'}:
+                        final_failure = 'final_check_failed'
+                    routed = route(final_failure, phase='final_check')
                     if checked['verification_status'] == 'passed' and checked['failure_class'] == 'passed':
                         return finish('success', '开发测试及干净副本同套原生测试均实际通过')
-                    return finish('failed', '独立验收未通过；结果不回流本轮Agent')
+                    return finish('failed' if routed['action'] == 'finish' else 'paused', '独立验收未通过；结果不回流本轮Agent')
                 # A model cannot force final validation of failing code or bypass syntax rules.
                 if effective == 'locate':
                     location = call('locator', ev, round_number)
@@ -259,7 +300,14 @@ class Workflow:
                     location = None
             return finish('stopped', '达到最大修复轮次')
         except ControlRequested as exc:
+            if exc.action == 'pause' and 'engine' in locals():
+                route('user_pause', pause=True)
+            else:
+                final['guard_id'] = 'V3_OPERATOR_STOP'
+            trace.complete('interrupted', reason='用户控制')
             return finish('paused' if exc.action == 'pause' else 'stopped', '按用户请求在步骤边界停止推进')
+        except RoutedFailure as exc:
+            return finish(exc.status, str(exc))
         except (ModelBlocked, IsolationBlocked, ConfigError) as exc:
             return finish('blocked', str(exc))
         except Exception as exc:
@@ -270,3 +318,9 @@ class Workflow:
 class ControlRequested(Exception):
     def __init__(self, action):
         self.action = action
+
+
+class RoutedFailure(Exception):
+    def __init__(self, status, reason):
+        super().__init__(reason)
+        self.status = status

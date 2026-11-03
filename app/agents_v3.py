@@ -4,7 +4,7 @@ from pathlib import Path
 
 from .knowledge import search_knowledge
 from .repair_output import InvalidModelOutput, _object, _fields, _citations, parse_repair_output
-from .security import validate_changes
+from .security import validate_changes, PermissionViolation
 from .tasks_v3 import FORBIDDEN, get_task
 from .role_config import RoleConfig
 
@@ -45,6 +45,9 @@ class AgentGateway:
     def invoke(self, role, *, run_id, round_number, code, evidence, version, work, task, deadline, extra=None, trace=None):
         if role not in ROLES or evidence['phase'] != 'development' or evidence['code_version'] != version:
             raise InvalidModelOutput('角色或当前开发证据不匹配')
+        allowed_evidence = {'evidence_id', 'phase', 'code_version', 'failure_class', 'summary'}
+        if set(evidence) - allowed_evidence:
+            raise InvalidModelOutput('开发证据包含未批准字段')
         agent = self.config.require(role)
         definition = get_task(task.get('project', 'leap'))
         source = definition.source
@@ -98,6 +101,8 @@ class AgentGateway:
                     raise InvalidModelOutput('定位文件必须属于当前任务')
                 if role == 'detector' and record['parsed_output']['failure_class'] != evidence['failure_class']:
                     raise InvalidModelOutput('检测建议不能覆盖真实分类')
+            except PermissionViolation as exc:
+                record.update(status='failed', failure_class='permission_violation', error_type=type(exc).__name__)
             except (ValueError, OSError) as exc:
                 record.update(status='failed', failure_class='invalid_model_output', error_type=type(exc).__name__)
         (folder / 'output.json').write_text(json.dumps(safe(record), ensure_ascii=False, indent=2), encoding='utf-8')
