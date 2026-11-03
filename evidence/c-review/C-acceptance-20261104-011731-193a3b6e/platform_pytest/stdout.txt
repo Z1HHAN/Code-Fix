@@ -1,0 +1,630 @@
+.....................................................s.................. [ 29%]
+...........................................FFFFFFFFFFFFFF............... [ 59%]
+....................................................................F... [ 89%]
+.........................                                                [100%]
+================================== FAILURES ===================================
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>0] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se0/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F45938DEF0>
+change = <function <lambda> at 0x000001F458FA71C0>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>1] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se1/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F459441940>
+change = <function <lambda> at 0x000001F458FA7270>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>2] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se2/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F459440EC0>
+change = <function <lambda> at 0x000001F458FA7320>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>3] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se3/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F459440A60>
+change = <function <lambda> at 0x000001F458FA73D0>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>4] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se4/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F459441400>
+change = <function <lambda> at 0x000001F458FA7480>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>5] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se5/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F459534D00>
+change = <function <lambda> at 0x000001F458FA7530>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>6] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se6/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se6')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F459534980>
+change = <function <lambda> at 0x000001F458FA75E0>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>7] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se7/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se7')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F4594419B0>
+change = <function <lambda> at 0x000001F458FA7690>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>8] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se8/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se8')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F459440F30>
+change = <function <lambda> at 0x000001F458FA7740>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>9] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se9/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se9')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F45938EA50>
+change = <function <lambda> at 0x000001F458FA77F0>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>10] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se10/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se10')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F4595365F0>
+change = <function <lambda> at 0x000001F458FA78A0>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>11] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se11/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se11')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F459537E00>
+change = <function <lambda> at 0x000001F458FA7950>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>12] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se12/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se12')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F459537E70>
+change = <function <lambda> at 0x000001F458FA7A00>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+_ test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>13] _
+
+root = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se13/repo')
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_bad_config_rejected_by_se13')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F459537EE0>
+change = <function <lambda> at 0x000001F458FA7AB0>
+
+    @pytest.mark.parametrize('change', [
+        lambda d: d.update(protocol='day1'),
+        lambda d: d.update(config_version='3.0'),
+        lambda d: d['agents'].append(copy.deepcopy(d['agents'][0])),
+        lambda d: d['agents'].pop(),
+        lambda d: d['agents'][1].update(model_ref='missing'),
+        lambda d: d['agents'][1].update(model_ref=[]),
+        lambda d: d['agents'][1].update(prompt_ref='task_assets/leap_legacy/prompts/repairer.md'),
+        lambda d: d['agents'][1].update(output_schema='BarePython'),
+        lambda d: d['agents'][1].update(tool_allowlist=['apply_patch']),
+        lambda d: d['agents'][1].update(tool_allowlist=['run_tests']),
+        lambda d: d['agents'][1].update(knowledge_ids=['../answer']),
+        lambda d: d['agents'][1].update(enabled='false'),
+        lambda d: d['models'].update(primary={'binding': 'arbitrary_import'}),
+        lambda d: d.update(api_key='must-not-be-saved'),
+    ])
+    def test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls(root, tmp_path, monkeypatch, change):
+        edit(root, change)
+        assert validate_draft_configs(root)
+        monkeypatch.setattr('app.workflow_v3.ROOT', root)
+        class Forbidden:
+            def preflight(self, *args):
+                pytest.fail('invalid config must precede executor preflight')
+            def call(self, *args, **kwargs):
+                pytest.fail('invalid config must not call model')
+        store = RunStore(tmp_path / 'runs')
+        rid = store.create({'mode': 'repair'})['run_id']
+        status, result = Workflow(store, Forbidden(), Forbidden()).run(rid)
+>       assert status == 'blocked' and result['model_calls'] == result['tool_calls'] == 0
+E       AssertionError: assert ('stopped' == 'blocked'
+E         
+E         - blocked
+E         + stopped)
+
+tests\test_role_config.py:68: AssertionError
+__________ test_model_call_limit_prevents_extra_role_and_final_check __________
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-4d82fb48/p/test_model_call_limit_prevents0')
+
+    def test_model_call_limit_prevents_extra_role_and_final_check(tmp_path):
+        status, result, runner, model, *_ = execute(tmp_path, ['assertion_failed', 'passed'], {'max_calls': 1})
+>       assert status == 'blocked' and result['model_calls'] == 1
+E       AssertionError: assert ('failed' == 'blocked'
+E         
+E         - blocked
+E         + failed)
+
+tests\test_workflow_v3.py:174: AssertionError
+============================== warnings summary ===============================
+runs\v3-venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\v3-venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\lenovo\Documents\ChatGPT\Code Fix\evidence\c-review\C-acceptance-20261104-011731-193a3b6e\platform_pytest\junit.xml -
+=========================== short test summary info ===========================
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>0]
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>1]
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>2]
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>3]
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>4]
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>5]
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>6]
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>7]
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>8]
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>9]
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>10]
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>11]
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>12]
+FAILED tests/test_role_config.py::test_bad_config_rejected_by_selfcheck_and_runtime_before_any_calls[<lambda>13]
+FAILED tests/test_workflow_v3.py::test_model_call_limit_prevents_extra_role_and_final_check
+15 failed, 225 passed, 1 skipped, 1 warning in 86.54s (0:01:26)

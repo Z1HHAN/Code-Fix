@@ -169,11 +169,11 @@ def test_expired_total_budget_after_model_prevents_patch(tmp_path, monkeypatch):
     assert not (store.directory(rid) / 'candidate-1').exists()
 
 
-def test_model_call_limit_prevents_extra_role_and_final_check(tmp_path):
-    status, result, runner, model, *_ = execute(tmp_path, ['assertion_failed', 'passed'], {'max_calls': 1})
-    assert status == 'blocked' and result['model_calls'] == 1
+def test_model_call_limit_prevents_extra_roles_but_allows_tool_final_check(tmp_path):
+    status, result, runner, model, *_ = execute(tmp_path, ['assertion_failed', 'passed', 'passed'], {'max_calls': 1})
+    assert status == 'success' and result['model_calls'] == 1
     assert model.roles == ['repairer']
-    assert runner.phases == ['development', 'development'] and result['final_result'] == 'not_run'
+    assert runner.phases == ['development', 'development', 'final_check'] and result['final_result'] == 'passed'
 
 
 @pytest.mark.parametrize('project', ['qb-get_factors', 'qb-gcd', 'qb-max_sublist_sum', 'qb-breadth_first_search'])

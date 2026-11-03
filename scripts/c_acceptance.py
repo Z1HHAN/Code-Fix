@@ -23,6 +23,7 @@ import tempfile
 import time
 import traceback
 import uuid
+import zipfile
 import xml.etree.ElementTree as ET
 
 TZ = timezone(timedelta(hours=8))
@@ -64,23 +65,30 @@ def preserve_work(source, destination):
     omitted = []
     if not source.exists():
         return {'source': str(source), 'copied': False, 'omitted_links': omitted}
-    for base, directories, files in os.walk(source, followlinks=False):
-        base = Path(base)
-        target = destination / base.relative_to(source)
-        target.mkdir(parents=True, exist_ok=True)
-        for name in list(directories):
-            path = base / name
-            if path.is_symlink() or getattr(path, 'is_junction', lambda: False)():
-                directories.remove(name)
-                omitted.append(path.relative_to(source).as_posix())
-        for name in files:
-            path = base / name
-            if path.is_symlink():
-                omitted.append(path.relative_to(source).as_posix())
-            else:
-                shutil.copy2(path, target / name)
-    return {'source': str(source), 'copied': True, 'omitted_links': omitted,
-            'original_retained': True}
+    # A ZIP retains relative artifact names without recreating Windows MAX_PATH
+    # paths in the evidence tree. Keep the original short workspace as well.
+    archive = destination.with_suffix('.zip')
+    hashes = {}
+    with zipfile.ZipFile(archive, 'x', zipfile.ZIP_DEFLATED) as bundle:
+        for base, directories, files in os.walk(source, followlinks=False):
+            base = Path(base)
+            for name in list(directories):
+                path = base / name
+                if path.is_symlink() or getattr(path, 'is_junction', lambda: False)():
+                    directories.remove(name)
+                    omitted.append(path.relative_to(source).as_posix())
+            for name in files:
+                path = base / name
+                relative = path.relative_to(source).as_posix()
+                if path.is_symlink():
+                    omitted.append(relative)
+                else:
+                    raw = path.read_bytes()
+                    bundle.writestr(relative, raw)
+                    hashes[relative] = hashlib.sha256(raw).hexdigest()
+    return {'source': str(source), 'copied': True, 'format': 'zip',
+            'archive': archive.name, 'archive_sha256': digest(archive),
+            'file_sha256': hashes, 'omitted_links': omitted, 'original_retained': True}
 
 
 def environment(folder):
@@ -365,7 +373,7 @@ def main():
         ('platform_pytest', [*python, '-m', 'pytest', 'tests', 'c_tests', '-q', '-p', 'no:cacheprovider',
                              '--basetemp=' + str(scratch / 'p'),
                              '--junitxml=' + str(run_dir / 'platform_pytest/junit.xml')], 600),
-        ('node_ui', [str(node), '--test', '--test-reporter=tap', 'tests/ui_prototype.test.cjs'], 60),
+        ('node_ui', [str(node), '--test', '--test-reporter=tap', 'tests/ui_prototype.test.cjs', 'tests/ui_budget.test.cjs'], 60),
         ('c_controls', [*python, 'scripts/check_c_controls.py', '--output-root', str(run_dir / 'c_controls/controls')], 180),
         ('repair_gates', [*python, '-m', 'pytest', 'acceptance_tests', '-q', '-p', 'no:cacheprovider', '-o', 'xfail_strict=true',
                           '--basetemp=' + str(scratch / 'g'),

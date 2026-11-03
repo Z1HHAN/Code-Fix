@@ -46,7 +46,7 @@ class RunTrace:
                  phase='development'):
         step = self.start('program_dispatch', round_number=round_number,
                           evidence_ids=evidence_ids, phase=phase)
-        record = {**program, **step, 'decision_id': 'd-' + uuid.uuid4().hex,
+        record = {**program, **step, 'decision_id': program.get('decision_id') or 'd-' + uuid.uuid4().hex,
                   'program_decision': program, 'model_advice': advice,
                   'action': effective_action, 'effective_action': effective_action,
                   'target_agent': {'repair': 'repairer', 'locate': 'locator'}.get(effective_action),

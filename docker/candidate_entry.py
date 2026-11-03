@@ -1,6 +1,4 @@
-"""Trusted container harness; reports leave bounded tmpfs through stdout only."""
-import base64
-import json
+"""Container harness; host retrieves bounded tmpfs reports via Docker API."""
 from pathlib import Path
 import runpy
 import sys
@@ -14,10 +12,8 @@ try:
 except SystemExit as exc:
     exit_code = exc.code if type(exc.code) is int else 2
 finally:
-    bundle = {}
-    for name in ('junit.xml', 'pytest_events.json'):
-        path = Path('/out') / name
-        if path.is_file() and path.stat().st_size <= 2_097_152:
-            bundle[name] = base64.b64encode(path.read_bytes()).decode('ascii')
-    print('CODEFIX_REPORT:' + base64.b64encode(json.dumps(bundle).encode()).decode('ascii'), flush=True)
+    print('CODEFIX_READY', flush=True)
+    # Keep tmpfs mounted until the host has copied artifacts, or closes stdin.
+    # A marker is only a readiness hint, never sufficient acceptance evidence.
+    sys.stdin.readline()
 raise SystemExit(exit_code)

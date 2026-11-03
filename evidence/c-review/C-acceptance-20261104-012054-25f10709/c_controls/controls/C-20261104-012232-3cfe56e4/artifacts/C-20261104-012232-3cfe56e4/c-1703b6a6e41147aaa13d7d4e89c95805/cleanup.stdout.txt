@@ -1,0 +1,2 @@
+SUCCESS: The process with PID 65352 (child process of PID 37260) has been terminated.
+SUCCESS: The process with PID 37260 (child process of PID 43672) has been terminated.

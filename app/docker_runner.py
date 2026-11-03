@@ -4,6 +4,8 @@ Requires a locally built content-addressed image, explicit execution approval,
 and a real control probe. Missing Docker or probe failure denies execution.
 """
 import json
+import io
+import tarfile
 import os
 from pathlib import Path
 import re
@@ -36,7 +38,7 @@ class DockerRunner:
         for path in (work, out, entry):
             if ',' in str(path) or path.is_symlink() or getattr(path, 'is_junction', lambda: False)():
                 raise IsolationBlocked('挂载目录包含不支持字符或链接')
-        return [self.executable, 'run', '--name', name, '--pull=never', '--network=none', '--read-only',
+        return [self.executable, 'run', '-i', '--name', name, '--pull=never', '--network=none', '--read-only',
                 '--cap-drop=ALL', '--security-opt=no-new-privileges', '--pids-limit=64', '--memory=256m',
                 '--memory-swap=256m', '--cpus=1', '--user=65534:65534', '--ulimit=nofile=128:128',
                 '--tmpfs=/tmp:rw,noexec,nosuid,size=67108864', '--log-driver=none',
@@ -93,12 +95,38 @@ class DockerRunner:
         started = time.monotonic()
         timed_out = False
         exit_code = None
+        artifact_channel = None
+        artifact_error = None
         with (folder / 'stdout.txt').open('wb') as stdout, (folder / 'stderr.txt').open('wb') as stderr:
             try:
-                process = subprocess.Popen(command, stdout=stdout, stderr=stderr)
+                process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=stdout, stderr=stderr)
                 try:
                     deadline = time.monotonic() + timeout
                     while process.poll() is None:
+                        if extra and extra[0] == '/harness.py' and artifact_channel is None:
+                            lines = (folder / 'stdout.txt').read_bytes().splitlines()
+                            if b'CODEFIX_READY' in lines:
+                                try:
+                                    if lines.count(b'CODEFIX_READY') != 1 or any(x.startswith(b'CODEFIX_REPORT:') for x in lines):
+                                        raise ValueError('候选stdout包含伪造报告或重复就绪标记')
+                                    # Report bytes come from Docker's filesystem
+                                    # API, never from a candidate's stdout packet.
+                                    for filename in ('junit.xml', 'pytest_events.json'):
+                                        copied = subprocess.run([self.executable, 'cp', name+':/out/'+filename, '-'],
+                                                                capture_output=True, timeout=max(.01, deadline-time.monotonic()), check=True)
+                                        if len(copied.stdout) > 2_200_000:
+                                            raise ValueError('报告过大')
+                                        with tarfile.open(fileobj=io.BytesIO(copied.stdout)) as archive:
+                                            entries = archive.getmembers()
+                                            if len(entries) != 1 or not entries[0].isfile() or entries[0].size > 2_097_152:
+                                                raise ValueError('非法报告归档')
+                                            (output / filename).write_bytes(archive.extractfile(entries[0]).read())
+                                    artifact_channel = 'docker-cp'
+                                except (OSError, ValueError, tarfile.TarError, subprocess.SubprocessError) as exc:
+                                    artifact_channel = 'rejected'
+                                    artifact_error = type(exc).__name__
+                                finally:
+                                    process.stdin.close()
                         if time.monotonic() >= deadline or any((folder / p).stat().st_size > 8_388_608 for p in ('stdout.txt', 'stderr.txt')):
                             raise subprocess.TimeoutExpired(command, timeout)
                         time.sleep(0.03)
@@ -107,6 +135,9 @@ class DockerRunner:
                     timed_out = True
                     process.kill()
                     process.wait(timeout=5)
+                finally:
+                    if process.stdin and not process.stdin.closed:
+                        process.stdin.close()
             finally:
                 inspected = subprocess.run([self.executable, 'inspect', name], capture_output=True, timeout=10)
                 if inspected.returncode == 0:
@@ -115,6 +146,7 @@ class DockerRunner:
                 (folder / 'cleanup.json').write_text(json.dumps({'container': name, 'exit_code': cleanup.returncode}), encoding='utf-8')
         return {'call_id': name, 'exit_code': exit_code, 'timed_out': timed_out, 'duration_ms': round((time.monotonic()-started)*1000),
                 'stdout_path': 'stdout.txt', 'stderr_path': 'stderr.txt', 'command': command,
+                'artifact_channel': artifact_channel, 'artifact_error': artifact_error,
                 'cleanup_passed': cleanup.returncode == 0}
 
     def run(self, work, evidence_dir, *, phase, timeout, expected_version):
@@ -129,13 +161,20 @@ class DockerRunner:
         # Match native test bytes against reviewed registry before container start.
         profile = self.task.profile
         self.task.verify(work, candidate=True)
+        # A private reviewed snapshot prevents later mutations of the source
+        # workspace from being mislabeled as the version actually executed.
+        snapshot = self.task.prepare(folder / 'execution-snapshot')
+        (snapshot / self.task.source).write_bytes((work / self.task.source).read_bytes())
+        self.task.verify(snapshot, candidate=True)
+        if code_version(snapshot, profile['source_paths']) != expected_version:
+            raise IsolationBlocked('执行快照版本不一致')
         output = folder / 'output'
         output.mkdir()
         (output / 'pytest.ini').write_text('[pytest]\n', encoding='utf-8')
         # Bind output is dedicated to this call and contains no other run data.
         output.chmod(0o777)
         (output / 'pytest.ini').chmod(0o644)
-        result = self._execute(work, output, ['/harness.py', *profile['test_paths']], timeout, folder)
+        result = self._execute(snapshot, output, ['/harness.py', *profile['test_paths']], timeout, folder)
         result.update(phase=phase, code_version=measured, isolation_ready=True, execution_mode='docker',
                       project=self.task.project,
                       test_suite_version=compute_test_suite_version(profile), expected_test_count=len(profile['expected_nodeids']),
@@ -144,22 +183,12 @@ class DockerRunner:
             result.update(status='timeout', verification_status='inconclusive', failure_class='timeout')
         elif not result['cleanup_passed']:
             result.update(status='failed', verification_status='inconclusive', failure_class='environment_error')
+        elif result.get('artifact_channel') != 'docker-cp':
+            result.update(status='failed', verification_status='inconclusive', failure_class='evidence_channel_tampered')
         else:
-            import base64
-            lines = (folder / 'stdout.txt').read_bytes().splitlines()
-            reports = [line[len(b'CODEFIX_REPORT:'):] for line in lines if line.startswith(b'CODEFIX_REPORT:')]
-            if len(reports) == 1:
-                try:
-                    bundle = json.loads(base64.b64decode(reports[0], validate=True))
-                    if set(bundle) != {'junit.xml', 'pytest_events.json'}:
-                        raise ValueError('非法报告字段')
-                    for name, content in bundle.items():
-                        (output / name).write_bytes(base64.b64decode(content, validate=True))
-                except (ValueError, TypeError):
-                    pass
             result.update(parse_evidence(output / 'junit.xml', output / 'pytest_events.json', profile, result['exit_code']))
             try:
-                compile((work / self.task.source).read_bytes(), self.task.source, 'exec')
+                compile((snapshot / self.task.source).read_bytes(), self.task.source, 'exec')
             except SyntaxError:
                 result.update(status='failed', verification_status='inconclusive', failure_class='syntax_error')
         (folder / 'result.json').write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding='utf-8')
