@@ -1,0 +1,15 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-9f3ded0fc1af4aaea9aa355f8af73b8c",
+  "step_id": "s-ab05ba19072c4269bc4a2dcde2d15ffb",
+  "parent_step_id": null,
+  "node_id": "isolation_preflight",
+  "round": 0,
+  "phase": "preflight",
+  "evidence_ids": [],
+  "status": "ok",
+  "evidence_path": "isolation",
+  "isolation_ready": true,
+  "scope": "test stub only",
+  "duration_ms": 26
+}

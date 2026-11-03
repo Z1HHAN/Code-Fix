@@ -1,16 +1,22 @@
 import os
 import shutil
 import sys
+from pathlib import Path
 
-from .live_model import LiveSettings, ModelBlocked
+from .live_model import ModelBlocked
+from .model_profiles import ModelRouter
+from .role_config import RoleConfig
+from .config import ConfigError
 
 
 def readiness():
     blockers = []
     try:
-        LiveSettings.from_env()
+        config = RoleConfig(Path(__file__).resolve().parents[1])
+        config.preflight()
+        ModelRouter.resolve(config)
         model_configured = True
-    except ModelBlocked as exc:
+    except (ModelBlocked, ConfigError) as exc:
         model_configured = False
         blockers.append(str(exc))
     if not shutil.which('docker'):

@@ -153,14 +153,17 @@ class RunStore:
             self._event(db, run_id, payload)
 
     @staticmethod
-    def _events(db, run_id):
+    def _events(db, run_id, after_sequence=0):
         return [{'sequence': r['sequence'], 'created_at': r['created_at'], **json.loads(r['payload'])}
-                for r in db.execute('SELECT * FROM events WHERE run_id=? ORDER BY sequence', (run_id,))]
+                for r in db.execute('SELECT * FROM events WHERE run_id=? AND sequence>? ORDER BY sequence',
+                                    (run_id, after_sequence))]
 
-    def events(self, run_id):
+    def events(self, run_id, after_sequence=0):
+        if type(after_sequence) is not int or after_sequence < 0:
+            raise ValueError('事件游标须为非负整数')
         self.get(run_id)
         with self.connect() as db:
-            return self._events(db, run_id)
+            return self._events(db, run_id, after_sequence)
 
     def snapshot(self, run_id):
         """Read status and events from one SQLite snapshot, including during finish."""

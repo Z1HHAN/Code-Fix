@@ -1,0 +1,485 @@
+{
+  "scope": "OFFLINE_STUB_ONLY: no model requests, no candidate execution, not repair success evidence",
+  "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+  "status": "paused",
+  "result": {
+    "final_result": "not_run",
+    "dev_result": "failed",
+    "rounds_used": 1,
+    "model_calls": 1,
+    "tool_calls": 2,
+    "model_api_called": false,
+    "mode": "test_stub",
+    "isolation_ready": true,
+    "project": "leap",
+    "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+    "code_path": "candidate-1/code/leap_year.py",
+    "reason": "依赖、测试收集、命令或执行环境异常，交C诊断；不让修复员改业务代码凑通过。",
+    "cost": {
+      "status": "not_applicable",
+      "amount_usd": null
+    },
+    "trace_version": "1.0.0",
+    "handoff_path": "handoff.json",
+    "handling_status": "pending_human"
+  },
+  "events": [
+    {
+      "sequence": 1,
+      "created_at": "2026-11-03T11:13:46.342672+00:00",
+      "event": "started"
+    },
+    {
+      "sequence": 2,
+      "created_at": "2026-11-03T11:13:46.373623+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-9803d4761fa044569c1777e429a6a792",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 3,
+      "created_at": "2026-11-03T11:13:46.387343+00:00",
+      "event": "isolation_checked",
+      "isolation_ready": true,
+      "scope": "test stub only"
+    },
+    {
+      "sequence": 4,
+      "created_at": "2026-11-03T11:13:46.401584+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-9803d4761fa044569c1777e429a6a792",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "evidence_ids": [],
+      "status": "ok",
+      "evidence_path": "isolation",
+      "isolation_ready": true,
+      "scope": "test stub only",
+      "duration_ms": 25
+    },
+    {
+      "sequence": 5,
+      "created_at": "2026-11-03T11:13:46.447932+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-e1925416497d467e949d568296982388",
+      "parent_step_id": "s-9803d4761fa044569c1777e429a6a792",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 6,
+      "created_at": "2026-11-03T11:13:46.465500+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-e1925416497d467e949d568296982388",
+      "parent_step_id": "s-9803d4761fa044569c1777e429a6a792",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "evidence_ids": [],
+      "evidence_id": "test-baseline",
+      "evidence_path": "baseline",
+      "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "failure_class": "assertion_failed",
+      "verification_status": "failed",
+      "stdout_path": "stdout.txt",
+      "stderr_path": "stderr.txt",
+      "exit_code": 1
+    },
+    {
+      "sequence": 7,
+      "created_at": "2026-11-03T11:13:46.482884+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-e1925416497d467e949d568296982388",
+      "parent_step_id": "s-9803d4761fa044569c1777e429a6a792",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "evidence_ids": [],
+      "status": "ok",
+      "verification_status": "failed",
+      "evidence_id": "test-baseline",
+      "failure_class": "assertion_failed",
+      "evidence_path": "baseline",
+      "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "test_suite_version": null,
+      "registered_test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "duration_ms": 32
+    },
+    {
+      "sequence": 8,
+      "created_at": "2026-11-03T11:13:46.502133+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-f1a6b4d5f0bd4a55a59af77b64f6b37a",
+      "parent_step_id": "s-e1925416497d467e949d568296982388",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 10,
+      "created_at": "2026-11-03T11:13:46.537094+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-f1a6b4d5f0bd4a55a59af77b64f6b37a",
+      "parent_step_id": "s-e1925416497d467e949d568296982388",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "call_id": "m-a9290c275d3e45c59de7f8f671a42497",
+      "artifact_path": "calls/m-a9290c275d3e45c59de7f8f671a42497",
+      "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "failure_class": null,
+      "duration_ms": 32
+    },
+    {
+      "sequence": 11,
+      "created_at": "2026-11-03T11:13:46.553428+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-74eacb0f350e4613a21b978158a424b7",
+      "parent_step_id": "s-f1a6b4d5f0bd4a55a59af77b64f6b37a",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 12,
+      "created_at": "2026-11-03T11:13:46.611893+00:00",
+      "event": "candidate_applied",
+      "round": 1,
+      "project": "leap",
+      "base_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "candidate_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "frozen_file_sha256": {
+        "tests/test_leap.py": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+      },
+      "changes": [
+        {
+          "path": "code/leap_year.py",
+          "new_content": "def is_leap(year):\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\n"
+        }
+      ],
+      "test_sha256": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+    },
+    {
+      "sequence": 13,
+      "created_at": "2026-11-03T11:13:46.631412+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-74eacb0f350e4613a21b978158a424b7",
+      "parent_step_id": "s-f1a6b4d5f0bd4a55a59af77b64f6b37a",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "artifact_path": "patch-1",
+      "duration_ms": 75
+    },
+    {
+      "sequence": 14,
+      "created_at": "2026-11-03T11:13:46.647965+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-2ada0c008c0b4f88869414e56726375f",
+      "parent_step_id": "s-74eacb0f350e4613a21b978158a424b7",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 15,
+      "created_at": "2026-11-03T11:13:46.665565+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-2ada0c008c0b4f88869414e56726375f",
+      "parent_step_id": "s-74eacb0f350e4613a21b978158a424b7",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "evidence_id": "test-development-1",
+      "evidence_path": "development-1",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "failure_class": "environment_error",
+      "verification_status": "failed",
+      "stdout_path": "stdout.txt",
+      "stderr_path": "stderr.txt",
+      "exit_code": 1
+    },
+    {
+      "sequence": 16,
+      "created_at": "2026-11-03T11:13:46.682707+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-2ada0c008c0b4f88869414e56726375f",
+      "parent_step_id": "s-74eacb0f350e4613a21b978158a424b7",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "verification_status": "failed",
+      "evidence_id": "test-development-1",
+      "failure_class": "environment_error",
+      "evidence_path": "development-1",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": null,
+      "registered_test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "duration_ms": 32
+    },
+    {
+      "sequence": 17,
+      "created_at": "2026-11-03T11:13:46.707940+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-3f942ebd8f7c4e14ad0aef76c361c559",
+      "parent_step_id": "s-2ada0c008c0b4f88869414e56726375f",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 18,
+      "created_at": "2026-11-03T11:13:46.722063+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-88e81ca234994ac0bdcbd2499c1a2b3c.json",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-3f942ebd8f7c4e14ad0aef76c361c559",
+      "parent_step_id": "s-2ada0c008c0b4f88869414e56726375f",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "decision_id": "d-88e81ca234994ac0bdcbd2499c1a2b3c",
+      "program_decision": {
+        "decision_id": "d-1",
+        "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+        "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "failure_class": "environment_error",
+        "action": "pause",
+        "target_agent": null,
+        "reason": "依赖、测试收集、命令或执行环境异常，交C诊断；不让修复员改业务代码凑通过。",
+        "retries_left": 2,
+        "rule_id": "R03",
+        "terminal_status": null
+      },
+      "model_advice": null,
+      "action": "pause",
+      "effective_action": "pause",
+      "reason": "依赖、测试收集、命令或执行环境异常，交C诊断；不让修复员改业务代码凑通过。",
+      "override_reason": null,
+      "rule_id": "R03",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "counters": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "rounds_used": 1,
+        "cost": {
+          "status": "not_applicable",
+          "amount_usd": null
+        },
+        "remaining_seconds": 299.65147020004224,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 19,
+      "created_at": "2026-11-03T11:13:46.739972+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-3f942ebd8f7c4e14ad0aef76c361c559",
+      "parent_step_id": "s-2ada0c008c0b4f88869414e56726375f",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "effective_action": "pause",
+      "decision_id": "d-88e81ca234994ac0bdcbd2499c1a2b3c",
+      "duration_ms": 30
+    },
+    {
+      "sequence": 20,
+      "created_at": "2026-11-03T11:13:46.755464+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-43448946819c4c8980a6f38a4bc63150",
+      "parent_step_id": "s-3f942ebd8f7c4e14ad0aef76c361c559",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 21,
+      "created_at": "2026-11-03T11:13:46.769924+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-d74238f32aeb47159658007215a6ce7d.json",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-43448946819c4c8980a6f38a4bc63150",
+      "parent_step_id": "s-3f942ebd8f7c4e14ad0aef76c361c559",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "decision_id": "d-d74238f32aeb47159658007215a6ce7d",
+      "program_decision": {
+        "action": "pause",
+        "rule_id": "terminal_paused",
+        "reason": "依赖、测试收集、命令或执行环境异常，交C诊断；不让修复员改业务代码凑通过。"
+      },
+      "model_advice": null,
+      "action": "pause",
+      "effective_action": "pause",
+      "reason": "依赖、测试收集、命令或执行环境异常，交C诊断；不让修复员改业务代码凑通过。",
+      "override_reason": null,
+      "rule_id": "terminal_paused",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "counters": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "rounds_used": 1,
+        "cost": {
+          "status": "not_applicable",
+          "amount_usd": null
+        },
+        "remaining_seconds": 299.60569840000244,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 22,
+      "created_at": "2026-11-03T11:13:46.787643+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-0d7f151b441c4b89855232b3dd71b14d",
+      "step_id": "s-43448946819c4c8980a6f38a4bc63150",
+      "parent_step_id": "s-3f942ebd8f7c4e14ad0aef76c361c559",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "effective_action": "pause",
+      "decision_id": "d-d74238f32aeb47159658007215a6ce7d",
+      "duration_ms": 32
+    },
+    {
+      "sequence": 23,
+      "created_at": "2026-11-03T11:13:46.803927+00:00",
+      "event": "handoff_created",
+      "handling_status": "pending_human",
+      "artifact_path": "handoff.json",
+      "reason": "依赖、测试收集、命令或执行环境异常，交C诊断；不让修复员改业务代码凑通过。"
+    },
+    {
+      "sequence": 24,
+      "created_at": "2026-11-03T11:13:46.821575+00:00",
+      "event": "finished",
+      "status": "paused",
+      "result": {
+        "final_result": "not_run",
+        "dev_result": "failed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 2,
+        "model_api_called": false,
+        "mode": "test_stub",
+        "isolation_ready": true,
+        "project": "leap",
+        "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+        "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+        "code_path": "candidate-1/code/leap_year.py",
+        "reason": "依赖、测试收集、命令或执行环境异常，交C诊断；不让修复员改业务代码凑通过。",
+        "cost": {
+          "status": "not_applicable",
+          "amount_usd": null
+        },
+        "trace_version": "1.0.0",
+        "handoff_path": "handoff.json",
+        "handling_status": "pending_human"
+      }
+    }
+  ],
+  "sample_contents": "Trace/handoff excerpts; full input workspaces and tool directories remain in ignored runs, not this excerpt"
+}

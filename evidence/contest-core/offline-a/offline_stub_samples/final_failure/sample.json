@@ -1,0 +1,626 @@
+{
+  "scope": "OFFLINE_STUB_ONLY: no model requests, no candidate execution, not repair success evidence",
+  "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+  "status": "failed",
+  "result": {
+    "final_result": "failed",
+    "dev_result": "passed",
+    "rounds_used": 1,
+    "model_calls": 3,
+    "tool_calls": 3,
+    "model_api_called": false,
+    "mode": "test_stub",
+    "isolation_ready": true,
+    "project": "leap",
+    "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+    "code_path": "candidate-1/code/leap_year.py",
+    "reason": "独立验收未通过；结果不回流本轮Agent",
+    "cost": {
+      "status": "not_applicable",
+      "amount_usd": null
+    },
+    "trace_version": "1.0.0",
+    "handoff_path": "handoff.json",
+    "handling_status": "pending_human"
+  },
+  "events": [
+    {
+      "sequence": 1,
+      "created_at": "2026-11-03T11:13:47.661867+00:00",
+      "event": "started"
+    },
+    {
+      "sequence": 2,
+      "created_at": "2026-11-03T11:13:47.697478+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-7e3755fd016c4d0cb328797cfc010eed",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 3,
+      "created_at": "2026-11-03T11:13:47.716386+00:00",
+      "event": "isolation_checked",
+      "isolation_ready": true,
+      "scope": "test stub only"
+    },
+    {
+      "sequence": 4,
+      "created_at": "2026-11-03T11:13:47.734817+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-7e3755fd016c4d0cb328797cfc010eed",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "evidence_ids": [],
+      "status": "ok",
+      "evidence_path": "isolation",
+      "isolation_ready": true,
+      "scope": "test stub only",
+      "duration_ms": 34
+    },
+    {
+      "sequence": 5,
+      "created_at": "2026-11-03T11:13:47.780175+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-ef1150a5e63e4ab79ae010ae16216733",
+      "parent_step_id": "s-7e3755fd016c4d0cb328797cfc010eed",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 6,
+      "created_at": "2026-11-03T11:13:47.803892+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-ef1150a5e63e4ab79ae010ae16216733",
+      "parent_step_id": "s-7e3755fd016c4d0cb328797cfc010eed",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "evidence_ids": [],
+      "evidence_id": "test-baseline",
+      "evidence_path": "baseline",
+      "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "failure_class": "assertion_failed",
+      "verification_status": "failed",
+      "stdout_path": "stdout.txt",
+      "stderr_path": "stderr.txt",
+      "exit_code": 1
+    },
+    {
+      "sequence": 7,
+      "created_at": "2026-11-03T11:13:47.830326+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-ef1150a5e63e4ab79ae010ae16216733",
+      "parent_step_id": "s-7e3755fd016c4d0cb328797cfc010eed",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "evidence_ids": [],
+      "status": "ok",
+      "verification_status": "failed",
+      "evidence_id": "test-baseline",
+      "failure_class": "assertion_failed",
+      "evidence_path": "baseline",
+      "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "test_suite_version": null,
+      "registered_test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "duration_ms": 47
+    },
+    {
+      "sequence": 8,
+      "created_at": "2026-11-03T11:13:47.851139+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-d4b97762ffbc420c9e9e55a052443e78",
+      "parent_step_id": "s-ef1150a5e63e4ab79ae010ae16216733",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 10,
+      "created_at": "2026-11-03T11:13:47.890205+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-d4b97762ffbc420c9e9e55a052443e78",
+      "parent_step_id": "s-ef1150a5e63e4ab79ae010ae16216733",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "call_id": "m-0ff0b76eb6a04d4895eab4c8deea8671",
+      "artifact_path": "calls/m-0ff0b76eb6a04d4895eab4c8deea8671",
+      "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "failure_class": null,
+      "duration_ms": 36
+    },
+    {
+      "sequence": 11,
+      "created_at": "2026-11-03T11:13:47.907063+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-af9f370580fd4f6eb9420e5e6b05ff9e",
+      "parent_step_id": "s-d4b97762ffbc420c9e9e55a052443e78",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 12,
+      "created_at": "2026-11-03T11:13:47.959040+00:00",
+      "event": "candidate_applied",
+      "round": 1,
+      "project": "leap",
+      "base_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "candidate_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "frozen_file_sha256": {
+        "tests/test_leap.py": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+      },
+      "changes": [
+        {
+          "path": "code/leap_year.py",
+          "new_content": "def is_leap(year):\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\n"
+        }
+      ],
+      "test_sha256": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+    },
+    {
+      "sequence": 13,
+      "created_at": "2026-11-03T11:13:47.973272+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-af9f370580fd4f6eb9420e5e6b05ff9e",
+      "parent_step_id": "s-d4b97762ffbc420c9e9e55a052443e78",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "artifact_path": "patch-1",
+      "duration_ms": 64
+    },
+    {
+      "sequence": 14,
+      "created_at": "2026-11-03T11:13:47.992590+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-f07b14729e8941d98d10e987d602ba4e",
+      "parent_step_id": "s-af9f370580fd4f6eb9420e5e6b05ff9e",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 15,
+      "created_at": "2026-11-03T11:13:48.013919+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-f07b14729e8941d98d10e987d602ba4e",
+      "parent_step_id": "s-af9f370580fd4f6eb9420e5e6b05ff9e",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "evidence_id": "test-development-1",
+      "evidence_path": "development-1",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "failure_class": "passed",
+      "verification_status": "passed",
+      "stdout_path": "stdout.txt",
+      "stderr_path": "stderr.txt",
+      "exit_code": 0
+    },
+    {
+      "sequence": 16,
+      "created_at": "2026-11-03T11:13:48.031605+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-f07b14729e8941d98d10e987d602ba4e",
+      "parent_step_id": "s-af9f370580fd4f6eb9420e5e6b05ff9e",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "verification_status": "passed",
+      "evidence_id": "test-development-1",
+      "failure_class": "passed",
+      "evidence_path": "development-1",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": null,
+      "registered_test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "duration_ms": 37
+    },
+    {
+      "sequence": 17,
+      "created_at": "2026-11-03T11:13:48.054102+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-0483eb0e63124d0db48a8c567185cf78",
+      "parent_step_id": "s-f07b14729e8941d98d10e987d602ba4e",
+      "node_id": "detector",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 19,
+      "created_at": "2026-11-03T11:13:48.090569+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-0483eb0e63124d0db48a8c567185cf78",
+      "parent_step_id": "s-f07b14729e8941d98d10e987d602ba4e",
+      "node_id": "detector",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "call_id": "m-24bac88e4740413ea4928dc0c1af129a",
+      "artifact_path": "calls/m-24bac88e4740413ea4928dc0c1af129a",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "failure_class": null,
+      "duration_ms": 34
+    },
+    {
+      "sequence": 20,
+      "created_at": "2026-11-03T11:13:48.114086+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-9e8e15c13e04420bb1611a059b225e74",
+      "parent_step_id": "s-0483eb0e63124d0db48a8c567185cf78",
+      "node_id": "scheduler",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 22,
+      "created_at": "2026-11-03T11:13:48.150964+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-9e8e15c13e04420bb1611a059b225e74",
+      "parent_step_id": "s-0483eb0e63124d0db48a8c567185cf78",
+      "node_id": "scheduler",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "call_id": "m-36de9650e9c644fba7de59fa00abdb7b",
+      "artifact_path": "calls/m-36de9650e9c644fba7de59fa00abdb7b",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "failure_class": null,
+      "duration_ms": 35
+    },
+    {
+      "sequence": 23,
+      "created_at": "2026-11-03T11:13:48.180046+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-d0dfd5dcee174348842d69d82e47b6ce",
+      "parent_step_id": "s-9e8e15c13e04420bb1611a059b225e74",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 24,
+      "created_at": "2026-11-03T11:13:48.202208+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-74e67786ff1d4087962ccf2d9aa7e6ab.json",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-d0dfd5dcee174348842d69d82e47b6ce",
+      "parent_step_id": "s-9e8e15c13e04420bb1611a059b225e74",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "decision_id": "d-74e67786ff1d4087962ccf2d9aa7e6ab",
+      "program_decision": {
+        "decision_id": "d-1",
+        "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+        "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "failure_class": "passed",
+        "action": "final_check",
+        "target_agent": null,
+        "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+        "retries_left": 2,
+        "rule_id": "R16",
+        "terminal_status": null
+      },
+      "model_advice": {
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "knowledge_citations": [],
+        "action": "repair",
+        "reason": "offline advice"
+      },
+      "action": "final_check",
+      "effective_action": "final_check",
+      "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+      "override_reason": "模型建议不能覆盖工具证据与强制规则",
+      "rule_id": "R16",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "counters": {
+        "model_calls": 3,
+        "tool_calls": 2,
+        "rounds_used": 1,
+        "cost": {
+          "status": "not_applicable",
+          "amount_usd": null
+        },
+        "remaining_seconds": 299.5048499000259,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 25,
+      "created_at": "2026-11-03T11:13:48.215194+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-d0dfd5dcee174348842d69d82e47b6ce",
+      "parent_step_id": "s-9e8e15c13e04420bb1611a059b225e74",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "effective_action": "final_check",
+      "decision_id": "d-74e67786ff1d4087962ccf2d9aa7e6ab",
+      "duration_ms": 33
+    },
+    {
+      "sequence": 26,
+      "created_at": "2026-11-03T11:13:48.269125+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-945ce7ab42b44ababa5700ee314a6015",
+      "parent_step_id": "s-d0dfd5dcee174348842d69d82e47b6ce",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 27,
+      "created_at": "2026-11-03T11:13:48.290572+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-945ce7ab42b44ababa5700ee314a6015",
+      "parent_step_id": "s-d0dfd5dcee174348842d69d82e47b6ce",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "evidence_id": "test-final-check",
+      "evidence_path": "final-check",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "failure_class": "assertion_failed",
+      "verification_status": "failed",
+      "stdout_path": "stdout.txt",
+      "stderr_path": "stderr.txt",
+      "exit_code": 1
+    },
+    {
+      "sequence": 28,
+      "created_at": "2026-11-03T11:13:48.309608+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-945ce7ab42b44ababa5700ee314a6015",
+      "parent_step_id": "s-d0dfd5dcee174348842d69d82e47b6ce",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "verification_status": "failed",
+      "evidence_id": "test-final-check",
+      "failure_class": "assertion_failed",
+      "evidence_path": "final-check",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": null,
+      "registered_test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "duration_ms": 38
+    },
+    {
+      "sequence": 29,
+      "created_at": "2026-11-03T11:13:48.327228+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-58571bf1ab184ef39b851b632f224581",
+      "parent_step_id": "s-945ce7ab42b44ababa5700ee314a6015",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "evidence_ids": [
+        "test-final-check"
+      ]
+    },
+    {
+      "sequence": 30,
+      "created_at": "2026-11-03T11:13:48.341350+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-e146afc1fcdf4a6cb6f548a339eee192.json",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-58571bf1ab184ef39b851b632f224581",
+      "parent_step_id": "s-945ce7ab42b44ababa5700ee314a6015",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "decision_id": "d-e146afc1fcdf4a6cb6f548a339eee192",
+      "program_decision": {
+        "action": "finish",
+        "rule_id": "terminal_failed",
+        "reason": "独立验收未通过；结果不回流本轮Agent"
+      },
+      "model_advice": null,
+      "action": "finish",
+      "effective_action": "finish",
+      "reason": "独立验收未通过；结果不回流本轮Agent",
+      "override_reason": null,
+      "rule_id": "terminal_failed",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "counters": {
+        "model_calls": 3,
+        "tool_calls": 3,
+        "rounds_used": 1,
+        "cost": {
+          "status": "not_applicable",
+          "amount_usd": null
+        },
+        "remaining_seconds": 299.3575936999987,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 31,
+      "created_at": "2026-11-03T11:13:48.364892+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-7fa6beed90f443038bd85de1b2adec5d",
+      "step_id": "s-58571bf1ab184ef39b851b632f224581",
+      "parent_step_id": "s-945ce7ab42b44ababa5700ee314a6015",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "status": "ok",
+      "effective_action": "finish",
+      "decision_id": "d-e146afc1fcdf4a6cb6f548a339eee192",
+      "duration_ms": 35
+    },
+    {
+      "sequence": 32,
+      "created_at": "2026-11-03T11:13:48.381685+00:00",
+      "event": "handoff_created",
+      "handling_status": "pending_human",
+      "artifact_path": "handoff.json",
+      "reason": "独立验收未通过；结果不回流本轮Agent"
+    },
+    {
+      "sequence": 33,
+      "created_at": "2026-11-03T11:13:48.401067+00:00",
+      "event": "finished",
+      "status": "failed",
+      "result": {
+        "final_result": "failed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 3,
+        "tool_calls": 3,
+        "model_api_called": false,
+        "mode": "test_stub",
+        "isolation_ready": true,
+        "project": "leap",
+        "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+        "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+        "code_path": "candidate-1/code/leap_year.py",
+        "reason": "独立验收未通过；结果不回流本轮Agent",
+        "cost": {
+          "status": "not_applicable",
+          "amount_usd": null
+        },
+        "trace_version": "1.0.0",
+        "handoff_path": "handoff.json",
+        "handling_status": "pending_human"
+      }
+    }
+  ],
+  "sample_contents": "Trace/handoff excerpts; full input workspaces and tool directories remain in ignored runs, not this excerpt"
+}

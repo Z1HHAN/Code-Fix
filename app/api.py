@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 import secrets
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Query
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
@@ -125,8 +125,8 @@ def create_app(root=None):
         return service.store.get(run_id)
 
     @app.get('/api/v3/tasks/{run_id}/events')
-    def events(run_id: str):
-        return service.store.events(run_id)
+    def events(run_id: str, after_sequence: int = Query(default=0, ge=0)):
+        return service.store.events(run_id, after_sequence)
 
     @app.get('/api/v3/tasks/{run_id}/report')
     def report(run_id: str):

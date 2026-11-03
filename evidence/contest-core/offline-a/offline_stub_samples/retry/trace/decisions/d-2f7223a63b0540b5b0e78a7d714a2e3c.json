@@ -1,0 +1,41 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-9f3ded0fc1af4aaea9aa355f8af73b8c",
+  "step_id": "s-a138d6fcfc174452aecec5bc18573ab9",
+  "parent_step_id": "s-e2f1fbff0de345d18ca51bfc7b0b84d7",
+  "node_id": "program_dispatch",
+  "round": 2,
+  "phase": "final_check",
+  "evidence_ids": [
+    "test-final-check"
+  ],
+  "decision_id": "d-2f7223a63b0540b5b0e78a7d714a2e3c",
+  "program_decision": {
+    "action": "finish",
+    "rule_id": "terminal_success",
+    "reason": "开发测试及干净副本同套原生测试均实际通过"
+  },
+  "model_advice": null,
+  "action": "finish",
+  "effective_action": "finish",
+  "reason": "开发测试及干净副本同套原生测试均实际通过",
+  "override_reason": null,
+  "rule_id": "terminal_success",
+  "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "counters": {
+    "model_calls": 7,
+    "tool_calls": 4,
+    "rounds_used": 2,
+    "cost": {
+      "status": "not_applicable",
+      "amount_usd": null
+    },
+    "remaining_seconds": 299.06854579999344,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}

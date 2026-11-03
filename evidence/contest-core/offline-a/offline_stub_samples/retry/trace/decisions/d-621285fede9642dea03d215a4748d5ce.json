@@ -1,0 +1,58 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-9f3ded0fc1af4aaea9aa355f8af73b8c",
+  "step_id": "s-2afad7334daa409c8a7627d906e7ebb5",
+  "parent_step_id": "s-d9e916c1ad1e472b87f9e0ffa23737f9",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "development",
+  "evidence_ids": [
+    "test-development-1"
+  ],
+  "decision_id": "d-621285fede9642dea03d215a4748d5ce",
+  "program_decision": {
+    "decision_id": "d-1",
+    "run_id": "run-9f3ded0fc1af4aaea9aa355f8af73b8c",
+    "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "failure_class": "assertion_failed",
+    "action": "locate",
+    "target_agent": "locator",
+    "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+    "retries_left": 2,
+    "rule_id": "R13",
+    "terminal_status": null
+  },
+  "model_advice": {
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "knowledge_citations": [],
+    "action": "final_check",
+    "reason": "offline advice"
+  },
+  "action": "locate",
+  "effective_action": "locate",
+  "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+  "override_reason": "模型建议不能覆盖工具证据与强制规则",
+  "rule_id": "R13",
+  "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "counters": {
+    "model_calls": 3,
+    "tool_calls": 2,
+    "rounds_used": 1,
+    "cost": {
+      "status": "not_applicable",
+      "amount_usd": null
+    },
+    "remaining_seconds": 299.5928532999824,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}

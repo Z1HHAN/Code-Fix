@@ -1,5 +1,5 @@
 from decimal import Decimal
-from io import BytesIO
+import httpx
 import json
 import time
 
@@ -49,18 +49,16 @@ def test_known_usage_is_persistent_and_call_count_enforced(tmp_path):
         ledger.reserve('c', 'other', settings(daily_limit=Decimal('.000001')), 1, 100)
 
 
-def test_http_protocol_is_offline_stub_and_secret_redacted(tmp_path, monkeypatch):
-    import app.live_model as module
+def test_http_protocol_is_offline_stub_and_secret_redacted(tmp_path):
     seen = {}
-    class OfflineOpener:
-        def open(self, request, timeout):
-            seen.update(url=request.full_url, body=json.loads(request.data), timeout=timeout)
-            return BytesIO(json.dumps({'id': 'offline-response', 'choices': [{'message': {'content': 'private-test-key'}}],
-                                       'usage': {'prompt_tokens': 10, 'completion_tokens': 5}}).encode())
-    monkeypatch.setattr(module, 'build_opener', lambda *args: OfflineOpener())
-    model = LiveModel(settings(), Ledger(tmp_path))
+    def respond(request):
+        seen.update(url=str(request.url), body=json.loads(request.content))
+        return httpx.Response(200, json={'id': 'offline-response', 'choices': [{'message': {'content': 'private-test-key'}}],
+                                        'usage': {'prompt_tokens': 10, 'completion_tokens': 5}})
+    model = LiveModel(settings(), Ledger(tmp_path), transport=httpx.MockTransport(respond))
     result = model.call([{'role': 'user', 'content': 'test'}], run_id='r', call_id='c', max_calls=1, deadline=time.monotonic()+10)
     assert result['status'] == 'ok' and result['raw_text'] == '[REDACTED]'
+    assert not result['model_api_called'] and result['mode'] == 'test_transport'
     assert seen['body']['max_completion_tokens'] == 2048
     assert seen['url'].endswith('/chat/completions')
     assert 'private-test-key' not in json.dumps(result)

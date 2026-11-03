@@ -1,0 +1,18 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-9f3ded0fc1af4aaea9aa355f8af73b8c",
+  "step_id": "s-92ab3bb51d50412ba224a84975232a98",
+  "parent_step_id": "s-09f8589148d04b6594311b2188df256a",
+  "node_id": "detector",
+  "round": 2,
+  "phase": "development",
+  "evidence_ids": [
+    "test-development-2"
+  ],
+  "status": "ok",
+  "call_id": "m-973832ac8e064463be03d32522472b0f",
+  "artifact_path": "calls/m-973832ac8e064463be03d32522472b0f",
+  "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+  "failure_class": null,
+  "duration_ms": 33
+}
