@@ -1,0 +1,23 @@
+C验收脚本交接 / 2026-11-03
+
+用途：在完整Code-Fix仓库上执行原平台回归、Node测试、12项C可信控制和25项返修门槛。
+本包只有C新增脚本，不是完整项目；以40fca6c归档实跑，后续版本需要重新审阅测试再复跑。
+
+1. 解压后，将scripts、acceptance_tests和run_C_acceptance.cmd放到完整仓库根目录，保持相对路径。
+2. 安装Python3.14和Node。仓库根目录执行：
+   py -3.14 -m venv .venv
+   .venv\Scripts\python.exe -m pip install -r requirements-lock.txt
+3. 双击run_C_acceptance.cmd，或执行：
+   .venv\Scripts\python.exe -B -X utf8 scripts\c_acceptance.py
+   Node不在PATH时加 --node "完整的node.exe路径"。
+   Windows临时目录过长时加 --work-root "本人有写权限的短目录"。
+4. 发回本次evidence/c-review/C-acceptance-...目录中的summary.json、JUnit和原始日志；不要只发截图。
+
+退出0：规定离线范围全部通过。退出1：测试发现缺陷。退出2：环境或证据不完整。
+当前40fca6c实跑是退出1：平台221过1跳过，Node9过，可信控制12项过；返修25项中2过23失败。
+23是参数化展开用例，不是23个独立缺陷。失败保留，不能skip/xfail或改断言凑通过。
+CODE-01两种旧格式错误放行；新封装已拒绝但错误分类不符。尾标记不能证明报告可信。
+没有真实模型/Docker/公开候选执行，也没有真实final签收；B生产修复及A/B/C正式签收另外登记。
+本脚本的无真实调用范围声明基于审阅，并非独立网络审计。换版本后必须复查。
+不要把本机归档来源文件复制到其他新版本，避免错误登记旧SHA。Git检出会读取自己的HEAD。
+SHA256.json用于验证包内各文件未变化。完整证据与固定文档补丁在另一个证据包中。
