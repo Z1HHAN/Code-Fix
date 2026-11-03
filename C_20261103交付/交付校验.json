@@ -1,0 +1,19 @@
+{
+  "script_package": {
+    "filename": "C验收脚本_20261103.zip",
+    "files": 8,
+    "bytes": 20876,
+    "sha256": "66a034b37b96c30c2aaf9e124e3003de11a473d28505676cb4dd01011a21e95c"
+  },
+  "evidence_package": {
+    "filename": "C复核证据_20261103.zip",
+    "files": 8698,
+    "bytes": 10340921,
+    "sha256": "1c63410090492bc581fb53741889436cad36d9bdc0f4a7ec17fe837b477c7197"
+  },
+  "final_run_id": "C-acceptance-20261103-212941-aab9cc78",
+  "original_evidence_hash_entries_verified": 8674,
+  "source_drift": [],
+  "production_files_changed": [],
+  "changed_document_count": 10
+}
