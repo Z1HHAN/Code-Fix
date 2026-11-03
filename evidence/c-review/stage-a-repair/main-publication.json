@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-04",
+  "implementation_commit": "a6ad09539aacbfe1d73dd4b0822ac1130676f3c2",
+  "reviewed_branch_commit": "824d6f9a87a32d1cd6597cc48c0d12cfc23c2ff7",
+  "main_merge_commit": "aafd05668de2061efa97b8b2d1055548805e89fe",
+  "merge_tree_matches_reviewed_branch": true,
+  "remote_observation": {
+    "command": [
+      "git",
+      "ls-remote",
+      "origin",
+      "refs/heads/main",
+      "refs/heads/codex/stage-a-repair-gates"
+    ],
+    "transport": "ssh.github.com:443, strict existing host-key validation",
+    "exit_code": 0,
+    "timed_out": false,
+    "stdout": "824d6f9a87a32d1cd6597cc48c0d12cfc23c2ff7\trefs/heads/codex/stage-a-repair-gates\naafd05668de2061efa97b8b2d1055548805e89fe\trefs/heads/main\n",
+    "stderr": "01:32:40.370945 exec-cmd.c:266          trace: resolved executable dir: C:/Program Files/Git/mingw64/bin\n01:32:40.384953 git.c:502               trace: built-in: git ls-remote origin refs/heads/main refs/heads/codex/stage-a-repair-gates\n01:32:40.387952 run-command.c:673       trace: run_command: unset GIT_PREFIX; GIT_PROTOCOL=version=2 '\"C:/Program Files/Git/usr/bin/ssh.exe\" -o BatchMode=yes -o ConnectTimeout=12 -o StrictHostKeyChecking=yes -o HostKeyAlias=github.com -o Hostname=ssh.github.com -p 443' -o SendEnv=GIT_PROTOCOL git@github.com 'git-upload-pack '\\''Z1HHAN/Code-Fix.git'\\'''\n01:32:40.387952 run-command.c:934       trace: start_command: 'C:/Program Files/Git/usr/bin/sh.exe' -c '\"C:/Program Files/Git/usr/bin/ssh.exe\" -o BatchMode=yes -o ConnectTimeout=12 -o StrictHostKeyChecking=yes -o HostKeyAlias=github.com -o Hostname=ssh.github.com -p 443 \"$@\"' '\"C:/Program Files/Git/usr/bin/ssh.exe\" -o BatchMode=yes -o ConnectTimeout=12 -o StrictHostKeyChecking=yes -o HostKeyAlias=github.com -o Hostname=ssh.github.com -p 443' -o SendEnv=GIT_PROTOCOL git@github.com 'git-upload-pack '\\''Z1HHAN/Code-Fix.git'\\'''\n"
+  },
+  "paid_requests": 0,
+  "docker_real_validation": "pending",
+  "stable_release": false
+}
