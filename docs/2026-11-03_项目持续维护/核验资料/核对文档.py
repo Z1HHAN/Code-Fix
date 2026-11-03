@@ -56,8 +56,14 @@ def states(text):
 
 old_states = states(original_ledger)
 new_states = states((HUB / '当前开发任务台账.md').read_text(encoding='utf-8'))
-if old_states != new_states or len(new_states) != 43:
+# 2026-11-03老师指导后仅登记两个静态缺口；不放宽原43项状态核对。
+added_ids = set(new_states) - set(old_states)
+original_states_unchanged = old_states == {k: new_states.get(k) for k in old_states}
+if not original_states_unchanged or added_ids != {'T-057', 'T-058'} or len(new_states) != 45:
     fail('task_states_changed', {'before': old_states, 'after': new_states})
+for ident in added_ids:
+    if new_states[ident] != {'实现状态': '未开始', '测试状态': '未运行', '独立验收状态': '未运行'}:
+        fail('unverified_new_task_promoted', ident)
 ledger = (HUB / '当前开发任务台账.md').read_text(encoding='utf-8')
 for name in ('当前待办索引.md', '已完成任务索引.md'):
     ids = re.findall(r'\[T-(\d{3}) ', (HUB / name).read_text(encoding='utf-8'))
@@ -65,7 +71,7 @@ for name in ('当前待办索引.md', '已完成任务索引.md'):
         fail('task_index_mismatch', name)
 pending = set(re.findall(r'\[T-(\d{3}) ', (HUB / '当前待办索引.md').read_text(encoding='utf-8')))
 done = set(re.findall(r'\[T-(\d{3}) ', (HUB / '已完成任务索引.md').read_text(encoding='utf-8')))
-if len(pending) != 23 or len(done) != 20 or pending & done or len(pending | done) != 43:
+if len(pending) != 25 or len(done) != 20 or pending & done or len(pending | done) != 45:
     fail('task_partition', {'pending': sorted(pending), 'done': sorted(done)})
 
 link_re = re.compile(r'!?\[[^\]\n]*\]\((<[^>\n]+>|[^)\s\n]+)\)')
@@ -156,11 +162,12 @@ for doc in (ROOT / 'docs/99_历史归档').rglob('*.md'):
 # Track originals by manifest rather than relying on an already-clean working tree after publication.
 result = {
     'checked_date': '2026-11-03', 'baseline_commit': BASE['base'],
-    'scope': '文档/路径/状态治理，仅执行配置静态自检；未新跑pytest、Node、模型、Docker或公开题',
+    'scope': '文档/路径/状态治理与老师指导登记，仅配置静态自检；未新跑pytest、Node、模型、Docker或公开题',
     'tracked_original_files': len(BASE['hashes']), 'mapped_files': len(mapping),
     'preserved_immutable_files': len(preserved), 'original_markdown_snapshots': len([p for p in BASE['hashes'] if p.endswith('.md')]),
     'v3_sha256': SHA((ROOT / 'docs/01_需求与范围/开发要求V3.0.md').read_bytes()),
-    'task_ids': len(new_states), 'task_states_unchanged': old_states == new_states,
+    'task_ids': len(new_states), 'original_task_states_unchanged': original_states_unchanged,
+    'registered_new_task_ids': sorted(added_ids),
     'pending_index': len(pending), 'completed_scoped_index': len(done),
     'current_markdown_files': len(current), 'current_relative_links_checked': checked, 'anchors_checked': anchors_checked,
     'config_check': {'command': '<运行核验脚本的同一Python> -X utf8 -m app.cli validate-config',
