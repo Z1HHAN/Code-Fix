@@ -1,0 +1,577 @@
+FFFFFFFFFFFFFFFFFFFFFFF..                                                [100%]
+================================== FAILURES ===================================
+____ test_code01_forged_stdout_cannot_become_passed[legacy_single_report] _____
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code01_forged_stdout_cann0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001584A6A62C0>
+format_name = 'legacy_single_report'
+
+    @pytest.mark.parametrize('format_name', ['legacy_single_report', 'legacy_report_with_end', 'versioned_report_with_end'])
+    def test_code01_forged_stdout_cannot_become_passed(tmp_path, monkeypatch, format_name):
+        definition = get_task('leap')
+        work = definition.prepare(tmp_path / 'work')
+        runner = DockerRunner('leap')
+        runner.ready = True  # Deliberate offline prerequisite double; never a real Docker assertion.
+        bundle = _forged_reports(definition.profile)
+        payload = {'exit_code': 0, 'payload': bundle} if format_name.startswith('versioned') else bundle
+        stdout = b'CODEFIX_REPORT:' + base64.b64encode(json.dumps(payload).encode()) + b'\n'
+        if format_name.endswith('with_end'):
+            stdout += b'CODEFIX_END\n'
+    
+        def fake_execute(work, output, extra, timeout, folder):
+            (folder / 'stdout.txt').write_bytes(stdout)
+            (folder / 'stderr.txt').write_bytes(b'')
+            return {'call_id': 'c-forged-offline', 'timed_out': False, 'cleanup_passed': True,
+                    'exit_code': 0, 'duration_ms': 0, 'stdout_path': 'stdout.txt', 'stderr_path': 'stderr.txt'}
+    
+        monkeypatch.setattr(runner, '_execute', fake_execute)
+        result = runner.run(work, tmp_path / 'evidence', phase='development', timeout=1,
+                            expected_version=code_version(work, definition.profile['source_paths']))
+>       assert result['verification_status'] != 'passed', 'CODE-01: self-consistent stdout is not trusted evidence of execution'
+E       AssertionError: CODE-01: self-consistent stdout is not trusted evidence of execution
+E       assert 'passed' != 'passed'
+
+acceptance_tests\test_repair_gates.py:127: AssertionError
+___ test_code01_forged_stdout_cannot_become_passed[legacy_report_with_end] ____
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code01_forged_stdout_cann1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001584A6A68B0>
+format_name = 'legacy_report_with_end'
+
+    @pytest.mark.parametrize('format_name', ['legacy_single_report', 'legacy_report_with_end', 'versioned_report_with_end'])
+    def test_code01_forged_stdout_cannot_become_passed(tmp_path, monkeypatch, format_name):
+        definition = get_task('leap')
+        work = definition.prepare(tmp_path / 'work')
+        runner = DockerRunner('leap')
+        runner.ready = True  # Deliberate offline prerequisite double; never a real Docker assertion.
+        bundle = _forged_reports(definition.profile)
+        payload = {'exit_code': 0, 'payload': bundle} if format_name.startswith('versioned') else bundle
+        stdout = b'CODEFIX_REPORT:' + base64.b64encode(json.dumps(payload).encode()) + b'\n'
+        if format_name.endswith('with_end'):
+            stdout += b'CODEFIX_END\n'
+    
+        def fake_execute(work, output, extra, timeout, folder):
+            (folder / 'stdout.txt').write_bytes(stdout)
+            (folder / 'stderr.txt').write_bytes(b'')
+            return {'call_id': 'c-forged-offline', 'timed_out': False, 'cleanup_passed': True,
+                    'exit_code': 0, 'duration_ms': 0, 'stdout_path': 'stdout.txt', 'stderr_path': 'stderr.txt'}
+    
+        monkeypatch.setattr(runner, '_execute', fake_execute)
+        result = runner.run(work, tmp_path / 'evidence', phase='development', timeout=1,
+                            expected_version=code_version(work, definition.profile['source_paths']))
+>       assert result['verification_status'] != 'passed', 'CODE-01: self-consistent stdout is not trusted evidence of execution'
+E       AssertionError: CODE-01: self-consistent stdout is not trusted evidence of execution
+E       assert 'passed' != 'passed'
+
+acceptance_tests\test_repair_gates.py:127: AssertionError
+__ test_code01_forged_stdout_cannot_become_passed[versioned_report_with_end] __
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code01_forged_stdout_cann2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001584B6FD130>
+format_name = 'versioned_report_with_end'
+
+    @pytest.mark.parametrize('format_name', ['legacy_single_report', 'legacy_report_with_end', 'versioned_report_with_end'])
+    def test_code01_forged_stdout_cannot_become_passed(tmp_path, monkeypatch, format_name):
+        definition = get_task('leap')
+        work = definition.prepare(tmp_path / 'work')
+        runner = DockerRunner('leap')
+        runner.ready = True  # Deliberate offline prerequisite double; never a real Docker assertion.
+        bundle = _forged_reports(definition.profile)
+        payload = {'exit_code': 0, 'payload': bundle} if format_name.startswith('versioned') else bundle
+        stdout = b'CODEFIX_REPORT:' + base64.b64encode(json.dumps(payload).encode()) + b'\n'
+        if format_name.endswith('with_end'):
+            stdout += b'CODEFIX_END\n'
+    
+        def fake_execute(work, output, extra, timeout, folder):
+            (folder / 'stdout.txt').write_bytes(stdout)
+            (folder / 'stderr.txt').write_bytes(b'')
+            return {'call_id': 'c-forged-offline', 'timed_out': False, 'cleanup_passed': True,
+                    'exit_code': 0, 'duration_ms': 0, 'stdout_path': 'stdout.txt', 'stderr_path': 'stderr.txt'}
+    
+        monkeypatch.setattr(runner, '_execute', fake_execute)
+        result = runner.run(work, tmp_path / 'evidence', phase='development', timeout=1,
+                            expected_version=code_version(work, definition.profile['source_paths']))
+        assert result['verification_status'] != 'passed', 'CODE-01: self-consistent stdout is not trusted evidence of execution'
+        assert result['status'] == 'failed'
+>       assert result['failure_class'] == 'evidence_channel_tampered'
+E       AssertionError: assert 'not_reproduced' == 'evidence_channel_tampered'
+E         
+E         - evidence_channel_tampered
+E         + not_reproduced
+
+acceptance_tests\test_repair_gates.py:129: AssertionError
+_ test_code02_baseline_failure_keeps_cause_and_rule[environment_error-paused-R03] _
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code02_baseline_failure_k0')
+outcome = 'environment_error', expected_status = 'paused', rule = 'R03'
+
+    @pytest.mark.parametrize('outcome, expected_status, rule', [
+        ('environment_error', 'paused', 'R03'), ('timeout', 'stopped', 'R04'), ('not_reproduced', 'paused', 'R06')])
+    def test_code02_baseline_failure_keeps_cause_and_rule(tmp_path, outcome, expected_status, rule):
+        status, result, runner, model, store, rid = execute(tmp_path, [outcome])
+>       assert status == expected_status, f'CODE-02: {outcome} must not become generic defect-not-reproduced'
+E       AssertionError: CODE-02: environment_error must not become generic defect-not-reproduced
+E       assert 'blocked' == 'paused'
+E         
+E         - paused
+E         + blocked
+
+acceptance_tests\test_repair_gates.py:136: AssertionError
+___ test_code02_baseline_failure_keeps_cause_and_rule[timeout-stopped-R04] ____
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code02_baseline_failure_k1')
+outcome = 'timeout', expected_status = 'stopped', rule = 'R04'
+
+    @pytest.mark.parametrize('outcome, expected_status, rule', [
+        ('environment_error', 'paused', 'R03'), ('timeout', 'stopped', 'R04'), ('not_reproduced', 'paused', 'R06')])
+    def test_code02_baseline_failure_keeps_cause_and_rule(tmp_path, outcome, expected_status, rule):
+        status, result, runner, model, store, rid = execute(tmp_path, [outcome])
+>       assert status == expected_status, f'CODE-02: {outcome} must not become generic defect-not-reproduced'
+E       AssertionError: CODE-02: timeout must not become generic defect-not-reproduced
+E       assert 'blocked' == 'stopped'
+E         
+E         - stopped
+E         + blocked
+
+acceptance_tests\test_repair_gates.py:136: AssertionError
+_ test_code02_baseline_failure_keeps_cause_and_rule[not_reproduced-paused-R06] _
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code02_baseline_failure_k2')
+outcome = 'not_reproduced', expected_status = 'paused', rule = 'R06'
+
+    @pytest.mark.parametrize('outcome, expected_status, rule', [
+        ('environment_error', 'paused', 'R03'), ('timeout', 'stopped', 'R04'), ('not_reproduced', 'paused', 'R06')])
+    def test_code02_baseline_failure_keeps_cause_and_rule(tmp_path, outcome, expected_status, rule):
+        status, result, runner, model, store, rid = execute(tmp_path, [outcome])
+>       assert status == expected_status, f'CODE-02: {outcome} must not become generic defect-not-reproduced'
+E       AssertionError: CODE-02: not_reproduced must not become generic defect-not-reproduced
+E       assert 'blocked' == 'paused'
+E         
+E         - paused
+E         + blocked
+
+acceptance_tests\test_repair_gates.py:136: AssertionError
+___________ test_code03_final_stage_records_actual_rule[passed-R07] ___________
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code03_final_stage_record0')
+outcome = 'passed', rule = 'R07'
+
+    @pytest.mark.parametrize('outcome, rule', [('passed', 'R07'), ('assertion_failed', 'R08N'), ('unknown_evidence', 'R17')])
+    def test_code03_final_stage_records_actual_rule(tmp_path, outcome, rule):
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed', outcome])
+        assert runner.phases[-1] == 'final_check'
+        decisions = [e for e in store.events(rid) if e['event'] == 'decision' and e.get('phase') == 'final_check']
+>       assert any(e.get('rule_id') == rule for e in decisions), 'CODE-03: terminal_* is not the final-stage rule-table decision'
+E       AssertionError: CODE-03: terminal_* is not the final-stage rule-table decision
+E       assert False
+E        +  where False = any(<generator object test_code03_final_stage_records_actual_rule.<locals>.<genexpr> at 0x000001584B6F3140>)
+
+acceptance_tests\test_repair_gates.py:148: AssertionError
+_____ test_code03_final_stage_records_actual_rule[assertion_failed-R08N] ______
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code03_final_stage_record1')
+outcome = 'assertion_failed', rule = 'R08N'
+
+    @pytest.mark.parametrize('outcome, rule', [('passed', 'R07'), ('assertion_failed', 'R08N'), ('unknown_evidence', 'R17')])
+    def test_code03_final_stage_records_actual_rule(tmp_path, outcome, rule):
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed', outcome])
+        assert runner.phases[-1] == 'final_check'
+        decisions = [e for e in store.events(rid) if e['event'] == 'decision' and e.get('phase') == 'final_check']
+>       assert any(e.get('rule_id') == rule for e in decisions), 'CODE-03: terminal_* is not the final-stage rule-table decision'
+E       AssertionError: CODE-03: terminal_* is not the final-stage rule-table decision
+E       assert False
+E        +  where False = any(<generator object test_code03_final_stage_records_actual_rule.<locals>.<genexpr> at 0x000001584B71BBC0>)
+
+acceptance_tests\test_repair_gates.py:148: AssertionError
+______ test_code03_final_stage_records_actual_rule[unknown_evidence-R17] ______
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code03_final_stage_record2')
+outcome = 'unknown_evidence', rule = 'R17'
+
+    @pytest.mark.parametrize('outcome, rule', [('passed', 'R07'), ('assertion_failed', 'R08N'), ('unknown_evidence', 'R17')])
+    def test_code03_final_stage_records_actual_rule(tmp_path, outcome, rule):
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed', outcome])
+        assert runner.phases[-1] == 'final_check'
+        decisions = [e for e in store.events(rid) if e['event'] == 'decision' and e.get('phase') == 'final_check']
+>       assert any(e.get('rule_id') == rule for e in decisions), 'CODE-03: terminal_* is not the final-stage rule-table decision'
+E       AssertionError: CODE-03: terminal_* is not the final-stage rule-table decision
+E       assert False
+E        +  where False = any(<generator object test_code03_final_stage_records_actual_rule.<locals>.<genexpr> at 0x000001584B71B680>)
+
+acceptance_tests\test_repair_gates.py:148: AssertionError
+__________ test_code03_pause_boundary_records_r02_without_more_work ___________
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code03_pause_boundary_rec0')
+
+    def test_code03_pause_boundary_records_r02_without_more_work(tmp_path):
+        store = RunStore(tmp_path)
+        rid = store.create({'mode': 'repair'})['run_id']
+        store.claim(rid)
+        class PausingModel(ModelDouble):
+            def call(self, *args, **kwargs):
+                response = super().call(*args, **kwargs)
+                store.request_control(rid, 'pause')
+                return response
+        runner, model = ExecutorDouble(['assertion_failed']), PausingModel()
+        status, result = Workflow(store, runner, model).run(rid)
+        assert status == 'paused' and model.roles == ['repairer']
+        assert runner.phases == ['development']
+>       assert any(e.get('rule_id') == 'R02' for e in store.events(rid) if e['event'] == 'decision'), 'CODE-03: operator pause must retain its rule identity'
+E       AssertionError: CODE-03: operator pause must retain its rule identity
+E       assert False
+E        +  where False = any(<generator object test_code03_pause_boundary_records_r02_without_more_work.<locals>.<genexpr> at 0x000001584B71B5A0>)
+
+acceptance_tests\test_repair_gates.py:166: AssertionError
+_______ test_code04_passed_candidate_can_use_final_check_at_model_limit _______
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code04_passed_candidate_c0')
+
+    def test_code04_passed_candidate_can_use_final_check_at_model_limit(tmp_path):
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed', 'passed'], task={'max_calls': 1})
+>       assert runner.phases == ['development', 'development', 'final_check'], 'CODE-04: advisory calls must not starve final validation'
+E       AssertionError: CODE-04: advisory calls must not starve final validation
+E       assert ['development', 'development'] == ['development...'final_check']
+E         
+E         Right contains one more item: 'final_check'
+E         Use -v to get more diff
+
+acceptance_tests\test_repair_gates.py:171: AssertionError
+____________ test_code05_test_modification_is_permission_violation ____________
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code05_test_modification_0')
+
+    def test_code05_test_modification_is_permission_violation(tmp_path):
+        class ForbiddenChange(ModelDouble):
+            def call(self, messages, **kwargs):
+                record = super().call(messages, **kwargs)
+                output = json.loads(record['raw_text'])
+                output['changes'][0]['path'] = 'tests/test_leap.py'
+                return record | {'raw_text': json.dumps(output)}
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed'], model=ForbiddenChange())
+>       assert result.get('failure_class') == 'permission_violation', 'CODE-05: valid JSON carrying a forbidden edit is not bad JSON'
+E       AssertionError: CODE-05: valid JSON carrying a forbidden edit is not bad JSON
+E       assert 'invalid_model_output' == 'permission_violation'
+E         
+E         - permission_violation
+E         + invalid_model_output
+
+acceptance_tests\test_repair_gates.py:184: AssertionError
+_______________ test_code06_transport_failure_pauses_with_guard _______________
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code06_transport_failure_0')
+
+    def test_code06_transport_failure_pauses_with_guard(tmp_path):
+        class TransportFailure(ModelDouble):
+            def call(self, *args, **kwargs):
+                return {'status': 'failed', 'failure_class': 'model_transport_error',
+                        'model_api_called': False, 'mode': 'test_stub', 'reason': 'OFFLINE injected transport failure'}
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed'], model=TransportFailure())
+>       assert status == 'paused', 'CODE-06: transport diagnosis should follow the pause policy'
+E       AssertionError: CODE-06: transport diagnosis should follow the pause policy
+E       assert 'blocked' == 'paused'
+E         
+E         - paused
+E         + blocked
+
+acceptance_tests\test_repair_gates.py:196: AssertionError
+_________ test_code08_interrupt_during_model_call_prevents_new_calls __________
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code08_interrupt_during_m0')
+
+    def test_code08_interrupt_during_model_call_prevents_new_calls(tmp_path):
+        store = RunStore(tmp_path)
+        rid = store.create({'mode': 'repair'})['run_id']
+        store.claim(rid)
+        class InterruptingModel(ModelDouble):
+            def call(self, *args, **kwargs):
+                response = super().call(*args, **kwargs)
+                if len(self.roles) == 1:
+                    store.interrupt(rid)
+                return response
+        model = InterruptingModel()
+        runner = ExecutorDouble(['assertion_failed', 'passed', 'passed'])
+        status, result = Workflow(store, runner, model).run(rid)
+>       assert model.roles == ['repairer'], 'CODE-08: interruption cannot permit further model calls'
+E       AssertionError: CODE-08: interruption cannot permit further model calls
+E       assert ['repairer', ..., 'scheduler'] == ['repairer']
+E         
+E         Left contains 2 more items, first extra item: 'detector'
+E         Use -v to get more diff
+
+acceptance_tests\test_repair_gates.py:215: AssertionError
+_______ test_code07_execution_version_bound_to_snapshot_during_mutation _______
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code07_execution_version_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001584B72D700>
+
+    def test_code07_execution_version_bound_to_snapshot_during_mutation(tmp_path, monkeypatch):
+        definition = get_task('leap')
+        original_work = definition.prepare(tmp_path / 'work')
+        source = original_work / definition.source
+        original_bytes = source.read_bytes()
+        expected = code_version(original_work, definition.profile['source_paths'])
+        runner = DockerRunner('leap')
+        runner.ready = True
+        observed = {}
+        def fake_execute(work, output, extra, timeout, folder):
+            try:
+                source.write_bytes(original_bytes + b'\n# OFFLINE simulated concurrent mutation\n')
+                observed['executed_version'] = code_version(work, definition.profile['source_paths'])
+            finally:
+                source.write_bytes(original_bytes)
+            stdout = b'CODEFIX_REPORT:' + base64.b64encode(json.dumps(_forged_reports(definition.profile)).encode()) + b'\n'
+            (folder / 'stdout.txt').write_bytes(stdout)
+            (folder / 'stderr.txt').write_bytes(b'')
+            return {'call_id': 'c-offline-mutation', 'timed_out': False, 'cleanup_passed': True,
+                    'exit_code': 0, 'duration_ms': 0, 'stdout_path': 'stdout.txt', 'stderr_path': 'stderr.txt'}
+        monkeypatch.setattr(runner, '_execute', fake_execute)
+        result = runner.run(original_work, tmp_path / 'evidence', phase='development', timeout=1, expected_version=expected)
+        assert source.read_bytes() == original_bytes
+>       assert observed['executed_version'] == expected or result['verification_status'] != 'passed', 'CODE-07: different execution bytes were accepted as the original version after source restoration'
+E       AssertionError: CODE-07: different execution bytes were accepted as the original version after source restoration
+E       assert ('sha256:03651...b8f7ff273a8ef' == 'sha256:1d9f5...50de15860f53a'
+E         
+E         - sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a
+E         + sha256:03651ab36da13c18b43cbd83d15c07d1209284c82d3c9727693b8f7ff273a8ef or 'passed' != 'passed')
+
+acceptance_tests\test_repair_gates.py:243: AssertionError
+_________ test_code09_parameter_expected_value_not_forwarded_to_model _________
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code09_parameter_expected0')
+
+    def test_code09_parameter_expected_value_not_forwarded_to_model(tmp_path):
+        marker = '987654321.123456789'
+        native_nodeid = f'python_testcases/test_sqrt.py::test_sqrt[input_data0-{marker}]'
+        _, _, runner, model, _, _ = execute(tmp_path, ['assertion_failed', 'passed', 'passed'],
+                                           task={'project': 'qb-sqrt'}, stdout=native_nodeid + ' FAILED\n')
+        assert model.messages, 'Control did not exercise a production model-context boundary'
+>       assert all(marker not in json.dumps(messages) for messages in model.messages), 'CODE-09: synthetic parameter expected value leaked through development stdout'
+E       AssertionError: CODE-09: synthetic parameter expected value leaked through development stdout
+E       assert False
+E        +  where False = all(<generator object test_code09_parameter_expected_value_not_forwarded_to_model.<locals>.<genexpr> at 0x000001584B7FE020>)
+
+acceptance_tests\test_repair_gates.py:252: AssertionError
+__________ test_code11_deferred_offline_router_is_not_labelled_live ___________
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code11_deferred_offline_r0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001584A60FCF0>
+
+    def test_code11_deferred_offline_router_is_not_labelled_live(tmp_path, monkeypatch):
+        model = ModelDouble()
+        class OfflineRouter:
+            @staticmethod
+            def resolve(config):
+                return {'scope': 'offline-double'}
+            def __new__(cls, *args, **kwargs):
+                return model
+        monkeypatch.setattr('app.workflow_v3.ModelRouter', OfflineRouter)
+        store = RunStore(tmp_path)
+        rid = store.create({'mode': 'repair'})['run_id']
+        store.claim(rid)
+        status, result = Workflow(store, ExecutorDouble(['assertion_failed', 'passed', 'passed'])).run(rid)
+        assert status == 'success', 'Control must complete through the deferred offline model branch'
+>       assert result['mode'] == 'test_stub', 'CODE-11: result mode must reflect the router actually constructed'
+E       AssertionError: CODE-11: result mode must reflect the router actually constructed
+E       assert 'live' == 'test_stub'
+E         
+E         - test_stub
+E         + live
+
+acceptance_tests\test_repair_gates.py:269: AssertionError
+_ test_code10_production_gateway_rejects_unapproved_evidence_fields[repairer] _
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code10_production_gateway0')
+role = 'repairer'
+
+    @pytest.mark.parametrize('role', ['repairer', 'locator', 'detector', 'scheduler'])
+    def test_code10_production_gateway_rejects_unapproved_evidence_fields(tmp_path, role):
+        from app.agents_v3 import AgentGateway
+        marker = 'C_SYNTHETIC_REFERENCE_ANSWER_DO_NOT_SEND'
+        definition = get_task('leap')
+        work = definition.prepare(tmp_path / 'work')
+        version = code_version(work, definition.profile['source_paths'])
+        store = RunStore(tmp_path / 'store')
+        rid = store.create({'mode': 'repair'})['run_id']
+        task = store.get(rid)['task']
+        model = ModelDouble()
+        evidence = {'evidence_id': 'offline-dev', 'phase': 'development', 'code_version': version,
+                    'failure_class': 'assertion_failed', 'summary': 'OFFLINE reviewed summary',
+                    'reference_answer': marker}
+        try:
+            AgentGateway(model, store).invoke(role, run_id=rid, round_number=1,
+                code=(work / definition.source).read_text(encoding='utf-8'), evidence=evidence,
+                version=version, work=work, task=task, deadline=time.monotonic() + 10)
+        except ValueError:
+            # Rejecting before dispatch is acceptable; rejection after disclosure is not.
+            assert not model.messages
+>       assert all(marker not in json.dumps(messages) for messages in model.messages), 'CODE-10: production gateway forwarded a non-allowlisted evidence field'
+E       AssertionError: CODE-10: production gateway forwarded a non-allowlisted evidence field
+E       assert False
+E        +  where False = all(<generator object test_code10_production_gateway_rejects_unapproved_evidence_fields.<locals>.<genexpr> at 0x000001584B74AD40>)
+
+acceptance_tests\test_repair_gates.py:294: AssertionError
+_ test_code10_production_gateway_rejects_unapproved_evidence_fields[locator] __
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code10_production_gateway1')
+role = 'locator'
+
+    @pytest.mark.parametrize('role', ['repairer', 'locator', 'detector', 'scheduler'])
+    def test_code10_production_gateway_rejects_unapproved_evidence_fields(tmp_path, role):
+        from app.agents_v3 import AgentGateway
+        marker = 'C_SYNTHETIC_REFERENCE_ANSWER_DO_NOT_SEND'
+        definition = get_task('leap')
+        work = definition.prepare(tmp_path / 'work')
+        version = code_version(work, definition.profile['source_paths'])
+        store = RunStore(tmp_path / 'store')
+        rid = store.create({'mode': 'repair'})['run_id']
+        task = store.get(rid)['task']
+        model = ModelDouble()
+        evidence = {'evidence_id': 'offline-dev', 'phase': 'development', 'code_version': version,
+                    'failure_class': 'assertion_failed', 'summary': 'OFFLINE reviewed summary',
+                    'reference_answer': marker}
+        try:
+            AgentGateway(model, store).invoke(role, run_id=rid, round_number=1,
+                code=(work / definition.source).read_text(encoding='utf-8'), evidence=evidence,
+                version=version, work=work, task=task, deadline=time.monotonic() + 10)
+        except ValueError:
+            # Rejecting before dispatch is acceptable; rejection after disclosure is not.
+            assert not model.messages
+>       assert all(marker not in json.dumps(messages) for messages in model.messages), 'CODE-10: production gateway forwarded a non-allowlisted evidence field'
+E       AssertionError: CODE-10: production gateway forwarded a non-allowlisted evidence field
+E       assert False
+E        +  where False = all(<generator object test_code10_production_gateway_rejects_unapproved_evidence_fields.<locals>.<genexpr> at 0x000001584B749F30>)
+
+acceptance_tests\test_repair_gates.py:294: AssertionError
+_ test_code10_production_gateway_rejects_unapproved_evidence_fields[detector] _
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code10_production_gateway2')
+role = 'detector'
+
+    @pytest.mark.parametrize('role', ['repairer', 'locator', 'detector', 'scheduler'])
+    def test_code10_production_gateway_rejects_unapproved_evidence_fields(tmp_path, role):
+        from app.agents_v3 import AgentGateway
+        marker = 'C_SYNTHETIC_REFERENCE_ANSWER_DO_NOT_SEND'
+        definition = get_task('leap')
+        work = definition.prepare(tmp_path / 'work')
+        version = code_version(work, definition.profile['source_paths'])
+        store = RunStore(tmp_path / 'store')
+        rid = store.create({'mode': 'repair'})['run_id']
+        task = store.get(rid)['task']
+        model = ModelDouble()
+        evidence = {'evidence_id': 'offline-dev', 'phase': 'development', 'code_version': version,
+                    'failure_class': 'assertion_failed', 'summary': 'OFFLINE reviewed summary',
+                    'reference_answer': marker}
+        try:
+            AgentGateway(model, store).invoke(role, run_id=rid, round_number=1,
+                code=(work / definition.source).read_text(encoding='utf-8'), evidence=evidence,
+                version=version, work=work, task=task, deadline=time.monotonic() + 10)
+        except ValueError:
+            # Rejecting before dispatch is acceptable; rejection after disclosure is not.
+            assert not model.messages
+>       assert all(marker not in json.dumps(messages) for messages in model.messages), 'CODE-10: production gateway forwarded a non-allowlisted evidence field'
+E       AssertionError: CODE-10: production gateway forwarded a non-allowlisted evidence field
+E       assert False
+E        +  where False = all(<generator object test_code10_production_gateway_rejects_unapproved_evidence_fields.<locals>.<genexpr> at 0x000001584B749D50>)
+
+acceptance_tests\test_repair_gates.py:294: AssertionError
+_ test_code10_production_gateway_rejects_unapproved_evidence_fields[scheduler] _
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code10_production_gateway3')
+role = 'scheduler'
+
+    @pytest.mark.parametrize('role', ['repairer', 'locator', 'detector', 'scheduler'])
+    def test_code10_production_gateway_rejects_unapproved_evidence_fields(tmp_path, role):
+        from app.agents_v3 import AgentGateway
+        marker = 'C_SYNTHETIC_REFERENCE_ANSWER_DO_NOT_SEND'
+        definition = get_task('leap')
+        work = definition.prepare(tmp_path / 'work')
+        version = code_version(work, definition.profile['source_paths'])
+        store = RunStore(tmp_path / 'store')
+        rid = store.create({'mode': 'repair'})['run_id']
+        task = store.get(rid)['task']
+        model = ModelDouble()
+        evidence = {'evidence_id': 'offline-dev', 'phase': 'development', 'code_version': version,
+                    'failure_class': 'assertion_failed', 'summary': 'OFFLINE reviewed summary',
+                    'reference_answer': marker}
+        try:
+            AgentGateway(model, store).invoke(role, run_id=rid, round_number=1,
+                code=(work / definition.source).read_text(encoding='utf-8'), evidence=evidence,
+                version=version, work=work, task=task, deadline=time.monotonic() + 10)
+        except ValueError:
+            # Rejecting before dispatch is acceptable; rejection after disclosure is not.
+            assert not model.messages
+>       assert all(marker not in json.dumps(messages) for messages in model.messages), 'CODE-10: production gateway forwarded a non-allowlisted evidence field'
+E       AssertionError: CODE-10: production gateway forwarded a non-allowlisted evidence field
+E       assert False
+E        +  where False = all(<generator object test_code10_production_gateway_rejects_unapproved_evidence_fields.<locals>.<genexpr> at 0x000001584B748D60>)
+
+acceptance_tests\test_repair_gates.py:294: AssertionError
+____________ test_code12_trace_preserves_engine_decision_identity _____________
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code12_trace_preserves_en0')
+
+    def test_code12_trace_preserves_engine_decision_identity(tmp_path):
+        store = RunStore(tmp_path)
+        rid = store.create({'mode': 'repair'})['run_id']
+        store.claim(rid)
+        trace = RunTrace(store, rid)
+        program = {'decision_id': 'd-c-stable-engine-id', 'action': 'stop', 'rule_id': 'R04', 'reason': 'offline timeout'}
+        record = trace.decision(program=program, effective_action='stop', reason='offline timeout',
+                                evidence_ids=['offline-evidence'], version='offline-v1', suite_version='offline-suite', counters={})
+>       assert record['decision_id'] == program['decision_id'], 'CODE-12: trace and engine must refer to the same decision identity'
+E       AssertionError: CODE-12: trace and engine must refer to the same decision identity
+E       assert 'd-2b508b66b6...c9bea10f62f21' == 'd-c-stable-engine-id'
+E         
+E         - d-c-stable-engine-id
+E         + d-2b508b66b6064fe4894c9bea10f62f21
+
+acceptance_tests\test_repair_gates.py:305: AssertionError
+_________ test_code13_failed_active_step_is_not_recorded_interrupted __________
+
+tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/cg-84a7394d/test_code13_failed_active_step0')
+
+    def test_code13_failed_active_step_is_not_recorded_interrupted(tmp_path):
+        class BrokenExecutor(ExecutorDouble):
+            def run(self, *args, **kwargs):
+                raise RuntimeError('OFFLINE controlled executor failure')
+        store = RunStore(tmp_path)
+        rid = store.create({'mode': 'repair'})['run_id']
+        store.claim(rid)
+        status, result = Workflow(store, BrokenExecutor([]), ModelDouble()).run(rid)
+        assert status == 'failed'
+        completed = [e for e in store.events(rid) if e['event'] == 'step_completed' and e['node_id'] == 'pytest']
+        assert len(completed) == 1
+>       assert completed[0]['status'] == 'failed', 'CODE-13: failure is not an operator interruption'
+E       AssertionError: CODE-13: failure is not an operator interruption
+E       assert 'interrupted' == 'failed'
+E         
+E         - failed
+E         + interrupted
+
+acceptance_tests\test_repair_gates.py:319: AssertionError
+- generated xml file: C:\Users\lenovo\Documents\ChatGPT\Code Fix\evidence\c-review\integration-check\repair-gates.junit.xml -
+=========================== short test summary info ===========================
+FAILED acceptance_tests/test_repair_gates.py::test_code01_forged_stdout_cannot_become_passed[legacy_single_report]
+FAILED acceptance_tests/test_repair_gates.py::test_code01_forged_stdout_cannot_become_passed[legacy_report_with_end]
+FAILED acceptance_tests/test_repair_gates.py::test_code01_forged_stdout_cannot_become_passed[versioned_report_with_end]
+FAILED acceptance_tests/test_repair_gates.py::test_code02_baseline_failure_keeps_cause_and_rule[environment_error-paused-R03]
+FAILED acceptance_tests/test_repair_gates.py::test_code02_baseline_failure_keeps_cause_and_rule[timeout-stopped-R04]
+FAILED acceptance_tests/test_repair_gates.py::test_code02_baseline_failure_keeps_cause_and_rule[not_reproduced-paused-R06]
+FAILED acceptance_tests/test_repair_gates.py::test_code03_final_stage_records_actual_rule[passed-R07]
+FAILED acceptance_tests/test_repair_gates.py::test_code03_final_stage_records_actual_rule[assertion_failed-R08N]
+FAILED acceptance_tests/test_repair_gates.py::test_code03_final_stage_records_actual_rule[unknown_evidence-R17]
+FAILED acceptance_tests/test_repair_gates.py::test_code03_pause_boundary_records_r02_without_more_work
+FAILED acceptance_tests/test_repair_gates.py::test_code04_passed_candidate_can_use_final_check_at_model_limit
+FAILED acceptance_tests/test_repair_gates.py::test_code05_test_modification_is_permission_violation
+FAILED acceptance_tests/test_repair_gates.py::test_code06_transport_failure_pauses_with_guard
+FAILED acceptance_tests/test_repair_gates.py::test_code08_interrupt_during_model_call_prevents_new_calls
+FAILED acceptance_tests/test_repair_gates.py::test_code07_execution_version_bound_to_snapshot_during_mutation
+FAILED acceptance_tests/test_repair_gates.py::test_code09_parameter_expected_value_not_forwarded_to_model
+FAILED acceptance_tests/test_repair_gates.py::test_code11_deferred_offline_router_is_not_labelled_live
+FAILED acceptance_tests/test_repair_gates.py::test_code10_production_gateway_rejects_unapproved_evidence_fields[repairer]
+FAILED acceptance_tests/test_repair_gates.py::test_code10_production_gateway_rejects_unapproved_evidence_fields[locator]
+FAILED acceptance_tests/test_repair_gates.py::test_code10_production_gateway_rejects_unapproved_evidence_fields[detector]
+FAILED acceptance_tests/test_repair_gates.py::test_code10_production_gateway_rejects_unapproved_evidence_fields[scheduler]
+FAILED acceptance_tests/test_repair_gates.py::test_code12_trace_preserves_engine_decision_identity
+FAILED acceptance_tests/test_repair_gates.py::test_code13_failed_active_step_is_not_recorded_interrupted
+23 failed, 2 passed in 11.74s

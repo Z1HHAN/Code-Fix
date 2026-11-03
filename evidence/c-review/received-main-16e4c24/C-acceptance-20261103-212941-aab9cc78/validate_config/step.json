@@ -1,0 +1,33 @@
+{
+  "stage": "validate_config",
+  "argv": [
+    "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "app.cli",
+    "validate-config"
+  ],
+  "cwd": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main",
+  "started_at": "2026-11-03T21:29:41.934+08:00",
+  "timeout_seconds": 30,
+  "exit_code": 0,
+  "timed_out": false,
+  "status": "passed",
+  "reason": null,
+  "stdout_path": "validate_config/stdout.txt",
+  "stderr_path": "validate_config/stderr.txt",
+  "cleanup": {
+    "parent_reaped": true,
+    "tree_termination_attempted": false,
+    "full_process_tree_verified": false
+  },
+  "pid": 9832,
+  "finished_at": "2026-11-03T21:29:42.049+08:00",
+  "duration_ms": 115,
+  "parsed_result": {
+    "task_id": "T001-leap-baseline",
+    "errors": []
+  }
+}

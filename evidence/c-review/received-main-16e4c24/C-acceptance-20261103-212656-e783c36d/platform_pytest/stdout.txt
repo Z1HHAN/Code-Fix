@@ -1,0 +1,186 @@
+.....F....FF.........................................s.....FFF.......... [ 32%]
+........................................................................ [ 64%]
+.F...................................................................... [ 97%]
+......                                                                   [100%]
+================================== FAILURES ===================================
+_____________ test_real_baseline_http_status_evidence_and_export ______________
+
+tmp_path = WindowsPath('C:/Users/ROG/Documents/ChatGPT/ai竞赛/C_20261103_work/Code-Fix-main/evidence/c-review/C-acceptance-20261103-212656-e783c36d/platform_pytest/work/test_real_baseline_http_status0')
+
+    def test_real_baseline_http_status_evidence_and_export(tmp_path):
+        with TestClient(create_app(tmp_path)) as client:
+            headers = auth(client) | {'Idempotency-Key': 'api-baseline'}
+            created = client.post('/api/v3/tasks', headers=headers, json={'mode': 'baseline'})
+            assert created.status_code == 201
+            rid = created.json()['run_id']
+            assert client.post('/api/v3/tasks', headers=headers, json={'mode': 'baseline'}).json()['run_id'] == rid
+            assert client.post(f'/api/v3/tasks/{rid}/start', headers=headers).status_code == 202
+            assert client.post(f'/api/v3/tasks/{rid}/start', headers=headers).status_code == 409
+            deadline = time.monotonic() + 20
+            while time.monotonic() < deadline:
+                run = client.get(f'/api/v3/tasks/{rid}').json()
+                if run['status'] != 'running':
+                    break
+                time.sleep(.05)
+>           assert run['status'] == 'stopped'
+E           AssertionError: assert 'blocked' == 'stopped'
+E             
+E             - stopped
+E             + blocked
+
+tests\test_api_v3.py:33: AssertionError
+___ test_control_while_real_baseline_runs_preserves_evidence[pause-paused] ____
+
+tmp_path = WindowsPath('C:/Users/ROG/Documents/ChatGPT/ai竞赛/C_20261103_work/Code-Fix-main/evidence/c-review/C-acceptance-20261103-212656-e783c36d/platform_pytest/work/test_control_while_real_baseli0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024FD14BC710>
+action = 'pause', expected = 'paused'
+
+    @pytest.mark.parametrize('action, expected', [('pause', 'paused'), ('stop', 'stopped')])
+    def test_control_while_real_baseline_runs_preserves_evidence(tmp_path, monkeypatch, action, expected):
+        from app.service import baseline_record
+        entered, release = Event(), Event()
+        def gated_baseline(*args, **kwargs):
+            entered.set()
+            assert release.wait(5), 'test did not release baseline worker'
+            # Only the scheduling boundary is gated: this executes the real frozen pytest.
+            return baseline_record(*args, **kwargs)
+        monkeypatch.setattr('app.service.baseline_record', gated_baseline)
+        with TestClient(create_app(tmp_path)) as client:
+            headers = auth(client)
+            rid = client.post('/api/v3/tasks', headers=headers, json={'mode': 'baseline'}).json()['run_id']
+            try:
+                assert client.post(f'/api/v3/tasks/{rid}/start', headers=headers).status_code == 202
+                assert entered.wait(3)
+                response = client.post(f'/api/v3/tasks/{rid}/control', headers=headers, json={'action': action})
+                assert response.status_code == 200
+                assert response.json()['control'] == action
+            finally:
+                release.set()
+            deadline = time.monotonic() + 20
+            while time.monotonic() < deadline:
+                report = client.get(f'/api/v3/tasks/{rid}/report').json()
+                if report['run']['status'] != 'running':
+                    break
+                time.sleep(.03)
+            assert report['run']['status'] == expected
+>           assert report['run']['result']['tool_result']['counts']['passed'] == 3
+E           assert None == 3
+
+tests\test_api_v3.py:126: AssertionError
+___ test_control_while_real_baseline_runs_preserves_evidence[stop-stopped] ____
+
+tmp_path = WindowsPath('C:/Users/ROG/Documents/ChatGPT/ai竞赛/C_20261103_work/Code-Fix-main/evidence/c-review/C-acceptance-20261103-212656-e783c36d/platform_pytest/work/test_control_while_real_baseli1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024FD14B3BD0>
+action = 'stop', expected = 'stopped'
+
+    @pytest.mark.parametrize('action, expected', [('pause', 'paused'), ('stop', 'stopped')])
+    def test_control_while_real_baseline_runs_preserves_evidence(tmp_path, monkeypatch, action, expected):
+        from app.service import baseline_record
+        entered, release = Event(), Event()
+        def gated_baseline(*args, **kwargs):
+            entered.set()
+            assert release.wait(5), 'test did not release baseline worker'
+            # Only the scheduling boundary is gated: this executes the real frozen pytest.
+            return baseline_record(*args, **kwargs)
+        monkeypatch.setattr('app.service.baseline_record', gated_baseline)
+        with TestClient(create_app(tmp_path)) as client:
+            headers = auth(client)
+            rid = client.post('/api/v3/tasks', headers=headers, json={'mode': 'baseline'}).json()['run_id']
+            try:
+                assert client.post(f'/api/v3/tasks/{rid}/start', headers=headers).status_code == 202
+                assert entered.wait(3)
+                response = client.post(f'/api/v3/tasks/{rid}/control', headers=headers, json={'action': action})
+                assert response.status_code == 200
+                assert response.json()['control'] == action
+            finally:
+                release.set()
+            deadline = time.monotonic() + 20
+            while time.monotonic() < deadline:
+                report = client.get(f'/api/v3/tasks/{rid}/report').json()
+                if report['run']['status'] != 'running':
+                    break
+                time.sleep(.03)
+            assert report['run']['status'] == expected
+>           assert report['run']['result']['tool_result']['counts']['passed'] == 3
+E           assert None == 3
+
+tests\test_api_v3.py:126: AssertionError
+_______ test_mock_roles_use_current_evidence_without_applying_candidate _______
+
+tmp_path = WindowsPath('C:/Users/ROG/Documents/ChatGPT/ai竞赛/C_20261103_work/Code-Fix-main/evidence/c-review/C-acceptance-20261103-212656-e783c36d/platform_pytest/work/test_mock_roles_use_current_ev0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024FD12F1A90>
+
+    def test_mock_roles_use_current_evidence_without_applying_candidate(tmp_path, monkeypatch):
+        monkeypatch.setenv('OPENAI_API_KEY', 'FORBIDDEN-KEY-MARKER')
+        output = model_dry_run(ROOT, output_root=tmp_path)
+        run = Path(output['evidence_path'])
+        summary = output['summary']
+>       assert summary['mock_integration_passed'] is True
+E       assert False is True
+
+tests\test_mock_workflow.py:15: AssertionError
+_______________ test_invalid_mock_json_stops_without_candidate ________________
+
+tmp_path = WindowsPath('C:/Users/ROG/Documents/ChatGPT/ai竞赛/C_20261103_work/Code-Fix-main/evidence/c-review/C-acceptance-20261103-212656-e783c36d/platform_pytest/work/test_invalid_mock_json_stops_w0')
+
+    def test_invalid_mock_json_stops_without_candidate(tmp_path):
+        output = model_dry_run(ROOT, output_root=tmp_path, mock_responses=['not-json'])
+        assert output['summary']['mock_integration_passed'] is False
+>       assert output['summary']['failure_class'] == 'invalid_model_output'
+E       AssertionError: assert 'baseline_not_reproduced' == 'invalid_model_output'
+E         
+E         - invalid_model_output
+E         + baseline_not_reproduced
+
+tests\test_mock_workflow.py:44: AssertionError
+______________ test_version_recheck_error_preserves_failed_final ______________
+
+tmp_path = WindowsPath('C:/Users/ROG/Documents/ChatGPT/ai竞赛/C_20261103_work/Code-Fix-main/evidence/c-review/C-acceptance-20261103-212656-e783c36d/platform_pytest/work/test_version_recheck_error_pre0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024FD14C9860>
+
+    def test_version_recheck_error_preserves_failed_final(tmp_path, monkeypatch):
+        from app import mock_workflow
+        def unavailable(*args):
+            raise OSError('fixture-read-error')
+        monkeypatch.setattr(mock_workflow, 'code_version', unavailable)
+        output = model_dry_run(ROOT, output_root=tmp_path)
+        assert output['summary']['source_unchanged'] is False
+        assert output['summary']['mock_integration_passed'] is False
+>       assert output['summary']['failure_class'] == 'unexpected_source_change'
+E       AssertionError: assert 'baseline_not_reproduced' == 'unexpected_source_change'
+E         
+E         - unexpected_source_change
+E         + baseline_not_reproduced
+
+tests\test_mock_workflow.py:59: AssertionError
+___________ test_real_baseline_survives_new_service_and_has_report ____________
+
+tmp_path = WindowsPath('C:/Users/ROG/Documents/ChatGPT/ai竞赛/C_20261103_work/Code-Fix-main/evidence/c-review/C-acceptance-20261103-212656-e783c36d/platform_pytest/work/test_real_baseline_survives_ne0')
+
+    def test_real_baseline_survives_new_service_and_has_report(tmp_path):
+        service = TaskService(tmp_path)
+        run_id = service.store.create({})['run_id']
+        run = service.execute(run_id)
+>       assert run['status'] == 'stopped'
+E       AssertionError: assert 'blocked' == 'stopped'
+E         
+E         - stopped
+E         + blocked
+
+tests\test_run_store.py:40: AssertionError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\ROG\Documents\ChatGPT\ai竞赛\C_20261103_work\Code-Fix-main\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\ROG\Documents\ChatGPT\ai竞赛\C_20261103_work\Code-Fix-main\evidence\c-review\C-acceptance-20261103-212656-e783c36d\platform_pytest\junit.xml -
+=========================== short test summary info ===========================
+FAILED tests/test_api_v3.py::test_real_baseline_http_status_evidence_and_export
+FAILED tests/test_api_v3.py::test_control_while_real_baseline_runs_preserves_evidence[pause-paused]
+FAILED tests/test_api_v3.py::test_control_while_real_baseline_runs_preserves_evidence[stop-stopped]
+FAILED tests/test_mock_workflow.py::test_mock_roles_use_current_evidence_without_applying_candidate
+FAILED tests/test_mock_workflow.py::test_invalid_mock_json_stops_without_candidate
+FAILED tests/test_mock_workflow.py::test_version_recheck_error_preserves_failed_final
+FAILED tests/test_run_store.py::test_real_baseline_survives_new_service_and_has_report
+7 failed, 214 passed, 1 skipped, 1 warning in 37.24s

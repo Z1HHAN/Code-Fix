@@ -32,3 +32,8 @@ task_assets/leap_legacy/** text=auto
 # Stage A raw results, source fingerprints and offline trace samples are immutable.
 evidence/contest-core/** -text -whitespace
 evidence/siliconflow-budget/** -text -whitespace
+# Received C packages, executable copies and extracted evidence retain ZIP/Git bytes.
+docs/99_历史归档/2026-11/原始交付/C_20261103交付/** -text -whitespace
+evidence/c-review/** -text -whitespace
+acceptance_tests/** -text -whitespace
+scripts/c_acceptance.py -text -whitespace

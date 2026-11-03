@@ -1,0 +1,96 @@
+{
+  "stage": "platform_pytest",
+  "argv": [
+    "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "tests",
+    "c_tests",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp=C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\evidence\\c-review\\C-acceptance-20261103-212656-e783c36d\\platform_pytest\\work",
+    "--junitxml=C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\evidence\\c-review\\C-acceptance-20261103-212656-e783c36d\\platform_pytest\\junit.xml"
+  ],
+  "cwd": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main",
+  "started_at": "2026-11-03T21:26:56.640+08:00",
+  "timeout_seconds": 600,
+  "exit_code": 1,
+  "timed_out": false,
+  "status": "failed",
+  "reason": "Test assertions failed; inspect JUnit and raw logs",
+  "stdout_path": "platform_pytest/stdout.txt",
+  "stderr_path": "platform_pytest/stderr.txt",
+  "cleanup": {
+    "parent_reaped": true,
+    "tree_termination_attempted": false,
+    "full_process_tree_verified": false
+  },
+  "pid": 26572,
+  "finished_at": "2026-11-03T21:27:34.181+08:00",
+  "duration_ms": 37540,
+  "junit_path": "platform_pytest/junit.xml",
+  "counts": {
+    "collected": 222,
+    "passed": 214,
+    "failed": 7,
+    "errors": 0,
+    "skipped": 1
+  },
+  "skipped_tests": [
+    {
+      "test": "tests.test_control_boundaries::test_in_root_symlink_is_rejected_before_resolution",
+      "message": "Host does not permit creating symlinks; verify on target host",
+      "type": "pytest.skip",
+      "details": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\tests\\test_control_boundaries.py:35: Host does not permit creating symlinks; verify on target host"
+    }
+  ],
+  "failed_tests": [
+    {
+      "test": "tests.test_api_v3::test_real_baseline_http_status_evidence_and_export",
+      "kind": "failure",
+      "message": "AssertionError: assert 'blocked' == 'stopped'\n  \n  - stopped\n  + blocked"
+    },
+    {
+      "test": "tests.test_api_v3::test_control_while_real_baseline_runs_preserves_evidence[pause-paused]",
+      "kind": "failure",
+      "message": "assert None == 3"
+    },
+    {
+      "test": "tests.test_api_v3::test_control_while_real_baseline_runs_preserves_evidence[stop-stopped]",
+      "kind": "failure",
+      "message": "assert None == 3"
+    },
+    {
+      "test": "tests.test_mock_workflow::test_mock_roles_use_current_evidence_without_applying_candidate",
+      "kind": "failure",
+      "message": "assert False is True"
+    },
+    {
+      "test": "tests.test_mock_workflow::test_invalid_mock_json_stops_without_candidate",
+      "kind": "failure",
+      "message": "AssertionError: assert 'baseline_not_reproduced' == 'invalid_model_output'\n  \n  - invalid_model_output\n  + baseline_not_reproduced"
+    },
+    {
+      "test": "tests.test_mock_workflow::test_version_recheck_error_preserves_failed_final",
+      "kind": "failure",
+      "message": "AssertionError: assert 'baseline_not_reproduced' == 'unexpected_source_change'\n  \n  - unexpected_source_change\n  + baseline_not_reproduced"
+    },
+    {
+      "test": "tests.test_run_store::test_real_baseline_survives_new_service_and_has_report",
+      "kind": "failure",
+      "message": "AssertionError: assert 'blocked' == 'stopped'\n  \n  - stopped\n  + blocked"
+    }
+  ],
+  "allowed_skips": [
+    {
+      "test": "tests.test_control_boundaries::test_in_root_symlink_is_rejected_before_resolution",
+      "message": "Host does not permit creating symlinks; verify on target host",
+      "type": "pytest.skip",
+      "details": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\tests\\test_control_boundaries.py:35: Host does not permit creating symlinks; verify on target host"
+    }
+  ]
+}

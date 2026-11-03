@@ -1,0 +1,550 @@
+{
+  "run_id": "C-acceptance-20261103-212358-ec9a2574",
+  "finished_at": "2026-11-03T21:26:55.907+08:00",
+  "repository": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main",
+  "source_identity": {
+    "git_commit": null,
+    "git_branch": null,
+    "git_status": null,
+    "git_identity_verified": false,
+    "archive_provenance": {
+      "base_commit": "40fca6cc98ef06659925dd25421fbd4463a90006",
+      "zip_sha256": "49fc0928ca41ab102b714c99b68b63662ab283f306332e4860d1f6ccbc3b20f3",
+      "filename": "Code-Fix-main (1).zip",
+      "archive_file_count": 741,
+      "identity_kind": "user-provided GitHub ZIP comment; not independently verified Git checkout",
+      "remote_head_verified": false,
+      "new_commit": null,
+      "received_at": "2026-11-03T21:11:00.071046+08:00",
+      "scope": "C acceptance tooling and offline review only; production app/config/runner untouched"
+    },
+    "archive_provenance_file_sha256": "0ba8f7c1bd7e16d46cc665710f0e8f5902e3e6e8c230e9cd8d7b323c1fd01bfa",
+    "git_reason": "No .git in the selected root; outer workspace HEAD is deliberately ignored."
+  },
+  "source_unchanged_during_checks": true,
+  "source_snapshot_sha256": "f7b668bd5a1d88f3ea358940339ae76413171f868c26fa8f71ed2e0e2c542c28",
+  "python_executable": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\.venv\\Scripts\\python.exe",
+  "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "exit_code": 2,
+  "acceptance_status": "blocked_or_incomplete",
+  "environment": {
+    "python_required": "3.14",
+    "python_actual": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "python_matches": true,
+    "dependencies": [
+      {
+        "package": "annotated-doc",
+        "expected": "0.0.5",
+        "actual": "0.0.5",
+        "matches": true
+      },
+      {
+        "package": "annotated-types",
+        "expected": "0.8.0",
+        "actual": "0.8.0",
+        "matches": true
+      },
+      {
+        "package": "anyio",
+        "expected": "4.16.0",
+        "actual": "4.16.0",
+        "matches": true
+      },
+      {
+        "package": "certifi",
+        "expected": "2026.10.23",
+        "actual": "2026.10.23",
+        "matches": true
+      },
+      {
+        "package": "click",
+        "expected": "8.5.0",
+        "actual": "8.5.0",
+        "matches": true
+      },
+      {
+        "package": "colorama",
+        "expected": "0.4.6",
+        "actual": "0.4.6",
+        "matches": true
+      },
+      {
+        "package": "fastapi",
+        "expected": "0.162.0",
+        "actual": "0.162.0",
+        "matches": true
+      },
+      {
+        "package": "h11",
+        "expected": "0.16.0",
+        "actual": "0.16.0",
+        "matches": true
+      },
+      {
+        "package": "httpcore",
+        "expected": "1.0.9",
+        "actual": "1.0.9",
+        "matches": true
+      },
+      {
+        "package": "httpx",
+        "expected": "0.28.1",
+        "actual": "0.28.1",
+        "matches": true
+      },
+      {
+        "package": "idna",
+        "expected": "3.20",
+        "actual": "3.20",
+        "matches": true
+      },
+      {
+        "package": "iniconfig",
+        "expected": "2.3.1",
+        "actual": "2.3.1",
+        "matches": true
+      },
+      {
+        "package": "opentelemetry-api",
+        "expected": "1.45.2",
+        "actual": "1.45.2",
+        "matches": true
+      },
+      {
+        "package": "packaging",
+        "expected": "26.3",
+        "actual": "26.3",
+        "matches": true
+      },
+      {
+        "package": "pluggy",
+        "expected": "1.7.0",
+        "actual": "1.7.0",
+        "matches": true
+      },
+      {
+        "package": "pydantic",
+        "expected": "2.14.2",
+        "actual": "2.14.2",
+        "matches": true
+      },
+      {
+        "package": "pydantic-core",
+        "expected": "2.50.2",
+        "actual": "2.50.2",
+        "matches": true
+      },
+      {
+        "package": "pytest",
+        "expected": "8.3.5",
+        "actual": "8.3.5",
+        "matches": true
+      },
+      {
+        "package": "starlette",
+        "expected": "1.10.0",
+        "actual": "1.10.0",
+        "matches": true
+      },
+      {
+        "package": "typing-extensions",
+        "expected": "4.16.0",
+        "actual": "4.16.0",
+        "matches": true
+      },
+      {
+        "package": "typing-inspection",
+        "expected": "0.4.4",
+        "actual": "0.4.4",
+        "matches": true
+      },
+      {
+        "package": "uvicorn",
+        "expected": "0.54.0",
+        "actual": "0.54.0",
+        "matches": true
+      }
+    ],
+    "issues": []
+  },
+  "steps": [
+    {
+      "stage": "doctor",
+      "argv": [
+        "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "app.cli",
+        "doctor"
+      ],
+      "cwd": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main",
+      "started_at": "2026-11-03T21:23:59.312+08:00",
+      "timeout_seconds": 30,
+      "exit_code": 0,
+      "timed_out": false,
+      "status": "passed",
+      "reason": null,
+      "stdout_path": "doctor/stdout.txt",
+      "stderr_path": "doctor/stderr.txt",
+      "cleanup": {
+        "parent_reaped": true,
+        "tree_termination_attempted": false,
+        "full_process_tree_verified": false
+      },
+      "pid": 636,
+      "finished_at": "2026-11-03T21:24:00.063+08:00",
+      "duration_ms": 752,
+      "parsed_result": {
+        "python": "3.14.6",
+        "baseline_available": true,
+        "model_configured": false,
+        "docker_available": false,
+        "isolation_verified": false,
+        "note": "每次修复任务启动时运行独立隔离探针；配置存在不等于验证通过",
+        "blockers": [
+          "需队长确认付费额度后设置CODE_FIX_LIVE_APPROVED=1",
+          "找不到Docker；候选不会回退到宿主执行",
+          "不可信代码执行授权未配置"
+        ]
+      },
+      "scope": "Read-only environment inventory; not live-model or isolation acceptance"
+    },
+    {
+      "stage": "validate_config",
+      "argv": [
+        "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "app.cli",
+        "validate-config"
+      ],
+      "cwd": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main",
+      "started_at": "2026-11-03T21:24:00.065+08:00",
+      "timeout_seconds": 30,
+      "exit_code": 0,
+      "timed_out": false,
+      "status": "passed",
+      "reason": null,
+      "stdout_path": "validate_config/stdout.txt",
+      "stderr_path": "validate_config/stderr.txt",
+      "cleanup": {
+        "parent_reaped": true,
+        "tree_termination_attempted": false,
+        "full_process_tree_verified": false
+      },
+      "pid": 3320,
+      "finished_at": "2026-11-03T21:24:00.217+08:00",
+      "duration_ms": 152,
+      "parsed_result": {
+        "task_id": "T001-leap-baseline",
+        "errors": []
+      }
+    },
+    {
+      "stage": "platform_pytest",
+      "argv": [
+        "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "tests",
+        "c_tests",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp=C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\evidence\\c-review\\C-acceptance-20261103-212358-ec9a2574\\platform_pytest\\work",
+        "--junitxml=C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\evidence\\c-review\\C-acceptance-20261103-212358-ec9a2574\\platform_pytest\\junit.xml"
+      ],
+      "cwd": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main",
+      "started_at": "2026-11-03T21:24:00.219+08:00",
+      "timeout_seconds": 600,
+      "exit_code": 1,
+      "timed_out": false,
+      "status": "blocked",
+      "reason": "Evidence validation failed: Required JUnit report was not produced",
+      "stdout_path": "platform_pytest/stdout.txt",
+      "stderr_path": "platform_pytest/stderr.txt",
+      "cleanup": {
+        "parent_reaped": true,
+        "tree_termination_attempted": false,
+        "full_process_tree_verified": false
+      },
+      "pid": 39592,
+      "finished_at": "2026-11-03T21:26:33.454+08:00",
+      "duration_ms": 153236,
+      "junit_path": null
+    },
+    {
+      "stage": "node_ui",
+      "argv": [
+        "C:/Users/ROG/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+        "--test",
+        "--test-reporter=tap",
+        "tests/ui_prototype.test.cjs"
+      ],
+      "cwd": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main",
+      "started_at": "2026-11-03T21:26:33.456+08:00",
+      "timeout_seconds": 60,
+      "exit_code": 0,
+      "timed_out": false,
+      "status": "passed",
+      "reason": null,
+      "stdout_path": "node_ui/stdout.txt",
+      "stderr_path": "node_ui/stderr.txt",
+      "cleanup": {
+        "parent_reaped": true,
+        "tree_termination_attempted": false,
+        "full_process_tree_verified": false
+      },
+      "pid": 40760,
+      "finished_at": "2026-11-03T21:26:33.632+08:00",
+      "duration_ms": 176,
+      "counts": {
+        "tests": 9,
+        "pass": 9,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "stage": "c_controls",
+      "argv": [
+        "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "scripts/check_c_controls.py",
+        "--output-root",
+        "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\evidence\\c-review\\C-acceptance-20261103-212358-ec9a2574\\c_controls\\controls"
+      ],
+      "cwd": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main",
+      "started_at": "2026-11-03T21:26:33.633+08:00",
+      "timeout_seconds": 180,
+      "exit_code": 0,
+      "timed_out": false,
+      "status": "passed",
+      "reason": null,
+      "stdout_path": "c_controls/stdout.txt",
+      "stderr_path": "c_controls/stderr.txt",
+      "cleanup": {
+        "parent_reaped": true,
+        "tree_termination_attempted": false,
+        "full_process_tree_verified": false
+      },
+      "pid": 38296,
+      "finished_at": "2026-11-03T21:26:46.862+08:00",
+      "duration_ms": 13229,
+      "control_summary_path": "c_controls/controls/C-20261103-212633-a96f4ef1/summary.json",
+      "control_run_id": "C-20261103-212633-a96f4ef1",
+      "scenario_count": 12
+    },
+    {
+      "stage": "repair_gates",
+      "argv": [
+        "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "acceptance_tests",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-o",
+        "xfail_strict=true",
+        "--basetemp=C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\evidence\\c-review\\C-acceptance-20261103-212358-ec9a2574\\repair_gates\\work",
+        "--junitxml=C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main\\evidence\\c-review\\C-acceptance-20261103-212358-ec9a2574\\repair_gates\\junit.xml"
+      ],
+      "cwd": "C:\\Users\\ROG\\Documents\\ChatGPT\\ai竞赛\\C_20261103_work\\Code-Fix-main",
+      "started_at": "2026-11-03T21:26:46.883+08:00",
+      "timeout_seconds": 180,
+      "exit_code": 1,
+      "timed_out": false,
+      "status": "failed",
+      "reason": "Test assertions failed; inspect JUnit and raw logs",
+      "stdout_path": "repair_gates/stdout.txt",
+      "stderr_path": "repair_gates/stderr.txt",
+      "cleanup": {
+        "parent_reaped": true,
+        "tree_termination_attempted": false,
+        "full_process_tree_verified": false
+      },
+      "pid": 35144,
+      "finished_at": "2026-11-03T21:26:55.758+08:00",
+      "duration_ms": 8875,
+      "junit_path": "repair_gates/junit.xml",
+      "counts": {
+        "collected": 25,
+        "passed": 2,
+        "failed": 23,
+        "errors": 0,
+        "skipped": 0
+      },
+      "skipped_tests": [],
+      "failed_tests": [
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code01_forged_stdout_cannot_become_passed[legacy_single_report]",
+          "kind": "failure",
+          "message": "AssertionError: CODE-01: self-consistent stdout is not trusted evidence of execution\nassert 'passed' != 'passed'"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code01_forged_stdout_cannot_become_passed[legacy_report_with_end]",
+          "kind": "failure",
+          "message": "AssertionError: CODE-01: self-consistent stdout is not trusted evidence of execution\nassert 'passed' != 'passed'"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code01_forged_stdout_cannot_become_passed[versioned_report_with_end]",
+          "kind": "failure",
+          "message": "AssertionError: assert 'not_reproduced' == 'evidence_channel_tampered'\n  \n  - evidence_channel_tampered\n  + not_reproduced"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code02_baseline_failure_keeps_cause_and_rule[environment_error-paused-R03]",
+          "kind": "failure",
+          "message": "AssertionError: CODE-02: environment_error must not become generic defect-not-reproduced\nassert 'blocked' == 'paused'\n  \n  - paused\n  + blocked"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code02_baseline_failure_keeps_cause_and_rule[timeout-stopped-R04]",
+          "kind": "failure",
+          "message": "AssertionError: CODE-02: timeout must not become generic defect-not-reproduced\nassert 'blocked' == 'stopped'\n  \n  - stopped\n  + blocked"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code02_baseline_failure_keeps_cause_and_rule[not_reproduced-paused-R06]",
+          "kind": "failure",
+          "message": "AssertionError: CODE-02: not_reproduced must not become generic defect-not-reproduced\nassert 'blocked' == 'paused'\n  \n  - paused\n  + blocked"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code03_final_stage_records_actual_rule[passed-R07]",
+          "kind": "failure",
+          "message": "AssertionError: CODE-03: terminal_* is not the final-stage rule-table decision\nassert False\n +  where False = any(<generator object test_code03_final_stage_records_actual_rule.<locals>.<genexpr> at 0x000002489C2BC740>)"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code03_final_stage_records_actual_rule[assertion_failed-R08N]",
+          "kind": "failure",
+          "message": "AssertionError: CODE-03: terminal_* is not the final-stage rule-table decision\nassert False\n +  where False = any(<generator object test_code03_final_stage_records_actual_rule.<locals>.<genexpr> at 0x000002489C2BD0E0>)"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code03_final_stage_records_actual_rule[unknown_evidence-R17]",
+          "kind": "failure",
+          "message": "AssertionError: CODE-03: terminal_* is not the final-stage rule-table decision\nassert False\n +  where False = any(<generator object test_code03_final_stage_records_actual_rule.<locals>.<genexpr> at 0x000002489C2BD8C0>)"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code03_pause_boundary_records_r02_without_more_work",
+          "kind": "failure",
+          "message": "AssertionError: CODE-03: operator pause must retain its rule identity\nassert False\n +  where False = any(<generator object test_code03_pause_boundary_records_r02_without_more_work.<locals>.<genexpr> at 0x000002489C2BD1C0>)"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code04_passed_candidate_can_use_final_check_at_model_limit",
+          "kind": "failure",
+          "message": "AssertionError: CODE-04: advisory calls must not starve final validation\nassert ['development', 'development'] == ['development...'final_check']\n  \n  Right contains one more item: 'final_check'\n  Use -v to get more diff"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code05_test_modification_is_permission_violation",
+          "kind": "failure",
+          "message": "AssertionError: CODE-05: valid JSON carrying a forbidden edit is not bad JSON\nassert 'invalid_model_output' == 'permission_violation'\n  \n  - permission_violation\n  + invalid_model_output"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code06_transport_failure_pauses_with_guard",
+          "kind": "failure",
+          "message": "AssertionError: CODE-06: transport diagnosis should follow the pause policy\nassert 'blocked' == 'paused'\n  \n  - paused\n  + blocked"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code08_interrupt_during_model_call_prevents_new_calls",
+          "kind": "failure",
+          "message": "AssertionError: CODE-08: interruption cannot permit further model calls\nassert ['repairer', ..., 'scheduler'] == ['repairer']\n  \n  Left contains 2 more items, first extra item: 'detector'\n  Use -v to get more diff"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code07_execution_version_bound_to_snapshot_during_mutation",
+          "kind": "failure",
+          "message": "AssertionError: CODE-07: different execution bytes were accepted as the original version after source restoration\nassert ('sha256:03651...b8f7ff273a8ef' == 'sha256:1d9f5...50de15860f53a'\n  \n  - sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a\n  + sha256:03651ab36da13c18b43cbd83d15c07d1209284c82d3c9727693b8f7ff273a8ef or 'passed' != 'passed')"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code09_parameter_expected_value_not_forwarded_to_model",
+          "kind": "failure",
+          "message": "AssertionError: CODE-09: synthetic parameter expected value leaked through development stdout\nassert False\n +  where False = all(<generator object test_code09_parameter_expected_value_not_forwarded_to_model.<locals>.<genexpr> at 0x000002489C3BDD50>)"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code11_deferred_offline_router_is_not_labelled_live",
+          "kind": "failure",
+          "message": "AssertionError: CODE-11: result mode must reflect the router actually constructed\nassert 'live' == 'test_stub'\n  \n  - test_stub\n  + live"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code10_production_gateway_rejects_unapproved_evidence_fields[repairer]",
+          "kind": "failure",
+          "message": "AssertionError: CODE-10: production gateway forwarded a non-allowlisted evidence field\nassert False\n +  where False = all(<generator object test_code10_production_gateway_rejects_unapproved_evidence_fields.<locals>.<genexpr> at 0x000002489C2EE980>)"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code10_production_gateway_rejects_unapproved_evidence_fields[locator]",
+          "kind": "failure",
+          "message": "AssertionError: CODE-10: production gateway forwarded a non-allowlisted evidence field\nassert False\n +  where False = all(<generator object test_code10_production_gateway_rejects_unapproved_evidence_fields.<locals>.<genexpr> at 0x000002489C2EDE40>)"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code10_production_gateway_rejects_unapproved_evidence_fields[detector]",
+          "kind": "failure",
+          "message": "AssertionError: CODE-10: production gateway forwarded a non-allowlisted evidence field\nassert False\n +  where False = all(<generator object test_code10_production_gateway_rejects_unapproved_evidence_fields.<locals>.<genexpr> at 0x000002489C2ED6C0>)"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code10_production_gateway_rejects_unapproved_evidence_fields[scheduler]",
+          "kind": "failure",
+          "message": "AssertionError: CODE-10: production gateway forwarded a non-allowlisted evidence field\nassert False\n +  where False = all(<generator object test_code10_production_gateway_rejects_unapproved_evidence_fields.<locals>.<genexpr> at 0x000002489C2ED4E0>)"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code12_trace_preserves_engine_decision_identity",
+          "kind": "failure",
+          "message": "AssertionError: CODE-12: trace and engine must refer to the same decision identity\nassert 'd-02441c56a3...ecef04b33918a' == 'd-c-stable-engine-id'\n  \n  - d-c-stable-engine-id\n  + d-02441c56a3864a46b02ecef04b33918a"
+        },
+        {
+          "test": "acceptance_tests.test_repair_gates::test_code13_failed_active_step_is_not_recorded_interrupted",
+          "kind": "failure",
+          "message": "AssertionError: CODE-13: failure is not an operator interruption\nassert 'interrupted' == 'failed'\n  \n  - failed\n  + interrupted"
+        }
+      ],
+      "required_case_count": 25,
+      "observed_testcases": [
+        "test_code01_forged_stdout_cannot_become_passed[legacy_single_report]",
+        "test_code01_forged_stdout_cannot_become_passed[legacy_report_with_end]",
+        "test_code01_forged_stdout_cannot_become_passed[versioned_report_with_end]",
+        "test_code02_baseline_failure_keeps_cause_and_rule[environment_error-paused-R03]",
+        "test_code02_baseline_failure_keeps_cause_and_rule[timeout-stopped-R04]",
+        "test_code02_baseline_failure_keeps_cause_and_rule[not_reproduced-paused-R06]",
+        "test_code03_final_stage_records_actual_rule[passed-R07]",
+        "test_code03_final_stage_records_actual_rule[assertion_failed-R08N]",
+        "test_code03_final_stage_records_actual_rule[unknown_evidence-R17]",
+        "test_code03_pause_boundary_records_r02_without_more_work",
+        "test_code04_passed_candidate_can_use_final_check_at_model_limit",
+        "test_code05_test_modification_is_permission_violation",
+        "test_code06_transport_failure_pauses_with_guard",
+        "test_code08_interrupt_during_model_call_prevents_new_calls",
+        "test_code07_execution_version_bound_to_snapshot_during_mutation",
+        "test_code09_parameter_expected_value_not_forwarded_to_model",
+        "test_code11_deferred_offline_router_is_not_labelled_live",
+        "test_code10_production_gateway_rejects_unapproved_evidence_fields[repairer]",
+        "test_code10_production_gateway_rejects_unapproved_evidence_fields[locator]",
+        "test_code10_production_gateway_rejects_unapproved_evidence_fields[detector]",
+        "test_code10_production_gateway_rejects_unapproved_evidence_fields[scheduler]",
+        "test_code12_trace_preserves_engine_decision_identity",
+        "test_code13_failed_active_step_is_not_recorded_interrupted",
+        "test_control_normal_offline_flow_still_reaches_final",
+        "test_control_unverified_docker_still_denies_candidate"
+      ],
+      "allowed_skips": []
+    }
+  ],
+  "model_api_called": false,
+  "docker_execution_performed": false,
+  "candidate_execution_performed": false,
+  "activity_attestation": "Scope declaration based on reviewed tests and fixtures, not an independent runtime network/process audit. Re-review test code before running against a changed repository.",
+  "isolation_verified": false,
+  "real_model_final_acceptance": "not_run",
+  "scope": "C offline reviewed platform/fixture regressions and repair gates; simulated model/runner responses are not real model or Docker evidence",
+  "signoff": "C local execution evidence only; no B or A signature filled automatically",
+  "repair_case_map_path": "repair-case-map.json"
+}
