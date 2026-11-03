@@ -1,0 +1,33 @@
+{
+  "record_id": "A-主线发布-010",
+  "observation_date": "2026-11-04",
+  "merge_commit": "f88e358ee249599c6294a1916216b3dc869e4fe2",
+  "reviewed_development_commit": "5a85ca6da7887c606d29df7807604f8aafb4ae76",
+  "prior_main": "16e4c24d4790ed42ce48d78539ff24d6732c0c35",
+  "implementation_commit": "2c98061ed4c71f76e444dfb2ecadef06cfbb5d9e",
+  "main_pushed_and_confirmed": true,
+  "merge_tree_matches_reviewed_branch": true,
+  "remote_observation": {
+    "command": [
+      "git",
+      "ls-remote",
+      "origin",
+      "refs/heads/main",
+      "refs/heads/codex/siliconflow-accounts-budget"
+    ],
+    "transport": "ssh.github.com:443, strict existing host-key validation",
+    "exit_code": 0,
+    "timed_out": false,
+    "stdout": "5a85ca6da7887c606d29df7807604f8aafb4ae76\trefs/heads/codex/siliconflow-accounts-budget\nf88e358ee249599c6294a1916216b3dc869e4fe2\trefs/heads/main\n"
+  },
+  "new_paid_requests": 0,
+  "stable_acceptance": false,
+  "failed_repair_gates": 23,
+  "c_entry_complete": false,
+  "limitations": [
+    "B/C current commit signoff pending",
+    "Docker/real repair/final pending",
+    "C new gates and entry long path unresolved"
+  ],
+  "publication_note": "Subsequent commit only registers this confirmed merge; latest main ref is tracked by Git."
+}
