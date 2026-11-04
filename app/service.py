@@ -23,7 +23,7 @@ class TaskService:
         try:
             control = self.store.get(run_id)['control']
             if control and task['mode'] == 'baseline':
-                self.store.finish(run_id, 'paused' if control == 'pause' else 'stopped',
+                self.store.finish_if_running(run_id, 'paused' if control == 'pause' else 'stopped',
                                   {'final_result': 'not_run', 'reason': '按用户请求在执行前停止推进',
                                    'model_api_called': False, 'model_calls': 0, 'tool_calls': 0})
                 return
@@ -54,9 +54,9 @@ class TaskService:
             else:
                 from .workflow_v3 import Workflow
                 status, result = Workflow(self.store).run(run_id)
-            self.store.finish(run_id, status, result)
+            self.store.finish_if_running(run_id, status, result)
         except Exception as exc:
-            self.store.finish(run_id, 'failed', {'final_result': 'not_run', 'error_type': type(exc).__name__,
+            self.store.finish_if_running(run_id, 'failed', {'final_result': 'not_run', 'error_type': type(exc).__name__,
                                                'reason': '运行异常，未完成独立验收'})
 
     def report(self, run_id):

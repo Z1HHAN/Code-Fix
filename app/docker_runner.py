@@ -127,7 +127,7 @@ class DockerRunner:
                                     artifact_error = type(exc).__name__
                                 finally:
                                     process.stdin.close()
-                        if time.monotonic() >= deadline or any((folder / p).stat().st_size > 8_388_608 for p in ('stdout.txt', 'stderr.txt')):
+                        if getattr(self, 'cancelled', lambda: False)() or time.monotonic() >= deadline or any((folder / p).stat().st_size > 8_388_608 for p in ('stdout.txt', 'stderr.txt')):
                             raise subprocess.TimeoutExpired(command, timeout)
                         time.sleep(0.03)
                     exit_code = process.returncode

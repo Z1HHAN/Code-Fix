@@ -34,7 +34,9 @@ def validate_task(value):
         raise ValueError('只支持baseline/repair模式')
     if not isinstance(task['description'], str) or not 1 <= len(task['description'].strip()) <= 2000:
         raise ValueError('任务描述长度必须为1至2000')
-    for field, maximum in [('max_rounds', 3), ('max_calls', 30), ('total_seconds', 1800)]:
+    limits = json.loads((Path(__file__).resolve().parents[1] / 'configs/runtime_limits.json').read_text(encoding='utf-8'))
+    for field in ('max_rounds', 'max_calls', 'total_seconds'):
+        maximum = limits[field]
         if type(task[field]) is not int or not 1 <= task[field] <= maximum:
             raise ValueError(f'{field}须为1至{maximum}的整数')
     return task
@@ -59,6 +61,8 @@ class RunStore:
     @contextmanager
     def connect(self):
         db = sqlite3.connect(self.database, timeout=10)
+        db.execute("PRAGMA journal_mode=WAL")
+        db.execute("PRAGMA busy_timeout=10000")
         db.row_factory = sqlite3.Row
         try:
             with db:
@@ -158,12 +162,20 @@ class RunStore:
                 for r in db.execute('SELECT * FROM events WHERE run_id=? AND sequence>? ORDER BY sequence',
                                     (run_id, after_sequence))]
 
-    def events(self, run_id, after_sequence=0):
+    def events(self, run_id, after_sequence=0, limit=200):
         if type(after_sequence) is not int or after_sequence < 0:
             raise ValueError('事件游标须为非负整数')
+        if type(limit) is not int or not 1 <= limit <= 500:
+            raise ValueError("事件页大小须为1至500")
         self.get(run_id)
         with self.connect() as db:
-            return self._events(db, run_id, after_sequence)
+            rows = db.execute("SELECT * FROM events WHERE run_id=? AND sequence>? ORDER BY sequence LIMIT ?", (run_id, after_sequence, limit))
+            def trim(value):
+                if isinstance(value, dict): return {k: trim(v) for k,v in value.items() if k not in {"raw_text", "messages", "api_key"}}
+                if isinstance(value, list): return [trim(v) for v in value]
+                if isinstance(value, str): return value[:6000]
+                return value
+            return [{"sequence": r["sequence"], "created_at": r["created_at"], **trim(json.loads(r["payload"]))} for r in rows]
 
     def snapshot(self, run_id):
         """Read status and events from one SQLite snapshot, including during finish."""
@@ -174,5 +186,18 @@ class RunStore:
             return {'run': run, 'events': self._events(db, run_id)}
 
     def interrupt(self, run_id):
-        """Explicit operator action after confirming the old worker has stopped."""
-        self.finish(run_id, 'interrupted', {'final_result': 'not_run', 'reason': '操作员确认旧进程已停止；不自动重放付费任务'})
+        """Persist stop; late worker results cannot overwrite this terminal state."""
+        self.request_control(run_id, 'stop')
+        self.finish_if_running(run_id, 'interrupted', {'final_result': 'not_run',
+            'reason': '操作员请求中断，禁止后续派发；在途工具清理与HTTP费用仍需确认，不自动重放',
+            'handling_status': 'pending_human'})
+
+    def finish_if_running(self, run_id, status, result):
+        """Worker termination cannot overwrite an operator's terminal record."""
+        try:
+            self.finish(run_id, status, result)
+            return True
+        except StateConflict:
+            if self.get(run_id)['status'] in {'stopped','blocked','failed','success','paused','interrupted'}:
+                return False
+            raise

@@ -51,8 +51,23 @@ def main() -> int:
     smoke.add_argument('--profile', default='sf_account1_v32')
     serve = sub.add_parser('serve')
     serve.add_argument('--port', type=int, default=8000)
+    reconcile = sub.add_parser('budget-reconcile', help='人工对账；仅本机CLI，不调用模型、不改变额度')
+    reconcile.add_argument('--call-id', required=True)
+    reconcile.add_argument('--currency', choices=['CNY','USD'], required=True)
+    reconcile.add_argument('--amount', required=True)
+    reconcile.add_argument('--evidence', required=True)
+    reconcile.add_argument('--operator', required=True)
+    reconcile.add_argument('--reason', required=True)
+    reconcile.add_argument('--confirm-no-inflight', action='store_true')
     args = parser.parse_args()
     try:
+        if args.command == 'budget-reconcile':
+            from .live_model import Ledger
+            from .reconciliation import reconcile
+            ledger = Ledger(Path(os.environ.get('CODE_FIX_RUN_ROOT') or ROOT / 'runs/platform'))
+            result = reconcile(ledger, call_id=args.call_id, currency=args.currency, amount=args.amount, evidence=args.evidence, operator=args.operator, reason=args.reason, no_inflight=args.confirm_no_inflight)
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
         if args.command in {'provider-check', 'provider-smoke', 'budget-status'}:
             from .siliconflow import check_models, smoke, budget_status
             root = Path(os.environ.get('CODE_FIX_RUN_ROOT') or ROOT / 'runs/platform')

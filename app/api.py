@@ -130,8 +130,8 @@ def create_app(root=None):
         return service.store.get(run_id)
 
     @app.get('/api/v3/tasks/{run_id}/events')
-    def events(run_id: str, after_sequence: int = Query(default=0, ge=0)):
-        return service.store.events(run_id, after_sequence)
+    def events(run_id: str, after_sequence: int = Query(default=0, ge=0), limit: int = Query(default=200, ge=1, le=500)):
+        return service.store.events(run_id, after_sequence, limit)
 
     @app.get('/api/v3/tasks/{run_id}/report')
     def report(run_id: str):
