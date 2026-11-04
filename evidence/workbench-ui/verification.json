@@ -1,0 +1,29 @@
+{
+  "record": "A-工作台改版-021",
+  "base_commit": "9bb72bf662d97e95994f0b8ee3b5543aa08eb307",
+  "acceptance_run": "evidence/c-review/C-acceptance-20261104-123041-0163143a",
+  "source_files": 381,
+  "source_matches_current": true,
+  "original_evidence_hashes_valid": true,
+  "zip_member_checks": {
+    "platform_pytest": 3632,
+    "repair_gates": 428
+  },
+  "failed_browser_checks_preserved": [
+    {
+      "source": "runs\\workbench-browser-670dec7232ab49a995ddd63beccaa4b9",
+      "saved": "evidence\\workbench-ui\\browser-failure-1",
+      "reason": "Shared demo database contained an additional created task; old fixed count/default-node assumption was invalid. No existing task was removed."
+    },
+    {
+      "source": "runs\\workbench-browser-bd68c95770a24992a9974bb5f7ed7eb3",
+      "saved": "evidence\\workbench-ui\\browser-failure-2",
+      "reason": "Shared demo database contained an additional created task; old fixed count/default-node assumption was invalid. No existing task was removed."
+    }
+  ],
+  "new_model_requests": 0,
+  "docker_execution_performed": false,
+  "public_code_executed": false,
+  "trusted_leap_baseline": "3 passed, 1 failed (expected buggy baseline)",
+  "scope": "UI component regression, readonly offline display fixtures, real trusted leap baseline and blocked public baseline. Not real model repair or B/C personal acceptance."
+}

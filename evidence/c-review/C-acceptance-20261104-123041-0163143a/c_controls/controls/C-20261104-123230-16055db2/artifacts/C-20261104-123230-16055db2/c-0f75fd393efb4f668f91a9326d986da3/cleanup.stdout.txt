@@ -1,0 +1,2 @@
+SUCCESS: The process with PID 68676 (child process of PID 26228) has been terminated.
+SUCCESS: The process with PID 26228 (child process of PID 78968) has been terminated.
