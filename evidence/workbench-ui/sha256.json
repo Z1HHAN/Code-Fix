@@ -1,0 +1,16 @@
+{
+  "browser-failure-1/failure-dom.txt": "4bfe9f8f50daf45ee2d1500cfb661216cfd526085789d86d8040aa21afebbbc1",
+  "browser-failure-1/failure.png": "dea3ca0b955eafc87a9fd7aa31b315633699d647bb10799142739607ff12110f",
+  "browser-failure-1/failure.txt": "377717b8d2e56d83a258aba550e846327ea13ab9e30536c5c0d95c00883e9d91",
+  "browser-failure-2/failure.txt": "921548848bbc617cb6a17069089dac118ed024cc875ba4d25c645d8946007af0",
+  "browser-offline/legacy-narrow.png": "b1570e43310f757040513a06b34f08f7a88a7bc0d9598e399b5c3b5071416358",
+  "browser-offline/result.json": "13fa41626939ba558843303cebbef1ab8672c15112be3040ca505c710b9f61a6",
+  "browser-offline/trace-panel.png": "41c6dd3523acb9aa93df7815ae44bfa767d1bcdf2bd511b097af601412a1c2ac",
+  "browser-operation/baseline.png": "3875ec13397dc94af87e18db2be797492bf2575ab4214e4befeacf91e3a88fe1",
+  "browser-operation/public-blocked.png": "87ded7cbab7f7554cd8a553344a70298a7586be958f5019b6754a94ad73a9050",
+  "browser-operation/result.json": "2a59e811e0f1ee1fa61106148e07a033313eb262a8a9f445b53b112cb5c673e5",
+  "operation-artifacts.zip": "3e09f355590a7f343a1f005bbfccc8c8ecde4efc3a431eee0371a4a3c8ace3e1",
+  "run-5f8a6039627a4214854cfc679170341c.json": "45239e6f250e71639d60684a2bca41d5bbbfbb33966e77743e017bef693640c6",
+  "run-cef208ede5474dc1934feeb88fb7bcc8.json": "d2e891ff67252fde58d82ad3b8d2531cb7780bec6ece318e3e45fb857bd06a46",
+  "verification.json": "c19a6323ff2e2d36cc45f1fe4f659e51d12373b5b1252d67935559f58bd00757"
+}

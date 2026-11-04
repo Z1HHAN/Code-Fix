@@ -92,7 +92,13 @@
     if (amount == null) return '费用：未记录／未知';
     return `费用估算：${cost.currency || 'USD'} ${amount}（不是平台账单）`;
   }
-  function mount(document, container, detail, readArtifact) {
+  // Positions arrange recorded steps for reading; only graph.edges define execution links.
+  function layout(graph) {
+    const columns=Math.min(3,Math.max(1,graph.nodes.length));
+    const positions=new Map(graph.nodes.map((node,i)=>[node.id,{x:18+(i%columns)*252,y:24+Math.floor(i/columns)*160}]));
+    return {positions,width:36+columns*252-47,height:Math.max(265,Math.ceil(graph.nodes.length/columns)*160+80)};
+  }
+  function mount(document, container, detail, readArtifact, options={}) {
     let selected = null, generation = 0, detailKey = null, renderedKey = null;
     const el = (tag, text, cls) => { const e = document.createElement(tag); if (text != null) e.textContent=text; if(cls)e.className=cls; return e; };
     return function render(run, events) {
@@ -102,51 +108,93 @@
       const focused=document.activeElement?.dataset?.stepId;
       const graph=project(run,events); container.replaceChildren();
       container.append(el('p',graph.provenance,'trace-provenance'));
-      container.append(el('p',`实际记录 ${graph.nodes.length} 步 · ${costText(run,events)}`,'hint'));
       container.append(el('p',graph.gaps ? `${graph.gaps}处历史、未闭合或未加载完整的记录：缺失身份／父步骤时不补造连线。` :
-        '连线仅来自已记录的parent_step_id；显示顺序不代表额外执行关系。','hint'));
-      const list=el('ol',null,'trace-nodes');container.append(list);
-      if (!graph.nodes.length) { container.append(el('p','尚无步骤证据；创建任务或静态模板不代表已经执行。'));detail.replaceChildren();detailKey=null;generation++;return; }
+        '连线依据已记录的父步骤；布局顺序不代表额外执行关系。','trace-hint'));
+      const viewport=el('div',null,'trace-viewport'),canvas=el('div',null,'trace-canvas');
+      const placement=layout(graph);canvas.setAttribute('style',`width:${placement.width}px;height:${placement.height}px`);
+      const svg=(tag)=>document.createElementNS?document.createElementNS('http://www.w3.org/2000/svg',tag):el(tag);
+      const links=svg('svg');links.setAttribute('class','trace-links');links.setAttribute('aria-label','已记录的父子分支');
+      const defs=svg('defs'),marker=svg('marker');marker.setAttribute('id','trace-arrow');marker.setAttribute('viewBox','0 0 10 10');
+      marker.setAttribute('refX','9');marker.setAttribute('refY','5');marker.setAttribute('markerWidth','5');marker.setAttribute('markerHeight','5');marker.setAttribute('orient','auto');
+      const arrow=svg('path');arrow.setAttribute('d','M0 0 L10 5 L0 10Z');arrow.setAttribute('fill','#7195eb');marker.append(arrow);defs.append(marker);links.append(defs);
+      for(const edge of graph.edges){
+        const a=placement.positions.get(edge.from),b=placement.positions.get(edge.to);
+        const line=svg('path');let path,labelX,labelY;
+        if(a.y===b.y&&b.x>a.x){path=`M${a.x+205} ${a.y+50} H${b.x-3}`;labelX=a.x+207;labelY=a.y+38;}
+        else{const middle=a.y+126;path=`M${a.x+102} ${a.y+100} V${middle} H${b.x+102} V${b.y-3}`;labelX=Math.min(a.x,b.x)+112;labelY=middle-7;}
+        line.setAttribute('d',path);line.setAttribute('class','trace-edge');line.setAttribute('marker-end','url(#trace-arrow)');
+        line.setAttribute('data-from',edge.from);line.setAttribute('data-to',edge.to);links.append(line);
+        const parent=graph.nodes.find(n=>n.id===edge.from);
+        const text=edge.action?(actions[edge.action]||edge.action):(parent.test?.failure_class==='assertion_failed'?'断言失败':parent.test?.verification_status==='passed'?'测试通过':'');
+        if(text){const label=svg('text');label.textContent=text;label.setAttribute('x',String(labelX));label.setAttribute('y',String(labelY));label.setAttribute('class','trace-edge-label');links.append(label);}
+      }
+      canvas.append(links);const list=el('ol',null,'trace-nodes');canvas.append(list);viewport.append(canvas);container.append(viewport);
+      const terminal=!['running','created'].includes(run.status);
+      if(terminal&&graph.nodes.length)canvas.append(el('div',`运行已结束 · ${run.result?.reason || run.status}（非新增步骤）`,'trace-terminal'));
+      container.append(el('div',`已记录 ${graph.nodes.length} 步 · ${costText(run,events)}`,'trace-legend'));
+      if (!graph.nodes.length) { canvas.append(el('p','尚无步骤证据；创建任务或静态模板不代表已经执行。','trace-empty'));detail.replaceChildren();detailKey=null;generation++;options.artifactContainer?.replaceChildren();return; }
       if (!graph.nodes.some(n => n.id === selected)) selected=graph.nodes[0].id;
       function show(node) {
         const key=JSON.stringify([run.run_id,node.id,node.status,node.events,artifacts(node,events)]);
         if(key===detailKey)return;
         detailKey=key;
         const ticket=++generation; detail.replaceChildren();
-        detail.append(el('h3',node.title));
+        detail.append(el('h3',`${node.title}${node.round!=null?' · 第'+node.round+'轮':''}`,'inspector-title'));
+        detail.append(el('p',node.statusLabel,'step-caption'));
         const d=node.decision;
         const data={身份:node.legacy?'历史事件：没有真实step_id':node.id,父步骤:node.parent || '未记录／首步骤',
           轮次:node.round ?? '未记录',阶段:node.phase,状态:node.statusLabel,耗时毫秒:node.duration ?? '未记录',
           代码版本:node.facts.code_version ?? '未记录',测试版本:node.facts.test_suite_version ?? '未记录',证据ID:node.evidenceIds};
-        detail.append(el('pre',JSON.stringify(data,null,2)));
-        if (d) {
-          detail.append(el('p',`程序实际动作：${actions[d.effective_action || d.action] || d.effective_action || d.action || '未记录'} · 规则 ${d.rule_id || '未记录'}`));
-          detail.append(el('p',`裁决原因：${d.reason || '未记录'}`));
-          detail.append(el('p',`模型建议：${d.model_advice ? JSON.stringify(d.model_advice) : '未调用／未记录'}`));
-          detail.append(el('p',`覆盖原因：${d.override_reason || '未记录，不推断模型与程序一致'}`));
+        const tabs=el('div',null,'inspector-tabs');tabs.setAttribute('role','tablist');
+        const panes=['决策详情','关联证据','技术信息'].map(()=>el('div',null,'trace-detail-pane'));
+        for(let i=0;i<panes.length;i++){
+          const tab=el('button',['决策详情','关联证据','技术信息'][i]);tab.type='button';tab.setAttribute('role','tab');tab.setAttribute('aria-selected',String(i===0));
+          panes[i].hidden=i!==0;panes[i].setAttribute('role','tabpanel');
+          tab.onclick=()=>{panes.forEach((p,j)=>p.hidden=j!==i);for(let j=0;j<tabs.children.length;j++)tabs.children[j].setAttribute('aria-selected',String(j===i));};tabs.append(tab);
         }
+        detail.append(tabs,...panes);
+        panes[2].append(el('pre',JSON.stringify(data,null,2),'trace-technical'));
+        const fields=el('dl',null,'decision-fields');
+        const field=(name,value)=>fields.append(el('dt',name),el('dd',value));
+        if (d) {
+          panes[0].append(el('div',`最终动作：${actions[d.effective_action || d.action] || d.effective_action || d.action || '未记录'}`,'decision-action'));
+          field('模型建议',d.model_advice?(actions[d.model_advice.action]||d.model_advice.action||'未记录'):'未调用／未记录');
+          field('程序裁决',d.reason||'未记录');field('覆盖原因',d.override_reason||'未记录，不推断模型与程序一致');
+          field('命中规则',d.rule_id||'未记录');
+          field('证据引用',node.evidenceIds.join('、')||'未记录');
+        }else{
+          panes[0].append(el('div',node.test?node.statusLabel:'执行状态：'+node.statusLabel,'decision-action'));
+          field('步骤职责',node.title);field('测试结论',node.test?.verification_status||'本步骤无测试结论');
+          field('失败类型',node.test?.failure_class||'未记录');field('调用来源',node.call?.mode||'本步骤无模型调用记录');
+        }
+        panes[0].append(fields);
         const viewer=el('pre','选择下方证据文件查看原文。','trace-artifact');
+        if(options.artifactContainer){options.artifactContainer.replaceChildren(viewer);options.onArtifact?.(null);}
         const paths=artifacts(node,events);
-        detail.append(el('p',paths.length ? '已记录的证据文件（只读）' : '此步骤未记录可读取的文件路径；可查看原始事件或下载报告。','hint'));
-        for (const path of paths) {
+        const files=el('div');panes[1].append(el('p',paths.length?'以下文件来自事件中的路径与证据引用。':'此步骤未记录可读取的文件路径。'),files);
+        const makeFile=(path)=>{
           const button=el('button',path,'trace-file');button.type='button';
           button.onclick=async () => {
-            viewer.textContent='读取中…';
+            viewer.textContent='读取中…';options.onArtifact?.(path);
             try { const value=await readArtifact(run.run_id,path);if(ticket===generation)viewer.textContent=value; }
             catch(error){if(ticket===generation)viewer.textContent=`证据读取失败：${error.message}；未替换为模拟内容。`;}
-          };detail.append(button);
-        }
-        detail.append(viewer);
+          };return button;
+        };
+        for (const path of paths)files.append(makeFile(path));
+        panes[0].append(el('h4',paths.length?'依据证据 · 只读':'尚无关联证据文件','evidence-title'));
+        for(const path of paths.slice(0,4))panes[0].append(makeFile(path));
+        if(!options.artifactContainer)detail.append(viewer);
         const raw=el('details');raw.append(el('summary','原始事件（页面字段可能已裁剪，完整原文见证据包）'));
-        raw.append(el('pre',JSON.stringify(node.events,null,2)));detail.append(raw);
+        raw.append(el('pre',JSON.stringify(node.events,null,2)));panes[2].append(raw);
       }
       const buttons=[];
       for (const node of graph.nodes) {
-        const li=el('li');list.append(li);
-        const edge=graph.edges.find(e=>e.to===node.id);
-        if(edge)li.append(el('div',`↓ 来自 ${edge.from}${edge.action ? ' · '+(actions[edge.action] || edge.action) : ''}`,'trace-edge'));
-        const button=el('button',`${node.title} · 第${node.round ?? '?'}轮 · ${node.phase}\n${node.statusLabel}${node.duration != null ? ' · '+node.duration+'ms' : ''}`,
-          'trace-node '+(node.status==='running'?'trace-active':''));button.type='button';button.dataset.stepId=node.id;
+        const li=el('li'),point=placement.positions.get(node.id);li.setAttribute('style',`left:${point.x}px;top:${point.y}px`);list.append(li);
+        const button=el('button',null,'trace-node '+(node.status==='running'?'trace-active':node.test?.verification_status==='failed'?'trace-test-failed':node.status==='failed'?'trace-failed':''));button.type='button';button.dataset.stepId=node.id;
+        const top=el('span',null,'node-top');top.append(el('span',`${node.title}${node.round!=null?' · 第'+node.round+'轮':''}`,'node-title'),el('span',String(buttons.length+1).padStart(2,'0'),'node-index'));
+        button.append(top,el('span',node.test?.verification_status==='failed'?'! 测试未通过':(node.status==='ok'?'✓ ':'')+node.statusLabel,'node-state'),
+          el('span',node.decision?(actions[node.decision.effective_action||node.decision.action]||'裁决已记录'):`${node.legacy?'历史格式':node.phase}${node.duration!=null?' · '+node.duration+'ms':''}`,'node-result'));
+        button.setAttribute('aria-label',`${node.title}，${node.statusLabel}`);
         button.setAttribute('aria-pressed',String(node.id===selected));
         button.onclick=()=>{selected=node.id;for(const b of buttons)b.setAttribute('aria-pressed',String(b===button));show(node);};
         buttons.push(button);li.append(button);
@@ -155,7 +203,7 @@
       if(focused)buttons.find(b=>b.dataset.stepId===focused)?.focus();
     };
   }
-  const api={project,mergeEvents,provenance,artifacts,safePath,costText,mount};
+  const api={project,mergeEvents,provenance,artifacts,safePath,costText,layout,mount};
   if(typeof module!=='undefined')module.exports=api;
   root.CodeFixTrace=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

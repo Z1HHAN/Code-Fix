@@ -85,3 +85,19 @@ test('terminal run without completion cannot leave stale running detail',()=>{
   view.render({...run,status:'interrupted'},partial);
   assert.match(descendants(view.detail).find(e=>e.tag==='pre').textContent,/步骤未闭合/);
 });
+
+test('layout positions do not introduce edges across unrelated or missing parents',()=>{
+  const graph=trace.project(run,events),positions=trace.layout(graph).positions;
+  assert.equal(positions.size,4);assert.ok(positions.get('b').y>positions.get('a').y);
+  assert.equal(graph.edges.length,3);
+  const disconnected=trace.project(run,[{event:'decision',step_id:'orphan',parent_step_id:'missing',reason:'old'}]);
+  assert.equal(trace.layout(disconnected).positions.size,1);assert.equal(disconnected.edges.length,0);
+});
+
+test('workbench external evidence viewer resets on task switch and rejects late responses',async()=>{
+  let finish;const doc={createElement:tag=>new Element(tag)},graph=new Element('div'),detail=new Element('div'),bottom=new Element('div'),notifications=[];
+  const render=trace.mount(doc,graph,detail,()=>new Promise(resolve=>finish=resolve),{artifactContainer:bottom,onArtifact:p=>notifications.push(p)});
+  render(run,events);const file=descendants(detail).find(e=>e.className==='trace-file');const request=file.onclick();
+  const old=bottom.children[0];render({...run,run_id:'new'},[]);finish('old artifact');await request;
+  assert.equal(bottom.children.length,0);assert.notEqual(old.textContent,'old artifact');assert.ok(notifications.includes('calls/m-abcd/input.json'));
+});
