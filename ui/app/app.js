@@ -1,3 +1,4 @@
+const eventCache = new Map();
 'use strict';
 const byId = id => document.getElementById(id);
 const display = (id, value) => { byId(id).textContent = typeof value === 'string' ? value : JSON.stringify(value, null, 2); };
@@ -37,9 +38,13 @@ async function refresh() {
     if (!selected) return;
     localStorage.setItem('codefix.selected', selected);
     const snapshot = selected;
-    const [run, events] = await Promise.all([
-      api(`/tasks/${snapshot}`).then(x => x.json()), api(`/tasks/${snapshot}/events`).then(x => x.json())]);
+    const cached = eventCache.get(snapshot) || [];
+    const cursor = cached.at(-1)?.sequence || 0;
+    const [run, page] = await Promise.all([
+      api(`/tasks/${snapshot}`).then(x => x.json()), api(`/tasks/${snapshot}/events?after_sequence=${cursor}&limit=200`).then(x => x.json())]);
     if (snapshot !== selected) return;
+    const events = cached.concat(page);
+    eventCache.set(snapshot, events);
     const result = run.result || {};
     display('status', `${run.run_id}\n状态：${run.status} · 题目：${run.task.project} · 模式：${run.task.mode}`);
     display('summary', [

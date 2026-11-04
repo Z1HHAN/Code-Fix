@@ -127,7 +127,7 @@ class DockerRunner:
                                     artifact_error = type(exc).__name__
                                 finally:
                                     process.stdin.close()
-                        if time.monotonic() >= deadline or any((folder / p).stat().st_size > 8_388_608 for p in ('stdout.txt', 'stderr.txt')):
+                        if getattr(self, 'cancelled', lambda: False)() or time.monotonic() >= deadline or any((folder / p).stat().st_size > 8_388_608 for p in ('stdout.txt', 'stderr.txt')):
                             raise subprocess.TimeoutExpired(command, timeout)
                         time.sleep(0.03)
                     exit_code = process.returncode
@@ -139,15 +139,27 @@ class DockerRunner:
                     if process.stdin and not process.stdin.closed:
                         process.stdin.close()
             finally:
-                inspected = subprocess.run([self.executable, 'inspect', name], capture_output=True, timeout=10)
-                if inspected.returncode == 0:
-                    (folder / 'container.json').write_bytes(inspected.stdout)
-                cleanup = subprocess.run([self.executable, 'rm', '--force', name], capture_output=True, timeout=10)
-                (folder / 'cleanup.json').write_text(json.dumps({'container': name, 'exit_code': cleanup.returncode}), encoding='utf-8')
+                cleanup_passed = False
+                cleanup_errors = []
+                try:
+                    inspected = subprocess.run([self.executable, 'inspect', name], capture_output=True, timeout=10)
+                    if inspected.returncode == 0:
+                        (folder / 'container.json').write_bytes(inspected.stdout)
+                except (OSError, subprocess.SubprocessError) as exc:
+                    cleanup_errors.append({'operation': 'inspect', 'error_type': type(exc).__name__})
+                try:
+                    cleanup = subprocess.run([self.executable, 'rm', '--force', name], capture_output=True, timeout=10)
+                    cleanup_passed = cleanup.returncode == 0
+                    cleanup_code = cleanup.returncode
+                except (OSError, subprocess.SubprocessError) as exc:
+                    cleanup_code = None
+                    cleanup_errors.append({'operation': 'rm', 'error_type': type(exc).__name__})
+                (folder / 'cleanup.json').write_text(json.dumps({'container': name, 'exit_code': cleanup_code,
+                    'cleanup_passed': cleanup_passed, 'errors': cleanup_errors}), encoding='utf-8')
         return {'call_id': name, 'exit_code': exit_code, 'timed_out': timed_out, 'duration_ms': round((time.monotonic()-started)*1000),
                 'stdout_path': 'stdout.txt', 'stderr_path': 'stderr.txt', 'command': command,
                 'artifact_channel': artifact_channel, 'artifact_error': artifact_error,
-                'cleanup_passed': cleanup.returncode == 0}
+                'cleanup_passed': cleanup_passed}
 
     def run(self, work, evidence_dir, *, phase, timeout, expected_version):
         if not self.ready:
@@ -170,10 +182,6 @@ class DockerRunner:
             raise IsolationBlocked('执行快照版本不一致')
         output = folder / 'output'
         output.mkdir()
-        (output / 'pytest.ini').write_text('[pytest]\n', encoding='utf-8')
-        # Bind output is dedicated to this call and contains no other run data.
-        output.chmod(0o777)
-        (output / 'pytest.ini').chmod(0o644)
         result = self._execute(snapshot, output, ['/harness.py', *profile['test_paths']], timeout, folder)
         result.update(phase=phase, code_version=measured, isolation_ready=True, execution_mode='docker',
                       project=self.task.project,

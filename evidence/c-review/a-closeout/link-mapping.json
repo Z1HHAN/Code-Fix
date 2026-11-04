@@ -1,0 +1,554 @@
+[
+  {
+    "doc": "docs/99_历史归档/2026-10/2026-10-31_两天阶段结论.md",
+    "url": "../../daily/2026-11-01.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\daily\\2026-11-01.md",
+    "new": "../持续维护切换前记录/daily/2026-11-01.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/2026-10-31_两天阶段结论.md",
+    "url": "../../09_配置与规范/接口契约与确认清单.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\09_配置与规范\\接口契约与确认清单.md",
+    "new": "../../2026-11-03_项目持续维护/接口与路径规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/2026-10-31_两天阶段结论.md",
+    "url": "../../06_测试与验收/测试与独立验收规范.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\06_测试与验收\\测试与独立验收规范.md",
+    "new": "../../2026-11-03_项目持续维护/测试与独立验收规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/2026-10-31_迭代与测试安排.md",
+    "url": "../../04_开发与任务管理/当前开发计划.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发计划.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发计划.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/2026-10-31_迭代与测试安排.md",
+    "url": "../../daily/2026-11-01.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\daily\\2026-11-01.md",
+    "new": "../持续维护切换前记录/daily/2026-11-01.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/2026-10-31_迭代与测试安排.md",
+    "url": "../../09_配置与规范/接口契约与确认清单.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\09_配置与规范\\接口契约与确认清单.md",
+    "new": "../../2026-11-03_项目持续维护/接口与路径规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/2026-10-31_迭代与测试安排.md",
+    "url": "../../05_UI与交互/设计参考/UI草图生成说明.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\05_UI与交互\\设计参考\\UI草图生成说明.md",
+    "new": "../../2026-11-03_项目持续维护/设计参考/UI草图生成说明.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/2026-10-31_迭代与测试安排.md",
+    "url": "../../06_测试与验收/证据登记与阶段结论规则.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\06_测试与验收\\证据登记与阶段结论规则.md",
+    "new": "../../2026-11-03_项目持续维护/测试与独立验收规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/已有成果与交接.md",
+    "url": "../../04_开发与任务管理/当前开发任务台账.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发任务台账.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发任务台账.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/已有成果与交接.md",
+    "url": "../../daily/2026-11-01.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\daily\\2026-11-01.md",
+    "new": "../持续维护切换前记录/daily/2026-11-01.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/执行方案与当前版本差距.md",
+    "url": "../../04_开发与任务管理/当前开发任务台账.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发任务台账.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发任务台账.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/执行方案与当前版本差距.md",
+    "url": "../../04_开发与任务管理/当前开发计划.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发计划.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发计划.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/执行方案与当前版本差距.md",
+    "url": "../../04_开发与任务管理/当前开发任务台账.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发任务台账.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发任务台账.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/执行方案与当前版本差距.md",
+    "url": "../../06_测试与验收/测试与独立验收规范.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\06_测试与验收\\测试与独立验收规范.md",
+    "new": "../../2026-11-03_项目持续维护/测试与独立验收规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-10/执行方案与当前版本差距.md",
+    "url": "../../daily/2026-11-01.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\daily\\2026-11-01.md",
+    "new": "../持续维护切换前记录/daily/2026-11-01.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_v0.2组件与原型集成.md",
+    "url": "../../daily/2026-11-02.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\daily\\2026-11-02.md",
+    "new": "../持续维护切换前记录/daily/2026-11-02.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_v0.2组件与原型集成.md",
+    "url": "../../04_开发与任务管理/当前开发任务台账.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发任务台账.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发任务台账.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_材料与范围对齐记录.md",
+    "url": "../../04_开发与任务管理/当前开发任务台账.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发任务台账.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发任务台账.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_材料与范围对齐记录.md",
+    "url": "../../04_开发与任务管理/当前开发计划.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发计划.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发计划.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_材料与范围对齐记录.md",
+    "url": "../../daily/2026-11-01.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\daily\\2026-11-01.md",
+    "new": "../持续维护切换前记录/daily/2026-11-01.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_材料与范围对齐记录.md",
+    "url": "../../06_测试与验收/测试与独立验收规范.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\06_测试与验收\\测试与独立验收规范.md",
+    "new": "../../2026-11-03_项目持续维护/测试与独立验收规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_材料与范围对齐记录.md",
+    "url": "../../06_测试与验收/实验设计与统计规范.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\06_测试与验收\\实验设计与统计规范.md",
+    "new": "../../2026-11-03_项目持续维护/实验设计与统计规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_材料与范围对齐记录.md",
+    "url": "../../09_配置与规范/接口契约与确认清单.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\09_配置与规范\\接口契约与确认清单.md",
+    "new": "../../2026-11-03_项目持续维护/接口与路径规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_材料与范围对齐记录.md",
+    "url": "../../07_比赛交付/研究报告编写提纲.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\07_比赛交付\\研究报告编写提纲.md",
+    "new": "../../2026-11-03_项目持续维护/研究报告编写提纲.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_材料与范围对齐记录.md",
+    "url": "../../07_比赛交付/演示流程与回放说明.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\07_比赛交付\\演示流程与回放说明.md",
+    "new": "../../2026-11-03_项目持续维护/演示流程与回放说明.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_材料与范围对齐记录.md",
+    "url": "../../07_比赛交付/演示材料说明.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\07_比赛交付\\演示材料说明.md",
+    "new": "../../2026-11-03_项目持续维护/演示材料说明.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_材料与范围对齐记录.md",
+    "url": "../../01_需求与范围/当前有效需求.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\01_需求与范围\\当前有效需求.md",
+    "new": "../../2026-11-03_项目持续维护/当前有效需求.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_材料与范围对齐记录.md",
+    "url": "../../daily/2026-11-01.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\daily\\2026-11-01.md",
+    "new": "../持续维护切换前记录/daily/2026-11-01.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_材料发布复核记录.md",
+    "url": "../../04_开发与任务管理/当前开发任务台账.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发任务台账.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发任务台账.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-01_材料发布复核记录.md",
+    "url": "../../daily/2026-11-01.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\daily\\2026-11-01.md",
+    "new": "../持续维护切换前记录/daily/2026-11-01.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_Docker安装条件检查.md",
+    "url": "../../04_开发与任务管理/当前开发计划.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发计划.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发计划.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_Docker安装条件检查.md",
+    "url": "../../00_项目导航/项目运行指南.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\项目运行指南.md",
+    "new": "../../2026-11-03_项目持续维护/项目运行指南.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_V3主线合并审核与复核.md",
+    "url": "../../04_开发与任务管理/当前开发任务台账.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发任务台账.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发任务台账.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_V3主线合并审核与复核.md",
+    "url": "../../06_测试与验收/测试与独立验收规范.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\06_测试与验收\\测试与独立验收规范.md",
+    "new": "../../2026-11-03_项目持续维护/测试与独立验收规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_V3全文完成情况与公开案例接入.md",
+    "url": "../../06_测试与验收/QuixBugs数据集导入与验收.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\06_测试与验收\\QuixBugs数据集导入与验收.md",
+    "new": "../持续维护切换前记录/审计与验收/QuixBugs数据集导入与验收.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_仓库真实能力审查.md",
+    "url": "C:/Users/lenovo/Documents/ChatGPT/Code Fix/app/model_client.py:65",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\app\\model_client.py:65",
+    "new": "../../../app/model_client.py"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_仓库真实能力审查.md",
+    "url": "C:/Users/lenovo/Documents/ChatGPT/Code Fix/app/mock_workflow.py:15",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\app\\mock_workflow.py:15",
+    "new": "../../../app/mock_workflow.py"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_仓库真实能力审查.md",
+    "url": "C:/Users/lenovo/Documents/ChatGPT/Code Fix/app/model_context.py:56",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\app\\model_context.py:56",
+    "new": "../../../app/model_context.py"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_仓库真实能力审查.md",
+    "url": "C:/Users/lenovo/Documents/ChatGPT/Code Fix/c_runner/runner.py:297",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\runner.py:297",
+    "new": "../../../c_runner/runner.py"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_仓库真实能力审查.md",
+    "url": "C:/Users/lenovo/Documents/ChatGPT/Code Fix/c_runner/pytest_entry.py:63",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\pytest_entry.py:63",
+    "new": "../../../c_runner/pytest_entry.py"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_仓库真实能力审查.md",
+    "url": "C:/Users/lenovo/Documents/ChatGPT/Code Fix/app/decision.py:3",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\app\\decision.py:3",
+    "new": "../../../app/decision.py"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_仓库真实能力审查.md",
+    "url": "C:/Users/lenovo/Documents/ChatGPT/Code Fix/app/security.py:11",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\app\\security.py:11",
+    "new": "../../../app/security.py"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_仓库真实能力审查.md",
+    "url": "C:/Users/lenovo/Documents/ChatGPT/Code Fix/app/knowledge.py:13",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\app\\knowledge.py:13",
+    "new": "../../../app/knowledge.py"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/2026-11-02_仓库真实能力审查.md",
+    "url": "C:/Users/lenovo/Documents/ChatGPT/Code Fix/app/baseline.py:19",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\app\\baseline.py:19",
+    "new": "../../../app/baseline.py"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/V3开发与验收.md",
+    "url": "../../00_项目导航/项目运行指南.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\项目运行指南.md",
+    "new": "../../2026-11-03_项目持续维护/项目运行指南.md"
+  },
+  {
+    "doc": "docs/99_历史归档/2026-11/V3开发与验收.md",
+    "url": "../../06_测试与验收/QuixBugs数据集导入与验收.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\06_测试与验收\\QuixBugs数据集导入与验收.md",
+    "new": "../持续维护切换前记录/审计与验收/QuixBugs数据集导入与验收.md"
+  },
+  {
+    "doc": "docs/99_历史归档/文档治理审计/2026-11-02/当前文档与跨日交付规则_补充方案.md",
+    "url": "../../../08_团队协作/分支提交与版本记录规范.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\08_团队协作\\分支提交与版本记录规范.md",
+    "new": "../../../2026-11-03_项目持续维护/提交与维护规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/文档治理审计/2026-11-02/当前文档与跨日交付规则_补充方案.md",
+    "url": "../../../08_团队协作/模板/分支交付记录模板.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\08_团队协作\\模板\\分支交付记录模板.md",
+    "new": "../../../2026-11-03_项目持续维护/提交与维护规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/11月1日需补齐材料与对齐记录.md",
+    "url": "../../04_开发与任务管理/当前开发任务台账.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发任务台账.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发任务台账.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/11月3日执行手册与任务分工.md",
+    "url": "../../04_开发与任务管理/当前开发计划.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发计划.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发计划.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/11月3日执行手册与任务分工.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/BC分支交付记录模板.md",
+    "url": "../../08_团队协作/模板/分支交付记录模板.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\08_团队协作\\模板\\分支交付记录模板.md",
+    "new": "../../2026-11-03_项目持续维护/提交与维护规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/BC分支交付记录模板.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/UI交付B完整提示词.md",
+    "url": "../../05_UI与交互/UI交付规范.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\05_UI与交互\\UI交付规范.md",
+    "new": "../../2026-11-03_项目持续维护/UI交付规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/UI交付B完整提示词.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/UI草图生图提示词与操作步骤.md",
+    "url": "../../05_UI与交互/设计参考/UI草图生成说明.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\05_UI与交互\\设计参考\\UI草图生成说明.md",
+    "new": "../../2026-11-03_项目持续维护/设计参考/UI草图生成说明.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/UI草图生图提示词与操作步骤.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/V3运行与接口.md",
+    "url": "../../00_项目导航/项目运行指南.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\项目运行指南.md",
+    "new": "../../2026-11-03_项目持续维护/项目运行指南.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/V3运行与接口.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/acceptance.md",
+    "url": "../../06_测试与验收/测试与独立验收规范.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\06_测试与验收\\测试与独立验收规范.md",
+    "new": "../../2026-11-03_项目持续维护/测试与独立验收规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/acceptance.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/demo-script.md",
+    "url": "../../07_比赛交付/演示流程与回放说明.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\07_比赛交付\\演示流程与回放说明.md",
+    "new": "../../2026-11-03_项目持续维护/演示流程与回放说明.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/demo-script.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/experiment-protocol.md",
+    "url": "../../06_测试与验收/实验设计与统计规范.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\06_测试与验收\\实验设计与统计规范.md",
+    "new": "../../2026-11-03_项目持续维护/实验设计与统计规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/experiment-protocol.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/scope.md",
+    "url": "../../01_需求与范围/当前有效需求.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\01_需求与范围\\当前有效需求.md",
+    "new": "../../2026-11-03_项目持续维护/当前有效需求.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/scope.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/五天落地与参赛分工-20261101至1105.md",
+    "url": "../../04_开发与任务管理/当前开发计划.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发计划.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发计划.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/五天落地与参赛分工-20261101至1105.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/今天迭代与测试安排.md",
+    "url": "../../00_项目导航/成员阅读与交接.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\成员阅读与交接.md",
+    "new": "../../2026-11-03_项目持续维护/任务分配与交接.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/今天迭代与测试安排.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/分支提交与版本记录规范.md",
+    "url": "../../08_团队协作/分支提交与版本记录规范.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\08_团队协作\\分支提交与版本记录规范.md",
+    "new": "../../2026-11-03_项目持续维护/提交与维护规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/分支提交与版本记录规范.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/功能状态与优化待办.md",
+    "url": "../../04_开发与任务管理/当前开发任务台账.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发任务台账.md",
+    "new": "../../2026-11-03_项目持续维护/当前开发任务台账.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/功能状态与优化待办.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/当前任务与交接.md",
+    "url": "../../00_项目导航/成员阅读与交接.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\成员阅读与交接.md",
+    "new": "../../2026-11-03_项目持续维护/任务分配与交接.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/当前任务与交接.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/成果登记与阶段结论.md",
+    "url": "../../06_测试与验收/证据登记与阶段结论规则.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\06_测试与验收\\证据登记与阶段结论规则.md",
+    "new": "../../2026-11-03_项目持续维护/测试与独立验收规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/成果登记与阶段结论.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/接口确认清单.md",
+    "url": "../../09_配置与规范/接口契约与确认清单.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\09_配置与规范\\接口契约与确认清单.md",
+    "new": "../../2026-11-03_项目持续维护/接口与路径规范.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/接口确认清单.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/版本与演示素材索引.md",
+    "url": "../../07_比赛交付/版本与演示素材索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\07_比赛交付\\版本与演示素材索引.md",
+    "new": "../../2026-11-03_项目持续维护/版本与演示素材索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/版本与演示素材索引.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/研究报告六章骨架.md",
+    "url": "../../07_比赛交付/研究报告编写提纲.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\07_比赛交付\\研究报告编写提纲.md",
+    "new": "../../2026-11-03_项目持续维护/研究报告编写提纲.md"
+  },
+  {
+    "doc": "docs/99_历史归档/旧入口/研究报告六章骨架.md",
+    "url": "../../00_项目导航/文档索引.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\00_项目导航\\文档索引.md",
+    "new": "../../2026-11-03_项目持续维护/文档索引.md"
+  },
+  {
+    "doc": "docs/integration/progress.md",
+    "url": "../daily/2026-11-03.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\daily\\2026-11-03.md",
+    "new": "../99_历史归档/持续维护切换前记录/daily/2026-11-03.md"
+  },
+  {
+    "doc": "docs/integration/progress.md",
+    "url": "../04_开发与任务管理/当前开发计划.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发计划.md",
+    "new": "../2026-11-03_项目持续维护/当前开发计划.md"
+  },
+  {
+    "doc": "docs/integration/progress.md",
+    "url": "../daily/2026-11-02.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\daily\\2026-11-02.md",
+    "new": "../99_历史归档/持续维护切换前记录/daily/2026-11-02.md"
+  },
+  {
+    "doc": "docs/integration/progress.md",
+    "url": "../04_开发与任务管理/当前开发任务台账.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发任务台账.md",
+    "new": "../2026-11-03_项目持续维护/当前开发任务台账.md"
+  },
+  {
+    "doc": "docs/integration/task_plan.md",
+    "url": "../04_开发与任务管理/当前开发计划.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发计划.md",
+    "new": "../2026-11-03_项目持续维护/当前开发计划.md"
+  },
+  {
+    "doc": "docs/integration/task_plan.md",
+    "url": "../daily/2026-11-03.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\daily\\2026-11-03.md",
+    "new": "../99_历史归档/持续维护切换前记录/daily/2026-11-03.md"
+  },
+  {
+    "doc": "docs/integration/task_plan.md",
+    "url": "../04_开发与任务管理/当前开发任务台账.md",
+    "resolved": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\docs\\04_开发与任务管理\\当前开发任务台账.md",
+    "new": "../2026-11-03_项目持续维护/当前开发任务台账.md"
+  }
+]

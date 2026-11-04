@@ -8,7 +8,8 @@ from .agents_v3 import AgentGateway
 from .candidates import apply_candidate
 from .config import read_json
 from .decision import DecisionEngine
-from .docker_runner import DockerRunner, IsolationBlocked
+from .docker_runner import IsolationBlocked
+from .split_runner import SplitDockerRunner as DockerRunner
 from .live_model import Ledger, ModelBlocked
 from .model_profiles import ModelRouter
 from .runner import code_version
@@ -37,6 +38,7 @@ class Workflow:
         definition = get_task(task['project'])
         source = definition.source
         self.runner = self.runner or DockerRunner(task['project'])
+        self.runner.cancelled = lambda: self.store.get(run_id)['control'] == 'stop' or self.store.get(run_id)['status'] not in {'created', 'running'}
         directory = self.store.directory(run_id)
         trace = RunTrace(self.store, run_id)
         latest_evidence = []
@@ -111,6 +113,7 @@ class Workflow:
             final['mode'] = getattr(self.model, 'mode', 'unknown')
             rules = read_json(ROOT / 'configs/decision_rules.json')
             trace.write('trace/configuration.json', {'roles': config.snapshot, 'config_sha256': config.sha256,
+                        'runtime_limits': read_json(ROOT / 'configs/runtime_limits.json'),
                         'bindings': {role: self.model.binding(role) for role in config.agents}
                         if hasattr(self.model, 'binding') else {'mode': getattr(self.model, 'mode', 'unknown')},
                         'rules': rules,
