@@ -2,6 +2,8 @@
 
 基于测试证据驱动的多Agent缺陷修复与验证项目，当前需求基线为V3.0。CLI、FastAPI、三栏页面、可信pytest执行、任务持久化及报告/证据ZIP已有可运行基础；真实模型修复、B机Docker隔离资格和真实候选独立验收仍待验证。
 
+**2026-11-04只读Trace流程面板已合入并上传main：`2c71af6`。** 沿用现有页面，选择历史任务即可查看实际节点、父子分支、模型建议与程序裁决、规则原因及关联证据；离线/真实调用/历史不完整分别标识，刷新不启动任务。实现`94d59a9`，最终平台258通过1跳过、前端21通过、原25门槛全过。见[发布观察](evidence/trace-panel/main-publication.json)与[离线界面截图](evidence/trace-panel/trace-panel-browser-03/trace-panel.png)。这是UI组件验收，真实闭环、B/C复跑和D阶段整体验收仍待。
+
 **2026-11-04阶段A前五项收尾已合入并上传main：`0e39801`。** 实现提交`b8a1f8d`，完整离线C入口退出0：平台258通过1跳过、原25门槛全过、Node12通过、C控制12通过。第六项由A安排B机Docker与C本人复跑；双容器RPC先支持登记四题，其余拒绝执行，不标稳定。见[发布记录](evidence/c-review/a-closeout/main-publication.json)和[统一台账](docs/2026-11-03_项目持续维护/当前开发任务台账.md#t-061)。
 
 ## 当前重点

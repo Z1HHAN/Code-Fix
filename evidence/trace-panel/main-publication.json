@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-04",
+  "record": "A-Trace主线发布-020",
+  "implementation_commit": "94d59a934a11c4b8ebe5652ca9642557790aa8dc",
+  "reviewed_branch": "5d7172a2945fab0bc290c02615a6162afa34a765",
+  "main_before": "7f784cc771d6718689b05e4b1f1e074f1302371d",
+  "main_merge": "2c71af647d3eed0320ae144ce3a598a633666578",
+  "remote_main_observed": "2c71af647d3eed0320ae144ce3a598a633666578",
+  "remote_branch_observed": "5d7172a2945fab0bc290c02615a6162afa34a765",
+  "push_exit_code": 0,
+  "merge_tree": "6f0ea596122a89b157974f9ec6cdffacf8de38f1",
+  "reviewed_branch_tree": "6f0ea596122a89b157974f9ec6cdffacf8de38f1",
+  "merge_tree_matches_reviewed_branch": true,
+  "tested_source_commit_binding": "evidence/trace-panel/commit-review.json",
+  "tested_run": "C-acceptance-20261104-112957-4b51866e",
+  "scope": "read_only_trace_UI_component_offline_and_browser_fixture_validation",
+  "real_model_repair_acceptance": "pending",
+  "B_Docker_and_C_personal_rerun": "pending",
+  "stable_release": false,
+  "new_paid_requests": 0,
+  "note": "Publication observed before the following documentation-only commit. Original evidence is unchanged; no claim of a new test execution."
+}
