@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-04",
+  "record": "A-工作台主线发布-023",
+  "implementation_commit": "6f9eec7d24d5e79d9b4f1d748249411bba8e98a5",
+  "reviewed_branch": "a898724db3f3ea6d14b6b4eaaec8aadace44c4c1",
+  "main_before": "9bb72bf662d97e95994f0b8ee3b5543aa08eb307",
+  "main_merge": "0a509a3b1dcd22d597df3d71e59bcecd4a3d1ce4",
+  "remote_main_observed": "0a509a3b1dcd22d597df3d71e59bcecd4a3d1ce4",
+  "remote_branch_observed": "a898724db3f3ea6d14b6b4eaaec8aadace44c4c1",
+  "merge_tree": "56254cb5258b9c48a130759312a6efa58ffca8a8",
+  "merge_tree_matches_reviewed_branch": true,
+  "push_exit_code": 0,
+  "source_binding": "evidence/workbench-ui/commit-review.json",
+  "acceptance_run": "C-acceptance-20261104-123041-0163143a",
+  "scope": "UI component and trusted baseline regression; not real model repair acceptance",
+  "new_paid_requests": 0,
+  "B_Docker_and_C_personal_rerun": "pending",
+  "stable_release": false,
+  "note": "Remote observed before subsequent documentation-only publication note. Original evidence and test identity were not rewritten."
+}
