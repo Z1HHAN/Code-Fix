@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "collected_nodeids": [],
+  "collection_errors": [
+    {
+      "nodeid": "tests/test_leap.py",
+      "details": "ImportError while importing test module 'C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\c-review\\C-acceptance-20261104-112957-4b51866e\\c_controls\\controls\\C-20261104-113147-a4cf3001\\artifacts\\C-20261104-113147-a4cf3001\\c-2322dd78b3054dd28e3616e7ea865749\\work\\tests\\test_leap.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\nC:\\Users\\lenovo\\.codex\\visualizations\\2026\\10\\30\\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\\code-fix-c-audit-20261102\\Code-Fix-C-20261101\\.runtime\\python314\\tools\\Lib\\importlib\\__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests\\test_leap.py:1: in <module>\n    from leap_app.leap_year import is_leap\nleap_app\\leap_year.py:1: in <module>\n    import c_fixture_deliberately_missing_dependency_20261101\nE   ModuleNotFoundError: No module named 'c_fixture_deliberately_missing_dependency_20261101'"
+    }
+  ],
+  "reports": [],
+  "session_finished": true,
+  "exit_code": 2
+}

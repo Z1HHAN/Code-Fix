@@ -1,0 +1,8 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.6, pytest-8.3.5, pluggy-1.7.0 -- C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\v3-venv\Scripts\python.exe
+rootdir: C:\Users\lenovo\Documents\ChatGPT\Code Fix\evidence\c-review\C-acceptance-20261104-112957-4b51866e\c_controls\controls\C-20261104-113147-a4cf3001\artifacts\C-20261104-113147-a4cf3001\c-f90a281e4a1c4c2a868aefcd1907951e\work
+configfile: ..\pytest.ini
+collecting ... collected 0 items
+
+- generated xml file: C:\Users\lenovo\Documents\ChatGPT\Code Fix\evidence\c-review\C-acceptance-20261104-112957-4b51866e\c_controls\controls\C-20261104-113147-a4cf3001\artifacts\C-20261104-113147-a4cf3001\c-f90a281e4a1c4c2a868aefcd1907951e\junit.xml -
+============================ no tests ran in 0.14s ============================

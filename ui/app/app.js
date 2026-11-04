@@ -1,11 +1,13 @@
-const eventCache = new Map();
 'use strict';
+const eventCache = new Map();
 const byId = id => document.getElementById(id);
 const display = (id, value) => { byId(id).textContent = typeof value === 'string' ? value : JSON.stringify(value, null, 2); };
 const labels = {created:'已创建',running:'运行中',stopped:'已停止',blocked:'条件未就绪',failed:'失败',success:'独立验收通过',paused:'已暂停',interrupted:'已中断',not_run:'未运行',passed:'通过',inconclusive:'证据不足'};
 const label = value => labels[value] || value || '未知';
 let token = '', selected = localStorage.getItem('codefix.selected') || '', key = null, busy = false, refreshing = false;
 let projects = [];
+const renderTrace = CodeFixTrace.mount(document, byId('trace-flow'), byId('trace-detail'),
+  async (runId, path) => (await api(`/tasks/${runId}/artifact?path=${encodeURIComponent(path)}`)).text());
 async function api(path, options = {}) {
   const response = await fetch('/api/v3' + path, { ...options, headers: {'Content-Type': 'application/json', 'X-Codefix-Token': token, ...(options.headers || {})} });
   if (!response.ok) {
@@ -43,17 +45,18 @@ async function refresh() {
     const [run, page] = await Promise.all([
       api(`/tasks/${snapshot}`).then(x => x.json()), api(`/tasks/${snapshot}/events?after_sequence=${cursor}&limit=200`).then(x => x.json())]);
     if (snapshot !== selected) return;
-    const events = cached.concat(page);
+    const events = CodeFixTrace.mergeEvents(cached, page);
     eventCache.set(snapshot, events);
     const result = run.result || {};
+    renderTrace(run, events);
     display('status', `${run.run_id}\n状态：${run.status} · 题目：${run.task.project} · 模式：${run.task.mode}`);
     display('summary', [
-      `运行模式：${run.task.mode === 'baseline' ? '原始基线检查' : '真实模型修复'}`,
-      `修复轮次：${result.rounds_used || 0} / ${run.task.max_rounds}`,
-      `模型调用：${result.model_calls || 0} 次`,
+      `执行来源：${CodeFixTrace.provenance(run, events)}`,
+      `修复轮次：${result.rounds_used ?? '未记录'} / ${run.task.max_rounds}`,
+      `模型调用：${result.model_calls ?? '未记录'} 次`,
       `开发测试：${label(result.dev_result)}`,
       `独立验收：${label(result.final_result || 'not_run')}`,
-      `说明：${result.reason || '任务已保存，等待启动'}`
+      `说明：${result.reason || (run.status === 'created' ? '任务已保存，等待启动' : '历史记录未提供说明')}`
     ].join('\n'));
     const names = {started:'开始运行',finished:'运行结束',agent_call:'Agent调用',test_completed:'测试完成',
       candidate_applied:'候选已应用',decision:'调度决策',isolation_checked:'隔离检查',control_requested:'收到控制请求'};
@@ -64,7 +67,7 @@ async function refresh() {
     display('development', result.stdout_excerpt || (latestTest ? `${label(latestTest.verification_status)}\n${latestTest.failure_class}\n${JSON.stringify(latestTest.counts || {})}` : '未运行'));
     display('final', label(result.final_result || 'not_run'));
     const decisions = events.filter(x => x.event === 'decision');
-    display('decisions', decisions.length ? decisions.map(x => `第${x.round}轮：${x.action}\n${x.reason}\n${x.model_advice ? '模型建议：'+x.model_advice.action+' · '+x.model_advice.reason : ''}`).join('\n\n') : '尚无调度决策');
+    display('decisions', decisions.length ? decisions.map(x => `轮次${x.round ?? '未记录'}：${x.effective_action || x.action || '未记录'}\n${x.reason || '原因未记录'}\n${x.model_advice ? '模型建议：'+x.model_advice.action+' · '+x.model_advice.reason : ''}`).join('\n\n') : '尚无调度决策');
     const patch = events.filter(x => x.event === 'candidate_applied').at(-1);
     display('patch', '尚无已应用候选');
     if (patch) {
@@ -120,7 +123,7 @@ byId('report').onclick = () => download('report'); byId('bundle').onclick = () =
     });
     byId('project').replaceChildren(...choices); byId('project').onchange();
     display('health', await (await api('/health')).json());
-    display('connection', '已连接真实任务后端');
+    display('connection', '已连接任务后端 · 运行来源见Trace标识');
     await refresh(); setInterval(refresh, 1200);
   } catch (error) { display('connection', '后端连接失败'); display('error', error.message); }
 })();

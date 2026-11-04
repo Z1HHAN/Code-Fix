@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="zh-CN">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>验链 Code Fix · 真实任务</title><link rel="stylesheet" href="/assets/theme.css">
+<title>验链 Code Fix · 任务与Trace</title><link rel="stylesheet" href="/assets/theme.css"><link rel="stylesheet" href="/assets/trace.css">
 <style>body{min-width:0}pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:430px;overflow:auto}.wide{grid-column:1/-1}.shell{grid-template-columns:28fr 35fr 37fr}.panel-body{overflow-wrap:anywhere}select{max-width:100%}@media(max-width:950px){.shell{grid-template-columns:1fr}.topbar{height:auto;padding:16px;flex-wrap:wrap;gap:10px}}a{color:#1468e8}</style>
-<script src="/assets/budget.js" defer></script><script src="/assets/app.js" defer></script></head>
+<script src="/assets/budget.js" defer></script><script src="/assets/trace.js" defer></script><script src="/assets/app.js" defer></script></head>
 <body><div class="app"><header class="topbar"><div class="brand"><div class="brand-title">验链 Code Fix</div><div class="brand-subtitle">测试证据驱动修复</div></div><span id="connection" class="mode-badge wait">正在连接本机后端</span></header>
 <main class="shell">
 <section class="column"><div class="panel"><div class="panel-head"><h2>任务与配置</h2></div><div class="panel-body">
@@ -23,9 +23,11 @@
 <div class="button-row"><button id="refresh" class="btn btn-outline">刷新结果</button><button id="pause" class="btn btn-outline" disabled>请求暂停</button><button id="stop" class="btn btn-outline" disabled>请求停止</button></div>
 <p class="hint">暂停和停止在当前步骤结束后生效；刷新页面不会重新启动或重复付费。</p>
 <div id="status" class="status-strip">尚未创建任务</div><pre id="summary">未运行</pre>
-<details open><summary>真实事件与Agent步骤</summary><pre id="events">尚无事件</pre></details>
+<h3>实际流转链路</h3><div id="trace-flow" aria-label="实际执行步骤"></div>
+<details><summary>原始事件列表</summary><pre id="events">尚无事件</pre></details>
 </div></div></section>
 <section class="column"><div class="panel"><div class="panel-head"><h2>证据与结果</h2></div><div class="panel-body">
+<div class="evidence"><div class="evidence-head">所选步骤与关联证据</div><div id="trace-detail" class="evidence-body" aria-label="步骤详情">选择流程节点查看。</div></div>
 <div class="evidence"><div class="evidence-head">开发测试</div><div class="evidence-body"><pre id="development">未运行</pre></div></div>
 <div class="evidence"><div class="evidence-head">独立验收</div><div class="evidence-body"><pre id="final">未运行</pre></div></div>
 <div class="evidence"><div class="evidence-head">调度依据</div><div class="evidence-body"><pre id="decisions">未运行</pre></div></div>
