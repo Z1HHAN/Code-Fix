@@ -1,0 +1,18 @@
+{
+  "browser": "Edg/156.0.4314.58",
+  "scope": "real browser and HTTP, offline display fixtures only",
+  "checks": {
+    "node_selection": true,
+    "artifact_read": true,
+    "poll_preserves_viewer": true,
+    "reload_preserves_run": true,
+    "legacy_without_fabricated_edges": true,
+    "narrow_without_horizontal_overflow": true,
+    "no_write_requests": true
+  },
+  "fixture": {
+    "trace_run": "run-c00392b2dd5a4b17a74635f1acb86b1c",
+    "legacy_run": "run-1678dee2b31d42f8b55766a1c6edcd6a",
+    "scope": "offline UI fixtures only"
+  }
+}

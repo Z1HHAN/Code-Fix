@@ -1,0 +1,47 @@
+{
+  "run": {
+    "run_id": "run-1678dee2b31d42f8b55766a1c6edcd6a",
+    "task": {
+      "description": "修复闰年判断",
+      "max_calls": 12,
+      "max_rounds": 3,
+      "mode": "repair",
+      "project": "leap",
+      "total_seconds": 300
+    },
+    "status": "paused",
+    "created_at": "2026-11-04T03:11:47.052476+00:00",
+    "updated_at": "2026-11-04T03:11:47.114793+00:00",
+    "result": {
+      "mode": "test_stub",
+      "model_api_called": false,
+      "final_result": "not_run"
+    },
+    "control": null
+  },
+  "events": [
+    {
+      "sequence": 12,
+      "created_at": "2026-11-04T03:11:47.076833+00:00",
+      "event": "started"
+    },
+    {
+      "sequence": 13,
+      "created_at": "2026-11-04T03:11:47.096788+00:00",
+      "event": "decision",
+      "action": "pause",
+      "reason": "历史展示夹具，无step_id和父节点"
+    },
+    {
+      "sequence": 14,
+      "created_at": "2026-11-04T03:11:47.114891+00:00",
+      "event": "finished",
+      "status": "paused",
+      "result": {
+        "mode": "test_stub",
+        "model_api_called": false,
+        "final_result": "not_run"
+      }
+    }
+  ]
+}

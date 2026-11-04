@@ -1,0 +1,221 @@
+{
+  "run": {
+    "run_id": "run-c00392b2dd5a4b17a74635f1acb86b1c",
+    "task": {
+      "description": "修复闰年判断",
+      "max_calls": 12,
+      "max_rounds": 3,
+      "mode": "repair",
+      "project": "leap",
+      "total_seconds": 300
+    },
+    "status": "stopped",
+    "created_at": "2026-11-04T03:11:46.810491+00:00",
+    "updated_at": "2026-11-04T03:11:47.029386+00:00",
+    "result": {
+      "mode": "test_stub",
+      "model_api_called": false,
+      "model_calls": 0,
+      "tool_calls": 0,
+      "rounds_used": 1,
+      "dev_result": "failed",
+      "final_result": "not_run",
+      "reason": "仅供面板离线展示，不是修复运行",
+      "cost": {
+        "status": "not_applicable"
+      }
+    },
+    "control": null
+  },
+  "events": [
+    {
+      "sequence": 1,
+      "created_at": "2026-11-04T03:11:46.841407+00:00",
+      "event": "started"
+    },
+    {
+      "sequence": 2,
+      "created_at": "2026-11-04T03:11:46.863018+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-c00392b2dd5a4b17a74635f1acb86b1c",
+      "step_id": "s-489507c75589416eb96ee4ecd8b8a4e0",
+      "parent_step_id": null,
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 3,
+      "created_at": "2026-11-04T03:11:46.881394+00:00",
+      "event": "agent_call",
+      "trace_version": "1.0.0",
+      "run_id": "run-c00392b2dd5a4b17a74635f1acb86b1c",
+      "step_id": "s-489507c75589416eb96ee4ecd8b8a4e0",
+      "parent_step_id": null,
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [],
+      "role": "repairer",
+      "mode": "test_stub",
+      "model_api_called": false,
+      "status": "ok"
+    },
+    {
+      "sequence": 4,
+      "created_at": "2026-11-04T03:11:46.899644+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-c00392b2dd5a4b17a74635f1acb86b1c",
+      "step_id": "s-489507c75589416eb96ee4ecd8b8a4e0",
+      "parent_step_id": null,
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [],
+      "status": "ok",
+      "duration_ms": 37
+    },
+    {
+      "sequence": 5,
+      "created_at": "2026-11-04T03:11:46.917332+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-c00392b2dd5a4b17a74635f1acb86b1c",
+      "step_id": "s-c1f771062c534d72921705d29a073adb",
+      "parent_step_id": "s-489507c75589416eb96ee4ecd8b8a4e0",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "fixture-test"
+      ]
+    },
+    {
+      "sequence": 6,
+      "created_at": "2026-11-04T03:11:46.936321+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-c00392b2dd5a4b17a74635f1acb86b1c",
+      "step_id": "s-c1f771062c534d72921705d29a073adb",
+      "parent_step_id": "s-489507c75589416eb96ee4ecd8b8a4e0",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "fixture-test"
+      ],
+      "evidence_id": "fixture-test",
+      "evidence_path": "fixture-test",
+      "stdout_path": "stdout.txt",
+      "verification_status": "failed",
+      "failure_class": "assertion_failed"
+    },
+    {
+      "sequence": 7,
+      "created_at": "2026-11-04T03:11:46.955023+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-c00392b2dd5a4b17a74635f1acb86b1c",
+      "step_id": "s-c1f771062c534d72921705d29a073adb",
+      "parent_step_id": "s-489507c75589416eb96ee4ecd8b8a4e0",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "fixture-test"
+      ],
+      "status": "ok",
+      "duration_ms": 38
+    },
+    {
+      "sequence": 8,
+      "created_at": "2026-11-04T03:11:46.971565+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-c00392b2dd5a4b17a74635f1acb86b1c",
+      "step_id": "s-de7eaecfbbbf47e9b14896679cb48795",
+      "parent_step_id": "s-c1f771062c534d72921705d29a073adb",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "fixture-test"
+      ]
+    },
+    {
+      "sequence": 9,
+      "created_at": "2026-11-04T03:11:46.989572+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-a11654013ffa49aa97d5031eca7acfaa.json",
+      "rule_id": "fixture-budget-rule",
+      "action": "stop",
+      "trace_version": "1.0.0",
+      "run_id": "run-c00392b2dd5a4b17a74635f1acb86b1c",
+      "step_id": "s-de7eaecfbbbf47e9b14896679cb48795",
+      "parent_step_id": "s-c1f771062c534d72921705d29a073adb",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "fixture-test"
+      ],
+      "decision_id": "d-a11654013ffa49aa97d5031eca7acfaa",
+      "program_decision": {
+        "rule_id": "fixture-budget-rule",
+        "action": "stop"
+      },
+      "model_advice": {
+        "action": "repair",
+        "reason": "离线建议"
+      },
+      "effective_action": "stop",
+      "target_agent": null,
+      "reason": "离线展示夹具：模拟达到调用上限",
+      "override_reason": "模拟预算不足",
+      "code_version": "fixture-only",
+      "test_suite_version": "fixture-only",
+      "counters": {}
+    },
+    {
+      "sequence": 10,
+      "created_at": "2026-11-04T03:11:47.009022+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-c00392b2dd5a4b17a74635f1acb86b1c",
+      "step_id": "s-de7eaecfbbbf47e9b14896679cb48795",
+      "parent_step_id": "s-c1f771062c534d72921705d29a073adb",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "evidence_ids": [
+        "fixture-test"
+      ],
+      "status": "ok",
+      "effective_action": "stop",
+      "decision_id": "d-a11654013ffa49aa97d5031eca7acfaa",
+      "duration_ms": 36
+    },
+    {
+      "sequence": 11,
+      "created_at": "2026-11-04T03:11:47.029484+00:00",
+      "event": "finished",
+      "status": "stopped",
+      "result": {
+        "mode": "test_stub",
+        "model_api_called": false,
+        "model_calls": 0,
+        "tool_calls": 0,
+        "rounds_used": 1,
+        "dev_result": "failed",
+        "final_result": "not_run",
+        "reason": "仅供面板离线展示，不是修复运行",
+        "cost": {
+          "status": "not_applicable"
+        }
+      }
+    }
+  ]
+}

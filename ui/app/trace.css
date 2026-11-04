@@ -1,0 +1,8 @@
+.trace-provenance{padding:10px;border-left:4px solid var(--blue);background:var(--blue-soft);font-size:13px}
+.trace-nodes{margin:0;padding:0;list-style:none;max-height:560px;overflow:auto}.trace-nodes li{margin:10px 0}
+.trace-node{width:100%;padding:12px;text-align:left;white-space:pre-wrap;border:1px solid var(--line);border-radius:10px;background:white;color:var(--ink);cursor:pointer;line-height:1.7}
+.trace-node[aria-pressed=true]{border:2px solid var(--blue);background:var(--blue-soft)}
+.trace-node:focus-visible,.trace-file:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.trace-active{box-shadow:inset 4px 0 var(--blue)}.trace-edge{font-size:11px;color:var(--muted);overflow-wrap:anywhere;margin:4px 8px}
+.trace-file{display:block;max-width:100%;text-align:left;overflow-wrap:anywhere;margin:6px 0;padding:7px;border:1px solid var(--line);border-radius:6px;background:white;color:var(--blue);cursor:pointer}
+#trace-detail{scroll-margin-top:20px}#trace-detail h3{font-size:15px}#trace-detail p{font-size:13px;line-height:1.7}.trace-artifact{background:#f4f7fb;padding:10px}

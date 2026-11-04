@@ -1,0 +1,7 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.6, pytest-8.3.5, pluggy-1.7.0 -- C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\v3-venv\Scripts\python.exe
+rootdir: C:\Users\lenovo\Documents\ChatGPT\Code Fix\evidence\c-review\C-acceptance-20261104-112957-4b51866e\c_controls\controls\C-20261104-113147-a4cf3001\artifacts\C-20261104-113147-a4cf3001\c-bb1459b4e3f243e8bd3c6d69d90a11c2\work
+configfile: ..\pytest.ini
+collecting ... collected 1 item
+
+tests/test_timeout.py::test_output_timeout C_TIMEOUT_STDOUT_FLUSHED

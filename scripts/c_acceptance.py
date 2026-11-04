@@ -373,7 +373,7 @@ def main():
         ('platform_pytest', [*python, '-m', 'pytest', 'tests', 'c_tests', '-q', '-p', 'no:cacheprovider',
                              '--basetemp=' + str(scratch / 'p'),
                              '--junitxml=' + str(run_dir / 'platform_pytest/junit.xml')], 600),
-        ('node_ui', [str(node), '--test', '--test-reporter=tap', 'tests/ui_prototype.test.cjs', 'tests/ui_budget.test.cjs'], 60),
+        ('node_ui', [str(node), '--test', '--test-reporter=tap', 'tests/ui_prototype.test.cjs', 'tests/ui_budget.test.cjs', 'tests/ui_trace.test.cjs'], 60),
         ('c_controls', [*python, 'scripts/check_c_controls.py', '--output-root', str(run_dir / 'c_controls/controls')], 180),
         ('repair_gates', [*python, '-m', 'pytest', 'acceptance_tests', '-q', '-p', 'no:cacheprovider', '-o', 'xfail_strict=true',
                           '--basetemp=' + str(scratch / 'g'),

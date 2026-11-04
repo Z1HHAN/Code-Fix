@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.284" timestamp="2026-11-04T11:24:17.823408+08:00" hostname="LAPTOP-8477LI5E"><testcase classname="" name="tests.test_leap" time="0.000"><error message="collection failure">ImportError while importing test module 'C:\Users\lenovo\Documents\ChatGPT\Code Fix\evidence\c-review\C-acceptance-20261104-112216-69d2315a\c_controls\controls\C-20261104-112408-b79d2dd7\artifacts\C-20261104-112408-b79d2dd7\c-64e83f15cb1d46babb049b1c31909540\work\tests\test_leap.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\lenovo\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_leap.py:1: in &lt;module&gt;
+    from leap_app.leap_year import is_leap
+leap_app\leap_year.py:1: in &lt;module&gt;
+    import c_fixture_deliberately_missing_dependency_20261101
+E   ModuleNotFoundError: No module named 'c_fixture_deliberately_missing_dependency_20261101'</error></testcase></testsuite></testsuites>
