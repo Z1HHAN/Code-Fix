@@ -1,0 +1,2 @@
+SUCCESS: The process with PID 39128 (child process of PID 81284) has been terminated.
+SUCCESS: The process with PID 81284 (child process of PID 70020) has been terminated.

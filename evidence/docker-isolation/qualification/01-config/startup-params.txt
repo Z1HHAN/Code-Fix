@@ -1,0 +1,51 @@
+Docker 隔离资格证据包：启动参数登记
+状态：ACTIVE；2026-11-05 在 Docker Desktop（WSL2 Linux 后端）实测采集，实际命令、时间与镜像 digest 见 02-runtime。
+
+完整启动命令：
+```bash
+  docker compose -f 01-config/compose.yaml build --pull
+  docker compose -f 01-config/compose.yaml up -d
+  docker compose -f 01-config/compose.yaml ps --all
+```
+
+参数作用：
+  build --pull
+    拉取声明的基础镜像更新层；生产审计中还必须记录最终 image ID 和 digest。
+  user: "10000:10000"
+    以固定非 root UID/GID 运行，避免依赖镜像默认用户。
+  privileged: false
+    明确关闭特权模式；不得使用 --privileged 启动。
+  cap_drop: ALL
+    删除 Linux capabilities，减少挂载、网络管理、模块加载等越权能力。
+  no-new-privileges:true
+    禁止通过 setuid/setgid 或 file capabilities 获得新的特权。
+  seccomp（不显式指定）
+    由 Engine 隐式施加 builtin profile，运行时以 /proc/1/status 的
+    Seccomp=2 / Seccomp_filters=2 为校验依据。
+    注意：Docker 不存在 "seccomp:default" 关键字；误写时会被当作 profile 文件路径解析，
+    导致 "opening seccomp profile (default) failed" 并使容器无法启动。
+  read_only: true
+    根文件系统只读；仅声明的 tmpfs 可写。
+  tmpfs: /tmp、/run
+    只提供临时、非持久的写入点，并设置 nosuid、nodev、noexec。
+  mem_limit / memswap_limit
+    限制内存和 swap；两者相同表示不允许额外 swap 扩张。
+  cpus
+    限制 CPU 配额，防止测试容器无限占用宿主机 CPU。
+  pids_limit
+    限制进程数，降低 fork bomb 风险。
+  networks.isolation_net.internal: true
+    使用独立 bridge 网络并禁止该网络直接访问外部网络；无宿主机端口映射。
+  restart: "no"
+    测试失败或退出后不自动重启，避免审计期间状态漂移。
+  peer.entrypoint: []（仅 peer 对照服务）
+    测试夹具修正。alpine 基础镜像的 Dockerfile 声明了 ENTRYPOINT ["/bin/sh","-c"]；
+    若不清空，compose 的 command 列表会与之叠加为
+      /bin/sh -c /bin/sh -c "while :; do ... nc -l -p 8080; done"
+    按 POSIX sh 语义，-c 的参数字符串是 "/bin/sh"，随后的 "-c" 成为 $0、
+    循环体成为 $1，且该子 shell 既无脚本也无 stdin，会立即退出 0。
+    结果是 peer 启动即退出，8080 永不监听，网络正向对照失效。
+    清空 entrypoint 后 command 直接成为容器 argv，peer 得以常驻监听 8080。
+    该修正只作用于 peer 对照容器；被审计主容器 isolation-test 的启动参数一行未改。
+
+敏感信息声明：本文件不得包含密码、Token、私钥、云凭据、内部地址或真实客户数据。

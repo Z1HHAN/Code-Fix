@@ -11,7 +11,6 @@ import xml.etree.ElementTree as ET
 
 import pytest
 
-from app.candidates import SOURCE
 from app.docker_runner import DockerRunner, IsolationBlocked
 from app.runner import code_version
 from app.run_store import RunStore
@@ -70,7 +69,7 @@ class ModelDouble:
         else:
             role = 'repairer'
             candidate = ('def is_leap(year):\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\n'
-                         if source == SOURCE else '# OFFLINE STUB; not an evaluated repair\n' + content)
+                         if source == get_task('leap').source else '# OFFLINE STUB; not an evaluated repair\n' + content)
             output = common | {'explanation': 'known synthetic candidate', 'changes': [{'path': source, 'new_content': candidate}]}
         self.roles.append(role)
         return {'status': 'ok', 'mode': self.mode, 'model_api_called': False, 'raw_text': json.dumps(output)}

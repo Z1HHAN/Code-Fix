@@ -1,0 +1,943 @@
+[
+  {
+    "sequence": 1,
+    "created_at": "2026-11-05T04:32:51.865411+00:00",
+    "event": "started"
+  },
+  {
+    "sequence": 2,
+    "created_at": "2026-11-05T04:32:52.224150+00:00",
+    "event": "step_started",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-09e7b4ac830d438daadf06dd1eaf0f61",
+    "parent_step_id": null,
+    "node_id": "isolation_preflight",
+    "round": 0,
+    "phase": "preflight",
+    "evidence_ids": []
+  },
+  {
+    "sequence": 3,
+    "created_at": "2026-11-05T04:32:54.175629+00:00",
+    "event": "isolation_checked",
+    "isolation_ready": true,
+    "image": "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+    "reason": null,
+    "engine_id": "9a5e7540-074f-4549-9e6a-02f78d140e9a",
+    "controls": {
+      "Binds": null,
+      "ContainerIDFile": "",
+      "LogConfig": {
+        "Type": "none",
+        "Config": {}
+      },
+      "NetworkMode": "none",
+      "PortBindings": {},
+      "RestartPolicy": {
+        "Name": "no",
+        "MaximumRetryCount": 0
+      },
+      "AutoRemove": false,
+      "VolumeDriver": "",
+      "VolumesFrom": null,
+      "ConsoleSize": [
+        0,
+        0
+      ],
+      "CapAdd": null,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CgroupnsMode": "private",
+      "Dns": null,
+      "DnsOptions": [],
+      "DnsSearch": [],
+      "ExtraHosts": null,
+      "GroupAdd": null,
+      "IpcMode": "private",
+      "Cgroup": "",
+      "Links": null,
+      "OomScoreAdj": 0,
+      "PidMode": "",
+      "Privileged": false,
+      "PublishAllPorts": false,
+      "ReadonlyRootfs": true,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=67108864"
+      },
+      "UTSMode": "",
+      "UsernsMode": "",
+      "ShmSize": 67108864,
+      "Runtime": "runc",
+      "Isolation": "",
+      "CpuShares": 0,
+      "Memory": 268435456,
+      "NanoCpus": 1000000000,
+      "CgroupParent": "",
+      "BlkioWeight": 0,
+      "BlkioWeightDevice": [],
+      "BlkioDeviceReadBps": [],
+      "BlkioDeviceWriteBps": [],
+      "BlkioDeviceReadIOps": [],
+      "BlkioDeviceWriteIOps": [],
+      "CpuPeriod": 0,
+      "CpuQuota": 0,
+      "CpuRealtimePeriod": 0,
+      "CpuRealtimeRuntime": 0,
+      "CpusetCpus": "",
+      "CpusetMems": "",
+      "Devices": [],
+      "DeviceCgroupRules": null,
+      "DeviceRequests": null,
+      "MemoryReservation": 0,
+      "MemorySwap": 268435456,
+      "MemorySwappiness": null,
+      "OomKillDisable": null,
+      "PidsLimit": 64,
+      "Ulimits": [
+        {
+          "Name": "nofile",
+          "Hard": 128,
+          "Soft": 128
+        }
+      ],
+      "CpuCount": 0,
+      "CpuPercent": 0,
+      "IOMaximumIOps": 0,
+      "IOMaximumBandwidth": 0,
+      "Mounts": [
+        {
+          "Type": "volume",
+          "Source": "codefix-out-18cd8a627cac4e70af0b75d0847a1cdf",
+          "Target": "/out"
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/desktop/mnt/host/c/Users/yang0/AppData/Local/Temp/codefix-rt-eos7orbq/operator-stop/store/run-39333df9bdea4c969397e7cb2c5b37f4/isolation/probe-work",
+          "Target": "/w",
+          "ReadOnly": true
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/c_runner/pytest_entry.py",
+          "Target": "/entry.py",
+          "ReadOnly": true
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/docker/candidate_entry.py",
+          "Target": "/harness.py",
+          "ReadOnly": true
+        }
+      ],
+      "MaskedPaths": [
+        "/proc/acpi",
+        "/proc/asound",
+        "/proc/interrupts",
+        "/proc/kcore",
+        "/proc/keys",
+        "/proc/latency_stats",
+        "/proc/sched_debug",
+        "/proc/scsi",
+        "/proc/timer_list",
+        "/proc/timer_stats",
+        "/sys/devices/virtual/powercap",
+        "/sys/firmware"
+      ],
+      "ReadonlyPaths": [
+        "/proc/bus",
+        "/proc/fs",
+        "/proc/irq",
+        "/proc/sys",
+        "/proc/sysrq-trigger"
+      ]
+    },
+    "scope": "Linux Docker probe; not VM-equivalent isolation certification"
+  },
+  {
+    "sequence": 4,
+    "created_at": "2026-11-05T04:32:54.190290+00:00",
+    "event": "step_completed",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-09e7b4ac830d438daadf06dd1eaf0f61",
+    "parent_step_id": null,
+    "node_id": "isolation_preflight",
+    "round": 0,
+    "phase": "preflight",
+    "evidence_ids": [],
+    "status": "ok",
+    "evidence_path": "isolation",
+    "isolation_ready": true,
+    "image": "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+    "reason": null,
+    "engine_id": "9a5e7540-074f-4549-9e6a-02f78d140e9a",
+    "controls": {
+      "Binds": null,
+      "ContainerIDFile": "",
+      "LogConfig": {
+        "Type": "none",
+        "Config": {}
+      },
+      "NetworkMode": "none",
+      "PortBindings": {},
+      "RestartPolicy": {
+        "Name": "no",
+        "MaximumRetryCount": 0
+      },
+      "AutoRemove": false,
+      "VolumeDriver": "",
+      "VolumesFrom": null,
+      "ConsoleSize": [
+        0,
+        0
+      ],
+      "CapAdd": null,
+      "CapDrop": [
+        "ALL"
+      ],
+      "CgroupnsMode": "private",
+      "Dns": null,
+      "DnsOptions": [],
+      "DnsSearch": [],
+      "ExtraHosts": null,
+      "GroupAdd": null,
+      "IpcMode": "private",
+      "Cgroup": "",
+      "Links": null,
+      "OomScoreAdj": 0,
+      "PidMode": "",
+      "Privileged": false,
+      "PublishAllPorts": false,
+      "ReadonlyRootfs": true,
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=67108864"
+      },
+      "UTSMode": "",
+      "UsernsMode": "",
+      "ShmSize": 67108864,
+      "Runtime": "runc",
+      "Isolation": "",
+      "CpuShares": 0,
+      "Memory": 268435456,
+      "NanoCpus": 1000000000,
+      "CgroupParent": "",
+      "BlkioWeight": 0,
+      "BlkioWeightDevice": [],
+      "BlkioDeviceReadBps": [],
+      "BlkioDeviceWriteBps": [],
+      "BlkioDeviceReadIOps": [],
+      "BlkioDeviceWriteIOps": [],
+      "CpuPeriod": 0,
+      "CpuQuota": 0,
+      "CpuRealtimePeriod": 0,
+      "CpuRealtimeRuntime": 0,
+      "CpusetCpus": "",
+      "CpusetMems": "",
+      "Devices": [],
+      "DeviceCgroupRules": null,
+      "DeviceRequests": null,
+      "MemoryReservation": 0,
+      "MemorySwap": 268435456,
+      "MemorySwappiness": null,
+      "OomKillDisable": null,
+      "PidsLimit": 64,
+      "Ulimits": [
+        {
+          "Name": "nofile",
+          "Hard": 128,
+          "Soft": 128
+        }
+      ],
+      "CpuCount": 0,
+      "CpuPercent": 0,
+      "IOMaximumIOps": 0,
+      "IOMaximumBandwidth": 0,
+      "Mounts": [
+        {
+          "Type": "volume",
+          "Source": "codefix-out-18cd8a627cac4e70af0b75d0847a1cdf",
+          "Target": "/out"
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/desktop/mnt/host/c/Users/yang0/AppData/Local/Temp/codefix-rt-eos7orbq/operator-stop/store/run-39333df9bdea4c969397e7cb2c5b37f4/isolation/probe-work",
+          "Target": "/w",
+          "ReadOnly": true
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/c_runner/pytest_entry.py",
+          "Target": "/entry.py",
+          "ReadOnly": true
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/docker/candidate_entry.py",
+          "Target": "/harness.py",
+          "ReadOnly": true
+        }
+      ],
+      "MaskedPaths": [
+        "/proc/acpi",
+        "/proc/asound",
+        "/proc/interrupts",
+        "/proc/kcore",
+        "/proc/keys",
+        "/proc/latency_stats",
+        "/proc/sched_debug",
+        "/proc/scsi",
+        "/proc/timer_list",
+        "/proc/timer_stats",
+        "/sys/devices/virtual/powercap",
+        "/sys/firmware"
+      ],
+      "ReadonlyPaths": [
+        "/proc/bus",
+        "/proc/fs",
+        "/proc/irq",
+        "/proc/sys",
+        "/proc/sysrq-trigger"
+      ]
+    },
+    "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+    "duration_ms": 1964
+  },
+  {
+    "sequence": 5,
+    "created_at": "2026-11-05T04:32:54.242128+00:00",
+    "event": "step_started",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-4921824304114054b54d750d03a95027",
+    "parent_step_id": "s-09e7b4ac830d438daadf06dd1eaf0f61",
+    "node_id": "pytest",
+    "round": 0,
+    "phase": "development",
+    "evidence_ids": []
+  },
+  {
+    "sequence": 6,
+    "created_at": "2026-11-05T04:32:57.605477+00:00",
+    "event": "test_completed",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-4921824304114054b54d750d03a95027",
+    "parent_step_id": "s-09e7b4ac830d438daadf06dd1eaf0f61",
+    "node_id": "pytest",
+    "round": 0,
+    "phase": "development",
+    "evidence_ids": [],
+    "evidence_id": "test-baseline",
+    "evidence_path": "baseline",
+    "call_id": "codefix-72a2c70631e84422b2014b46da24ceb2",
+    "exit_code": 1,
+    "timed_out": false,
+    "duration_ms": 1969,
+    "stdout_path": "trusted-run/stdout.txt",
+    "stderr_path": "trusted-run/stderr.txt",
+    "command": [
+      "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.EXE",
+      "run",
+      "--mount",
+      "type=volume,source=codefix-rpc-f3ad17b865904cda9312c446881dd387,target=/rpc,readonly",
+      "-i",
+      "--name",
+      "codefix-72a2c70631e84422b2014b46da24ceb2",
+      "--pull=never",
+      "--network=none",
+      "--read-only",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--pids-limit=64",
+      "--memory=256m",
+      "--memory-swap=256m",
+      "--cpus=1",
+      "--user=65534:65534",
+      "--ulimit=nofile=128:128",
+      "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+      "--log-driver=none",
+      "--mount",
+      "type=volume,source=codefix-out-b25facdc53994a14bb332ab196d6a51d,target=/out",
+      "--mount",
+      "type=bind,source=C:\\Users\\yang0\\AppData\\Local\\Temp\\codefix-rt-eos7orbq\\operator-stop\\store\\run-39333df9bdea4c969397e7cb2c5b37f4\\baseline\\trusted-tests,target=/w,readonly",
+      "--mount",
+      "type=bind,source=C:\\Users\\yang0\\Documents\\Codex\\2026-10-31\\wo\\projects\\Code-Fix-main\\Code-Fix-main\\c_runner\\pytest_entry.py,target=/entry.py,readonly",
+      "--mount",
+      "type=bind,source=C:\\Users\\yang0\\Documents\\Codex\\2026-10-31\\wo\\projects\\Code-Fix-main\\Code-Fix-main\\docker\\candidate_entry.py,target=/harness.py,readonly",
+      "--workdir=/w",
+      "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+      "--env=PYTHONDONTWRITEBYTECODE=1",
+      "--entrypoint=python",
+      "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+      "-I",
+      "-B",
+      "-X",
+      "utf8",
+      "/harness.py",
+      "tests"
+    ],
+    "artifact_channel": "docker-cp",
+    "artifact_error": null,
+    "artifact_detail": null,
+    "cleanup_passed": true,
+    "output_volume": "codefix-out-b25facdc53994a14bb332ab196d6a51d",
+    "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+    "project": "leap",
+    "execution_mode": "docker-split-rpc",
+    "isolation_ready": true,
+    "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "expected_test_count": 4,
+    "junit_path": "trusted-run/output/junit.xml",
+    "structured_path": "trusted-run/output/pytest_events.json",
+    "evidence_matches_current_version": true,
+    "trust_boundary": "separate_candidate_and_test_containers",
+    "candidate_audit": {
+      "container": "codefix-candidate-aeaa5e15afc149799030ef990003805e",
+      "logs_captured": true,
+      "events": [],
+      "event_kinds": [],
+      "fake_report_output": false,
+      "violation": null,
+      "reason": null
+    },
+    "runner_classification": {
+      "status": null,
+      "verification_status": null,
+      "failure_class": null,
+      "reason": null
+    },
+    "counts": {
+      "collected": 4,
+      "passed": 3,
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "status": "failed",
+    "verification_status": "failed",
+    "failure_class": "assertion_failed",
+    "reason": "Frozen native fixture tests completed with a recorded failure",
+    "coverage": {
+      "expected_nodeids": [
+        "tests/test_leap.py::test_2024_is_leap",
+        "tests/test_leap.py::test_2023_is_not_leap",
+        "tests/test_leap.py::test_1900_is_not_leap",
+        "tests/test_leap.py::test_2000_is_leap"
+      ],
+      "collected_nodeids": [
+        "tests/test_leap.py::test_2024_is_leap",
+        "tests/test_leap.py::test_2023_is_not_leap",
+        "tests/test_leap.py::test_1900_is_not_leap",
+        "tests/test_leap.py::test_2000_is_leap"
+      ],
+      "expected_collected_match": true,
+      "junit_identities": [
+        [
+          "tests.test_leap",
+          "test_2024_is_leap"
+        ],
+        [
+          "tests.test_leap",
+          "test_2023_is_not_leap"
+        ],
+        [
+          "tests.test_leap",
+          "test_1900_is_not_leap"
+        ],
+        [
+          "tests.test_leap",
+          "test_2000_is_leap"
+        ]
+      ],
+      "junit_expected_match": true,
+      "session_finished": true
+    }
+  },
+  {
+    "sequence": 7,
+    "created_at": "2026-11-05T04:32:57.626373+00:00",
+    "event": "step_completed",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-4921824304114054b54d750d03a95027",
+    "parent_step_id": "s-09e7b4ac830d438daadf06dd1eaf0f61",
+    "node_id": "pytest",
+    "round": 0,
+    "phase": "development",
+    "evidence_ids": [],
+    "status": "ok",
+    "verification_status": "failed",
+    "evidence_id": "test-baseline",
+    "failure_class": "assertion_failed",
+    "evidence_path": "baseline",
+    "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+    "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "registered_test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "duration_ms": 3383
+  },
+  {
+    "sequence": 8,
+    "created_at": "2026-11-05T04:32:57.651516+00:00",
+    "event": "step_started",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-a244729eab8242638c1d705ee9e377b3",
+    "parent_step_id": "s-4921824304114054b54d750d03a95027",
+    "node_id": "repairer",
+    "round": 1,
+    "phase": "development",
+    "evidence_ids": [
+      "test-baseline"
+    ]
+  },
+  {
+    "sequence": 9,
+    "created_at": "2026-11-05T04:32:57.678098+00:00",
+    "event": "agent_call",
+    "status": "ok",
+    "mode": "deterministic_stub_for_stop_test",
+    "model_api_called": false,
+    "role": "repairer",
+    "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+    "call_id": "m-66f97062cff54471a755d41da84ac995",
+    "round": 1,
+    "provenance": {
+      "protocol": "codefix-json-v1",
+      "parser_version": "1.0.0",
+      "config_version": "1.1.0",
+      "effective_config": {
+        "config_version": "1.1.0",
+        "protocol": "codefix-json-v1",
+        "models": {
+          "primary": {
+            "binding": "approved_profile",
+            "profile_ref": "sf_account1_v32"
+          }
+        },
+        "agents": [
+          {
+            "agent_id": "locator",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "primary",
+            "prompt_ref": "prompts/locator.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "project_structure",
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "LocatorOutput"
+          },
+          {
+            "agent_id": "repairer",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "primary",
+            "prompt_ref": "prompts/repairer.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "RepairOutput"
+          },
+          {
+            "agent_id": "detector",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "primary",
+            "prompt_ref": "prompts/detector.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "DetectorOutput"
+          },
+          {
+            "agent_id": "scheduler",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "primary",
+            "prompt_ref": "prompts/scheduler.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "SchedulerOutput"
+          }
+        ]
+      },
+      "config_sha256": "b3472a143047be416465bd12b883494daab38dc1dce1b9522c99992eb7d455ba",
+      "prompt_ref": "prompts/repairer.md",
+      "prompt_sha256": "638ba6f34303cee630fd9304cc46ce12bd6775ad08c780ae95e920f93aafc6ab",
+      "system_prompt_sha256": "b42ab08883a2934d52ca6d91d65a3ad4286394fb9083e61c2b01dc17691bf2ef",
+      "model_binding": {
+        "model_ref": "primary",
+        "binding": "approved_profile",
+        "profile_ref": "sf_account1_v32",
+        "mode": "deterministic_stub_for_stop_test",
+        "model": null
+      }
+    },
+    "step_id": "s-a244729eab8242638c1d705ee9e377b3",
+    "parent_step_id": "s-4921824304114054b54d750d03a95027",
+    "parsed_output": {
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "knowledge_citations": [],
+      "explanation": "停止测试候选：函数体内死循环",
+      "changes": [
+        {
+          "path": "code/leap_year.py",
+          "new_content": "\"\"\"死循环夹具B：函数调用不返回，模拟被测逻辑卡死。\"\"\"\n\n\ndef is_leap(year):\n    while True:\n        pass\n"
+        }
+      ]
+    }
+  },
+  {
+    "sequence": 10,
+    "created_at": "2026-11-05T04:32:57.692835+00:00",
+    "event": "step_completed",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-a244729eab8242638c1d705ee9e377b3",
+    "parent_step_id": "s-4921824304114054b54d750d03a95027",
+    "node_id": "repairer",
+    "round": 1,
+    "phase": "development",
+    "evidence_ids": [
+      "test-baseline"
+    ],
+    "status": "ok",
+    "call_id": "m-66f97062cff54471a755d41da84ac995",
+    "artifact_path": "calls/m-66f97062cff54471a755d41da84ac995",
+    "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+    "failure_class": null,
+    "duration_ms": 40
+  },
+  {
+    "sequence": 11,
+    "created_at": "2026-11-05T04:32:57.705937+00:00",
+    "event": "step_started",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-e580d28385dc47568391f2110588f1a2",
+    "parent_step_id": "s-a244729eab8242638c1d705ee9e377b3",
+    "node_id": "apply_candidate",
+    "round": 1,
+    "phase": "development",
+    "evidence_ids": [
+      "test-baseline"
+    ]
+  },
+  {
+    "sequence": 12,
+    "created_at": "2026-11-05T04:32:57.775246+00:00",
+    "event": "candidate_applied",
+    "round": 1,
+    "project": "leap",
+    "base_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+    "candidate_version": "sha256:f43886a0551747805a86ebcdc8e21bda80b88aed730426f168212af73578b1f6",
+    "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "frozen_file_sha256": {
+      "tests/test_leap.py": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+    },
+    "changes": [
+      {
+        "path": "code/leap_year.py",
+        "new_content": "\"\"\"死循环夹具B：函数调用不返回，模拟被测逻辑卡死。\"\"\"\n\n\ndef is_leap(year):\n    while True:\n        pass\n"
+      }
+    ],
+    "test_sha256": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+  },
+  {
+    "sequence": 13,
+    "created_at": "2026-11-05T04:32:57.788687+00:00",
+    "event": "step_completed",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-e580d28385dc47568391f2110588f1a2",
+    "parent_step_id": "s-a244729eab8242638c1d705ee9e377b3",
+    "node_id": "apply_candidate",
+    "round": 1,
+    "phase": "development",
+    "evidence_ids": [
+      "test-baseline"
+    ],
+    "status": "ok",
+    "code_version": "sha256:f43886a0551747805a86ebcdc8e21bda80b88aed730426f168212af73578b1f6",
+    "artifact_path": "patch-1",
+    "duration_ms": 82
+  },
+  {
+    "sequence": 14,
+    "created_at": "2026-11-05T04:32:57.803317+00:00",
+    "event": "step_started",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-6b09bca72da6449fb98d4a3da736ac58",
+    "parent_step_id": "s-e580d28385dc47568391f2110588f1a2",
+    "node_id": "pytest",
+    "round": 1,
+    "phase": "development",
+    "evidence_ids": [
+      "test-baseline"
+    ]
+  },
+  {
+    "sequence": 15,
+    "created_at": "2026-11-05T04:33:00.096902+00:00",
+    "event": "control_requested",
+    "action": "stop",
+    "effective_action": "stop"
+  },
+  {
+    "sequence": 16,
+    "created_at": "2026-11-05T04:33:00.111481+00:00",
+    "event": "finished",
+    "status": "interrupted",
+    "result": {
+      "final_result": "not_run",
+      "reason": "操作员请求中断，禁止后续派发；在途工具清理与HTTP费用仍需确认，不自动重放",
+      "handling_status": "pending_human"
+    }
+  },
+  {
+    "sequence": 17,
+    "created_at": "2026-11-05T04:33:01.451340+00:00",
+    "event": "test_completed",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-6b09bca72da6449fb98d4a3da736ac58",
+    "parent_step_id": "s-e580d28385dc47568391f2110588f1a2",
+    "node_id": "pytest",
+    "round": 1,
+    "phase": "development",
+    "evidence_ids": [
+      "test-baseline"
+    ],
+    "evidence_id": "test-development-1",
+    "evidence_path": "development-1",
+    "call_id": "codefix-6ba46380d2de491a815c66731077ac69",
+    "exit_code": null,
+    "timed_out": true,
+    "duration_ms": 2263,
+    "stdout_path": "trusted-run/stdout.txt",
+    "stderr_path": "trusted-run/stderr.txt",
+    "command": [
+      "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.EXE",
+      "run",
+      "--mount",
+      "type=volume,source=codefix-rpc-5328ae4c94a74e62a98e1b38cfc4076e,target=/rpc,readonly",
+      "-i",
+      "--name",
+      "codefix-6ba46380d2de491a815c66731077ac69",
+      "--pull=never",
+      "--network=none",
+      "--read-only",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--pids-limit=64",
+      "--memory=256m",
+      "--memory-swap=256m",
+      "--cpus=1",
+      "--user=65534:65534",
+      "--ulimit=nofile=128:128",
+      "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+      "--log-driver=none",
+      "--mount",
+      "type=volume,source=codefix-out-dfedc06ea48945aab376ff7535957fcf,target=/out",
+      "--mount",
+      "type=bind,source=C:\\Users\\yang0\\AppData\\Local\\Temp\\codefix-rt-eos7orbq\\operator-stop\\store\\run-39333df9bdea4c969397e7cb2c5b37f4\\development-1\\trusted-tests,target=/w,readonly",
+      "--mount",
+      "type=bind,source=C:\\Users\\yang0\\Documents\\Codex\\2026-10-31\\wo\\projects\\Code-Fix-main\\Code-Fix-main\\c_runner\\pytest_entry.py,target=/entry.py,readonly",
+      "--mount",
+      "type=bind,source=C:\\Users\\yang0\\Documents\\Codex\\2026-10-31\\wo\\projects\\Code-Fix-main\\Code-Fix-main\\docker\\candidate_entry.py,target=/harness.py,readonly",
+      "--workdir=/w",
+      "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+      "--env=PYTHONDONTWRITEBYTECODE=1",
+      "--entrypoint=python",
+      "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+      "-I",
+      "-B",
+      "-X",
+      "utf8",
+      "/harness.py",
+      "tests"
+    ],
+    "artifact_channel": null,
+    "artifact_error": null,
+    "artifact_detail": null,
+    "cleanup_passed": true,
+    "output_volume": "codefix-out-dfedc06ea48945aab376ff7535957fcf",
+    "code_version": "sha256:f43886a0551747805a86ebcdc8e21bda80b88aed730426f168212af73578b1f6",
+    "project": "leap",
+    "execution_mode": "docker-split-rpc",
+    "isolation_ready": true,
+    "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "expected_test_count": 4,
+    "junit_path": "trusted-run/output/junit.xml",
+    "structured_path": "trusted-run/output/pytest_events.json",
+    "evidence_matches_current_version": true,
+    "trust_boundary": "separate_candidate_and_test_containers",
+    "candidate_audit": {
+      "container": "codefix-candidate-a57ad42f68004c3a84b436c9464b407b",
+      "logs_captured": true,
+      "events": [],
+      "event_kinds": [],
+      "fake_report_output": false,
+      "violation": null,
+      "reason": null
+    },
+    "runner_classification": {
+      "status": null,
+      "verification_status": null,
+      "failure_class": null,
+      "reason": null
+    },
+    "status": "timeout",
+    "verification_status": "inconclusive",
+    "failure_class": "timeout",
+    "reason": "运行超时，已强制终止容器"
+  },
+  {
+    "sequence": 18,
+    "created_at": "2026-11-05T04:33:01.469899+00:00",
+    "event": "step_completed",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-6b09bca72da6449fb98d4a3da736ac58",
+    "parent_step_id": "s-e580d28385dc47568391f2110588f1a2",
+    "node_id": "pytest",
+    "round": 1,
+    "phase": "development",
+    "evidence_ids": [
+      "test-baseline"
+    ],
+    "status": "ok",
+    "verification_status": "inconclusive",
+    "evidence_id": "test-development-1",
+    "failure_class": "timeout",
+    "evidence_path": "development-1",
+    "code_version": "sha256:f43886a0551747805a86ebcdc8e21bda80b88aed730426f168212af73578b1f6",
+    "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "registered_test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "duration_ms": 3665
+  },
+  {
+    "sequence": 19,
+    "created_at": "2026-11-05T04:33:01.484816+00:00",
+    "event": "step_started",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-da52985e318e4d7e8130736e879f410c",
+    "parent_step_id": "s-6b09bca72da6449fb98d4a3da736ac58",
+    "node_id": "program_dispatch",
+    "round": 1,
+    "phase": "development",
+    "evidence_ids": [
+      "test-development-1"
+    ]
+  },
+  {
+    "sequence": 20,
+    "created_at": "2026-11-05T04:33:01.499446+00:00",
+    "event": "decision",
+    "artifact_path": "trace/decisions/d-6fd6149f48464c939969ecde2497977e.json",
+    "action": "stop",
+    "rule_id": "V3_OPERATOR_STOP",
+    "reason": "按用户请求在步骤边界停止推进",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-da52985e318e4d7e8130736e879f410c",
+    "parent_step_id": "s-6b09bca72da6449fb98d4a3da736ac58",
+    "node_id": "program_dispatch",
+    "round": 1,
+    "phase": "development",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "decision_id": "d-6fd6149f48464c939969ecde2497977e",
+    "program_decision": {
+      "action": "stop",
+      "rule_id": "V3_OPERATOR_STOP",
+      "reason": "按用户请求在步骤边界停止推进"
+    },
+    "model_advice": null,
+    "effective_action": "stop",
+    "target_agent": null,
+    "override_reason": null,
+    "code_version": "sha256:f43886a0551747805a86ebcdc8e21bda80b88aed730426f168212af73578b1f6",
+    "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "counters": {
+      "model_calls": 1,
+      "tool_calls": 2,
+      "rounds_used": 1,
+      "cost": {
+        "status": "not_applicable",
+        "amount_usd": null
+      },
+      "remaining_seconds": 290.72703109999975,
+      "limits": {
+        "max_rounds": 3,
+        "max_calls": 12,
+        "total_seconds": 300
+      }
+    }
+  },
+  {
+    "sequence": 21,
+    "created_at": "2026-11-05T04:33:01.517678+00:00",
+    "event": "step_completed",
+    "trace_version": "1.0.0",
+    "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+    "step_id": "s-da52985e318e4d7e8130736e879f410c",
+    "parent_step_id": "s-6b09bca72da6449fb98d4a3da736ac58",
+    "node_id": "program_dispatch",
+    "round": 1,
+    "phase": "development",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "status": "ok",
+    "effective_action": "stop",
+    "decision_id": "d-6fd6149f48464c939969ecde2497977e",
+    "duration_ms": 28
+  },
+  {
+    "sequence": 22,
+    "created_at": "2026-11-05T04:33:01.534591+00:00",
+    "event": "handoff_created",
+    "handling_status": "pending_human",
+    "artifact_path": "handoff.json",
+    "reason": "按用户请求在步骤边界停止推进"
+  }
+]

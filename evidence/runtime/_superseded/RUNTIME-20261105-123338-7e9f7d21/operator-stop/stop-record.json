@@ -1,0 +1,42 @@
+{
+  "mode": "operator_stop",
+  "run_id": "run-9bfc41a186c84802a7128690ef04253a",
+  "final_status": "interrupted",
+  "final_control": "stop",
+  "interrupt_at_s": 9.88,
+  "workflow_returned_at_s": 11.34,
+  "seconds_from_interrupt_to_return": 1.46,
+  "containers_at_stop": [
+    "codefix-7d25d4bb6ff642038fae91af71c0a4f3|Up 2 seconds|512bc2a4e681",
+    "codefix-candidate-d22152b398334125a61fe49dec47b791|Up 3 seconds|512bc2a4e681"
+  ],
+  "volumes_at_stop": [
+    "codefix-out-33fbe5f2904d45e4ac01d0632821952d",
+    "codefix-rpc-71b28921ad2541edb065a58b8c53737c"
+  ],
+  "containers_after": [],
+  "volumes_after": [],
+  "test_phases": [
+    "development",
+    "development"
+  ],
+  "model_roles": [
+    "repairer"
+  ],
+  "workflow_return": "stopped",
+  "workflow_error": null,
+  "workflow_traceback": null,
+  "criteria": {
+    "inflight_test_not_passed": true,
+    "inflight_test_killed": true,
+    "final_status_interrupted": true,
+    "control_is_stop": true,
+    "container_was_running_at_stop": true,
+    "no_final_check_dispatch": true,
+    "no_phase_after_stop": true,
+    "no_container_left": true,
+    "no_volume_left": true,
+    "stopped_promptly": true
+  },
+  "ok": true
+}

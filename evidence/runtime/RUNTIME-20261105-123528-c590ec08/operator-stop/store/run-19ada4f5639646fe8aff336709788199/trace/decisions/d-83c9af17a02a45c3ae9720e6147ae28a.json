@@ -1,0 +1,42 @@
+{
+  "action": "stop",
+  "rule_id": "V3_OPERATOR_STOP",
+  "reason": "按用户请求在步骤边界停止推进",
+  "trace_version": "1.0.0",
+  "run_id": "run-19ada4f5639646fe8aff336709788199",
+  "step_id": "s-17cbb0f2134a41eba6812341cd610c11",
+  "parent_step_id": "s-5f1f9d2fdeb946ee94289d5370231b6f",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "development",
+  "evidence_ids": [
+    "test-development-1"
+  ],
+  "decision_id": "d-83c9af17a02a45c3ae9720e6147ae28a",
+  "program_decision": {
+    "action": "stop",
+    "rule_id": "V3_OPERATOR_STOP",
+    "reason": "按用户请求在步骤边界停止推进"
+  },
+  "model_advice": null,
+  "effective_action": "stop",
+  "target_agent": null,
+  "override_reason": null,
+  "code_version": "sha256:9e2397331b01b8e5867b6f91b230b6c970d4eca57927b5664a3020e83a168894",
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "counters": {
+    "model_calls": 1,
+    "tool_calls": 2,
+    "rounds_used": 1,
+    "cost": {
+      "status": "not_applicable",
+      "amount_usd": null
+    },
+    "remaining_seconds": 288.7816684999998,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="4" time="15.186" timestamp="2026-11-05T04:32:32.476401+00:00" hostname="d1c5a926b77c"><testcase classname="tests.test_leap" name="test_2024_is_leap" time="5.006"><failure message="TimeoutError: timed out">def test_2024_is_leap():
+&gt;       assert is_leap(2024) is True
+
+tests/test_leap.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+code/leap_year.py:31: in is_leap
+    return invoke('is_leap', args, kwargs)
+code/leap_year.py:22: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7343ceafba90&gt;
+b = &lt;memory at 0x7343cdfb53c0&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="tests.test_leap" name="test_2023_is_not_leap" time="5.005"><failure message="TimeoutError: timed out">def test_2023_is_not_leap():
+&gt;       assert is_leap(2023) is False
+
+tests/test_leap.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+code/leap_year.py:31: in is_leap
+    return invoke('is_leap', args, kwargs)
+code/leap_year.py:22: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7343ce34edd0&gt;
+b = &lt;memory at 0x7343cdfb5840&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="tests.test_leap" name="test_1900_is_not_leap" time="5.006"><failure message="TimeoutError: timed out">def test_1900_is_not_leap():
+&gt;       assert is_leap(1900) is False
+
+tests/test_leap.py:21: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+code/leap_year.py:31: in is_leap
+    return invoke('is_leap', args, kwargs)
+code/leap_year.py:22: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7343cdf45ab0&gt;
+b = &lt;memory at 0x7343cdfb5c00&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="tests.test_leap" name="test_2000_is_leap" time="0.000"><failure message="BlockingIOError: [Errno 11] Resource temporarily unavailable">def test_2000_is_leap():
+&gt;       assert is_leap(2000) is True
+
+tests/test_leap.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+code/leap_year.py:31: in is_leap
+    return invoke('is_leap', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'is_leap', args = (2000,), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) &gt; 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+&gt;                   client.connect('/rpc/channel.sock')
+E                   BlockingIOError: [Errno 11] Resource temporarily unavailable
+
+code/leap_year.py:14: BlockingIOError</failure></testcase></testsuite></testsuites>

@@ -63,7 +63,13 @@ def test_docker_transport_uses_filesystem_api_before_reaping_container(tmp_path,
     result = runner._execute(work, output, ['/harness.py'], 2, folder)
     assert result['artifact_channel'] == 'docker-cp'
     assert (output / 'junit.xml').read_bytes() == b'{}'
-    assert [x[1] for x in commands[1:]] == ['cp', 'cp', 'inspect', 'rm']
+    # Docker Desktop/WSL2 上 docker cp 读不到 --tmpfs，/out 改用 tmpfs 后端的命名卷：
+    # 先 volume create，再 docker run，最后容器销毁后 volume rm。
+    assert [x[1] for x in commands] == ['volume', 'run', 'cp', 'cp', 'inspect', 'rm', 'volume']
+    assert commands[0][2] == 'create' and commands[-1][2] == 'rm'
+    joined = ' '.join(commands[1])
+    assert 'type=volume,source=' in joined and '--tmpfs=/out' not in joined
+    assert result['cleanup_passed'] is True
 
 
 def test_docker_readiness_without_report_is_rejected_and_cleaned(tmp_path, monkeypatch):
@@ -84,7 +90,7 @@ def test_docker_readiness_without_report_is_rejected_and_cleaned(tmp_path, monke
     monkeypatch.setattr('app.docker_runner.subprocess.run', execute)
     result = runner._execute(work, output, ['/harness.py'], 2, folder)
     assert result['artifact_channel'] == 'rejected'
-    assert calls == ['cp', 'inspect', 'rm']
+    assert calls == ['volume', 'cp', 'inspect', 'rm', 'volume']
     assert not (output / 'junit.xml').exists()
 
 
@@ -104,7 +110,7 @@ def test_docker_inspect_failure_still_attempts_cleanup(tmp_path, monkeypatch):
     monkeypatch.setattr('app.docker_runner.subprocess.Popen', Process)
     monkeypatch.setattr('app.docker_runner.subprocess.run', execute)
     result = runner._execute(*paths[:2], ['-c', 'pass'], 2, paths[2])
-    assert calls == ['inspect', 'rm']
+    assert calls == ['volume', 'inspect', 'rm', 'volume']
     assert result['exit_code'] == 0 and result['cleanup_passed']
     assert 'TimeoutExpired' in (paths[2] / 'cleanup.json').read_text()
 

@@ -14,6 +14,7 @@ import httpx
 import pytest
 from fastapi.testclient import TestClient
 
+from app import providers as providers_module
 from app.api import create_app
 from app.config import ConfigError
 from app.live_model import Ledger, LiveModel, ModelBlocked
@@ -230,6 +231,9 @@ def profiles_root(tmp_path, monkeypatch):
                'max_input_tokens': 16000, 'max_output_tokens': 1000, 'token_limit_parameter': 'max_tokens'}
     second = dict(profile, provider_id='b', model='offline-model-b', base_url='https://b.invalid/v1',
                   api_key_env='CODE_FIX_B_KEY', token_limit_parameter='max_completion_tokens')
+    # 主机白名单来自代码登记表：测试用的假服务商需显式登记，生产配置无法自带放行。
+    monkeypatch.setitem(providers_module.PROVIDERS, 'a', {'hosts': ('a.invalid',)})
+    monkeypatch.setitem(providers_module.PROVIDERS, 'b', {'hosts': ('b.invalid',)})
     (root / 'configs/model_profiles.json').write_text(json.dumps({'schema_version': '1.0.0', 'profiles': {'a': profile, 'b': second}}), encoding='utf-8')
     path = root / 'configs/agents.json'
     data = json.loads(path.read_text(encoding='utf-8'))

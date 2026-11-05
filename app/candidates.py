@@ -9,8 +9,6 @@ from .runner import code_version
 from .security import validate_changes
 from .tasks_v3 import FORBIDDEN, get_task
 
-SOURCE = 'code/leap_year.py'
-
 
 def apply_candidate(base, destination, changes, evidence_dir, *, project='leap'):
     base, destination, evidence_dir = Path(base), Path(destination), Path(evidence_dir)
@@ -38,7 +36,12 @@ def apply_candidate(base, destination, changes, evidence_dir, *, project='leap')
               'test_suite_version': task.summary()['test_suite_version'],
               'frozen_file_sha256': {p: h for p, h in task.profile['approved_files'].items() if p != source},
               'changes': changes}
-    if project == 'leap':
-        record['test_sha256'] = hashlib.sha256((destination / 'tests/test_leap.py').read_bytes()).hexdigest()
+    # test_paths may name files or directories. Only hash registered test files.
+    record['test_sha256'] = {
+        path: hashlib.sha256((destination / path).read_bytes()).hexdigest()
+        for path in sorted(task.profile['approved_files'])
+        if any(path == test or path.startswith(test.rstrip('/') + '/')
+               for test in task.profile['test_paths'])
+    }
     (evidence_dir / 'candidate.json').write_text(json.dumps(record, ensure_ascii=False, indent=2), encoding='utf-8')
     return record

@@ -1,0 +1,31 @@
+{
+  "mode": "operator_stop",
+  "run_id": "run-293cb151017d46dc98350f0e7c8c4ca9",
+  "final_status": "paused",
+  "final_control": null,
+  "interrupt_at_s": null,
+  "workflow_returned_at_s": 5.75,
+  "seconds_from_interrupt_to_return": null,
+  "containers_at_stop": [],
+  "volumes_at_stop": [],
+  "containers_after": [],
+  "volumes_after": [],
+  "test_phases": [
+    "development"
+  ],
+  "model_roles": [],
+  "workflow_return": "paused",
+  "workflow_error": null,
+  "workflow_traceback": null,
+  "criteria": {
+    "final_status_interrupted": false,
+    "control_is_stop": false,
+    "container_was_running_at_stop": false,
+    "no_final_check_dispatch": true,
+    "no_phase_after_stop": true,
+    "no_container_left": true,
+    "no_volume_left": true,
+    "stopped_promptly": false
+  },
+  "ok": false
+}

@@ -1,0 +1,59 @@
+{
+  "source_files": 398,
+  "source_matches_snapshot": true,
+  "source_snapshot_sha256": "6e7c8241d5c2c9c88e47da8424ae6e83122a5ed07a4d31e401a9bc03c49909b6",
+  "results": {
+    "doctor": "passed",
+    "validate_config": "passed",
+    "platform_pytest": {
+      "collected": 363,
+      "passed": 362,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "node_ui": {
+      "tests": 23,
+      "pass": 23,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "c_controls": 12,
+    "repair_gates": {
+      "collected": 25,
+      "passed": 25,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "incoming_evidence": {
+    "incoming_ref": "origin/codex/b-real-docker-5-items-20261105",
+    "incoming_commit": "64ee1e50f015ad7e2bca5f9109076192b1429783",
+    "qualification_hashes_passed": 15,
+    "live_run_hashes_passed": 8,
+    "archive_hashes_passed": 1,
+    "b_manifest_retained": true,
+    "b_manifest_mismatches_against_delivered_commit": [],
+    "b_manifest_mismatches_against_integration": [
+      "app/docker_runner.py",
+      "app/split_runner.py",
+      "docker/candidate_rpc.py",
+      "docs/2026-11-03_项目持续维护/持续交付与变更记录.md",
+      "scripts/docker_baselines.py",
+      "scripts/docker_isolation_extra_tests.ps1",
+      "scripts/evidence_sha256.py",
+      "tests/fixtures/malicious/a_fake_output_exit0.py",
+      "tests/fixtures/malicious/b_fork_orphan.py",
+      "tests/fixtures/malicious/c_tamper_tests.py",
+      "tests/fixtures/malicious/d_forged_artifacts.py",
+      "tests/fixtures/runtime/hang_in_call.py",
+      "tests/fixtures/runtime/hang_on_import.py"
+    ],
+    "note": "Historical source manifest is not regenerated. Source/doc differences are versioned integration changes; mismatches already present on B branch are reported separately."
+  },
+  "model_api_called": false,
+  "docker_execution_performed": false
+}

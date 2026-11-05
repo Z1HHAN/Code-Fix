@@ -1,0 +1,68 @@
+name: docker-isolation-evidence
+
+services:
+  isolation-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: docker-isolation-evidence:test-current
+    container_name: docker-isolation-test
+    user: "10000:10000"
+    privileged: false
+    read_only: true
+    init: true
+    mem_limit: 256m
+    memswap_limit: 256m
+    cpus: "0.50"
+    pids_limit: 128
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+      # seccomp 不在此显式指定：Docker Engine 默认施加 builtin profile。
+      # "seccomp:default" 不是合法取值，会被当作 profile 文件路径解析并导致启动失败。
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=64m
+      - /run:rw,noexec,nosuid,nodev,size=16m
+    networks:
+      - isolation_net
+    restart: "no"
+
+  peer:
+    image: docker-isolation-evidence:test-current
+    container_name: docker-isolation-peer
+    user: "10000:10000"
+    privileged: false
+    read_only: true
+    init: true
+    mem_limit: 128m
+    memswap_limit: 128m
+    cpus: "0.25"
+    pids_limit: 64
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+      # seccomp 不在此显式指定：Docker Engine 默认施加 builtin profile。
+      # "seccomp:default" 不是合法取值，会被当作 profile 文件路径解析并导致启动失败。
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=32m
+      - /run:rw,noexec,nosuid,nodev,size=16m
+    entrypoint: []
+    command:
+      - /bin/sh
+      - -c
+      - >-
+        while :; do
+        printf 'HTTP/1.1 200 OK\r\nContent-Length: 5\r\nConnection: close\r\n\r\nREADY'
+        | nc -l -p 8080;
+        done
+    networks:
+      - isolation_net
+    restart: "no"
+
+networks:
+  isolation_net:
+    driver: bridge
+    internal: true
+    attachable: false

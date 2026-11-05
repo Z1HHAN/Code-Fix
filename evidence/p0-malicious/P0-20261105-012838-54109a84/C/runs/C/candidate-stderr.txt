@@ -1,0 +1,12 @@
+TAMPER_DENIED /w/tests/test_leap.py OSError
+TAMPER_DENIED tests/test_leap.py OSError
+TAMPER_DENIED /tests/test_leap.py OSError
+TAMPER_DENIED /w/tests/test_leap.py OSError
+TAMPER_DENIED tests/test_leap.py OSError
+TAMPER_DENIED /tests/test_leap.py OSError
+TAMPER_DENIED /w/tests/test_leap.py OSError
+TAMPER_DENIED tests/test_leap.py OSError
+TAMPER_DENIED /tests/test_leap.py OSError
+TAMPER_DENIED /w/tests/test_leap.py OSError
+TAMPER_DENIED tests/test_leap.py OSError
+TAMPER_DENIED /tests/test_leap.py OSError

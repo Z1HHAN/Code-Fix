@@ -1,0 +1,298 @@
+[
+    {
+        "Id": "532ed66b0a8d5cb0efd57d5dff8b9a455e11403b69bb9b9fb84ed1f99cd395c8",
+        "Created": "2026-11-05T04:22:41.458060955Z",
+        "Path": "python",
+        "Args": [
+            "-I",
+            "-B",
+            "-X",
+            "utf8",
+            "/harness.py",
+            "tests"
+        ],
+        "State": {
+            "Status": "exited",
+            "Running": false,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 0,
+            "ExitCode": 1,
+            "Error": "",
+            "StartedAt": "2026-11-05T04:22:41.583379562Z",
+            "FinishedAt": "2026-11-05T04:22:42.643380478Z"
+        },
+        "Image": "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+        "ResolvConfPath": "/var/lib/docker/containers/532ed66b0a8d5cb0efd57d5dff8b9a455e11403b69bb9b9fb84ed1f99cd395c8/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/532ed66b0a8d5cb0efd57d5dff8b9a455e11403b69bb9b9fb84ed1f99cd395c8/hostname",
+        "HostsPath": "/var/lib/docker/containers/532ed66b0a8d5cb0efd57d5dff8b9a455e11403b69bb9b9fb84ed1f99cd395c8/hosts",
+        "LogPath": "",
+        "Name": "/codefix-56ea78ffaaeb44ce88d38fddb03809e2",
+        "RestartCount": 0,
+        "Driver": "overlayfs",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "none",
+                "Config": {}
+            },
+            "NetworkMode": "none",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": [
+                "ALL"
+            ],
+            "CgroupnsMode": "private",
+            "Dns": null,
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": true,
+            "SecurityOpt": [
+                "no-new-privileges"
+            ],
+            "Tmpfs": {
+                "/tmp": "rw,noexec,nosuid,size=67108864"
+            },
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 268435456,
+            "NanoCpus": 1000000000,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 268435456,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": 64,
+            "Ulimits": [
+                {
+                    "Name": "nofile",
+                    "Hard": 128,
+                    "Soft": 128
+                }
+            ],
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "Mounts": [
+                {
+                    "Type": "volume",
+                    "Source": "codefix-rpc-6c5c3dc723fd4417a3c72253c8930c4e",
+                    "Target": "/rpc",
+                    "ReadOnly": true
+                },
+                {
+                    "Type": "volume",
+                    "Source": "codefix-out-6dc509fff16f48599b1ef21b5330eda6",
+                    "Target": "/out"
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/evidence/baseline/BASELINE-20261105-122233-5c2c546e/leap/run/trusted-tests",
+                    "Target": "/w",
+                    "ReadOnly": true
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/c_runner/pytest_entry.py",
+                    "Target": "/entry.py",
+                    "ReadOnly": true
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/docker/candidate_entry.py",
+                    "Target": "/harness.py",
+                    "ReadOnly": true
+                }
+            ],
+            "MaskedPaths": [
+                "/proc/acpi",
+                "/proc/asound",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/sys/devices/virtual/powercap",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "Storage": {
+            "RootFS": {
+                "Snapshot": {
+                    "Name": "overlayfs"
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/c_runner/pytest_entry.py",
+                "Destination": "/entry.py",
+                "Mode": "",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/docker/candidate_entry.py",
+                "Destination": "/harness.py",
+                "Mode": "",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "volume",
+                "Name": "codefix-out-6dc509fff16f48599b1ef21b5330eda6",
+                "Source": "/var/lib/docker/volumes/codefix-out-6dc509fff16f48599b1ef21b5330eda6/_data",
+                "Destination": "/out",
+                "Driver": "local",
+                "Mode": "z",
+                "RW": true,
+                "Propagation": ""
+            },
+            {
+                "Type": "volume",
+                "Name": "codefix-rpc-6c5c3dc723fd4417a3c72253c8930c4e",
+                "Source": "/var/lib/docker/volumes/codefix-rpc-6c5c3dc723fd4417a3c72253c8930c4e/_data",
+                "Destination": "/rpc",
+                "Driver": "local",
+                "Mode": "z",
+                "RW": false,
+                "Propagation": ""
+            },
+            {
+                "Type": "bind",
+                "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/evidence/baseline/BASELINE-20261105-122233-5c2c546e/leap/run/trusted-tests",
+                "Destination": "/w",
+                "Mode": "",
+                "RW": false,
+                "Propagation": "rprivate"
+            }
+        ],
+        "Config": {
+            "Hostname": "532ed66b0a8d",
+            "Domainname": "",
+            "User": "65534:65534",
+            "AttachStdin": true,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "Tty": false,
+            "OpenStdin": true,
+            "StdinOnce": true,
+            "Env": [
+                "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+                "PYTHONDONTWRITEBYTECODE=1",
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "PYTHON_VERSION=3.14.10",
+                "PYTHON_SHA256=de414a57119abef52784d8993e341d53aed635fc2b05c2607d9f98a2c5b72032"
+            ],
+            "Cmd": [
+                "-I",
+                "-B",
+                "-X",
+                "utf8",
+                "/harness.py",
+                "tests"
+            ],
+            "Image": "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+            "Volumes": null,
+            "WorkingDir": "/w",
+            "Entrypoint": [
+                "python"
+            ],
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "SandboxID": "",
+            "SandboxKey": "",
+            "Ports": {},
+            "Networks": {
+                "none": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "6747954da13220d727dd173986d9019453c8b5cef8d729f92184503df22ba2f2",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:1aa1f3f61979ad4766ac0e6ea64558beebfb9416d0cb8637d0cdf692f9404cea",
+            "size": 1434,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        }
+    }
+]

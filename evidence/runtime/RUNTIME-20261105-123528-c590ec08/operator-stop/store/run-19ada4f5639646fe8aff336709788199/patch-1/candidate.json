@@ -1,0 +1,16 @@
+{
+  "project": "leap",
+  "base_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+  "candidate_version": "sha256:9e2397331b01b8e5867b6f91b230b6c970d4eca57927b5664a3020e83a168894",
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "frozen_file_sha256": {
+    "tests/test_leap.py": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+  },
+  "changes": [
+    {
+      "path": "code/leap_year.py",
+      "new_content": "\"\"\"第4项夹具B：函数内死循环。\n\n模块可以正常导入、RPC 服务可以启动，但被调用函数永不返回，\n用于验证可信测试侧按单次 RPC 上限收敛、runner 不会无限等待。\n\"\"\"\n\n\ndef is_leap(year):\n    while True:\n        pass"
+    }
+  ],
+  "test_sha256": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+}

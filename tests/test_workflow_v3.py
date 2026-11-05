@@ -4,11 +4,12 @@ from pathlib import Path
 
 import pytest
 
-from app.candidates import SOURCE, apply_candidate
+from app.candidates import apply_candidate
 from app.docker_runner import DockerRunner
 from app.runner import code_version, prepare_fixture
 from app.run_store import RunStore
 from app.workflow_v3 import Workflow
+from app.tasks_v3 import get_task
 
 
 class ExecutorStub:
@@ -52,7 +53,7 @@ class ModelStub:
         else:
             role = 'repairer'
             synthetic = ('def is_leap(year):\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\n'
-                         if source == SOURCE else '# OFFLINE STUB: not a verified repair\n' + content)
+                         if source == get_task('leap').source else '# OFFLINE STUB: not a verified repair\n' + content)
             output = common | {'explanation': 'synthetic candidate', 'changes': [{'path': source, 'new_content': synthetic}]}
         self.roles.append(role)
         return {'status': 'ok', 'mode': 'test_stub', 'model_api_called': False, 'raw_text': json.dumps(output)}
@@ -109,8 +110,9 @@ def test_patch_permissions_and_no_overwrite(tmp_path):
     base = prepare_fixture('leap_original', tmp_path / 'base')
     with pytest.raises(ValueError):
         apply_candidate(base, tmp_path / 'bad', [{'path': 'tests/test_leap.py', 'new_content': ''}], tmp_path / 'evidence')
-    result = apply_candidate(base, tmp_path / 'candidate', [{'path': SOURCE, 'new_content': 'x=1\n'}], tmp_path / 'evidence')
-    assert result['candidate_version'] != code_version(base, (SOURCE,))
+    source = get_task('leap').source
+    result = apply_candidate(base, tmp_path / 'candidate', [{'path': source, 'new_content': 'x=1\n'}], tmp_path / 'evidence')
+    assert result['candidate_version'] != code_version(base, (source,))
     assert (base / 'tests/test_leap.py').read_bytes() == (tmp_path / 'candidate/tests/test_leap.py').read_bytes()
 
 

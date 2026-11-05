@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run-293cb151017d46dc98350f0e7c8c4ca9",
+  "handling_status": "pending_human",
+  "automation_stopped": true,
+  "run_status": "paused",
+  "reason": "依赖、测试收集、命令或执行环境异常，交C诊断；不让修复员改业务代码凑通过。",
+  "project": "leap",
+  "mode": "deterministic_stub_for_stop_test",
+  "model_api_called": false,
+  "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+  "code_path": "base/code/leap_year.py",
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "dev_result": "not_run",
+  "final_result": "not_run",
+  "evidence_ids": [
+    "test-baseline"
+  ],
+  "decision_paths": [
+    "trace/decisions/d-dc4ecef688bf43088029e38b831294d3.json",
+    "trace/decisions/d-8a89676a10c04ac2aa3d7877affe251a.json"
+  ],
+  "consumption": {
+    "rounds_used": 0,
+    "model_calls": 0,
+    "tool_calls": 1,
+    "cost": {
+      "status": "not_called",
+      "amount_usd": null
+    }
+  },
+  "limits": {
+    "max_rounds": 3,
+    "max_calls": 12,
+    "total_seconds": 300
+  },
+  "next_steps": [
+    "核对停止原因及关联证据",
+    "B/C对明确代码与测试版本复核",
+    "满足授权与隔离条件后创建新任务；本运行不自动恢复"
+  ],
+  "accepted_by": null
+}

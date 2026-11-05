@@ -1,0 +1,66 @@
+{
+  "stage": "platform_pytest",
+  "argv": [
+    "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "tests",
+    "c_tests",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp=C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\review-fixes\\ca-90bd9812\\p",
+    "--junitxml=C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\runtime-review\\C-acceptance-20261105-193722-c2b62acb\\platform_pytest\\junit.xml"
+  ],
+  "cwd": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix",
+  "started_at": "2026-11-05T19:37:26.785+08:00",
+  "timeout_seconds": 600,
+  "exit_code": 1,
+  "timed_out": false,
+  "status": "failed",
+  "reason": "Test assertions failed; inspect JUnit and raw logs",
+  "stdout_path": "platform_pytest/stdout.txt",
+  "stderr_path": "platform_pytest/stderr.txt",
+  "cleanup": {
+    "parent_reaped": true,
+    "tree_termination_attempted": false,
+    "full_process_tree_verified": false
+  },
+  "pid": 94560,
+  "finished_at": "2026-11-05T19:39:13.463+08:00",
+  "duration_ms": 106678,
+  "junit_path": "platform_pytest/junit.xml",
+  "counts": {
+    "collected": 283,
+    "passed": 281,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 1
+  },
+  "skipped_tests": [
+    {
+      "test": "tests.test_control_boundaries::test_in_root_symlink_is_rejected_before_resolution",
+      "message": "Host does not permit creating symlinks; verify on target host",
+      "type": "pytest.skip",
+      "details": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\tests\\test_control_boundaries.py:35: Host does not permit creating symlinks; verify on target host"
+    }
+  ],
+  "failed_tests": [
+    {
+      "test": "tests.test_siliconflow_budget::test_dpapi_roundtrip_refuses_overwrite_and_env_has_precedence",
+      "kind": "failure",
+      "message": "ValueError: 本机凭证加解密失败；不输出密钥或系统异常内容"
+    }
+  ],
+  "allowed_skips": [
+    {
+      "test": "tests.test_control_boundaries::test_in_root_symlink_is_rejected_before_resolution",
+      "message": "Host does not permit creating symlinks; verify on target host",
+      "type": "pytest.skip",
+      "details": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\tests\\test_control_boundaries.py:35: Host does not permit creating symlinks; verify on target host"
+    }
+  ]
+}

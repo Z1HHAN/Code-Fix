@@ -1,0 +1,396 @@
+{
+  "_evidence_status": "EXECUTED",
+  "schema_version": "1.0",
+  "scan": {
+    "tool": "Docker Scout",
+    "tool_version": "1.27.0",
+    "command": "docker scout cves --format sarif --output 04-scan/image-scan-raw.sarif.json local://docker-isolation-evidence:test-current",
+    "exit_code": 0,
+    "captured_at_utc": "2026-11-04T16:45:04.277Z",
+    "database_updated_at_utc": "not exposed by Docker Scout SARIF output",
+    "target": "docker-isolation-evidence:test-current",
+    "image_id": "sha256:6cceb56a1ad064ab7f3e3c092c42bc1698802160b62bd0382a5e055cfa639c2a",
+    "image_digest": "docker-isolation-evidence@sha256:6cceb56a1ad064ab7f3e3c092c42bc1698802160b62bd0382a5e055cfa639c2a",
+    "source_registry": "local image store",
+    "raw_report": "04-scan/image-scan-raw.sarif.json",
+    "raw_report_sha256": "04beef91c6b8b3ae2c8933d741fcb7387aa5da76296fab921031ec87d1bddab6",
+    "vulnerable_package_count": 4,
+    "vulnerability_count": 18
+  },
+  "vulnerability_summary": {
+    "unspecified": 1,
+    "negligible": 0,
+    "low": 1,
+    "medium": 10,
+    "high": 6,
+    "critical": 0,
+    "unfixed": 17,
+    "total": 18
+  },
+  "findings": [
+    {
+      "id": "CVE-2026-107891",
+      "severity": "UNSPECIFIED",
+      "package": "pkg:apk/alpine/musl@1.2.5-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<1.2.5-r4",
+      "fixed_version": "1.2.5-r4",
+      "epss_score": null,
+      "epss_percentile": null,
+      "locations": [
+        "/lib/apk/db/installed",
+        "/lib/ld-musl-x86_64.so.1",
+        "/sbin/ldconfig",
+        "/usr/bin/getconf",
+        "/usr/bin/getent",
+        "/usr/bin/iconv",
+        "/usr/bin/ldd"
+      ]
+    },
+    {
+      "id": "CVE-2026-119377",
+      "severity": "LOW",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.001180",
+      "epss_percentile": "0.017240",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2026-27456",
+      "severity": "MEDIUM",
+      "package": "pkg:apk/alpine/util-linux@2.40.1-r1?os_name=alpine&os_version=3.20",
+      "affected_range": "<=2.40.1-r1",
+      "fixed_version": "not fixed",
+      "epss_score": "0.001570",
+      "epss_percentile": "0.048770",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/bin/dmesg",
+        "/bin/findmnt",
+        "/bin/getopt",
+        "/bin/lsblk",
+        "/bin/lsfd",
+        "/bin/more",
+        "/bin/mount",
+        "/bin/mountpoint",
+        "/bin/pipesz",
+        "/bin/rev",
+        "/bin/umount",
+        "/bin/wdctl",
+        "/lib/libblkid.so.1.1.0",
+        "/lib/libfdisk.so.1.1.0",
+        "/lib/liblastlog2.so.2.0.0",
+        "/lib/libmount.so.1.1.0",
+        "/lib/libsmartcols.so.1.1.0",
+        "/lib/libuuid.so.1.3.0",
+        "/lib/security/pam_lastlog2.so",
+        "/sbin/agetty",
+        "/sbin/blkdiscard",
+        "/sbin/blkid",
+        "/sbin/blkpr",
+        "/sbin/blkzone",
+        "/sbin/blockdev",
+        "/sbin/cfdisk",
+        "/sbin/chcpu",
+        "/sbin/ctrlaltdel",
+        "/sbin/fdisk",
+        "/sbin/findfs",
+        "/sbin/fsck",
+        "/sbin/fsck.cramfs",
+        "/sbin/fsck.minix",
+        "/sbin/fsfreeze",
+        "/sbin/fstrim",
+        "/sbin/hwclock",
+        "/sbin/losetup",
+        "/sbin/mkfs",
+        "/sbin/mkfs.bfs",
+        "/sbin/mkfs.cramfs",
+        "/sbin/mkfs.minix",
+        "/sbin/mkswap",
+        "/sbin/pivot_root",
+        "/sbin/runuser",
+        "/sbin/sfdisk",
+        "/sbin/swaplabel",
+        "/sbin/swapoff",
+        "/sbin/swapon",
+        "/sbin/switch_root",
+        "/sbin/wipefs",
+        "/sbin/zramctl",
+        "/usr/bin/cal",
+        "/usr/bin/chmem",
+        "/usr/bin/choom",
+        "/usr/bin/chrt",
+        "/usr/bin/colcrt",
+        "/usr/bin/colrm",
+        "/usr/bin/column",
+        "/usr/bin/eject",
+        "/usr/bin/enosys",
+        "/usr/bin/exch",
+        "/usr/bin/fadvise",
+        "/usr/bin/fallocate",
+        "/usr/bin/fincore",
+        "/usr/bin/flock",
+        "/usr/bin/hardlink",
+        "/usr/bin/hexdump",
+        "/usr/bin/ionice",
+        "/usr/bin/ipcmk",
+        "/usr/bin/ipcrm",
+        "/usr/bin/ipcs",
+        "/usr/bin/irqtop",
+        "/usr/bin/isosize",
+        "/usr/bin/lastlog2",
+        "/usr/bin/logger",
+        "/usr/bin/look",
+        "/usr/bin/lsclocks",
+        "/usr/bin/lscpu",
+        "/usr/bin/lsipc",
+        "/usr/bin/lsirq",
+        "/usr/bin/lslocks",
+        "/usr/bin/lsmem",
+        "/usr/bin/lsns",
+        "/usr/bin/mcookie",
+        "/usr/bin/mesg",
+        "/usr/bin/namei",
+        "/usr/bin/nsenter",
+        "/usr/bin/prlimit",
+        "/usr/bin/rename",
+        "/usr/bin/renice",
+        "/usr/bin/script",
+        "/usr/bin/scriptlive",
+        "/usr/bin/scriptreplay",
+        "/usr/bin/setarch",
+        "/usr/bin/setpgid",
+        "/usr/bin/setpriv",
+        "/usr/bin/setsid",
+        "/usr/bin/setterm",
+        "/usr/bin/taskset",
+        "/usr/bin/uclampset",
+        "/usr/bin/ul",
+        "/usr/bin/unshare",
+        "/usr/bin/utmpdump",
+        "/usr/bin/uuidgen",
+        "/usr/bin/uuidparse",
+        "/usr/bin/waitpid",
+        "/usr/bin/wall",
+        "/usr/bin/whereis",
+        "/usr/sbin/addpart",
+        "/usr/sbin/delpart",
+        "/usr/sbin/ldattach",
+        "/usr/sbin/partx",
+        "/usr/sbin/readprofile",
+        "/usr/sbin/resizepart",
+        "/usr/sbin/rfkill",
+        "/usr/sbin/rtcwake"
+      ]
+    },
+    {
+      "id": "CVE-2025-60876",
+      "severity": "MEDIUM",
+      "package": "pkg:apk/alpine/busybox@1.36.1-r31?os_name=alpine&os_version=3.20",
+      "affected_range": "<=1.36.1-r31",
+      "fixed_version": "not fixed",
+      "epss_score": "0.003120",
+      "epss_percentile": "0.241710",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/bin/busybox",
+        "/bin/busybox-extras",
+        "/etc/busybox-paths.d/busybox",
+        "/etc/busybox-paths.d/busybox-extras",
+        "/etc/logrotate.d/acpid",
+        "/etc/network/if-up.d/dad",
+        "/etc/securetty",
+        "/etc/udhcpc/udhcpc.conf",
+        "/etc/udhcpd.conf",
+        "/usr/bin/ssl_client",
+        "/usr/share/udhcpc/default.script"
+      ]
+    },
+    {
+      "id": "CVE-2026-11822",
+      "severity": "MEDIUM",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.001950",
+      "epss_percentile": "0.092680",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2026-119371",
+      "severity": "MEDIUM",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.001990",
+      "epss_percentile": "0.097240",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2026-119372",
+      "severity": "MEDIUM",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.001310",
+      "epss_percentile": "0.027090",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2026-119375",
+      "severity": "MEDIUM",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.001770",
+      "epss_percentile": "0.072740",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2026-119376",
+      "severity": "MEDIUM",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.001830",
+      "epss_percentile": "0.079210",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2026-119378",
+      "severity": "MEDIUM",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.001630",
+      "epss_percentile": "0.055470",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2026-119591",
+      "severity": "MEDIUM",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.001240",
+      "epss_percentile": "0.021170",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2025-3277",
+      "severity": "MEDIUM",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.012520",
+      "epss_percentile": "0.694730",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2025-70873",
+      "severity": "HIGH",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.004680",
+      "epss_percentile": "0.405380",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2026-11824",
+      "severity": "HIGH",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.001820",
+      "epss_percentile": "0.078310",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2026-119373",
+      "severity": "HIGH",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.001440",
+      "epss_percentile": "0.037010",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2026-119374",
+      "severity": "HIGH",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.001840",
+      "epss_percentile": "0.080480",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2026-119379",
+      "severity": "HIGH",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.001840",
+      "epss_percentile": "0.080480",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    },
+    {
+      "id": "CVE-2026-119586",
+      "severity": "HIGH",
+      "package": "pkg:apk/alpine/sqlite@3.45.3-r3?os_name=alpine&os_version=3.20",
+      "affected_range": "<=3.45.3-r3",
+      "fixed_version": "not fixed",
+      "epss_score": "0.008410",
+      "epss_percentile": "0.579390",
+      "locations": [
+        "/lib/apk/db/installed",
+        "/usr/lib/libsqlite3.so.0.8.6"
+      ]
+    }
+  ]
+}

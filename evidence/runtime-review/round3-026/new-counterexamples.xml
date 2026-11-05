@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="6" time="1.799" timestamp="2026-11-05T20:44:26.786770+08:00" hostname="LAPTOP-8477LI5E"><testcase classname="tests.test_runtime_review" name="test_structured_diagnostics_filter_modules_and_keep_logs[stdout_path]" time="0.059"><failure message="KeyError: 'diagnostics'">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rd3b/test_structured_diagnostics_fi0')
+stream = 'stdout_path'
+
+    @pytest.mark.parametrize('stream', ['stdout_path', 'stderr_path'])
+    def test_structured_diagnostics_filter_modules_and_keep_logs(tmp_path, stream):
+        from app.workflow_v3 import WorkflowRun
+        raw = ("E   ModuleNotFoundError: No module named 'numpy.linalg'\n"
+               "E   ImportError: No module named '/private/answer.py'\n"
+               "ErrorType: TypeError\n"
+               "E   AssertionError: expected-answer\n"
+               "E   TokenValueError: confidential\n"
+               "&gt; assert result == 'expected-answer'\n"
+               "assert hidden == 'expected-answer'\n"
+               "  File '/private/trace.py', line 10\n")
+        path = tmp_path / 'log.txt'
+        path.write_text(raw, encoding='utf-8')
+        result = {stream: 'log.txt', 'failure_class': 'environment_error', 'code_version': 'fixture'}
+        ev = WorkflowRun.evidence(result, tmp_path)
+&gt;       diag = json.loads(ev['summary'])['diagnostics']
+E       KeyError: 'diagnostics'
+
+tests\test_runtime_review.py:354: KeyError</failure></testcase><testcase classname="tests.test_runtime_review" name="test_structured_diagnostics_filter_modules_and_keep_logs[stderr_path]" time="0.009"><failure message="KeyError: 'diagnostics'">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rd3b/test_structured_diagnostics_fi1')
+stream = 'stderr_path'
+
+    @pytest.mark.parametrize('stream', ['stdout_path', 'stderr_path'])
+    def test_structured_diagnostics_filter_modules_and_keep_logs(tmp_path, stream):
+        from app.workflow_v3 import WorkflowRun
+        raw = ("E   ModuleNotFoundError: No module named 'numpy.linalg'\n"
+               "E   ImportError: No module named '/private/answer.py'\n"
+               "ErrorType: TypeError\n"
+               "E   AssertionError: expected-answer\n"
+               "E   TokenValueError: confidential\n"
+               "&gt; assert result == 'expected-answer'\n"
+               "assert hidden == 'expected-answer'\n"
+               "  File '/private/trace.py', line 10\n")
+        path = tmp_path / 'log.txt'
+        path.write_text(raw, encoding='utf-8')
+        result = {stream: 'log.txt', 'failure_class': 'environment_error', 'code_version': 'fixture'}
+        ev = WorkflowRun.evidence(result, tmp_path)
+&gt;       diag = json.loads(ev['summary'])['diagnostics']
+E       KeyError: 'diagnostics'
+
+tests\test_runtime_review.py:354: KeyError</failure></testcase><testcase classname="tests.test_runtime_review" name="test_empty_structured_diagnostics_are_explicit_null" time="0.004"><failure message="KeyError: 'diagnostics'">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rd3b/test_empty_structured_diagnost0')
+
+    def test_empty_structured_diagnostics_are_explicit_null(tmp_path):
+        from app.workflow_v3 import WorkflowRun
+        result = {'failure_class': 'passed', 'code_version': 'fixture'}
+&gt;       assert json.loads(WorkflowRun.evidence(result, tmp_path)['summary'])['diagnostics'] is None
+E       KeyError: 'diagnostics'
+
+tests\test_runtime_review.py:366: KeyError</failure></testcase><testcase classname="tests.test_siliconflow_budget" name="test_legacy_alert_migrates_inside_ledger_transaction" time="0.034"><failure message="sqlite3.OperationalError: cannot start a transaction within a transaction">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rd3b/test_legacy_alert_migrates_ins0')
+
+    def test_legacy_alert_migrates_inside_ledger_transaction(tmp_path):
+        path = tmp_path / 'model-ledger.sqlite3'
+        payload = '{"kind":"low_balance","original":"保留原始字节"}'
+        created = '2026-01-01T00:00:00+00:00'
+        with sqlite3.connect(path) as db:
+            db.execute('CREATE TABLE budget_alerts (account_id TEXT,kind TEXT,created_at TEXT,payload TEXT,PRIMARY KEY(account_id,kind))')
+            db.execute('INSERT INTO budget_alerts VALUES (?,?,?,?)', ('account1', 'low_balance', created, payload))
+&gt;       Ledger(tmp_path)
+
+tests\test_siliconflow_budget.py:250: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+app\live_model.py:93: in __init__
+    AccountBudget.initialize(db)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+db = &lt;sqlite3.Connection object at 0x00000206B6A2A5C0&gt;
+
+    @staticmethod
+    def initialize(db):
+        db.execute('''CREATE TABLE IF NOT EXISTS account_limits (
+            account_id TEXT PRIMARY KEY, provider_id TEXT NOT NULL,
+            authorized_microcny INTEGER NOT NULL, warning_microcny INTEGER NOT NULL,
+            team_microcny INTEGER NOT NULL)''')
+        db.execute('''CREATE TABLE IF NOT EXISTS cny_calls (
+            call_id TEXT PRIMARY KEY, run_id TEXT NOT NULL, account_id TEXT NOT NULL,
+            provider_id TEXT NOT NULL, model TEXT NOT NULL, price_version TEXT NOT NULL,
+            created_at TEXT NOT NULL, reserved_microcny INTEGER NOT NULL,
+            actual_microcny INTEGER, status TEXT NOT NULL)''')
+        db.execute('''CREATE TABLE IF NOT EXISTS account_keys (
+            provider_id TEXT NOT NULL, fingerprint TEXT NOT NULL, account_id TEXT NOT NULL,
+            PRIMARY KEY(provider_id,fingerprint))''')
+        # Schema v1→v2: replace (account_id,kind) PK with auto-id so the same
+        # alert kind can cycle active→resolved→active without overwriting history.
+        columns = {r[1] for r in db.execute('PRAGMA table_info(budget_alerts)')} if any(
+            r[0] == 'budget_alerts' for r in db.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='budget_alerts'")) else set()
+        if not columns:
+            db.execute('''CREATE TABLE budget_alerts (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                account_id TEXT NOT NULL, kind TEXT NOT NULL,
+                created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
+                payload TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'active',
+                resolved_at TEXT)''')
+            db.execute('''CREATE UNIQUE INDEX idx_budget_alerts_active
+                         ON budget_alerts(account_id, kind) WHERE status='active' ''')
+        elif 'id' not in columns:
+&gt;           db.execute('BEGIN IMMEDIATE')
+E           sqlite3.OperationalError: cannot start a transaction within a transaction
+
+app\account_budget.py:52: OperationalError</failure></testcase><testcase classname="tests.test_siliconflow_budget" name="test_low_balance_resolves_and_retriggers_without_overwriting_history" time="0.094"><failure message="AssertionError: assert '2.99998' == '3'&#10;  &#10;  - 3&#10;  + 2.99998">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rd3b/test_low_balance_resolves_and_0')
+
+    def test_low_balance_resolves_and_retriggers_without_overwriting_history(tmp_path):
+        ledger, s = Ledger(tmp_path), cny()
+        budget = AccountBudget(ledger.path)
+        ledger.reserve('first', 'run', s, 100, 13_000_000)
+        initial = budget.snapshot()['alerts'][0]
+        assert initial['status'] == 'active' and initial['resolved_at'] is None
+        ledger.settle('first', {'prompt_tokens': 12_000_000, 'completion_tokens': 0}, s)
+        resolved = budget.snapshot()['alerts'][0]
+        assert resolved['status'] == 'resolved' and resolved['resolved_at']
+        assert resolved['created_at'] == initial['created_at']
+        ledger.reserve('second', 'run', s, 100, 1_000_000)
+        state = budget.snapshot()
+        assert [x['status'] for x in state['alerts']] == ['resolved', 'active']
+        assert state['alerts'][0] == resolved
+        active = state['alerts'][1]
+        ledger.settle('second', {'prompt_tokens': 1_000_000, 'completion_tokens': 0}, s)
+        still_low = budget.snapshot()['alerts'][1]
+        assert still_low['status'] == 'active'  # equality with threshold does not resolve
+&gt;       assert still_low['remaining_cny'] == '3'
+E       AssertionError: assert '2.99998' == '3'
+E         
+E         - 3
+E         + 2.99998
+
+tests\test_siliconflow_budget.py:278: AssertionError</failure></testcase><testcase classname="tests.test_siliconflow_budget" name="test_alert_migration_failure_rolls_back_old_schema_and_payload" time="0.051" /></testsuite></testsuites>

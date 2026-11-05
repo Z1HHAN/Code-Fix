@@ -1,0 +1,2 @@
+SUCCESS: The process with PID 16760 (child process of PID 38164) has been terminated.
+SUCCESS: The process with PID 38164 (child process of PID 89504) has been terminated.

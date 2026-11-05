@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+  "handling_status": "pending_human",
+  "automation_stopped": true,
+  "run_status": "stopped",
+  "reason": "按用户请求在步骤边界停止推进",
+  "project": "leap",
+  "mode": "deterministic_stub_for_stop_test",
+  "model_api_called": false,
+  "code_version": "sha256:f43886a0551747805a86ebcdc8e21bda80b88aed730426f168212af73578b1f6",
+  "code_path": "candidate-1/code/leap_year.py",
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "dev_result": "inconclusive",
+  "final_result": "not_run",
+  "evidence_ids": [
+    "test-baseline",
+    "test-development-1"
+  ],
+  "decision_paths": [
+    "trace/decisions/d-6fd6149f48464c939969ecde2497977e.json"
+  ],
+  "consumption": {
+    "rounds_used": 1,
+    "model_calls": 1,
+    "tool_calls": 2,
+    "cost": {
+      "status": "not_applicable",
+      "amount_usd": null
+    }
+  },
+  "limits": {
+    "max_rounds": 3,
+    "max_calls": 12,
+    "total_seconds": 300
+  },
+  "next_steps": [
+    "核对停止原因及关联证据",
+    "B/C对明确代码与测试版本复核",
+    "满足授权与隔离条件后创建新任务；本运行不自动恢复"
+  ],
+  "accepted_by": null
+}

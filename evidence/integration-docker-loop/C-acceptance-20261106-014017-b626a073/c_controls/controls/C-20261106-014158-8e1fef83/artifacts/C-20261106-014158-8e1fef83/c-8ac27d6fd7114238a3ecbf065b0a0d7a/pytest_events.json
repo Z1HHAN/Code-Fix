@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "collected_nodeids": [
+    "tests/test_leap.py::test_2024_is_leap",
+    "tests/test_leap.py::test_2023_is_not_leap",
+    "tests/test_leap.py::test_1900_is_not_leap",
+    "tests/test_leap.py::test_2000_is_leap"
+  ],
+  "collection_errors": [],
+  "reports": [
+    {
+      "nodeid": "tests/test_leap.py::test_2024_is_leap",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2024_is_leap",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2024_is_leap",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2023_is_not_leap",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2023_is_not_leap",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2023_is_not_leap",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_1900_is_not_leap",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_1900_is_not_leap",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "AssertionError",
+      "exception_path": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-docker-loop\\C-acceptance-20261106-014017-b626a073\\c_controls\\controls\\C-20261106-014158-8e1fef83\\artifacts\\C-20261106-014158-8e1fef83\\c-8ac27d6fd7114238a3ecbf065b0a0d7a\\work\\tests\\test_leap.py"
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_1900_is_not_leap",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2000_is_leap",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2000_is_leap",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2000_is_leap",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    }
+  ],
+  "session_finished": true,
+  "exit_code": 1
+}

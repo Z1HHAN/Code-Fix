@@ -1,0 +1,158 @@
+# Network isolation test evidence
+
+## 测试目的
+证明测试容器拥有独立 network namespace，未发布宿主机端口，网络为 internal: true 的独立 bridge（无默认路由、无上游 DNS），缺少 CAP_NET_ADMIN 无法改网络配置；同组 peer 可达证明 bridge 内通信正常，同时容器内无法访问外部网络。
+
+## 执行命令
+
+~~~bash
+CONTAINER=docker-isolation-test
+PEER=docker-isolation-peer
+docker inspect $CONTAINER --format 'NetworkMode={{.HostConfig.NetworkMode}} Ports={{json .NetworkSettings.Ports}} PortBindings={{json .HostConfig.PortBindings}} Networks={{json .NetworkSettings.Networks}}'
+docker exec $CONTAINER readlink /proc/1/ns/net
+docker run --rm --network host --entrypoint /bin/sh docker-isolation-evidence:test-current -c 'readlink /proc/1/ns/net'
+docker exec $CONTAINER ip -brief addr
+docker exec $CONTAINER ip route
+docker inspect $PEER --format 'Running={{.State.Running}} Status={{.State.Status}} IP={{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} Entrypoint={{json .Config.Entrypoint}} Cmd={{json .Config.Cmd}}'
+docker exec $PEER sh -c "netstat -ltn 2>/dev/null | grep ':8080' || ss -ltn 2>/dev/null | grep ':8080'"
+docker exec $CONTAINER nc -zvw 3 $PEER 8080
+docker exec $CONTAINER wget -T 5 -q -O- http://$PEER:8080/
+docker exec $CONTAINER ip link add evidence-test type dummy
+docker exec $CONTAINER nc -zvw 3 1.1.1.1 443
+docker exec $CONTAINER wget -T 5 -q -O- http://example.com
+docker exec $CONTAINER nslookup example.com
+docker port $CONTAINER
+~~~
+
+## 预期结果
+- peer 为 running 且监听 8080；
+- 主容器访问同组 peer:8080 成功并返回 HTTP 200 响应体 READY；
+- 容器 net namespace 与 host-network 参照容器不同；
+- Ports/PortBindings 为空，docker port 无输出；
+- ip route 只有 172.18.0.0/16 直连路由，没有 default 路由；
+- ip link add 因缺少 CAP_NET_ADMIN 失败；
+- 容器内直连外部 IP、按域名访问外网均失败，DNS 解析失败。
+
+## 实际测试结果
+采集时间 UTC：2026-11-04T16:47:15.212Z
+容器：docker-isolation-test
+容器 ID：f58704716eb1e0fab9c827e81b8bcfd5934d1119557ffaf8049de26db8ee0df0
+对端：docker-isolation-peer
+对端容器 ID：5ed8147df3651923728a61882124b3ee8328e177958d041456265862e4ddbfd4
+镜像：docker-isolation-evidence:test-current
+镜像 ID：sha256:6cceb56a1ad064ab7f3e3c092c42bc1698802160b62bd0382a5e055cfa639c2a
+
+### inspect 网络字段
+~~~text
+NetworkMode=docker-isolation-evidence_isolation_net Ports={} PortBindings={} Networks={"docker-isolation-evidence_isolation_net":{"IPAMConfig":null,"Links":null,"Aliases":["docker-isolation-test","isolation-test"],"DriverOpts":null,"GwPriority":0,"NetworkID":"5b93a8f38f7df5ebb60332c39f4ee44671f0669b59828be44d8f24185df5aff0","EndpointID":"cf0e41eaf1dad07c2057a45dc95027733f3b055da29e848fd00406c4b7b29128","Gateway":"","IPAddress":"172.18.0.3","MacAddress":"92:c8:b7:17:0d:11","IPPrefixLen":16,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"DNSNames":["docker-isolation-test","isolation-test","f58704716eb1"]}}
+
+exit_code=0
+~~~
+
+### 容器 net namespace
+~~~text
+net:[4026532457]
+
+exit_code=0
+~~~
+
+### host-network 参照容器 net namespace
+~~~text
+net:[4026532224]
+
+exit_code=0
+~~~
+
+### 容器内接口
+~~~text
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+eth0@if27        UP             172.18.0.3/16
+
+exit_code=0
+~~~
+
+### 容器内路由表
+~~~text
+172.18.0.0/16 dev eth0 proto kernel scope link src 172.18.0.3
+
+exit_code=0
+~~~
+
+### peer 运行状态、地址与启动参数
+~~~text
+Running=true Status=running IP=172.18.0.2 Entrypoint=[] Cmd=["/bin/sh","-c","while :; do printf 'HTTP/1.1 200 OK\\r\\nContent-Length: 5\\r\\nConnection: close\\r\\n\\r\\nREADY' | nc -l -p 8080; done"]
+
+exit_code=0
+~~~
+
+### peer 监听 8080
+~~~text
+tcp        0      0 :::8080                 :::*                    LISTEN
+
+exit_code=0
+~~~
+
+### 同组对照：nc -> peer:8080
+~~~text
+docker-isolation-peer (172.18.0.2:8080) open
+
+exit_code=0
+~~~
+
+### 同组对照：HTTP GET peer:8080
+~~~text
+READY
+
+exit_code=0
+~~~
+
+### 网络配置越权：ip link add
+~~~text
+RTNETLINK answers: Operation not permitted
+
+exit_code=2
+~~~
+
+### 外网 canary：nc -> 1.1.1.1:443
+~~~text
+nc: 1.1.1.1 (1.1.1.1:443): Network unreachable
+
+exit_code=1
+~~~
+
+### 外网 canary：wget http://example.com
+~~~text
+wget: bad address 'example.com'
+
+exit_code=1
+~~~
+
+### 外网 canary：DNS 解析
+~~~text
+Server:		127.0.0.11
+Address:	127.0.0.11:53
+
+** server can't find example.com: SERVFAIL
+
+** server can't find example.com: SERVFAIL
+
+exit_code=1
+~~~
+
+### 宿主机发布端口
+~~~text
+
+
+exit_code=0
+~~~
+
+## 结论
+网络隔离判据 PASS：
+
+- 主容器 → 同组 peer：可达（`nc` 返回 `open`，HTTP 返回 `READY`），证明 `internal` bridge 内通信正常。
+- 主容器 → 外网（`1.1.1.1:443` / 域名解析）：不可达（IP 直连为 `Network unreachable`，域名解析失败），证明外网隔离生效。
+- 这两条合起来证明 `internal: true` 按设计工作，不是 bug；同组容器互通与外网隔离并不矛盾。
+
+补充：容器 net namespace 与 host-network 参照不同，未发布宿主机端口，路由表无 default route，且 `ip link add` 因无 CAP_NET_ADMIN 被拒绝。
+
+敏感信息处理：保留 network mode、namespace、容器内私有 IP（172.18.0.0/16 为 Docker 默认 bridge 地址段，非客户内网）与退出码；未包含宿主机真实内网地址、代理地址或内部域名。

@@ -1,0 +1,118 @@
+# Permission isolation test evidence
+
+## 测试目的
+证明容器以非 root 身份运行，Linux capabilities 已裁剪，特权模式关闭，seccomp 默认过滤器在内核态生效，并且挂载、加载内核模块和根文件系统写入等越权操作被拒绝。
+
+## 执行命令
+
+~~~bash
+CONTAINER=docker-isolation-test
+docker exec $CONTAINER id
+docker exec $CONTAINER capsh --print
+docker inspect $CONTAINER --format 'Privileged={{.HostConfig.Privileged}} CapDrop={{json .HostConfig.CapDrop}} CapAdd={{json .HostConfig.CapAdd}} SecurityOpt={{json .HostConfig.SecurityOpt}} ReadonlyRootfs={{.HostConfig.ReadonlyRootfs}} UsernsMode={{.HostConfig.UsernsMode}}'
+docker exec $CONTAINER grep -E '^(Uid|CapEff|CapBnd|NoNewPrivs|Seccomp|Seccomp_filters):' /proc/1/status
+docker exec $CONTAINER sh -c 'mkdir -p /tmp/mount-test; mount -t tmpfs tmpfs /tmp/mount-test'
+docker exec $CONTAINER modprobe dummy
+docker exec $CONTAINER touch /etc/evidence-must-fail
+docker exec $CONTAINER sh -c 'touch /tmp/evidence-write && rm -f /tmp/evidence-write && echo tmpfs_write_ok'
+~~~
+
+## 预期结果
+- UID/GID 为 10000，UID 不为 0；
+- CapEff/CapBnd 为全 0，尤其没有 CAP_SYS_ADMIN、CAP_NET_ADMIN、CAP_SYS_MODULE；
+- Privileged=false、CapDrop 包含 ALL、ReadonlyRootfs=true、SecurityOpt 仅含 no-new-privileges:true；
+- Seccomp=2（SECCOMP_MODE_FILTER）且 Seccomp_filters=2，与 Engine 默认 profile 基线一致；
+- mount、modprobe、根层写入均返回非零；声明的 /tmp 写入成功。
+
+## 实际测试结果
+采集时间 UTC：2026-11-04T16:47:15.212Z
+容器：docker-isolation-test
+容器 ID：f58704716eb1e0fab9c827e81b8bcfd5934d1119557ffaf8049de26db8ee0df0
+镜像：docker-isolation-evidence:test-current
+镜像 ID：sha256:6cceb56a1ad064ab7f3e3c092c42bc1698802160b62bd0382a5e055cfa639c2a
+
+### id
+~~~text
+uid=10000(evidence) gid=10000(evidence) groups=10000(evidence)
+
+exit_code=0
+~~~
+
+### capsh --print
+~~~text
+Current: =
+Bounding set =
+Ambient set =
+Current IAB: !cap_chown,!cap_dac_override,!cap_dac_read_search,!cap_fowner,!cap_fsetid,!cap_kill,!cap_setgid,!cap_setuid,!cap_setpcap,!cap_linux_immutable,!cap_net_bind_service,!cap_net_broadcast,!cap_net_admin,!cap_net_raw,!cap_ipc_lock,!cap_ipc_owner,!cap_sys_module,!cap_sys_rawio,!cap_sys_chroot,!cap_sys_ptrace,!cap_sys_pacct,!cap_sys_admin,!cap_sys_boot,!cap_sys_nice,!cap_sys_resource,!cap_sys_time,!cap_sys_tty_config,!cap_mknod,!cap_lease,!cap_audit_write,!cap_audit_control,!cap_setfcap,!cap_mac_override,!cap_mac_admin,!cap_syslog,!cap_wake_alarm,!cap_block_suspend,!cap_audit_read,!cap_perfmon,!cap_bpf,!cap_checkpoint_restore
+Securebits: 00/0x0/1'b0 (no-new-privs=1)
+ secure-noroot: no (unlocked)
+ secure-no-suid-fixup: no (unlocked)
+ secure-keep-caps: no (unlocked)
+ secure-no-ambient-raise: no (unlocked)
+uid=10000(evidence) euid=10000(evidence)
+gid=10000(evidence)
+groups=10000(evidence)
+Guessed mode: HYBRID (4)
+
+exit_code=0
+~~~
+
+### inspect 安全字段
+~~~text
+Privileged=false CapDrop=["ALL"] CapAdd=null SecurityOpt=["no-new-privileges:true"] ReadonlyRootfs=true UsernsMode=
+
+exit_code=0
+~~~
+
+### /proc/1/status 内核态字段
+~~~text
+Uid:	10000	10000	10000	10000
+CapEff:	0000000000000000
+CapBnd:	0000000000000000
+NoNewPrivs:	1
+Seccomp:	2
+Seccomp_filters:	2
+
+exit_code=0
+~~~
+
+### mount 越权尝试
+~~~text
+mount: /tmp/mount-test: must be superuser to use mount.
+       dmesg(1) may have more information after failed mount system call.
+
+exit_code=32
+~~~
+
+### modprobe 越权尝试
+~~~text
+modprobe: FATAL: Module dummy not found in directory /lib/modules/6.18.54.1-microsoft-standard-WSL2
+
+exit_code=1
+~~~
+
+### 根层写入尝试（/etc）
+~~~text
+touch: /etc/evidence-must-fail: Read-only file system
+
+exit_code=1
+~~~
+
+### tmpfs 写入尝试（/tmp）
+~~~text
+tmpfs_write_ok
+
+exit_code=0
+~~~
+
+## 结论
+PASS：
+- `id` 显示 uid=gid=10000(evidence)，非 root；
+- `capsh --print` 的 Current/Bounding/Ambient 集合为空，CapEff/CapBnd 全 0；
+- `HostConfig.Privileged=false`、`CapDrop=["ALL"]`、`ReadonlyRootfs=true`、`SecurityOpt=["no-new-privileges:true"]`；
+- 内核态 `/proc/1/status` 给出 `NoNewPrivs=1`、`Seccomp=2`、`Seccomp_filters=2`，与 Engine 默认 profile 基线一致，且区别于 unconfined / privileged 基线的 1 个过滤器；
+- mount（exit 非 0）、modprobe（exit 非 0）、根层写入（Read-only file system）均被拒绝；/tmp 按声明可写。
+
+说明：本镜像未安装 curl，网络与 HTTP 探测统一使用 busybox 的 `nc` / `wget`，不改变判据。
+
+敏感信息处理：未包含密码、Token、私钥、云凭据、内部域名或客户数据。

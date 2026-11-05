@@ -1,0 +1,149 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-39333df9bdea4c969397e7cb2c5b37f4",
+  "step_id": "s-09e7b4ac830d438daadf06dd1eaf0f61",
+  "parent_step_id": null,
+  "node_id": "isolation_preflight",
+  "round": 0,
+  "phase": "preflight",
+  "evidence_ids": [],
+  "status": "ok",
+  "evidence_path": "isolation",
+  "isolation_ready": true,
+  "image": "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+  "reason": null,
+  "engine_id": "9a5e7540-074f-4549-9e6a-02f78d140e9a",
+  "controls": {
+    "Binds": null,
+    "ContainerIDFile": "",
+    "LogConfig": {
+      "Type": "none",
+      "Config": {}
+    },
+    "NetworkMode": "none",
+    "PortBindings": {},
+    "RestartPolicy": {
+      "Name": "no",
+      "MaximumRetryCount": 0
+    },
+    "AutoRemove": false,
+    "VolumeDriver": "",
+    "VolumesFrom": null,
+    "ConsoleSize": [
+      0,
+      0
+    ],
+    "CapAdd": null,
+    "CapDrop": [
+      "ALL"
+    ],
+    "CgroupnsMode": "private",
+    "Dns": null,
+    "DnsOptions": [],
+    "DnsSearch": [],
+    "ExtraHosts": null,
+    "GroupAdd": null,
+    "IpcMode": "private",
+    "Cgroup": "",
+    "Links": null,
+    "OomScoreAdj": 0,
+    "PidMode": "",
+    "Privileged": false,
+    "PublishAllPorts": false,
+    "ReadonlyRootfs": true,
+    "SecurityOpt": [
+      "no-new-privileges"
+    ],
+    "Tmpfs": {
+      "/tmp": "rw,noexec,nosuid,size=67108864"
+    },
+    "UTSMode": "",
+    "UsernsMode": "",
+    "ShmSize": 67108864,
+    "Runtime": "runc",
+    "Isolation": "",
+    "CpuShares": 0,
+    "Memory": 268435456,
+    "NanoCpus": 1000000000,
+    "CgroupParent": "",
+    "BlkioWeight": 0,
+    "BlkioWeightDevice": [],
+    "BlkioDeviceReadBps": [],
+    "BlkioDeviceWriteBps": [],
+    "BlkioDeviceReadIOps": [],
+    "BlkioDeviceWriteIOps": [],
+    "CpuPeriod": 0,
+    "CpuQuota": 0,
+    "CpuRealtimePeriod": 0,
+    "CpuRealtimeRuntime": 0,
+    "CpusetCpus": "",
+    "CpusetMems": "",
+    "Devices": [],
+    "DeviceCgroupRules": null,
+    "DeviceRequests": null,
+    "MemoryReservation": 0,
+    "MemorySwap": 268435456,
+    "MemorySwappiness": null,
+    "OomKillDisable": null,
+    "PidsLimit": 64,
+    "Ulimits": [
+      {
+        "Name": "nofile",
+        "Hard": 128,
+        "Soft": 128
+      }
+    ],
+    "CpuCount": 0,
+    "CpuPercent": 0,
+    "IOMaximumIOps": 0,
+    "IOMaximumBandwidth": 0,
+    "Mounts": [
+      {
+        "Type": "volume",
+        "Source": "codefix-out-18cd8a627cac4e70af0b75d0847a1cdf",
+        "Target": "/out"
+      },
+      {
+        "Type": "bind",
+        "Source": "/run/desktop/mnt/host/c/Users/yang0/AppData/Local/Temp/codefix-rt-eos7orbq/operator-stop/store/run-39333df9bdea4c969397e7cb2c5b37f4/isolation/probe-work",
+        "Target": "/w",
+        "ReadOnly": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/c_runner/pytest_entry.py",
+        "Target": "/entry.py",
+        "ReadOnly": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/docker/candidate_entry.py",
+        "Target": "/harness.py",
+        "ReadOnly": true
+      }
+    ],
+    "MaskedPaths": [
+      "/proc/acpi",
+      "/proc/asound",
+      "/proc/interrupts",
+      "/proc/kcore",
+      "/proc/keys",
+      "/proc/latency_stats",
+      "/proc/sched_debug",
+      "/proc/scsi",
+      "/proc/timer_list",
+      "/proc/timer_stats",
+      "/sys/devices/virtual/powercap",
+      "/sys/firmware"
+    ],
+    "ReadonlyPaths": [
+      "/proc/bus",
+      "/proc/fs",
+      "/proc/irq",
+      "/proc/sys",
+      "/proc/sysrq-trigger"
+    ]
+  },
+  "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+  "duration_ms": 1964
+}

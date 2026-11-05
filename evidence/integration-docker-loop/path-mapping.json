@@ -1,0 +1,5 @@
+{
+  "docker-isolation-evidence": "evidence/docker-isolation/qualification",
+  "docker-isolation-evidence-2026-11-04.tar.gz": "docs/99_历史归档/2026-11/原始交付/Docker隔离资格/docker-isolation-evidence-2026-11-04.tar.gz",
+  "docker-isolation-evidence-2026-11-04.SHA256SUMS": "docs/99_历史归档/2026-11/原始交付/Docker隔离资格/docker-isolation-evidence-2026-11-04.SHA256SUMS"
+}

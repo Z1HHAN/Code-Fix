@@ -1,0 +1,55 @@
+{
+  "decision_id": "d-dc4ecef688bf43088029e38b831294d3",
+  "run_id": "run-293cb151017d46dc98350f0e7c8c4ca9",
+  "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+  "evidence_ids": [
+    "test-baseline"
+  ],
+  "failure_class": "environment_error",
+  "action": "pause",
+  "target_agent": null,
+  "reason": "依赖、测试收集、命令或执行环境异常，交C诊断；不让修复员改业务代码凑通过。",
+  "retries_left": 3,
+  "rule_id": "R03",
+  "terminal_status": null,
+  "trace_version": "1.0.0",
+  "step_id": "s-7f58e44fd3164063aa49c2a88de665c8",
+  "parent_step_id": "s-896152d8910b427d81e1d05e645387ab",
+  "node_id": "program_dispatch",
+  "round": 0,
+  "phase": "development",
+  "program_decision": {
+    "decision_id": "d-dc4ecef688bf43088029e38b831294d3",
+    "run_id": "run-293cb151017d46dc98350f0e7c8c4ca9",
+    "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+    "evidence_ids": [
+      "test-baseline"
+    ],
+    "failure_class": "environment_error",
+    "action": "pause",
+    "target_agent": null,
+    "reason": "依赖、测试收集、命令或执行环境异常，交C诊断；不让修复员改业务代码凑通过。",
+    "retries_left": 3,
+    "rule_id": "R03",
+    "terminal_status": null
+  },
+  "model_advice": null,
+  "effective_action": "pause",
+  "override_reason": null,
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "counters": {
+    "model_calls": 0,
+    "tool_calls": 1,
+    "rounds_used": 0,
+    "cost": {
+      "status": "not_called",
+      "amount_usd": null
+    },
+    "remaining_seconds": 294.6658917999998,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}
