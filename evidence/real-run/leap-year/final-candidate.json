@@ -1,0 +1,16 @@
+{
+  "project": "leap",
+  "base_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+  "candidate_version": "sha256:b284f7827385acb443e4927944539620ef1fae87fdb605a37102b8211495336e",
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "frozen_file_sha256": {
+    "tests/test_leap.py": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+  },
+  "changes": [
+    {
+      "path": "code/leap_year.py",
+      "new_content": "def is_leap(year):\n    \"\"\"闰年：能被4整除，且（不能被100整除，或能被400整除）。\"\"\"\n    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)\n"
+    }
+  ],
+  "test_sha256": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+}

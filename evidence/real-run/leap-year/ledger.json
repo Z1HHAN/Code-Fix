@@ -1,0 +1,62 @@
+{
+  "schema": "codefix-ledger-export/1",
+  "source": "runs/platform/model-ledger.sqlite3",
+  "note": "仅导出本 run 的人民币计费行；未导出 account_keys（凭证指纹）与调用正文。金额为项目账本估算，不是平台真实余额。",
+  "run_id": "run-abfe208f4c784957b373eec2f74ad7e0",
+  "currency": "CNY",
+  "basis": "project_ledger_estimate_not_platform_balance",
+  "calls": [
+    {
+      "call_id": "m-0ef99176499b46399d366dd8217b908d",
+      "account_id": "aliyun_maas",
+      "provider_id": "aliyun_maas",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "operator-delegated-estimate-2026-11-06;aliyun-bailian-ds-class-peak",
+      "created_at": "2026-11-05T16:09:42.968982+00:00",
+      "status": "known",
+      "reserved_cny": "0.075282",
+      "actual_cny": "0.006032"
+    },
+    {
+      "call_id": "m-ecf6f576c50f4cf792d47ee551a2a729",
+      "account_id": "aliyun_maas",
+      "provider_id": "aliyun_maas",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "operator-delegated-estimate-2026-11-06;aliyun-bailian-ds-class-peak",
+      "created_at": "2026-11-05T16:09:50.258295+00:00",
+      "status": "known",
+      "reserved_cny": "0.073558",
+      "actual_cny": "0.007290"
+    },
+    {
+      "call_id": "m-4592af2b688945ae98f10b9650b74b5d",
+      "account_id": "aliyun_maas",
+      "provider_id": "aliyun_maas",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "operator-delegated-estimate-2026-11-06;aliyun-bailian-ds-class-peak",
+      "created_at": "2026-11-05T16:09:56.339940+00:00",
+      "status": "known",
+      "reserved_cny": "0.076502",
+      "actual_cny": "0.005276"
+    }
+  ],
+  "totals": {
+    "calls": 3,
+    "reserved_cny": "0.225342",
+    "actual_cny": "0.018598"
+  },
+  "account_limits": [
+    {
+      "account_id": "aliyun_maas",
+      "provider_id": "aliyun_maas",
+      "authorized_cny": "16.000000",
+      "warning_cny": "3.000000",
+      "team_total_cny": "32.000000"
+    }
+  ],
+  "excluded": [
+    "account_keys（API key 指纹）",
+    "budget_alerts（本 run 为空）",
+    "calls/*/input.json 与 output.json（提示词与模型原文）"
+  ]
+}
