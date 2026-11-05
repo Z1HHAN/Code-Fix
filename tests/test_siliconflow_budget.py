@@ -12,6 +12,7 @@ import httpx
 import pytest
 from fastapi.testclient import TestClient
 
+from app import siliconflow as siliconflow_module
 from app.account_budget import AccountBudget
 from app.api import create_app
 from app.config import ConfigError
@@ -51,6 +52,12 @@ def enable(monkeypatch):
     monkeypatch.setenv('CODE_FIX_SF_ACCOUNT2_KEY', 'sk-offline-account2')
     monkeypatch.setenv('CODE_FIX_SF_V32_INPUT_CNY', '4')
     monkeypatch.setenv('CODE_FIX_SF_V32_OUTPUT_CNY', '6')
+    monkeypatch.setenv('CODE_FIX_SF_V41_FLASH_INPUT_CNY', '2')
+    monkeypatch.setenv('CODE_FIX_SF_V41_FLASH_OUTPUT_CNY', '8')
+    monkeypatch.setenv('CODE_FIX_ALIYUN_APPROVED', '1')
+    monkeypatch.setenv('CODE_FIX_ALIYUN_V41_INPUT_CNY', '2')
+    monkeypatch.setenv('CODE_FIX_ALIYUN_V41_OUTPUT_CNY', '8')
+    monkeypatch.setenv('CODE_FIX_ALIYUN_REQUEST_SECONDS', '2')
 
 
 def test_native_cny_cumulative_across_dates_models_and_restart(tmp_path):
@@ -152,17 +159,23 @@ def test_unknown_http_charge_never_becomes_zero(tmp_path, response):
     assert 'sk-offline-not-exported' not in json.dumps(record)
 
 
-def test_profiles_are_two_accounts_one_provider_and_five_models(tmp_path, monkeypatch):
+def test_profiles_cover_two_providers_and_six_models(tmp_path, monkeypatch):
     registry = registry_copy(tmp_path)
     enable(monkeypatch)
-    assert len(registry['profiles']) == 10 and len(registry['accounts']) == 2
-    assert len({p['model'] for p in registry['profiles'].values()}) == 5
-    assert {p['provider_id'] for p in registry['profiles'].values()} == {'siliconflow'}
+    assert len(registry['profiles']) == 11 and len(registry['accounts']) == 3
+    assert len({p['model'] for p in registry['profiles'].values()}) == 6
+    assert {p['provider_id'] for p in registry['profiles'].values()} == {'siliconflow', 'aliyun_maas'}
     resolved = profile_settings(registry['profiles']['sf_account1_v32'], registry)
     assert resolved.account_limit == 16 and resolved.warning_balance == 3 and resolved.team_limit == 32
     assert resolved.currency == 'CNY' and resolved.billable_output_tokens == 163840
+    flash = profile_settings(registry['profiles']['sf_account1_v41_flash'], registry)
+    assert flash.model == 'deepseek-ai/DeepSeek-V4.1-Flash' and flash.billable_output_tokens == 8192
+    monkeypatch.setenv('CODE_FIX_ALIYUN_MAAS_KEY', 'sk-offline-aliyun')
+    aliyun = profile_settings(registry['profiles']['aliyun_maas_ds_v41_flash'], registry)
+    assert aliyun.model == 'deepseek-v4.1-flash-1017' and aliyun.billable_output_tokens == 8192
+    assert aliyun.base_url.endswith('/compatible-mode/v1') and aliyun.account_id == 'aliyun_maas'
     with pytest.raises(ModelBlocked, match='计费输出上限未核实'):
-        profile_settings(registry['profiles']['sf_account1_v41_flash'], registry)
+        profile_settings(registry['profiles']['sf_account1_glm53_flash'], registry)
     monkeypatch.delenv('CODE_FIX_SF_V32_INPUT_CNY')
     with pytest.raises(ModelBlocked):
         profile_settings(registry['profiles']['sf_account1_v32'], registry)
@@ -204,7 +217,65 @@ def test_metadata_missing_key_does_not_request(tmp_path, monkeypatch):
     def forbidden(_):
         pytest.fail('Missing keys must not trigger any HTTP request')
     result = check_models(tmp_path, transport=httpx.MockTransport(forbidden))
-    assert all(a['status'] == 'blocked' and not a['metadata_request_made'] for a in result['accounts'])
+    assert all(not a['metadata_request_made'] for a in result['accounts'])
+    assert [a['status'] for a in result['accounts'] if a['provider_id'] == 'siliconflow'] == ['blocked', 'blocked']
+    assert all(a['status'] == 'skipped' for a in result['accounts'] if a['provider_id'] != 'siliconflow')
+
+
+def test_provider_check_never_sends_third_party_key(tmp_path, monkeypatch):
+    """跨服务商凭证隔离：第三方账号的key绝不出现在任何发出请求里。"""
+    registry_copy(tmp_path)
+    enable(monkeypatch)
+    monkeypatch.setenv('CODE_FIX_ALIYUN_MAAS_KEY', 'sk-offline-third-party-secret')
+    seen = []
+    def respond(request):
+        seen.append(request)
+        return httpx.Response(200, json={'data': []})
+    result = check_models(tmp_path, transport=httpx.MockTransport(respond))
+    sent = [request.headers.get('authorization', '') for request in seen]
+    assert len(seen) == 2
+    assert {request.url.host for request in seen} == {'api.siliconflow.cn'}
+    assert not any('third-party-secret' in value for value in sent)
+    abandoned = [a for a in result['accounts'] if a['provider_id'] != 'siliconflow']
+    assert abandoned and all(a['status'] == 'skipped' and not a['metadata_request_made'] for a in abandoned)
+    assert 'sk-offline-third-party-secret' not in json.dumps(result)
+
+
+def test_metadata_endpoint_is_resolved_per_provider_not_hardcoded(tmp_path, monkeypatch):
+    registry_copy(tmp_path)
+    enable(monkeypatch)
+    monkeypatch.setitem(siliconflow_module.PROVIDER_METADATA, 'siliconflow',
+                        {**siliconflow_module.PROVIDER_METADATA['siliconflow'],
+                         'base_url': 'https://metadata.invalid/v9'})
+    hosts = []
+    def respond(request):
+        hosts.append(request.url.host)
+        return httpx.Response(200, json={'data': []})
+    check_models(tmp_path, transport=httpx.MockTransport(respond))
+    assert hosts == ['metadata.invalid', 'metadata.invalid']
+    with pytest.raises(ValueError, match='未登记的服务商元数据端点'):
+        check_models(tmp_path, transport=httpx.MockTransport(respond), provider='unregistered')
+
+
+def test_metadata_endpoint_rejects_non_https_or_missing_catalog(tmp_path, monkeypatch):
+    registry_copy(tmp_path)
+    enable(monkeypatch)
+    for broken in ({'base_url': 'http://plain.example/v1', 'catalog_path': 'configs/siliconflow_catalog.json', 'params': {}},
+                   {'base_url': 'https://ok.example/v1', 'params': {}}):
+        monkeypatch.setitem(siliconflow_module.PROVIDER_METADATA, 'siliconflow', broken)
+        with pytest.raises(ValueError, match='服务商元数据端点配置无效'):
+            check_models(tmp_path, transport=httpx.MockTransport(lambda _: httpx.Response(200, json={'data': []})))
+
+
+def test_smoke_refuses_non_siliconflow_profile_before_any_request(tmp_path, monkeypatch):
+    """provider-smoke的白名单必须在读取密钥与发出请求之前拦住阿里云档案。"""
+    registry_copy(tmp_path)
+    enable(monkeypatch)
+    monkeypatch.setenv('CODE_FIX_ALIYUN_MAAS_KEY', 'sk-offline-third-party-secret')
+    def forbidden(_):
+        pytest.fail('非硅基流动档案不得触发任何HTTP请求')
+    with pytest.raises(ModelBlocked, match='硅基流动'):
+        smoke(tmp_path, 'aliyun_maas_ds_v41_flash', transport=httpx.MockTransport(forbidden))
 
 
 def test_local_api_estimated_balance_and_offline_smoke_are_separate(tmp_path, monkeypatch):
@@ -212,7 +283,7 @@ def test_local_api_estimated_balance_and_offline_smoke_are_separate(tmp_path, mo
     with TestClient(create_app(tmp_path)) as client:
         value = client.get('/api/v3/budget').json()
         assert not value['platform_balance_verified']
-        assert [a['estimated_remaining_cny'] for a in value['accounts']] == ['16', '16']
+        assert [a['estimated_remaining_cny'] for a in value['accounts']] == ['16', '16', '16']
         assert all(a['status'] == 'declared_not_started' for a in value['accounts'])
     response = {'id': 'offline-only', 'model': 'offline-test', 'usage': {'prompt_tokens': 10, 'completion_tokens': 5},
                 'choices': [{'message': {'content': '{"ok":true}'}}]}

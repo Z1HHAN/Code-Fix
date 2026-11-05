@@ -5,7 +5,7 @@
     "models": {
       "primary": {
         "binding": "approved_profile",
-        "profile_ref": "sf_account1_v32"
+        "profile_ref": "aliyun_maas_ds_v41_flash"
       }
     },
     "agents": [

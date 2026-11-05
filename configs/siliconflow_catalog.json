@@ -14,7 +14,7 @@
     "pricing": "https://siliconflow.cn/pricing"
   },
   "models": [
-    {"alias": "v41_flash", "model": "deepseek-ai/DeepSeek-V4.1-Flash", "input_cny_per_million": null, "output_cny_per_million": null, "billable_output_tokens": null, "status": "待核实价格及计费输出上限"},
+    {"alias": "v41_flash", "model": "deepseek-ai/DeepSeek-V4.1-Flash", "input_cny_per_million": "2", "output_cny_per_million": "8", "billable_output_tokens": 8192, "status": "控制台2026-11-05核实峰值价：输入2元/输出8元每百万token；2:00-8:00低峰为1元/4元，按高峰保守计价；缓存命中0.04元不计优惠；计费输出上限按操作员确认8192"},
     {"alias": "glm53_flash", "model": "zai-org/GLM-5.3-Flash", "input_cny_per_million": null, "output_cny_per_million": null, "billable_output_tokens": null, "status": "待核实价格及计费输出上限"},
     {"alias": "v32", "model": "Pro/deepseek-ai/DeepSeek-V3.2", "input_cny_per_million": "4", "output_cny_per_million": "6", "billable_output_tokens": 163840, "status": "官方公告参考价；原生上下文160K作为保守计费输出边界；账号1真实JSON烟测通过，非Agent修复"},
     {"alias": "qwen36", "model": "Qwen/Qwen3.6-27B", "input_cny_per_million": "3", "output_cny_per_million": "18", "billable_output_tokens": null, "status": "官方公告参考价；计费输出上限待核实"},

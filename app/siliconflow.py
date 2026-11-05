@@ -1,4 +1,4 @@
-"""Explicit SiliconFlow metadata checks and capped JSON smoke, never code execution."""
+"""Provider-scoped metadata checks and capped JSON smoke, never code execution."""
 import asyncio
 import json
 from pathlib import Path
@@ -33,11 +33,33 @@ def budget_status(run_root, root=ROOT):
     return result
 
 
-async def _models(key, transport=None):
+# 元数据端点按服务商登记，调用点不再写死任何厂商域名。
+# 未登记的服务商不会被查询，也不会被拼接出请求。
+PROVIDER_METADATA = {
+    'siliconflow': {
+        'base_url': 'https://api.siliconflow.cn/v1',
+        'catalog_path': 'configs/siliconflow_catalog.json',
+        'params': {'type': 'text', 'sub_type': 'chat'},
+    },
+}
+
+
+def metadata_endpoint(provider):
+    """Resolve a provider metadata endpoint; unknown or malformed entries are refused."""
+    endpoint = PROVIDER_METADATA.get(provider)
+    if not isinstance(endpoint, dict):
+        raise ValueError('未登记的服务商元数据端点')
+    base = endpoint.get('base_url')
+    if not isinstance(base, str) or not base.startswith('https://') or not endpoint.get('catalog_path'):
+        raise ValueError('服务商元数据端点配置无效')
+    return endpoint
+
+
+async def _models(key, endpoint, transport=None):
     async with asyncio.timeout(15):
         async with httpx.AsyncClient(transport=transport, trust_env=False, follow_redirects=False, timeout=15) as client:
-            async with client.stream('GET', 'https://api.siliconflow.cn/v1/models',
-                    params={'type': 'text', 'sub_type': 'chat'}, headers={'Authorization': 'Bearer ' + key}) as response:
+            async with client.stream('GET', endpoint['base_url'] + '/models',
+                    params=endpoint['params'], headers={'Authorization': 'Bearer ' + key}) as response:
                 response.raise_for_status()
                 content = bytearray()
                 async for chunk in response.aiter_bytes():
@@ -50,15 +72,21 @@ async def _models(key, transport=None):
     return {row['id'] for row in data['data'] if isinstance(row, dict) and isinstance(row.get('id'), str)}
 
 
-def check_models(root=ROOT, *, transport=None):
+def check_models(root=ROOT, *, transport=None, provider='siliconflow'):
+    endpoint = metadata_endpoint(provider)
     registry = load_profiles(root)
-    catalog = read_json(root / 'configs/siliconflow_catalog.json')
+    catalog = read_json(root / endpoint['catalog_path'])
     allowed = [m['model'] for m in catalog['models']]
+    scope = 'offline_transport' if transport is not None else 'live_metadata_only'
     accounts = []
     for aid, account in registry.get('accounts', {}).items():
         record = {'account_id': aid, 'provider_id': account['provider_id'], 'model_api_called': False,
-                  'metadata_request_made': False, 'paid_chat_requests': 0,
-                  'scope': 'offline_transport' if transport is not None else 'live_metadata_only'}
+                  'metadata_request_made': False, 'paid_chat_requests': 0, 'scope': scope}
+        # 跨服务商凭证隔离：非本次查询服务商的账号不读密钥、不发请求。
+        if account['provider_id'] != provider:
+            record.update(status='skipped', reason='该账号不属于本次查询的服务商，未读取密钥、未请求平台')
+            accounts.append(record)
+            continue
         try:
             key = read_secret(account['api_key_env'])
         except (ValueError, OSError):
@@ -70,7 +98,7 @@ def check_models(root=ROOT, *, transport=None):
         else:
             try:
                 record['metadata_request_made'] = True
-                models = asyncio.run(_models(key, transport))
+                models = asyncio.run(_models(key, endpoint, transport))
                 record.update(status='ok', available=[m for m in allowed if m in models],
                               unavailable=[m for m in allowed if m not in models])
             except Exception as exc:
@@ -78,7 +106,7 @@ def check_models(root=ROOT, *, transport=None):
                 record.update(status='failed', error_type=type(exc).__name__,
                               http_status=getattr(getattr(exc, 'response', None), 'status_code', None))
         accounts.append(record)
-    return {'provider': 'siliconflow', 'provider_count': 1, 'accounts': accounts,
+    return {'provider': provider, 'provider_count': 1, 'accounts': accounts,
             'paid_chat_requests': 0, 'platform_balance_verified': False}
 
 
