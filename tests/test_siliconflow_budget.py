@@ -1,6 +1,7 @@
 """Offline account-budget acceptance; no real keys, network or public execution."""
 from dataclasses import replace
 from decimal import Decimal
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -12,6 +13,7 @@ import httpx
 import pytest
 from fastapi.testclient import TestClient
 
+from app import providers as providers_module
 from app import siliconflow as siliconflow_module
 from app.account_budget import AccountBudget
 from app.api import create_app
@@ -54,6 +56,7 @@ def enable(monkeypatch):
     monkeypatch.setenv('CODE_FIX_SF_V32_OUTPUT_CNY', '6')
     monkeypatch.setenv('CODE_FIX_SF_V41_FLASH_INPUT_CNY', '2')
     monkeypatch.setenv('CODE_FIX_SF_V41_FLASH_OUTPUT_CNY', '8')
+    monkeypatch.setenv('CODE_FIX_ALIYUN_MAAS_BASE_URL', 'https://ws-offline.cn-beijing.maas.aliyuncs.com/compatible-mode/v1')
     monkeypatch.setenv('CODE_FIX_ALIYUN_APPROVED', '1')
     monkeypatch.setenv('CODE_FIX_ALIYUN_V41_INPUT_CNY', '2')
     monkeypatch.setenv('CODE_FIX_ALIYUN_V41_OUTPUT_CNY', '8')
@@ -244,6 +247,9 @@ def test_provider_check_never_sends_third_party_key(tmp_path, monkeypatch):
 def test_metadata_endpoint_is_resolved_per_provider_not_hardcoded(tmp_path, monkeypatch):
     registry_copy(tmp_path)
     enable(monkeypatch)
+    # 端点与允许主机都来自登记表：登记项一改，目标主机随之改变，调用点没有写死域名。
+    monkeypatch.setitem(providers_module.PROVIDERS, 'siliconflow',
+                        {'hosts': ('api.siliconflow.cn', 'metadata.invalid')})
     monkeypatch.setitem(siliconflow_module.PROVIDER_METADATA, 'siliconflow',
                         {**siliconflow_module.PROVIDER_METADATA['siliconflow'],
                          'base_url': 'https://metadata.invalid/v9'})
@@ -265,6 +271,76 @@ def test_metadata_endpoint_rejects_non_https_or_missing_catalog(tmp_path, monkey
         monkeypatch.setitem(siliconflow_module.PROVIDER_METADATA, 'siliconflow', broken)
         with pytest.raises(ValueError, match='服务商元数据端点配置无效'):
             check_models(tmp_path, transport=httpx.MockTransport(lambda _: httpx.Response(200, json={'data': []})))
+
+
+def test_metadata_endpoint_rejects_host_outside_provider_allowlist(tmp_path, monkeypatch):
+    """端点主机不在服务商白名单内时，任何请求都不得发出。"""
+    registry_copy(tmp_path)
+    enable(monkeypatch)
+    monkeypatch.setitem(siliconflow_module.PROVIDER_METADATA, 'siliconflow',
+                        {**siliconflow_module.PROVIDER_METADATA['siliconflow'],
+                         'base_url': 'https://metadata.invalid/v9'})
+    def forbidden(_):
+        pytest.fail('白名单外的主机不得收到任何请求')
+    with pytest.raises(ValueError, match='服务商元数据端点配置无效'):
+        check_models(tmp_path, transport=httpx.MockTransport(forbidden))
+
+
+def test_profile_base_url_must_match_provider_host(tmp_path, monkeypatch):
+    """P2：provider_id 与 base_url 主机绑定，改配置不能把该服务商密钥指向别家域名。"""
+    registry_copy(tmp_path)
+    path = tmp_path / 'configs/model_profiles.json'
+    data = json.loads(path.read_text(encoding='utf-8'))
+    data['profiles']['sf_account1_v32']['base_url'] = 'https://evil.example/v1'
+    path.write_text(json.dumps(data), encoding='utf-8')
+    with pytest.raises(ConfigError, match='白名单'):
+        load_profiles(tmp_path)
+
+
+def test_unregistered_provider_cannot_load_profile(tmp_path):
+    """P2：provider 未登记允许主机时，连 env: 形式的档案也不得载入。"""
+    registry_copy(tmp_path)
+    path = tmp_path / 'configs/model_profiles.json'
+    data = json.loads(path.read_text(encoding='utf-8'))
+    data['profiles']['aliyun_maas_ds_v41_flash']['provider_id'] = 'unknown_vendor'
+    path.write_text(json.dumps(data), encoding='utf-8')
+    with pytest.raises(ConfigError, match='登记'):
+        load_profiles(tmp_path)
+
+
+def test_aliyun_base_url_comes_from_environment(tmp_path, monkeypatch):
+    """P3：阿里云端点不写死在配置里，从环境变量读取，且仍受主机白名单约束。"""
+    registry_copy(tmp_path)
+    enable(monkeypatch)
+    endpoint = 'https://ws-offline.cn-beijing.maas.aliyuncs.com/compatible-mode/v1'
+    monkeypatch.setenv('CODE_FIX_ALIYUN_MAAS_BASE_URL', endpoint)
+    monkeypatch.setenv('CODE_FIX_ALIYUN_MAAS_KEY', 'sk-offline-aliyun')
+    registry = load_profiles(tmp_path)
+    profile = registry['profiles']['aliyun_maas_ds_v41_flash']
+    assert profile['base_url'] == 'env:CODE_FIX_ALIYUN_MAAS_BASE_URL'
+    assert profile_settings(profile, registry).base_url == endpoint
+    monkeypatch.delenv('CODE_FIX_ALIYUN_MAAS_BASE_URL')
+    with pytest.raises(ModelBlocked, match='未设置'):
+        profile_settings(profile, registry)
+    monkeypatch.setenv('CODE_FIX_ALIYUN_MAAS_BASE_URL', 'https://evil.example/v1')
+    with pytest.raises(ModelBlocked, match='白名单'):
+        profile_settings(profile, registry)
+
+
+def test_ledger_key_fingerprint_is_salted_not_raw_sha256(tmp_path):
+    """P3：账本只存带本账本随机盐的 HMAC 截断值，不存无盐 sha256。"""
+    setting = cny()
+    plain = hashlib.sha256(setting.api_key.encode()).hexdigest()
+    fingerprints = []
+    for name in ('ledger-a', 'ledger-b'):
+        ledger = Ledger(tmp_path / name)
+        ledger.reserve(name, 'run-' + name, setting, 5, 1)
+        with sqlite3.connect(ledger.path) as db:
+            fingerprints.append(db.execute('SELECT fingerprint FROM account_keys').fetchone()[0])
+    assert len(set(fingerprints)) == 2          # 同一密钥、不同账本 → 盐不同 → 指纹不同
+    assert all(len(value) == 32 for value in fingerprints)
+    assert plain not in fingerprints
+    assert plain.encode() not in (tmp_path / 'ledger-a' / 'model-ledger.sqlite3').read_bytes()
 
 
 def test_smoke_refuses_non_siliconflow_profile_before_any_request(tmp_path, monkeypatch):

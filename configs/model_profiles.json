@@ -210,7 +210,7 @@
     "aliyun_maas_ds_v41_flash": {
       "provider_id": "aliyun_maas",
       "model": "deepseek-v4.1-flash-1017",
-      "base_url": "https://ws-twhbaof7fzagz198.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+      "base_url": "env:CODE_FIX_ALIYUN_MAAS_BASE_URL",
       "api_key_env": "CODE_FIX_ALIYUN_MAAS_KEY",
       "approval_env": "CODE_FIX_ALIYUN_APPROVED",
       "input_price_env": "CODE_FIX_ALIYUN_V41_INPUT_CNY",

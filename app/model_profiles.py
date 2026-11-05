@@ -1,16 +1,55 @@
 """Server-owned, explicitly approved model profiles. No automatic fallback."""
 import os
 import re
-from urllib.parse import urlsplit
 
 from .config import ConfigError, read_json
 from .live_model import LiveModel, LiveSettings, ModelBlocked, positive_decimal
+from .providers import registered, validate_url
 from .role_config import checked_file, digest
 
 FIELDS = {'provider_id', 'model', 'base_url', 'api_key_env', 'approval_env',
           'input_price_env', 'output_price_env', 'request_seconds_env',
           'price_version', 'max_input_tokens', 'max_output_tokens', 'token_limit_parameter'}
 CNY_FIELDS = {'currency', 'account_ref', 'billable_output_tokens', 'request_parameters'}
+BASE_URL_ENV_PREFIX = 'env:'
+ENV_NAME = re.compile(r'CODE_FIX_[A-Z][A-Z0-9_]+')
+
+
+def config_base_url(profile):
+    """载入期校验：字面地址立即校验；env: 引用只校验变量名，取值在使用前校验。
+
+    主机白名单在 app/providers.py，改配置无法把密钥指向别家域名。
+    """
+    # 服务商必须先登记允许主机；未登记的服务商连档案都无法载入（env: 引用同样受限）。
+    if not registered(profile.get('provider_id')):
+        raise ConfigError('服务商未在 app/providers.py 登记允许主机')
+    value = profile.get('base_url')
+    if isinstance(value, str) and value.startswith(BASE_URL_ENV_PREFIX):
+        name = value[len(BASE_URL_ENV_PREFIX):]
+        if not ENV_NAME.fullmatch(name):
+            raise ConfigError('服务商地址只允许 CODE_FIX 命名空间的环境变量引用')
+        return name
+    url = value.rstrip('/') if isinstance(value, str) else ''
+    if not validate_url(profile.get('provider_id'), url):
+        raise ConfigError('档案地址须为无凭证及查询参数的HTTPS地址，且主机属于该服务商白名单')
+    return url
+
+
+def resolved_base_url(profile):
+    """使用期解析：env: 引用在此取值，并再次过服务商主机白名单（早于读取密钥）。"""
+    value = profile.get('base_url')
+    if isinstance(value, str) and value.startswith(BASE_URL_ENV_PREFIX):
+        name = value[len(BASE_URL_ENV_PREFIX):]
+        if not ENV_NAME.fullmatch(name):
+            raise ModelBlocked('服务商地址只允许 CODE_FIX 命名空间的环境变量引用')
+        raw = (os.environ.get(name) or '').strip()
+        if not raw:
+            raise ModelBlocked('服务商地址环境变量 ' + name + ' 未设置')
+        value = raw
+    url = str(value or '').rstrip('/')
+    if not validate_url(profile.get('provider_id'), url):
+        raise ModelBlocked('服务商地址须为无凭证及查询参数的HTTPS地址，且主机属于该服务商白名单')
+    return url
 
 
 def _amount(value):
@@ -56,10 +95,7 @@ def load_profiles(root):
         for field in ('api_key_env', 'approval_env', 'input_price_env', 'output_price_env', 'request_seconds_env'):
             if not re.fullmatch(r'CODE_FIX_[A-Z][A-Z0-9_]+', profile[field]):
                 raise ConfigError('档案只允许CODE_FIX命名空间的环境变量引用')
-        url = urlsplit(profile['base_url'])
-        if (url.scheme != 'https' or not url.hostname or url.username or url.password
-                or url.query or url.fragment):
-            raise ConfigError('档案地址须为无凭证及查询参数的HTTPS地址')
+        config_base_url(profile)
         if profile['token_limit_parameter'] not in {'max_tokens', 'max_completion_tokens'}:
             raise ConfigError('未实现的输出长度参数')
         if any(type(profile[k]) is not int or not 1 <= profile[k] <= 1_000_000
@@ -84,6 +120,8 @@ def load_profiles(root):
 def profile_settings(profile, registry=None):
     if os.environ.get('CODE_FIX_LIVE_APPROVED') != '1' or os.environ.get(profile['approval_env']) != '1':
         raise ModelBlocked('本进程尚未启用已批准模型调用配置')
+    # 端点白名单校验早于读取密钥：配错的地址不会触发任何凭证读取。
+    base_url = resolved_base_url(profile)
     from .local_credentials import read_secret
     try:
         key = read_secret(profile['api_key_env'])
@@ -105,7 +143,7 @@ def profile_settings(profile, registry=None):
                       team_limit=positive_decimal(registry['team_total_limit_cny']),
                       billable_output_tokens=profile['billable_output_tokens'],
                       request_parameters=profile['request_parameters'])
-    return LiveSettings(api_key=key, model=profile['model'], base_url=profile['base_url'].rstrip('/'),
+    return LiveSettings(api_key=key, model=profile['model'], base_url=base_url,
         timeout=float(timeout), daily_limit=native.get('team_limit') or positive_decimal(os.environ.get('CODE_FIX_DAILY_USD')),
         input_per_million=positive_decimal(os.environ.get(profile['input_price_env'])),
         output_per_million=positive_decimal(os.environ.get(profile['output_price_env'])),

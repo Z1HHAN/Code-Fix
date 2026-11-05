@@ -1,8 +1,10 @@
 """Native CNY account budgets. Values are project estimates, never live balances."""
 from datetime import datetime, timezone
 from decimal import Decimal, ROUND_CEILING
-import json
 import hashlib
+import hmac
+import json
+import secrets
 import sqlite3
 
 from .live_model import ModelBlocked
@@ -37,14 +39,37 @@ class AccountBudget:
         db.execute('''CREATE TABLE IF NOT EXISTS account_keys (
             provider_id TEXT NOT NULL, fingerprint TEXT NOT NULL, account_id TEXT NOT NULL,
             PRIMARY KEY(provider_id,fingerprint))''')
+        db.execute('''CREATE TABLE IF NOT EXISTS ledger_meta (
+            name TEXT PRIMARY KEY, value TEXT NOT NULL)''')
 
     @staticmethod
-    def _register(db, settings):
-        fingerprint = hashlib.sha256(settings.api_key.encode()).hexdigest()
-        previous = db.execute('SELECT account_id FROM account_keys WHERE provider_id=? AND fingerprint=?',
-                              (settings.provider_id, fingerprint)).fetchone()
-        if previous and previous[0] != settings.account_id:
+    def _salt(db):
+        row = db.execute("SELECT value FROM ledger_meta WHERE name='key_fingerprint_salt'").fetchone()
+        if row is None:
+            db.execute("INSERT OR IGNORE INTO ledger_meta VALUES ('key_fingerprint_salt', ?)",
+                       (secrets.token_bytes(32).hex(),))
+            row = db.execute("SELECT value FROM ledger_meta WHERE name='key_fingerprint_salt'").fetchone()
+        return bytes.fromhex(row[0])
+
+    @classmethod
+    def _fingerprint(cls, db, settings):
+        """本账本随机盐的 HMAC 截断值：不落无盐 sha256，跨账本不可比对。"""
+        return hmac.new(cls._salt(db), settings.api_key.encode(), hashlib.sha256).hexdigest()[:32]
+
+    @classmethod
+    def _register(cls, db, settings):
+        fingerprint = cls._fingerprint(db, settings)
+        # 兼容旧账本里已存在的无盐 sha256 指纹：命中后升级为带盐值，守卫强度不变。
+        legacy = hashlib.sha256(settings.api_key.encode()).hexdigest()
+        rows = db.execute('SELECT account_id, fingerprint FROM account_keys '
+                          'WHERE provider_id=? AND fingerprint IN (?,?)',
+                          (settings.provider_id, fingerprint, legacy)).fetchall()
+        if any(row[0] != settings.account_id for row in rows):
             raise ModelBlocked('同一凭证已记入其他账号，不能重新命名重置额度')
+        for _account_id, old in rows:
+            if old != fingerprint:
+                db.execute('DELETE FROM account_keys WHERE provider_id=? AND fingerprint=?',
+                           (settings.provider_id, old))
         db.execute('INSERT OR IGNORE INTO account_keys VALUES (?,?,?)',
                    (settings.provider_id, fingerprint, settings.account_id))
         values = (settings.account_id, settings.provider_id, micro(settings.account_limit),

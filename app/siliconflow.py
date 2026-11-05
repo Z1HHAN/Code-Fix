@@ -12,6 +12,7 @@ from .config import read_json
 from .live_model import Ledger, LiveModel, ModelBlocked
 from .local_credentials import read_secret
 from .model_profiles import load_profiles, profile_settings
+from .providers import validate_url
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -49,8 +50,10 @@ def metadata_endpoint(provider):
     endpoint = PROVIDER_METADATA.get(provider)
     if not isinstance(endpoint, dict):
         raise ValueError('未登记的服务商元数据端点')
-    base = endpoint.get('base_url')
-    if not isinstance(base, str) or not base.startswith('https://') or not endpoint.get('catalog_path'):
+    # 端点须为 https、无凭证/查询、且主机在该服务商白名单内；params 必须是对象。
+    if not isinstance(endpoint.get('params'), dict) or not endpoint.get('catalog_path'):
+        raise ValueError('服务商元数据端点配置无效')
+    if not validate_url(provider, endpoint.get('base_url')):
         raise ValueError('服务商元数据端点配置无效')
     return endpoint
 
@@ -58,8 +61,8 @@ def metadata_endpoint(provider):
 async def _models(key, endpoint, transport=None):
     async with asyncio.timeout(15):
         async with httpx.AsyncClient(transport=transport, trust_env=False, follow_redirects=False, timeout=15) as client:
-            async with client.stream('GET', endpoint['base_url'] + '/models',
-                    params=endpoint['params'], headers={'Authorization': 'Bearer ' + key}) as response:
+            async with client.stream('GET', endpoint['base_url'].rstrip('/') + '/models',
+                    params=endpoint.get('params') or {}, headers={'Authorization': 'Bearer ' + key}) as response:
                 response.raise_for_status()
                 content = bytearray()
                 async for chunk in response.aiter_bytes():
@@ -106,7 +109,9 @@ def check_models(root=ROOT, *, transport=None, provider='siliconflow'):
                 record.update(status='failed', error_type=type(exc).__name__,
                               http_status=getattr(getattr(exc, 'response', None), 'status_code', None))
         accounts.append(record)
-    return {'provider': provider, 'provider_count': 1, 'accounts': accounts,
+    queried = {a['provider_id'] for a in accounts if a['metadata_request_made']}
+    return {'provider': provider, 'provider_count': len(queried), 'accounts': accounts,
+            'queried_account_count': sum(1 for a in accounts if a['metadata_request_made']),
             'paid_chat_requests': 0, 'platform_balance_verified': False}
 
 
