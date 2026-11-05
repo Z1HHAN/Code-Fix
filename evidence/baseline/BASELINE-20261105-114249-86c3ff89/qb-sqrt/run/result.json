@@ -1,0 +1,144 @@
+{
+  "call_id": "codefix-7eae427c3d9f4a3096d579616571d2a7",
+  "exit_code": 1,
+  "timed_out": false,
+  "duration_ms": 17191,
+  "stdout_path": "trusted-run/stdout.txt",
+  "stderr_path": "trusted-run/stderr.txt",
+  "command": [
+    "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.EXE",
+    "run",
+    "--mount",
+    "type=volume,source=codefix-rpc-591f318ae32b4821b2b4b5b7409a4b2c,target=/rpc,readonly",
+    "-i",
+    "--name",
+    "codefix-7eae427c3d9f4a3096d579616571d2a7",
+    "--pull=never",
+    "--network=none",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--pids-limit=64",
+    "--memory=256m",
+    "--memory-swap=256m",
+    "--cpus=1",
+    "--user=65534:65534",
+    "--ulimit=nofile=128:128",
+    "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+    "--log-driver=none",
+    "--mount",
+    "type=volume,source=codefix-out-328d5d1f2ce94f778a8e8a92ca333860,target=/out",
+    "--mount",
+    "type=bind,source=C:\\Users\\yang0\\Documents\\Codex\\2026-10-31\\wo\\projects\\Code-Fix-main\\Code-Fix-main\\evidence\\baseline\\BASELINE-20261105-114249-86c3ff89\\qb-sqrt\\run\\trusted-tests,target=/w,readonly",
+    "--mount",
+    "type=bind,source=C:\\Users\\yang0\\Documents\\Codex\\2026-10-31\\wo\\projects\\Code-Fix-main\\Code-Fix-main\\c_runner\\pytest_entry.py,target=/entry.py,readonly",
+    "--mount",
+    "type=bind,source=C:\\Users\\yang0\\Documents\\Codex\\2026-10-31\\wo\\projects\\Code-Fix-main\\Code-Fix-main\\docker\\candidate_entry.py,target=/harness.py,readonly",
+    "--workdir=/w",
+    "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+    "--env=PYTHONDONTWRITEBYTECODE=1",
+    "--entrypoint=python",
+    "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "/harness.py",
+    "python_testcases/test_sqrt.py"
+  ],
+  "artifact_channel": "docker-cp",
+  "artifact_error": null,
+  "artifact_detail": null,
+  "cleanup_passed": true,
+  "output_volume": "codefix-out-328d5d1f2ce94f778a8e8a92ca333860",
+  "phase": "baseline",
+  "code_version": "sha256:e942cb42f67a3ca5a19ade50df5d65a45bd74c1a9be69eecc50f04c495118cbc",
+  "project": "qb-sqrt",
+  "execution_mode": "docker-split-rpc",
+  "isolation_ready": true,
+  "test_suite_version": "sha256:69b27e972d71adcad48adec9b581fc50d5f6c6bf6b98c6b88b88dbcf38a788e1",
+  "expected_test_count": 7,
+  "junit_path": "trusted-run/output/junit.xml",
+  "structured_path": "trusted-run/output/pytest_events.json",
+  "evidence_matches_current_version": true,
+  "trust_boundary": "separate_candidate_and_test_containers",
+  "candidate_audit": {
+    "container": "codefix-candidate-8222f5fa1e604ef3babdc3fa702eddc6",
+    "logs_captured": true,
+    "events": [],
+    "event_kinds": [],
+    "fake_report_output": false,
+    "violation": null,
+    "reason": null
+  },
+  "runner_classification": {
+    "status": null,
+    "verification_status": null,
+    "failure_class": null,
+    "reason": null
+  },
+  "counts": {
+    "collected": 7,
+    "passed": 0,
+    "failed": 7,
+    "errors": 0,
+    "skipped": 0
+  },
+  "status": "failed",
+  "verification_status": "failed",
+  "failure_class": "code_runtime_error",
+  "reason": "Frozen native fixture tests completed with a recorded failure",
+  "coverage": {
+    "expected_nodeids": [
+      "python_testcases/test_sqrt.py::test_sqrt[input_data0-1.4166666666666665]",
+      "python_testcases/test_sqrt.py::test_sqrt[input_data1-1.5]",
+      "python_testcases/test_sqrt.py::test_sqrt[input_data2-1.5]",
+      "python_testcases/test_sqrt.py::test_sqrt[input_data3-2]",
+      "python_testcases/test_sqrt.py::test_sqrt[input_data4-5.196164639727311]",
+      "python_testcases/test_sqrt.py::test_sqrt[input_data5-5.744627526262464]",
+      "python_testcases/test_sqrt.py::test_sqrt[input_data6-13.038404876679632]"
+    ],
+    "collected_nodeids": [
+      "python_testcases/test_sqrt.py::test_sqrt[input_data0-1.4166666666666665]",
+      "python_testcases/test_sqrt.py::test_sqrt[input_data1-1.5]",
+      "python_testcases/test_sqrt.py::test_sqrt[input_data2-1.5]",
+      "python_testcases/test_sqrt.py::test_sqrt[input_data3-2]",
+      "python_testcases/test_sqrt.py::test_sqrt[input_data4-5.196164639727311]",
+      "python_testcases/test_sqrt.py::test_sqrt[input_data5-5.744627526262464]",
+      "python_testcases/test_sqrt.py::test_sqrt[input_data6-13.038404876679632]"
+    ],
+    "expected_collected_match": true,
+    "junit_identities": [
+      [
+        "python_testcases.test_sqrt",
+        "test_sqrt[input_data0-1.4166666666666665]"
+      ],
+      [
+        "python_testcases.test_sqrt",
+        "test_sqrt[input_data1-1.5]"
+      ],
+      [
+        "python_testcases.test_sqrt",
+        "test_sqrt[input_data2-1.5]"
+      ],
+      [
+        "python_testcases.test_sqrt",
+        "test_sqrt[input_data3-2]"
+      ],
+      [
+        "python_testcases.test_sqrt",
+        "test_sqrt[input_data4-5.196164639727311]"
+      ],
+      [
+        "python_testcases.test_sqrt",
+        "test_sqrt[input_data5-5.744627526262464]"
+      ],
+      [
+        "python_testcases.test_sqrt",
+        "test_sqrt[input_data6-13.038404876679632]"
+      ]
+    ],
+    "junit_expected_match": true,
+    "session_finished": true
+  }
+}

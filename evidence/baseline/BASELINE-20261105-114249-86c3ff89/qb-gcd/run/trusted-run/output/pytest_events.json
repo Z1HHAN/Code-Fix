@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "collected_nodeids": [
+    "python_testcases/test_gcd.py::test_gcd[input_data0-17]",
+    "python_testcases/test_gcd.py::test_gcd[input_data1-13]",
+    "python_testcases/test_gcd.py::test_gcd[input_data2-1]",
+    "python_testcases/test_gcd.py::test_gcd[input_data3-20]",
+    "python_testcases/test_gcd.py::test_gcd[input_data4-18913]",
+    "python_testcases/test_gcd.py::test_gcd[input_data5-3]"
+  ],
+  "collection_errors": [],
+  "reports": [
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data0-17]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data0-17]",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data0-17]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data1-13]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data1-13]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/gcd.py"
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data1-13]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data2-1]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data2-1]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/gcd.py"
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data2-1]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data3-20]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data3-20]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/gcd.py"
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data3-20]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data4-18913]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data4-18913]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/gcd.py"
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data4-18913]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data5-3]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data5-3]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/gcd.py"
+    },
+    {
+      "nodeid": "python_testcases/test_gcd.py::test_gcd[input_data5-3]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    }
+  ],
+  "session_finished": true,
+  "exit_code": 1
+}

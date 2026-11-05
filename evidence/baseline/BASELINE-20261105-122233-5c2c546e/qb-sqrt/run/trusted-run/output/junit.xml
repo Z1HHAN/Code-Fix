@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="7" time="15.252" timestamp="2026-11-05T04:22:58.491319+00:00" hostname="4aa2a61eaad5"><testcase classname="python_testcases.test_sqrt" name="test_sqrt[input_data0-1.4166666666666665]" time="5.006"><failure message="TimeoutError: timed out">input_data = [2, 0.01], expected = 1.4166666666666665
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_sqrt(input_data, expected):
+&gt;       assert sqrt(*input_data) == pytest.approx(expected, abs=input_data[-1])
+
+python_testcases/test_sqrt.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/sqrt.py:31: in sqrt
+    return invoke('sqrt', args, kwargs)
+python_programs/sqrt.py:22: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7a5a5deeca30&gt;
+b = &lt;memory at 0x7a5a5ddd5600&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_sqrt" name="test_sqrt[input_data1-1.5]" time="5.006"><failure message="TimeoutError: timed out">input_data = [2, 0.5], expected = 1.5
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_sqrt(input_data, expected):
+&gt;       assert sqrt(*input_data) == pytest.approx(expected, abs=input_data[-1])
+
+python_testcases/test_sqrt.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/sqrt.py:31: in sqrt
+    return invoke('sqrt', args, kwargs)
+python_programs/sqrt.py:22: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7a5a5deede10&gt;
+b = &lt;memory at 0x7a5a5ddd59c0&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_sqrt" name="test_sqrt[input_data2-1.5]" time="5.006"><failure message="TimeoutError: timed out">input_data = [2, 0.3], expected = 1.5
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_sqrt(input_data, expected):
+&gt;       assert sqrt(*input_data) == pytest.approx(expected, abs=input_data[-1])
+
+python_testcases/test_sqrt.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/sqrt.py:31: in sqrt
+    return invoke('sqrt', args, kwargs)
+python_programs/sqrt.py:22: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7a5a5dd86290&gt;
+b = &lt;memory at 0x7a5a5ddd5d80&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_sqrt" name="test_sqrt[input_data3-2]" time="0.000"><failure message="BlockingIOError: [Errno 11] Resource temporarily unavailable">input_data = [4, 0.2], expected = 2
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_sqrt(input_data, expected):
+&gt;       assert sqrt(*input_data) == pytest.approx(expected, abs=input_data[-1])
+
+python_testcases/test_sqrt.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/sqrt.py:31: in sqrt
+    return invoke('sqrt', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'sqrt', args = (4, 0.2), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) &gt; 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+&gt;                   client.connect('/rpc/channel.sock')
+E                   BlockingIOError: [Errno 11] Resource temporarily unavailable
+
+python_programs/sqrt.py:14: BlockingIOError</failure></testcase><testcase classname="python_testcases.test_sqrt" name="test_sqrt[input_data4-5.196164639727311]" time="0.000"><failure message="BlockingIOError: [Errno 11] Resource temporarily unavailable">input_data = [27, 0.01], expected = 5.196164639727311
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_sqrt(input_data, expected):
+&gt;       assert sqrt(*input_data) == pytest.approx(expected, abs=input_data[-1])
+
+python_testcases/test_sqrt.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/sqrt.py:31: in sqrt
+    return invoke('sqrt', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'sqrt', args = (27, 0.01), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) &gt; 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+&gt;                   client.connect('/rpc/channel.sock')
+E                   BlockingIOError: [Errno 11] Resource temporarily unavailable
+
+python_programs/sqrt.py:14: BlockingIOError</failure></testcase><testcase classname="python_testcases.test_sqrt" name="test_sqrt[input_data5-5.744627526262464]" time="0.000"><failure message="BlockingIOError: [Errno 11] Resource temporarily unavailable">input_data = [33, 0.05], expected = 5.744627526262464
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_sqrt(input_data, expected):
+&gt;       assert sqrt(*input_data) == pytest.approx(expected, abs=input_data[-1])
+
+python_testcases/test_sqrt.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/sqrt.py:31: in sqrt
+    return invoke('sqrt', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'sqrt', args = (33, 0.05), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) &gt; 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+&gt;                   client.connect('/rpc/channel.sock')
+E                   BlockingIOError: [Errno 11] Resource temporarily unavailable
+
+python_programs/sqrt.py:14: BlockingIOError</failure></testcase><testcase classname="python_testcases.test_sqrt" name="test_sqrt[input_data6-13.038404876679632]" time="0.000"><failure message="BlockingIOError: [Errno 11] Resource temporarily unavailable">input_data = [170, 0.03], expected = 13.038404876679632
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_sqrt(input_data, expected):
+&gt;       assert sqrt(*input_data) == pytest.approx(expected, abs=input_data[-1])
+
+python_testcases/test_sqrt.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/sqrt.py:31: in sqrt
+    return invoke('sqrt', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'sqrt', args = (170, 0.03), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) &gt; 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+&gt;                   client.connect('/rpc/channel.sock')
+E                   BlockingIOError: [Errno 11] Resource temporarily unavailable
+
+python_programs/sqrt.py:14: BlockingIOError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,27 @@
+{
+  "status": "stopped",
+  "finish_if_running": false,
+  "result": {
+    "final_result": "not_run",
+    "dev_result": "inconclusive",
+    "rounds_used": 1,
+    "model_calls": 1,
+    "tool_calls": 2,
+    "model_api_called": false,
+    "mode": "deterministic_stub_for_stop_test",
+    "isolation_ready": true,
+    "project": "leap",
+    "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "code_version": "sha256:f43886a0551747805a86ebcdc8e21bda80b88aed730426f168212af73578b1f6",
+    "code_path": "candidate-1/code/leap_year.py",
+    "guard_id": "V3_OPERATOR_STOP",
+    "reason": "按用户请求在步骤边界停止推进",
+    "cost": {
+      "status": "not_applicable",
+      "amount_usd": null
+    },
+    "trace_version": "1.0.0",
+    "handoff_path": "handoff.json",
+    "handling_status": "pending_human"
+  }
+}

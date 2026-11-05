@@ -93,75 +93,120 @@ class DockerRunner:
 
     def _execute(self, work, output, extra, timeout, folder):
         name = 'codefix-' + uuid.uuid4().hex
+        out_volume = 'codefix-out-' + uuid.uuid4().hex
         command = self.command(name, work, output, ROOT / 'c_runner/pytest_entry.py', extra)
+        # Docker Desktop/WSL2 上 docker cp 无法读取容器内的 --tmpfs 挂载
+        # （"Could not find the file /out/junit.xml"）。改用 tmpfs 后端的命名卷：
+        # 语义仍是内存态、随容器销毁而删除，且保留 noexec/nosuid。
+        tmpfs_flag = '--tmpfs=/out:rw,noexec,nosuid,size=16777216,mode=1777'
+        try:
+            index = command.index(tmpfs_flag)
+        except ValueError:
+            raise IsolationBlocked('/out tmpfs 参数缺失，拒绝执行')
+        command[index:index + 1] = ['--mount', f'type=volume,source={out_volume},target=/out']
         started = time.monotonic()
         timed_out = False
         exit_code = None
         artifact_channel = None
         artifact_error = None
-        with (folder / 'stdout.txt').open('wb') as stdout, (folder / 'stderr.txt').open('wb') as stderr:
-            try:
-                process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=stdout, stderr=stderr)
+        artifact_detail = None
+        cleanup_passed = False
+        cleanup_errors = []
+        cleanup_code = None
+        volume_code = None
+        volume_created = False
+        try:
+            created = subprocess.run(
+                [self.executable, 'volume', 'create', '--driver', 'local', '--opt', 'type=tmpfs',
+                 '--opt', 'device=tmpfs',
+                 '--opt', 'o=uid=65534,gid=65534,mode=1777,size=16777216,noexec,nosuid', out_volume],
+                capture_output=True, timeout=30)
+            if created.returncode != 0:
+                raise IsolationBlocked('无法创建 /out 临时卷: ' + created.stderr.decode('utf-8', 'replace')[:300])
+            volume_created = True
+            with (folder / 'stdout.txt').open('wb') as stdout, (folder / 'stderr.txt').open('wb') as stderr:
                 try:
-                    deadline = time.monotonic() + timeout
-                    while process.poll() is None:
-                        if extra and extra[0] == '/harness.py' and artifact_channel is None:
-                            lines = (folder / 'stdout.txt').read_bytes().splitlines()
-                            if b'CODEFIX_READY' in lines:
-                                try:
-                                    if lines.count(b'CODEFIX_READY') != 1 or any(x.startswith(b'CODEFIX_REPORT:') for x in lines):
-                                        raise ValueError('候选stdout包含伪造报告或重复就绪标记')
-                                    # Report bytes come from Docker's filesystem
-                                    # API, never from a candidate's stdout packet.
-                                    for filename in ('junit.xml', 'pytest_events.json'):
-                                        copied = subprocess.run([self.executable, 'cp', name+':/out/'+filename, '-'],
-                                                                capture_output=True, timeout=max(.01, deadline-time.monotonic()), check=True)
-                                        if len(copied.stdout) > 2_200_000:
-                                            raise ValueError('报告过大')
-                                        with tarfile.open(fileobj=io.BytesIO(copied.stdout)) as archive:
-                                            entries = archive.getmembers()
-                                            if len(entries) != 1 or not entries[0].isfile() or entries[0].size > 2_097_152:
-                                                raise ValueError('非法报告归档')
-                                            (output / filename).write_bytes(archive.extractfile(entries[0]).read())
-                                    artifact_channel = 'docker-cp'
-                                except (OSError, ValueError, tarfile.TarError, subprocess.SubprocessError) as exc:
-                                    artifact_channel = 'rejected'
-                                    artifact_error = type(exc).__name__
-                                finally:
-                                    process.stdin.close()
-                        if getattr(self, 'cancelled', lambda: False)() or time.monotonic() >= deadline or any((folder / p).stat().st_size > 8_388_608 for p in ('stdout.txt', 'stderr.txt')):
-                            raise subprocess.TimeoutExpired(command, timeout)
-                        time.sleep(0.03)
-                    exit_code = process.returncode
-                except subprocess.TimeoutExpired:
-                    timed_out = True
-                    process.kill()
-                    process.wait(timeout=5)
+                    process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=stdout, stderr=stderr)
+                    try:
+                        deadline = time.monotonic() + timeout
+                        while process.poll() is None:
+                            if extra and extra[0] == '/harness.py' and artifact_channel is None:
+                                lines = (folder / 'stdout.txt').read_bytes().splitlines()
+                                if b'CODEFIX_READY' in lines:
+                                    try:
+                                        if lines.count(b'CODEFIX_READY') != 1 or any(x.startswith(b'CODEFIX_REPORT:') for x in lines):
+                                            raise ValueError('候选stdout包含伪造报告或重复就绪标记')
+                                        # Report bytes come from Docker's filesystem
+                                        # API, never from a candidate's stdout packet.
+                                        for filename in ('junit.xml', 'pytest_events.json'):
+                                            copied = subprocess.run([self.executable, 'cp', name+':/out/'+filename, '-'],
+                                                                    capture_output=True, timeout=max(.01, deadline-time.monotonic()), check=True)
+                                            if len(copied.stdout) > 2_200_000:
+                                                raise ValueError('报告过大')
+                                            with tarfile.open(fileobj=io.BytesIO(copied.stdout)) as archive:
+                                                entries = archive.getmembers()
+                                                if len(entries) != 1 or not entries[0].isfile() or entries[0].size > 2_097_152:
+                                                    raise ValueError('非法报告归档')
+                                                (output / filename).write_bytes(archive.extractfile(entries[0]).read())
+                                        artifact_channel = 'docker-cp'
+                                    except subprocess.CalledProcessError as exc:
+                                        artifact_channel = 'rejected'
+                                        artifact_error = type(exc).__name__
+                                        artifact_detail = (exc.stderr or b'').decode('utf-8', 'replace')[:500]
+                                    except (OSError, ValueError, tarfile.TarError, subprocess.SubprocessError) as exc:
+                                        artifact_channel = 'rejected'
+                                        artifact_error = type(exc).__name__
+                                        artifact_detail = str(exc)[:500]
+                                    finally:
+                                        process.stdin.close()
+                            if getattr(self, 'cancelled', lambda: False)() or time.monotonic() >= deadline or any((folder / p).stat().st_size > 8_388_608 for p in ('stdout.txt', 'stderr.txt')):
+                                raise subprocess.TimeoutExpired(command, timeout)
+                            time.sleep(0.03)
+                        exit_code = process.returncode
+                    except subprocess.TimeoutExpired:
+                        timed_out = True
+                        process.kill()
+                        process.wait(timeout=5)
+                    finally:
+                        if process.stdin and not process.stdin.closed:
+                            process.stdin.close()
                 finally:
-                    if process.stdin and not process.stdin.closed:
-                        process.stdin.close()
-            finally:
-                cleanup_passed = False
-                cleanup_errors = []
+                    try:
+                        inspected = subprocess.run([self.executable, 'inspect', name], capture_output=True, timeout=10)
+                        if inspected.returncode == 0:
+                            (folder / 'container.json').write_bytes(inspected.stdout)
+                    except (OSError, subprocess.SubprocessError) as exc:
+                        cleanup_errors.append({'operation': 'inspect', 'error_type': type(exc).__name__})
+                    try:
+                        cleanup = subprocess.run([self.executable, 'rm', '--force', name], capture_output=True, timeout=10)
+                        cleanup_code = cleanup.returncode
+                        if cleanup_code:
+                            cleanup_errors.append({'operation': 'rm', 'exit_code': cleanup_code,
+                                                   'stderr': cleanup.stderr.decode('utf-8', 'replace')[:300]})
+                    except (OSError, subprocess.SubprocessError) as exc:
+                        cleanup_code = None
+                        cleanup_errors.append({'operation': 'rm', 'error_type': type(exc).__name__})
+        finally:
+            if volume_created:
                 try:
-                    inspected = subprocess.run([self.executable, 'inspect', name], capture_output=True, timeout=10)
-                    if inspected.returncode == 0:
-                        (folder / 'container.json').write_bytes(inspected.stdout)
+                    removed = subprocess.run([self.executable, 'volume', 'rm', out_volume],
+                                             capture_output=True, timeout=15)
+                    volume_code = removed.returncode
+                    if volume_code:
+                        cleanup_errors.append({'operation': 'volume rm', 'exit_code': volume_code,
+                                               'stderr': removed.stderr.decode('utf-8', 'replace')[:300]})
                 except (OSError, subprocess.SubprocessError) as exc:
-                    cleanup_errors.append({'operation': 'inspect', 'error_type': type(exc).__name__})
-                try:
-                    cleanup = subprocess.run([self.executable, 'rm', '--force', name], capture_output=True, timeout=10)
-                    cleanup_passed = cleanup.returncode == 0
-                    cleanup_code = cleanup.returncode
-                except (OSError, subprocess.SubprocessError) as exc:
-                    cleanup_code = None
-                    cleanup_errors.append({'operation': 'rm', 'error_type': type(exc).__name__})
-                (folder / 'cleanup.json').write_text(json.dumps({'container': name, 'exit_code': cleanup_code,
-                    'cleanup_passed': cleanup_passed, 'errors': cleanup_errors}), encoding='utf-8')
+                    cleanup_errors.append({'operation': 'volume rm', 'error_type': type(exc).__name__})
+            cleanup_passed = (cleanup_code == 0) and (volume_code == 0)
+            (folder / 'cleanup.json').write_text(json.dumps({
+                'container': name, 'exit_code': cleanup_code,
+                'output_volume': out_volume, 'output_volume_exit_code': volume_code,
+                'cleanup_passed': cleanup_passed, 'errors': cleanup_errors}), encoding='utf-8')
         return {'call_id': name, 'exit_code': exit_code, 'timed_out': timed_out, 'duration_ms': round((time.monotonic()-started)*1000),
                 'stdout_path': 'stdout.txt', 'stderr_path': 'stderr.txt', 'command': command,
                 'artifact_channel': artifact_channel, 'artifact_error': artifact_error,
-                'cleanup_passed': cleanup_passed}
+                'artifact_detail': artifact_detail, 'cleanup_passed': cleanup_passed,
+                'output_volume': out_volume}
 
     def run(self, work, evidence_dir, *, phase, timeout, expected_version):
         if not self.ready:

@@ -1,0 +1,8 @@
+tests passed=221
+CODEFIX_AUDIT {"event": "early_exit", "detail": {"code": 0}}
+tests passed=221
+CODEFIX_AUDIT {"event": "early_exit", "detail": {"code": 0}}
+tests passed=221
+CODEFIX_AUDIT {"event": "early_exit", "detail": {"code": 0}}
+tests passed=221
+CODEFIX_AUDIT {"event": "early_exit", "detail": {"code": 0}}

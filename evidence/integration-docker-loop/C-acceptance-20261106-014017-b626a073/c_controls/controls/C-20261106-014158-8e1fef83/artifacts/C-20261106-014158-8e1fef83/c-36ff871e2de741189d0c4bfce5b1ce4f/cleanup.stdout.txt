@@ -1,0 +1,2 @@
+SUCCESS: The process with PID 37308 (child process of PID 44480) has been terminated.
+SUCCESS: The process with PID 44480 (child process of PID 36668) has been terminated.

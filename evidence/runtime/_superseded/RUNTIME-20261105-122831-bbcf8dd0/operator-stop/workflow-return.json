@@ -1,0 +1,28 @@
+{
+  "status": "paused",
+  "finish_if_running": true,
+  "result": {
+    "final_result": "not_run",
+    "dev_result": "not_run",
+    "rounds_used": 0,
+    "model_calls": 0,
+    "tool_calls": 1,
+    "model_api_called": false,
+    "mode": "deterministic_stub_for_stop_test",
+    "isolation_ready": true,
+    "project": "leap",
+    "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+    "code_path": "base/code/leap_year.py",
+    "baseline_failure_class": "environment_error",
+    "rule_id": "R03",
+    "reason": "依赖、测试收集、命令或执行环境异常，交C诊断；不让修复员改业务代码凑通过。",
+    "cost": {
+      "status": "not_called",
+      "amount_usd": null
+    },
+    "trace_version": "1.0.0",
+    "handoff_path": "handoff.json",
+    "handling_status": "pending_human"
+  }
+}

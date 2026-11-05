@@ -1,0 +1,75 @@
+# Runtime process and mount evidence
+# Captured_UTC=2026-11-04T16:47:15.212Z
+# Container=docker-isolation-test
+# Container_id=f58704716eb1e0fab9c827e81b8bcfd5934d1119557ffaf8049de26db8ee0df0
+# Image=docker-isolation-evidence:test-current
+# Image_id=sha256:6cceb56a1ad064ab7f3e3c092c42bc1698802160b62bd0382a5e055cfa639c2a
+
+## docker top docker-isolation-test
+~~~text
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+10000               1379                1356                0                   16:33               ?                   00:00:00            /sbin/docker-init -- /bin/sh -c while :; do sleep 3600; done
+10000               1403                1379                0                   16:33               ?                   00:00:00            /bin/sh -c while :; do sleep 3600; done
+10000               1404                1403                0                   16:33               ?                   00:00:00            sleep 3600
+
+exit_code=0
+~~~
+
+## docker exec docker-isolation-test ps aux
+~~~text
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+evidence       1  0.0  0.0   1016   688 ?        Ss   16:33   0:00 /sbin/docker-init -- /bin/sh -c while :; do sleep 3600; done
+evidence       7  0.0  0.0   1636   884 ?        S    16:33   0:00 /bin/sh -c while :; do sleep 3600; done
+evidence       8  0.0  0.0   1620   936 ?        S    16:33   0:00 sleep 3600
+evidence     263 83.3  0.0   2516  1688 ?        Rs   16:47   0:00 ps aux
+
+exit_code=0
+~~~
+
+## docker exec docker-isolation-test cat /proc/1/mounts
+~~~text
+overlay / overlay ro,relatime,lowerdir=/var/lib/desktop-containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/80/fs:/var/lib/desktop-containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/54/fs:/var/lib/desktop-containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/53/fs:/var/lib/desktop-containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/10/fs,upperdir=/var/lib/desktop-containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/82/fs,workdir=/var/lib/desktop-containerd/daemon/io.containerd.snapshotter.v1.overlayfs/snapshots/82/work 0 0
+proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0
+tmpfs /dev tmpfs rw,nosuid,size=65536k,mode=755 0 0
+devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=666 0 0
+sysfs /sys sysfs ro,nosuid,nodev,noexec,relatime 0 0
+cgroup /sys/fs/cgroup cgroup2 ro,nosuid,nodev,noexec,relatime,nsdelegate 0 0
+mqueue /dev/mqueue mqueue rw,nosuid,nodev,noexec,relatime 0 0
+shm /dev/shm tmpfs rw,nosuid,nodev,noexec,relatime,size=65536k 0 0
+overlay /sbin/docker-init overlay ro,relatime,lowerdir=/tmp/docker-desktop-root-ro,upperdir=/run/rootfs.upper,workdir=/run/rootfs.workdir,uuid=on 0 0
+tmpfs /run tmpfs rw,nosuid,nodev,noexec,relatime,size=16384k,mode=755 0 0
+tmpfs /tmp tmpfs rw,nosuid,nodev,noexec,relatime,size=65536k 0 0
+/dev/sdd /etc/hostname ext4 ro,relatime 0 0
+/dev/sdd /etc/hosts ext4 ro,relatime 0 0
+/dev/sdd /etc/resolv.conf ext4 ro,relatime 0 0
+proc /proc/bus proc ro,nosuid,nodev,noexec,relatime 0 0
+proc /proc/fs proc ro,nosuid,nodev,noexec,relatime 0 0
+proc /proc/irq proc ro,nosuid,nodev,noexec,relatime 0 0
+proc /proc/sys proc ro,nosuid,nodev,noexec,relatime 0 0
+proc /proc/sysrq-trigger proc ro,nosuid,nodev,noexec,relatime 0 0
+tmpfs /proc/acpi tmpfs ro,relatime,size=4k,nr_inodes=1 0 0
+tmpfs /proc/interrupts tmpfs rw,nosuid,size=65536k,mode=755 0 0
+tmpfs /proc/kcore tmpfs rw,nosuid,size=65536k,mode=755 0 0
+tmpfs /proc/keys tmpfs rw,nosuid,size=65536k,mode=755 0 0
+tmpfs /proc/scsi tmpfs ro,relatime,size=4k,nr_inodes=1 0 0
+tmpfs /proc/timer_list tmpfs rw,nosuid,size=65536k,mode=755 0 0
+tmpfs /sys/firmware tmpfs ro,relatime,size=4k,nr_inodes=1 0 0
+
+exit_code=0
+~~~
+
+## docker exec docker-isolation-test cat /proc/1/status (seccomp / caps / no_new_privs)
+~~~text
+Uid:	10000	10000	10000	10000
+Gid:	10000	10000	10000	10000
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	0000000000000000
+CapAmb:	0000000000000000
+NoNewPrivs:	1
+Seccomp:	2
+Seccomp_filters:	2
+
+exit_code=0
+~~~

@@ -2,8 +2,73 @@
 import contextlib
 import importlib.util
 import json
+import os
 import socket
 import sys
+
+AUDIT_PREFIX = 'CODEFIX_AUDIT '
+_WRITE_FLAGS = os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_APPEND | os.O_TRUNC
+_PATH_EVENTS = {'open', 'os.open', 'os.remove', 'os.unlink', 'os.rename', 'os.mkdir',
+                'os.rmdir', 'os.truncate', 'os.link', 'os.symlink'}
+_spawning = []
+
+
+def _emit(event, detail=None):
+    try:
+        payload = {'event': event}
+        if detail is not None:
+            payload['detail'] = detail
+        line = AUDIT_PREFIX + json.dumps(payload, ensure_ascii=False, default=str) + '\n'
+        os.write(2, line.encode('utf-8', 'replace')[:4096])
+    except BaseException:
+        pass
+
+
+def _classify_path(path):
+    try:
+        text = os.fsdecode(os.fspath(path)).replace('\\', '/')
+    except TypeError:
+        return None
+    parts = [x for x in text.split('/') if x]
+    if text == '/out' or text.startswith('/out/'):
+        return 'artifact_write'
+    if ('/tests/' in text or text.endswith('/tests') or text.startswith('tests/')
+            or (parts and (parts[-1] == 'tests' or parts[-1].startswith('test_')))):
+        return 'tests_write'
+    return None
+
+
+def _audit(event, args):
+    if _spawning:
+        return
+    _spawning.append(1)
+    try:
+        if event in ('os.fork', 'os.forkpty'):
+            _emit('process_fork')
+        elif event in ('subprocess.Popen', 'os.exec', 'os.posix_spawn', 'os.system', 'os.spawn'):
+            _emit('process_spawn', event)
+        elif event in _PATH_EVENTS and args:
+            path = args[0]
+            write = event != 'open'
+            if event == 'open':
+                mode = args[1] if len(args) > 1 else None
+                flags = args[2] if len(args) > 2 else 0
+                if isinstance(mode, str) and any(ch in mode for ch in 'wax+'):
+                    write = True
+                elif isinstance(flags, int) and flags & _WRITE_FLAGS:
+                    write = True
+            if write:
+                kind = _classify_path(path)
+                if kind:
+                    try:
+                        _emit(kind, os.fsdecode(os.fspath(path)))
+                    except TypeError:
+                        _emit(kind)
+    except BaseException:
+        pass
+    finally:
+        _spawning.pop()
+
 
 # This standalone entry has no access to the host app package. New adapters
 # must register their reviewed name here and in app.split_runner.FUNCTIONS.
@@ -27,6 +92,7 @@ def execute_request(request, source):
 
 
 def main():
+    sys.addaudithook(_audit)
     with socket.socket(socket.AF_UNIX) as server:
         server.bind('/rpc/channel.sock')
         server.listen(1)
@@ -41,7 +107,11 @@ def main():
                     response = json.dumps({'value': value}, allow_nan=False).encode() + b'\n'
                     if len(response) > 65536:
                         raise ValueError('response too large')
-                except Exception:
+                except SystemExit as exc:
+                    _emit('early_exit', {'code': exc.code if isinstance(exc.code, (int, type(None))) else 'non-int'})
+                    response = b'{"error":"candidate_early_exit"}\n'
+                except BaseException as exc:
+                    _emit('execution_error', type(exc).__name__)
                     response = b'{"error":"candidate_execution_failed"}\n'
                 connection.sendall(response)
 

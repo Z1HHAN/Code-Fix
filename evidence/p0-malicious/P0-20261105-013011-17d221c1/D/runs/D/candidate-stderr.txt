@@ -1,0 +1,5 @@
+CODEFIX_AUDIT {"event": "artifact_write", "detail": "/out"}
+CODEFIX_AUDIT {"event": "artifact_write", "detail": "/out/junit.xml"}
+CODEFIX_AUDIT {"event": "artifact_write", "detail": "/out/pytest_events.json"}
+FORGED_ARTIFACTS_WRITTEN
+CODEFIX_READY

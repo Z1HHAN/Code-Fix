@@ -1,0 +1,171 @@
+﻿# 资源限制测试证据（CPU 配额 / 内存上限）
+
+## 测试目的
+用 `docker inspect` 核对声明的资源限制，并用 `docker stats` 与 cgroup v2 内核计数实测 CPU 配额和内存上限确实生效，防止单容器耗尽宿主机资源。
+
+## 执行命令
+~~~bash
+docker inspect docker-isolation-test --format 'NanoCpus={{.HostConfig.NanoCpus}} CpuQuota={{.HostConfig.CpuQuota}} CpuPeriod={{.HostConfig.CpuPeriod}} Memory={{.HostConfig.Memory}} MemorySwap={{.HostConfig.MemorySwap}} PidsLimit={{.HostConfig.PidsLimit}}'
+docker stats --no-stream --format '{{.Name}}|cpu={{.CPUPerc}}|mem={{.MemUsage}}|memperc={{.MemPerc}}|pids={{.PIDs}}' docker-isolation-test
+docker exec docker-isolation-test sh -c 'timeout 10 yes >/dev/null'
+docker exec docker-isolation-test cat /sys/fs/cgroup/memory.events
+docker exec docker-isolation-test sh -c 'y=0123456789abcdef0123456789abcdef; x=$y; while :; do x=$x$x; done'
+docker inspect docker-isolation-test --format 'Status={{.State.Status}} OOMKilled={{.State.OOMKilled}} RestartCount={{.RestartCount}}'
+~~~
+
+## 预期结果
+- `NanoCpus=500000000`（0.50 CPU）、`Memory=268435456`（256 MiB）、`MemorySwap=268435456`（禁止额外 swap）、`PidsLimit=128`；
+- 单线程忙循环时 `docker stats` 的 `CPUPerc` 收敛在 50% 附近，而不是 100%；
+- 内存压测进程被 cgroup OOM 杀死（`docker exec` 退出码 137），`memory.events` 的 `oom_kill` 计数递增，`memory.peak` 达到 `memory.max`；
+- 压测结束后 CPU 回落，容器仍为 running（限制生效但不影响正常使用）。
+
+## 实际测试结果
+~~~text
+采集时间 UTC：2026-11-04T18:07:04.943Z
+宿主机：Docker Desktop (WSL2 Linux backend)
+容器：docker-isolation-test
+镜像：docker-isolation-evidence:test-current
+镜像 ID：sha256:6cceb56a1ad064ab7f3e3c092c42bc1698802160b62bd0382a5e055cfa639c2a
+约束：仅使用 01-config/compose.yaml，不加载任何 runtime override
+
+~~~
+
+### 声明的资源限制（docker inspect）
+~~~text
+$ docker inspect docker-isolation-test --format 'NanoCpus=... Memory=... PidsLimit=...'
+NanoCpus=500000000 CpuQuota=0 CpuPeriod=0 Memory=268435456 MemorySwap=268435456 PidsLimit=128
+exit_code=0
+~~~
+
+### 空闲基线（docker stats --no-stream）
+~~~text
+$ docker stats --no-stream --format '{{.Name}}|cpu={{.CPUPerc}}|mem={{.MemUsage}}|pids={{.PIDs}}' docker-isolation-test
+docker-isolation-test|cpu=0.00%|mem=3.328MiB / 256MiB|memperc=1.30%|pids=3
+exit_code=0
+~~~
+
+CPU 压测进程（容器内 timeout 10 自限时，到时以 SIGTERM 结束）
+### CPU 配额实测：单线程忙循环期间的 docker stats 采样
+~~~text
+$ while sampling; docker stats --no-stream --format '{{.Name}}|cpu={{.CPUPerc}}|mem={{.MemUsage}}|pids={{.PIDs}}' docker-isolation-test
+docker-isolation-test|cpu=44.99%|mem=3.93MiB / 256MiB|memperc=1.54%|pids=5
+docker-isolation-test|cpu=49.49%|mem=3.93MiB / 256MiB|memperc=1.54%|pids=5
+docker-isolation-test|cpu=49.51%|mem=3.93MiB / 256MiB|memperc=1.54%|pids=5
+docker-isolation-test|cpu=50.55%|mem=3.93MiB / 256MiB|memperc=1.54%|pids=5
+docker-isolation-test|cpu=49.92%|mem=3.93MiB / 256MiB|memperc=1.54%|pids=5
+docker-isolation-test|cpu=3.52%|mem=3.578MiB / 256MiB|memperc=1.40%|pids=3
+docker-isolation-test|cpu=0.00%|mem=3.578MiB / 256MiB|memperc=1.40%|pids=3
+docker-isolation-test|cpu=0.00%|mem=3.48MiB / 256MiB|memperc=1.36%|pids=3
+exit_code=0
+~~~
+
+CPU 采样统计：样本数=8，落在 40%–60% 区间=5，超过 90% 的样本=0
+
+### 压测结束后回落
+~~~text
+$ docker stats --no-stream --format '{{.Name}}|cpu={{.CPUPerc}}|mem={{.MemUsage}}|pids={{.PIDs}}' docker-isolation-test
+docker-isolation-test|cpu=0.00%|mem=3.445MiB / 256MiB|memperc=1.35%|pids=3
+exit_code=0
+~~~
+
+### cgroup v2 memory.max
+~~~text
+$ docker exec docker-isolation-test cat /sys/fs/cgroup/memory.max
+268435456
+exit_code=0
+~~~
+
+### 内存压测前：memory.events 基线
+~~~text
+$ docker exec docker-isolation-test cat /sys/fs/cgroup/memory.events
+low 0
+high 0
+max 0
+oom 0
+oom_kill 0
+oom_group_kill 0
+exit_code=0
+~~~
+
+### 内存压测前：容器状态
+~~~text
+$ docker inspect docker-isolation-test --format 'Status={{.State.Status}} OOMKilled={{.State.OOMKilled}} RestartCount={{.RestartCount}}'
+Status=running OOMKilled=false RestartCount=0
+exit_code=0
+~~~
+
+### 内存上限实测：持续倍增分配直至 cgroup 上限
+~~~text
+$ docker exec docker-isolation-test sh -c 'y=0123456789abcdef0123456789abcdef; x=$y; while :; do x=$x$x; done'
+exit_code=137
+~~~
+
+### 内存上限实测：docker stats 采样
+~~~text
+$ while sampling; docker stats --no-stream --format '{{.Name}}|cpu={{.CPUPerc}}|mem={{.MemUsage}}|memperc={{.MemPerc}}|pids={{.PIDs}}' docker-isolation-test
+18:07:38.882 docker-isolation-test|cpu=15.37%|mem=13.25MiB / 256MiB|memperc=5.18%|pids=4
+18:07:40.975 docker-isolation-test|cpu=49.59%|mem=135.2MiB / 256MiB|memperc=52.79%|pids=4
+18:07:42.999 docker-isolation-test|cpu=0.00%|mem=1000KiB / 256MiB|memperc=0.38%|pids=3
+18:07:45.009 docker-isolation-test|cpu=0.01%|mem=1000KiB / 256MiB|memperc=0.38%|pids=3
+18:07:47.021 docker-isolation-test|cpu=0.00%|mem=1000KiB / 256MiB|memperc=0.38%|pids=3
+18:07:49.030 docker-isolation-test|cpu=0.01%|mem=1000KiB / 256MiB|memperc=0.38%|pids=3
+18:07:51.041 docker-isolation-test|cpu=0.00%|mem=1000KiB / 256MiB|memperc=0.38%|pids=3
+18:07:53.060 docker-isolation-test|cpu=0.00%|mem=952KiB / 256MiB|memperc=0.36%|pids=3
+18:07:55.074 docker-isolation-test|cpu=0.01%|mem=952KiB / 256MiB|memperc=0.36%|pids=3
+18:07:57.082 docker-isolation-test|cpu=0.01%|mem=952KiB / 256MiB|memperc=0.36%|pids=3
+18:07:59.094 docker-isolation-test|cpu=0.01%|mem=952KiB / 256MiB|memperc=0.36%|pids=3
+18:08:01.104 docker-isolation-test|cpu=0.00%|mem=952KiB / 256MiB|memperc=0.36%|pids=3
+18:08:03.123 docker-isolation-test|cpu=0.00%|mem=952KiB / 256MiB|memperc=0.36%|pids=3
+18:08:05.133 docker-isolation-test|cpu=0.00%|mem=952KiB / 256MiB|memperc=0.36%|pids=3
+18:08:07.146 docker-isolation-test|cpu=0.01%|mem=952KiB / 256MiB|memperc=0.36%|pids=3
+18:08:09.155 docker-isolation-test|cpu=0.01%|mem=952KiB / 256MiB|memperc=0.36%|pids=3
+18:08:11.164 docker-isolation-test|cpu=0.00%|mem=952KiB / 256MiB|memperc=0.36%|pids=3
+18:08:13.185 docker-isolation-test|cpu=0.00%|mem=952KiB / 256MiB|memperc=0.36%|pids=3
+exit_code=0
+~~~
+
+### 内存压测后：memory.events
+~~~text
+$ docker exec docker-isolation-test cat /sys/fs/cgroup/memory.events
+low 0
+high 0
+max 39
+oom 1
+oom_kill 1
+oom_group_kill 0
+exit_code=0
+~~~
+
+### 内存压测后：memory.peak
+~~~text
+$ docker exec docker-isolation-test cat /sys/fs/cgroup/memory.peak
+268435456
+exit_code=0
+~~~
+
+### 内存压测后：容器状态
+~~~text
+$ docker inspect docker-isolation-test --format 'Status={{.State.Status}} OOMKilled={{.State.OOMKilled}} RestartCount={{.RestartCount}}'
+Status=running OOMKilled=true RestartCount=0
+exit_code=0
+~~~
+
+### 内存压测后：docker stats
+~~~text
+$ docker stats --no-stream --format '{{.Name}}|cpu={{.CPUPerc}}|mem={{.MemUsage}}|memperc={{.MemPerc}}|pids={{.PIDs}}' docker-isolation-test
+docker-isolation-test|cpu=0.00%|mem=3.051MiB / 256MiB|memperc=1.19%|pids=3
+exit_code=0
+~~~
+
+内存压测统计：docker exec 退出码=137，oom_kill 计数=0→1，oom 事件=0→1，memory.peak=268435456（memory.max=268435456）
+
+## 结论
+
+PASS：`docker inspect` 显示 `NanoCpus=500000000`（0.50 CPU）、`Memory=268435456`、`MemorySwap=268435456`、`PidsLimit=128`，与 `01-config/compose.yaml` 声明一致。单线程忙循环期间 `docker stats` 的 CPU 占用收敛在 50% 附近（5/8 个样本落在 40%–60%，无样本超过 90%），压测结束后回落。内存压测进程持续分配直至被 cgroup OOM 杀死，`docker exec` 退出码 137（128+SIGKILL），内核 `memory.events` 的 `oom_kill` 计数由 0 增至 1，`memory.peak` 达到 268435456 字节（`memory.max`=268435456）。CPU 配额与内存上限均实测生效。
+
+说明：`docker stats` 的 `CPUPerc` 为采样窗口内的平均占用，0.50 单核算力下理论峰值为 50%；宿主机调度抖动会带来几个百分点偏差。
+说明：被 OOM 杀死的是 `docker exec` 启动的压测进程，容器 PID 1 仍存活，因此 `State.Status=running`；Docker 的 `State.OOMKilled` 反映 cgroup 最近一次 OOM 事件，与内核 `memory.events` 计数互相印证。
+
+敏感信息处理：仅包含容器名、资源数值与退出码，不含宿主机 CPU 型号、进程列表或账户信息。
+
+

@@ -1,0 +1,43 @@
+[
+  {
+    "offset_s": 0.32,
+    "event": "workflow_start",
+    "run_id": "run-9bfc41a186c84802a7128690ef04253a"
+  },
+  {
+    "offset_s": 0.32,
+    "event": "stop_armed"
+  },
+  {
+    "offset_s": 6.81,
+    "event": "development_containers_up",
+    "containers": [
+      "codefix-candidate-d22152b398334125a61fe49dec47b791|Up Less than a second|512bc2a4e681"
+    ]
+  },
+  {
+    "offset_s": 9.89,
+    "event": "interrupt_sent",
+    "containers": [
+      "codefix-7d25d4bb6ff642038fae91af71c0a4f3|Up 2 seconds|512bc2a4e681",
+      "codefix-candidate-d22152b398334125a61fe49dec47b791|Up 3 seconds|512bc2a4e681"
+    ],
+    "volumes": [
+      "codefix-out-33fbe5f2904d45e4ac01d0632821952d",
+      "codefix-rpc-71b28921ad2541edb065a58b8c53737c"
+    ]
+  },
+  {
+    "offset_s": 9.93,
+    "event": "interrupt_recorded",
+    "effective": "interrupted"
+  },
+  {
+    "offset_s": 11.34,
+    "event": "workflow_returned"
+  },
+  {
+    "offset_s": 11.43,
+    "event": "observed_done"
+  }
+]

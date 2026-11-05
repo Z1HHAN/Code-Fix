@@ -1,0 +1,19 @@
+[
+  {
+    "offset_s": 0.33,
+    "event": "workflow_start",
+    "run_id": "run-293cb151017d46dc98350f0e7c8c4ca9"
+  },
+  {
+    "offset_s": 0.33,
+    "event": "stop_armed"
+  },
+  {
+    "offset_s": 5.75,
+    "event": "workflow_returned"
+  },
+  {
+    "offset_s": 5.84,
+    "event": "observed_done"
+  }
+]
