@@ -1,0 +1,36 @@
+{
+  "record": "助手-运行时审查修复-024",
+  "base_commit": "93b315a634c7d860bc7d78dd903c1eff87a08d95",
+  "branch": "codex/runtime-review-fixes",
+  "scope": "Authorized 13-item runtime review; offline component checks, not B/C signoff",
+  "earlier_attempts": [
+    {
+      "path": "review-024/targeted-first-failure.xml",
+      "outcome": "2 failed, 71 passed",
+      "reason": "Initial context check rejected registered python_testcases/node.py; compatibility restored without changing assertions"
+    },
+    {
+      "path": "C-acceptance-20261105-193722-c2b62acb",
+      "outcome": "infrastructure incomplete",
+      "platform": "281 passed, 1 failed, 1 skipped",
+      "platform_failure": "Windows DPAPI CryptProtectData failed under sandbox user",
+      "infrastructure_failure": "preserve_work FileNotFoundError reading long custom workspace artifact path",
+      "tool_exit_code": 1,
+      "script_diagnostic_exit_code": 2
+    },
+    {
+      "path": "C-acceptance-20261105-194032-3a95a5f7",
+      "outcome": "infrastructure incomplete",
+      "platform": "282 passed, 1 skipped",
+      "platform_failure": null,
+      "infrastructure_failure": "preserve_work FileNotFoundError reading long custom workspace artifact path",
+      "tool_exit_code": 1,
+      "script_diagnostic_exit_code": 2,
+      "execution_context": "original Windows user, elevated"
+    }
+  ],
+  "resolution": "Use original Windows user for DPAPI and existing default short TEMP work root; no C assertions or script source changed",
+  "remaining_limitation": "Custom long C workspace artifact preservation remains unsupported in reproduced paths; follow-up under T-056 requires separate authorization",
+  "model_api_called": false,
+  "docker_execution_performed": false
+}

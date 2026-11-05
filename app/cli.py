@@ -50,7 +50,7 @@ def main() -> int:
     smoke = sub.add_parser('provider-smoke', help='一次有上限的JSON接口测试；不是修复闭环')
     smoke.add_argument('--profile', default='sf_account1_v32')
     serve = sub.add_parser('serve')
-    serve.add_argument('--port', type=int, default=8000)
+    serve.add_argument('--port', type=int, default=8000, help='固定监听端口1024至65535；不支持0随机分配')
     reconcile = sub.add_parser('budget-reconcile', help='人工对账；仅本机CLI，不调用模型、不改变额度')
     reconcile.add_argument('--call-id', required=True)
     reconcile.add_argument('--currency', choices=['CNY','USD'], required=True)
@@ -133,17 +133,19 @@ def main() -> int:
             value = parse_locator_output(raw) if args.kind == 'locator' else parse_repair_output(raw)
             print(json.dumps(value, ensure_ascii=False, indent=2))
             return 0
-        engine = DecisionEngine(read_json(ROOT / 'configs/decision_rules.json'))
-        common = dict(phase='development', isolation_ready=True, user_pause_requested=False,
-                      evidence_matches_current_version=True, repair_budget_available=True,
-                      execution_budget_available=True, needs_new_repair=True,
-                      next_action_requires_execution_budget=True, output_agent=None, retries_left=2)
-        results = [engine.decide({**common, 'failure_class': failure}, run_id='fixture-run',
-                                 code_version='fixture:v0', evidence_ids=['fixture-e1'],
-                                 decision_id=f'D{i:03d}')
-                   for i, failure in enumerate(('assertion_failed', 'syntax_error', 'environment_error', 'timeout'), 1)]
-        print(json.dumps(results, ensure_ascii=False, indent=2))
-        return 0
+        if args.command == 'decision-fixtures':
+            engine = DecisionEngine(read_json(ROOT / 'configs/decision_rules.json'))
+            common = dict(phase='development', isolation_ready=True, user_pause_requested=False,
+                          evidence_matches_current_version=True, repair_budget_available=True,
+                          execution_budget_available=True, needs_new_repair=True,
+                          next_action_requires_execution_budget=True, output_agent=None, retries_left=2)
+            results = [engine.decide({**common, 'failure_class': failure}, run_id='fixture-run',
+                                     code_version='fixture:v0', evidence_ids=['fixture-e1'],
+                                     decision_id=f'D{i:03d}')
+                       for i, failure in enumerate(('assertion_failed', 'syntax_error', 'environment_error', 'timeout'), 1)]
+            print(json.dumps(results, ensure_ascii=False, indent=2))
+            return 0
+        parser.error(f'命令未实现：{args.command}')
     except (ConfigError, InvalidModelOutput, ValueError, OSError, KeyError) as exc:
         print(json.dumps({'status': 'blocked', 'reason': str(exc)}, ensure_ascii=False))
         return 2

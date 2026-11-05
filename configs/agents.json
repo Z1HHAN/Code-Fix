@@ -1,4 +1,5 @@
 {
+  "legacy_agents_note": "以下旧agents数组为Day1历史兼容配置，生产运行时由runtime_v3替代；两个结构不强制同步。旧结构仅供validate_draft_configs作为pending_BC_confirmation检查来源，不参与实际调度。",
   "runtime_v3": {
     "config_version": "1.1.0",
     "protocol": "codefix-json-v1",

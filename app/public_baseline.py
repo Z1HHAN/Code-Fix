@@ -1,7 +1,7 @@
 """Public-dataset baseline: Docker only, with no model calls or host fallback."""
 import time
 
-from .split_runner import SplitDockerRunner as DockerRunner
+from .split_runner import SplitDockerRunner
 from .runner import code_version
 from .tasks_v3 import get_task
 
@@ -9,7 +9,7 @@ from .tasks_v3 import get_task
 def run_public_baseline(store, run_id, runner=None):
     run = store.get(run_id)
     task = get_task(run['task']['project'])
-    runner = runner or DockerRunner(task.project)
+    runner = runner or SplitDockerRunner(task.project)
     runner.cancelled = lambda: store.get(run_id)['control'] == 'stop' or store.get(run_id)['status'] not in {'created', 'running'}
     directory = store.directory(run_id)
     deadline = time.monotonic() + run['task']['total_seconds']

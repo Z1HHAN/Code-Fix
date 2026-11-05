@@ -1,0 +1,42 @@
+{
+  "record": "助手-第二轮审查修复-025",
+  "acceptance_run": "evidence/runtime-review/C-acceptance-20261105-201000-211945d3",
+  "base_commit": "93b315a634c7d860bc7d78dd903c1eff87a08d95",
+  "branch": "codex/runtime-review-fixes",
+  "source_files": 386,
+  "source_matches_tested_snapshot": true,
+  "source_snapshot_sha256": "6b00a5f49293d47220e221b9e6deaa06ad4615ef8f0c2cefc0c597f2b1681c1f",
+  "evidence_files_hashed": 169,
+  "evidence_hashes_valid": true,
+  "zip_member_sha256_verified": {
+    "platform_pytest": 4231,
+    "repair_gates": 429
+  },
+  "acceptance_assert_nodes_unchanged": 44,
+  "acceptance_test_functions_unchanged": 16,
+  "c_runner_and_profiles_unchanged": true,
+  "results": {
+    "platform_passed": 340,
+    "platform_skipped": 1,
+    "new_specialized_passed": 58,
+    "node_passed": 23,
+    "trusted_controls_passed": 12,
+    "repair_gates_passed": 25
+  },
+  "early_failures": [
+    {
+      "file": "targeted.xml",
+      "result": "collection error: reserved pytest request parameter name; renamed payload"
+    },
+    {
+      "file": "targeted-rerun.xml",
+      "result": "1 failed, 103 passed: new expected-hash test treated leap test directory as file; fixture expectation fixed"
+    }
+  ],
+  "model_api_called": false,
+  "docker_execution_performed": false,
+  "scope": "Uncommitted worktree; assistant offline checks, not B/C personal signoff",
+  "changed_markdown_files": 12,
+  "local_markdown_targets_checked": 272,
+  "missing_local_targets": []
+}

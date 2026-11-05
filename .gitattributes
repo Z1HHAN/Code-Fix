@@ -41,3 +41,6 @@ scripts/c_acceptance.py -text -whitespace
 # Trace panel browser results and offline fixtures retain their captured bytes.
 evidence/trace-panel/** -text -whitespace
 evidence/workbench-ui/** -text -whitespace
+
+# Review evidence hashes must survive Git checkout without newline conversion.
+evidence/runtime-review/** -text -whitespace

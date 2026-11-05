@@ -238,3 +238,64 @@ def test_dpapi_roundtrip_refuses_overwrite_and_env_has_precedence(tmp_path, monk
         save_local(fake, path)
     monkeypatch.setenv('CODE_FIX_SF_ACCOUNT1_KEY', 'environment-only-test')
     assert read_secret('CODE_FIX_SF_ACCOUNT1_KEY', path) == 'environment-only-test'
+
+# Third-round lifecycle and migration regressions: only temporary ledgers.
+def test_legacy_alert_migrates_inside_ledger_transaction(tmp_path):
+    path = tmp_path / 'model-ledger.sqlite3'
+    payload = '{"kind":"low_balance","original":"保留原始字节"}'
+    created = '2026-01-01T00:00:00+00:00'
+    with sqlite3.connect(path) as db:
+        db.execute('CREATE TABLE budget_alerts (account_id TEXT,kind TEXT,created_at TEXT,payload TEXT,PRIMARY KEY(account_id,kind))')
+        db.execute('INSERT INTO budget_alerts VALUES (?,?,?,?)', ('account1', 'low_balance', created, payload))
+    Ledger(tmp_path)
+    Ledger(tmp_path)
+    with sqlite3.connect(path) as db:
+        row = db.execute('SELECT created_at,updated_at,payload,status,resolved_at FROM budget_alerts').fetchone()
+        assert row == (created, created, payload, 'active', None)
+        assert db.execute('SELECT count(*) FROM budget_alerts').fetchone()[0] == 1
+        with pytest.raises(sqlite3.IntegrityError):
+            db.execute("INSERT INTO budget_alerts(account_id,kind,created_at,updated_at,payload,status) VALUES ('account1','low_balance','now','now','{}','active')")
+
+
+def test_low_balance_resolves_and_retriggers_without_overwriting_history(tmp_path):
+    ledger, s = Ledger(tmp_path), cny()
+    budget = AccountBudget(ledger.path)
+    ledger.reserve('first', 'run', s, 100, 13_000_000)
+    initial = budget.snapshot()['alerts'][0]
+    assert initial['status'] == 'active' and initial['resolved_at'] is None
+    ledger.settle('first', {'prompt_tokens': 12_000_000, 'completion_tokens': 0}, s)
+    resolved = budget.snapshot()['alerts'][0]
+    assert resolved['status'] == 'resolved' and resolved['resolved_at']
+    assert resolved['created_at'] == initial['created_at']
+    ledger.reserve('second', 'run', s, 100, 1_000_000)
+    state = budget.snapshot()
+    assert [x['status'] for x in state['alerts']] == ['resolved', 'active']
+    assert state['alerts'][0] == resolved
+    active = state['alerts'][1]
+    ledger.settle('second', {'prompt_tokens': 1_000_000, 'completion_tokens': 0}, s)
+    still_low = budget.snapshot()['alerts'][1]
+    assert still_low['status'] == 'active'  # equality with threshold does not resolve
+    assert still_low['remaining_cny'] == '3'
+    assert still_low['created_at'] == active['created_at']
+    assert still_low['updated_at'] >= active['updated_at']
+    ledger.reserve('third', 'run', s, 100, 1_000_000)
+    ledger.settle('third', {'prompt_tokens': 1_000_000, 'completion_tokens': 0}, s)
+    alerts = budget.snapshot()['alerts']
+    assert len(alerts) == 2 and alerts[0] == resolved
+    assert alerts[1]['remaining_cny'] == '2'
+
+
+def test_alert_migration_failure_rolls_back_old_schema_and_payload(tmp_path):
+    path = tmp_path / 'old.sqlite3'
+    with sqlite3.connect(path) as db:
+        db.execute('CREATE TABLE budget_alerts (account_id TEXT,kind TEXT,created_at TEXT,payload TEXT,PRIMARY KEY(account_id,kind))')
+        db.execute("INSERT INTO budget_alerts VALUES ('a','low_balance','original-time','original-payload')")
+    with sqlite3.connect(path) as db:
+        db.execute('BEGIN IMMEDIATE')
+        db.set_authorizer(lambda operation, *args: sqlite3.SQLITE_DENY if operation == sqlite3.SQLITE_ALTER_TABLE else sqlite3.SQLITE_OK)
+        with pytest.raises(sqlite3.DatabaseError):
+            AccountBudget.initialize(db)
+        db.set_authorizer(None)
+        assert [row[1] for row in db.execute('PRAGMA table_info(budget_alerts)')] == ['account_id', 'kind', 'created_at', 'payload']
+        assert db.execute('SELECT * FROM budget_alerts').fetchall() == [('a', 'low_balance', 'original-time', 'original-payload')]
+        assert not db.execute("SELECT name FROM sqlite_master WHERE name='budget_alerts_v2'").fetchone()

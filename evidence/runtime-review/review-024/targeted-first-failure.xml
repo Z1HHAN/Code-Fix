@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="73" time="40.626" timestamp="2026-11-05T19:35:36.009693+08:00" hostname="LAPTOP-8477LI5E"><testcase classname="tests.test_runtime_review" name="test_internal_errors_are_500_not_input_or_missing_errors[ValueError]" time="0.203" /><testcase classname="tests.test_runtime_review" name="test_internal_errors_are_500_not_input_or_missing_errors[KeyError]" time="0.057" /><testcase classname="tests.test_runtime_review" name="test_version_and_precise_json_input_errors" time="0.117" /><testcase classname="tests.test_runtime_review" name="test_capacity_full_does_not_claim_and_releases_after_completion" time="0.333" /><testcase classname="tests.test_runtime_review" name="test_failed_claim_releases_admission_slot" time="0.115" /><testcase classname="tests.test_runtime_review" name="test_diagnostic_stack_redacts_env_and_model_keys_without_locals" time="0.021" /><testcase classname="tests.test_runtime_review" name="test_service_unexpected_error_has_stack_and_failed_terminal" time="0.147" /><testcase classname="tests.test_runtime_review" name="test_workflow_and_model_unexpected_errors_have_diagnostics[executor]" time="0.421" /><testcase classname="tests.test_runtime_review" name="test_workflow_and_model_unexpected_errors_have_diagnostics[model]" time="0.491" /><testcase classname="tests.test_runtime_review" name="test_registered_interface_names_and_hash_binding[src/helper.py]" time="0.014" /><testcase classname="tests.test_runtime_review" name="test_registered_interface_names_and_hash_binding[utils.py]" time="0.013" /><testcase classname="tests.test_runtime_review" name="test_registered_interface_names_and_hash_binding[python_testcases/node.py]" time="0.008"><failure message="app.repair_output.InvalidModelOutput: 只读接口材料被拒绝：'python_testcases/node.py'；不是已登记的只读Python接口材料">definition = namespace(source='src/main.py', data={'context_paths': ['python_testcases/node.py']}, profile={'approved_files': {'pyt...cases/node.py': '24fb4b352bec5a3ac46ede7eab4b28f48d39c0937a6b2f4e42d92dbab28c3c8d'}, 'test_paths': ['tests/check.py']})
+work = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfix3/test_registered_interface_name2')
+
+    def readonly_material(definition, work):
+        """Only reviewed, hash-bound interface files may enter agent context."""
+        result = {}
+        context_paths = definition.data.get('context_paths', [])
+        if not isinstance(context_paths, list):
+            raise InvalidModelOutput('只读接口材料登记须为路径数组')
+        for path in context_paths:
+            try:
+                relative = normalise_relpath(path)
+                parts = Path(relative).parts
+                if (relative != path or path not in definition.profile['approved_files']
+                        or path == definition.source or path in definition.profile['test_paths']
+                        or any(part in FORBIDDEN for part in parts)
+                        or Path(path).name.startswith('test_')
+                        or Path(path).name in {'conftest.py', 'load_testdata.py'}
+                        or not path.endswith('.py')):
+&gt;                   raise ValueError('不是已登记的只读Python接口材料')
+E                   ValueError: 不是已登记的只读Python接口材料
+
+app\agents_v3.py:30: ValueError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfix3/test_registered_interface_name2')
+path = 'python_testcases/node.py'
+
+    @pytest.mark.parametrize('path', ['src/helper.py', 'utils.py', 'python_testcases/node.py'])
+    def test_registered_interface_names_and_hash_binding(tmp_path, path):
+        definition = interface_definition(tmp_path, path)
+&gt;       assert 'class Interface' in readonly_material(definition, tmp_path)[path]
+
+tests\test_runtime_review.py:160: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+definition = namespace(source='src/main.py', data={'context_paths': ['python_testcases/node.py']}, profile={'approved_files': {'pyt...cases/node.py': '24fb4b352bec5a3ac46ede7eab4b28f48d39c0937a6b2f4e42d92dbab28c3c8d'}, 'test_paths': ['tests/check.py']})
+work = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfix3/test_registered_interface_name2')
+
+    def readonly_material(definition, work):
+        """Only reviewed, hash-bound interface files may enter agent context."""
+        result = {}
+        context_paths = definition.data.get('context_paths', [])
+        if not isinstance(context_paths, list):
+            raise InvalidModelOutput('只读接口材料登记须为路径数组')
+        for path in context_paths:
+            try:
+                relative = normalise_relpath(path)
+                parts = Path(relative).parts
+                if (relative != path or path not in definition.profile['approved_files']
+                        or path == definition.source or path in definition.profile['test_paths']
+                        or any(part in FORBIDDEN for part in parts)
+                        or Path(path).name.startswith('test_')
+                        or Path(path).name in {'conftest.py', 'load_testdata.py'}
+                        or not path.endswith('.py')):
+                    raise ValueError('不是已登记的只读Python接口材料')
+                target = Path(work)
+                for part in parts:
+                    target = target / part
+                    if target.is_symlink() or getattr(target, 'is_junction', lambda: False)():
+                        raise ValueError('接口材料路径包含链接')
+                if not target.resolve().is_relative_to(Path(work).resolve()):
+                    raise ValueError('接口材料路径越界')
+                raw = target.read_bytes()
+                if hashlib.sha256(raw).hexdigest() != definition.profile['approved_files'][path]:
+                    raise ValueError('接口材料哈希不匹配')
+                result[path] = raw.decode('utf-8')
+            except (ValueError, OSError) as exc:
+&gt;               raise InvalidModelOutput(f'只读接口材料被拒绝：{path!r}；{exc}') from exc
+E               app.repair_output.InvalidModelOutput: 只读接口材料被拒绝：'python_testcases/node.py'；不是已登记的只读Python接口材料
+
+app\agents_v3.py:43: InvalidModelOutput</failure></testcase><testcase classname="tests.test_runtime_review" name="test_test_and_answer_files_never_become_interface_material[tests/check.py]" time="0.010" /><testcase classname="tests.test_runtime_review" name="test_test_and_answer_files_never_become_interface_material[python_testcases/test_hidden.py]" time="0.009" /><testcase classname="tests.test_runtime_review" name="test_test_and_answer_files_never_become_interface_material[correct_python_programs/helper.py]" time="0.008" /><testcase classname="tests.test_runtime_review" name="test_test_and_answer_files_never_become_interface_material[json_testcases/helper.py]" time="0.009" /><testcase classname="tests.test_runtime_review" name="test_test_and_answer_files_never_become_interface_material[conftest.py]" time="0.009" /><testcase classname="tests.test_runtime_review" name="test_test_and_answer_files_never_become_interface_material[src/main.py]" time="0.009" /><testcase classname="tests.test_runtime_review" name="test_rpc_rejects_invalid_function_before_files_or_docker[x():\n    pass\n#]" time="0.014" /><testcase classname="tests.test_runtime_review" name="test_rpc_rejects_invalid_function_before_files_or_docker[class]" time="0.015" /><testcase classname="tests.test_runtime_review" name="test_rpc_rejects_invalid_function_before_files_or_docker[]" time="0.014" /><testcase classname="tests.test_runtime_review" name="test_rpc_rejects_invalid_function_before_files_or_docker[None]" time="0.014" /><testcase classname="tests.test_workflow_v3" name="test_stub_success_requires_independent_call_and_no_final_feedback" time="1.106" /><testcase classname="tests.test_workflow_v3" name="test_final_failure_ends_without_new_model_calls" time="1.132" /><testcase classname="tests.test_workflow_v3" name="test_failure_types_change_actual_next_role[syntax_error-success-roles0]" time="1.662" /><testcase classname="tests.test_workflow_v3" name="test_failure_types_change_actual_next_role[assertion_failed-success-roles1]" time="1.652" /><testcase classname="tests.test_workflow_v3" name="test_failure_types_change_actual_next_role[environment_error-paused-roles2]" time="0.743" /><testcase classname="tests.test_workflow_v3" name="test_failure_types_change_actual_next_role[timeout-stopped-roles3]" time="0.708" /><testcase classname="tests.test_workflow_v3" name="test_round_limit_stops_and_model_cannot_force_final_check" time="0.752" /><testcase classname="tests.test_workflow_v3" name="test_scheduler_can_pause_but_cannot_forge_success" time="0.961" /><testcase classname="tests.test_workflow_v3" name="test_patch_permissions_and_no_overwrite" time="0.065" /><testcase classname="tests.test_workflow_v3" name="test_real_environment_blocks_without_execution_approval" time="0.016" /><testcase classname="tests.test_workflow_v3" name="test_control_during_model_call_prevents_candidate_write[pause-paused]" time="0.552" /><testcase classname="tests.test_workflow_v3" name="test_control_during_model_call_prevents_candidate_write[stop-stopped]" time="0.522" /><testcase classname="tests.test_workflow_v3" name="test_pause_before_preflight_does_not_start_executor" time="0.224" /><testcase classname="tests.test_workflow_v3" name="test_expired_total_budget_after_model_prevents_patch" time="0.466" /><testcase classname="tests.test_workflow_v3" name="test_model_call_limit_prevents_extra_roles_but_allows_tool_final_check" time="0.893" /><testcase classname="tests.test_workflow_v3" name="test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-get_factors]" time="1.817" /><testcase classname="tests.test_workflow_v3" name="test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-gcd]" time="1.969" /><testcase classname="tests.test_workflow_v3" name="test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-max_sublist_sum]" time="1.722" /><testcase classname="tests.test_workflow_v3" name="test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-breadth_first_search]" time="0.464"><failure message="AssertionError: assert ('failed' == 'success'&#10;  &#10;  - success&#10;  + failed)">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfix3/test_public_task_routes_regist3')
+project = 'qb-breadth_first_search'
+
+    @pytest.mark.parametrize('project', ['qb-get_factors', 'qb-gcd', 'qb-max_sublist_sum', 'qb-breadth_first_search'])
+    def test_public_task_routes_registered_source_and_clean_copy_with_stubs_only(tmp_path, project):
+        from app.tasks_v3 import get_task
+        definition = get_task(project)
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'assertion_failed', 'passed', 'passed'], {'project': project})
+&gt;       assert status == 'success' and result['mode'] == 'test_stub' and not result['model_api_called']
+E       AssertionError: assert ('failed' == 'success'
+E         
+E         - success
+E         + failed)
+
+tests\test_workflow_v3.py:184: AssertionError</failure></testcase><testcase classname="tests.test_api_v3" name="test_real_baseline_http_status_evidence_and_export" time="1.604" /><testcase classname="tests.test_api_v3" name="test_http_repair_blocks_without_fake_success" time="0.439" /><testcase classname="tests.test_api_v3" name="test_request_boundary_and_validation" time="0.133" /><testcase classname="tests.test_api_v3" name="test_artifact_paths_cannot_escape_and_open_runs_cannot_export" time="0.127" /><testcase classname="tests.test_api_v3" name="test_selected_run_is_persisted_across_app_instances" time="0.119" /><testcase classname="tests.test_api_v3" name="test_control_while_real_baseline_runs_preserves_evidence[pause-paused]" time="1.510" /><testcase classname="tests.test_api_v3" name="test_control_while_real_baseline_runs_preserves_evidence[stop-stopped]" time="1.592" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code01_forged_stdout_cannot_become_passed[legacy_single_report]" time="0.141" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code01_forged_stdout_cannot_become_passed[legacy_report_with_end]" time="0.110" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code01_forged_stdout_cannot_become_passed[versioned_report_with_end]" time="0.101" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code02_baseline_failure_keeps_cause_and_rule[environment_error-paused-R03]" time="0.558" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code02_baseline_failure_keeps_cause_and_rule[timeout-stopped-R04]" time="0.656" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code02_baseline_failure_keeps_cause_and_rule[not_reproduced-paused-R06]" time="0.677" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code03_final_stage_records_actual_rule[passed-R07]" time="1.317" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code03_final_stage_records_actual_rule[assertion_failed-R08N]" time="1.309" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code03_final_stage_records_actual_rule[unknown_evidence-R17]" time="1.237" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code03_pause_boundary_records_r02_without_more_work" time="0.578" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code04_passed_candidate_can_use_final_check_at_model_limit" time="0.889" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code05_test_modification_is_permission_violation" time="0.585" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code06_transport_failure_pauses_with_guard" time="0.587" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code08_interrupt_during_model_call_prevents_new_calls" time="0.599" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code07_execution_version_bound_to_snapshot_during_mutation" time="0.101" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code09_parameter_expected_value_not_forwarded_to_model" time="1.289" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code11_deferred_offline_router_is_not_labelled_live" time="1.190" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code10_production_gateway_rejects_unapproved_evidence_fields[repairer]" time="0.135" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code10_production_gateway_rejects_unapproved_evidence_fields[locator]" time="0.133" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code10_production_gateway_rejects_unapproved_evidence_fields[detector]" time="0.115" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code10_production_gateway_rejects_unapproved_evidence_fields[scheduler]" time="0.120" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code12_trace_preserves_engine_decision_identity" time="0.166" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code13_failed_active_step_is_not_recorded_interrupted" time="0.394" /><testcase classname="acceptance_tests.test_repair_gates" name="test_control_normal_offline_flow_still_reaches_final" time="1.058" /><testcase classname="acceptance_tests.test_repair_gates" name="test_control_unverified_docker_still_denies_candidate" time="0.015" /></testsuite></testsuites>

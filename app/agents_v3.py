@@ -1,12 +1,49 @@
 """V3 JSON contracts, configured capabilities and versioned call evidence."""
 import json
+import hashlib
 from pathlib import Path
 
 from .knowledge import search_knowledge
 from .repair_output import InvalidModelOutput, _object, _fields, _citations, parse_repair_output
-from .security import validate_changes, PermissionViolation
+from .security import validate_changes, PermissionViolation, normalise_relpath
 from .tasks_v3 import FORBIDDEN, get_task
 from .role_config import RoleConfig
+from .diagnostics import record_exception
+
+
+def readonly_material(definition, work):
+    """Only reviewed, hash-bound interface files may enter agent context."""
+    result = {}
+    context_paths = definition.data.get('context_paths', [])
+    if not isinstance(context_paths, list):
+        raise InvalidModelOutput('只读接口材料登记须为路径数组')
+    for path in context_paths:
+        try:
+            relative = normalise_relpath(path)
+            parts = Path(relative).parts
+            if (relative != path or path not in definition.profile['approved_files']
+                    or path == definition.source or path in definition.profile['test_paths']
+                    # QuixBugs registers node.py under python_testcases; that
+                    # directory alone is not a denial for reviewed interfaces.
+                    or any(part in FORBIDDEN and part != 'python_testcases' for part in parts)
+                    or Path(path).name.startswith('test_')
+                    or Path(path).name in {'conftest.py', 'load_testdata.py'}
+                    or not path.endswith('.py')):
+                raise ValueError('不是已登记的只读Python接口材料')
+            target = Path(work)
+            for part in parts:
+                target = target / part
+                if target.is_symlink() or getattr(target, 'is_junction', lambda: False)():
+                    raise ValueError('接口材料路径包含链接')
+            if not target.resolve().is_relative_to(Path(work).resolve()):
+                raise ValueError('接口材料路径越界')
+            raw = target.read_bytes()
+            if hashlib.sha256(raw).hexdigest() != definition.profile['approved_files'][path]:
+                raise ValueError('接口材料哈希不匹配')
+            result[path] = raw.decode('utf-8')
+        except (ValueError, OSError) as exc:
+            raise InvalidModelOutput(f'只读接口材料被拒绝：{path!r}；{exc}') from exc
+    return result
 
 ROOT = Path(__file__).resolve().parents[1]
 ROLES = {'repairer', 'detector', 'scheduler', 'locator'}
@@ -62,11 +99,9 @@ class AgentGateway:
                     'previous_analysis': extra if role != 'repairer' else None}
         # Only explicitly registered interface helpers, never reference answers,
         # whole test files, evaluation workspaces or the complete dataset bundle.
-        context = definition.data.get('context_paths', [])
-        if any(path not in definition.profile['approved_files'] or path == source or not path.endswith('/node.py') for path in context):
-            raise InvalidModelOutput('只读接口材料未登记')
+        context = readonly_material(definition, work)
         if context:
-            material['readonly_code'] = {path: (work / path).read_text(encoding='utf-8') for path in context}
+            material['readonly_code'] = context
         messages = [{'role': 'system', 'content': prompt}, {'role': 'user', 'content': json.dumps(material, ensure_ascii=False)}]
         import uuid
         call_id = 'm-' + uuid.uuid4().hex
@@ -90,6 +125,8 @@ class AgentGateway:
             from .live_model import ModelBlocked
             if isinstance(exc, ModelBlocked):
                 record['reason'] = str(exc)
+            else:
+                record.update(record_exception(self.store.directory(run_id), exc, model=self.model))
         record.update(role=role, code_version=version, call_id=call_id, round=round_number, provenance=provenance)
         record.update(trace or {})
         if record['status'] == 'ok':

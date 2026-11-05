@@ -6,6 +6,7 @@ import shutil
 
 from c_runner.runner import _snapshot, compute_test_suite_version
 from .security import normalise_relpath
+from .errors import InputValidationError
 
 ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN = ('tests', 'python_testcases', 'json_testcases', 'conftest.py', 'LICENSE',
@@ -73,7 +74,7 @@ def catalog():
 def get_task(project='leap'):
     projects = catalog()
     if not isinstance(project, str) or project not in projects:
-        raise ValueError('未知项目；请从已登记题目中选择')
+        raise InputValidationError('未知项目；请从已登记题目中选择')
     task = RegisteredTask(project, projects[project])
     profile = task.profile
     if len(profile['source_paths']) != 1 or task.source not in profile['approved_files']:

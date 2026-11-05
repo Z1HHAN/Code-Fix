@@ -4,6 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 import os
 from pathlib import Path
 import secrets
+from threading import BoundedSemaphore
 
 from fastapi import FastAPI, HTTPException, Request, Query
 from fastapi.responses import FileResponse, JSONResponse, Response
@@ -11,6 +12,8 @@ from fastapi.staticfiles import StaticFiles
 
 from .run_store import StateConflict
 from .service import TaskService
+from .errors import InputValidationError, RunNotFound
+from .version import SERVICE_VERSION, REQUIREMENTS_BASELINE
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -19,13 +22,14 @@ def create_app(root=None):
     service = TaskService(root or os.environ.get('CODE_FIX_RUN_ROOT'))
     token = secrets.token_urlsafe(32)
     workers = ThreadPoolExecutor(max_workers=2, thread_name_prefix='codefix')
+    capacity = BoundedSemaphore(2)
 
     @asynccontextmanager
     async def lifespan(app):
         yield
         workers.shutdown(wait=True)
 
-    app = FastAPI(title='验链 Code Fix V3', version='0.3.0-dev', lifespan=lifespan)
+    app = FastAPI(title='验链 Code Fix V3', version=SERVICE_VERSION, lifespan=lifespan)
     app.state.service = service
 
     @app.middleware('http')
@@ -52,17 +56,18 @@ def create_app(root=None):
     async def conflict(request, exc):
         return JSONResponse({'detail': str(exc)}, status_code=409)
 
-    @app.exception_handler(KeyError)
+    @app.exception_handler(RunNotFound)
     async def missing(request, exc):
         return JSONResponse({'detail': '任务不存在'}, status_code=404)
 
-    @app.exception_handler(ValueError)
+    @app.exception_handler(InputValidationError)
     async def invalid(request, exc):
         return JSONResponse({'detail': str(exc)}, status_code=422)
 
     @app.get('/api/v3/session')
     def session():
-        return {'token': token, 'deployment': 'local-only', 'version': 'v3-development'}
+        return {'token': token, 'deployment': 'local-only', 'version': SERVICE_VERSION,
+                'requirements_baseline': REQUIREMENTS_BASELINE}
 
     @app.get('/api/v3/health')
     def health():
@@ -93,7 +98,7 @@ def create_app(root=None):
         import json
         try:
             value = json.loads(body)
-        except ValueError:
+        except (json.JSONDecodeError, UnicodeDecodeError):
             raise HTTPException(422, '无效JSON') from None
         return service.store.create(value, request.headers.get('idempotency-key'))
 
@@ -107,13 +112,22 @@ def create_app(root=None):
 
     @app.post('/api/v3/tasks/{run_id}/start', status_code=202)
     def start(run_id: str):
-        service.store.get(run_id)
-        service.store.claim(run_id)
+        run = service.store.get(run_id)
+        if run['status'] != 'created':
+            raise StateConflict('仅新建任务可以启动')
+        if not capacity.acquire(blocking=False):
+            raise HTTPException(503, '执行容量已满，请稍后重试；任务尚未启动')
         try:
-            workers.submit(service.run_claimed, run_id)
-        except RuntimeError:
-            service.store.finish(run_id, 'interrupted', {'final_result': 'not_run', 'reason': '服务正在关闭，未启动worker'})
-            raise HTTPException(503, '服务正在关闭') from None
+            service.store.claim(run_id)
+            try:
+                future = workers.submit(service.run_claimed, run_id)
+            except RuntimeError:
+                service.store.finish_if_running(run_id, 'interrupted', {'final_result': 'not_run', 'reason': '服务正在关闭，未启动worker'})
+                raise HTTPException(503, '服务正在关闭') from None
+        except BaseException:
+            capacity.release()
+            raise
+        future.add_done_callback(lambda completed: capacity.release())
         return service.store.get(run_id)
 
     @app.post('/api/v3/tasks/{run_id}/control')
@@ -122,7 +136,7 @@ def create_app(root=None):
         raw = await limited_body(request, 1024)
         try:
             value = json.loads(raw)
-        except ValueError:
+        except (json.JSONDecodeError, UnicodeDecodeError):
             raise HTTPException(422, '无效JSON') from None
         if not isinstance(value, dict) or set(value) != {'action'}:
             raise HTTPException(422, '仅接受action')
@@ -139,9 +153,12 @@ def create_app(root=None):
 
     @app.get('/api/v3/tasks/{run_id}/artifact')
     def artifact(run_id: str, path: str):
-        from .security import normalise_relpath
+        from .security import normalise_relpath, PermissionViolation
         service.store.get(run_id)
-        relative = normalise_relpath(path)
+        try:
+            relative = normalise_relpath(path)
+        except PermissionViolation as exc:
+            raise HTTPException(422, str(exc)) from None
         folder = service.store.directory(run_id)
         target = folder
         for part in relative.split('/'):
