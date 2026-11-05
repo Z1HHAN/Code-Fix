@@ -1,0 +1,43 @@
+[
+  {
+    "offset_s": 0.32,
+    "event": "workflow_start",
+    "run_id": "run-19ada4f5639646fe8aff336709788199"
+  },
+  {
+    "offset_s": 0.32,
+    "event": "stop_armed"
+  },
+  {
+    "offset_s": 7.08,
+    "event": "development_containers_up",
+    "containers": [
+      "codefix-candidate-4fd1706808594aaf8dd7f9121f0ea5ff|Up Less than a second|512bc2a4e681"
+    ]
+  },
+  {
+    "offset_s": 10.14,
+    "event": "interrupt_sent",
+    "containers": [
+      "codefix-bf1363d68b4f4df89d4cd2c8acb45448|Up 2 seconds|512bc2a4e681",
+      "codefix-candidate-4fd1706808594aaf8dd7f9121f0ea5ff|Up 3 seconds|512bc2a4e681"
+    ],
+    "volumes": [
+      "codefix-out-1bb257131dc24966aefc374f5a18dc0e",
+      "codefix-rpc-af42e561f60540d097f6b769111eb2e4"
+    ]
+  },
+  {
+    "offset_s": 10.17,
+    "event": "interrupt_recorded",
+    "effective": "interrupted"
+  },
+  {
+    "offset_s": 11.6,
+    "event": "workflow_returned"
+  },
+  {
+    "offset_s": 11.67,
+    "event": "observed_done"
+  }
+]

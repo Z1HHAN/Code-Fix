@@ -1,0 +1,78 @@
+﻿# Unix socket 隔离测试证据
+
+## 测试目的
+证明主容器内不存在宿主 Docker daemon 的控制套接字，无法通过 `/var/run/docker.sock` 越权控制宿主机 Docker。
+
+## 执行命令
+~~~bash
+docker inspect docker-isolation-test --format '{{json .Mounts}}'
+docker exec docker-isolation-test sh -c 'ls -l /var/run/docker.sock'
+docker exec docker-isolation-test sh -c '[ -S /var/run/docker.sock ] && echo SOCKET_PRESENT || echo SOCKET_ABSENT'
+docker exec docker-isolation-test sh -c 'grep -c docker.sock /proc/1/mountinfo'
+docker exec docker-isolation-test sh -c 'cat /var/run/docker.sock > /dev/null'
+~~~
+
+## 预期结果
+- `.Mounts` 中不存在 `docker.sock` 的 bind 挂载；
+- `/var/run/docker.sock` 不存在（`ls` 失败）且不是 socket（`SOCKET_ABSENT`）；
+- `/proc/1/mountinfo` 中 `docker.sock` 计数为 0；
+- 任何对套接字的读取尝试以非 0 退出码失败。
+
+## 实际测试结果
+~~~text
+采集时间 UTC：2026-11-04T18:07:04.943Z
+宿主机：Docker Desktop (WSL2 Linux backend)
+容器：docker-isolation-test
+镜像：docker-isolation-evidence:test-current
+镜像 ID：sha256:6cceb56a1ad064ab7f3e3c092c42bc1698802160b62bd0382a5e055cfa639c2a
+约束：仅使用 01-config/compose.yaml，不加载任何 runtime override
+
+~~~
+
+### 容器挂载列表（无 docker.sock）
+~~~text
+$ docker inspect docker-isolation-test --format '{{json .Mounts}}'
+[]
+exit_code=0
+~~~
+
+### 访问 /var/run/docker.sock
+~~~text
+$ docker exec docker-isolation-test sh -c 'ls -l /var/run/docker.sock'
+exit_code=1
+~~~
+
+### 套接字类型判定
+~~~text
+$ docker exec docker-isolation-test sh -c '[ -S /var/run/docker.sock ] && echo SOCKET_PRESENT || echo SOCKET_ABSENT'
+SOCKET_ABSENT
+exit_code=0
+~~~
+
+### mountinfo 中 docker.sock 计数
+~~~text
+$ docker exec docker-isolation-test sh -c 'grep -c docker.sock /proc/1/mountinfo'
+0
+exit_code=1
+~~~
+
+### 实际读取套接字尝试
+~~~text
+$ docker exec docker-isolation-test sh -c 'cat /var/run/docker.sock > /dev/null'
+exit_code=1
+~~~
+
+### /var/run 目录列表
+~~~text
+$ docker exec docker-isolation-test sh -c 'ls -la /var/run'
+lrwxrwxrwx    1 root     root             4 Apr 15  2026 /var/run -> /run
+exit_code=0
+~~~
+
+## 结论
+
+PASS：容器内 `/var/run/docker.sock` 不存在，`[ -S ]` 判定为 `SOCKET_ABSENT`，`/proc/1/mountinfo` 中无 `docker.sock` 挂载记录，读取尝试以非 0 退出码失败；`.Mounts` 中也没有任何指向宿主 Docker socket 的 bind 挂载。主容器无法通过 Docker API 越权控制宿主机。
+
+敏感信息处理：仅保留容器内路径与退出码，不含宿主 socket 绝对路径（Windows 命名管道）或 daemon 凭据。
+
+

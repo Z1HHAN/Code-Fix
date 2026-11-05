@@ -1,0 +1,11 @@
+--- a/code/leap_year.py
++++ b/code/leap_year.py
+@@ -1,3 +1,6 @@
++"""死循环夹具B：函数调用不返回，模拟被测逻辑卡死。"""
++
++
+ def is_leap(year):
+-    """闰年：能被4整除，且（不能被100整除，或能被400整除）。"""
+-    return year % 4 == 0
++    while True:
++        pass

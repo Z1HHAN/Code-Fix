@@ -41,3 +41,15 @@ scripts/c_acceptance.py -text -whitespace
 # Trace panel browser results and offline fixtures retain their captured bytes.
 evidence/trace-panel/** -text -whitespace
 evidence/workbench-ui/** -text -whitespace
+
+# B 侧真实 Docker 五项实测证据（2026-11-05）：按字节保存，SHA256 清单绑定实际字节。
+evidence/p0-malicious/** -text -whitespace
+evidence/baseline/** -text -whitespace
+evidence/runtime/** -text -whitespace
+evidence/2026-11-05/** -text -whitespace
+
+# Docker 隔离资格证据包（02-runtime / 03-tests / 04-scan 原始产物）：按字节保存，包内 SHA256SUMS 绑定实际字节。
+docker-isolation-evidence/** -text -whitespace
+# 归档包为二进制 tar.gz，禁止任何换行或文本处理。
+docker-isolation-evidence-2026-11-04.tar.gz binary
+docker-isolation-evidence-2026-11-04.SHA256SUMS -text

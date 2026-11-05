@@ -1,0 +1,122 @@
+{
+  "status": "ok",
+  "mode": "deterministic_stub_for_stop_test",
+  "model_api_called": false,
+  "raw_text": "{\"evidence_ids\": [\"test-baseline\"], \"knowledge_citations\": [], \"explanation\": \"停止测试候选：函数体内死循环\", \"changes\": [{\"path\": \"code/leap_year.py\", \"new_content\": \"\\\"\\\"\\\"第4项夹具B：函数内死循环。\\n\\n模块可以正常导入、RPC 服务可以启动，但被调用函数永不返回，\\n用于验证可信测试侧按单次 RPC 上限收敛、runner 不会无限等待。\\n\\\"\\\"\\\"\\n\\n\\ndef is_leap(year):\\n    while True:\\n        pass\"}]}",
+  "role": "repairer",
+  "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+  "call_id": "m-a746df16eb154bc28a8c33c248f5c518",
+  "round": 1,
+  "provenance": {
+    "protocol": "codefix-json-v1",
+    "parser_version": "1.0.0",
+    "config_version": "1.1.0",
+    "effective_config": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "primary": {
+          "binding": "approved_profile",
+          "profile_ref": "sf_account1_v32"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "config_sha256": "b3472a143047be416465bd12b883494daab38dc1dce1b9522c99992eb7d455ba",
+    "prompt_ref": "prompts/repairer.md",
+    "prompt_sha256": "638ba6f34303cee630fd9304cc46ce12bd6775ad08c780ae95e920f93aafc6ab",
+    "system_prompt_sha256": "b42ab08883a2934d52ca6d91d65a3ad4286394fb9083e61c2b01dc17691bf2ef",
+    "model_binding": {
+      "model_ref": "primary",
+      "binding": "approved_profile",
+      "profile_ref": "sf_account1_v32",
+      "mode": "deterministic_stub_for_stop_test",
+      "model": null
+    }
+  },
+  "step_id": "s-2d93164c2cf744998f732a33aabe0fa1",
+  "parent_step_id": "s-2e1e5b27964048d99fc33624b07ebf2b",
+  "parsed_output": {
+    "evidence_ids": [
+      "test-baseline"
+    ],
+    "knowledge_citations": [],
+    "explanation": "停止测试候选：函数体内死循环",
+    "changes": [
+      {
+        "path": "code/leap_year.py",
+        "new_content": "\"\"\"第4项夹具B：函数内死循环。\n\n模块可以正常导入、RPC 服务可以启动，但被调用函数永不返回，\n用于验证可信测试侧按单次 RPC 上限收敛、runner 不会无限等待。\n\"\"\"\n\n\ndef is_leap(year):\n    while True:\n        pass"
+      }
+    ]
+  }
+}

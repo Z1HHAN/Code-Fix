@@ -1,0 +1,2 @@
+ERROR: Directory '/w' not found. Check your '--rootdir' option.
+

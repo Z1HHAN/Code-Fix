@@ -1,0 +1,24 @@
+CODEFIX_AUDIT {"event": "tests_write", "detail": "/w/tests"}
+TAMPER_DENIED /w/tests/test_leap.py OSError
+CODEFIX_AUDIT {"event": "tests_write", "detail": "tests"}
+TAMPER_DENIED tests/test_leap.py OSError
+CODEFIX_AUDIT {"event": "tests_write", "detail": "/tests"}
+TAMPER_DENIED /tests/test_leap.py OSError
+CODEFIX_AUDIT {"event": "tests_write", "detail": "/w/tests"}
+TAMPER_DENIED /w/tests/test_leap.py OSError
+CODEFIX_AUDIT {"event": "tests_write", "detail": "tests"}
+TAMPER_DENIED tests/test_leap.py OSError
+CODEFIX_AUDIT {"event": "tests_write", "detail": "/tests"}
+TAMPER_DENIED /tests/test_leap.py OSError
+CODEFIX_AUDIT {"event": "tests_write", "detail": "/w/tests"}
+TAMPER_DENIED /w/tests/test_leap.py OSError
+CODEFIX_AUDIT {"event": "tests_write", "detail": "tests"}
+TAMPER_DENIED tests/test_leap.py OSError
+CODEFIX_AUDIT {"event": "tests_write", "detail": "/tests"}
+TAMPER_DENIED /tests/test_leap.py OSError
+CODEFIX_AUDIT {"event": "tests_write", "detail": "/w/tests"}
+TAMPER_DENIED /w/tests/test_leap.py OSError
+CODEFIX_AUDIT {"event": "tests_write", "detail": "tests"}
+TAMPER_DENIED tests/test_leap.py OSError
+CODEFIX_AUDIT {"event": "tests_write", "detail": "/tests"}
+TAMPER_DENIED /tests/test_leap.py OSError

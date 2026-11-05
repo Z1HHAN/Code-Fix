@@ -1,0 +1,148 @@
+{
+  "project": "leap",
+  "task_source": "code/leap_year.py",
+  "source_sha256": "0ec1efe58ae53f04f3cdcbc5f95e37d182b8074134ed0267ddb0fb2be00fa160",
+  "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+  "expected_test_count": 4,
+  "timeout_seconds": 90.0,
+  "isolation_ready": true,
+  "isolation_reason": null,
+  "source_snapshot": "leap\\source-snapshot.py",
+  "call_id": "codefix-6d4cd571c32042ea8bc04342c32ad8cd",
+  "exit_code": 1,
+  "timed_out": false,
+  "duration_ms": 2157,
+  "stdout_path": "trusted-run/stdout.txt",
+  "stderr_path": "trusted-run/stderr.txt",
+  "command": [
+    "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.EXE",
+    "run",
+    "--mount",
+    "type=volume,source=codefix-rpc-81f8b9adfbc74548ac5ce2f69bf9b755,target=/rpc,readonly",
+    "-i",
+    "--name",
+    "codefix-6d4cd571c32042ea8bc04342c32ad8cd",
+    "--pull=never",
+    "--network=none",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--pids-limit=64",
+    "--memory=256m",
+    "--memory-swap=256m",
+    "--cpus=1",
+    "--user=65534:65534",
+    "--ulimit=nofile=128:128",
+    "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+    "--log-driver=none",
+    "--mount",
+    "type=volume,source=codefix-out-435aa7cc6e1c48a0ab4556a6713a558c,target=/out",
+    "--mount",
+    "type=bind,source=C:\\Users\\yang0\\Documents\\Codex\\2026-10-31\\wo\\projects\\Code-Fix-main\\Code-Fix-main\\evidence\\baseline\\BASELINE-20261105-114249-86c3ff89\\leap\\run\\trusted-tests,target=/w,readonly",
+    "--mount",
+    "type=bind,source=C:\\Users\\yang0\\Documents\\Codex\\2026-10-31\\wo\\projects\\Code-Fix-main\\Code-Fix-main\\c_runner\\pytest_entry.py,target=/entry.py,readonly",
+    "--mount",
+    "type=bind,source=C:\\Users\\yang0\\Documents\\Codex\\2026-10-31\\wo\\projects\\Code-Fix-main\\Code-Fix-main\\docker\\candidate_entry.py,target=/harness.py,readonly",
+    "--workdir=/w",
+    "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+    "--env=PYTHONDONTWRITEBYTECODE=1",
+    "--entrypoint=python",
+    "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "/harness.py",
+    "tests"
+  ],
+  "artifact_channel": "docker-cp",
+  "artifact_error": null,
+  "artifact_detail": null,
+  "cleanup_passed": true,
+  "output_volume": "codefix-out-435aa7cc6e1c48a0ab4556a6713a558c",
+  "phase": "baseline",
+  "execution_mode": "docker-split-rpc",
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "junit_path": "trusted-run/output/junit.xml",
+  "structured_path": "trusted-run/output/pytest_events.json",
+  "evidence_matches_current_version": true,
+  "trust_boundary": "separate_candidate_and_test_containers",
+  "candidate_audit": {
+    "container": "codefix-candidate-083e3f1207674ae4afc1ea1cee4c3537",
+    "logs_captured": true,
+    "events": [],
+    "event_kinds": [],
+    "fake_report_output": false,
+    "violation": null,
+    "reason": null
+  },
+  "runner_classification": {
+    "status": null,
+    "verification_status": null,
+    "failure_class": null,
+    "reason": null
+  },
+  "counts": {
+    "collected": 4,
+    "passed": 3,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "status": "failed",
+  "verification_status": "failed",
+  "failure_class": "assertion_failed",
+  "reason": "Frozen native fixture tests completed with a recorded failure",
+  "coverage": {
+    "expected_nodeids": [
+      "tests/test_leap.py::test_2024_is_leap",
+      "tests/test_leap.py::test_2023_is_not_leap",
+      "tests/test_leap.py::test_1900_is_not_leap",
+      "tests/test_leap.py::test_2000_is_leap"
+    ],
+    "collected_nodeids": [
+      "tests/test_leap.py::test_2024_is_leap",
+      "tests/test_leap.py::test_2023_is_not_leap",
+      "tests/test_leap.py::test_1900_is_not_leap",
+      "tests/test_leap.py::test_2000_is_leap"
+    ],
+    "expected_collected_match": true,
+    "junit_identities": [
+      [
+        "tests.test_leap",
+        "test_2024_is_leap"
+      ],
+      [
+        "tests.test_leap",
+        "test_2023_is_not_leap"
+      ],
+      [
+        "tests.test_leap",
+        "test_1900_is_not_leap"
+      ],
+      [
+        "tests.test_leap",
+        "test_2000_is_leap"
+      ]
+    ],
+    "junit_expected_match": true,
+    "session_finished": true
+  },
+  "junit": {
+    "present": true,
+    "tests": 4,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "failed_cases": [
+      {
+        "nodeid": "tests.test_leap::test_1900_is_not_leap",
+        "kind": "failure",
+        "message": "assert True is False"
+      }
+    ]
+  },
+  "finished_at": "2026-11-05T11:42:56.538+08:00",
+  "duration_seconds": 3.55,
+  "baseline_ok": true
+}

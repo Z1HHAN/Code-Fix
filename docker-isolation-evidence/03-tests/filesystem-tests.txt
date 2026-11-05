@@ -1,0 +1,137 @@
+# Filesystem isolation test evidence
+
+## 测试目的
+证明容器看到的是自己的根文件系统，根层只读，宿主机敏感文件不可访问，未声明目录没有宿主机挂载，且只有批准的临时挂载边界可写。
+
+## 执行命令
+
+~~~bash
+CONTAINER=docker-isolation-test
+docker inspect $CONTAINER --format 'ReadonlyRootfs={{.HostConfig.ReadonlyRootfs}} Mounts={{json .Mounts}} Binds={{json .HostConfig.Binds}} Tmpfs={{json .HostConfig.Tmpfs}}'
+docker exec $CONTAINER cat /etc/hostname
+docker exec $CONTAINER ls -1A /
+docker exec $CONTAINER cat /etc/shadow
+docker exec $CONTAINER sh -c 'test ! -e /host/etc/passwd; echo canary_absent=$?'
+docker exec $CONTAINER sh -c 'test ! -e /var/run/docker.sock; echo socket_absent=$?'
+docker exec $CONTAINER touch /etc/evidence-must-fail
+docker exec $CONTAINER touch /work/evidence-must-fail
+docker exec $CONTAINER sh -c 'touch /tmp/evidence-write && rm -f /tmp/evidence-write && echo tmpfs_write_ok'
+docker exec $CONTAINER mountpoint /tmp
+docker exec $CONTAINER mountpoint /run
+~~~
+
+## 预期结果
+- ReadonlyRootfs=true，Mounts 为空，Binds 为空，Tmpfs 仅包含 /tmp 与 /run；
+- /etc/hostname 为容器自身短 ID，根目录为镜像内容而非宿主机；
+- /etc/shadow 不可读；/host/etc/passwd 与 /var/run/docker.sock 均不存在；
+- /etc 与 /work 写入失败（根层只读）；
+- /tmp 可写且 /tmp、/run 均为挂载点。
+
+## 实际测试结果
+采集时间 UTC：2026-11-04T16:47:15.212Z
+容器：docker-isolation-test
+容器 ID：f58704716eb1e0fab9c827e81b8bcfd5934d1119557ffaf8049de26db8ee0df0
+镜像：docker-isolation-evidence:test-current
+镜像 ID：sha256:6cceb56a1ad064ab7f3e3c092c42bc1698802160b62bd0382a5e055cfa639c2a
+
+### inspect 挂载字段
+~~~text
+ReadonlyRootfs=true Mounts=[] Binds=null Tmpfs={"/run":"rw,noexec,nosuid,nodev,size=16m","/tmp":"rw,noexec,nosuid,nodev,size=64m"}
+
+exit_code=0
+~~~
+
+### 容器 hostname
+~~~text
+f58704716eb1
+
+exit_code=0
+~~~
+
+### 根目录内容
+~~~text
+.dockerenv
+bin
+dev
+etc
+home
+lib
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+work
+
+exit_code=0
+~~~
+
+### /etc/shadow 访问
+~~~text
+cat: can't open '/etc/shadow': Permission denied
+
+exit_code=1
+~~~
+
+### 宿主机路径 canary（/host/etc/passwd）
+~~~text
+canary_absent=0
+
+exit_code=0
+~~~
+
+### Docker socket canary（/var/run/docker.sock）
+~~~text
+socket_absent=0
+
+exit_code=0
+~~~
+
+### 根层写入（/etc）
+~~~text
+touch: /etc/evidence-must-fail: Read-only file system
+
+exit_code=1
+~~~
+
+### 根层写入（/work）
+~~~text
+touch: /work/evidence-must-fail: Read-only file system
+
+exit_code=1
+~~~
+
+### tmpfs 写入（/tmp）
+~~~text
+tmpfs_write_ok
+
+exit_code=0
+~~~
+
+### /tmp 挂载点
+~~~text
+/tmp is a mountpoint
+
+exit_code=0
+~~~
+
+### /run 挂载点
+~~~text
+/run is a mountpoint
+
+exit_code=0
+~~~
+
+## 结论
+PASS：根文件系统为只读（ReadonlyRootfs=true），未配置任何 bind mount 或宿主机卷（Mounts=[]、Binds=null），/etc/shadow 不可读，宿主机 canary 路径与 Docker socket 均不存在，/etc 与 /work 写入被内核以 Read-only file system 拒绝，/tmp 与 /run 按声明可写且确为挂载点。
+
+说明：busybox 的 `find` 不支持 `-printf`，根目录枚举改用 `ls -1A /`；判据不变。
+
+敏感信息处理：未保存 /etc/shadow 真实内容、私钥、云凭据、Token 或客户数据。

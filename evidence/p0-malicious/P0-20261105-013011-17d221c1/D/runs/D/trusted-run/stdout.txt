@@ -1,0 +1,130 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.10, pytest-8.3.5, pluggy-1.7.0 -- /usr/local/bin/python
+rootdir: /w
+configfile: ../out/pytest.ini
+collecting ... collected 4 items
+
+tests/test_leap.py::test_2024_is_leap FAILED
+tests/test_leap.py::test_2023_is_not_leap FAILED
+tests/test_leap.py::test_1900_is_not_leap FAILED
+tests/test_leap.py::test_2000_is_leap FAILED
+
+=================================== FAILURES ===================================
+______________________________ test_2024_is_leap _______________________________
+
+    def test_2024_is_leap():
+>       assert is_leap(2024) is True
+
+tests/test_leap.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+code/leap_year.py:31: in is_leap
+    return invoke('is_leap', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'is_leap', args = (2024,), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) > 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+                    client.connect('/rpc/channel.sock')
+                    break
+                except (FileNotFoundError, ConnectionRefusedError):
+                    if attempt == 99:
+                        raise
+                    time.sleep(.02)
+            client.sendall(request)
+            with client.makefile('rb') as stream:
+                raw = stream.readline(65537)
+            if len(raw) > 65536 or not raw.endswith(b'\n'):
+>               raise ValueError('RPC response exceeds bound or is incomplete')
+E               ValueError: RPC response exceeds bound or is incomplete
+
+code/leap_year.py:24: ValueError
+____________________________ test_2023_is_not_leap _____________________________
+
+    def test_2023_is_not_leap():
+>       assert is_leap(2023) is False
+
+tests/test_leap.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+code/leap_year.py:31: in is_leap
+    return invoke('is_leap', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'is_leap', args = (2023,), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) > 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+>                   client.connect('/rpc/channel.sock')
+E                   ConnectionRefusedError: [Errno 111] Connection refused
+
+code/leap_year.py:14: ConnectionRefusedError
+____________________________ test_1900_is_not_leap _____________________________
+
+    def test_1900_is_not_leap():
+>       assert is_leap(1900) is False
+
+tests/test_leap.py:21: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+code/leap_year.py:31: in is_leap
+    return invoke('is_leap', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'is_leap', args = (1900,), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) > 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+>                   client.connect('/rpc/channel.sock')
+E                   ConnectionRefusedError: [Errno 111] Connection refused
+
+code/leap_year.py:14: ConnectionRefusedError
+______________________________ test_2000_is_leap _______________________________
+
+    def test_2000_is_leap():
+>       assert is_leap(2000) is True
+
+tests/test_leap.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+code/leap_year.py:31: in is_leap
+    return invoke('is_leap', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'is_leap', args = (2000,), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) > 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+>                   client.connect('/rpc/channel.sock')
+E                   ConnectionRefusedError: [Errno 111] Connection refused
+
+code/leap_year.py:14: ConnectionRefusedError
+---------------------- generated xml file: /out/junit.xml ----------------------
+=========================== short test summary info ============================
+FAILED tests/test_leap.py::test_2024_is_leap - ValueError: RPC response excee...
+FAILED tests/test_leap.py::test_2023_is_not_leap - ConnectionRefusedError: [E...
+FAILED tests/test_leap.py::test_1900_is_not_leap - ConnectionRefusedError: [E...
+FAILED tests/test_leap.py::test_2000_is_leap - ConnectionRefusedError: [Errno...
+============================== 4 failed in 6.40s ===============================
+CODEFIX_READY

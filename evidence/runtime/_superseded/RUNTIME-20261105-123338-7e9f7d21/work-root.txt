@@ -1,0 +1,2 @@
+work_root=C:\Users\yang0\AppData\Local\Temp\codefix-rt-ngdbjw_s
+reason=Docker Desktop/WSL2 bind mount 深度限制（>210 字符时容器内为 EIO）

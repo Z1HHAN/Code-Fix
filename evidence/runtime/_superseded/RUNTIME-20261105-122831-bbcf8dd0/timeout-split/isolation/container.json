@@ -1,0 +1,282 @@
+[
+    {
+        "Id": "52948ce4520a2a6d71bb77a446c7d84460487a90d1cd39375609a95f55cab04d",
+        "Created": "2026-11-05T04:28:51.192687279Z",
+        "Path": "python",
+        "Args": [
+            "-I",
+            "-B",
+            "-X",
+            "utf8",
+            "-c",
+            "import json,os,socket; denied=False\ntry:\n open('/w/should-not-write','w')\nexcept OSError:\n denied=True\nprint(json.dumps({'uid':os.getuid(),'readonly':denied,'interfaces':[x[1] for x in socket.if_nameindex()]}))"
+        ],
+        "State": {
+            "Status": "exited",
+            "Running": false,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 0,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-11-05T04:28:51.369368976Z",
+            "FinishedAt": "2026-11-05T04:28:51.566890037Z"
+        },
+        "Image": "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+        "ResolvConfPath": "/var/lib/docker/containers/52948ce4520a2a6d71bb77a446c7d84460487a90d1cd39375609a95f55cab04d/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/52948ce4520a2a6d71bb77a446c7d84460487a90d1cd39375609a95f55cab04d/hostname",
+        "HostsPath": "/var/lib/docker/containers/52948ce4520a2a6d71bb77a446c7d84460487a90d1cd39375609a95f55cab04d/hosts",
+        "LogPath": "",
+        "Name": "/codefix-25c2ab72909749fdb1fee6a69cd41cf4",
+        "RestartCount": 0,
+        "Driver": "overlayfs",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "none",
+                "Config": {}
+            },
+            "NetworkMode": "none",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": [
+                "ALL"
+            ],
+            "CgroupnsMode": "private",
+            "Dns": null,
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": true,
+            "SecurityOpt": [
+                "no-new-privileges"
+            ],
+            "Tmpfs": {
+                "/tmp": "rw,noexec,nosuid,size=67108864"
+            },
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 268435456,
+            "NanoCpus": 1000000000,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 268435456,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": 64,
+            "Ulimits": [
+                {
+                    "Name": "nofile",
+                    "Hard": 128,
+                    "Soft": 128
+                }
+            ],
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "Mounts": [
+                {
+                    "Type": "volume",
+                    "Source": "codefix-out-8016d6819b714f00b917bbef99128af3",
+                    "Target": "/out"
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/evidence/runtime/RUNTIME-20261105-122831-bbcf8dd0/timeout-split/isolation/probe-work",
+                    "Target": "/w",
+                    "ReadOnly": true
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/c_runner/pytest_entry.py",
+                    "Target": "/entry.py",
+                    "ReadOnly": true
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/docker/candidate_entry.py",
+                    "Target": "/harness.py",
+                    "ReadOnly": true
+                }
+            ],
+            "MaskedPaths": [
+                "/proc/acpi",
+                "/proc/asound",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/sys/devices/virtual/powercap",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "Storage": {
+            "RootFS": {
+                "Snapshot": {
+                    "Name": "overlayfs"
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/c_runner/pytest_entry.py",
+                "Destination": "/entry.py",
+                "Mode": "",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/docker/candidate_entry.py",
+                "Destination": "/harness.py",
+                "Mode": "",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "volume",
+                "Name": "codefix-out-8016d6819b714f00b917bbef99128af3",
+                "Source": "/var/lib/docker/volumes/codefix-out-8016d6819b714f00b917bbef99128af3/_data",
+                "Destination": "/out",
+                "Driver": "local",
+                "Mode": "z",
+                "RW": true,
+                "Propagation": ""
+            },
+            {
+                "Type": "bind",
+                "Source": "/run/desktop/mnt/host/c/Users/yang0/Documents/Codex/2026-10-31/wo/projects/Code-Fix-main/Code-Fix-main/evidence/runtime/RUNTIME-20261105-122831-bbcf8dd0/timeout-split/isolation/probe-work",
+                "Destination": "/w",
+                "Mode": "",
+                "RW": false,
+                "Propagation": "rprivate"
+            }
+        ],
+        "Config": {
+            "Hostname": "52948ce4520a",
+            "Domainname": "",
+            "User": "65534:65534",
+            "AttachStdin": true,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "Tty": false,
+            "OpenStdin": true,
+            "StdinOnce": true,
+            "Env": [
+                "PYTHONDONTWRITEBYTECODE=1",
+                "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "PYTHON_VERSION=3.14.10",
+                "PYTHON_SHA256=de414a57119abef52784d8993e341d53aed635fc2b05c2607d9f98a2c5b72032"
+            ],
+            "Cmd": [
+                "-I",
+                "-B",
+                "-X",
+                "utf8",
+                "-c",
+                "import json,os,socket; denied=False\ntry:\n open('/w/should-not-write','w')\nexcept OSError:\n denied=True\nprint(json.dumps({'uid':os.getuid(),'readonly':denied,'interfaces':[x[1] for x in socket.if_nameindex()]}))"
+            ],
+            "Image": "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+            "Volumes": null,
+            "WorkingDir": "/w",
+            "Entrypoint": [
+                "python"
+            ],
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "SandboxID": "",
+            "SandboxKey": "",
+            "Ports": {},
+            "Networks": {
+                "none": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "6747954da13220d727dd173986d9019453c8b5cef8d729f92184503df22ba2f2",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:1aa1f3f61979ad4766ac0e6ea64558beebfb9416d0cb8637d0cdf692f9404cea",
+            "size": 1434,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        }
+    }
+]

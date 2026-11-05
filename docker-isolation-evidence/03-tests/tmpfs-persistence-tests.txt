@@ -1,0 +1,98 @@
+﻿# tmpfs 持久化测试证据
+
+## 测试目的
+证明容器内可写目录只有 tmpfs：写入的数据随容器销毁而消失，不会跨容器实例持久化。
+
+## 执行命令
+~~~bash
+docker compose -f 01-config/compose.yaml up -d --no-deps --force-recreate isolation-test
+docker inspect docker-isolation-test --format '{{json .HostConfig.Tmpfs}}'
+docker exec docker-isolation-test sh -c 'echo persistence-probe > /tmp/persistence-probe.txt; cat /tmp/persistence-probe.txt'
+docker rm -f docker-isolation-test
+docker compose -f 01-config/compose.yaml up -d --no-deps isolation-test
+docker exec docker-isolation-test sh -c 'test -e /tmp/persistence-probe.txt; echo test_e_exit=$?'
+~~~
+
+## 预期结果
+- `/tmp`、`/run` 为 tmpfs 挂载，根文件系统只读；
+- 第一次容器实例写入成功；
+- 销毁后用同一 compose 启动的新实例中该文件不存在（`test -e` 返回 1）。
+
+## 实际测试结果
+~~~text
+采集时间 UTC：2026-11-04T18:07:04.943Z
+宿主机：Docker Desktop (WSL2 Linux backend)
+容器：docker-isolation-test
+镜像：docker-isolation-evidence:test-current
+镜像 ID：sha256:6cceb56a1ad064ab7f3e3c092c42bc1698802160b62bd0382a5e055cfa639c2a
+约束：仅使用 01-config/compose.yaml，不加载任何 runtime override
+
+~~~
+
+### tmpfs 声明（HostConfig.Tmpfs）
+~~~text
+$ docker inspect docker-isolation-test --format '{{json .HostConfig.Tmpfs}}'
+{"/run":"rw,noexec,nosuid,nodev,size=16m","/tmp":"rw,noexec,nosuid,nodev,size=64m"}
+exit_code=0
+~~~
+
+### 容器内 /tmp 与 /run 挂载
+~~~text
+$ docker exec docker-isolation-test mount | grep -E ' /(tmp|run) '
+tmpfs on /run type tmpfs (rw,nosuid,nodev,noexec,relatime,size=16384k,mode=755)
+tmpfs on /tmp type tmpfs (rw,nosuid,nodev,noexec,relatime,size=65536k)
+exit_code=0
+~~~
+
+### 首次写入（容器实例 1）
+~~~text
+$ docker exec docker-isolation-test sh -c 'echo persistence-probe-2026-11-05 > /tmp/persistence-probe.txt; ls -l /tmp/persistence-probe.txt; cat /tmp/persistence-probe.txt'
+-rw-r--r--    1 evidence evidence        29 Nov  4 18:07 /tmp/persistence-probe.txt
+persistence-probe-2026-11-05
+exit_code=0
+~~~
+
+### 销毁容器实例 1
+~~~text
+$ docker rm -f docker-isolation-test
+docker-isolation-test
+exit_code=0
+~~~
+
+### 同配置重新启动容器实例 2
+~~~text
+$ docker compose -f 01-config/compose.yaml up -d --no-deps isolation-test
+exit_code=0
+~~~
+
+容器实例比对：
+~~~text
+实例 1 ID：77c7b7c792f11f5e8fb8cfce5baaa3089f12730916720077fff6dcda50db44e5
+实例 2 ID：ec884ad2afe06ea7f768071d5c461919af5ded3eeb5155aa6f5f81d45b3b514c
+实例不同：True
+~~~
+
+### 新实例中查找探测文件
+~~~text
+$ docker exec docker-isolation-test sh -c 'ls -l /tmp/persistence-probe.txt; echo ls_exit=$?; test -e /tmp/persistence-probe.txt; echo test_e_exit=$?'
+ls_exit=1
+test_e_exit=1
+exit_code=0
+~~~
+
+### 新实例 /tmp 剩余文件列表
+~~~text
+$ docker exec docker-isolation-test sh -c 'ls -la /tmp'
+total 4
+drwxrwxrwt    2 root     root            40 Nov  4 18:07 .
+drwxr-xr-x    1 root     root          4096 Nov  4 18:07 ..
+exit_code=0
+~~~
+
+## 结论
+
+PASS：实例 1 写入 `/tmp/persistence-probe.txt` 成功；销毁容器后以同一 `01-config/compose.yaml` 启动的实例 2（容器 ID 不同）中该文件不存在，`test -e` 返回 1。证明写入点仅为 tmpfs，随容器销毁回收，不具备跨实例持久化能力。
+
+敏感信息处理：仅包含容器 ID 与退出码，不含宿主机路径/账户/凭据。
+
+
