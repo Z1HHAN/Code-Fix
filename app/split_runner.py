@@ -6,6 +6,7 @@ only a Unix socket. A hostile candidate can cause failure/DoS, not write reports
 """
 from pathlib import Path
 import json
+import keyword
 import subprocess
 import time
 import uuid
@@ -35,6 +36,9 @@ class SplitDockerRunner(DockerRunner):
             raise IsolationBlocked('Isolation probe required')
         if self.task.project not in FUNCTIONS:
             raise IsolationBlocked('Task has no approved pure JSON RPC adapter')
+        function = FUNCTIONS[self.task.project]
+        if not isinstance(function, str) or not function.isidentifier() or keyword.iskeyword(function):
+            raise IsolationBlocked('RPC function must be a non-keyword Python identifier')
         work = Path(work)
         self.task.verify(work, candidate=True)
         if code_version(work, self.task.profile['source_paths']) != expected_version:
@@ -48,7 +52,6 @@ class SplitDockerRunner(DockerRunner):
             raise IsolationBlocked('Candidate snapshot mismatch')
         trusted = self.task.prepare(outer / 'trusted-tests')
         proxy = (ROOT / 'docker/rpc_proxy.py').read_text(encoding='utf-8')
-        function = FUNCTIONS[self.task.project]
         (trusted / self.task.source).write_text(proxy + f'\ndef {function}(*args, **kwargs):\n    return invoke({function!r}, args, kwargs)\n', encoding='utf-8')
         volume = 'codefix-rpc-' + uuid.uuid4().hex
         name = 'codefix-candidate-' + uuid.uuid4().hex

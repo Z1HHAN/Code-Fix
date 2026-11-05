@@ -1,0 +1,32 @@
+{
+  "record": "助手-运行时审查修复-024",
+  "acceptance_run": "evidence/runtime-review/C-acceptance-20261105-194128-7d11286b",
+  "base_commit": "93b315a634c7d860bc7d78dd903c1eff87a08d95",
+  "source_files": 385,
+  "source_matches_tested_snapshot": true,
+  "source_snapshot_sha256": "7ca1297cf8dd220e474b109f719ec7702011aecec7bf7d5046b10100ee0fe031",
+  "evidence_files_hashed": 169,
+  "evidence_hashes_valid": true,
+  "zip_integrity_and_members": {
+    "platform_pytest": 3677,
+    "repair_gates": 429
+  },
+  "changed_markdown_files": 12,
+  "local_markdown_targets_checked": 242,
+  "missing_local_targets": [],
+  "platform": {
+    "passed": 282,
+    "skipped": 1
+  },
+  "new_regressions_passed": 24,
+  "repair_gates_passed": 25,
+  "node_tests_passed": 23,
+  "trusted_controls_passed": 12,
+  "model_api_called": false,
+  "docker_execution_performed": false,
+  "signoff": "Assistant offline verification, no B/C personal signoff; uncommitted worktree, no main merge",
+  "zip_member_sha256_verified": {
+    "platform_pytest": 3677,
+    "repair_gates": 429
+  }
+}

@@ -9,6 +9,7 @@ from pathlib import Path
 import re
 import sqlite3
 import uuid
+from .errors import InputValidationError, RunNotFound
 
 
 class StateConflict(ValueError):
@@ -22,7 +23,7 @@ def now():
 def validate_task(value):
     fields = {'description', 'project', 'mode', 'max_rounds', 'max_calls', 'total_seconds'}
     if not isinstance(value, dict) or set(value) - fields:
-        raise ValueError('未知任务字段；不能提交路径、命令或密钥')
+        raise InputValidationError('未知任务字段；不能提交路径、命令或密钥')
     task = dict(description='修复闰年判断', project='leap', mode='baseline',
                 max_rounds=3, max_calls=12, total_seconds=300)
     task.update(value)
@@ -31,14 +32,14 @@ def validate_task(value):
     if 'description' not in value:
         task['description'] = definition.data['description']
     if not isinstance(task['mode'], str) or task['mode'] not in {'baseline', 'repair'}:
-        raise ValueError('只支持baseline/repair模式')
+        raise InputValidationError('只支持baseline/repair模式')
     if not isinstance(task['description'], str) or not 1 <= len(task['description'].strip()) <= 2000:
-        raise ValueError('任务描述长度必须为1至2000')
+        raise InputValidationError('任务描述长度必须为1至2000')
     limits = json.loads((Path(__file__).resolve().parents[1] / 'configs/runtime_limits.json').read_text(encoding='utf-8'))
     for field in ('max_rounds', 'max_calls', 'total_seconds'):
         maximum = limits[field]
         if type(task[field]) is not int or not 1 <= task[field] <= maximum:
-            raise ValueError(f'{field}须为1至{maximum}的整数')
+            raise InputValidationError(f'{field}须为1至{maximum}的整数')
     return task
 
 
@@ -73,7 +74,7 @@ class RunStore:
     def create(self, value, key=None):
         task = validate_task(value)
         if key is not None and (not isinstance(key, str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', key)):
-            raise ValueError('幂等键须为1至100位字母数字、下划线或短横线')
+            raise InputValidationError('幂等键须为1至100位字母数字、下划线或短横线')
         encoded = json.dumps(task, ensure_ascii=False, sort_keys=True)
         fingerprint = hashlib.sha256(encoded.encode()).hexdigest()
         run_id = 'run-' + uuid.uuid4().hex
@@ -92,7 +93,7 @@ class RunStore:
     @staticmethod
     def _decode(row):
         if row is None:
-            raise KeyError('任务不存在')
+            raise RunNotFound('任务不存在')
         value = dict(row)
         for name in ('task', 'result'):
             value[name] = json.loads(value[name]) if value[name] else None
@@ -109,7 +110,7 @@ class RunStore:
 
     def directory(self, run_id):
         if not isinstance(run_id, str) or not re.fullmatch(r'run-[a-f0-9]{32}', run_id):
-            raise ValueError('非法运行编号')
+            raise InputValidationError('非法运行编号')
         path = self.root / run_id
         if path.is_symlink() or getattr(path, 'is_junction', lambda: False)():
             raise ValueError('运行目录不能为链接')
@@ -137,7 +138,7 @@ class RunStore:
 
     def request_control(self, run_id, action):
         if not isinstance(action, str) or action not in {'pause', 'stop'}:
-            raise ValueError('非法控制操作')
+            raise InputValidationError('非法控制操作')
         self.get(run_id)
         with self.connect() as db:
             # Stop is irreversible within this run; a later pause cannot weaken it.

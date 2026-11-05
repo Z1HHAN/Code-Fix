@@ -1,0 +1,72 @@
+{
+  "record": "助手-第三轮审查修复-026",
+  "acceptance_run": "evidence/runtime-review/C-acceptance-20261105-205000-299a2d18",
+  "base_commit": "93b315a634c7d860bc7d78dd903c1eff87a08d95",
+  "branch": "codex/runtime-review-fixes",
+  "source_files": 386,
+  "source_matches_tested_snapshot": true,
+  "source_snapshot_sha256": "caa2020728200e8e375c4b2d1b6b4f1002163c9761a4720b408a85bc450b02eb",
+  "evidence_files_hashed": 169,
+  "evidence_hashes_valid": true,
+  "zip_member_sha256_verified": {
+    "platform_pytest": 4254,
+    "repair_gates": 429
+  },
+  "c_runner_and_profiles_unchanged": true,
+  "repair_gate_bytes_unchanged_this_round": true,
+  "original_gate_assert_nodes_unchanged": 44,
+  "runtime_v3_and_legacy_agents_definitions_unchanged": true,
+  "results": {
+    "doctor": {
+      "status": "passed"
+    },
+    "validate_config": {
+      "status": "passed"
+    },
+    "platform_pytest": {
+      "status": "passed",
+      "counts": {
+        "collected": 354,
+        "passed": 353,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 1
+      }
+    },
+    "node_ui": {
+      "status": "passed",
+      "counts": {
+        "tests": 23,
+        "pass": 23,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    "c_controls": {
+      "status": "passed",
+      "scenario_count": 12
+    },
+    "repair_gates": {
+      "status": "passed",
+      "counts": {
+        "collected": 25,
+        "passed": 25,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "targeted_passed": 55,
+  "targeted_deselected": 1,
+  "counterexamples_failed_before_fix": 5,
+  "counterexamples_passed_before_fix": 1,
+  "model_api_called": false,
+  "docker_execution_performed": false,
+  "scope": "Assistant offline checks on uncommitted worktree; not B/C personal signoff",
+  "changed_markdown_files": 12,
+  "local_markdown_targets_checked": 299,
+  "missing_local_targets": []
+}

@@ -36,6 +36,8 @@ class DockerRunner:
 
     def command(self, name, work, out, entry, extra):
         for path in (work, out, entry):
+            # Docker --mount parses comma-separated fields; a comma in a path
+            # could change mount options instead of denoting a literal filename.
             if ',' in str(path) or path.is_symlink() or getattr(path, 'is_junction', lambda: False)():
                 raise IsolationBlocked('挂载目录包含不支持字符或链接')
         return [self.executable, 'run', '-i', '--name', name, '--pull=never', '--network=none', '--read-only',

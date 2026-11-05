@@ -1,0 +1,53 @@
+.....................................................s.................. [ 25%]
+........................................................................ [ 50%]
+..........................................................F............. [ 76%]
+...................................................................      [100%]
+================================== FAILURES ===================================
+________ test_dpapi_roundtrip_refuses_overwrite_and_env_has_precedence ________
+
+tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/review-fixes/ca-90bd9812/p/test_dpapi_roundtrip_refuses_o0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002AC10540280>
+
+    @pytest.mark.skipif(os.name != 'nt', reason='Windows DPAPI is machine/user specific')
+    def test_dpapi_roundtrip_refuses_overwrite_and_env_has_precedence(tmp_path, monkeypatch):
+        path = tmp_path / 'credentials.json'
+        fake = {'CODE_FIX_SF_ACCOUNT1_KEY': 'sk-offline-account1', 'CODE_FIX_SF_ACCOUNT2_KEY': 'sk-offline-account2'}
+        for name in fake:
+            monkeypatch.delenv(name, raising=False)
+>       save_local(fake, path)
+
+tests\test_siliconflow_budget.py:234: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+app\local_credentials.py:46: in save_local
+    encrypted = {k: _crypt(v.encode(), True).hex() for k, v in keys.items()}
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+raw = b'sk-offline-account1', protect = True
+
+    def _crypt(raw, protect):
+        if os.name != 'nt':
+            raise ValueError('DPAPI凭证仅可由原Windows用户使用；其他机器请使用环境变量或本机重新配置')
+        buffer = ctypes.create_string_buffer(raw)
+        source = Blob(len(raw), ctypes.cast(buffer, ctypes.POINTER(ctypes.c_ubyte)))
+        dest = Blob()
+        crypt = ctypes.WinDLL('crypt32', use_last_error=True)
+        kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+        if protect:
+            ok = crypt.CryptProtectData(ctypes.byref(source), None, None, None, None, 1, ctypes.byref(dest))
+        else:
+            ok = crypt.CryptUnprotectData(ctypes.byref(source), None, None, None, None, 1, ctypes.byref(dest))
+        if not ok:
+>           raise ValueError('本机凭证加解密失败；不输出密钥或系统异常内容')
+E           ValueError: 本机凭证加解密失败；不输出密钥或系统异常内容
+
+app\local_credentials.py:30: ValueError
+============================== warnings summary ===============================
+runs\v3-venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\v3-venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\lenovo\Documents\ChatGPT\Code Fix\evidence\runtime-review\C-acceptance-20261105-193722-c2b62acb\platform_pytest\junit.xml -
+=========================== short test summary info ===========================
+FAILED tests/test_siliconflow_budget.py::test_dpapi_roundtrip_refuses_overwrite_and_env_has_precedence
+1 failed, 281 passed, 1 skipped, 1 warning in 105.50s (0:01:45)

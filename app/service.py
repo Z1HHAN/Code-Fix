@@ -5,6 +5,7 @@ import os
 
 from .baseline import baseline_record
 from .run_store import RunStore
+from .diagnostics import record_exception
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -19,8 +20,8 @@ class TaskService:
         return self.store.get(run_id)
 
     def run_claimed(self, run_id):
-        task = self.store.get(run_id)['task']
         try:
+            task = self.store.get(run_id)['task']
             control = self.store.get(run_id)['control']
             if control and task['mode'] == 'baseline':
                 self.store.finish_if_running(run_id, 'paused' if control == 'pause' else 'stopped',
@@ -56,7 +57,8 @@ class TaskService:
                 status, result = Workflow(self.store).run(run_id)
             self.store.finish_if_running(run_id, status, result)
         except Exception as exc:
-            self.store.finish_if_running(run_id, 'failed', {'final_result': 'not_run', 'error_type': type(exc).__name__,
+            diagnostic = record_exception(self.store.directory(run_id), exc)
+            self.store.finish_if_running(run_id, 'failed', {'final_result': 'not_run', **diagnostic,
                                                'reason': '运行异常，未完成独立验收'})
 
     def report(self, run_id):

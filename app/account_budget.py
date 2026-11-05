@@ -31,12 +31,44 @@ class AccountBudget:
             provider_id TEXT NOT NULL, model TEXT NOT NULL, price_version TEXT NOT NULL,
             created_at TEXT NOT NULL, reserved_microcny INTEGER NOT NULL,
             actual_microcny INTEGER, status TEXT NOT NULL)''')
-        db.execute('''CREATE TABLE IF NOT EXISTS budget_alerts (
-            account_id TEXT NOT NULL, kind TEXT NOT NULL, created_at TEXT NOT NULL,
-            payload TEXT NOT NULL, PRIMARY KEY(account_id,kind))''')
         db.execute('''CREATE TABLE IF NOT EXISTS account_keys (
             provider_id TEXT NOT NULL, fingerprint TEXT NOT NULL, account_id TEXT NOT NULL,
             PRIMARY KEY(provider_id,fingerprint))''')
+        # Ledger already owns a write transaction. Standalone callers acquire
+        # the same lock; a savepoint makes schema/data replacement atomic without
+        # committing or restarting the caller's transaction.
+        if not db.in_transaction:
+            db.execute('BEGIN IMMEDIATE')
+        db.execute('SAVEPOINT budget_alerts_schema')
+        try:
+            columns = {r[1] for r in db.execute('PRAGMA table_info(budget_alerts)')}
+            if not columns:
+                db.execute("""CREATE TABLE budget_alerts (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    account_id TEXT NOT NULL, kind TEXT NOT NULL,
+                    created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
+                    payload TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'active',
+                    resolved_at TEXT)""")
+            elif 'id' not in columns:
+                db.execute("""CREATE TABLE budget_alerts_v2 (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    account_id TEXT NOT NULL, kind TEXT NOT NULL,
+                    created_at TEXT NOT NULL, updated_at TEXT NOT NULL,
+                    payload TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'active',
+                    resolved_at TEXT)""")
+                db.execute("""INSERT INTO budget_alerts_v2
+                    (account_id,kind,created_at,updated_at,payload,status)
+                    SELECT account_id,kind,created_at,created_at,payload,'active'
+                    FROM budget_alerts ORDER BY account_id,kind""")
+                db.execute('DROP TABLE budget_alerts')
+                db.execute('ALTER TABLE budget_alerts_v2 RENAME TO budget_alerts')
+            db.execute("""CREATE UNIQUE INDEX IF NOT EXISTS idx_budget_alerts_active
+                ON budget_alerts(account_id,kind) WHERE status='active'""")
+        except BaseException:
+            db.execute('ROLLBACK TO budget_alerts_schema')
+            raise
+        finally:
+            db.execute('RELEASE budget_alerts_schema')
 
     @staticmethod
     def _register(db, settings):
@@ -60,8 +92,26 @@ class AccountBudget:
     def _alert(db, account_id, kind, **payload):
         value = {'account_id': account_id, 'kind': kind, 'currency': 'CNY',
                  'basis': 'project_ledger_estimate_not_platform_balance', **payload}
-        db.execute('INSERT OR IGNORE INTO budget_alerts VALUES (?,?,?,?)',
-                   (account_id, kind, datetime.now(timezone.utc).isoformat(), json.dumps(value, ensure_ascii=False)))
+        now_ts = datetime.now(timezone.utc).isoformat()
+        encoded = json.dumps(value, ensure_ascii=False)
+        existing = db.execute(
+            "SELECT id FROM budget_alerts WHERE account_id=? AND kind=? AND status='active'",
+            (account_id, kind)).fetchone()
+        if existing:
+            db.execute('UPDATE budget_alerts SET updated_at=?,payload=? WHERE id=?',
+                       (now_ts, encoded, existing[0]))
+        else:
+            db.execute('INSERT INTO budget_alerts (account_id,kind,created_at,updated_at,payload,status)'
+                       ' VALUES (?,?,?,?,?,\'active\')',
+                       (account_id, kind, now_ts, now_ts, encoded))
+
+    @staticmethod
+    def _resolve_alert(db, account_id, kind):
+        now_ts = datetime.now(timezone.utc).isoformat()
+        db.execute(
+            "UPDATE budget_alerts SET status='resolved',resolved_at=?,updated_at=? "
+            "WHERE account_id=? AND kind=? AND status='active'",
+            (now_ts, now_ts, account_id, kind))
 
     def reserve(self, call_id, run_id, settings, max_calls, upper_input):
         output = settings.billable_output_tokens or settings.max_output_tokens
@@ -92,6 +142,8 @@ class AccountBudget:
                 self._alert(db, settings.account_id, 'low_balance', remaining_cny=yuan(remaining),
                             threshold_cny=str(settings.warning_balance),
                             message='本项目估算剩余额度已降至提醒阈值，包含当前预留，请核对平台控制台')
+            else:
+                self._resolve_alert(db, settings.account_id, 'low_balance')
 
     def settle(self, call_id, usage, settings):
         valid = isinstance(usage, dict) and all(type(usage.get(k)) is int and usage[k] >= 0
@@ -109,6 +161,21 @@ class AccountBudget:
             if not valid:
                 self._alert(db, settings.account_id, 'cost_unknown',
                             message='存在费用未知请求，所有账号暂停付费，待人工核对账单')
+            # Actual usage may be lower than reserved; balance recovery resolves the alert.
+            cap, warning = db.execute(
+                'SELECT authorized_microcny, warning_microcny FROM account_limits WHERE account_id=?',
+                (settings.account_id,)).fetchone()
+            used, reserved = db.execute('''SELECT
+                coalesce(sum(actual_microcny),0),
+                coalesce(sum(CASE WHEN status<>? THEN reserved_microcny ELSE 0 END),0)
+                FROM cny_calls WHERE account_id=?''', ('known', settings.account_id)).fetchone()
+            remaining = cap - used - reserved
+            if remaining > warning:
+                self._resolve_alert(db, settings.account_id, 'low_balance')
+            else:
+                self._alert(db, settings.account_id, 'low_balance', remaining_cny=yuan(remaining),
+                            threshold_cny=str(settings.warning_balance),
+                            message='本项目估算剩余额度已降至提醒阈值，请核对平台控制台')
         return {'status': 'estimated' if valid else 'unknown', 'currency': 'CNY',
                 'amount_cny': yuan(amount) if valid else None, 'amount_usd': None,
                 'account_id': settings.account_id, 'basis': 'configured_CNY_rates_not_provider_invoice',
@@ -131,8 +198,11 @@ class AccountBudget:
                                  'remaining_after_reservations_cny': yuan(remaining),
                                  'warning_threshold_cny': yuan(warning), 'low_balance': remaining <= warning,
                                  'status': 'unknown' if unknown else 'estimated'})
-            alerts = [json.loads(row[0]) | {'created_at': row[1]} for row in
-                      db.execute('SELECT payload,created_at FROM budget_alerts ORDER BY created_at')]
+            alerts = []
+            for row in db.execute('SELECT payload,created_at,updated_at,status,resolved_at FROM budget_alerts ORDER BY created_at,id'):
+                payload = json.loads(row[0])
+                alerts.append(payload | {'created_at': row[1], 'updated_at': row[2],
+                                         'status': row[3], 'resolved_at': row[4]})
             blocked = bool(db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()
                            or db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone())
         return {'currency': 'CNY', 'basis': 'project_ledger_estimate_not_platform_balance',
