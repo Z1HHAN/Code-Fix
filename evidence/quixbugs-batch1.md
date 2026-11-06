@@ -23,7 +23,7 @@
 | `qb-gcd` | 1 | 是 | passed | 无（基线 code_runtime_error，已修复） | 0.020834 | `run-feba8e2a0d4a45f5bf3c71714ad56a79` |
 | `qb-get_factors` | 1 | 是 | passed | 无（基线 assertion_failed，已修复） | 0.025118 | `run-0b8c19e681f6484ab1d13a9753277e58` |
 | `qb-hanoi` | 0 | 否 | not_run | 预检阻断，未调用模型：Task has no approved pure JSON RPC adapter | 0 | `run-d167fe697875497b98935800b6fbbad4` |
-| `qb-is_valid_parenthesization` | 1 | 是 | passed | 无（基线 assertion_failed，已修复） | 0.022666 | 首次调用返回 &#96;&#96;&#96;json 围栏被判定 invalid_model_output，重试后通过；`run-24f7fd3625d04a73b1d0cf0de412b932` |
+| `qb-is_valid_parenthesization` | 1 | 是 | passed | 无（基线 assertion_failed，已修复） | 0.022666 | 首次输出被整段 json 代码围栏包裹，判 invalid_model_output（`run-5d4cfa59b10346e584717f16fbb45b88`），重试后通过；本轮已加“仅剥离整段 json 围栏”容错；最终运行 `run-24f7fd3625d04a73b1d0cf0de412b932` |
 | `qb-kheapsort` | 1 | 是 | passed | 无（基线 assertion_failed，已修复） | 0.032208 | 首次 model_transport_error、二次 detector 输出被 2048 token 上限截断；已将 profile max_output_tokens 提至 8192 后通过；`run-d6d7eca48ebd44c3a660df91fdce7ddf` |
 | `qb-knapsack` | 1 | 是 | passed | 无（基线 assertion_failed，已修复） | 0.029784 | 该题官方测试含 pytest.skip；`run-3397d515ca924ad88427916460c70ff3` |
 | `qb-kth` | 1 | 是 | passed | 无（基线 code_runtime_error，已修复） | 0.026344 | `run-39289e9b42914dea83ade8746694b2c8` |
@@ -37,7 +37,7 @@
 | `qb-next_palindrome` | 1 | 是 | passed | 无（基线 assertion_failed，已修复） | 0.033194 | `run-dc049861b724430aa06b54a36539a0cf` |
 | `qb-next_permutation` | 1 | 是 | passed | 无（基线 assertion_failed，已修复） | 0.024962 | `run-9cb18f6d2de54d23bf97f209b8e5a505` |
 | `qb-pascal` | 1 | 是 | passed | 无（基线 code_runtime_error，已修复） | 0.030528 | `run-6a7d5a8fff784b2daee53bac67dd8489` |
-| `qb-possible_change` | 1 | 是 | passed | 无（基线 code_runtime_error，已修复） | 0.028422 | 首次 repairer 输出多出 evidence_ids/knowledge_citations 字段被协议严格拒绝，重试后通过；`run-c245835d4aaa4f0e95cb9880cb326176` |
+| `qb-possible_change` | 1 | 是 | passed | 无（基线 code_runtime_error，已修复） | 0.028422 | 首次 repairer 输出 `changes` 中同一 path 出现两次（`python_programs/possible_change.py`），协议校验拒绝判 invalid_model_output（`run-ada5e2c1ecd74fe9b020bd1643c61185`），重试后通过；最终运行 `run-c245835d4aaa4f0e95cb9880cb326176` |
 | `qb-powerset` | 1 | 是 | passed | 无（基线 assertion_failed，已修复） | 0.019948 | `run-80d90f28c77e43bd8ff4c7d8dbc80882` |
 | `qb-quicksort` | 1 | 是 | passed | 无（基线 assertion_failed，已修复） | 0.019516 | `run-93308c11a8a9498a8cbf8c4d5ec9d6c2` |
 | `qb-reverse_linked_list` | 0 | 否 | not_run | 预检阻断，未调用模型：Task has no approved pure JSON RPC adapter | 0 | `run-02eab506bb2f4ae092ab43642032de3e` |
@@ -88,16 +88,19 @@
 2. **`model_transport_error`（重试解决）**
    `qb-kheapsort` 首次调用为传输层 `ValueError`，`attempts = 1 / max_attempts = 1`（传输重试配置为 1 次），批量层重试后恢复。
 
-3. **模型输出协议严格性（未改动，记录为已知脆弱点）**
-   - `qb-is_valid_parenthesization` 首次把 JSON 包在 &#96;&#96;&#96;json 代码围栏里 → `invalid_model_output`，重试通过。
-   - `qb-possible_change` 首次在 repair 输出里多带 `evidence_ids` / `knowledge_citations` 字段 → 被 `_fields()` 严格拒绝，重试通过。
-   解析器当前**不接受**代码围栏、也**不接受**协议外多余字段；这是刻意的严格校验，本轮未放宽。
-   若后续批量规模扩大，建议评估"仅剥离 &#96;&#96;&#96;json 围栏"这一最小归一化，其余严格性保持不变。
+3. **模型输出协议严格性（本轮已做最小容错）**
+   - `qb-is_valid_parenthesization` 首次把 JSON 整段包在 json 代码围栏里 → `invalid_model_output`（`run-5d4cfa59b10346e584717f16fbb45b88`），重试通过。
+   - `qb-possible_change` 首次 repair 输出的 `changes` 中同一 path 出现两次（`python_programs/possible_change.py`）→ 判 `invalid_model_output`（`run-ada5e2c1ecd74fe9b020bd1643c61185`），重试通过。
+     原备注曾误记为“多带 `evidence_ids` / `knowledge_citations` 字段”，回放证伪：这两个字段本就是协议要求的，不属于多余字段。
+   本轮只做一处最小归一化：**当整段响应恰好被一层 json 代码围栏完整包裹时**，先剥掉围栏再解析（允许首尾空白、`JSON` 大小写）；
+   其余严格性全部保留：前后夹带自然语言、非 json 语言围栏、多段围栏、未闭合围栏、根节点非对象、重复字段、协议外字段仍然一律拒绝。
+   回归测试：`tests/test_v02_core.py::test_repair_output_unwraps_only_a_single_json_fence`（覆盖 repair / locator 共用解析路径），
+   并用 `run-5d4cfa59b10346e584717f16fbb45b88` 的真实 `raw_text` 回放确认修复后可以正常解析。
 
 ### 复核方式
 
 - 每题原始记录：`runs/batch1/<project>.json`（`runs/` 已 gitignore，不入库）
 - 完整调用链/容器记录：`runs/platform/<run_id>/`
 - 表格中每行的 `run_id` 均可回溯到上述目录。
-- 全量单元测试：`385 passed, 18 failed`，18 个失败项在本次配置改动**前后完全一致**
-  （本机 DPAPI 在当前账户上下文不可用、C runner 制品缺失），与本次改动无关。
+- 全量单元测试：`386 passed, 18 failed, 1 skipped`（新增 1 个围栏容错回归测试后由 385 增至 386），
+  18 个失败项在本次改动**前后完全一致**（本机 DPAPI 在当前账户上下文不可用、C runner 制品缺失），与本次改动无关。

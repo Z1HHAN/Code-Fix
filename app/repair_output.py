@@ -2,11 +2,19 @@
 from __future__ import annotations
 
 import json
+import re
 from collections.abc import Collection
 
 
 class InvalidModelOutput(ValueError):
     pass
+
+
+# 仅匹配“整段响应恰好被一层 ```json 围栏包裹”的情况；其余形态一律不放宽。
+_FENCED_JSON = re.compile(
+    r"\A```[ \t]*json[ \t]*\r?\n(.*?)\r?\n```\Z",
+    re.IGNORECASE | re.DOTALL,
+)
 
 
 def _unique_object(pairs):
@@ -21,8 +29,12 @@ def _unique_object(pairs):
 def _object(raw: str) -> dict:
     if not isinstance(raw, str):
         raise InvalidModelOutput('模型输出必须是文本')
+    text = raw.strip()
+    fenced = _FENCED_JSON.fullmatch(text)
+    if fenced is not None:
+        text = fenced.group(1)
     try:
-        value = json.loads(raw, object_pairs_hook=_unique_object)
+        value = json.loads(text, object_pairs_hook=_unique_object)
     except (ValueError, RecursionError) as exc:
         raise InvalidModelOutput('模型输出不是有效 JSON') from exc
     if not isinstance(value, dict):
