@@ -17,7 +17,65 @@ from c_runner.runner import compute_test_suite_version, parse_evidence
 from .docker_runner import DockerRunner, IsolationBlocked, ROOT
 from .runner import code_version
 
-FUNCTIONS = {'leap': 'is_leap', 'qb-get_factors': 'get_factors', 'qb-gcd': 'gcd', 'qb-sqrt': 'sqrt'}
+# Reviewed pure-JSON adapters.  Registration is per task, not per dataset: the
+# only thing a name unlocks is "call this one function with JSON args inside the
+# candidate container".  Every entry below was reviewed against the pinned test
+# for three properties, and an entry that fails any of them stays out:
+#   1. the module exports exactly that callable and the pinned test imports it
+#      by that name;
+#   2. every argument the pinned test passes survives a JSON round-trip
+#      unchanged (no `node.Node` graphs, no tuple-keyed dicts);
+#   3. the return value the pinned test compares survives a JSON round-trip
+#      unchanged (no sets, no tuples, no generators, no Infinity).
+# The one reviewed exception to (3) is MATERIALIZE_AS_LIST: those functions
+# return a generator and their pinned test compares `list(f(...))`.  The
+# candidate endpoint applies exactly that `list(...)` before serialising, so the
+# RPC side evaluates the same expression the native test evaluates.  It is
+# declared per function -- returns of every other entry are never coerced -- and
+# mirrored in docker/candidate_rpc.py, with a regression test pinning equality.
+# Excluded on purpose: breadth_first_search, depth_first_search, detect_cycle,
+# reverse_linked_list, shortest_path_length, shortest_paths, topological_ordering,
+# shortest_path_lengths (Node objects / tuple keys), hanoi (list of tuples),
+# minimum_spanning_tree (set).  Isolation controls are identical for every
+# entry; this table only decides which function may be invoked over the RPC
+# socket.
+FUNCTIONS = {
+    'leap': 'is_leap',
+    'qb-bitcount': 'bitcount',
+    'qb-bucketsort': 'bucketsort',
+    'qb-find_first_in_sorted': 'find_first_in_sorted',
+    'qb-find_in_sorted': 'find_in_sorted',
+    'qb-flatten': 'flatten',
+    'qb-gcd': 'gcd',
+    'qb-get_factors': 'get_factors',
+    'qb-is_valid_parenthesization': 'is_valid_parenthesization',
+    'qb-kheapsort': 'kheapsort',
+    'qb-knapsack': 'knapsack',
+    'qb-kth': 'kth',
+    'qb-lcs_length': 'lcs_length',
+    'qb-levenshtein': 'levenshtein',
+    'qb-lis': 'lis',
+    'qb-longest_common_subsequence': 'longest_common_subsequence',
+    'qb-max_sublist_sum': 'max_sublist_sum',
+    'qb-mergesort': 'mergesort',
+    'qb-next_palindrome': 'next_palindrome',
+    'qb-next_permutation': 'next_permutation',
+    'qb-pascal': 'pascal',
+    'qb-possible_change': 'possible_change',
+    'qb-powerset': 'powerset',
+    'qb-quicksort': 'quicksort',
+    'qb-rpn_eval': 'rpn_eval',
+    'qb-sieve': 'sieve',
+    'qb-sqrt': 'sqrt',
+    'qb-subsequences': 'subsequences',
+    'qb-to_base': 'to_base',
+    'qb-wrap': 'wrap',
+}
+
+# Generator-returning entries whose pinned test compares `list(f(...))`.
+# Kept separate from FUNCTIONS so the name table stays a plain
+# project -> function mapping.
+MATERIALIZE_AS_LIST = frozenset({'flatten', 'kheapsort'})
 
 AUDIT_PREFIX = b'CODEFIX_AUDIT '
 FAKE_REPORT = re.compile(rb'(?i)tests?\s+passed\s*=')

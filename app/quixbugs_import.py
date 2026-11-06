@@ -28,6 +28,35 @@ TITLES = dict(bitcount='二进制位计数', breadth_first_search='广度优先�
               topological_ordering='拓扑排序', wrap='文本换行')
 
 
+def load_skip_approvals(root=ROOT):
+    """Reviewed native pytest.skip allowlist, keyed by project.
+
+    The import may only register skips that a human explicitly approved here;
+    every approved nodeid must also exist in the pre-registered native ids.
+    A missing file means no task has an approved native skip.
+    """
+    path = Path(root) / 'configs/tasks/native-skip-approvals.json'
+    if not path.exists():
+        return {}
+    data = json.loads(path.read_text(encoding='utf-8'))
+    if data.get('schema_version') != 1 or not isinstance(data.get('approvals'), dict):
+        raise ValueError('原生 skip 批准文件格式不支持')
+    approvals = {}
+    for project, entries in data['approvals'].items():
+        if not isinstance(project, str) or not isinstance(entries, dict) or not entries:
+            raise ValueError('原生 skip 批准条目格式不支持')
+        for nodeid, reason in entries.items():
+            if not isinstance(nodeid, str) or not nodeid:
+                raise ValueError('原生 skip 批准条目格式不支持')
+            if not isinstance(reason, str) or not reason.strip():
+                raise ValueError('原生 skip 批准条目格式不支持')
+        approvals[project] = dict(entries)
+    unknown = set(approvals) - {'qb-' + name for name in TITLES}
+    if unknown:
+        raise ValueError('原生 skip 批准指向未登记题目：' + ', '.join(sorted(unknown)))
+    return approvals
+
+
 def load_bundle(path=BUNDLE):
     path = Path(path)
     if path.stat().st_size > 1_048_576:
@@ -123,6 +152,7 @@ def import_dataset(*, source_bundle=BUNDLE, root=ROOT, write=False):
     _no_links(catalog_path)
     old = json.loads(catalog_path.read_bytes())
     updated = json.loads(json.dumps(old))
+    approvals = load_skip_approvals(root)
     plans = []
     blocked = []
     total_tests = 0
@@ -136,16 +166,23 @@ def import_dataset(*, source_bundle=BUNDLE, root=ROOT, write=False):
             selected += [f'json_testcases/{name}.json', 'python_testcases/load_testdata.py']
         if helper:
             selected.append('python_testcases/node.py')
-        approved = {path: hashlib.sha256(files[path]).hexdigest() for path in selected}
+        approved_files = {path: hashlib.sha256(files[path]).hexdigest() for path in selected}
         relative = 'task_assets/quixbugs/' + name
         destination = root / relative
         _no_links(destination)
         existed = destination.exists()
-        if existed and _snapshot(destination) != approved:
+        if existed and _snapshot(destination) != approved_files:
             raise ValueError('拒绝覆盖已有且字节不同的任务资产：' + name)
         project = 'qb-' + name
-        reason = '原生测试含慢测跳过；需确认完整原生测试策略后再准入' if slow else None
-        if slow:
+        approved_skips = approvals.get(project, {})
+        if approved_skips:
+            if not slow:
+                raise ValueError('题目未静态检测到原生 skip，不能登记批准：' + project)
+            missing = set(approved_skips) - set(ids)
+            if missing:
+                raise ValueError('批准的原生 skip nodeid 不在预登记集合中：' + project)
+        reason = '原生测试含慢测跳过；需确认完整原生测试策略后再准入' if slow and not approved_skips else None
+        if reason:
             blocked.append(project)
         updated['projects'][project] = {
             'title': 'QuixBugs · ' + TITLES[name],
@@ -159,7 +196,8 @@ def import_dataset(*, source_bundle=BUNDLE, root=ROOT, write=False):
                        'retrieved_via': 'GitHub connector pinned tree and Git blobs; hashes verified',
                        'test_ids_source': 'static native AST/JSON + pytest8.3.5 ID formatter; not actual collection'},
             'profile': {'fixture_dir': relative, 'source_paths': [source], 'test_paths': [test_path],
-                        'expected_nodeids': ids, 'approved_files': approved, 'allowed_skips': {}},
+                        'expected_nodeids': ids, 'approved_files': approved_files,
+                        'allowed_skips': dict(approved_skips)},
             'knowledge_ids': ['public_tasks', 'testing'], 'knowledge_query': '公开 Python 算法 测试'}
         plans.append((destination, selected, existed))
     changed = updated != old

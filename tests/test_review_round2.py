@@ -11,7 +11,7 @@ from app import candidates, cli, public_baseline
 from app.candidates import apply_candidate
 from app.knowledge import search_knowledge
 from app.run_store import RunStore
-from app.split_runner import FUNCTIONS
+from app.split_runner import FUNCTIONS, MATERIALIZE_AS_LIST
 from app.tasks_v3 import RegisteredTask, catalog, get_task
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -116,6 +116,95 @@ def test_approved_rpc_dispatches_to_offline_stub(endpoint, monkeypatch, function
     monkeypatch.setattr(endpoint.importlib.util, 'module_from_spec', lambda spec: SimpleNamespace())
     assert endpoint.execute_request({'function': function, 'args': [3], 'kwargs': {'x': 4}}, 'stub') == [(3,), {'x': 4}]
     assert imported == [True]
+
+
+def test_candidate_endpoint_materialize_declaration_matches_host(endpoint):
+    # Two files declare the adapter because the endpoint is a standalone entry
+    # with no app package; they must never drift apart.
+    assert endpoint.MATERIALIZE_AS_LIST == MATERIALIZE_AS_LIST
+    assert MATERIALIZE_AS_LIST <= frozenset(FUNCTIONS.values())
+
+
+@pytest.mark.parametrize('function', sorted(MATERIALIZE_AS_LIST))
+def test_materialized_entries_return_lists_over_rpc(endpoint, monkeypatch, function):
+    # Without the declared adapter a generator return cannot cross json.dumps
+    # and the trusted test would see an opaque RPC failure.
+    def execute(module):
+        setattr(module, function, lambda *args, **kwargs: (item for item in (1, 2)))
+
+    spec = SimpleNamespace(loader=SimpleNamespace(exec_module=execute))
+    monkeypatch.setattr(endpoint.importlib.util, 'spec_from_file_location', lambda *args: spec)
+    monkeypatch.setattr(endpoint.importlib.util, 'module_from_spec', lambda spec: SimpleNamespace())
+    assert endpoint.execute_request({'function': function, 'args': [], 'kwargs': {}}, 'stub') == [1, 2]
+
+
+@pytest.mark.parametrize('function', sorted(MATERIALIZE_AS_LIST))
+def test_materialized_entries_reject_non_iterable_returns(endpoint, monkeypatch, function):
+    def execute(module):
+        setattr(module, function, lambda *args, **kwargs: 5)
+
+    spec = SimpleNamespace(loader=SimpleNamespace(exec_module=execute))
+    monkeypatch.setattr(endpoint.importlib.util, 'spec_from_file_location', lambda *args: spec)
+    monkeypatch.setattr(endpoint.importlib.util, 'module_from_spec', lambda spec: SimpleNamespace())
+    with pytest.raises(TypeError):
+        endpoint.execute_request({'function': function, 'args': [], 'kwargs': {}}, 'stub')
+
+
+def test_native_skip_tasks_register_only_the_official_nodeids():
+    # Both tasks' upstream tests call pytest.skip on one explicitly slow case.
+    # Only those exact ids may be admitted; any other skip must still block.
+    expected = {
+        'qb-knapsack': 'python_testcases/test_knapsack.py::test_knapsack[input_data9-13549094]',
+        'qb-levenshtein': 'python_testcases/test_levenshtein.py::test_levenshtein[input_data3-42]',
+    }
+    for project, nodeid in expected.items():
+        task = get_task(project)
+        assert task.data.get('admission_blocker') in (None, '')
+        assert set(task.profile['allowed_skips']) == {nodeid}
+        assert nodeid in task.profile['expected_nodeids']
+
+
+def test_adapter_validation_applies_in_memory_skips_to_runner_task():
+    # The second validation pass patches admission policy in memory.  The
+    # runner re-loads the registry task, so patching a separate get_task()
+    # instance would silently leave the production policy in force.
+    script = ROOT / 'scripts/validate_quixbugs_correct_adapters.py'
+    spec = importlib.util.spec_from_file_location('validate_correct_adapters', script)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    from app.split_runner import SplitDockerRunner
+    project = next(name for name in sorted(catalog()) if name.startswith('qb-'))
+    detached = get_task(project)
+    runner = SplitDockerRunner(project)
+    assert runner.task is not detached
+    exact = {next(iter(detached.profile['expected_nodeids'])):
+             'official upstream native test skip'}
+    detached.data['profile']['allowed_skips'] = dict(exact)
+    assert runner.task.profile.get('allowed_skips') != exact
+    module.apply_in_memory_skips(runner, exact)
+    assert runner.task.profile['allowed_skips'] == exact
+
+
+def test_negative_control_rejects_buggy_source_that_passes_some_cases():
+    # QuixBugs bugs are input-specific, so the pinned buggy file legitimately
+    # passes some cases; the gate must look at the overall failed verdict.
+    script = ROOT / 'scripts/validate_quixbugs_correct_adapters.py'
+    spec = importlib.util.spec_from_file_location('validate_negative_controls', script)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    buggy = {'status': 'failed', 'verification_status': 'failed',
+             'failure_class': 'code_runtime_error',
+             'counts': {'collected': 7, 'passed': 1, 'failed': 6, 'errors': 0, 'skipped': 0}}
+    assert module.negative_control_ok(buggy)
+    assert not module.negative_control_ok({**buggy, 'status': 'ok',
+                                           'verification_status': 'passed',
+                                           'failure_class': 'passed',
+                                           'counts': {'collected': 7, 'passed': 7,
+                                                      'failed': 0, 'errors': 0, 'skipped': 0}})
+    assert not module.negative_control_ok({**buggy, 'failure_class': 'environment_error'})
+    assert not module.negative_control_ok({**buggy,
+                                           'counts': {'collected': 7, 'passed': 7,
+                                                      'failed': 0, 'errors': 0, 'skipped': 0}})
 
 
 def test_knowledge_coverage_frequency_and_stable_ties(tmp_path):
