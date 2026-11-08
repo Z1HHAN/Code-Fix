@@ -1,0 +1,13 @@
+{
+  "observed_at": "2026-11-09T03:19:07.532611+08:00",
+  "local_main": "88baf97c1c7b6501534cc3ccaaa8549e9f02867c",
+  "remote_main_observed": "88baf97c1c7b6501534cc3ccaaa8549e9f02867c",
+  "push": "git push origin main",
+  "push_exit_code": 0,
+  "remote_check": "git ls-remote origin refs/heads/main",
+  "tested_code_commit": "46bfbed8191ea6321a06fa0dc6e22a15673ed195",
+  "post_test_functional_changes": false,
+  "original_evidence_files_verified": 169,
+  "scope": "offline integration verification only; no real model/Docker or C personal signoff",
+  "note": "This publication record is saved in a subsequent documentation-only commit, identifiable from Git."
+}
