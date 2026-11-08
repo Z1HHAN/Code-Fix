@@ -80,3 +80,6 @@ evidence/simplification-review/** -text -whitespace
 
 
 evidence/main-repair-merge/** -text -whitespace
+
+# Config/workbench main integration originals retain captured bytes.
+evidence/model-console-merge/** -text -whitespace
