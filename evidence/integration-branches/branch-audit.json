@@ -1,0 +1,293 @@
+{
+  "date": "2026-11-09",
+  "main_baseline": "bb8d19c9320dfa3a41cd9a688a8f88fb097ae447",
+  "refs_reviewed": 11,
+  "refs": [
+    {
+      "ref": "codex/integration-v02-delivery",
+      "tip": "64aa2c89ef50aea5e00d3f3fcce4cae46004cd3b",
+      "common_base": "bb6229a3415cf62bf2318277ea0227a2d0ad7b26",
+      "commits_not_ancestors": [
+        "64aa2c8 fix: integrate C handoff with reproducible delivery verification"
+      ],
+      "patch_comparison": [
+        "- 64aa2c89ef50aea5e00d3f3fcce4cae46004cd3b"
+      ],
+      "disposition": "patch_already_integrated",
+      "equivalent_main_commit": "0a51b61",
+      "evidence": "docs/99_历史归档/2026-11/2026-11-01_v0.2组件与原型集成.md"
+    },
+    {
+      "ref": "codex/integration-v02-runner",
+      "tip": "11447726f7bdc0fb163aff85ce4c501f8f899117",
+      "common_base": "bb6229a3415cf62bf2318277ea0227a2d0ad7b26",
+      "commits_not_ancestors": [
+        "1144772 fix: integrate runner regression and control boundary checks"
+      ],
+      "patch_comparison": [
+        "- 11447726f7bdc0fb163aff85ce4c501f8f899117"
+      ],
+      "disposition": "patch_already_integrated",
+      "equivalent_main_commit": "3308cf1",
+      "evidence": "docs/99_历史归档/2026-11/2026-11-01_v0.2组件与原型集成.md"
+    },
+    {
+      "ref": "codex/integration-v02-ui",
+      "tip": "fd8bd0d4c0aee665ffa253c78a6139f4823443a9",
+      "common_base": "bb6229a3415cf62bf2318277ea0227a2d0ad7b26",
+      "commits_not_ancestors": [
+        "fd8bd0d feat: integrate static UI prototype with guarded demo states"
+      ],
+      "patch_comparison": [
+        "- fd8bd0d4c0aee665ffa253c78a6139f4823443a9"
+      ],
+      "disposition": "patch_already_integrated",
+      "equivalent_main_commit": "52895f0",
+      "evidence": "docs/99_历史归档/2026-11/2026-11-01_v0.2组件与原型集成.md"
+    },
+    {
+      "ref": "codex/v0.2-candidate",
+      "tip": "fcff59946baf77034f0d770b86c34a85fa14ccad",
+      "common_base": "656f0489b2dd586cdcd938307f437b448794fc17",
+      "commits_not_ancestors": [
+        "fcff599 c修改v0.1"
+      ],
+      "patch_comparison": [
+        "+ fcff59946baf77034f0d770b86c34a85fa14ccad"
+      ],
+      "disposition": "historical_delivery_migrated_and_archived",
+      "replacement": "0a51b61",
+      "current_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30",
+      "evidence": "docs/99_历史归档/2026-11/2026-11-01_v0.2组件与原型集成.md"
+    },
+    {
+      "ref": "demo/readme-note",
+      "tip": "be9273f4282282b11a5440f0b39a0d60efee324f",
+      "common_base": "7d50e25f78bff6bce472bab4e4a821292c61baff",
+      "commits_not_ancestors": [
+        "be9273f docs: 演示分支流程（README 加一行）"
+      ],
+      "patch_comparison": [
+        "+ be9273f4282282b11a5440f0b39a0d60efee324f"
+      ],
+      "disposition": "historical_demo_not_current_requirements",
+      "reason": "README branch exercise; older C package replaced by fcff599; no re-import of obsolete root layout",
+      "evidence": "docs/99_历史归档/2026-10/已有成果与交接.md"
+    },
+    {
+      "ref": "origin/codex/day1-repair-demo-review-20261031",
+      "tip": "743727c0891b26c96c99f974a04a85add80b3073",
+      "common_base": null,
+      "commits_not_ancestors": [
+        "743727c fix: pass target path correctly to code versioning",
+        "dc4a552 fix: harden day1 repair execution",
+        "3de29d2 Review and secure Day 1 repair demo"
+      ],
+      "patch_comparison": [
+        "+ 3de29d2fd26bc2f6b108ab40b4aaeab7bb57e0a5",
+        "+ dc4a55293e5c7211cfbcaccfce26841471da4936",
+        "+ 743727c0891b26c96c99f974a04a85add80b3073"
+      ],
+      "disposition": "legacy_unrelated_history_selective_migration_only",
+      "reason": "No common Git ancestor; reviewed current runner/UI migration already recorded, do not overlay legacy root backend/requirements/runs",
+      "replacement": "3308cf1 / 52895f0",
+      "evidence": "docs/99_历史归档/2026-11/2026-11-01_v0.2组件与原型集成.md"
+    },
+    {
+      "ref": "origin/codex/evidence-binding-fail-closed",
+      "tip": "83971e0507076ff583935583a56f4219eea485f3",
+      "common_base": "d27a97ebdf905a70a3a128d2c323d51fad761589",
+      "commits_not_ancestors": [
+        "83971e0 fix(evidence): 证据版本绑定改为 fail-closed（R-01）"
+      ],
+      "patch_comparison": [
+        "+ 83971e0507076ff583935583a56f4219eea485f3"
+      ],
+      "disposition": "merge_candidate_under_verification",
+      "candidate_commit": "99153cb",
+      "new_scope": "R-01 evidence binding fail-closed; 5 offline tests"
+    },
+    {
+      "ref": "origin/codex/runner-regression-fix",
+      "tip": "b125ca924b8e3689c14145c675b53682ff175c03",
+      "common_base": "656f0489b2dd586cdcd938307f437b448794fc17",
+      "commits_not_ancestors": [
+        "b125ca9 fix: guard test pass detection and timeout cleanup"
+      ],
+      "patch_comparison": [
+        "+ b125ca924b8e3689c14145c675b53682ff175c03"
+      ],
+      "disposition": "superseded_by_reviewed_integration",
+      "replacement": "3308cf1",
+      "evidence": "docs/integration/task_plan.md",
+      "current_paths": [
+        "app/runner.py",
+        "tests/test_control_boundaries.py"
+      ]
+    },
+    {
+      "ref": "origin/codex/v0.2-candidate",
+      "tip": "fcff59946baf77034f0d770b86c34a85fa14ccad",
+      "common_base": "656f0489b2dd586cdcd938307f437b448794fc17",
+      "commits_not_ancestors": [
+        "fcff599 c修改v0.1"
+      ],
+      "patch_comparison": [
+        "+ fcff59946baf77034f0d770b86c34a85fa14ccad"
+      ],
+      "disposition": "historical_delivery_migrated_and_archived",
+      "replacement": "0a51b61",
+      "current_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30",
+      "evidence": "docs/99_历史归档/2026-11/2026-11-01_v0.2组件与原型集成.md"
+    },
+    {
+      "ref": "origin/demo/readme-note",
+      "tip": "fe12addd56fc730d01e22986e0ef32e0e792ec13",
+      "common_base": "7d50e25f78bff6bce472bab4e4a821292c61baff",
+      "commits_not_ancestors": [
+        "fe12add 复试案例",
+        "a5270e4 提交 C 的 Day1 环境验证与复现",
+        "be9273f docs: 演示分支流程（README 加一行）"
+      ],
+      "patch_comparison": [
+        "+ be9273f4282282b11a5440f0b39a0d60efee324f",
+        "+ a5270e48f0915c6bb316c5d38da3ffc5190271d4",
+        "+ fe12addd56fc730d01e22986e0ef32e0e792ec13"
+      ],
+      "disposition": "historical_demo_not_current_requirements",
+      "reason": "README branch exercise; older C package replaced by fcff599; no re-import of obsolete root layout",
+      "evidence": "docs/99_历史归档/2026-10/已有成果与交接.md"
+    },
+    {
+      "ref": "origin/ui/day1-repair-ui-20261101",
+      "tip": "43c333c5a79dccb5204a77f060da45c5c0f2763a",
+      "common_base": null,
+      "commits_not_ancestors": [
+        "43c333c feat: add day1 repair UI",
+        "743727c fix: pass target path correctly to code versioning",
+        "dc4a552 fix: harden day1 repair execution",
+        "3de29d2 Review and secure Day 1 repair demo"
+      ],
+      "patch_comparison": [
+        "+ 3de29d2fd26bc2f6b108ab40b4aaeab7bb57e0a5",
+        "+ dc4a55293e5c7211cfbcaccfce26841471da4936",
+        "+ 743727c0891b26c96c99f974a04a85add80b3073",
+        "+ 43c333c5a79dccb5204a77f060da45c5c0f2763a"
+      ],
+      "disposition": "legacy_unrelated_history_selective_migration_only",
+      "reason": "No common Git ancestor; reviewed current runner/UI migration already recorded, do not overlay legacy root backend/requirements/runs",
+      "replacement": "3308cf1 / 52895f0",
+      "evidence": "docs/99_历史归档/2026-11/2026-11-01_v0.2组件与原型集成.md"
+    }
+  ],
+  "policy": "No force push, branch deletion, history rewrite, unrelated whole-tree merge, or reintroduction of archived paths. Only new approved compatible changes are merged.",
+  "candidate_commit": "99153cbeafa054321fea0ef20257a38634747f37",
+  "offline_result": {
+    "platform_passed": 493,
+    "platform_skipped": 1,
+    "repair_gates_passed": 25,
+    "c_controls_passed": 12,
+    "node_complete_set_passed": 28,
+    "node_original_entry_passed": 23,
+    "no_real_model_or_docker": true,
+    "C_personal_signoff": false
+  },
+  "evidence_original_files_verified": 169,
+  "C_original_evidence_verified": [
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/bad.junit.xml",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/bad.junit.xml",
+      "sha256": "3200dea358b02298fe01fe0a96e976728a6696035a890357c32a26a342de7775"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/bad.log.txt",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/bad.log.txt",
+      "sha256": "18eff03317394691677c99e02e59f2df6672cca0fb243cb2c8c224b30713200f"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/bad.stderr.txt",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/bad.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/bad.stdout.txt",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/bad.stdout.txt",
+      "sha256": "9cd4212c0db78b0e1248c62da419fd8b20afcfe27b659d110191e5d9adb8650f"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/bad.toolrun.json",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/bad.toolrun.json",
+      "sha256": "c632f1350d76f55c0f882910c06ad0007a70436d4c64a0ae8ec5e117f4544003"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/events.jsonl",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/events.jsonl",
+      "sha256": "8289e9cd67a59e103932cff6af57c795cd465e73cde137ef610dba3da8a1b381"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/manifest.json",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/manifest.json",
+      "sha256": "4d100a210d0e04939d6d475bdf8d102dbb44af8978a0c7ebc6e7d909958a3752"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/reference.junit.xml",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/reference.junit.xml",
+      "sha256": "03f86cf068f43e16f7901923c10df6ed891193a1c884f89bd8ce3794db84915b"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/reference.log.txt",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/reference.log.txt",
+      "sha256": "97b6fef89ffa5b0b759ad3737b8f1682f613dcd9f31f48f1b8c8ca989cb5998d"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/reference.stderr.txt",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/reference.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/reference.stdout.txt",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/reference.stdout.txt",
+      "sha256": "842bae6716486d354de19e20501ebb4b15b37355ed676300d394889c38a1d3f6"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/reference.toolrun.json",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/reference.toolrun.json",
+      "sha256": "6be494cc55a68cb9ea53f91f576106d0f674b5629b810f5257562cd3368cbd44"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/report.md",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/report.md",
+      "sha256": "9e1476dda23c00ab30ea7d1b450aeb09bfde47b2ff5781c59bb46f31fc9e6ae8"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/work_bad/code/__init__.py",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/work_bad/code/__init__.py",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/work_bad/code/leap_year.py",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/work_bad/code/leap_year.py",
+      "sha256": "62e651c0dad7bfd034f11e76303d29a5830cd71c832713ad6a3eb909e48a70fa"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/work_bad/tests/test_leap.py",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/work_bad/tests/test_leap.py",
+      "sha256": "26f88bb716343c945dfc6ebc8d33e6ed4911af7bb095811ade5d6675f86fcbef"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/work_reference/code/__init__.py",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/work_reference/code/__init__.py",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/work_reference/code/leap_year.py",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/work_reference/code/leap_year.py",
+      "sha256": "a8399a35acf6811cde6ee14de457bb818dd3c49020afe5e4413431f9f5f44016"
+    },
+    {
+      "git_path": "C_Day1_20261030/runs/C-20261030-193201-b32afc2e/work_reference/tests/test_leap.py",
+      "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/work_reference/tests/test_leap.py",
+      "sha256": "26f88bb716343c945dfc6ebc8d33e6ed4911af7bb095811ade5d6675f86fcbef"
+    }
+  ]
+}

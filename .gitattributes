@@ -83,3 +83,6 @@ evidence/main-repair-merge/** -text -whitespace
 
 # Config/workbench main integration originals retain captured bytes.
 evidence/model-console-merge/** -text -whitespace
+
+# Branch integration evidence retains captured bytes.
+evidence/integration-branches/** -text -whitespace
