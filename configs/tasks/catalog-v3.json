@@ -749,7 +749,6 @@
       "title": "QuixBugs · 背包问题",
       "description": "修复knapsack缺陷，使预登记的原生测试通过；不修改测试。",
       "requires_isolation": true,
-      "admission_blocker": "原生测试含慢测跳过；需确认完整原生测试策略后再准入",
       "qualification_status": "pending_docker_collection_and_baseline",
       "context_paths": [],
       "source": {
@@ -791,7 +790,9 @@
           "json_testcases/knapsack.json": "392c98e3b94de0e91de573cde8f4044749bf7d00e79423c7fe30f011a30d894b",
           "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
         },
-        "allowed_skips": {}
+        "allowed_skips": {
+          "python_testcases/test_knapsack.py::test_knapsack[input_data9-13549094]": "official upstream native test skip: takes about 4 minutes to pass"
+        }
       },
       "knowledge_ids": [
         "public_tasks",
@@ -907,7 +908,6 @@
       "title": "QuixBugs · 编辑距离",
       "description": "修复levenshtein缺陷，使预登记的原生测试通过；不修改测试。",
       "requires_isolation": true,
-      "admission_blocker": "原生测试含慢测跳过；需确认完整原生测试策略后再准入",
       "qualification_status": "pending_docker_collection_and_baseline",
       "context_paths": [],
       "source": {
@@ -946,7 +946,9 @@
           "json_testcases/levenshtein.json": "d96caa3f6b4ebbd17a45ac43b8d4a93b5d3b9b9d4378765e727fd5145e52f7df",
           "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
         },
-        "allowed_skips": {}
+        "allowed_skips": {
+          "python_testcases/test_levenshtein.py::test_levenshtein[input_data3-42]": "official upstream native test skip: takes too long to pass"
+        }
       },
       "knowledge_ids": [
         "public_tasks",

@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 from app.config import load_task_spec,read_json
 from app.decision import DecisionEngine
-from app.repair_output import InvalidModelOutput,parse_repair_output
+from app.repair_output import InvalidModelOutput,parse_locator_output,parse_repair_output
 from app.security import PermissionViolation,validate_changes
 from app.runner import run_tests, prepare_fixture, code_version
 ROOT=Path(__file__).resolve().parents[1]
@@ -27,6 +27,30 @@ def test_permission_boundary(tmp_path):
 def test_repair_output_json_protocol():
     payload={'changes':[{'path':'leap_app/leap_year.py','new_content':'x'}],'explanation':'fix','evidence_ids':[],'knowledge_citations':[]}; assert parse_repair_output(json.dumps(payload))['changes']
     with pytest.raises(InvalidModelOutput): parse_repair_output('return year % 4 == 0')
+
+def test_repair_output_unwraps_only_a_single_json_fence():
+    payload={'changes':[{'path':'leap_app/leap_year.py','new_content':'x'}],'explanation':'fix','evidence_ids':[],'knowledge_citations':[]}
+    body=json.dumps(payload,ensure_ascii=False)
+    assert parse_repair_output('```json\n'+body+'\n```')==payload
+    assert parse_repair_output('  ```JSON\r\n'+body+'\r\n```\n\n')==payload
+    locator={'file':'leap_app/leap_year.py','function':'is_leap_year','hypothesis':'分支条件错误','evidence_ids':[],'knowledge_citations':[]}
+    assert parse_locator_output('```json\n'+json.dumps(locator,ensure_ascii=False)+'\n```')==locator
+    extra='{"changes":[],"explanation":"fix","evidence_ids":[],"knowledge_citations":[],"extra":1}'
+    duplicate_path='{"changes":[{"path":"a.py","new_content":"x"},{"path":"a.py","new_content":"y"}],"explanation":"fix","evidence_ids":[],"knowledge_citations":[]}'
+    rejected=[
+        '说明如下：\n```json\n'+body+'\n```',
+        '```json\n'+body+'\n```\n以上是补丁',
+        '```python\n'+body+'\n```',
+        '```json\n'+body,
+        '```json\n'+body+'\n``',
+        '```json\n'+body+'\n```\n```json\n'+body+'\n```',
+        '```json\n'+extra+'\n```',
+        '```json\n'+duplicate_path+'\n```',
+        '```json\n[1, 2]\n```',
+    ]
+    for raw in rejected:
+        with pytest.raises(InvalidModelOutput):
+            parse_repair_output(raw)
 
 def test_runner_does_not_mark_nonzero_or_wrong_count_as_pass(tmp_path):
     work = prepare_fixture('leap_bad', tmp_path / 'work')

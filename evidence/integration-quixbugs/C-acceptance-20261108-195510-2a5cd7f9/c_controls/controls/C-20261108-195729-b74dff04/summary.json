@@ -1,0 +1,1257 @@
+{
+  "run_id": "C-20261108-195729-b74dff04",
+  "started_at": "2026-11-08T19:57:29+08:00",
+  "completed_at": "2026-11-08T19:57:42+08:00",
+  "timezone": "Asia/Shanghai",
+  "interface_version": "0.2-20261101-draft",
+  "run_type": "tool_check",
+  "scope": "C reviewed fixtures and fault injection only",
+  "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "python_executable": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+  "pytest_version": "8.3.5",
+  "runner_files_sha256": {
+    "c_runner/__init__.py": "1164d633d056b2c43a0e47ec7bf2654aee9b16a9c409fe8be94ae4b1690fd975",
+    "c_runner/profiles.json": "059533b8ca91d1b1863035f15dfc3f007beb24a1bc1dc5e3204a2ddc66fc3de1",
+    "c_runner/pytest_entry.py": "09550a848f7e2ba8e8aaeeedf11e9792ff42cfc9ffc828ee0efdba5dfb2571f8",
+    "c_runner/README.md": "f7c02549961655038fbb30ac4867edaedfa1c939a5724f8e35a372d4f9668c07",
+    "c_runner/runner.py": "41a22669e23e66a1a5c17655802c158d7eeb242d3bc09b27c7577af0d6463882"
+  },
+  "source_commit": null,
+  "source_commit_reason": "Workspace derived from user archive; no new Git commit created by this entry.",
+  "model_api_called": false,
+  "isolation_ready": false,
+  "isolation_status": "not_verified; host execution limited to exact approved fixture snapshots",
+  "bc_integration": "not_run; C producer self-check only",
+  "interface_freeze": "pending_BC_confirmation",
+  "experiment_result": "not_applicable; not model_repair",
+  "artifact_paths_relative_to": "this run directory / artifacts",
+  "all_control_checks_passed": true,
+  "scenario_count": 12,
+  "records": [
+    {
+      "scenario": "leap_bad",
+      "run_type": "tool_check",
+      "test_profile": "leap_bad",
+      "expected": {
+        "status": "failed",
+        "verification_status": "failed",
+        "failure_class": "assertion_failed"
+      },
+      "checks": {
+        "status": true,
+        "verification": true,
+        "failure_class": true,
+        "no_false_pass": true,
+        "output_agent_null": true,
+        "stdout_exists": true,
+        "stderr_exists": true,
+        "counts": true
+      },
+      "control_check_passed": true,
+      "result": {
+        "interface_version": "0.2-20261101-draft",
+        "interface_status": "pending_BC_confirmation",
+        "call_id": "c-146568949e0d48a5b9c1b194366c5585",
+        "run_id": "C-20261108-195729-b74dff04",
+        "task_id": "C-control-leap_bad",
+        "tool": "run_tests",
+        "phase": "development",
+        "status": "failed",
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "exit_code": 1,
+        "counts": {
+          "collected": 4,
+          "passed": 3,
+          "failed": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "stdout_path": "C-20261108-195729-b74dff04/c-146568949e0d48a5b9c1b194366c5585/stdout.txt",
+        "stderr_path": "C-20261108-195729-b74dff04/c-146568949e0d48a5b9c1b194366c5585/stderr.txt",
+        "junit_path": "C-20261108-195729-b74dff04/c-146568949e0d48a5b9c1b194366c5585/junit.xml",
+        "junit_missing_reason": null,
+        "structured_path": "C-20261108-195729-b74dff04/c-146568949e0d48a5b9c1b194366c5585/pytest_events.json",
+        "duration_ms": 1202,
+        "code_version": "sha256:19038a868350f55bbae251c0ef3f42086de77551224f887b3da13255f0e2d6bf",
+        "requested_code_version": "sha256:19038a868350f55bbae251c0ef3f42086de77551224f887b3da13255f0e2d6bf",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "test_suite_version": "sha256:2ea03f30704e7dbba8a717333045002ff34eb7b904c47b2f6e713e8f89be2642",
+        "expected_test_count": 4,
+        "output_agent": null,
+        "artifact_paths_relative_to": "artifact_dir",
+        "result_path": "C-20261108-195729-b74dff04/c-146568949e0d48a5b9c1b194366c5585/result.json",
+        "isolation_ready": false,
+        "execution_mode": "reviewed_fixture",
+        "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "run_type": "tool_check",
+        "started_at": "2026-11-08T19:57:29.682+08:00",
+        "cleanup": {
+          "parent_reaped": true,
+          "pipes_drained": true,
+          "tree_termination_attempted": false,
+          "full_process_tree_verified": false,
+          "scope": "reviewed fixture parent; full process-tree isolation not certified"
+        },
+        "reason": "Frozen native fixture tests completed with a recorded failure",
+        "command": [
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+          "-I",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\pytest_entry.py",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-146568949e0d48a5b9c1b194366c5585\\pytest_events.json",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-146568949e0d48a5b9c1b194366c5585\\junit.xml",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-146568949e0d48a5b9c1b194366c5585\\pytest.ini",
+          "tests"
+        ],
+        "test_profile": "leap_bad",
+        "environment_policy": "minimal_allowlist_no_inherited_credentials_or_plugins",
+        "source_syntax_errors": [],
+        "process_id": 32040,
+        "coverage": {
+          "expected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap",
+            "tests/test_leap.py::test_2023_is_not_leap",
+            "tests/test_leap.py::test_1900_is_not_leap",
+            "tests/test_leap.py::test_2000_is_leap"
+          ],
+          "collected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap",
+            "tests/test_leap.py::test_2023_is_not_leap",
+            "tests/test_leap.py::test_1900_is_not_leap",
+            "tests/test_leap.py::test_2000_is_leap"
+          ],
+          "expected_collected_match": true,
+          "junit_identities": [
+            [
+              "tests.test_leap",
+              "test_2024_is_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_2023_is_not_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_1900_is_not_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_2000_is_leap"
+            ]
+          ],
+          "junit_expected_match": true,
+          "session_finished": true
+        },
+        "integrity": {
+          "executed_copy_unchanged": true,
+          "input_workspace_unchanged": true
+        },
+        "evidence_matches_current_version": true,
+        "finished_at": "2026-11-08T19:57:30.879+08:00"
+      }
+    },
+    {
+      "scenario": "leap_good",
+      "run_type": "reference_check",
+      "test_profile": "leap_good",
+      "expected": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed"
+      },
+      "checks": {
+        "status": true,
+        "verification": true,
+        "failure_class": true,
+        "no_false_pass": true,
+        "output_agent_null": true,
+        "stdout_exists": true,
+        "stderr_exists": true,
+        "counts": true
+      },
+      "control_check_passed": true,
+      "result": {
+        "interface_version": "0.2-20261101-draft",
+        "interface_status": "pending_BC_confirmation",
+        "call_id": "c-f73e4c2f60de49d899fe13db0d096f68",
+        "run_id": "C-20261108-195729-b74dff04",
+        "task_id": "C-control-leap_good",
+        "tool": "run_tests",
+        "phase": "development",
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "exit_code": 0,
+        "counts": {
+          "collected": 4,
+          "passed": 4,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "stdout_path": "C-20261108-195729-b74dff04/c-f73e4c2f60de49d899fe13db0d096f68/stdout.txt",
+        "stderr_path": "C-20261108-195729-b74dff04/c-f73e4c2f60de49d899fe13db0d096f68/stderr.txt",
+        "junit_path": "C-20261108-195729-b74dff04/c-f73e4c2f60de49d899fe13db0d096f68/junit.xml",
+        "junit_missing_reason": null,
+        "structured_path": "C-20261108-195729-b74dff04/c-f73e4c2f60de49d899fe13db0d096f68/pytest_events.json",
+        "duration_ms": 1157,
+        "code_version": "sha256:cc8248edc1a48315fd5afabd1ef909dba9fb77b75cc4e957074f31722c196ee1",
+        "requested_code_version": "sha256:cc8248edc1a48315fd5afabd1ef909dba9fb77b75cc4e957074f31722c196ee1",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "test_suite_version": "sha256:2ea03f30704e7dbba8a717333045002ff34eb7b904c47b2f6e713e8f89be2642",
+        "expected_test_count": 4,
+        "output_agent": null,
+        "artifact_paths_relative_to": "artifact_dir",
+        "result_path": "C-20261108-195729-b74dff04/c-f73e4c2f60de49d899fe13db0d096f68/result.json",
+        "isolation_ready": false,
+        "execution_mode": "reviewed_fixture",
+        "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "run_type": "reference_check",
+        "started_at": "2026-11-08T19:57:30.916+08:00",
+        "cleanup": {
+          "parent_reaped": true,
+          "pipes_drained": true,
+          "tree_termination_attempted": false,
+          "full_process_tree_verified": false,
+          "scope": "reviewed fixture parent; full process-tree isolation not certified"
+        },
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "command": [
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+          "-I",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\pytest_entry.py",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-f73e4c2f60de49d899fe13db0d096f68\\pytest_events.json",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-f73e4c2f60de49d899fe13db0d096f68\\junit.xml",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-f73e4c2f60de49d899fe13db0d096f68\\pytest.ini",
+          "tests"
+        ],
+        "test_profile": "leap_good",
+        "environment_policy": "minimal_allowlist_no_inherited_credentials_or_plugins",
+        "source_syntax_errors": [],
+        "process_id": 51316,
+        "coverage": {
+          "expected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap",
+            "tests/test_leap.py::test_2023_is_not_leap",
+            "tests/test_leap.py::test_1900_is_not_leap",
+            "tests/test_leap.py::test_2000_is_leap"
+          ],
+          "collected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap",
+            "tests/test_leap.py::test_2023_is_not_leap",
+            "tests/test_leap.py::test_1900_is_not_leap",
+            "tests/test_leap.py::test_2000_is_leap"
+          ],
+          "expected_collected_match": true,
+          "junit_identities": [
+            [
+              "tests.test_leap",
+              "test_2024_is_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_2023_is_not_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_1900_is_not_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_2000_is_leap"
+            ]
+          ],
+          "junit_expected_match": true,
+          "session_finished": true
+        },
+        "integrity": {
+          "executed_copy_unchanged": true,
+          "input_workspace_unchanged": true
+        },
+        "evidence_matches_current_version": true,
+        "finished_at": "2026-11-08T19:57:32.069+08:00"
+      }
+    },
+    {
+      "scenario": "output_timeout",
+      "run_type": "fault_injection",
+      "test_profile": "output_timeout",
+      "expected": {
+        "status": "timeout",
+        "verification_status": "inconclusive",
+        "failure_class": "timeout"
+      },
+      "checks": {
+        "status": true,
+        "verification": true,
+        "failure_class": true,
+        "no_false_pass": true,
+        "output_agent_null": true,
+        "stdout_exists": true,
+        "stderr_exists": true,
+        "partial_stdout": true,
+        "partial_stderr": true,
+        "no_fake_junit": true,
+        "unknown_outcomes": true,
+        "collected_truthful": true
+      },
+      "control_check_passed": true,
+      "result": {
+        "interface_version": "0.2-20261101-draft",
+        "interface_status": "pending_BC_confirmation",
+        "call_id": "c-00c2fce055544daa87886e7204b70cad",
+        "run_id": "C-20261108-195729-b74dff04",
+        "task_id": "C-control-output_timeout",
+        "tool": "run_tests",
+        "phase": "development",
+        "status": "timeout",
+        "verification_status": "inconclusive",
+        "failure_class": "timeout",
+        "exit_code": 1,
+        "counts": {
+          "collected": 1,
+          "passed": null,
+          "failed": null,
+          "errors": null,
+          "skipped": null
+        },
+        "stdout_path": "C-20261108-195729-b74dff04/c-00c2fce055544daa87886e7204b70cad/stdout.txt",
+        "stderr_path": "C-20261108-195729-b74dff04/c-00c2fce055544daa87886e7204b70cad/stderr.txt",
+        "junit_path": null,
+        "junit_missing_reason": "Timed out before JUnit was produced",
+        "structured_path": "C-20261108-195729-b74dff04/c-00c2fce055544daa87886e7204b70cad/pytest_events.json",
+        "duration_ms": 2473,
+        "code_version": "sha256:3348d3bdc2512b3d5beaef28de0863066e9fc8a752c3ea885c77806da9cebb0f",
+        "requested_code_version": "sha256:3348d3bdc2512b3d5beaef28de0863066e9fc8a752c3ea885c77806da9cebb0f",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "test_suite_version": "sha256:0ac79e3a03c255aca6462b8ea77d28b124a5e3ffbc7222d734d06c7010e4316e",
+        "expected_test_count": 1,
+        "output_agent": null,
+        "artifact_paths_relative_to": "artifact_dir",
+        "result_path": "C-20261108-195729-b74dff04/c-00c2fce055544daa87886e7204b70cad/result.json",
+        "isolation_ready": false,
+        "execution_mode": "reviewed_fixture",
+        "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "run_type": "fault_injection",
+        "started_at": "2026-11-08T19:57:32.105+08:00",
+        "cleanup": {
+          "parent_reaped": true,
+          "pipes_drained": true,
+          "tree_termination_attempted": true,
+          "full_process_tree_verified": false,
+          "scope": "reviewed fixture parent; full process-tree isolation not certified",
+          "termination_exit_code": 0
+        },
+        "reason": "Per-call fixture deadline exceeded; inspect cleanup scope and partial logs",
+        "command": [
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+          "-I",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\pytest_entry.py",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-00c2fce055544daa87886e7204b70cad\\pytest_events.json",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-00c2fce055544daa87886e7204b70cad\\junit.xml",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-00c2fce055544daa87886e7204b70cad\\pytest.ini",
+          "tests"
+        ],
+        "test_profile": "output_timeout",
+        "environment_policy": "minimal_allowlist_no_inherited_credentials_or_plugins",
+        "source_syntax_errors": [],
+        "process_id": 37576,
+        "coverage": {},
+        "integrity": {
+          "executed_copy_unchanged": true,
+          "input_workspace_unchanged": true
+        },
+        "evidence_matches_current_version": true,
+        "finished_at": "2026-11-08T19:57:34.572+08:00"
+      }
+    },
+    {
+      "scenario": "all_skipped",
+      "run_type": "fault_injection",
+      "test_profile": "leap_all_skipped",
+      "expected": {
+        "status": null,
+        "verification_status": "inconclusive",
+        "failure_class": null
+      },
+      "checks": {
+        "status": true,
+        "verification": true,
+        "failure_class": true,
+        "no_false_pass": true,
+        "output_agent_null": true,
+        "stdout_exists": true,
+        "stderr_exists": true
+      },
+      "control_check_passed": true,
+      "result": {
+        "interface_version": "0.2-20261101-draft",
+        "interface_status": "pending_BC_confirmation",
+        "call_id": "c-b8dc7666c36b4b8db2ce84a7914dee1f",
+        "run_id": "C-20261108-195729-b74dff04",
+        "task_id": "C-control-all_skipped",
+        "tool": "run_tests",
+        "phase": "development",
+        "status": "failed",
+        "verification_status": "inconclusive",
+        "failure_class": "not_reproduced",
+        "exit_code": 0,
+        "counts": {
+          "collected": 4,
+          "passed": 0,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 4
+        },
+        "stdout_path": "C-20261108-195729-b74dff04/c-b8dc7666c36b4b8db2ce84a7914dee1f/stdout.txt",
+        "stderr_path": "C-20261108-195729-b74dff04/c-b8dc7666c36b4b8db2ce84a7914dee1f/stderr.txt",
+        "junit_path": "C-20261108-195729-b74dff04/c-b8dc7666c36b4b8db2ce84a7914dee1f/junit.xml",
+        "junit_missing_reason": null,
+        "structured_path": "C-20261108-195729-b74dff04/c-b8dc7666c36b4b8db2ce84a7914dee1f/pytest_events.json",
+        "duration_ms": 1084,
+        "code_version": "sha256:f66ce32a9c8287aadbc5125645dd957807f133343f3e487f4bee0fd9ff8ad6a9",
+        "requested_code_version": "sha256:f66ce32a9c8287aadbc5125645dd957807f133343f3e487f4bee0fd9ff8ad6a9",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "test_suite_version": "sha256:2ea03f30704e7dbba8a717333045002ff34eb7b904c47b2f6e713e8f89be2642",
+        "expected_test_count": 4,
+        "output_agent": null,
+        "artifact_paths_relative_to": "artifact_dir",
+        "result_path": "C-20261108-195729-b74dff04/c-b8dc7666c36b4b8db2ce84a7914dee1f/result.json",
+        "isolation_ready": false,
+        "execution_mode": "reviewed_fixture",
+        "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "run_type": "fault_injection",
+        "started_at": "2026-11-08T19:57:34.636+08:00",
+        "cleanup": {
+          "parent_reaped": true,
+          "pipes_drained": true,
+          "tree_termination_attempted": false,
+          "full_process_tree_verified": false,
+          "scope": "reviewed fixture parent; full process-tree isolation not certified"
+        },
+        "reason": "Unapproved skipped tests or no actual passing tests",
+        "command": [
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+          "-I",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\pytest_entry.py",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-b8dc7666c36b4b8db2ce84a7914dee1f\\pytest_events.json",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-b8dc7666c36b4b8db2ce84a7914dee1f\\junit.xml",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-b8dc7666c36b4b8db2ce84a7914dee1f\\pytest.ini",
+          "tests"
+        ],
+        "test_profile": "leap_all_skipped",
+        "environment_policy": "minimal_allowlist_no_inherited_credentials_or_plugins",
+        "source_syntax_errors": [],
+        "process_id": 44776,
+        "coverage": {
+          "expected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap",
+            "tests/test_leap.py::test_2023_is_not_leap",
+            "tests/test_leap.py::test_1900_is_not_leap",
+            "tests/test_leap.py::test_2000_is_leap"
+          ],
+          "collected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap",
+            "tests/test_leap.py::test_2023_is_not_leap",
+            "tests/test_leap.py::test_1900_is_not_leap",
+            "tests/test_leap.py::test_2000_is_leap"
+          ],
+          "expected_collected_match": true,
+          "junit_identities": [
+            [
+              "tests.test_leap",
+              "test_2024_is_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_2023_is_not_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_1900_is_not_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_2000_is_leap"
+            ]
+          ],
+          "junit_expected_match": true,
+          "session_finished": true
+        },
+        "integrity": {
+          "executed_copy_unchanged": true,
+          "input_workspace_unchanged": true
+        },
+        "evidence_matches_current_version": true,
+        "finished_at": "2026-11-08T19:57:35.715+08:00"
+      }
+    },
+    {
+      "scenario": "zero_tests",
+      "run_type": "fault_injection",
+      "test_profile": "zero_tests",
+      "expected": {
+        "status": null,
+        "verification_status": "inconclusive",
+        "failure_class": null
+      },
+      "checks": {
+        "status": true,
+        "verification": true,
+        "failure_class": true,
+        "no_false_pass": true,
+        "output_agent_null": true,
+        "stdout_exists": true,
+        "stderr_exists": true
+      },
+      "control_check_passed": true,
+      "result": {
+        "interface_version": "0.2-20261101-draft",
+        "interface_status": "pending_BC_confirmation",
+        "call_id": "c-6e9e9916acb347b6878982bf8c31a44c",
+        "run_id": "C-20261108-195729-b74dff04",
+        "task_id": "C-control-zero_tests",
+        "tool": "run_tests",
+        "phase": "development",
+        "status": "failed",
+        "verification_status": "inconclusive",
+        "failure_class": "not_reproduced",
+        "exit_code": 5,
+        "counts": {
+          "collected": 0,
+          "passed": 0,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "stdout_path": "C-20261108-195729-b74dff04/c-6e9e9916acb347b6878982bf8c31a44c/stdout.txt",
+        "stderr_path": "C-20261108-195729-b74dff04/c-6e9e9916acb347b6878982bf8c31a44c/stderr.txt",
+        "junit_path": "C-20261108-195729-b74dff04/c-6e9e9916acb347b6878982bf8c31a44c/junit.xml",
+        "junit_missing_reason": null,
+        "structured_path": "C-20261108-195729-b74dff04/c-6e9e9916acb347b6878982bf8c31a44c/pytest_events.json",
+        "duration_ms": 1127,
+        "code_version": "sha256:f222b00c59a009a4b5cf8b1fcec88b637e93123f2d9bb5669d5c6f96f75a1151",
+        "requested_code_version": "sha256:f222b00c59a009a4b5cf8b1fcec88b637e93123f2d9bb5669d5c6f96f75a1151",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "test_suite_version": "sha256:0cde4623c03cfeb246c137917b7c723159133febfe55444da486f5c9499cc4d0",
+        "expected_test_count": 0,
+        "output_agent": null,
+        "artifact_paths_relative_to": "artifact_dir",
+        "result_path": "C-20261108-195729-b74dff04/c-6e9e9916acb347b6878982bf8c31a44c/result.json",
+        "isolation_ready": false,
+        "execution_mode": "reviewed_fixture",
+        "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "run_type": "fault_injection",
+        "started_at": "2026-11-08T19:57:35.752+08:00",
+        "cleanup": {
+          "parent_reaped": true,
+          "pipes_drained": true,
+          "tree_termination_attempted": false,
+          "full_process_tree_verified": false,
+          "scope": "reviewed fixture parent; full process-tree isolation not certified"
+        },
+        "reason": "No tests or expected collected identities differ from actual collection",
+        "command": [
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+          "-I",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\pytest_entry.py",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-6e9e9916acb347b6878982bf8c31a44c\\pytest_events.json",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-6e9e9916acb347b6878982bf8c31a44c\\junit.xml",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-6e9e9916acb347b6878982bf8c31a44c\\pytest.ini",
+          "tests"
+        ],
+        "test_profile": "zero_tests",
+        "environment_policy": "minimal_allowlist_no_inherited_credentials_or_plugins",
+        "source_syntax_errors": [],
+        "process_id": 38260,
+        "coverage": {
+          "expected_nodeids": [],
+          "collected_nodeids": [],
+          "expected_collected_match": true,
+          "junit_identities": [],
+          "junit_expected_match": true,
+          "session_finished": true
+        },
+        "integrity": {
+          "executed_copy_unchanged": true,
+          "input_workspace_unchanged": true
+        },
+        "evidence_matches_current_version": true,
+        "finished_at": "2026-11-08T19:57:36.875+08:00"
+      }
+    },
+    {
+      "scenario": "incomplete_tests",
+      "run_type": "fault_injection",
+      "test_profile": "incomplete_tests",
+      "expected": {
+        "status": null,
+        "verification_status": "inconclusive",
+        "failure_class": null
+      },
+      "checks": {
+        "status": true,
+        "verification": true,
+        "failure_class": true,
+        "no_false_pass": true,
+        "output_agent_null": true,
+        "stdout_exists": true,
+        "stderr_exists": true
+      },
+      "control_check_passed": true,
+      "result": {
+        "interface_version": "0.2-20261101-draft",
+        "interface_status": "pending_BC_confirmation",
+        "call_id": "c-dd408bb90fd248018c29394fbd79458f",
+        "run_id": "C-20261108-195729-b74dff04",
+        "task_id": "C-control-incomplete_tests",
+        "tool": "run_tests",
+        "phase": "development",
+        "status": "failed",
+        "verification_status": "inconclusive",
+        "failure_class": "not_reproduced",
+        "exit_code": 0,
+        "counts": {
+          "collected": 1,
+          "passed": 1,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "stdout_path": "C-20261108-195729-b74dff04/c-dd408bb90fd248018c29394fbd79458f/stdout.txt",
+        "stderr_path": "C-20261108-195729-b74dff04/c-dd408bb90fd248018c29394fbd79458f/stderr.txt",
+        "junit_path": "C-20261108-195729-b74dff04/c-dd408bb90fd248018c29394fbd79458f/junit.xml",
+        "junit_missing_reason": null,
+        "structured_path": "C-20261108-195729-b74dff04/c-dd408bb90fd248018c29394fbd79458f/pytest_events.json",
+        "duration_ms": 1061,
+        "code_version": "sha256:19038a868350f55bbae251c0ef3f42086de77551224f887b3da13255f0e2d6bf",
+        "requested_code_version": "sha256:19038a868350f55bbae251c0ef3f42086de77551224f887b3da13255f0e2d6bf",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "test_suite_version": "sha256:778ad373e546ffb7650bef43c5be980a75e31515231e4779ecf98ab71fba409d",
+        "expected_test_count": 4,
+        "output_agent": null,
+        "artifact_paths_relative_to": "artifact_dir",
+        "result_path": "C-20261108-195729-b74dff04/c-dd408bb90fd248018c29394fbd79458f/result.json",
+        "isolation_ready": false,
+        "execution_mode": "reviewed_fixture",
+        "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "run_type": "fault_injection",
+        "started_at": "2026-11-08T19:57:36.936+08:00",
+        "cleanup": {
+          "parent_reaped": true,
+          "pipes_drained": true,
+          "tree_termination_attempted": false,
+          "full_process_tree_verified": false,
+          "scope": "reviewed fixture parent; full process-tree isolation not certified"
+        },
+        "reason": "No tests or expected collected identities differ from actual collection",
+        "command": [
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+          "-I",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\pytest_entry.py",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-dd408bb90fd248018c29394fbd79458f\\pytest_events.json",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-dd408bb90fd248018c29394fbd79458f\\junit.xml",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-dd408bb90fd248018c29394fbd79458f\\pytest.ini",
+          "tests"
+        ],
+        "test_profile": "incomplete_tests",
+        "environment_policy": "minimal_allowlist_no_inherited_credentials_or_plugins",
+        "source_syntax_errors": [],
+        "process_id": 45628,
+        "coverage": {
+          "expected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap",
+            "tests/test_leap.py::test_2023_is_not_leap",
+            "tests/test_leap.py::test_1900_is_not_leap",
+            "tests/test_leap.py::test_2000_is_leap"
+          ],
+          "collected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap"
+          ],
+          "expected_collected_match": false,
+          "junit_identities": [
+            [
+              "tests.test_leap",
+              "test_2024_is_leap"
+            ]
+          ],
+          "junit_expected_match": false,
+          "session_finished": true
+        },
+        "integrity": {
+          "executed_copy_unchanged": true,
+          "input_workspace_unchanged": true
+        },
+        "evidence_matches_current_version": true,
+        "finished_at": "2026-11-08T19:57:37.993+08:00"
+      }
+    },
+    {
+      "scenario": "dependency_error",
+      "run_type": "fault_injection",
+      "test_profile": "collection_dependency_error",
+      "expected": {
+        "status": null,
+        "verification_status": "inconclusive",
+        "failure_class": "environment_error"
+      },
+      "checks": {
+        "status": true,
+        "verification": true,
+        "failure_class": true,
+        "no_false_pass": true,
+        "output_agent_null": true,
+        "stdout_exists": true,
+        "stderr_exists": true
+      },
+      "control_check_passed": true,
+      "result": {
+        "interface_version": "0.2-20261101-draft",
+        "interface_status": "pending_BC_confirmation",
+        "call_id": "c-a96b7c9678824478b1ce09929f08ffe8",
+        "run_id": "C-20261108-195729-b74dff04",
+        "task_id": "C-control-dependency_error",
+        "tool": "run_tests",
+        "phase": "development",
+        "status": "failed",
+        "verification_status": "inconclusive",
+        "failure_class": "environment_error",
+        "exit_code": 2,
+        "counts": {
+          "collected": 0,
+          "passed": 0,
+          "failed": 0,
+          "errors": 1,
+          "skipped": 0
+        },
+        "stdout_path": "C-20261108-195729-b74dff04/c-a96b7c9678824478b1ce09929f08ffe8/stdout.txt",
+        "stderr_path": "C-20261108-195729-b74dff04/c-a96b7c9678824478b1ce09929f08ffe8/stderr.txt",
+        "junit_path": "C-20261108-195729-b74dff04/c-a96b7c9678824478b1ce09929f08ffe8/junit.xml",
+        "junit_missing_reason": null,
+        "structured_path": "C-20261108-195729-b74dff04/c-a96b7c9678824478b1ce09929f08ffe8/pytest_events.json",
+        "duration_ms": 1257,
+        "code_version": "sha256:c9da916d09195c74651864c51c9f928c731eb34662bad3a90ff394f959eeb022",
+        "requested_code_version": "sha256:c9da916d09195c74651864c51c9f928c731eb34662bad3a90ff394f959eeb022",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "test_suite_version": "sha256:2ea03f30704e7dbba8a717333045002ff34eb7b904c47b2f6e713e8f89be2642",
+        "expected_test_count": 4,
+        "output_agent": null,
+        "artifact_paths_relative_to": "artifact_dir",
+        "result_path": "C-20261108-195729-b74dff04/c-a96b7c9678824478b1ce09929f08ffe8/result.json",
+        "isolation_ready": false,
+        "execution_mode": "reviewed_fixture",
+        "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "run_type": "fault_injection",
+        "started_at": "2026-11-08T19:57:38.043+08:00",
+        "cleanup": {
+          "parent_reaped": true,
+          "pipes_drained": true,
+          "tree_termination_attempted": false,
+          "full_process_tree_verified": false,
+          "scope": "reviewed fixture parent; full process-tree isolation not certified"
+        },
+        "reason": "Collection/import failed; no business assertion result",
+        "command": [
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+          "-I",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\pytest_entry.py",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-a96b7c9678824478b1ce09929f08ffe8\\pytest_events.json",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-a96b7c9678824478b1ce09929f08ffe8\\junit.xml",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-a96b7c9678824478b1ce09929f08ffe8\\pytest.ini",
+          "tests"
+        ],
+        "test_profile": "collection_dependency_error",
+        "environment_policy": "minimal_allowlist_no_inherited_credentials_or_plugins",
+        "source_syntax_errors": [],
+        "process_id": 44356,
+        "coverage": {
+          "expected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap",
+            "tests/test_leap.py::test_2023_is_not_leap",
+            "tests/test_leap.py::test_1900_is_not_leap",
+            "tests/test_leap.py::test_2000_is_leap"
+          ],
+          "collected_nodeids": [],
+          "expected_collected_match": false,
+          "junit_identities": [
+            [
+              "",
+              "tests.test_leap"
+            ]
+          ],
+          "junit_expected_match": false,
+          "session_finished": true
+        },
+        "integrity": {
+          "executed_copy_unchanged": true,
+          "input_workspace_unchanged": true
+        },
+        "evidence_matches_current_version": true,
+        "finished_at": "2026-11-08T19:57:39.295+08:00"
+      }
+    },
+    {
+      "scenario": "syntax_error",
+      "run_type": "fault_injection",
+      "test_profile": "collection_syntax_error",
+      "expected": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": "syntax_error"
+      },
+      "checks": {
+        "status": true,
+        "verification": true,
+        "failure_class": true,
+        "no_false_pass": true,
+        "output_agent_null": true,
+        "stdout_exists": true,
+        "stderr_exists": true
+      },
+      "control_check_passed": true,
+      "result": {
+        "interface_version": "0.2-20261101-draft",
+        "interface_status": "pending_BC_confirmation",
+        "call_id": "c-c0f25deed4454ec793bb3a28c67f8d8c",
+        "run_id": "C-20261108-195729-b74dff04",
+        "task_id": "C-control-syntax_error",
+        "tool": "run_tests",
+        "phase": "development",
+        "status": "failed",
+        "verification_status": "failed",
+        "failure_class": "syntax_error",
+        "exit_code": 2,
+        "counts": {
+          "collected": 0,
+          "passed": 0,
+          "failed": 0,
+          "errors": 1,
+          "skipped": 0
+        },
+        "stdout_path": "C-20261108-195729-b74dff04/c-c0f25deed4454ec793bb3a28c67f8d8c/stdout.txt",
+        "stderr_path": "C-20261108-195729-b74dff04/c-c0f25deed4454ec793bb3a28c67f8d8c/stderr.txt",
+        "junit_path": "C-20261108-195729-b74dff04/c-c0f25deed4454ec793bb3a28c67f8d8c/junit.xml",
+        "junit_missing_reason": null,
+        "structured_path": "C-20261108-195729-b74dff04/c-c0f25deed4454ec793bb3a28c67f8d8c/pytest_events.json",
+        "duration_ms": 1291,
+        "code_version": "sha256:77908e06e60fd8110ef2a5b0ee2d8dc53c53b5487d0b8c157f4ef65311953458",
+        "requested_code_version": "sha256:77908e06e60fd8110ef2a5b0ee2d8dc53c53b5487d0b8c157f4ef65311953458",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "test_suite_version": "sha256:2ea03f30704e7dbba8a717333045002ff34eb7b904c47b2f6e713e8f89be2642",
+        "expected_test_count": 4,
+        "output_agent": null,
+        "artifact_paths_relative_to": "artifact_dir",
+        "result_path": "C-20261108-195729-b74dff04/c-c0f25deed4454ec793bb3a28c67f8d8c/result.json",
+        "isolation_ready": false,
+        "execution_mode": "reviewed_fixture",
+        "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "run_type": "fault_injection",
+        "started_at": "2026-11-08T19:57:39.341+08:00",
+        "cleanup": {
+          "parent_reaped": true,
+          "pipes_drained": true,
+          "tree_termination_attempted": false,
+          "full_process_tree_verified": false,
+          "scope": "reviewed fixture parent; full process-tree isolation not certified"
+        },
+        "reason": "Registered source syntax error confirmed without executing source",
+        "command": [
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+          "-I",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\pytest_entry.py",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-c0f25deed4454ec793bb3a28c67f8d8c\\pytest_events.json",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-c0f25deed4454ec793bb3a28c67f8d8c\\junit.xml",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-c0f25deed4454ec793bb3a28c67f8d8c\\pytest.ini",
+          "tests"
+        ],
+        "test_profile": "collection_syntax_error",
+        "environment_policy": "minimal_allowlist_no_inherited_credentials_or_plugins",
+        "source_syntax_errors": [
+          "leap_app/leap_year.py"
+        ],
+        "process_id": 52148,
+        "coverage": {
+          "expected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap",
+            "tests/test_leap.py::test_2023_is_not_leap",
+            "tests/test_leap.py::test_1900_is_not_leap",
+            "tests/test_leap.py::test_2000_is_leap"
+          ],
+          "collected_nodeids": [],
+          "expected_collected_match": false,
+          "junit_identities": [
+            [
+              "",
+              "tests.test_leap"
+            ]
+          ],
+          "junit_expected_match": false,
+          "session_finished": true
+        },
+        "integrity": {
+          "executed_copy_unchanged": true,
+          "input_workspace_unchanged": true
+        },
+        "evidence_matches_current_version": true,
+        "finished_at": "2026-11-08T19:57:40.628+08:00"
+      }
+    },
+    {
+      "scenario": "runtime_error",
+      "run_type": "fault_injection",
+      "test_profile": "code_runtime_error",
+      "expected": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": "code_runtime_error"
+      },
+      "checks": {
+        "status": true,
+        "verification": true,
+        "failure_class": true,
+        "no_false_pass": true,
+        "output_agent_null": true,
+        "stdout_exists": true,
+        "stderr_exists": true
+      },
+      "control_check_passed": true,
+      "result": {
+        "interface_version": "0.2-20261101-draft",
+        "interface_status": "pending_BC_confirmation",
+        "call_id": "c-5fb74c8533984cd7b51494c9041f85b8",
+        "run_id": "C-20261108-195729-b74dff04",
+        "task_id": "C-control-runtime_error",
+        "tool": "run_tests",
+        "phase": "development",
+        "status": "failed",
+        "verification_status": "failed",
+        "failure_class": "code_runtime_error",
+        "exit_code": 1,
+        "counts": {
+          "collected": 4,
+          "passed": 0,
+          "failed": 4,
+          "errors": 0,
+          "skipped": 0
+        },
+        "stdout_path": "C-20261108-195729-b74dff04/c-5fb74c8533984cd7b51494c9041f85b8/stdout.txt",
+        "stderr_path": "C-20261108-195729-b74dff04/c-5fb74c8533984cd7b51494c9041f85b8/stderr.txt",
+        "junit_path": "C-20261108-195729-b74dff04/c-5fb74c8533984cd7b51494c9041f85b8/junit.xml",
+        "junit_missing_reason": null,
+        "structured_path": "C-20261108-195729-b74dff04/c-5fb74c8533984cd7b51494c9041f85b8/pytest_events.json",
+        "duration_ms": 1243,
+        "code_version": "sha256:ed8b025ad0ffa0295f43bb39a9dfb1129e8c504a0c86901d3f3537ec05e6ef79",
+        "requested_code_version": "sha256:ed8b025ad0ffa0295f43bb39a9dfb1129e8c504a0c86901d3f3537ec05e6ef79",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "test_suite_version": "sha256:2ea03f30704e7dbba8a717333045002ff34eb7b904c47b2f6e713e8f89be2642",
+        "expected_test_count": 4,
+        "output_agent": null,
+        "artifact_paths_relative_to": "artifact_dir",
+        "result_path": "C-20261108-195729-b74dff04/c-5fb74c8533984cd7b51494c9041f85b8/result.json",
+        "isolation_ready": false,
+        "execution_mode": "reviewed_fixture",
+        "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "run_type": "fault_injection",
+        "started_at": "2026-11-08T19:57:40.662+08:00",
+        "cleanup": {
+          "parent_reaped": true,
+          "pipes_drained": true,
+          "tree_termination_attempted": false,
+          "full_process_tree_verified": false,
+          "scope": "reviewed fixture parent; full process-tree isolation not certified"
+        },
+        "reason": "Frozen native fixture tests completed with a recorded failure",
+        "command": [
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+          "-I",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\pytest_entry.py",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-5fb74c8533984cd7b51494c9041f85b8\\pytest_events.json",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-5fb74c8533984cd7b51494c9041f85b8\\junit.xml",
+          "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evidence\\integration-quixbugs\\C-acceptance-20261108-195510-2a5cd7f9\\c_controls\\controls\\C-20261108-195729-b74dff04\\artifacts\\C-20261108-195729-b74dff04\\c-5fb74c8533984cd7b51494c9041f85b8\\pytest.ini",
+          "tests"
+        ],
+        "test_profile": "code_runtime_error",
+        "environment_policy": "minimal_allowlist_no_inherited_credentials_or_plugins",
+        "source_syntax_errors": [],
+        "process_id": 47692,
+        "coverage": {
+          "expected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap",
+            "tests/test_leap.py::test_2023_is_not_leap",
+            "tests/test_leap.py::test_1900_is_not_leap",
+            "tests/test_leap.py::test_2000_is_leap"
+          ],
+          "collected_nodeids": [
+            "tests/test_leap.py::test_2024_is_leap",
+            "tests/test_leap.py::test_2023_is_not_leap",
+            "tests/test_leap.py::test_1900_is_not_leap",
+            "tests/test_leap.py::test_2000_is_leap"
+          ],
+          "expected_collected_match": true,
+          "junit_identities": [
+            [
+              "tests.test_leap",
+              "test_2024_is_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_2023_is_not_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_1900_is_not_leap"
+            ],
+            [
+              "tests.test_leap",
+              "test_2000_is_leap"
+            ]
+          ],
+          "junit_expected_match": true,
+          "session_finished": true
+        },
+        "integrity": {
+          "executed_copy_unchanged": true,
+          "input_workspace_unchanged": true
+        },
+        "evidence_matches_current_version": true,
+        "finished_at": "2026-11-08T19:57:41.901+08:00"
+      }
+    },
+    {
+      "scenario": "stale_version",
+      "run_type": "fault_injection",
+      "test_profile": "leap_good",
+      "expected": {
+        "status": "blocked",
+        "verification_status": "not_run",
+        "failure_class": null
+      },
+      "checks": {
+        "status": true,
+        "verification": true,
+        "failure_class": true,
+        "no_false_pass": true,
+        "output_agent_null": true,
+        "stdout_exists": true,
+        "stderr_exists": true
+      },
+      "control_check_passed": true,
+      "result": {
+        "interface_version": "0.2-20261101-draft",
+        "interface_status": "pending_BC_confirmation",
+        "call_id": "c-6221c99728b24a5082c09201f9273516",
+        "run_id": "C-20261108-195729-b74dff04",
+        "task_id": "C-control-stale_version",
+        "tool": "run_tests",
+        "phase": "development",
+        "status": "blocked",
+        "verification_status": "not_run",
+        "failure_class": "permission_violation",
+        "exit_code": null,
+        "counts": {
+          "collected": null,
+          "passed": null,
+          "failed": null,
+          "errors": null,
+          "skipped": null
+        },
+        "stdout_path": "C-20261108-195729-b74dff04/c-6221c99728b24a5082c09201f9273516/stdout.txt",
+        "stderr_path": "C-20261108-195729-b74dff04/c-6221c99728b24a5082c09201f9273516/stderr.txt",
+        "junit_path": null,
+        "junit_missing_reason": "Test process has not started",
+        "structured_path": null,
+        "duration_ms": 15,
+        "code_version": "sha256:cc8248edc1a48315fd5afabd1ef909dba9fb77b75cc4e957074f31722c196ee1",
+        "requested_code_version": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "test_suite_version": "sha256:2ea03f30704e7dbba8a717333045002ff34eb7b904c47b2f6e713e8f89be2642",
+        "expected_test_count": 4,
+        "output_agent": null,
+        "artifact_paths_relative_to": "artifact_dir",
+        "result_path": "C-20261108-195729-b74dff04/c-6221c99728b24a5082c09201f9273516/result.json",
+        "isolation_ready": false,
+        "execution_mode": "reviewed_fixture",
+        "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "run_type": "reference_check",
+        "started_at": "2026-11-08T19:57:41.937+08:00",
+        "cleanup": {
+          "parent_reaped": false,
+          "pipes_drained": false,
+          "tree_termination_attempted": false,
+          "full_process_tree_verified": false,
+          "scope": "reviewed fixture parent; full process-tree isolation not certified"
+        },
+        "reason": "Requested code_version does not match actual approved source bytes",
+        "command": null,
+        "test_profile": "leap_good",
+        "finished_at": "2026-11-08T19:57:41.948+08:00"
+      }
+    },
+    {
+      "scenario": "modified_tests",
+      "run_type": "fault_injection",
+      "test_profile": "leap_good",
+      "expected": {
+        "status": "blocked",
+        "verification_status": "not_run",
+        "failure_class": null
+      },
+      "checks": {
+        "status": true,
+        "verification": true,
+        "failure_class": true,
+        "no_false_pass": true,
+        "output_agent_null": true,
+        "stdout_exists": true,
+        "stderr_exists": true
+      },
+      "control_check_passed": true,
+      "result": {
+        "interface_version": "0.2-20261101-draft",
+        "interface_status": "pending_BC_confirmation",
+        "call_id": "c-c87e34a64ecd45808c8c11764fefefad",
+        "run_id": "C-20261108-195729-b74dff04",
+        "task_id": "C-control-modified_tests",
+        "tool": "run_tests",
+        "phase": "development",
+        "status": "blocked",
+        "verification_status": "not_run",
+        "failure_class": "permission_violation",
+        "exit_code": null,
+        "counts": {
+          "collected": null,
+          "passed": null,
+          "failed": null,
+          "errors": null,
+          "skipped": null
+        },
+        "stdout_path": "C-20261108-195729-b74dff04/c-c87e34a64ecd45808c8c11764fefefad/stdout.txt",
+        "stderr_path": "C-20261108-195729-b74dff04/c-c87e34a64ecd45808c8c11764fefefad/stderr.txt",
+        "junit_path": null,
+        "junit_missing_reason": "Test process has not started",
+        "structured_path": null,
+        "duration_ms": 20,
+        "code_version": null,
+        "requested_code_version": "sha256:cc8248edc1a48315fd5afabd1ef909dba9fb77b75cc4e957074f31722c196ee1",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "test_suite_version": "sha256:2ea03f30704e7dbba8a717333045002ff34eb7b904c47b2f6e713e8f89be2642",
+        "expected_test_count": 4,
+        "output_agent": null,
+        "artifact_paths_relative_to": "artifact_dir",
+        "result_path": "C-20261108-195729-b74dff04/c-c87e34a64ecd45808c8c11764fefefad/result.json",
+        "isolation_ready": false,
+        "execution_mode": "reviewed_fixture",
+        "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "run_type": "reference_check",
+        "started_at": "2026-11-08T19:57:41.983+08:00",
+        "cleanup": {
+          "parent_reaped": false,
+          "pipes_drained": false,
+          "tree_termination_attempted": false,
+          "full_process_tree_verified": false,
+          "scope": "reviewed fixture parent; full process-tree isolation not certified"
+        },
+        "reason": "Workspace differs from the reviewed fixture; execution denied",
+        "command": null,
+        "test_profile": "leap_good",
+        "finished_at": "2026-11-08T19:57:42.000+08:00"
+      }
+    },
+    {
+      "scenario": "model_candidate_blocked",
+      "run_type": "fault_injection",
+      "test_profile": "leap_good",
+      "expected": {
+        "status": "blocked",
+        "verification_status": "not_run",
+        "failure_class": null
+      },
+      "checks": {
+        "status": true,
+        "verification": true,
+        "failure_class": true,
+        "no_false_pass": true,
+        "output_agent_null": true,
+        "stdout_exists": true,
+        "stderr_exists": true
+      },
+      "control_check_passed": true,
+      "result": {
+        "interface_version": "0.2-20261101-draft",
+        "interface_status": "pending_BC_confirmation",
+        "call_id": "c-06f0d0c412544987a3da7cf620214319",
+        "run_id": "C-20261108-195729-b74dff04",
+        "task_id": "C-control-model_candidate_blocked",
+        "tool": "run_tests",
+        "phase": "development",
+        "status": "blocked",
+        "verification_status": "not_run",
+        "failure_class": "permission_violation",
+        "exit_code": null,
+        "counts": {
+          "collected": null,
+          "passed": null,
+          "failed": null,
+          "errors": null,
+          "skipped": null
+        },
+        "stdout_path": "C-20261108-195729-b74dff04/c-06f0d0c412544987a3da7cf620214319/stdout.txt",
+        "stderr_path": "C-20261108-195729-b74dff04/c-06f0d0c412544987a3da7cf620214319/stderr.txt",
+        "junit_path": null,
+        "junit_missing_reason": "Test process has not started",
+        "structured_path": null,
+        "duration_ms": 4,
+        "code_version": null,
+        "requested_code_version": "sha256:cc8248edc1a48315fd5afabd1ef909dba9fb77b75cc4e957074f31722c196ee1",
+        "code_version_scheme": "sha256-canonical-files-v1",
+        "test_suite_version": null,
+        "expected_test_count": null,
+        "output_agent": null,
+        "artifact_paths_relative_to": "artifact_dir",
+        "result_path": "C-20261108-195729-b74dff04/c-06f0d0c412544987a3da7cf620214319/result.json",
+        "isolation_ready": false,
+        "execution_mode": "model_candidate",
+        "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+        "run_type": "tool_check",
+        "started_at": "2026-11-08T19:57:42.035+08:00",
+        "cleanup": {
+          "parent_reaped": false,
+          "pipes_drained": false,
+          "tree_termination_attempted": false,
+          "full_process_tree_verified": false,
+          "scope": "reviewed fixture parent; full process-tree isolation not certified"
+        },
+        "reason": "Isolation is unverified: model/unreviewed candidate execution is disabled",
+        "command": null,
+        "finished_at": "2026-11-08T19:57:42.035+08:00"
+      }
+    }
+  ]
+}

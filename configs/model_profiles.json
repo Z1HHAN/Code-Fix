@@ -218,7 +218,7 @@
       "request_seconds_env": "CODE_FIX_ALIYUN_REQUEST_SECONDS",
       "price_version": "operator-delegated-estimate-2026-11-06;aliyun-bailian-ds-class-peak",
       "max_input_tokens": 16000,
-      "max_output_tokens": 2048,
+      "max_output_tokens": 8192,
       "token_limit_parameter": "max_tokens",
       "currency": "CNY",
       "account_ref": "aliyun_maas",
