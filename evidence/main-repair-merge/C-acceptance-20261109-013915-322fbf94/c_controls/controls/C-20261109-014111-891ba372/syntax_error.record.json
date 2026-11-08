@@ -1,0 +1,70 @@
+{
+  "scenario": "syntax_error",
+  "run_type": "fault_injection",
+  "test_profile": "collection_syntax_error",
+  "expected": {
+    "status": null,
+    "verification_status": null,
+    "failure_class": "syntax_error"
+  },
+  "checks": {
+    "status": true,
+    "verification": true,
+    "failure_class": false,
+    "no_false_pass": true,
+    "output_agent_null": true,
+    "stdout_exists": true,
+    "stderr_exists": true
+  },
+  "control_check_passed": false,
+  "result": {
+    "interface_version": "0.2-20261101-draft",
+    "interface_status": "pending_BC_confirmation",
+    "call_id": "c-7597e6b699df4ef99a667f3f80b823ae",
+    "run_id": "C-20261109-014111-891ba372",
+    "task_id": "C-control-syntax_error",
+    "tool": "run_tests",
+    "phase": "development",
+    "status": "blocked",
+    "verification_status": "not_run",
+    "failure_class": "environment_error",
+    "exit_code": null,
+    "counts": {
+      "collected": null,
+      "passed": null,
+      "failed": null,
+      "errors": null,
+      "skipped": null
+    },
+    "stdout_path": "C-20261109-014111-891ba372/c-7597e6b699df4ef99a667f3f80b823ae/stdout.txt",
+    "stderr_path": "C-20261109-014111-891ba372/c-7597e6b699df4ef99a667f3f80b823ae/stderr.txt",
+    "junit_path": null,
+    "junit_missing_reason": "Execution could not produce a validated JUnit report",
+    "structured_path": null,
+    "duration_ms": 11,
+    "code_version": "sha256:77908e06e60fd8110ef2a5b0ee2d8dc53c53b5487d0b8c157f4ef65311953458",
+    "requested_code_version": "sha256:77908e06e60fd8110ef2a5b0ee2d8dc53c53b5487d0b8c157f4ef65311953458",
+    "code_version_scheme": "sha256-canonical-files-v1",
+    "test_suite_version": "sha256:2ea03f30704e7dbba8a717333045002ff34eb7b904c47b2f6e713e8f89be2642",
+    "expected_test_count": 4,
+    "output_agent": null,
+    "artifact_paths_relative_to": "artifact_dir",
+    "result_path": "C-20261109-014111-891ba372/c-7597e6b699df4ef99a667f3f80b823ae/result.json",
+    "isolation_ready": false,
+    "execution_mode": "reviewed_fixture",
+    "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "run_type": "fault_injection",
+    "started_at": "2026-11-09T01:41:11.423+08:00",
+    "cleanup": {
+      "parent_reaped": false,
+      "pipes_drained": false,
+      "tree_termination_attempted": false,
+      "full_process_tree_verified": false,
+      "scope": "reviewed fixture parent; full process-tree isolation not certified"
+    },
+    "reason": "FileNotFoundError: [WinError 206] 文件名或扩展名太长。: 'C:\\\\Users\\\\lenovo\\\\Documents\\\\ChatGPT\\\\Code Fix\\\\runs\\\\main-review-integration\\\\runs\\\\main-check\\\\C-acceptance-20261109-013915-322fbf94\\\\c_controls\\\\controls\\\\C-20261109-014111-891ba372\\\\artifacts\\\\C-20261109-014111-891ba372\\\\c-7597e6b699df4ef99a667f3f80b823ae\\\\work'",
+    "command": null,
+    "test_profile": "collection_syntax_error",
+    "finished_at": "2026-11-09T01:41:11.430+08:00"
+  }
+}

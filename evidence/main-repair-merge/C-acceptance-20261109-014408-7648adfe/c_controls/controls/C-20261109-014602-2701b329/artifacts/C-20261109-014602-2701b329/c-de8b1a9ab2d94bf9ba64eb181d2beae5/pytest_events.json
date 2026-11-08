@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "collected_nodeids": [
+    "tests/test_leap.py::test_2024_is_leap",
+    "tests/test_leap.py::test_2023_is_not_leap",
+    "tests/test_leap.py::test_1900_is_not_leap",
+    "tests/test_leap.py::test_2000_is_leap"
+  ],
+  "collection_errors": [],
+  "reports": [
+    {
+      "nodeid": "tests/test_leap.py::test_2024_is_leap",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2024_is_leap",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "ValueError",
+      "exception_path": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\main-check-1109\\C-acceptance-20261109-014408-7648adfe\\c_controls\\controls\\C-20261109-014602-2701b329\\artifacts\\C-20261109-014602-2701b329\\c-de8b1a9ab2d94bf9ba64eb181d2beae5\\work\\leap_app\\leap_year.py"
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2024_is_leap",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2023_is_not_leap",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2023_is_not_leap",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "ValueError",
+      "exception_path": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\main-check-1109\\C-acceptance-20261109-014408-7648adfe\\c_controls\\controls\\C-20261109-014602-2701b329\\artifacts\\C-20261109-014602-2701b329\\c-de8b1a9ab2d94bf9ba64eb181d2beae5\\work\\leap_app\\leap_year.py"
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2023_is_not_leap",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_1900_is_not_leap",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_1900_is_not_leap",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "ValueError",
+      "exception_path": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\main-check-1109\\C-acceptance-20261109-014408-7648adfe\\c_controls\\controls\\C-20261109-014602-2701b329\\artifacts\\C-20261109-014602-2701b329\\c-de8b1a9ab2d94bf9ba64eb181d2beae5\\work\\leap_app\\leap_year.py"
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_1900_is_not_leap",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2000_is_leap",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2000_is_leap",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "ValueError",
+      "exception_path": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\main-check-1109\\C-acceptance-20261109-014408-7648adfe\\c_controls\\controls\\C-20261109-014602-2701b329\\artifacts\\C-20261109-014602-2701b329\\c-de8b1a9ab2d94bf9ba64eb181d2beae5\\work\\leap_app\\leap_year.py"
+    },
+    {
+      "nodeid": "tests/test_leap.py::test_2000_is_leap",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    }
+  ],
+  "session_finished": true,
+  "exit_code": 1
+}

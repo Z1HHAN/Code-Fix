@@ -1,0 +1,23 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.6, pytest-8.3.5, pluggy-1.7.0 -- C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\v3-venv\Scripts\python.exe
+rootdir: C:\Users\lenovo\AppData\Local\Temp\main-check-1109\C-acceptance-20261109-014408-7648adfe\c_controls\controls\C-20261109-014602-2701b329\artifacts\C-20261109-014602-2701b329\c-9b410fb0872a49f88a4c8cd5847266f4\work
+configfile: ..\pytest.ini
+collecting ... collected 0 items / 1 error
+
+=================================== ERRORS ====================================
+_____________________ ERROR collecting tests/test_leap.py _____________________
+ImportError while importing test module 'C:\Users\lenovo\AppData\Local\Temp\main-check-1109\C-acceptance-20261109-014408-7648adfe\c_controls\controls\C-20261109-014602-2701b329\artifacts\C-20261109-014602-2701b329\c-9b410fb0872a49f88a4c8cd5847266f4\work\tests\test_leap.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\lenovo\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_leap.py:1: in <module>
+    from leap_app.leap_year import is_leap
+leap_app\leap_year.py:1: in <module>
+    import c_fixture_deliberately_missing_dependency_20261101
+E   ModuleNotFoundError: No module named 'c_fixture_deliberately_missing_dependency_20261101'
+- generated xml file: C:\Users\lenovo\AppData\Local\Temp\main-check-1109\C-acceptance-20261109-014408-7648adfe\c_controls\controls\C-20261109-014602-2701b329\artifacts\C-20261109-014602-2701b329\c-9b410fb0872a49f88a4c8cd5847266f4\junit.xml -
+=========================== short test summary info ===========================
+ERROR tests/test_leap.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+============================== 1 error in 0.38s ===============================
