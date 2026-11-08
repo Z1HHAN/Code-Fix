@@ -77,3 +77,6 @@ evidence/repair-followup/** -text -whitespace
 
 
 evidence/simplification-review/** -text -whitespace
+
+
+evidence/main-repair-merge/** -text -whitespace

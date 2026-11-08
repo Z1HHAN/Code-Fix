@@ -1,0 +1,13 @@
+leap_bad: False / blocked / environment_error
+leap_good: False / blocked / environment_error
+output_timeout: False / blocked / environment_error
+all_skipped: False / blocked / environment_error
+zero_tests: False / blocked / environment_error
+incomplete_tests: False / blocked / environment_error
+dependency_error: False / blocked / environment_error
+syntax_error: False / blocked / environment_error
+runtime_error: False / blocked / environment_error
+stale_version: True / blocked / permission_violation
+modified_tests: True / blocked / permission_violation
+model_candidate_blocked: True / blocked / permission_violation
+Evidence: C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\runs\main-check\C-acceptance-20261109-013915-322fbf94\c_controls\controls\C-20261109-014111-891ba372
