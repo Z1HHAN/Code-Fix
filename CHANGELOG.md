@@ -1,5 +1,9 @@
 # 版本更迭日志
 
+## 未发布：返修包首批修复（032/033，2026-11-08）
+
+本地分支codex/repair-evidence-boundaries代码7fba24b：最终验收原字节/版本绑定、摘要断言过滤、端点端口/token/JUnit边界，以及CODE-01/07和验收身份基线。完整离线回归通过，按A确认保留report/ZIP完整模型正文。未合入/推送main、未新增真实Docker或模型验收；范围、计数及原证据见[033](docs/2026-11-03_项目持续维护/持续交付与变更记录.md#助手-返修版干净提交回归-033)。
+
 ## 2026-11-08 QuixBugs新交付整合（030）
 
 031发布确认：整合18697da已正常合入并上传main 155ec70，远端SHA已核验，见[发布观察](evidence/integration-quixbugs/main-publication.json)。
