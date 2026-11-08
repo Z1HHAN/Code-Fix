@@ -39,10 +39,10 @@ def string_list(value, name):
 
 
 class RoleConfig:
-    def __init__(self, root):
+    def __init__(self, root, snapshot=None):
         self.root = Path(root)
         document = read_json(checked_file(root, 'configs/agents.json'))
-        data = document.get('runtime_v3')
+        data = document.get('runtime_v3') if snapshot is None else snapshot
         if not isinstance(data, dict) or set(data) != {'config_version', 'protocol', 'models', 'agents'}:
             raise ConfigError('runtime_v3字段不完整或存在未知字段')
         if data['protocol'] != PROTOCOL or data['config_version'] not in {'1.0.0', '1.1.0'}:

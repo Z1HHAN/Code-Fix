@@ -67,7 +67,12 @@ class TaskService:
                                                'reason': '运行异常，未完成独立验收'})
 
     def report(self, run_id):
-        return {'schema_version': 'v3', **self.store.snapshot(run_id)}
+        report = {'schema_version': 'v3', **self.store.snapshot(run_id)}
+        config_id = self.store.get(run_id)['task'].get('config_id')
+        if config_id:
+            from .configuration import ConfigurationStore
+            report['configuration_snapshot'] = ConfigurationStore(self.store).get(config_id)
+        return report
 
     def write_report(self, run_id):
         target = self.store.directory(run_id) / 'report.json'

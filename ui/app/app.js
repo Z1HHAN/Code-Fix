@@ -24,7 +24,7 @@ function showView(view,updateHash=true){
   if(updateHash&&location.hash!=='#'+view)history.replaceState(null,'','#'+view);
   const title=view==='records'?'运行记录':view==='config'?'模型与配置':currentRun?taskName(currentRun)+' · '+modeName(currentRun):'编排工作台';
   display('page-title',title);display('breadcrumb','工作空间 / '+({records:'运行记录',workspace:'编排工作台',config:'模型与配置',evidence:'证据浏览'}[view]));
-  display('page-subtitle',view==='records'?'从一次运行出发，查看Agent流转与决策依据。':view==='config'?'只读查看所选运行参数、已记录模型信息与本机状态。':currentRun?`${shortId(currentRun.run_id)} · ${currentRun.task.strategy || '策略未单独记录'} · ${label(currentRun.status)}`:'请先从运行记录选择任务。');
+  display('page-subtitle',view==='records'?'从一次运行出发，查看Agent流转与决策依据。':view==='config'?'设置新任务模型与参数，核对费用条件，查看只读运行记录。':currentRun?`${shortId(currentRun.run_id)} · ${currentRun.task.strategy || '策略未单独记录'} · ${label(currentRun.status)}`:'请先从运行记录选择任务。');
   if(view==='evidence'&&updateHash){showEvidence('artifact');document.querySelector('.evidence-dock').scrollIntoView({block:'start',behavior:'smooth'});}
 }
 function selectRun(id){selected=id;showView('workspace');refresh();}
@@ -57,6 +57,7 @@ function renderRun(run,events){
   display('metric-environment',source.includes('离线')?'模拟事件':isolation?.isolation_ready===true?'隔离探针通过':isolation?'隔离未就绪':run.task.mode==='baseline'?'查看测试证据':'未记录');
   display('run-notice',`${source} · 最终验收：${label(result.final_result||'not_run')}。暂停/停止按服务端控制边界生效。`);
   display('config-json',run.task);
+  if(window.CodeFixConfig)CodeFixConfig.snapshot(run);
   byId('config-values').replaceChildren();
   for(const [name,value] of [['题目',taskName(run)],['运行模式',modeName(run)],['策略',run.task.strategy||'历史参数未单独记录'],['最大修复轮数',run.task.max_rounds??'未记录'],['模型调用上限',run.task.max_calls??'未记录'],['总时限',run.task.total_seconds==null?'未记录':run.task.total_seconds+' 秒'],['运行编号',run.run_id]])byId('config-values').append(element('dt',name),element('dd',String(value)));
   const calls=events.filter(e=>e.event==='agent_call');
@@ -156,6 +157,7 @@ byId('task-form').onsubmit = event => {event.preventDefault();if(!byId('task-for
   key ||= crypto.randomUUID();
   const task = {project:byId('project').value, mode:byId('mode').value, description:byId('description').value,
     max_rounds:Number(byId('rounds').value), max_calls:Number(byId('calls').value), total_seconds:Number(byId('seconds').value)};
+  if(window.CodeFixConfig)CodeFixConfig.apply(task);
   const run = await (await api('/tasks', {method:'POST', headers:{'Idempotency-Key':key}, body:JSON.stringify(task)})).json();
   selected = run.run_id; key = null;byId('new-task-dialog').close();showView('workspace');
 });};
@@ -176,7 +178,7 @@ byId('history').onchange = () => { selected = byId('history').value; refresh(); 
 byId('refresh').onclick = refresh;
 for(const button of document.querySelectorAll('[data-view]'))button.onclick=()=>showView(button.dataset.view);
 window.addEventListener('hashchange',()=>showView(location.hash.slice(1)||'records',false));
-byId('show-config').onclick=()=>showView('config');
+byId('show-config').onclick=()=>{showView('config');if(window.CodeFixConfig)CodeFixConfig.tab('snapshot');};
 byId('search-runs').oninput=renderRecords;byId('filter-status').onchange=renderRecords;
 byId('new-task').onclick=()=>{display('form-error','');byId('new-task-dialog').showModal();byId('project').focus();};
 byId('close-task').onclick=byId('cancel-task').onclick=()=>byId('new-task-dialog').close();
@@ -211,6 +213,7 @@ byId('report').onclick = () => download('report'); byId('bundle').onclick = () =
     });
     byId('project').replaceChildren(...choices); byId('project').onchange();
     display('health', await (await api('/health')).json());
+    if(window.CodeFixConfig)await CodeFixConfig.init();
     display('connection', '已连接任务后端 · 运行来源见Trace标识');
     await refresh(); setInterval(refresh, 1200);
   } catch (error) { display('connection', '后端连接失败'); display('error', error.message); }

@@ -21,12 +21,14 @@ def now():
 
 
 def validate_task(value):
-    fields = {'description', 'project', 'mode', 'max_rounds', 'max_calls', 'total_seconds'}
+    fields = {'description', 'project', 'mode', 'max_rounds', 'max_calls', 'total_seconds', 'config_id'}
     if not isinstance(value, dict) or set(value) - fields:
         raise InputValidationError('未知任务字段；不能提交路径、命令或密钥')
     task = dict(description='修复闰年判断', project='leap', mode='baseline',
                 max_rounds=3, max_calls=12, total_seconds=300)
     task.update(value)
+    if 'config_id' in task and (not isinstance(task['config_id'], str) or not re.fullmatch(r'cfg-[a-f0-9]{64}', task['config_id'])):
+        raise InputValidationError('非法配置编号')
     from .tasks_v3 import get_task
     definition = get_task(task['project'])
     if 'description' not in value:
@@ -74,6 +76,11 @@ class RunStore:
 
     def create(self, value, key=None):
         task = validate_task(value)
+        if 'config_id' in task:
+            from .configuration import ConfigurationStore
+            configuration = ConfigurationStore(self).get(task['config_id'])
+            if any(task[k] != configuration['parameters'][k] for k in configuration['parameters']):
+                raise InputValidationError('任务参数与保存配置不一致；请保存新配置')
         if key is not None and (not isinstance(key, str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', key)):
             raise InputValidationError('幂等键须为1至100位字母数字、下划线或短横线')
         encoded = json.dumps(task, ensure_ascii=False, sort_keys=True)

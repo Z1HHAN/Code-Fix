@@ -85,6 +85,28 @@ def create_app(root=None):
         from .tasks_v3 import list_tasks
         return list_tasks()
 
+    from .configuration import ConfigurationStore
+    configurations = ConfigurationStore(service.store)
+
+    @app.get('/api/v3/configuration/catalog')
+    def configuration_catalog():
+        return configurations.catalog()
+
+    @app.get('/api/v3/configurations/{config_id}')
+    def configuration_get(config_id: str):
+        return configurations.get(config_id)
+
+    @app.post('/api/v3/configurations/validate')
+    @app.post('/api/v3/configurations', status_code=201)
+    async def configuration_save(request: Request):
+        import json
+        from .config import ConfigError
+        try:
+            value = json.loads(await limited_body(request, 8192))
+            return configurations.validate(value) if request.url.path.endswith('/validate') else configurations.save(value)
+        except (ValueError, ConfigError, UnicodeDecodeError) as exc:
+            raise HTTPException(422, str(exc)) from None
+
     async def limited_body(request, limit):
         result = bytearray()
         async for chunk in request.stream():

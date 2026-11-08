@@ -1,0 +1,12 @@
+{
+  "scope": "local-browser-no-model-no-docker",
+  "run_id": "run-49a06f3048464dfbb68368537fdceb2f",
+  "config_id": "cfg-5b0ea8cd8f04ea74a3c3831876f35095284a5611bf8a712f07e6c7940ce41ab5",
+  "passed": true,
+  "errors": [],
+  "writes": [
+    "http://127.0.0.1:8769/api/v3/configurations/validate",
+    "http://127.0.0.1:8769/api/v3/configurations",
+    "http://127.0.0.1:8769/api/v3/tasks"
+  ]
+}

@@ -263,7 +263,11 @@ class WorkflowRun:
         self.boundary()
         if self.definition.admission_blocker:
             return self.finish('blocked', self.definition.admission_blocker)
-        config = RoleConfig(ROOT)
+        if self.task.get('config_id'):
+            from .configuration import ConfigurationStore
+            config = ConfigurationStore(self.store).runtime(self.task['config_id'])
+        else:
+            config = RoleConfig(ROOT)
         config.preflight()
         resolved = None
         blockers = []
