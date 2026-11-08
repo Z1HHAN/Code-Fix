@@ -154,7 +154,8 @@ class WorkflowRun:
                 or (result.get('test_suite_version') is not None
                     and result['test_suite_version'] != self.final['test_suite_version'])):
             raise IsolationBlocked('执行后证据版本不一致')
-        self.final['evidence_matches_current_version'] = result.get('evidence_matches_current_version', True) is True
+        # Fail closed: a runner that omits the binding flag proves nothing.
+        self.final['evidence_matches_current_version'] = result.get('evidence_matches_current_version') is True
         self.trace.complete(verification_status=result['verification_status'], evidence_id=eid,
                        failure_class=result['failure_class'],
                        evidence_path=name, code_version=result['code_version'],

@@ -8,15 +8,17 @@
 
 ## 如何运行
 
-使用Python 3.14，在仓库根目录安装锁定依赖后启动：
+需要 Python 3.14：`c_runner` 在真实执行前会硬性校验解释器版本，3.13 及以下直接判 `environment_error`。请用该版本的解释器在仓库根目录创建虚拟环境，再安装锁定依赖启动。Windows 可用 `py -3.14`，或把下面的 `python` 换成你自己的 3.14 可执行文件：
 
 ```powershell
-python -m venv .venv
+py -3.14 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements-lock.txt
 .\.venv\Scripts\python.exe -m app.cli doctor
 .\.venv\Scripts\python.exe -m app.cli validate-config
 .\.venv\Scripts\python.exe -m app.cli serve --port 8000
 ```
+
+> 若仓库里已有旧 `.venv` 是用别的 Python 版本创建的（例如本机默认的 3.13），对已存在的目录再跑 `venv` **不会**换解释器，需要用 `py -3.14 -m venv --clear .venv` 重建，或先删除该目录再创建。仓库不跟踪 `.venv`，重建不涉及任何已提交内容。排查时先确认 `.\.venv\Scripts\python.exe -V` 输出 3.14。
 
 打开[本机工作台](http://127.0.0.1:8000/)，从“新建任务”创建，再明确启动。服务仅供本机，端口范围1024–65535，不支持0随机分配；最多同时接纳2项后台任务，容量满时启动返回503，任务保持未启动，可稍后重试。
 
