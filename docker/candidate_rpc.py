@@ -139,7 +139,7 @@ def main():
     sys.addaudithook(_audit)
     with socket.socket(socket.AF_UNIX) as server:
         server.bind('/rpc/channel.sock')
-        server.listen(1)
+        server.listen(16)
         while True:
             connection, _ = server.accept()
             with connection, connection.makefile('rb') as stream:

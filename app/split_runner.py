@@ -104,8 +104,9 @@ class SplitDockerRunner(DockerRunner):
         # 基础命令里的 --log-driver=none 会丢弃它，这里换成有上限的 json-file。
         try:
             index = command.index('--log-driver=none')
-            command[index:index + 1] = ['--log-driver=json-file', '--log-opt', 'max-size=1m',
-                                        '--log-opt', 'max-file=1']
+            # No rotation: the bounded live collector stops excessive output;
+            # rotating would silently discard earlier security events.
+            command[index:index + 1] = ['--log-driver=json-file']
         except ValueError:
             pass
         return command
@@ -114,13 +115,26 @@ class SplitDockerRunner(DockerRunner):
         record = {'container': name, 'logs_captured': False, 'events': [], 'event_kinds': [],
                   'fake_report_output': False, 'violation': None, 'reason': None}
         try:
-            logs = subprocess.run([self.executable, 'logs', name], capture_output=True, timeout=20)
+            capture = getattr(self, 'candidate_logs', None)
+            if capture is not None:
+                complete, exceeded = capture.finish()
+                self.candidate_logs = None
+                logs = subprocess.CompletedProcess([], 0 if complete else 1,
+                    (outer / 'candidate-stdout.txt').read_bytes(),
+                    (outer / 'candidate-stderr.txt').read_bytes())
+                record['output_limit_exceeded'] = exceeded
+            else:
+                logs = subprocess.run([self.executable, 'logs', name], capture_output=True, timeout=20)
         except (OSError, subprocess.SubprocessError) as exc:
             record['log_error'] = type(exc).__name__
+            record.update(violation='environment_error', reason='候选审计日志不可读取')
             return record
         (outer / 'candidate-stdout.txt').write_bytes(logs.stdout or b'')
         (outer / 'candidate-stderr.txt').write_bytes(logs.stderr or b'')
         record['logs_captured'] = logs.returncode == 0
+        if logs.returncode or len(logs.stdout or b'') + len(logs.stderr or b'') > 1_048_576:
+            record.update(violation='environment_error', reason='候选审计日志不完整或超过上限')
+            return record
         events = []
         for line in ((logs.stdout or b'') + b'\n' + (logs.stderr or b'')).splitlines():
             if line.startswith(AUDIT_PREFIX):
@@ -181,6 +195,8 @@ class SplitDockerRunner(DockerRunner):
                 raise IsolationBlocked('无法创建 RPC 临时卷')
             subprocess.run(self._candidate_command(name, candidate, volume), capture_output=True,
                            timeout=max(.01, timeout-(time.monotonic()-started)), check=True)
+            from .candidate_logs import CandidateLogs
+            self.candidate_logs = CandidateLogs(self.executable, name, outer)
             self.rpc_volume = volume
             # Only reviewed tests and fixed proxy bytes enter this container.
             runner = DockerRunner(self.task.project)
@@ -206,7 +222,7 @@ class SplitDockerRunner(DockerRunner):
             result['runner_classification'] = {key: result.get(key) for key in
                                                ('status', 'verification_status', 'failure_class', 'reason')}
             if audit['violation']:
-                result.update(status='failed', verification_status='failed',
+                result.update(status='failed', verification_status='inconclusive' if audit['violation'] == 'environment_error' else 'failed',
                               failure_class=audit['violation'],
                               reason='候选审计通道阻断：' + audit['reason'])
             elif result['timed_out']:
@@ -219,6 +235,9 @@ class SplitDockerRunner(DockerRunner):
                 result.update(parse_evidence(output/'junit.xml', output/'pytest_events.json',
                                              self.task.profile, result['exit_code']))
         finally:
+            if getattr(self, 'candidate_logs', None) is not None:
+                self.candidate_logs.finish()
+                self.candidate_logs = None
             self.rpc_volume = None
             for args in (['rm','--force',name], ['volume','rm',volume]):
                 try:

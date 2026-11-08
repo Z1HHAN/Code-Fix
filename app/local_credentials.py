@@ -49,14 +49,15 @@ def save_local(keys, path=DEFAULT_PATH):
 
 
 def read_secret(name, path=DEFAULT_PATH):
+    from .redaction import register_secret
     if os.environ.get(name):
-        return os.environ[name]
+        return register_secret(os.environ[name])
     if name not in NAMES or not Path(path).is_file():
         return None
     data = json.loads(Path(path).read_text(encoding='utf-8'))
     if data.get('schema_version') != '1.0.0' or data.get('encryption') != 'Windows-DPAPI-CurrentUser':
         raise ValueError('本机凭证格式不支持')
     try:
-        return _crypt(bytes.fromhex(data['keys'][name]), False).decode('utf-8')
+        return register_secret(_crypt(bytes.fromhex(data['keys'][name]), False).decode('utf-8'))
     except (KeyError, ValueError, TypeError, UnicodeError):
         raise ValueError('本机凭证不可读取，请在本机重新配置') from None

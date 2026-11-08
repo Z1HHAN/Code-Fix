@@ -86,7 +86,7 @@ class WorkflowRun:
     def finish(self, status, reason):
         self.final.update(reason=reason, model_calls=self.model_calls, tool_calls=self.tool_calls,
                      cost=self.counters()['cost'])
-        self.trace.complete('failed' if status == 'failed' else 'interrupted', reason=reason)
+        self.trace.complete({'success': 'ok', 'failed': 'failed', 'blocked': 'blocked'}.get(status, 'interrupted'), reason=reason)
         action = 'finish' if status in {'success', 'failed'} else 'pause' if status == 'paused' else 'stop'
         self.trace.decision(program={'action': action,
                                 'rule_id': self.final.get('rule_id', self.final.get('guard_id', 'terminal_' + status)), 'reason': reason},
@@ -112,8 +112,8 @@ class WorkflowRun:
             raise ModelBlocked('任务总时限到达')
 
     def route(self, failure, phase='development', pause=False):
-        context = dict(phase=phase, failure_class=failure, isolation_ready=True,
-                       user_pause_requested=pause, evidence_matches_current_version=True,
+        context = dict(phase=phase, failure_class=failure, isolation_ready=self.final['isolation_ready'],
+                       user_pause_requested=pause, evidence_matches_current_version=self.final.get('evidence_matches_current_version', False),
                        repair_budget_available=self.final['rounds_used'] < self.task['max_rounds'],
                        execution_budget_available=time.monotonic() < self.deadline,
                        needs_new_repair=failure != 'passed', next_action_requires_execution_budget=True,
@@ -133,6 +133,9 @@ class WorkflowRun:
         expected_version = self.version if phase == 'final_check' else code_version(work, (self.source,))
         if code_version(work, (self.source,)) != expected_version:
             raise IsolationBlocked('最终候选版本已改变')
+        limit = read_json(ROOT / 'configs/runtime_limits.json')['max_tool_calls']
+        if self.tool_calls >= limit:
+            raise ModelBlocked('工具调用次数到达工程上限')
         step = self.trace.start('pytest', round_number=self.final['rounds_used'], phase=phase,
                            evidence_ids=self.latest_evidence)
         self.tool_calls += 1
@@ -150,6 +153,7 @@ class WorkflowRun:
                 or (result.get('test_suite_version') is not None
                     and result['test_suite_version'] != self.final['test_suite_version'])):
             raise IsolationBlocked('执行后证据版本不一致')
+        self.final['evidence_matches_current_version'] = result.get('evidence_matches_current_version', True) is True
         self.trace.complete(verification_status=result['verification_status'], evidence_id=eid,
                        failure_class=result['failure_class'],
                        evidence_path=name, code_version=result['code_version'],
@@ -338,8 +342,8 @@ class WorkflowRun:
         self.boundary()
         ev = self.evidence(result, folder)
         # Terminal safety branches take precedence over all model advice.
-        context = dict(phase='development', failure_class=result['failure_class'], isolation_ready=True,
-                       user_pause_requested=False, evidence_matches_current_version=True,
+        context = dict(phase='development', failure_class=result['failure_class'], isolation_ready=self.final['isolation_ready'],
+                       user_pause_requested=False, evidence_matches_current_version=self.final.get('evidence_matches_current_version', False),
                        repair_budget_available=round_number < self.task['max_rounds'],
                        execution_budget_available=time.monotonic() < self.deadline,
                        needs_new_repair=result['failure_class'] != 'passed',
@@ -390,6 +394,7 @@ class WorkflowRun:
             if terminal is not None:
                 return terminal
             result, folder = self.test(self.base, 'development', 'baseline')
+            self.final['dev_result'] = result['verification_status']
             self.boundary()
             baseline_failure = result.get('failure_class', 'unknown_evidence')
             self.final['baseline_failure_class'] = baseline_failure
@@ -402,6 +407,7 @@ class WorkflowRun:
                     return terminal
             return self.finish('stopped', '达到最大修复轮次')
         except ControlRequested as exc:
+            self.final['failure_class'] = 'user_pause' if exc.action == 'pause' else 'user_stop'
             if exc.action == 'pause' and self.engine is not None:
                 self.route('user_pause', pause=True)
             else:

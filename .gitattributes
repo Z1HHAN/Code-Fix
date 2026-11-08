@@ -71,3 +71,6 @@ evidence/integration-quixbugs/** -text -whitespace
 # Review packet originals and observed failures retain captured bytes.
 evidence/repair-review/** -text -whitespace
 docs/99_历史归档/2026-11/原始交付/C返修包_422091d/** -text -whitespace
+
+
+evidence/repair-followup/** -text -whitespace

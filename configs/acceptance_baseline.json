@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "approved_source_commit": "9d5b5bef23004a69b112e72e1f9417cf0b77b32a",
+  "approved_source_commit": "7fba24bb35055ac07c5fc8addf74fa2b9603918d",
   "scope": "Reviewed minimum identities; additions allowed for platform/Node, repair gate inventory changes require explicit review; not cryptographic attestation",
   "platform_testcases": [
     [
@@ -466,6 +466,122 @@
     [
       "tests.test_quixbugs_import",
       "test_native_skip_task_blocks_before_any_probe_or_model[repair]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_final_candidate_bytes_bound_before_dispatch[False]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_final_candidate_bytes_bound_before_dispatch[True]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_model_excerpt_never_contains_assertion_values[FAILED tests/t.py::test_x - assert 3 == 4]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_model_excerpt_never_contains_assertion_values[    assert result == 999]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_model_excerpt_never_contains_assertion_values[  E   AssertionError: expected-secret]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_model_excerpt_never_contains_assertion_values[FAILED tests/t.py::test_x - AssertionError: expected-secret]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_model_excerpt_never_contains_assertion_values[    > assert result == 999]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_final_dispatch_rejects_late_source_change"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_assertion_values_are_absent_at_gateway_boundary"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_provider_rejects_non_https_or_invalid_ports[:80]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_provider_rejects_non_https_or_invalid_ports[:4443]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_provider_rejects_non_https_or_invalid_ports[:abc]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_provider_rejects_non_https_or_invalid_ports[:65536]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_provider_rejects_non_https_or_invalid_ports[:-1]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_provider_accepts_https_port[]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_provider_accepts_https_port[:443]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_non_ascii_token_is_forbidden_and_valid_session_still_works"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_parameterized_junit_identity[tests/test_a.py::test_x[a::b]-expected0]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_parameterized_junit_identity[tests/test_a.py::TestA::test_x[1]-expected1]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_parameterized_junit_identity[tests/test_a.py::TestA::test_x[a[::]b]-expected2]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_acceptance_dirty_policy[-False-False]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_acceptance_dirty_policy[ M app/api.py-False-True]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_acceptance_dirty_policy[ M app/api.py-True-False]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_acceptance_dirty_policy[UU app/api.py-True-True]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_acceptance_dirty_policy[AD app/api.py-True-True]"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_gate_count_cannot_shrink_with_manifest"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_platform_inventory_detects_one_missing_identity"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_node_inventory_detects_one_missing_subtest"
+    ],
+    [
+      "tests.test_repair_review",
+      "test_public_report_and_zip_keep_complete_model_text"
     ],
     [
       "tests.test_review_round2",

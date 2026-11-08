@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="71" time="32.048" timestamp="2026-11-09T00:28:43.935467+08:00" hostname="LAPTOP-8477LI5E"><testcase classname="tests.test_agents_v3" name="test_live_requires_explicit_approval_and_complete_budget" time="0.001" /><testcase classname="tests.test_agents_v3" name="test_shared_ledger_reserves_before_call_and_blocks_unknown_cost" time="0.075" /><testcase classname="tests.test_agents_v3" name="test_known_usage_is_persistent_and_call_count_enforced" time="0.056" /><testcase classname="tests.test_agents_v3" name="test_http_protocol_is_offline_stub_and_secret_redacted" time="0.051" /><testcase classname="tests.test_agents_v3" name="test_detector_and_scheduler_cannot_invent_citations" time="0.001" /><testcase classname="tests.test_workflow_v3" name="test_stub_success_requires_independent_call_and_no_final_feedback" time="1.381" /><testcase classname="tests.test_workflow_v3" name="test_final_failure_ends_without_new_model_calls" time="1.530" /><testcase classname="tests.test_workflow_v3" name="test_failure_types_change_actual_next_role[syntax_error-success-roles0]" time="2.022" /><testcase classname="tests.test_workflow_v3" name="test_failure_types_change_actual_next_role[assertion_failed-success-roles1]" time="1.853" /><testcase classname="tests.test_workflow_v3" name="test_failure_types_change_actual_next_role[environment_error-paused-roles2]" time="0.957" /><testcase classname="tests.test_workflow_v3" name="test_failure_types_change_actual_next_role[timeout-stopped-roles3]" time="0.853" /><testcase classname="tests.test_workflow_v3" name="test_round_limit_stops_and_model_cannot_force_final_check" time="0.822" /><testcase classname="tests.test_workflow_v3" name="test_scheduler_can_pause_but_cannot_forge_success" time="0.935" /><testcase classname="tests.test_workflow_v3" name="test_patch_permissions_and_no_overwrite" time="0.078" /><testcase classname="tests.test_workflow_v3" name="test_real_environment_blocks_without_execution_approval" time="0.015" /><testcase classname="tests.test_workflow_v3" name="test_control_during_model_call_prevents_candidate_write[pause-paused]" time="0.665" /><testcase classname="tests.test_workflow_v3" name="test_control_during_model_call_prevents_candidate_write[stop-stopped]" time="0.602" /><testcase classname="tests.test_workflow_v3" name="test_pause_before_preflight_does_not_start_executor" time="0.264" /><testcase classname="tests.test_workflow_v3" name="test_expired_total_budget_after_model_prevents_patch" time="0.582" /><testcase classname="tests.test_workflow_v3" name="test_model_call_limit_prevents_extra_roles_but_allows_tool_final_check" time="0.980" /><testcase classname="tests.test_workflow_v3" name="test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-get_factors]" time="2.191" /><testcase classname="tests.test_workflow_v3" name="test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-gcd]" time="2.042" /><testcase classname="tests.test_workflow_v3" name="test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-max_sublist_sum]" time="1.888" /><testcase classname="tests.test_workflow_v3" name="test_public_task_routes_registered_source_and_clean_copy_with_stubs_only[qb-breadth_first_search]" time="1.918" /><testcase classname="tests.test_workflow_v3" name="test_baseline_code_runtime_error_is_accepted_as_reproduced_defect" time="1.134" /><testcase classname="tests.test_workflow_v3" name="test_baseline_outside_approved_classes_stops_before_any_model_call[environment_error]" time="0.475" /><testcase classname="tests.test_workflow_v3" name="test_baseline_outside_approved_classes_stops_before_any_model_call[timeout]" time="0.464" /><testcase classname="tests.test_workflow_v3" name="test_baseline_outside_approved_classes_stops_before_any_model_call[passed]" time="0.464" /><testcase classname="tests.test_workflow_v3" name="test_baseline_outside_approved_classes_stops_before_any_model_call[unknown_evidence]" time="0.500" /><testcase classname="tests.test_repair_review" name="test_final_candidate_bytes_bound_before_dispatch[False]" time="0.143" /><testcase classname="tests.test_repair_review" name="test_final_candidate_bytes_bound_before_dispatch[True]" time="0.074" /><testcase classname="tests.test_repair_review" name="test_model_excerpt_never_contains_assertion_values[FAILED tests/t.py::test_x - assert 3 == 4]" time="0.014" /><testcase classname="tests.test_repair_review" name="test_model_excerpt_never_contains_assertion_values[    assert result == 999]" time="0.017" /><testcase classname="tests.test_repair_review" name="test_model_excerpt_never_contains_assertion_values[  E   AssertionError: expected-secret]" time="0.015" /><testcase classname="tests.test_repair_review" name="test_model_excerpt_never_contains_assertion_values[FAILED tests/t.py::test_x - AssertionError: expected-secret]" time="0.014" /><testcase classname="tests.test_repair_review" name="test_model_excerpt_never_contains_assertion_values[    &gt; assert result == 999]" time="0.014" /><testcase classname="tests.test_repair_review" name="test_final_dispatch_rejects_late_source_change" time="0.014"><failure message="AttributeError: 'WorkflowRun' object has no attribute 'tool_calls'">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rb1/test_final_dispatch_rejects_la0')
+
+    def test_final_dispatch_rejects_late_source_change(tmp_path):
+        from app.docker_runner import IsolationBlocked
+        ctx = object.__new__(WorkflowRun)
+        ctx.source = 'source.py'
+        (tmp_path / ctx.source).write_bytes(b'original\r\n')
+        ctx.version = code_version(tmp_path, (ctx.source,))
+        ctx.boundary = lambda: None
+        (tmp_path / ctx.source).write_bytes(b'changed\r\n')
+        with pytest.raises(IsolationBlocked, match='最终候选版本已改变'):
+&gt;           ctx.test(tmp_path, 'final_check', 'unused')
+
+tests\test_repair_review.py:71: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;app.workflow_v3.WorkflowRun object at 0x000002024C886350&gt;
+work = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rb1/test_final_dispatch_rejects_la0')
+phase = 'final_check', name = 'unused'
+
+    def test(self, work, phase, name):
+        self.boundary()
+        limit = read_json(ROOT / 'configs/runtime_limits.json')['max_tool_calls']
+&gt;       if self.tool_calls &gt;= limit:
+E       AttributeError: 'WorkflowRun' object has no attribute 'tool_calls'
+
+app\workflow_v3.py:134: AttributeError</failure></testcase><testcase classname="tests.test_repair_review" name="test_assertion_values_are_absent_at_gateway_boundary" time="0.022" /><testcase classname="tests.test_repair_review" name="test_provider_rejects_non_https_or_invalid_ports[:80]" time="0.001" /><testcase classname="tests.test_repair_review" name="test_provider_rejects_non_https_or_invalid_ports[:4443]" time="0.001" /><testcase classname="tests.test_repair_review" name="test_provider_rejects_non_https_or_invalid_ports[:abc]" time="0.001" /><testcase classname="tests.test_repair_review" name="test_provider_rejects_non_https_or_invalid_ports[:65536]" time="0.001" /><testcase classname="tests.test_repair_review" name="test_provider_rejects_non_https_or_invalid_ports[:-1]" time="0.001" /><testcase classname="tests.test_repair_review" name="test_provider_accepts_https_port[]" time="0.001" /><testcase classname="tests.test_repair_review" name="test_provider_accepts_https_port[:443]" time="0.001" /><testcase classname="tests.test_repair_review" name="test_non_ascii_token_is_forbidden_and_valid_session_still_works" time="0.526" /><testcase classname="tests.test_repair_review" name="test_parameterized_junit_identity[tests/test_a.py::test_x[a::b]-expected0]" time="0.001" /><testcase classname="tests.test_repair_review" name="test_parameterized_junit_identity[tests/test_a.py::TestA::test_x[1]-expected1]" time="0.001" /><testcase classname="tests.test_repair_review" name="test_parameterized_junit_identity[tests/test_a.py::TestA::test_x[a[::]b]-expected2]" time="0.001" /><testcase classname="tests.test_repair_review" name="test_acceptance_dirty_policy[-False-False]" time="0.020" /><testcase classname="tests.test_repair_review" name="test_acceptance_dirty_policy[ M app/api.py-False-True]" time="0.008" /><testcase classname="tests.test_repair_review" name="test_acceptance_dirty_policy[ M app/api.py-True-False]" time="0.008" /><testcase classname="tests.test_repair_review" name="test_acceptance_dirty_policy[UU app/api.py-True-True]" time="0.008" /><testcase classname="tests.test_repair_review" name="test_acceptance_dirty_policy[AD app/api.py-True-True]" time="0.008" /><testcase classname="tests.test_repair_review" name="test_gate_count_cannot_shrink_with_manifest" time="0.033" /><testcase classname="tests.test_repair_review" name="test_platform_inventory_detects_one_missing_identity" time="0.068" /><testcase classname="tests.test_repair_review" name="test_node_inventory_detects_one_missing_subtest" time="0.034" /><testcase classname="tests.test_repair_review" name="test_public_report_and_zip_keep_complete_model_text" time="0.179" /><testcase classname="tests.test_stage_a_closeout" name="test_split_container_mounts_exclude_tests_and_reports_from_candidate" time="0.101"><failure message="FileNotFoundError: [WinError 2] 系统找不到指定的文件。">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rb1/test_split_container_mounts_ex0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002024CA0B570&gt;
+
+    def test_split_container_mounts_exclude_tests_and_reports_from_candidate(tmp_path, monkeypatch):
+        runner = SplitDockerRunner(); runner.ready=True; runner.executable='docker-stub'; runner.image='sha256:'+'a'*64
+        work = runner.task.prepare(tmp_path/'work')
+        attack = b"raise RuntimeError('must never execute on host or trusted container')\n"
+        (work/runner.task.source).write_bytes(attack)
+        commands=[]
+        def execute(command, **kwargs):
+            commands.append(command)
+            return subprocess.CompletedProcess(command,0,b'',b'')
+        def trusted(self, snapshot, output, extra, timeout, folder):
+            assert attack not in (snapshot/runner.task.source).read_bytes()
+            assert 'return invoke(' in (snapshot/runner.task.source).read_text()
+            assert (snapshot/'tests/test_leap.py').is_file()
+            command = self.command('trusted',snapshot,output,Path('entry.py'),extra)
+            assert any('target=/rpc,readonly' in str(x) for x in command)
+            return dict(timed_out=True,cleanup_passed=True,artifact_channel=None,exit_code=None)
+        monkeypatch.setattr('app.split_runner.subprocess.run',execute)
+        monkeypatch.setattr('app.docker_runner.DockerRunner._execute',trusted)
+&gt;       result=runner.run(work,tmp_path/'evidence',phase='development',timeout=10,expected_version=code_version(work,(runner.task.source,)))
+
+tests\test_stage_a_closeout.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+app\split_runner.py:199: in run
+    self.candidate_logs = CandidateLogs(self.executable, name, outer)
+app\candidate_logs.py:12: in __init__
+    self.process = subprocess.Popen([executable, 'logs', '--follow', name],
+..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\subprocess.py:1039: in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;Popen: returncode: None args: ['docker-stub', 'logs', '--follow', 'codefix-...&gt;
+args = 'docker-stub logs --follow codefix-candidate-ec5fbc6bc09a47ea97331917d56af892'
+executable = None, preexec_fn = None, close_fds = False, pass_fds = ()
+cwd = None, env = None
+startupinfo = &lt;subprocess.STARTUPINFO object at 0x000002024CA69940&gt;
+creationflags = 0, shell = False, p2cread = Handle(888), p2cwrite = -1
+c2pread = 11, c2pwrite = Handle(960), errread = 12, errwrite = Handle(752)
+unused_restore_signals = True, unused_gid = None, unused_gids = None
+unused_uid = None, unused_umask = -1, unused_start_new_session = False
+unused_process_group = -1
+
+    def _execute_child(self, args, executable, preexec_fn, close_fds,
+                       pass_fds, cwd, env,
+                       startupinfo, creationflags, shell,
+                       p2cread, p2cwrite,
+                       c2pread, c2pwrite,
+                       errread, errwrite,
+                       unused_restore_signals,
+                       unused_gid, unused_gids, unused_uid,
+                       unused_umask,
+                       unused_start_new_session, unused_process_group):
+        """Execute program (MS Windows version)"""
+    
+        assert not pass_fds, "pass_fds not supported on Windows."
+    
+        if isinstance(args, str):
+            pass
+        elif isinstance(args, bytes):
+            if shell:
+                raise TypeError('bytes args is not allowed on Windows')
+            args = list2cmdline([args])
+        elif isinstance(args, os.PathLike):
+            if shell:
+                raise TypeError('path-like args is not allowed when '
+                                'shell is true')
+            args = list2cmdline([args])
+        else:
+            args = list2cmdline(args)
+    
+        if executable is not None:
+            executable = os.fsdecode(executable)
+    
+        # Process startup details
+        if startupinfo is None:
+            startupinfo = STARTUPINFO()
+        else:
+            # bpo-34044: Copy STARTUPINFO since it is modified above,
+            # so the caller can reuse it multiple times.
+            startupinfo = startupinfo.copy()
+    
+        use_std_handles = -1 not in (p2cread, c2pwrite, errwrite)
+        if use_std_handles:
+            startupinfo.dwFlags |= _winapi.STARTF_USESTDHANDLES
+            startupinfo.hStdInput = p2cread
+            startupinfo.hStdOutput = c2pwrite
+            startupinfo.hStdError = errwrite
+    
+        attribute_list = startupinfo.lpAttributeList
+        have_handle_list = bool(attribute_list and
+                                "handle_list" in attribute_list and
+                                attribute_list["handle_list"])
+    
+        # If we were given an handle_list or need to create one
+        if have_handle_list or (use_std_handles and close_fds):
+            if attribute_list is None:
+                attribute_list = startupinfo.lpAttributeList = {}
+            handle_list = attribute_list["handle_list"] = \
+                list(attribute_list.get("handle_list", []))
+    
+            if use_std_handles:
+                handle_list += [int(p2cread), int(c2pwrite), int(errwrite)]
+    
+            handle_list[:] = self._filter_handle_list(handle_list)
+    
+            if handle_list:
+                if not close_fds:
+                    warnings.warn("startupinfo.lpAttributeList['handle_list'] "
+                                  "overriding close_fds", RuntimeWarning)
+    
+                # When using the handle_list we always request to inherit
+                # handles but the only handles that will be inherited are
+                # the ones in the handle_list
+                close_fds = False
+    
+        if shell:
+            startupinfo.dwFlags |= _winapi.STARTF_USESHOWWINDOW
+            startupinfo.wShowWindow = _winapi.SW_HIDE
+            if not executable:
+                # gh-101283: without a fully-qualified path, before Windows
+                # checks the system directories, it first looks in the
+                # application directory, and also the current directory if
+                # NeedCurrentDirectoryForExePathW(ExeName) is true, so try
+                # to avoid executing unqualified "cmd.exe".
+                comspec = os.environ.get('ComSpec')
+                if not comspec:
+                    system_root = os.environ.get('SystemRoot', '')
+                    comspec = os.path.join(system_root, 'System32', 'cmd.exe')
+                    if not os.path.isabs(comspec):
+                        raise FileNotFoundError('shell not found: neither %ComSpec% nor %SystemRoot% is set')
+                if os.path.isabs(comspec):
+                    executable = comspec
+            else:
+                comspec = executable
+    
+            args = '{} /c "{}"'.format (comspec, args)
+    
+        if cwd is not None:
+            cwd = os.fsdecode(cwd)
+    
+        sys.audit("subprocess.Popen", executable, args, cwd, env)
+    
+        # Start the process
+        try:
+&gt;           hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                                     # no special security
+                                     None, None,
+                                     int(not close_fds),
+                                     creationflags,
+                                     env,
+                                     cwd,
+                                     startupinfo)
+E                                    FileNotFoundError: [WinError 2] 系统找不到指定的文件。
+
+..\..\..\.codex\visualizations\2026\10\30\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\code-fix-c-audit-20261102\Code-Fix-C-20261101\.runtime\python314\tools\Lib\subprocess.py:1553: FileNotFoundError</failure></testcase><testcase classname="tests.test_stage_a_closeout" name="test_interrupt_is_terminal_and_late_worker_cannot_overwrite" time="0.170" /><testcase classname="tests.test_stage_a_closeout" name="test_concurrent_events_paginate_without_payload_leak" time="0.519" /><testcase classname="tests.test_stage_a_closeout" name="test_reconciliation_preserves_receipt_and_disallows_overwrite[USD]" time="0.068" /><testcase classname="tests.test_stage_a_closeout" name="test_reconciliation_preserves_receipt_and_disallows_overwrite[CNY]" time="0.081" /><testcase classname="tests.test_stage_a_closeout" name="test_engineering_caps_do_not_expand" time="0.009" /><testcase classname="tests.test_stage_a_closeout" name="test_worker_after_interrupt_returns_without_terminal_exception" time="0.227" /><testcase classname="tests.test_stage_a_closeout" name="test_invalid_reconciliation_cannot_release_unknown[NaN]" time="0.027" /><testcase classname="tests.test_stage_a_closeout" name="test_invalid_reconciliation_cannot_release_unknown[-1]" time="0.031" /><testcase classname="tests.test_stage_a_closeout" name="test_invalid_reconciliation_cannot_release_unknown[0.0000001]" time="0.029" /><testcase classname="tests.test_stage_a_closeout" name="test_invalid_reconciliation_cannot_release_unknown[Infinity]" time="0.025" /><testcase classname="tests.test_stage_a_closeout" name="test_invalid_reconciliation_cannot_release_unknown[1000000000000000000]" time="0.021" /><testcase classname="tests.test_stage_a_closeout" name="test_http_event_page_cursor_and_validation" time="0.226" /></testsuite></testsuites>

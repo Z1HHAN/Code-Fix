@@ -12,7 +12,6 @@ import os
 from pathlib import Path
 import sqlite3
 import time
-from urllib.parse import urlsplit
 
 import httpx
 
@@ -57,21 +56,24 @@ class LiveSettings:
     def from_env(cls):
         if os.environ.get('CODE_FIX_LIVE_APPROVED') != '1':
             raise ModelBlocked('需队长确认付费额度后设置CODE_FIX_LIVE_APPROVED=1')
+        from .providers import validate_url
+        provider = os.environ.get('CODE_FIX_PROVIDER_ID')
+        base = os.environ.get('CODE_FIX_BASE_URL', '').rstrip('/')
+        if not validate_url(provider, base):
+            raise ModelBlocked('旧live_env需设置已登记的CODE_FIX_PROVIDER_ID及匹配白名单的CODE_FIX_BASE_URL；请迁移配置')
         key = os.environ.get('CODE_FIX_API_KEY') or os.environ.get('OPENAI_API_KEY')
         model = os.environ.get('CODE_FIX_MODEL')
         if not key or not model:
             raise ModelBlocked('缺少模型密钥或CODE_FIX_MODEL')
-        base = os.environ.get('CODE_FIX_BASE_URL', 'https://api.openai.com/v1').rstrip('/')
-        parsed = urlsplit(base)
-        if parsed.scheme != 'https' or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment:
-            raise ModelBlocked('模型地址必须为无凭证、无查询参数的HTTPS URL')
+        from .redaction import register_secret
+        register_secret(key)
         timeout = positive_decimal(os.environ.get('CODE_FIX_REQUEST_SECONDS'))
         if timeout > 120:
             raise ModelBlocked('模型单请求时限不能超过120秒')
         return cls(key, model, base, float(timeout),
                    positive_decimal(os.environ.get('CODE_FIX_DAILY_USD')),
                    positive_decimal(os.environ.get('CODE_FIX_INPUT_USD_PER_MILLION')),
-                   positive_decimal(os.environ.get('CODE_FIX_OUTPUT_USD_PER_MILLION')))
+                   positive_decimal(os.environ.get('CODE_FIX_OUTPUT_USD_PER_MILLION')), provider_id=provider)
 
 
 class Ledger:
@@ -105,7 +107,9 @@ class Ledger:
             db.execute('BEGIN IMMEDIATE')
             if (db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
                     or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()):
-                raise ModelBlocked('存在进行中或费用未知请求，暂停新付费请求')
+                unknown = (db.execute("SELECT 1 FROM calls WHERE status='unknown'").fetchone()
+                           or db.execute("SELECT 1 FROM cny_calls WHERE status='unknown'").fetchone())
+                raise ModelBlocked('存在费用未知请求，需人工核对后恢复' if unknown else '存在进行中请求，请等待其结算后重试')
             count = db.execute('SELECT count(*) FROM calls WHERE run_id=?', (run_id,)).fetchone()[0]
             count += db.execute('SELECT count(*) FROM cny_calls WHERE run_id=?', (run_id,)).fetchone()[0]
             if count >= max_calls:
@@ -214,7 +218,8 @@ class LiveModel:
                   'model': self.settings.model, 'call_id': call_id, 'status': 'failed',
                   'provider_id': self.settings.provider_id, 'price_version': self.settings.price_version,
                   'usage': None, 'cost': {'status': 'unknown', 'amount_usd': None},
-                  'attempts': 1, 'max_attempts': 1, 'failure_class': 'model_transport_error'}
+                  'attempts': 1, 'max_attempts': 1, 'transport_request_started': False,
+                  'failure_class': 'model_transport_error'}
         started = time.monotonic()
         settled = False
         try:
@@ -224,6 +229,8 @@ class LiveModel:
             record['model_api_called'] = self.transport is None
             record['transport_request_started'] = True
             value = asyncio.run(self._request(messages, remaining))
+            if not isinstance(value, dict):
+                raise ValueError('响应根节点必须是对象')
             record['usage'] = value.get('usage')
             record['cost'] = self.ledger.settle(call_id, record['usage'], self.settings)
             settled = True
@@ -236,10 +243,13 @@ class LiveModel:
                 record.update(status='blocked', failure_class='cost_unknown')
         except Exception as exc:
             if not settled:
-                record['cost'] = self.ledger.settle(call_id, None, self.settings)
+                usage = None if record['transport_request_started'] else {'prompt_tokens': 0, 'completion_tokens': 0}
+                record['cost'] = self.ledger.settle(call_id, usage, self.settings)
             record['error_type'] = type(exc).__name__
             if isinstance(exc, (TimeoutError, httpx.TimeoutException)):
-                record['failure_class'] = 'model_request_timeout'
+                record['failure_class'] = ('model_request_timeout' if record['transport_request_started'] else 'model_deadline_before_send')
+            elif isinstance(exc, (ValueError, KeyError, IndexError, TypeError)):
+                record['failure_class'] = 'invalid_model_response'
         finally:
             record['duration_ms'] = round((time.monotonic() - started) * 1000)
         return self.redact(record)

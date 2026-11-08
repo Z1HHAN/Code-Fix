@@ -147,7 +147,10 @@ class AccountBudget:
             self._register(db, settings)
             if (db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
                     or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()):
-                raise ModelBlocked('存在进行中或费用未知请求，暂停所有账号及币种的新付费请求')
+                unknown = (db.execute("SELECT 1 FROM calls WHERE status='unknown'").fetchone()
+                           or db.execute("SELECT 1 FROM cny_calls WHERE status='unknown'").fetchone())
+                raise ModelBlocked('存在费用未知请求，暂停所有账号及币种，需人工核对' if unknown
+                                   else '存在进行中请求，所有账号及币种等待结算后重试')
             count = db.execute('SELECT count(*) FROM calls WHERE run_id=?', (run_id,)).fetchone()[0]
             count += db.execute('SELECT count(*) FROM cny_calls WHERE run_id=?', (run_id,)).fetchone()[0]
             if count >= max_calls:

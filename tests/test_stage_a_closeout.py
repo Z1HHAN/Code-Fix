@@ -29,6 +29,13 @@ def test_split_container_mounts_exclude_tests_and_reports_from_candidate(tmp_pat
         assert any('target=/rpc,readonly' in str(x) for x in command)
         return dict(timed_out=True,cleanup_passed=True,artifact_channel=None,exit_code=None)
     monkeypatch.setattr('app.split_runner.subprocess.run',execute)
+    class LogDouble:
+        def __init__(self, executable, name, folder):
+            for stream in ('stdout', 'stderr'):
+                (folder / f'candidate-{stream}.txt').write_bytes(b'')
+        def finish(self):
+            return True, False
+    monkeypatch.setattr('app.candidate_logs.CandidateLogs', LogDouble)
     monkeypatch.setattr('app.docker_runner.DockerRunner._execute',trusted)
     result=runner.run(work,tmp_path/'evidence',phase='development',timeout=10,expected_version=code_version(work,(runner.task.source,)))
     command=next(c for c in commands if 'run' in c)

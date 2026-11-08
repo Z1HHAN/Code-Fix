@@ -1,0 +1,6 @@
+{
+  "isolation_ready": false,
+  "image": "",
+  "reason": "需确认不可信代码执行授权：CODE_FIX_EXECUTION_APPROVED=1",
+  "error_type": "IsolationBlocked"
+}
