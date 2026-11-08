@@ -1,0 +1,2 @@
+SUCCESS: The process with PID 43620 (child process of PID 40332) has been terminated.
+SUCCESS: The process with PID 40332 (child process of PID 40708) has been terminated.

@@ -1,0 +1,36 @@
+{
+  "stage": "node_ui",
+  "argv": [
+    "C:/Program Files/nodejs/node.exe",
+    "--test",
+    "--test-reporter=tap",
+    "tests/ui_prototype.test.cjs",
+    "tests/ui_budget.test.cjs",
+    "tests/ui_trace.test.cjs"
+  ],
+  "cwd": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix",
+  "started_at": "2026-11-09T00:46:34.681+08:00",
+  "timeout_seconds": 60,
+  "exit_code": 0,
+  "timed_out": false,
+  "status": "passed",
+  "reason": null,
+  "stdout_path": "node_ui/stdout.txt",
+  "stderr_path": "node_ui/stderr.txt",
+  "cleanup": {
+    "parent_reaped": true,
+    "tree_termination_attempted": false,
+    "full_process_tree_verified": false
+  },
+  "pid": 65004,
+  "finished_at": "2026-11-09T00:46:34.940+08:00",
+  "duration_ms": 260,
+  "counts": {
+    "tests": 23,
+    "pass": 23,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  }
+}

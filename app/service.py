@@ -20,6 +20,11 @@ class TaskService:
         return self.store.get(run_id)
 
     def run_claimed(self, run_id):
+        from .redaction import credential_scope
+        with credential_scope():
+            return self._run_claimed(run_id)
+
+    def _run_claimed(self, run_id):
         try:
             task = self.store.get(run_id)['task']
             control = self.store.get(run_id)['control']

@@ -1,0 +1,11 @@
+{
+  "scope": "Evidence files excluding this checksum index and symlinks",
+  "sha256": {
+    "environment.json": "8d08f10e6f42fae1c79d4d153520c2f0bd0f4098a47544f397b65bb9b0964e4e",
+    "repair-case-map.json": "351e79759b57d635345d71c8eb3fa233f6ebd70374732e73677ec97a87bc4aea",
+    "report.md": "c5e3ada04fce10f523ca42fa5c97d9622ad8781b5797c31da6ba9ffb58b4fea3",
+    "source-after.json": "7dbfc78ac1bf53cc40d4fb03c751e884aaf07bde0b7c5dc51dc2a3385ae2b286",
+    "source-before.json": "7dbfc78ac1bf53cc40d4fb03c751e884aaf07bde0b7c5dc51dc2a3385ae2b286",
+    "summary.json": "95c3cb64ac417e453a4af5a60eade278314a1a410190ca7ba72814f535489ac3"
+  }
+}

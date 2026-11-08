@@ -217,3 +217,4 @@ def test_baseline_outside_approved_classes_stops_before_any_model_call(tmp_path,
     assert status in {'paused', 'stopped'} and runner.phases == ['development']
     assert model.roles == [] and result['model_calls'] == 0
     assert result['baseline_failure_class'] == baseline
+    assert result['dev_result'] == ('passed' if baseline == 'passed' else 'failed')

@@ -14,6 +14,8 @@ def record_exception(directory, exc, *, model=None):
     detail = ''.join(traceback.format_exception(type(exc), exc, exc.__traceback__))
     redact = getattr(model, 'redact', lambda value: value)
     detail = redact(detail)
+    from .redaction import redact as redact_credentials
+    detail = redact_credentials(detail)
     for name, value in os.environ.items():
         if value and any(marker in name.upper() for marker in ('KEY', 'SECRET', 'TOKEN', 'PASSWORD')):
             detail = detail.replace(value, '[REDACTED]')

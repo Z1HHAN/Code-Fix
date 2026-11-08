@@ -1,0 +1,8 @@
+{
+  "code_commit": "40cd0a25f6ed3db0f37a86ea33f15f902313011b",
+  "bundle_sha256": "24e0435c62bb103f82f81c84080ea888f86cc76610ec6872c0f1f82ce0ded953",
+  "prerequisite_commit": "9d5b5bef23004a69b112e72e1f9417cf0b77b32a",
+  "bundle_ref": "refs/heads/codex/repair-evidence-boundaries",
+  "delivery": "Local runs/simplification-review.bundle; not uploaded or merged",
+  "docker_status": "not_run_on_this_machine; operator chose existing Docker target"
+}

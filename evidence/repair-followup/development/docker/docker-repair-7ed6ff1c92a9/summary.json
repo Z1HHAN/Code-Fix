@@ -1,0 +1,16 @@
+{
+  "started_at": "2026-11-08T16:33:51.422043+00:00",
+  "image": "",
+  "git_commit": "109d8cedf1926a7ca82f136580ccf7514ff5db7c",
+  "docker_executable": null,
+  "model_api_called": false,
+  "scope": "Synthetic real Split Docker security probes; not model repair acceptance",
+  "cases": [],
+  "status": "blocked",
+  "preflight": {
+    "isolation_ready": false,
+    "image": "",
+    "reason": "需确认不可信代码执行授权：CODE_FIX_EXECUTION_APPROVED=1",
+    "error_type": "IsolationBlocked"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "code_commit": "59b171121ba5ae2dff374c9d72e2be2851f8b9a2",
+  "bundle_sha256": "3e20e8a171c2146111e94f6c8e45e366ca447836b2abe1e5823a2fdd80859474",
+  "prerequisite_commit": "9d5b5bef23004a69b112e72e1f9417cf0b77b32a",
+  "bundle_ref": "refs/heads/codex/repair-evidence-boundaries",
+  "delivery": "Local runs/repair-followup.bundle; not uploaded or merged",
+  "docker_status": "not_run_on_this_machine; operator chose existing Docker target"
+}

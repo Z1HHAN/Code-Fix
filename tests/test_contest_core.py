@@ -150,7 +150,7 @@ def test_prior_day_uncertain_cost_blocks_other_provider_after_restart(tmp_path, 
     ledger.reserve('old', 'old-run', settings(provider_id='provider_a'), 3, 100)
     with sqlite3.connect(ledger.path) as db:
         db.execute('UPDATE calls SET day=?,status=?', ('2000-01-01', unsettled))
-    with pytest.raises(ModelBlocked, match='费用未知'):
+    with pytest.raises(ModelBlocked, match='进行中' if unsettled == 'pending' else '费用未知'):
         Ledger(tmp_path).reserve('new', 'new-run', settings(provider_id='provider_b'), 3, 100)
     summary = ledger.summary('old-run')
     assert summary['status'] == 'unknown' and summary['amount_usd'] is None

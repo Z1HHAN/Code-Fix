@@ -3,6 +3,7 @@
   "basis": "Existing API engineering caps; not paid-call authorization. Legacy v0.2 limits remain historical.",
   "max_rounds": 3,
   "max_calls": 30,
+  "max_tool_calls": 5,
   "total_seconds": 1800,
   "defaults": {"max_rounds": 3, "max_calls": 12, "total_seconds": 300}
 }

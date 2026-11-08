@@ -35,7 +35,8 @@ def validate_task(value):
         raise InputValidationError('只支持baseline/repair模式')
     if not isinstance(task['description'], str) or not 1 <= len(task['description'].strip()) <= 2000:
         raise InputValidationError('任务描述长度必须为1至2000')
-    limits = json.loads((Path(__file__).resolve().parents[1] / 'configs/runtime_limits.json').read_text(encoding='utf-8'))
+    from .runtime_limits import runtime_limits
+    limits = runtime_limits()
     for field in ('max_rounds', 'max_calls', 'total_seconds'):
         maximum = limits[field]
         if type(task[field]) is not int or not 1 <= task[field] <= maximum:

@@ -1,0 +1,51 @@
+{
+  "head": "9d5b5bef23004a69b112e72e1f9417cf0b77b32a",
+  "findings": {
+    "B-01": {
+      "candidate_version": "sha256:00f90a13d1d0b694d2f84415b99fff8800368d8c59ded58a2868f2c50dd2eddb",
+      "final_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "bytes_equal": false,
+      "method": "production final_check until test dispatch"
+    },
+    "B-02": {
+      "excerpt": "FAILED tests/t.py::test_x - assert 3 == 4\n    assert secret == 999"
+    },
+    "B-04": {
+      "https://api.siliconflow.cn:4443/v1": true,
+      "https://api.siliconflow.cn:80/v1": true,
+      "https://api.siliconflow.cn:abc/v1": true
+    },
+    "B-05": {
+      "non_ascii_header_status": 500
+    },
+    "B-06": {
+      "actual": [
+        "tests.test_a.test_x[a",
+        "b]"
+      ],
+      "expected": [
+        "tests.test_a",
+        "test_x[a::b]"
+      ]
+    },
+    "B-07": {
+      "events_contains_raw": false,
+      "snapshot_contains_raw": true
+    }
+  },
+  "evidence_audits": {
+    "evidence/integration-docker-loop/C-acceptance-20261106-014017-b626a073": {
+      "files": 169,
+      "missing": [],
+      "different": []
+    },
+    "evidence/integration-quixbugs/C-acceptance-20261108-195510-2a5cd7f9": {
+      "files": 169,
+      "missing": [],
+      "different": []
+    }
+  },
+  "source_changes": false,
+  "real_model_calls": 0,
+  "docker_runs": 0
+}

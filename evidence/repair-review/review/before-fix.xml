@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="21" skipped="0" tests="24" time="1.993" timestamp="2026-11-08T20:20:40.264428+08:00" hostname="LAPTOP-8477LI5E"><testcase classname="tests.test_repair_review" name="test_final_candidate_bytes_bound_before_dispatch[False]" time="0.114"><failure message="AssertionError: assert b'def is_leap...% 100 != 0)\n' == b'def is_leap...100 != 0)\r\n'&#10;  &#10;  At index 18 diff: b'\n' != b'\r'&#10;  Use -v to get more diff">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfpre/test_final_candidate_bytes_bou0')
+corrupt = False
+
+    @pytest.mark.parametrize('corrupt', [False, True])
+    def test_final_candidate_bytes_bound_before_dispatch(tmp_path, corrupt):
+        definition = get_task('leap')
+        base = definition.prepare(tmp_path / 'base')
+        current = definition.prepare(tmp_path / 'current')
+        payload = b'def is_leap(year):\r\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\r\n'
+        (current / definition.source).write_bytes(payload)
+        ctx = object.__new__(WorkflowRun)
+        ctx.base, ctx.current, ctx.source = base, current, definition.source
+        ctx.directory = tmp_path / 'run'
+        ctx.task = {'project': 'leap'}
+        ctx.version = code_version(current, (definition.source,))
+        ctx.final = {}
+        if corrupt:
+            (current / definition.source).write_bytes(payload + b'# changed\n')
+        class Dispatched(Exception):
+            pass
+        def test(work, phase, name):
+            assert not corrupt, 'changed bytes must never reach final runner'
+            assert (work / definition.source).read_bytes() == payload
+            assert code_version(work, (definition.source,)) == ctx.version
+            metadata = json.loads((ctx.directory / 'final-patch/candidate.json').read_text())
+            assert metadata['candidate_version'] == ctx.version
+            raise Dispatched()
+        ctx.test = test
+        from app.docker_runner import IsolationBlocked
+        with pytest.raises(IsolationBlocked if corrupt else Dispatched):
+&gt;           ctx.final_check()
+
+tests\test_repair_review.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+app\workflow_v3.py:296: in final_check
+    checked, _ = self.test(final_work, 'final_check', 'final-check')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+work = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfpre/test_final_candidate_bytes_bou0/run/final-work')
+phase = 'final_check', name = 'final-check'
+
+    def test(work, phase, name):
+        assert not corrupt, 'changed bytes must never reach final runner'
+&gt;       assert (work / definition.source).read_bytes() == payload
+E       AssertionError: assert b'def is_leap...% 100 != 0)\n' == b'def is_leap...100 != 0)\r\n'
+E         
+E         At index 18 diff: b'\n' != b'\r'
+E         Use -v to get more diff
+
+tests\test_repair_review.py:37: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_final_candidate_bytes_bound_before_dispatch[True]" time="0.110"><failure message="AssertionError: changed bytes must never reach final runner&#10;assert not True">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfpre/test_final_candidate_bytes_bou1')
+corrupt = True
+
+    @pytest.mark.parametrize('corrupt', [False, True])
+    def test_final_candidate_bytes_bound_before_dispatch(tmp_path, corrupt):
+        definition = get_task('leap')
+        base = definition.prepare(tmp_path / 'base')
+        current = definition.prepare(tmp_path / 'current')
+        payload = b'def is_leap(year):\r\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\r\n'
+        (current / definition.source).write_bytes(payload)
+        ctx = object.__new__(WorkflowRun)
+        ctx.base, ctx.current, ctx.source = base, current, definition.source
+        ctx.directory = tmp_path / 'run'
+        ctx.task = {'project': 'leap'}
+        ctx.version = code_version(current, (definition.source,))
+        ctx.final = {}
+        if corrupt:
+            (current / definition.source).write_bytes(payload + b'# changed\n')
+        class Dispatched(Exception):
+            pass
+        def test(work, phase, name):
+            assert not corrupt, 'changed bytes must never reach final runner'
+            assert (work / definition.source).read_bytes() == payload
+            assert code_version(work, (definition.source,)) == ctx.version
+            metadata = json.loads((ctx.directory / 'final-patch/candidate.json').read_text())
+            assert metadata['candidate_version'] == ctx.version
+            raise Dispatched()
+        ctx.test = test
+        from app.docker_runner import IsolationBlocked
+        with pytest.raises(IsolationBlocked if corrupt else Dispatched):
+&gt;           ctx.final_check()
+
+tests\test_repair_review.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+app\workflow_v3.py:296: in final_check
+    checked, _ = self.test(final_work, 'final_check', 'final-check')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+work = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfpre/test_final_candidate_bytes_bou1/run/final-work')
+phase = 'final_check', name = 'final-check'
+
+    def test(work, phase, name):
+&gt;       assert not corrupt, 'changed bytes must never reach final runner'
+E       AssertionError: changed bytes must never reach final runner
+E       assert not True
+
+tests\test_repair_review.py:36: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_model_excerpt_never_contains_assertion_values[FAILED tests/t.py::test_x - assert 3 == 4]" time="0.013"><failure message="assert not True&#10; +  where True = any(&lt;generator object test_model_excerpt_never_contains_assertion_values.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001E368BA6500&gt;)">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfpre/test_model_excerpt_never_conta0')
+line = 'FAILED tests/t.py::test_x - assert 3 == 4'
+
+    @pytest.mark.parametrize('line', [
+        'FAILED tests/t.py::test_x - assert 3 == 4',
+        '    assert result == 999',
+        '  E   AssertionError: expected-secret',
+        'FAILED tests/t.py::test_x - AssertionError: expected-secret',
+        '    &gt; assert result == 999',
+    ])
+    def test_model_excerpt_never_contains_assertion_values(tmp_path, line):
+        (tmp_path / 'out.txt').write_text(line, encoding='utf-8')
+        text = WorkflowRun.excerpt({'stdout_path': 'out.txt'}, tmp_path, 'stdout_path')
+&gt;       assert not any(s in text for s in ('3 == 4', '999', 'expected-secret'))
+E       assert not True
+E        +  where True = any(&lt;generator object test_model_excerpt_never_contains_assertion_values.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001E368BA6500&gt;)
+
+tests\test_repair_review.py:58: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_model_excerpt_never_contains_assertion_values[    assert result == 999]" time="0.013"><failure message="assert not True&#10; +  where True = any(&lt;generator object test_model_excerpt_never_contains_assertion_values.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001E368BE2340&gt;)">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfpre/test_model_excerpt_never_conta1')
+line = '    assert result == 999'
+
+    @pytest.mark.parametrize('line', [
+        'FAILED tests/t.py::test_x - assert 3 == 4',
+        '    assert result == 999',
+        '  E   AssertionError: expected-secret',
+        'FAILED tests/t.py::test_x - AssertionError: expected-secret',
+        '    &gt; assert result == 999',
+    ])
+    def test_model_excerpt_never_contains_assertion_values(tmp_path, line):
+        (tmp_path / 'out.txt').write_text(line, encoding='utf-8')
+        text = WorkflowRun.excerpt({'stdout_path': 'out.txt'}, tmp_path, 'stdout_path')
+&gt;       assert not any(s in text for s in ('3 == 4', '999', 'expected-secret'))
+E       assert not True
+E        +  where True = any(&lt;generator object test_model_excerpt_never_contains_assertion_values.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001E368BE2340&gt;)
+
+tests\test_repair_review.py:58: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_model_excerpt_never_contains_assertion_values[  E   AssertionError: expected-secret]" time="0.012"><failure message="assert not True&#10; +  where True = any(&lt;generator object test_model_excerpt_never_contains_assertion_values.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001E368BE2B20&gt;)">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfpre/test_model_excerpt_never_conta2')
+line = '  E   AssertionError: expected-secret'
+
+    @pytest.mark.parametrize('line', [
+        'FAILED tests/t.py::test_x - assert 3 == 4',
+        '    assert result == 999',
+        '  E   AssertionError: expected-secret',
+        'FAILED tests/t.py::test_x - AssertionError: expected-secret',
+        '    &gt; assert result == 999',
+    ])
+    def test_model_excerpt_never_contains_assertion_values(tmp_path, line):
+        (tmp_path / 'out.txt').write_text(line, encoding='utf-8')
+        text = WorkflowRun.excerpt({'stdout_path': 'out.txt'}, tmp_path, 'stdout_path')
+&gt;       assert not any(s in text for s in ('3 == 4', '999', 'expected-secret'))
+E       assert not True
+E        +  where True = any(&lt;generator object test_model_excerpt_never_contains_assertion_values.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001E368BE2B20&gt;)
+
+tests\test_repair_review.py:58: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_model_excerpt_never_contains_assertion_values[FAILED tests/t.py::test_x - AssertionError: expected-secret]" time="0.014"><failure message="assert not True&#10; +  where True = any(&lt;generator object test_model_excerpt_never_contains_assertion_values.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001E368BE3140&gt;)">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfpre/test_model_excerpt_never_conta3')
+line = 'FAILED tests/t.py::test_x - AssertionError: expected-secret'
+
+    @pytest.mark.parametrize('line', [
+        'FAILED tests/t.py::test_x - assert 3 == 4',
+        '    assert result == 999',
+        '  E   AssertionError: expected-secret',
+        'FAILED tests/t.py::test_x - AssertionError: expected-secret',
+        '    &gt; assert result == 999',
+    ])
+    def test_model_excerpt_never_contains_assertion_values(tmp_path, line):
+        (tmp_path / 'out.txt').write_text(line, encoding='utf-8')
+        text = WorkflowRun.excerpt({'stdout_path': 'out.txt'}, tmp_path, 'stdout_path')
+&gt;       assert not any(s in text for s in ('3 == 4', '999', 'expected-secret'))
+E       assert not True
+E        +  where True = any(&lt;generator object test_model_excerpt_never_contains_assertion_values.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001E368BE3140&gt;)
+
+tests\test_repair_review.py:58: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_model_excerpt_never_contains_assertion_values[    &gt; assert result == 999]" time="0.014"><failure message="assert not True&#10; +  where True = any(&lt;generator object test_model_excerpt_never_contains_assertion_values.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001E368BA50E0&gt;)">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfpre/test_model_excerpt_never_conta4')
+line = '    &gt; assert result == 999'
+
+    @pytest.mark.parametrize('line', [
+        'FAILED tests/t.py::test_x - assert 3 == 4',
+        '    assert result == 999',
+        '  E   AssertionError: expected-secret',
+        'FAILED tests/t.py::test_x - AssertionError: expected-secret',
+        '    &gt; assert result == 999',
+    ])
+    def test_model_excerpt_never_contains_assertion_values(tmp_path, line):
+        (tmp_path / 'out.txt').write_text(line, encoding='utf-8')
+        text = WorkflowRun.excerpt({'stdout_path': 'out.txt'}, tmp_path, 'stdout_path')
+&gt;       assert not any(s in text for s in ('3 == 4', '999', 'expected-secret'))
+E       assert not True
+E        +  where True = any(&lt;generator object test_model_excerpt_never_contains_assertion_values.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001E368BA50E0&gt;)
+
+tests\test_repair_review.py:58: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_provider_rejects_non_https_or_invalid_ports[:80]" time="0.001"><failure message="AssertionError: assert not True&#10; +  where True = validate_url('siliconflow', (('https://api.siliconflow.cn' + ':80') + '/v1'))">port = ':80'
+
+    @pytest.mark.parametrize('port', [':80', ':4443', ':abc', ':65536', ':-1'])
+    def test_provider_rejects_non_https_or_invalid_ports(port):
+&gt;       assert not validate_url('siliconflow', 'https://api.siliconflow.cn' + port + '/v1')
+E       AssertionError: assert not True
+E        +  where True = validate_url('siliconflow', (('https://api.siliconflow.cn' + ':80') + '/v1'))
+
+tests\test_repair_review.py:65: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_provider_rejects_non_https_or_invalid_ports[:4443]" time="0.001"><failure message="AssertionError: assert not True&#10; +  where True = validate_url('siliconflow', (('https://api.siliconflow.cn' + ':4443') + '/v1'))">port = ':4443'
+
+    @pytest.mark.parametrize('port', [':80', ':4443', ':abc', ':65536', ':-1'])
+    def test_provider_rejects_non_https_or_invalid_ports(port):
+&gt;       assert not validate_url('siliconflow', 'https://api.siliconflow.cn' + port + '/v1')
+E       AssertionError: assert not True
+E        +  where True = validate_url('siliconflow', (('https://api.siliconflow.cn' + ':4443') + '/v1'))
+
+tests\test_repair_review.py:65: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_provider_rejects_non_https_or_invalid_ports[:abc]" time="0.001"><failure message="AssertionError: assert not True&#10; +  where True = validate_url('siliconflow', (('https://api.siliconflow.cn' + ':abc') + '/v1'))">port = ':abc'
+
+    @pytest.mark.parametrize('port', [':80', ':4443', ':abc', ':65536', ':-1'])
+    def test_provider_rejects_non_https_or_invalid_ports(port):
+&gt;       assert not validate_url('siliconflow', 'https://api.siliconflow.cn' + port + '/v1')
+E       AssertionError: assert not True
+E        +  where True = validate_url('siliconflow', (('https://api.siliconflow.cn' + ':abc') + '/v1'))
+
+tests\test_repair_review.py:65: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_provider_rejects_non_https_or_invalid_ports[:65536]" time="0.001"><failure message="AssertionError: assert not True&#10; +  where True = validate_url('siliconflow', (('https://api.siliconflow.cn' + ':65536') + '/v1'))">port = ':65536'
+
+    @pytest.mark.parametrize('port', [':80', ':4443', ':abc', ':65536', ':-1'])
+    def test_provider_rejects_non_https_or_invalid_ports(port):
+&gt;       assert not validate_url('siliconflow', 'https://api.siliconflow.cn' + port + '/v1')
+E       AssertionError: assert not True
+E        +  where True = validate_url('siliconflow', (('https://api.siliconflow.cn' + ':65536') + '/v1'))
+
+tests\test_repair_review.py:65: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_provider_rejects_non_https_or_invalid_ports[:-1]" time="0.001"><failure message="AssertionError: assert not True&#10; +  where True = validate_url('siliconflow', (('https://api.siliconflow.cn' + ':-1') + '/v1'))">port = ':-1'
+
+    @pytest.mark.parametrize('port', [':80', ':4443', ':abc', ':65536', ':-1'])
+    def test_provider_rejects_non_https_or_invalid_ports(port):
+&gt;       assert not validate_url('siliconflow', 'https://api.siliconflow.cn' + port + '/v1')
+E       AssertionError: assert not True
+E        +  where True = validate_url('siliconflow', (('https://api.siliconflow.cn' + ':-1') + '/v1'))
+
+tests\test_repair_review.py:65: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_provider_accepts_https_port[]" time="0.001" /><testcase classname="tests.test_repair_review" name="test_provider_accepts_https_port[:443]" time="0.001" /><testcase classname="tests.test_repair_review" name="test_non_ascii_token_is_forbidden_and_valid_session_still_works" time="0.181"><failure message="AssertionError: assert 500 == 403&#10; +  where 500 = &lt;Response [500 Internal Server Error]&gt;.status_code&#10; +    where &lt;Response [500 Internal Server Error]&gt; = post('/api/v3/tasks', headers=[(b'x-codefix-token', b'\xe9')], json={})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x000001E368D657F0&gt;.post">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfpre/test_non_ascii_token_is_forbid0')
+
+    def test_non_ascii_token_is_forbidden_and_valid_session_still_works(tmp_path):
+        with TestClient(create_app(tmp_path), raise_server_exceptions=False) as client:
+&gt;           assert client.post('/api/v3/tasks', headers=[(b'x-codefix-token', b'\xe9')], json={}).status_code == 403
+E           AssertionError: assert 500 == 403
+E            +  where 500 = &lt;Response [500 Internal Server Error]&gt;.status_code
+E            +    where &lt;Response [500 Internal Server Error]&gt; = post('/api/v3/tasks', headers=[(b'x-codefix-token', b'\xe9')], json={})
+E            +      where post = &lt;starlette.testclient.TestClient object at 0x000001E368D657F0&gt;.post
+
+tests\test_repair_review.py:75: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_parameterized_junit_identity[tests/test_a.py::test_x[a::b]-expected0]" time="0.001"><failure message="AssertionError: assert ('tests.test_...st_x[a', 'b]') == ('tests.test_...test_x[a::b]')&#10;  &#10;  At index 0 diff: 'tests.test_a.test_x[a' != 'tests.test_a'&#10;  Use -v to get more diff">nodeid = 'tests/test_a.py::test_x[a::b]'
+expected = ('tests.test_a', 'test_x[a::b]')
+
+    @pytest.mark.parametrize('nodeid,expected', [
+        ('tests/test_a.py::test_x[a::b]', ('tests.test_a', 'test_x[a::b]')),
+        ('tests/test_a.py::TestA::test_x[1]', ('tests.test_a.TestA', 'test_x[1]')),
+        ('tests/test_a.py::TestA::test_x[a[::]b]', ('tests.test_a.TestA', 'test_x[a[::]b]')),
+    ])
+    def test_parameterized_junit_identity(nodeid, expected):
+&gt;       assert _junit_key(nodeid) == expected
+E       AssertionError: assert ('tests.test_...st_x[a', 'b]') == ('tests.test_...test_x[a::b]')
+E         
+E         At index 0 diff: 'tests.test_a.test_x[a' != 'tests.test_a'
+E         Use -v to get more diff
+
+tests\test_repair_review.py:86: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_parameterized_junit_identity[tests/test_a.py::TestA::test_x[1]-expected1]" time="0.001" /><testcase classname="tests.test_repair_review" name="test_parameterized_junit_identity[tests/test_a.py::TestA::test_x[a[::]b]-expected2]" time="0.001"><failure message="AssertionError: assert ('tests.test_..._x[a[', ']b]') == ('tests.test_...st_x[a[::]b]')&#10;  &#10;  At index 0 diff: 'tests.test_a.TestA.test_x[a[' != 'tests.test_a.TestA'&#10;  Use -v to get more diff">nodeid = 'tests/test_a.py::TestA::test_x[a[::]b]'
+expected = ('tests.test_a.TestA', 'test_x[a[::]b]')
+
+    @pytest.mark.parametrize('nodeid,expected', [
+        ('tests/test_a.py::test_x[a::b]', ('tests.test_a', 'test_x[a::b]')),
+        ('tests/test_a.py::TestA::test_x[1]', ('tests.test_a.TestA', 'test_x[1]')),
+        ('tests/test_a.py::TestA::test_x[a[::]b]', ('tests.test_a.TestA', 'test_x[a[::]b]')),
+    ])
+    def test_parameterized_junit_identity(nodeid, expected):
+&gt;       assert _junit_key(nodeid) == expected
+E       AssertionError: assert ('tests.test_..._x[a[', ']b]') == ('tests.test_...st_x[a[::]b]')
+E         
+E         At index 0 diff: 'tests.test_a.TestA.test_x[a[' != 'tests.test_a.TestA'
+E         Use -v to get more diff
+
+tests\test_repair_review.py:86: AssertionError</failure></testcase><testcase classname="tests.test_repair_review" name="test_acceptance_dirty_policy[-False-False]" time="0.007"><failure message="AttributeError: module 'acceptance_review' has no attribute 'identity_issue'">status = '', allow = False, blocked = False
+
+    @pytest.mark.parametrize('status,allow,blocked', [('', False, False), (' M app/api.py', False, True),
+        (' M app/api.py', True, False), ('UU app/api.py', True, True), ('AD app/api.py', True, True)])
+    def test_acceptance_dirty_policy(status, allow, blocked):
+&gt;       assert bool(acceptance().identity_issue({'git_commit': 'synthetic', 'git_status': status}, allow)) == blocked
+E       AttributeError: module 'acceptance_review' has no attribute 'identity_issue'
+
+tests\test_repair_review.py:100: AttributeError</failure></testcase><testcase classname="tests.test_repair_review" name="test_acceptance_dirty_policy[ M app/api.py-False-True]" time="0.008"><failure message="AttributeError: module 'acceptance_review' has no attribute 'identity_issue'">status = ' M app/api.py', allow = False, blocked = True
+
+    @pytest.mark.parametrize('status,allow,blocked', [('', False, False), (' M app/api.py', False, True),
+        (' M app/api.py', True, False), ('UU app/api.py', True, True), ('AD app/api.py', True, True)])
+    def test_acceptance_dirty_policy(status, allow, blocked):
+&gt;       assert bool(acceptance().identity_issue({'git_commit': 'synthetic', 'git_status': status}, allow)) == blocked
+E       AttributeError: module 'acceptance_review' has no attribute 'identity_issue'
+
+tests\test_repair_review.py:100: AttributeError</failure></testcase><testcase classname="tests.test_repair_review" name="test_acceptance_dirty_policy[ M app/api.py-True-False]" time="0.008"><failure message="AttributeError: module 'acceptance_review' has no attribute 'identity_issue'">status = ' M app/api.py', allow = True, blocked = False
+
+    @pytest.mark.parametrize('status,allow,blocked', [('', False, False), (' M app/api.py', False, True),
+        (' M app/api.py', True, False), ('UU app/api.py', True, True), ('AD app/api.py', True, True)])
+    def test_acceptance_dirty_policy(status, allow, blocked):
+&gt;       assert bool(acceptance().identity_issue({'git_commit': 'synthetic', 'git_status': status}, allow)) == blocked
+E       AttributeError: module 'acceptance_review' has no attribute 'identity_issue'
+
+tests\test_repair_review.py:100: AttributeError</failure></testcase><testcase classname="tests.test_repair_review" name="test_acceptance_dirty_policy[UU app/api.py-True-True]" time="0.008"><failure message="AttributeError: module 'acceptance_review' has no attribute 'identity_issue'">status = 'UU app/api.py', allow = True, blocked = True
+
+    @pytest.mark.parametrize('status,allow,blocked', [('', False, False), (' M app/api.py', False, True),
+        (' M app/api.py', True, False), ('UU app/api.py', True, True), ('AD app/api.py', True, True)])
+    def test_acceptance_dirty_policy(status, allow, blocked):
+&gt;       assert bool(acceptance().identity_issue({'git_commit': 'synthetic', 'git_status': status}, allow)) == blocked
+E       AttributeError: module 'acceptance_review' has no attribute 'identity_issue'
+
+tests\test_repair_review.py:100: AttributeError</failure></testcase><testcase classname="tests.test_repair_review" name="test_acceptance_dirty_policy[AD app/api.py-True-True]" time="0.008"><failure message="AttributeError: module 'acceptance_review' has no attribute 'identity_issue'">status = 'AD app/api.py', allow = True, blocked = True
+
+    @pytest.mark.parametrize('status,allow,blocked', [('', False, False), (' M app/api.py', False, True),
+        (' M app/api.py', True, False), ('UU app/api.py', True, True), ('AD app/api.py', True, True)])
+    def test_acceptance_dirty_policy(status, allow, blocked):
+&gt;       assert bool(acceptance().identity_issue({'git_commit': 'synthetic', 'git_status': status}, allow)) == blocked
+E       AttributeError: module 'acceptance_review' has no attribute 'identity_issue'
+
+tests\test_repair_review.py:100: AttributeError</failure></testcase><testcase classname="tests.test_repair_review" name="test_gate_count_cannot_shrink_with_manifest" time="0.032"><failure message="AssertionError: assert 'passed' == 'blocked'&#10;  &#10;  - blocked&#10;  + passed">tmp_path = WindowsPath('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/rfpre/test_gate_count_cannot_shrink_0')
+
+    def test_gate_count_cannot_shrink_with_manifest(tmp_path):
+        (tmp_path / 'repair_gates').mkdir()
+        (tmp_path / 'acceptance_tests').mkdir()
+        (tmp_path / 'acceptance_tests/case_map.json').write_text(json.dumps({
+            'required_testcase_count': 25, 'required_testcases': ['only_one']}))
+        (tmp_path / 'repair_gates/junit.xml').write_text('&lt;testsuite&gt;&lt;testcase classname="probe" name="only_one"/&gt;&lt;/testsuite&gt;')
+        record = {'stage': 'repair_gates', 'status': 'passed', 'exit_code': 0}
+        acceptance().assess(record, tmp_path, tmp_path)
+&gt;       assert record['status'] == 'blocked'
+E       AssertionError: assert 'passed' == 'blocked'
+E         
+E         - blocked
+E         + passed
+
+tests\test_repair_review.py:111: AssertionError</failure></testcase></testsuite></testsuites>

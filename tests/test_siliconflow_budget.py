@@ -122,7 +122,7 @@ def test_global_unknown_blocks_all_accounts_currencies_even_previous_day(tmp_pat
 def test_usd_uncertainty_and_call_count_apply_to_cny(tmp_path):
     ledger = Ledger(tmp_path)
     ledger.reserve('old', 'r', settings(), 1, 100)
-    with pytest.raises(ModelBlocked, match='费用未知'):
+    with pytest.raises(ModelBlocked, match='进行中'):
         ledger.reserve('new', 'other', cny(), 1, 100)
     ledger.settle('old', {'prompt_tokens': 5, 'completion_tokens': 1}, settings())
     with pytest.raises(ModelBlocked, match='调用上限'):

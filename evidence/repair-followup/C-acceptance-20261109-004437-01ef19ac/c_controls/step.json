@@ -1,0 +1,32 @@
+{
+  "stage": "c_controls",
+  "argv": [
+    "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "scripts/check_c_controls.py",
+    "--output-root",
+    "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\rfc\\C-acceptance-20261109-004437-01ef19ac\\c_controls\\controls"
+  ],
+  "cwd": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix",
+  "started_at": "2026-11-09T00:46:34.958+08:00",
+  "timeout_seconds": 180,
+  "exit_code": 0,
+  "timed_out": false,
+  "status": "passed",
+  "reason": null,
+  "stdout_path": "c_controls/stdout.txt",
+  "stderr_path": "c_controls/stderr.txt",
+  "cleanup": {
+    "parent_reaped": true,
+    "tree_termination_attempted": false,
+    "full_process_tree_verified": false
+  },
+  "pid": 26804,
+  "finished_at": "2026-11-09T00:46:48.296+08:00",
+  "duration_ms": 13338,
+  "control_summary_path": "c_controls/controls/C-20261109-004635-18be872a/summary.json",
+  "control_run_id": "C-20261109-004635-18be872a",
+  "scenario_count": 12
+}

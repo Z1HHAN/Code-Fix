@@ -18,10 +18,6 @@ def apply_candidate(base, destination, changes, evidence_dir, *, project='leap')
     if len(changes) != 1:
         raise ValueError('当前单文件项目只接受一项替换')
     task.verify(base, candidate=True)
-    # Never follow links when copying material into the execution workspace.
-    for item in [base, *base.rglob('*')]:
-        if item.is_symlink() or getattr(item, 'is_junction', lambda: False)():
-            raise ValueError('候选起点不能包含链接')
     if destination.exists():
         raise ValueError('不覆盖已有候选工作区')
     shutil.copytree(base, destination)

@@ -1,0 +1,30 @@
+{
+  "current_sources_equal_tested_snapshot": true,
+  "previous_evidence_files": 169,
+  "previous_evidence_sha256_valid": true,
+  "direct_apply_without_parser": [
+    {
+      "case": 0,
+      "error_type": "PermissionViolation",
+      "destination_created": false
+    },
+    {
+      "case": 1,
+      "error_type": "PermissionViolation",
+      "destination_created": false
+    },
+    {
+      "case": 2,
+      "error_type": "PermissionViolation",
+      "destination_created": false
+    },
+    {
+      "case": 3,
+      "error_type": "PermissionViolation",
+      "destination_created": false
+    }
+  ],
+  "snapshot_full_parent_chain_checks": 8,
+  "profile_json_parses_for_two_calls": 1,
+  "runtime_limits_reads_for_two_tasks": 2
+}

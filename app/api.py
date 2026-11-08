@@ -42,7 +42,8 @@ def create_app(root=None):
         if origin and origin != str(request.base_url).rstrip('/'):
             return JSONResponse({'detail': '拒绝跨站请求'}, status_code=403)
         if request.method in {'POST', 'PUT', 'PATCH', 'DELETE'}:
-            if not secrets.compare_digest(request.headers.get('x-codefix-token', ''), token):
+            provided = request.headers.get('x-codefix-token', '')
+            if not provided.isascii() or not secrets.compare_digest(provided, token):
                 return JSONResponse({'detail': '会话令牌无效；刷新页面后重试'}, status_code=403)
             size = request.headers.get('content-length')
             if size and (not size.isdecimal() or int(size) > 8192):
@@ -176,33 +177,13 @@ def create_app(root=None):
         run = service.store.get(run_id)
         if run['status'] in {'created', 'running'}:
             raise StateConflict('任务结束后才能导出完整证据包')
-        import hashlib
-        import io
-        import json
-        import zipfile
-        folder = service.store.directory(run_id)
-        buffer = io.BytesIO()
-        manifest = {}
-        with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as archive:
-            encoded = json.dumps(service.report(run_id), ensure_ascii=False, indent=2).encode()
-            archive.writestr('report.json', encoded)
-            manifest['report.json'] = hashlib.sha256(encoded).hexdigest()
-            total = len(encoded)
-            for path in sorted(folder.rglob('*')):
-                if path.is_symlink() or getattr(path, 'is_junction', lambda: False)():
-                    raise StateConflict('拒绝导出含链接的运行目录')
-                if not path.is_file() or path.name == 'report.json':
-                    continue
-                total += path.stat().st_size
-                if total > 64 * 1024 * 1024:
-                    raise StateConflict('证据包超过64MiB，请由操作员分包归档')
-                data = path.read_bytes()
-                name = path.relative_to(folder).as_posix()
-                archive.writestr(name, data)
-                manifest[name] = hashlib.sha256(data).hexdigest()
-            archive.writestr('sha256.json', json.dumps(manifest, indent=2))
-        return Response(buffer.getvalue(), media_type='application/zip',
-                        headers={'Content-Disposition': f'attachment; filename="{run_id}.zip"'})
+        from .bundle import build_bundle, chunks
+        from fastapi.responses import StreamingResponse
+        from starlette.background import BackgroundTask
+        buffer = build_bundle(service.store.directory(run_id), service.report(run_id))
+        return StreamingResponse(chunks(buffer), media_type='application/zip',
+                                 background=BackgroundTask(buffer.close),
+                                 headers={'Content-Disposition': f'attachment; filename="{run_id}.zip"'})
 
     @app.get('/')
     def index():

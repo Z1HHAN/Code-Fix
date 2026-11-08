@@ -1,0 +1,6 @@
+{
+  "isolation_ready": false,
+  "image": "",
+  "reason": "找不到Docker；禁止回退宿主执行",
+  "error_type": "IsolationBlocked"
+}

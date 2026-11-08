@@ -6,7 +6,9 @@ All artifact paths in ToolResult are relative to the supplied artifact_dir.
 from __future__ import annotations
 
 from collections import Counter
+from copy import deepcopy
 from datetime import datetime, timedelta, timezone
+from functools import lru_cache
 import hashlib
 import json
 import math
@@ -90,7 +92,9 @@ def compute_test_suite_version(profile):
 def _profile(name):
     if not isinstance(name, str):
         raise Rejected('test_profile must be a registered string')
-    data = json.loads((PACKAGE / 'profiles.json').read_text(encoding='utf-8'))
+    path = PACKAGE / 'profiles.json'
+    stat = path.stat()
+    data = deepcopy(_profile_registry(str(path), stat.st_mtime_ns, stat.st_size))
     if data.get('schema_version') != 1 or name not in data['profiles']:
         raise Rejected('Unknown test_profile; arbitrary commands are not accepted')
     profile = data['profiles'][name]
@@ -105,17 +109,33 @@ def _profile(name):
     return profile
 
 
+@lru_cache(maxsize=4)
+def _profile_registry(path, modified_ns, size):
+    return json.loads(Path(path).read_text(encoding='utf-8'))
+
+
 def _snapshot(workspace):
     root = Path(workspace)
     _no_links(root)
     if not root.is_dir():
         raise Rejected('Workspace does not exist')
-    files = []
-    for p in root.rglob('*'):
-        _no_links(p)
-        if p.is_file():
-            files.append(p.relative_to(root).as_posix())
-    return _hash_files(root, sorted(files))
+    # Check ancestors once, then every entry (including directories) before
+    # descending. _hash_files remains an independently checked public-code path.
+    resolved = root.resolve()
+    files = {}
+    def walk_error(error):
+        raise error
+    for directory, directories, filenames in root.walk(on_error=walk_error, follow_symlinks=False):
+        for name in (*directories, *filenames):
+            p = directory / name
+            if p.is_symlink() or getattr(p, 'is_junction', lambda: False)():
+                raise Rejected('Symlinks and junctions are not accepted')
+            if p.is_file():
+                relative = _relative(p.relative_to(root).as_posix())
+                if not p.resolve().is_relative_to(resolved):
+                    raise Rejected('Out-of-scope task file: ' + relative.as_posix())
+                files[relative.as_posix()] = hashlib.sha256(p.read_bytes()).hexdigest()
+    return dict(sorted(files.items()))
 
 
 def prepare_fixture(profile_id, destination):
@@ -137,7 +157,10 @@ def prepare_fixture(profile_id, destination):
 
 
 def _junit_key(nodeid):
-    parts = nodeid.split('::')
+    # Match pytest's mangle_test_address: :: inside a parameter id is data.
+    address, bracket, parameters = nodeid.partition('[')
+    parts = address.split('::')
+    parts[-1] += bracket + parameters
     filename = parts[0].removesuffix('.py').replace('/', '.')
     return ('.'.join([filename, *parts[1:-1]]), parts[-1])
 
@@ -387,7 +410,13 @@ def run_tests(run_id, task_id, workspace, test_profile, timeout_seconds, code_ve
                     result['source_syntax_errors'].append(name)
         flags = getattr(subprocess, 'CREATE_NEW_PROCESS_GROUP', 0) if os.name == 'nt' else 0
         kwargs = {'creationflags': flags} if os.name == 'nt' else {'start_new_session': True}
-        process = subprocess.Popen(command, cwd=work, env=environment,
+        if os.name == 'nt':
+            from c_runner.windows_job import WindowsJob
+            job = WindowsJob()
+            start = job.start
+        else:
+            start = subprocess.Popen
+        process = start(command, cwd=work, env=environment,
                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, **kwargs)
         executed = True
         result['process_id'] = process.pid
@@ -401,14 +430,11 @@ def run_tests(run_id, task_id, workspace, test_profile, timeout_seconds, code_ve
             cleanup = result['cleanup']
             try:
                 if os.name == 'nt':
-                    system_root = os.environ.get('SystemRoot', r'C:\Windows')
-                    taskkill = Path(system_root) / 'System32' / 'taskkill.exe'
-                    killed = subprocess.run([str(taskkill), '/PID', str(process.pid), '/T', '/F'],
-                                            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                            timeout=5, check=False)
-                    cleanup['termination_exit_code'] = killed.returncode
-                    (call_dir / 'cleanup.stdout.txt').write_bytes(killed.stdout)
-                    (call_dir / 'cleanup.stderr.txt').write_bytes(killed.stderr)
+                    job.terminate()
+                    cleanup['termination_exit_code'] = 0
+                    cleanup['termination_method'] = 'TerminateJobObject'
+                    (call_dir / 'cleanup.stdout.txt').write_bytes(b'')
+                    (call_dir / 'cleanup.stderr.txt').write_bytes(b'')
                 else:
                     os.killpg(process.pid, signal.SIGKILL)
                     cleanup['termination_exit_code'] = 0
@@ -463,6 +489,17 @@ def run_tests(run_id, task_id, workspace, test_profile, timeout_seconds, code_ve
                       failure_class='environment_error', reason=type(error).__name__ + ': ' + str(error))
         result['junit_missing_reason'] = 'Execution could not produce a validated JUnit report'
     finally:
+        job = locals().get('job')
+        if job is not None:
+            try:
+                result['cleanup']['full_process_tree_verified'] = job.close()
+                if not result['cleanup']['full_process_tree_verified']:
+                    result.update(status='blocked', verification_status='inconclusive', failure_class='environment_error',
+                                  reason='Windows job descendants were not reaped')
+            except OSError:
+                result['cleanup']['full_process_tree_verified'] = False
+                result.update(status='blocked', verification_status='inconclusive', failure_class='environment_error',
+                              reason='Windows job cleanup failed')
         if process is not None and process.poll() is None:
             # Last resort for unexpected controller exceptions. This does not
             # certify descendant cleanup; the result remains non-success.

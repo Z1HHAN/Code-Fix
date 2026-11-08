@@ -60,6 +60,28 @@ def snapshot(repo):
             for p in sorted(set(paths))}
 
 
+def identity_issue(identity, allow_dirty=False):
+    """Development dirty runs are explicit; unresolved index states never pass."""
+    status = identity.get('git_status') or ''
+    conflicts = {'DD', 'AU', 'UD', 'UA', 'DU', 'AA', 'UU', 'AD'}
+    if any(line[:2] in conflicts for line in status.splitlines()):
+        return 'Unmerged or staged-then-deleted paths; resolve the index before acceptance'
+    if not identity.get('git_commit') and not allow_dirty:
+        return 'Git HEAD unavailable; only --allow-dirty permits an unbound development run'
+    if status and not allow_dirty:
+        return 'Dirty worktree; commit first or explicitly use --allow-dirty for development checks'
+    return None
+
+
+def acceptance_baseline(repo):
+    # A versioned approved inventory catches accidental shrinking of a manifest.
+    # It is a review artifact, not a signature against a malicious maintainer.
+    value = json.loads((repo / 'configs/acceptance_baseline.json').read_text(encoding='utf-8'))
+    if value.get('schema_version') != 1:
+        raise ValueError('Unsupported acceptance inventory')
+    return value
+
+
 def preserve_work(source, destination):
     """Copy regular work artifacts for sharing, never follow test-created links."""
     omitted = []
@@ -263,12 +285,27 @@ def assess(record, run_dir, repo):
             counts, skipped, failed = junit_counts(path)
             record.update(counts=counts, skipped_tests=skipped, failed_tests=failed)
             if name == 'repair_gates':
-                required = json.loads((repo / 'acceptance_tests/case_map.json').read_text(encoding='utf-8'))['required_testcases']
+                manifest = json.loads((repo / 'acceptance_tests/case_map.json').read_text(encoding='utf-8'))
+                required = manifest['required_testcases']
+                if (type(manifest.get('required_testcase_count')) is not int
+                        or manifest['required_testcase_count'] != len(required)
+                        or len(required) != len(set(required))):
+                    raise ValueError('Declared repair gate count differs from unique case inventory')
+                approved = acceptance_baseline(repo)['repair_testcases']
+                if sorted(required) != sorted(approved):
+                    raise ValueError('Repair gate inventory differs from the reviewed baseline')
                 observed = [c.get('name') for c in ET.parse(path).getroot().findall('.//testcase')]
                 record['required_case_count'] = len(required)
                 record['observed_testcases'] = observed
                 if not required or len(observed) != len(required) or set(observed) != set(required):
                     raise ValueError('Collected repair gates do not match the required case manifest')
+            else:
+                baseline = acceptance_baseline(repo)['platform_testcases']
+                observed = {(c.get('classname'), c.get('name')) for c in ET.parse(path).getroot().findall('.//testcase')}
+                missing = sorted(set(map(tuple, baseline)) - observed)
+                record['missing_baseline_testcases'] = missing
+                if missing:
+                    raise ValueError('Platform collection lost reviewed test identities')
             allowed = [s for s in skipped if name == 'platform_pytest'
                        and s['test'].endswith('::test_in_root_symlink_is_rejected_before_resolution')
                        and s['type'] == 'pytest.skip'
@@ -304,6 +341,10 @@ def assess(record, run_dir, repo):
             record['counts'] = counts
             if any(v is None for v in counts.values()) or not counts['tests']:
                 raise ValueError('Node TAP summary is absent or incomplete')
+            required = acceptance_baseline(repo)['node_subtests']
+            observed = re.findall(r'^# Subtest: (.+)$', output, re.M)
+            if not set(required).issubset(observed) or counts['tests'] < len(required):
+                raise ValueError('Node collection lost reviewed test identities')
             if counts['skipped'] or counts['todo'] or counts['cancelled']:
                 record.update(status='blocked', reason='Node tests did not execute every required case')
             elif counts['fail'] or record['exit_code'] != 0:
@@ -340,6 +381,7 @@ def main():
     parser.add_argument('--work-root', type=Path, help='Short temporary parent directory; each invocation creates a unique child and preserves a copy in the evidence directory')
     parser.add_argument('--node', default=None, help='Node executable path; otherwise find node on PATH')
     parser.add_argument('--archive-provenance', type=Path, help='Optional source archive SHA/commit declaration; never used as an actual Git HEAD')
+    parser.add_argument('--allow-dirty', action='store_true', help='Explicit development-only checks; never equivalent to clean-commit acceptance')
     args = parser.parse_args()
     repo = args.repository.resolve()
     output = (args.output_root or repo / 'evidence/c-review').resolve()
@@ -360,6 +402,7 @@ def main():
     if provenance is None and (repo / 'archive-source.json').is_file():
         provenance = repo / 'archive-source.json'
     identity = repository_identity(repo, provenance)
+    identity_problem = identity_issue(identity, args.allow_dirty)
     checks = check_environment(repo)
     save(run_dir / 'environment.json', checks)
     save(run_dir / 'source-before.json', before)
@@ -381,7 +424,9 @@ def main():
     ]
     for name, argv, timeout in commands:
         missing = None
-        if checks['issues']:
+        if identity_problem:
+            missing = identity_problem
+        elif checks['issues']:
             missing = 'Python/locked dependency preflight failed; no test process started'
         elif name == 'node_ui' and not node:
             missing = 'Node executable unavailable; provide --node PATH'
@@ -404,7 +449,10 @@ def main():
     save(run_dir / 'source-after.json', after)
     stable = before == after
     code = 2 if checks['issues'] or not stable or any(s['status'] == 'blocked' for s in steps) else 1 if any(s['status'] == 'failed' for s in steps) else 0
+    development_run = bool(identity.get('git_status')) or not identity.get('git_commit')
     report = {'run_id': run_id, 'finished_at': now(), 'repository': str(repo),
+              'allow_dirty': args.allow_dirty, 'identity_issue': identity_problem,
+              'development_run': development_run,
               'temporary_work_root': str(scratch),
               'source_identity': identity, 'source_unchanged_during_checks': stable,
               'source_snapshot_sha256': digest(run_dir / 'source-before.json'),
@@ -416,12 +464,14 @@ def main():
               'isolation_verified': False, 'real_model_final_acceptance': 'not_run',
               'scope': 'C offline reviewed platform/fixture regressions and repair gates; simulated model/runner responses are not real model or Docker evidence',
               'signoff': 'C local execution evidence only; no B or A signature filled automatically'}
+    if code == 0 and development_run:
+        report['acceptance_status'] = 'passed_dirty_offline_scope'
     case_map = repo / 'acceptance_tests/case_map.json'
     if case_map.is_file():
         shutil.copyfile(case_map, run_dir / 'repair-case-map.json')
         report['repair_case_map_path'] = 'repair-case-map.json'
     save(run_dir / 'summary.json', report)
-    lines = ['# C 离线验收结果', '', f'运行编号：`{run_id}`。退出码：{code}。', '',
+    lines = ['# C 离线验收结果' + ('（开发态：不等于干净commit验收）' if development_run else ''), '', f'运行编号：`{run_id}`。退出码：{code}。', '',
              f'结论：{report["acceptance_status"]}。原平台回归与返修门槛分别登记；旧平台测试通过不能替代返修通过。', '',
              '| 检查 | 状态 | 退出码 | 原因 |', '| --- | --- | --- | --- |']
     for step in steps:
