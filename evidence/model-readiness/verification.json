@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-09",
+  "scope": "本机逐项诊断与表格交互；未发模型请求，未执行Docker",
+  "tests": "配置/API20通过；真实Edge五行模型表、账号2详情、保存新任务、草稿失效与窄屏通过",
+  "command": "runs/v3-venv/Scripts/python.exe -B -X utf8 -m pytest tests/test_configuration.py tests/test_api_v3.py -q -o cache_dir=runs/model-readiness-cache --basetemp=runs/model-readiness-tests --junitxml=runs/model-readiness.xml",
+  "browser": "CODE_FIX_CONFIG_BROWSER_OUTPUT=runs/model-readiness-browser-final node tests/browser_config.cjs",
+  "observations": [
+    "PowerShell Stop-Process失败导致一次端口占用，核实无在途任务后终止旧预览进程并用同一数据库重启成功",
+    "浏览器任务保存等待条件加强，避免有历史任务时提前核对旧记录；最终新任务run-398e3f4ed521490880c3ba61aa2e307a已确认created"
+  ],
+  "source_sha256": {
+    "app/configuration.py": "a669f651de5ed973effcb73fd784cb4cd7589890279f7ff58f5635e01284310a",
+    "ui/app/config.js": "f52d929d1cf16e76c7503ee4807373e54ae6a8bee34e6b0ee4990291cffc40dd",
+    "ui/app/config.css": "02b58af79b22d1fc6ad66b1533aba2bf644624c503b90adc2dbf8f6410c13546",
+    "tests/test_configuration.py": "2c451356e8fb125ac482ffefb00b3dcae59554beb9eec66976f632f249a2db2c",
+    "tests/browser_config.cjs": "08e1766a1105405a4e08c80e83edf93362e0cb29c9878b339e1601f8839fe1b5"
+  }
+}

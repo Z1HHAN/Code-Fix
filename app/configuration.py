@@ -2,6 +2,7 @@
 from copy import deepcopy
 import json
 import re
+import os
 from pathlib import Path
 
 from .config import ConfigError
@@ -11,6 +12,31 @@ from .live_model import ModelBlocked
 from .role_config import RoleConfig, digest, SCHEMAS
 from .run_store import now, validate_task
 from .runtime_limits import runtime_limits
+
+
+def profile_checks(profile):
+    """Local diagnostics only. Never expose secrets or exception text to the browser."""
+    from .local_credentials import read_secret
+    from .live_model import positive_decimal
+    checks = []
+    approved = os.environ.get('CODE_FIX_LIVE_APPROVED') == '1' and os.environ.get(profile['approval_env']) == '1'
+    checks.append({'name': '调用授权', 'ok': approved, 'status': '已启用' if approved else '未启用'})
+    try:
+        credential = bool(read_secret(profile['api_key_env']))
+        status = '可读取' if credential else '未配置'
+    except (ValueError, OSError):
+        credential, status = False, '无法读取'
+    checks.append({'name': '凭据读取', 'ok': credential, 'status': status})
+    try:
+        positive_decimal(os.environ.get(profile['input_price_env']))
+        positive_decimal(os.environ.get(profile['output_price_env']))
+        priced = True
+    except (ModelBlocked, ValueError):
+        priced = False
+    checks.append({'name': '计费价格', 'ok': priced, 'status': '已配置' if priced else '未正确配置'})
+    bounded = profile.get('currency') != 'CNY' or profile.get('billable_output_tokens') is not None
+    checks.append({'name': '计费输出上限', 'ok': bounded, 'status': '已登记' if bounded else '待核实'})
+    return checks
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -26,6 +52,7 @@ class ConfigurationStore:
         current = RoleConfig(self.root)
         rows = []
         for ref, profile in registry['profiles'].items():
+            checks = profile_checks(profile)
             try:
                 profile_settings(profile, registry)
                 ready, reason = True, '本机调用配置可解析；未发请求验证'
@@ -33,7 +60,8 @@ class ConfigurationStore:
                 ready, reason = False, '授权、凭据、价格或计费上限未就绪；未发请求'
             rows.append(dict(profile_ref=ref, provider=profile['provider_id'], model=profile['model'],
                              account=profile.get('account_ref'), configured=ready, note=reason,
-                             billing_bound_known=profile.get('billable_output_tokens') is not None))
+                             billing_bound_known=profile.get('billable_output_tokens') is not None,
+                             checks=checks))
         return {'profiles': rows, 'bindings': {role: current.snapshot['models'][agent['model_ref']].get('profile_ref')
                 for role, agent in current.agents.items()},
                 'limits': runtime_limits(),

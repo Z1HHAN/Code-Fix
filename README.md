@@ -49,3 +49,5 @@ node --test tests/ui_prototype.test.cjs tests/ui_budget.test.cjs tests/ui_trace.
 | PPT/demo与历史来源 | [素材索引](docs/2026-11-03_项目持续维护/版本与演示素材索引.md)、[历史索引](docs/99_历史归档/历史归档索引.md) |
 
 功能修改前向A确认范围；B交实现，C针对明确commit本人复跑，A复核状态与合并。每次提交在固定交付日志追加记录，保留失败与历史证据，不代签B/C、不自动打稳定标签。详见[AGENTS](AGENTS.md)、[提交与维护规范](docs/2026-11-03_项目持续维护/提交与维护规范.md)和[PR模板](.github/pull_request_template.md)。
+
+模型配置情况现按服务商与账号对照，点击状态查看授权/凭据/价格/计费上限；检查仅在本机，不触发模型调用。固定交付记录041。

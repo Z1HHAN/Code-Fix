@@ -112,3 +112,36 @@ def test_workflow_consumes_saved_bindings(tmp_path):
     evidence = json.loads((store.directory(rid)/'trace/configuration.json').read_text(encoding='utf-8'))
     assert evidence['roles'] == saved['roles']
 
+
+def test_local_checks_report_each_blocker_without_exposing_credentials(monkeypatch):
+    from app.configuration import profile_checks
+    from app.model_profiles import load_profiles
+    import app.local_credentials
+    p = load_profiles(ROOT)['profiles']['sf_account1_v32'].copy()
+    monkeypatch.setattr(app.local_credentials, 'read_secret', lambda name: 'private-test-credential')
+    monkeypatch.delenv('CODE_FIX_LIVE_APPROVED', raising=False)
+    monkeypatch.delenv(p['input_price_env'], raising=False)
+    monkeypatch.delenv(p['output_price_env'], raising=False)
+    p['billable_output_tokens'] = None
+    checks = profile_checks(p)
+    assert [c['ok'] for c in checks] == [False, True, False, False]
+    assert 'private-test-credential' not in json.dumps(checks)
+    monkeypatch.setenv('CODE_FIX_LIVE_APPROVED', '1')
+    monkeypatch.setenv(p['approval_env'], '1')
+    monkeypatch.setenv(p['input_price_env'], '2')
+    monkeypatch.setenv(p['output_price_env'], '3')
+    p['billable_output_tokens'] = 1000
+    assert all(c['ok'] for c in profile_checks(p))
+
+
+def test_credential_read_error_is_sanitized(monkeypatch):
+    from app.configuration import profile_checks
+    from app.model_profiles import load_profiles
+    import app.local_credentials
+    def unreadable(name):
+        raise ValueError('sensitive-exception-content')
+    monkeypatch.setattr(app.local_credentials, 'read_secret', unreadable)
+    checks = profile_checks(load_profiles(ROOT)['profiles']['sf_account1_v32'])
+    assert checks[1]['status'] == '无法读取'
+    assert 'sensitive-exception-content' not in json.dumps(checks)
+

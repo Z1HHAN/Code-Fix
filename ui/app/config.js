@@ -41,10 +41,39 @@ window.CodeFixConfig = (() => {
       display('budget-note',(budget.paid_calls_blocked?'存在未结算费用，阻止所有账号新付费请求。 ':'')+(budget.note||'仅本项目估算，不是实时平台余额。')+' 金额单位：人民币元；累计额度不按天重置。');
       const values=[['Docker命令',health.docker_available?'可找到；尚不代表隔离通过':'未找到'],['隔离探针',health.isolation_verified===true?'已记录通过':'待本次任务启动验证'],['模型调用配置',health.model_configured?'默认配置可解析，未请求验证':'默认配置未就绪'],['执行机','当前服务所在本机；不代表B机'],['前置阻塞',(health.blockers||[]).join('；')||'未报告；仍须每次运行检查']];
       for(const [k,v]of values)byId('isolation-values').append(element('dt',k),element('dd',v));
-      for(const p of models.profiles){const line=element('p',`${accountName(p)} · ${p.model}：${p.configured?'本机配置可解析':'待核对'}；${p.note}`);byId('model-readiness').append(line);}
+      renderModelReadiness(models.profiles);
       display('conditions-note','已读取本机状态；模型、费用预留和隔离仍以任务启动检查为准。');
     }catch(e){display('conditions-note','状态读取失败：'+e.message+'；旧状态不作当前依据。');display('health','未核对');display('budget','未核对');}
     finally{button.disabled=false;}
+  }
+  function renderModelReadiness(profiles){
+    const host=byId('model-readiness');host.replaceChildren();
+    const groups=[...new Set(profiles.map(p=>p.provider))];
+    groups.sort((a,b)=>a==='siliconflow'?-1:b==='siliconflow'?1:a.localeCompare(b));
+    for(const provider of groups){
+      const group=element(provider==='siliconflow'?'section':'details',null,'readiness-group');
+      group.append(element(provider==='siliconflow'?'h3':'summary',provider==='siliconflow'?'硅基流动':provider==='aliyun_maas'?'阿里云百炼':provider));
+      const content=element('div',null,'readiness-layout'),scroll=element('div',null,'table-scroll'),table=element('table',null,'run-table readiness-table'),head=element('thead'),tr=element('tr'),body=element('tbody'),detail=element('aside',null,'readiness-detail');
+      const rows=profiles.filter(p=>p.provider===provider),aids=[...new Set(rows.map(p=>p.account))];
+      tr.append(element('th','模型'));for(const aid of aids)tr.append(element('th',accounts[aid]||aid||'未记录账号'));head.append(tr);table.append(head,body);scroll.append(table);content.append(scroll,detail);group.append(content);host.append(group);
+      const buttons=[];
+      function select(p,b){
+        for(const button of buttons){button.classList.toggle('selected',button===b);button.setAttribute('aria-pressed',String(button===b));}
+        detail.replaceChildren(element('h3','检查详情'),element('strong',`${accounts[p.account]||p.account} · ${p.model.split('/').at(-1)}`));
+        const dl=element('dl',null,'config-values');
+        for(const check of p.checks||[]){const v=element('dd',check.status,check.ok?'check-ok':'check-pending');dl.append(element('dt',check.name),v);}detail.append(dl);
+        if(!(p.checks||[]).length)detail.append(element('p','检查详情未记录；请重启新版本后端后刷新。'));
+        const blockers=(p.checks||[]).filter(c=>!c.ok).map(c=>c.name+'：'+c.status);
+        detail.append(element('p',blockers.length?'当前阻塞：'+blockers.join('；'):p.configured?'本机配置可解析；未发请求验证。':'四项检查已配置，其他调用条件（如请求时限、地址或额度）仍需核对。','readiness-reason'),element('small','模型 ID：'+p.model),element('p','仅本机检查，不代表平台模型可用或真实调用通过。','footnote'));
+      }
+      for(const model of [...new Set(rows.map(p=>p.model))]){
+        const row=element('tr'),name=element('td',model.split('/').at(-1));name.title=model;row.append(name);
+        for(const aid of aids){const cell=element('td'),p=rows.find(p=>p.model===model&&p.account===aid);
+          if(p){const b=element('button',p.configured?'配置可解析 ›':'待核对 ›','readiness-status');b.type='button';b.setAttribute('aria-label',`${accounts[aid]||aid} ${model}检查详情`);b.onclick=()=>select(p,b);buttons.push(b);cell.append(b);if(buttons.length===1)select(p,b);}
+          else cell.textContent='未登记';row.append(cell);
+        }body.append(row);
+      }
+    }
   }
   async function snapshot(run){
     const id=run.task.config_id||'';
