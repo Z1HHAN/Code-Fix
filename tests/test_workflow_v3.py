@@ -26,6 +26,7 @@ class ExecutorStub:
         (folder / 'stderr.txt').write_text('')
         return {'code_version': expected_version, 'phase': phase, 'failure_class': outcome,
                 'verification_status': 'passed' if outcome == 'passed' else 'failed',
+                'evidence_matches_current_version': True,
                 'stdout_path': 'stdout.txt', 'stderr_path': 'stderr.txt', 'exit_code': 0 if outcome == 'passed' else 1}
 
 

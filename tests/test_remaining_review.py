@@ -266,3 +266,54 @@ def test_windows_job_reaps_real_children_and_grandchildren(tmp_path, parent_wait
                     kernel.CloseHandle(handle)
     finally:
         job.close()
+
+
+@pytest.mark.parametrize('flag, expected', [(True, True), (False, False), (None, False), ('yes', False)])
+def test_evidence_binding_flag_fails_closed(tmp_path, flag, expected):
+    """R-01 (packet RF-07): only a literal True may mark evidence as bound."""
+    from app.runner import code_version
+    from app.workflow_v3 import WorkflowRun
+    (tmp_path / 'source.py').write_text('pass\n', encoding='utf-8')
+    result = {'phase': 'final_check', 'verification_status': 'passed', 'failure_class': 'passed',
+              'test_suite_version': 'suite'}
+    if flag is not None:
+        result['evidence_matches_current_version'] = flag
+    ctx = object.__new__(WorkflowRun)
+    ctx.boundary = lambda: None
+    ctx.source = 'source.py'
+    ctx.version = code_version(tmp_path, ('source.py',))
+    ctx.tool_calls = 0
+    ctx.latest_evidence = ['test-development']
+    ctx.final = {'rounds_used': 1, 'test_suite_version': 'suite'}
+    ctx.directory = tmp_path
+    ctx.deadline = time.monotonic() + 30
+    ctx.run_id = 'synthetic-run'
+    ctx.runner = SimpleNamespace(run=lambda work, folder, *, phase, timeout, expected_version: dict(result, code_version=expected_version))
+    ctx.trace = SimpleNamespace(start=lambda *a, **k: {'step_id': 'synthetic'},
+                               evidence_ids=[], complete=lambda **k: None)
+    ctx.store = SimpleNamespace(event=lambda *a, **k: None)
+    checked, _ = ctx.test(tmp_path, 'final_check', 'final-check')
+    assert checked['verification_status'] == 'passed'
+    assert ctx.final['evidence_matches_current_version'] is expected
+
+
+def test_evidence_binding_rejects_candidate_self_mutation(tmp_path):
+    """R-01 (packet RF-07): a candidate that rewrites its own shipped copy is not bound."""
+    from app.runner import code_version
+    from app.split_runner import evidence_binding
+    work = tmp_path / 'work'
+    work.mkdir()
+    (work / 'source.py').write_bytes(b'original\r\n')
+    raw = (work / 'source.py').read_bytes()
+    shipped = tmp_path / 'shipped.py'
+    shipped.write_bytes(raw)
+    version = code_version(work, ('source.py',))
+    arguments = (shipped, work, ('source.py',), version)
+    assert evidence_binding(raw, *arguments) is True
+    shipped.write_bytes(b'tampered\r\n')
+    assert evidence_binding(raw, *arguments) is False
+    shipped.unlink()
+    assert evidence_binding(raw, *arguments) is False
+    shipped.write_bytes(raw)
+    (work / 'source.py').write_bytes(b'changed elsewhere\r\n')
+    assert evidence_binding(raw, *arguments) is False

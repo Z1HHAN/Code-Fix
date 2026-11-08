@@ -81,6 +81,22 @@ AUDIT_PREFIX = b'CODEFIX_AUDIT '
 FAKE_REPORT = re.compile(rb'(?i)tests?\s+passed\s*=')
 
 
+def evidence_binding(raw, candidate_source, work, source_paths, expected_version):
+    """Bind evidence to the dispatched bytes; anything else fails closed.
+
+    The candidate container mounts its own source, so it could rewrite or delete
+    the copy that was shipped into the RPC volume. A missing/unreadable file, a
+    mutated copy or a changed outer work tree is a negative result, never an
+    exception that a caller might mistake for a pass.
+    """
+    try:
+        if Path(candidate_source).read_bytes() != raw:
+            return False
+        return code_version(Path(work), source_paths) == expected_version
+    except OSError:
+        return False
+
+
 class SplitDockerRunner(DockerRunner):
     def preflight(self, evidence_dir):
         if self.task.project not in FUNCTIONS:
@@ -209,13 +225,19 @@ class SplitDockerRunner(DockerRunner):
             runner.command = self.command
             result = runner._execute(trusted, output, ['/harness.py', *self.task.profile['test_paths']],
                                      max(.01, timeout-(time.monotonic()-started)), folder)
+            # The trusted container never imports candidate bytes, so bind the
+            # evidence to the exact source shipped into /rpc instead of declaring
+            # the binding true.
+            candidate_intact = evidence_binding(
+                raw, candidate / self.task.source, work,
+                self.task.profile['source_paths'], expected_version)
             result.update(phase=phase, code_version=expected_version, project=self.task.project,
                           execution_mode='docker-split-rpc', isolation_ready=True,
                           test_suite_version=compute_test_suite_version(self.task.profile),
                           expected_test_count=len(self.task.profile['expected_nodeids']),
                           stdout_path='trusted-run/stdout.txt', stderr_path='trusted-run/stderr.txt',
                           junit_path='trusted-run/output/junit.xml', structured_path='trusted-run/output/pytest_events.json',
-                          evidence_matches_current_version=True,
+                          evidence_matches_current_version=candidate_intact,
                           trust_boundary='separate_candidate_and_test_containers')
             audit = self._collect_candidate_audit(name, outer)
             result['candidate_audit'] = audit
