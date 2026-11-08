@@ -1,0 +1,17 @@
+{
+  "observed_at": "2026-11-09T03:30:50.476513+08:00",
+  "published_main": "2b236a9deb699d2f5b68c1df51039f146cdfce67",
+  "remote_main_observed": "2b236a9deb699d2f5b68c1df51039f146cdfce67",
+  "push_exit_code": 0,
+  "tested_candidate": "99153cbeafa054321fea0ef20257a38634747f37",
+  "functional_diff_after_testing": false,
+  "remaining_remote_refs": [
+    "origin/codex/day1-repair-demo-review-20261031",
+    "origin/codex/runner-regression-fix",
+    "origin/codex/v0.2-candidate",
+    "origin/demo/readme-note",
+    "origin/ui/day1-repair-ui-20261101"
+  ],
+  "scope": "offline verified merge, not real Docker/model/C-personal acceptance",
+  "note": "Publication record itself is saved in a later documentation-only Git commit."
+}

@@ -103,9 +103,10 @@
       "patch_comparison": [
         "+ 83971e0507076ff583935583a56f4219eea485f3"
       ],
-      "disposition": "merge_candidate_under_verification",
+      "disposition": "merged_and_published_main",
       "candidate_commit": "99153cb",
-      "new_scope": "R-01 evidence binding fail-closed; 5 offline tests"
+      "new_scope": "R-01 evidence binding fail-closed; 5 offline tests",
+      "published_main": "2b236a9deb699d2f5b68c1df51039f146cdfce67"
     },
     {
       "ref": "origin/codex/runner-regression-fix",
@@ -289,5 +290,13 @@
       "archive_path": "docs/99_历史归档/2026-10/C成员首日交付_2026-10-30/runs/C-20261030-193201-b32afc2e/work_reference/tests/test_leap.py",
       "sha256": "26f88bb716343c945dfc6ebc8d33e6ed4911af7bb095811ade5d6675f86fcbef"
     }
-  ]
+  ],
+  "remaining_remote_refs": [
+    "origin/codex/day1-repair-demo-review-20261031",
+    "origin/codex/runner-regression-fix",
+    "origin/codex/v0.2-candidate",
+    "origin/demo/readme-note",
+    "origin/ui/day1-repair-ui-20261101"
+  ],
+  "published_main": "2b236a9deb699d2f5b68c1df51039f146cdfce67"
 }
