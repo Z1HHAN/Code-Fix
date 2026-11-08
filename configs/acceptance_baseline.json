@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "approved_source_commit": "7fba24bb35055ac07c5fc8addf74fa2b9603918d",
+  "approved_source_commit": "59b171121ba5ae2dff374c9d72e2be2851f8b9a2",
   "scope": "Reviewed minimum identities; additions allowed for platform/Node, repair gate inventory changes require explicit review; not cryptographic attestation",
   "platform_testcases": [
     [
@@ -466,6 +466,114 @@
     [
       "tests.test_quixbugs_import",
       "test_native_skip_task_blocks_before_any_probe_or_model[repair]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_legacy_migrates_provider_identity"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_legacy_rejects_before_reading_key[-https://api.siliconflow.cn/v1]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_legacy_rejects_before_reading_key[unknown-https://api.siliconflow.cn/v1]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_legacy_rejects_before_reading_key[siliconflow-https://example.com/v1]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_legacy_rejects_before_reading_key[siliconflow-https://api.siliconflow.cn:4443/v1]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_legacy_rejects_before_reading_key[aliyun_maas-https://api.siliconflow.cn/v1]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_unsent_deadline_releases_reservation"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_invalid_200_has_explicit_class[None]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_invalid_200_has_explicit_class[payload1]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_invalid_200_has_explicit_class[payload2]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_invalid_200_has_explicit_class[payload3]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_service_exception_redacts_observed_non_environment_secret"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_profile_cache_isolated_and_invalidates"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_audit_fail_closed[missing]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_audit_fail_closed[nonzero]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_audit_fail_closed[oversized]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_audit_retains_early_violation_and_no_rotation"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_bundle_counts_actual_bytes_after_stat"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_bundle_streams_files_without_read_bytes"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_live_audit_collector_handles_real_pipes[normal]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_live_audit_collector_handles_real_pipes[overflow]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_live_audit_collector_handles_real_pipes[failed]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_runtime_tool_limit_blocks_before_dispatch"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_route_uses_actual_isolation_state"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_success_trace_is_ok"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_windows_job_reaps_real_children_and_grandchildren[False]"
+    ],
+    [
+      "tests.test_remaining_review",
+      "test_windows_job_reaps_real_children_and_grandchildren[True]"
     ],
     [
       "tests.test_repair_review",
@@ -1398,6 +1506,10 @@
     [
       "tests.test_stage_a_closeout",
       "test_split_container_mounts_exclude_tests_and_reports_from_candidate"
+    ],
+    [
+      "tests.test_stage_a_closeout",
+      "test_audit_cleanup_error_still_removes_containers_and_volume"
     ],
     [
       "tests.test_stage_a_closeout",

@@ -133,7 +133,8 @@ class WorkflowRun:
         expected_version = self.version if phase == 'final_check' else code_version(work, (self.source,))
         if code_version(work, (self.source,)) != expected_version:
             raise IsolationBlocked('最终候选版本已改变')
-        limit = read_json(ROOT / 'configs/runtime_limits.json')['max_tool_calls']
+        from .runtime_limits import runtime_limits
+        limit = runtime_limits()['max_tool_calls']
         if self.tool_calls >= limit:
             raise ModelBlocked('工具调用次数到达工程上限')
         step = self.trace.start('pytest', round_number=self.final['rounds_used'], phase=phase,

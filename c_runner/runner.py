@@ -119,12 +119,23 @@ def _snapshot(workspace):
     _no_links(root)
     if not root.is_dir():
         raise Rejected('Workspace does not exist')
-    files = []
-    for p in root.rglob('*'):
-        _no_links(p)
-        if p.is_file():
-            files.append(p.relative_to(root).as_posix())
-    return _hash_files(root, sorted(files))
+    # Check ancestors once, then every entry (including directories) before
+    # descending. _hash_files remains an independently checked public-code path.
+    resolved = root.resolve()
+    files = {}
+    def walk_error(error):
+        raise error
+    for directory, directories, filenames in root.walk(on_error=walk_error, follow_symlinks=False):
+        for name in (*directories, *filenames):
+            p = directory / name
+            if p.is_symlink() or getattr(p, 'is_junction', lambda: False)():
+                raise Rejected('Symlinks and junctions are not accepted')
+            if p.is_file():
+                relative = _relative(p.relative_to(root).as_posix())
+                if not p.resolve().is_relative_to(resolved):
+                    raise Rejected('Out-of-scope task file: ' + relative.as_posix())
+                files[relative.as_posix()] = hashlib.sha256(p.read_bytes()).hexdigest()
+    return dict(sorted(files.items()))
 
 
 def prepare_fixture(profile_id, destination):

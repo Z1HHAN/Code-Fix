@@ -77,6 +77,8 @@ def get_task(project='leap'):
         raise InputValidationError('未知项目；请从已登记题目中选择')
     task = RegisteredTask(project, projects[project])
     profile = task.profile
+    # Current V3 candidate protocol permits one source replacement. Keep the
+    # shared profile list schema; multi-file repair needs separate approval.
     if len(profile['source_paths']) != 1 or task.source not in profile['approved_files']:
         raise ValueError('当前登记项目必须有一个允许修改的源文件')
     for path in (*profile['approved_files'], *profile['test_paths']):
