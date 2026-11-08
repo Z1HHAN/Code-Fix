@@ -1,0 +1,13 @@
+{
+  "observed_at": "2026-11-09T01:50:22.884349+08:00",
+  "remote": "git@github.com:Z1HHAN/Code-Fix.git",
+  "branch": "main",
+  "observed_remote_commit": "fee9d6cef916472c2529b1603ea6ade8a04b4fbd",
+  "verification": "git ls-remote origin refs/heads/main matched local HEAD after normal push",
+  "tested_merge_commit": "4b609622a40d5070bb762c38fd4afeb5b8f2c9ec",
+  "source_snapshot_sha256": "968ca8deea51eff41a7744400703bf8b4221cff55d9ba3247ce28b2802235938",
+  "source_unchanged_during_checks": true,
+  "subsequent_changes": "040/041 only documents, evidence and evidence byte-preservation attributes; final documentation commit identity is tracked by Git",
+  "docker_target_status": "not_run; use exact tested merge commit on existing Docker target",
+  "configuration_console_branch": "4235421916322c69f8f3cbbe9c1bc919c7662164 is separate, not included"
+}
