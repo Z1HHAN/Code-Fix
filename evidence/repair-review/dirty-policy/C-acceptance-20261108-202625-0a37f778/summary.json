@@ -1,0 +1,215 @@
+{
+  "run_id": "C-acceptance-20261108-202625-0a37f778",
+  "finished_at": "2026-11-08T20:26:27.068+08:00",
+  "repository": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix",
+  "allow_dirty": false,
+  "identity_issue": "Dirty worktree; commit first or explicitly use --allow-dirty for development checks",
+  "development_run": true,
+  "temporary_work_root": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\ca-e88c13aa",
+  "source_identity": {
+    "git_commit": "9d5b5bef23004a69b112e72e1f9417cf0b77b32a",
+    "git_branch": "codex/repair-evidence-boundaries",
+    "git_status": "M acceptance_tests/test_repair_gates.py\n M app/api.py\n M app/docker_runner.py\n M app/providers.py\n M app/workflow_v3.py\n M c_runner/runner.py\n M scripts/c_acceptance.py\n?? configs/acceptance_baseline.json\n?? tests/test_repair_review.py",
+    "git_identity_verified": true,
+    "archive_provenance": null
+  },
+  "source_unchanged_during_checks": true,
+  "source_snapshot_sha256": "7dbfc78ac1bf53cc40d4fb03c751e884aaf07bde0b7c5dc51dc2a3385ae2b286",
+  "python_executable": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+  "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "exit_code": 2,
+  "acceptance_status": "blocked_or_incomplete",
+  "environment": {
+    "python_required": "3.14",
+    "python_actual": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "python_matches": true,
+    "dependencies": [
+      {
+        "package": "annotated-doc",
+        "expected": "0.0.5",
+        "actual": "0.0.5",
+        "matches": true
+      },
+      {
+        "package": "annotated-types",
+        "expected": "0.8.0",
+        "actual": "0.8.0",
+        "matches": true
+      },
+      {
+        "package": "anyio",
+        "expected": "4.16.0",
+        "actual": "4.16.0",
+        "matches": true
+      },
+      {
+        "package": "certifi",
+        "expected": "2026.10.23",
+        "actual": "2026.10.23",
+        "matches": true
+      },
+      {
+        "package": "click",
+        "expected": "8.5.0",
+        "actual": "8.5.0",
+        "matches": true
+      },
+      {
+        "package": "colorama",
+        "expected": "0.4.6",
+        "actual": "0.4.6",
+        "matches": true
+      },
+      {
+        "package": "fastapi",
+        "expected": "0.162.0",
+        "actual": "0.162.0",
+        "matches": true
+      },
+      {
+        "package": "h11",
+        "expected": "0.16.0",
+        "actual": "0.16.0",
+        "matches": true
+      },
+      {
+        "package": "httpcore",
+        "expected": "1.0.9",
+        "actual": "1.0.9",
+        "matches": true
+      },
+      {
+        "package": "httpx",
+        "expected": "0.28.1",
+        "actual": "0.28.1",
+        "matches": true
+      },
+      {
+        "package": "idna",
+        "expected": "3.20",
+        "actual": "3.20",
+        "matches": true
+      },
+      {
+        "package": "iniconfig",
+        "expected": "2.3.1",
+        "actual": "2.3.1",
+        "matches": true
+      },
+      {
+        "package": "opentelemetry-api",
+        "expected": "1.45.2",
+        "actual": "1.45.2",
+        "matches": true
+      },
+      {
+        "package": "packaging",
+        "expected": "26.3",
+        "actual": "26.3",
+        "matches": true
+      },
+      {
+        "package": "pluggy",
+        "expected": "1.7.0",
+        "actual": "1.7.0",
+        "matches": true
+      },
+      {
+        "package": "pydantic",
+        "expected": "2.14.2",
+        "actual": "2.14.2",
+        "matches": true
+      },
+      {
+        "package": "pydantic-core",
+        "expected": "2.50.2",
+        "actual": "2.50.2",
+        "matches": true
+      },
+      {
+        "package": "pytest",
+        "expected": "8.3.5",
+        "actual": "8.3.5",
+        "matches": true
+      },
+      {
+        "package": "starlette",
+        "expected": "1.10.0",
+        "actual": "1.10.0",
+        "matches": true
+      },
+      {
+        "package": "typing-extensions",
+        "expected": "4.16.0",
+        "actual": "4.16.0",
+        "matches": true
+      },
+      {
+        "package": "typing-inspection",
+        "expected": "0.4.4",
+        "actual": "0.4.4",
+        "matches": true
+      },
+      {
+        "package": "uvicorn",
+        "expected": "0.54.0",
+        "actual": "0.54.0",
+        "matches": true
+      }
+    ],
+    "issues": []
+  },
+  "steps": [
+    {
+      "stage": "doctor",
+      "status": "blocked",
+      "exit_code": null,
+      "reason": "Dirty worktree; commit first or explicitly use --allow-dirty for development checks",
+      "verification_status": "not_run"
+    },
+    {
+      "stage": "validate_config",
+      "status": "blocked",
+      "exit_code": null,
+      "reason": "Dirty worktree; commit first or explicitly use --allow-dirty for development checks",
+      "verification_status": "not_run"
+    },
+    {
+      "stage": "platform_pytest",
+      "status": "blocked",
+      "exit_code": null,
+      "reason": "Dirty worktree; commit first or explicitly use --allow-dirty for development checks",
+      "verification_status": "not_run"
+    },
+    {
+      "stage": "node_ui",
+      "status": "blocked",
+      "exit_code": null,
+      "reason": "Dirty worktree; commit first or explicitly use --allow-dirty for development checks",
+      "verification_status": "not_run"
+    },
+    {
+      "stage": "c_controls",
+      "status": "blocked",
+      "exit_code": null,
+      "reason": "Dirty worktree; commit first or explicitly use --allow-dirty for development checks",
+      "verification_status": "not_run"
+    },
+    {
+      "stage": "repair_gates",
+      "status": "blocked",
+      "exit_code": null,
+      "reason": "Dirty worktree; commit first or explicitly use --allow-dirty for development checks",
+      "verification_status": "not_run"
+    }
+  ],
+  "model_api_called": false,
+  "docker_execution_performed": false,
+  "candidate_execution_performed": false,
+  "activity_attestation": "Scope declaration based on reviewed tests and fixtures, not an independent runtime network/process audit. Re-review test code before running against a changed repository.",
+  "isolation_verified": false,
+  "real_model_final_acceptance": "not_run",
+  "scope": "C offline reviewed platform/fixture regressions and repair gates; simulated model/runner responses are not real model or Docker evidence",
+  "signoff": "C local execution evidence only; no B or A signature filled automatically",
+  "repair_case_map_path": "repair-case-map.json"
+}

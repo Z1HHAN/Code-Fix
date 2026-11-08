@@ -31,7 +31,7 @@ python -m venv .venv
 node --test tests/ui_prototype.test.cjs tests/ui_budget.test.cjs tests/ui_trace.test.cjs
 ```
 
-完整C入口、25项门槛及执行前置见[测试与验收计划](docs/2026-11-03_项目持续维护/当前测试与验收计划.md)。模拟模型/执行器的组件结果与真实修复、独立验收分别记录，不能互相替代。
+完整C入口默认要求干净Git提交；`--allow-dirty`仅供开发检查。25项门槛及执行前置见[测试与验收计划](docs/2026-11-03_项目持续维护/当前测试与验收计划.md)。模拟模型/执行器的组件结果与真实修复、独立验收分别记录，不能互相替代。
 
 ## 当前资料与协作
 

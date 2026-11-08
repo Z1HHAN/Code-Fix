@@ -1,0 +1,20 @@
+{
+  "stage": "repair_gates",
+  "status": "passed",
+  "exit_code": 0,
+  "junit_path": "repair_gates/junit.xml",
+  "counts": {
+    "collected": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "skipped_tests": [],
+  "failed_tests": [],
+  "required_case_count": 1,
+  "observed_testcases": [
+    "only_one"
+  ],
+  "allowed_skips": []
+}

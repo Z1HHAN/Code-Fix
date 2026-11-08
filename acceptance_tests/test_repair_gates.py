@@ -127,6 +127,17 @@ def test_code01_forged_stdout_cannot_become_passed(tmp_path, monkeypatch, format
     assert result['status'] == 'failed'
     assert result['failure_class'] == 'evidence_channel_tampered'
 
+    # A channel marker alone cannot promote stdout into actual report files.
+    original_execute = fake_execute
+    def marked_execute(*args):
+        return {**original_execute(*args), 'artifact_channel': 'docker-cp'}
+    monkeypatch.setattr(runner, '_execute', marked_execute)
+    marked = runner.run(work, tmp_path / 'marked-evidence', phase='development', timeout=1,
+                        expected_version=code_version(work, definition.profile['source_paths']))
+    assert marked['verification_status'] == 'inconclusive'
+    assert marked['failure_class'] == 'not_reproduced'
+    assert marked['counts']['passed'] is None
+
 
 @pytest.mark.parametrize('outcome, expected_status, rule', [
     ('environment_error', 'paused', 'R03'), ('timeout', 'stopped', 'R04'), ('not_reproduced', 'paused', 'R06')])
@@ -224,22 +235,34 @@ def test_code07_execution_version_bound_to_snapshot_during_mutation(tmp_path, mo
     expected = code_version(original_work, definition.profile['source_paths'])
     runner = DockerRunner('leap')
     runner.ready = True
-    observed = {}
-    def fake_execute(work, output, extra, timeout, folder):
+    # Synthetic trusted-channel reports allow both cases to reach the version
+    # guard; a missing-channel failure must not make this gate pass.
+    for target in ('original', 'snapshot'):
+        observed = {}
+        def fake_execute(work, output, extra, timeout, folder):
+            changed = source if target == 'original' else work / definition.source
+            changed.write_bytes(original_bytes + b'\n# OFFLINE simulated concurrent mutation\n')
+            observed['version'] = code_version(work, definition.profile['source_paths'])
+            for name, encoded in _forged_reports(definition.profile).items():
+                (output / name).write_bytes(base64.b64decode(encoded))
+            (folder / 'stdout.txt').write_bytes(b'OFFLINE trusted-channel double\n')
+            (folder / 'stderr.txt').write_bytes(b'')
+            return {'call_id': 'c-offline-mutation', 'timed_out': False, 'cleanup_passed': True,
+                    'artifact_channel': 'docker-cp', 'exit_code': 0, 'duration_ms': 0,
+                    'stdout_path': 'stdout.txt', 'stderr_path': 'stderr.txt'}
+        monkeypatch.setattr(runner, '_execute', fake_execute)
         try:
-            source.write_bytes(original_bytes + b'\n# OFFLINE simulated concurrent mutation\n')
-            observed['executed_version'] = code_version(work, definition.profile['source_paths'])
+            if target == 'original':
+                result = runner.run(original_work, tmp_path / target, phase='development', timeout=1, expected_version=expected)
+                assert observed['version'] == expected
+                assert result['verification_status'] == 'passed'
+            else:
+                from app.docker_runner import IsolationBlocked
+                with pytest.raises(IsolationBlocked, match='执行快照版本已改变'):
+                    runner.run(original_work, tmp_path / target, phase='development', timeout=1, expected_version=expected)
+                assert observed['version'] != expected
         finally:
             source.write_bytes(original_bytes)
-        stdout = b'CODEFIX_REPORT:' + base64.b64encode(json.dumps(_forged_reports(definition.profile)).encode()) + b'\n'
-        (folder / 'stdout.txt').write_bytes(stdout)
-        (folder / 'stderr.txt').write_bytes(b'')
-        return {'call_id': 'c-offline-mutation', 'timed_out': False, 'cleanup_passed': True,
-                'exit_code': 0, 'duration_ms': 0, 'stdout_path': 'stdout.txt', 'stderr_path': 'stderr.txt'}
-    monkeypatch.setattr(runner, '_execute', fake_execute)
-    result = runner.run(original_work, tmp_path / 'evidence', phase='development', timeout=1, expected_version=expected)
-    assert source.read_bytes() == original_bytes
-    assert observed['executed_version'] == expected or result['verification_status'] != 'passed', 'CODE-07: different execution bytes were accepted as the original version after source restoration'
 
 
 def test_code09_parameter_expected_value_not_forwarded_to_model(tmp_path):

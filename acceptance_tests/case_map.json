@@ -1,6 +1,7 @@
 {
   "review_id": "CF-REVIEW-20261103-01",
   "schema_version": 1,
+  "gate_revision": "032-code01-code07-strengthened",
   "scope": "C offline requirements-based gates; not real model, Docker qualification, or all-review closure",
   "required_testcase_count": 25,
   "required_testcases": [

@@ -43,7 +43,12 @@ def validate_url(provider, url):
     """https + 无凭证/查询/片段 + 主机属于该服务商白名单。"""
     if not isinstance(url, str) or not url:
         return False
-    parsed = urlsplit(url)
+    try:
+        parsed = urlsplit(url)
+        if parsed.port not in (None, 443):
+            return False
+    except ValueError:
+        return False
     if parsed.scheme != 'https' or not parsed.hostname:
         return False
     if parsed.username or parsed.password or parsed.query or parsed.fragment:

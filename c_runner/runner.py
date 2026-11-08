@@ -137,7 +137,10 @@ def prepare_fixture(profile_id, destination):
 
 
 def _junit_key(nodeid):
-    parts = nodeid.split('::')
+    # Match pytest's mangle_test_address: :: inside a parameter id is data.
+    address, bracket, parameters = nodeid.partition('[')
+    parts = address.split('::')
+    parts[-1] += bracket + parameters
     filename = parts[0].removesuffix('.py').replace('/', '.')
     return ('.'.join([filename, *parts[1:-1]]), parts[-1])
 

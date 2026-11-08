@@ -230,6 +230,8 @@ class DockerRunner:
         output = folder / 'output'
         output.mkdir()
         result = self._execute(snapshot, output, ['/harness.py', *profile['test_paths']], timeout, folder)
+        if code_version(snapshot, profile['source_paths']) != expected_version:
+            raise IsolationBlocked('执行快照版本已改变')
         result.update(phase=phase, code_version=measured, isolation_ready=True, execution_mode='docker',
                       project=self.task.project,
                       test_suite_version=compute_test_suite_version(profile), expected_test_count=len(profile['expected_nodeids']),

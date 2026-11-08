@@ -1,0 +1,10 @@
+{
+  "original_product": {
+    "status": "failed",
+    "type": "Failed",
+    "reason": "DID NOT RAISE <class 'app.docker_runner.IsolationBlocked'>"
+  },
+  "fixed_product": {
+    "status": "passed"
+  }
+}

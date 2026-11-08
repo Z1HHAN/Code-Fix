@@ -1,0 +1,52 @@
+[
+  {
+    "source": "D:\\微信\\xwechat_files\\wxid_dtp0mcijkyyt22_d9e6\\msg\\file\\2026-11\\00_README_返修包说明(1).md",
+    "archived": "docs/99_历史归档/2026-11/原始交付/C返修包_422091d/00_README_返修包说明(1).md",
+    "sha256": "8fb7d0d86e3485863cd70fce145baef81a6b9719547814487b1204fe3675c83b"
+  },
+  {
+    "source": "D:\\微信\\xwechat_files\\wxid_dtp0mcijkyyt22_d9e6\\msg\\file\\2026-11\\01_复核基线与复跑结果(1).md",
+    "archived": "docs/99_历史归档/2026-11/原始交付/C返修包_422091d/01_复核基线与复跑结果(1).md",
+    "sha256": "b3821b943e6c83a37e24584c3f301001dd3b13816e57d16b2fc9ac044afc1986"
+  },
+  {
+    "source": "D:\\微信\\xwechat_files\\wxid_dtp0mcijkyyt22_d9e6\\msg\\file\\2026-11\\02_证据链问题(1).md",
+    "archived": "docs/99_历史归档/2026-11/原始交付/C返修包_422091d/02_证据链问题(1).md",
+    "sha256": "079c60031e4392ac12710364fd3ee20b0dcde4aaaf37c21b2065e52f2d24c16e"
+  },
+  {
+    "source": "D:\\微信\\xwechat_files\\wxid_dtp0mcijkyyt22_d9e6\\msg\\file\\2026-11\\03_缺陷复现清单(1).md",
+    "archived": "docs/99_历史归档/2026-11/原始交付/C返修包_422091d/03_缺陷复现清单(1).md",
+    "sha256": "9aacee5f889dbf8c2cdeab225dba2c9eb384062ff01ec4f6f97dde69586c06ae"
+  },
+  {
+    "source": "D:\\微信\\xwechat_files\\wxid_dtp0mcijkyyt22_d9e6\\msg\\file\\2026-11\\04_代码审查发现(1).md",
+    "archived": "docs/99_历史归档/2026-11/原始交付/C返修包_422091d/04_代码审查发现(1).md",
+    "sha256": "c7d22763b6735df5269e7925c2bde35cb4c89b8928c1390b8b73e86af3de065c"
+  },
+  {
+    "source": "D:\\微信\\xwechat_files\\wxid_dtp0mcijkyyt22_d9e6\\msg\\file\\2026-11\\05_测试与门槛审查(1).md",
+    "archived": "docs/99_历史归档/2026-11/原始交付/C返修包_422091d/05_测试与门槛审查(1).md",
+    "sha256": "d5301232b393680f30b803967468164422351b4e053faac952e3433fba81ccf6"
+  },
+  {
+    "source": "D:\\微信\\xwechat_files\\wxid_dtp0mcijkyyt22_d9e6\\msg\\file\\2026-11\\06_优化方案(1).md",
+    "archived": "docs/99_历史归档/2026-11/原始交付/C返修包_422091d/06_优化方案(1).md",
+    "sha256": "0bec6113013b55ab3207f0f77358481fe4ea9cf6acdbe7413dfd7f16f464b7b5"
+  },
+  {
+    "source": "D:\\微信\\xwechat_files\\wxid_dtp0mcijkyyt22_d9e6\\msg\\file\\2026-11\\07_返修工单与验收清单(1).md",
+    "archived": "docs/99_历史归档/2026-11/原始交付/C返修包_422091d/07_返修工单与验收清单(1).md",
+    "sha256": "cd59720c3c84da095910bc5ba4b60f1735ae0a23ee9ea4a6eb1f56da8783f2c4"
+  },
+  {
+    "source": "D:\\微信\\xwechat_files\\wxid_dtp0mcijkyyt22_d9e6\\msg\\file\\2026-11\\08_未验证边界与阻塞项(1).md",
+    "archived": "docs/99_历史归档/2026-11/原始交付/C返修包_422091d/08_未验证边界与阻塞项(1).md",
+    "sha256": "ff97f98e67ced5a905518e113660e99ee46eb1529fec9d16f206991b334935f2"
+  },
+  {
+    "source": "D:\\微信\\xwechat_files\\wxid_dtp0mcijkyyt22_d9e6\\msg\\file\\2026-11\\09_附录_命令与证据索引(1).md",
+    "archived": "docs/99_历史归档/2026-11/原始交付/C返修包_422091d/09_附录_命令与证据索引(1).md",
+    "sha256": "e55c7d26b707e8a7736f013864431a6ac3fc3f3c1d8f6a68f19d56543f61036c"
+  }
+]

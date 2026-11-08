@@ -42,7 +42,8 @@ def create_app(root=None):
         if origin and origin != str(request.base_url).rstrip('/'):
             return JSONResponse({'detail': '拒绝跨站请求'}, status_code=403)
         if request.method in {'POST', 'PUT', 'PATCH', 'DELETE'}:
-            if not secrets.compare_digest(request.headers.get('x-codefix-token', ''), token):
+            provided = request.headers.get('x-codefix-token', '')
+            if not provided.isascii() or not secrets.compare_digest(provided, token):
                 return JSONResponse({'detail': '会话令牌无效；刷新页面后重试'}, status_code=403)
             size = request.headers.get('content-length')
             if size and (not size.isdecimal() or int(size) > 8192):
