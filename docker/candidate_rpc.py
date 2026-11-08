@@ -72,7 +72,46 @@ def _audit(event, args):
 
 # This standalone entry has no access to the host app package. New adapters
 # must register their reviewed name here and in app.split_runner.FUNCTIONS.
-ALLOWED_FUNCTIONS = frozenset({'is_leap', 'get_factors', 'gcd', 'sqrt'})
+ALLOWED_FUNCTIONS = frozenset({
+    'bitcount',
+    'bucketsort',
+    'find_first_in_sorted',
+    'find_in_sorted',
+    'flatten',
+    'gcd',
+    'get_factors',
+    'is_leap',
+    'is_valid_parenthesization',
+    'kheapsort',
+    'knapsack',
+    'kth',
+    'lcs_length',
+    'levenshtein',
+    'lis',
+    'longest_common_subsequence',
+    'max_sublist_sum',
+    'mergesort',
+    'next_palindrome',
+    'next_permutation',
+    'pascal',
+    'possible_change',
+    'powerset',
+    'quicksort',
+    'rpn_eval',
+    'sieve',
+    'sqrt',
+    'subsequences',
+    'to_base',
+    'wrap',
+})
+
+# Mirrors the pinned native assertion `list(f(...))` for these generator
+# entries.  Declared per function and pinned to app.split_runner by a
+# regression test; returns of every other function are never coerced.
+MATERIALIZE_AS_LIST = frozenset({
+    'flatten',
+    'kheapsort',
+})
 
 
 def execute_request(request, source):
@@ -88,7 +127,12 @@ def execute_request(request, source):
     module = importlib.util.module_from_spec(spec)
     with contextlib.redirect_stdout(sys.stderr):
         spec.loader.exec_module(module)
-        return getattr(module, request['function'])(*request['args'], **request['kwargs'])
+        value = getattr(module, request['function'])(*request['args'], **request['kwargs'])
+        if request['function'] in MATERIALIZE_AS_LIST:
+            # The pinned test compares `list(f(...))`; evaluate the same
+            # expression here so a generator can cross the JSON boundary.
+            value = list(value)
+        return value
 
 
 def main():

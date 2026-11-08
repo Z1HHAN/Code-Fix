@@ -1,0 +1,35 @@
+{
+  "source_files": 400,
+  "source_snapshot_sha256": "51fd48fab6fd1babb23a538887bebc10a8062f01154d7d9b3a358e8a82b29c60",
+  "source_unchanged": true,
+  "results": {
+    "doctor": "passed",
+    "validate_config": "passed",
+    "platform_pytest": {
+      "collected": 405,
+      "passed": 404,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "node_ui": {
+      "tests": 23,
+      "pass": 23,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "c_controls": 12,
+    "repair_gates": {
+      "collected": 25,
+      "passed": 25,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "incoming_commit": "0d0d14bb6c5e77860f2df47e699f030691368c3f",
+  "new_model_calls": 0,
+  "new_docker_runs": 0
+}

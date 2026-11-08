@@ -24,6 +24,11 @@ ROOT = Path(__file__).resolve().parents[1]
 # not enter that table's R15 repair retry; this release deliberately stops once.
 RUNTIME_POLICY = {'version': '1.0.0', 'invalid_model_output': 'stop',
                   'transport_attempts': 1, 'final_feedback_to_agents': False}
+# A baseline run reproduces the registered defect when the frozen native tests
+# fail through an assertion or through a candidate runtime error.  Both classes
+# were approved by the operator on 2026-11-06 (option A); syntax_error,
+# environment_error and timeout still stop before any repair round.
+BASELINE_FAILURE_CLASSES = frozenset({'assertion_failed', 'code_runtime_error'})
 
 
 class Workflow:
@@ -368,10 +373,10 @@ class WorkflowRun:
                 return terminal
             result, folder = self.test(self.base, 'development', 'baseline')
             self.boundary()
-            if result.get('failure_class') != 'assertion_failed':
-                failure = result.get('failure_class', 'unknown_evidence')
-                self.final['baseline_failure_class'] = failure
-                routed = self.route('not_reproduced' if failure == 'passed' else failure)
+            baseline_failure = result.get('failure_class', 'unknown_evidence')
+            self.final['baseline_failure_class'] = baseline_failure
+            if baseline_failure not in BASELINE_FAILURE_CLASSES:
+                routed = self.route('not_reproduced' if baseline_failure == 'passed' else baseline_failure)
                 return self.finish('stopped' if routed['action'] == 'stop' else 'paused', routed['reason'])
             for round_number in range(1, self.task['max_rounds'] + 1):
                 result, folder, terminal = self.repair_round(result, folder, round_number)

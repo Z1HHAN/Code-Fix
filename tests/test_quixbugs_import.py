@@ -4,7 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from app.quixbugs_import import BUNDLE, ROOT, import_dataset, load_bundle, static_test_ids
+from app.quixbugs_import import (BUNDLE, ROOT, import_dataset, load_bundle,
+                                 load_skip_approvals, static_test_ids)
 
 
 def empty_registry(tmp_path):
@@ -24,6 +25,13 @@ def test_full_bundle_hash_verification_and_static_id_compatibility():
         ids, skip, _ = static_test_ids(name, files)
         assert ids == current['projects']['qb-'+name]['profile']['expected_nodeids']
         assert not skip
+    # The shipped registry must match the reviewed approval file exactly.
+    approvals = load_skip_approvals(ROOT)
+    assert set(approvals) == {'qb-knapsack', 'qb-levenshtein'}
+    for project, entries in approvals.items():
+        registered = current['projects'][project]
+        assert registered['profile']['allowed_skips'] == entries
+        assert registered.get('admission_blocker') is None
 
 
 def test_preview_does_not_write_and_never_starts_a_process(tmp_path, monkeypatch):
@@ -149,8 +157,39 @@ def test_windows_permission_failure_is_bounded_and_registry_remains_safe(tmp_pat
     assert len(json.loads(path.read_bytes())['projects']) == 41
 
 
+def test_approved_native_skips_are_registered_exactly(tmp_path):
+    path = empty_registry(tmp_path)
+    approvals_path = tmp_path / 'configs/tasks/native-skip-approvals.json'
+    approvals_path.write_text(
+        (ROOT / 'configs/tasks/native-skip-approvals.json').read_text(encoding='utf-8'),
+        encoding='utf-8')
+    report = import_dataset(root=tmp_path, write=True)
+    assert report['blocked_native_skip_policy'] == []
+    catalog = json.loads(path.read_bytes())['projects']
+    approvals = load_skip_approvals(tmp_path)
+    for project, entries in approvals.items():
+        assert catalog[project]['admission_blocker'] is None
+        assert catalog[project]['profile']['allowed_skips'] == entries
+        assert set(entries) <= set(catalog[project]['profile']['expected_nodeids'])
+
+
+def test_unknown_native_skip_approval_rejects_import_before_write(tmp_path):
+    path = empty_registry(tmp_path)
+    original = path.read_bytes()
+    approvals_path = tmp_path / 'configs/tasks/native-skip-approvals.json'
+    approvals_path.write_text(json.dumps({'schema_version': 1, 'approvals': {
+        'qb-knapsack': {'python_testcases/test_knapsack.py::test_knapsack[not-real]': 'x'}}}),
+        encoding='utf-8')
+    with pytest.raises(ValueError, match='skip nodeid'):
+        import_dataset(root=tmp_path, write=True)
+    assert path.read_bytes() == original and not (tmp_path / 'task_assets').exists()
+
+
 @pytest.mark.parametrize('mode', ['baseline', 'repair'])
 def test_native_skip_task_blocks_before_any_probe_or_model(tmp_path, monkeypatch, mode):
+    # A fresh import without the approvals file must keep the fail-closed
+    # policy: the static scan flags the slow native skip and admission blocks
+    # before any probe or model call.
     from app.service import TaskService
     empty_registry(tmp_path)
     import_dataset(root=tmp_path, write=True)

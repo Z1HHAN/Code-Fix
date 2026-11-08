@@ -1,0 +1,1329 @@
+{
+  "schema_version": 1,
+  "batch": "batch-20261106-correct-adapters",
+  "upstream_repository": "https://github.com/jkoppel/QuixBugs",
+  "upstream_commit": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+  "correct_source_verification": "pinned commit + git ls-tree blob SHA + cat-file bytes",
+  "model_api_called": false,
+  "api_cost_cny": 0,
+  "docker_image": "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+  "preflight": {
+    "isolation_ready": true,
+    "image": "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+    "reason": null,
+    "engine_id": "9a5e7540-074f-4549-9e6a-02f78d140e9a",
+    "scope": "Linux Docker probe; not VM-equivalent isolation certification"
+  },
+  "task_count": 28,
+  "production_profile_passed": 25,
+  "native_skip_in_memory_validated": 2,
+  "adapter_contract_passed": 25,
+  "adapter_contract_failed": 3,
+  "all_adapter_contracts_passed": false,
+  "production_profile_all_passed": false,
+  "run_root": "runs/quixbugs-adapter-validation/batch-20261106-correct-adapters",
+  "tasks": [
+    {
+      "index": 1,
+      "project": "qb-bitcount",
+      "function": "bitcount",
+      "source": "python_programs/bitcount.py",
+      "correct_blob_path": "correct_python_programs/bitcount.py",
+      "correct_git_blob_sha": "14a215b1ee3106519c0f09fe5a04c95b478ea6dc",
+      "correct_sha256": "debc7dc00e3084e106c388d31e90087b3b86845aa5bae1b848d6bac97ec872b4",
+      "expected_test_count": 9,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 9,
+          "passed": 9,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 9,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 2,
+      "project": "qb-bucketsort",
+      "function": "bucketsort",
+      "source": "python_programs/bucketsort.py",
+      "correct_blob_path": "correct_python_programs/bucketsort.py",
+      "correct_git_blob_sha": "b5e7d0116d0930be1de24c06eb4b9a9f76d15870",
+      "correct_sha256": "a83473634c9a9bf43d589e183201ae9d00006b028c2eec403a1e74abe1927ab9",
+      "expected_test_count": 7,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 7,
+          "passed": 7,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 7,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 3,
+      "project": "qb-find_first_in_sorted",
+      "function": "find_first_in_sorted",
+      "source": "python_programs/find_first_in_sorted.py",
+      "correct_blob_path": "correct_python_programs/find_first_in_sorted.py",
+      "correct_git_blob_sha": "b3e453e48d6aa2c3047c8c08381560a0912905e4",
+      "correct_sha256": "815d382f87c7ccc215305b5c28429c96cd605755d44f466bae3448be298bc17d",
+      "expected_test_count": 7,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 7,
+          "passed": 7,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 7,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 4,
+      "project": "qb-find_in_sorted",
+      "function": "find_in_sorted",
+      "source": "python_programs/find_in_sorted.py",
+      "correct_blob_path": "correct_python_programs/find_in_sorted.py",
+      "correct_git_blob_sha": "0311c3b20783cef0ff7b6a546141b690aa2973d0",
+      "correct_sha256": "cce13769543e2972d66ea61c9d1f1751836c719abf336be8f50f2702d19477ea",
+      "expected_test_count": 7,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 7,
+          "passed": 7,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 7,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 5,
+      "project": "qb-flatten",
+      "function": "flatten",
+      "source": "python_programs/flatten.py",
+      "correct_blob_path": "correct_python_programs/flatten.py",
+      "correct_git_blob_sha": "6954b0724791f05293c5213c4bd187b95590410b",
+      "correct_sha256": "9a81d65b8147aa84be75b3345b1ce25d2577335d955e963e10bbef19f986618d",
+      "expected_test_count": 7,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "failed",
+        "verification_status": "failed",
+        "failure_class": "code_runtime_error",
+        "reason": "Frozen native fixture tests completed with a recorded failure",
+        "exit_code": 1,
+        "counts": {
+          "collected": 7,
+          "passed": 0,
+          "failed": 7,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 7,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [
+            "execution_error"
+          ],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": false,
+      "skipped_nodeids": [],
+      "validation_profile": "not_needed",
+      "adapter_contract_passed": false
+    },
+    {
+      "index": 6,
+      "project": "qb-gcd",
+      "function": "gcd",
+      "source": "python_programs/gcd.py",
+      "correct_blob_path": "correct_python_programs/gcd.py",
+      "correct_git_blob_sha": "2ae5d0b4e3ac6bba85ff55f8cca1819af17f1982",
+      "correct_sha256": "68ed345fa14c13fa0d3b70ebfd3ab3e30ca937a52fd4a7f139630177ca005d9b",
+      "expected_test_count": 6,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 6,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 7,
+      "project": "qb-get_factors",
+      "function": "get_factors",
+      "source": "python_programs/get_factors.py",
+      "correct_blob_path": "correct_python_programs/get_factors.py",
+      "correct_git_blob_sha": "c9fc3fdb636ccddbdff8b2855f7b1a7c87490304",
+      "correct_sha256": "a2cd419152aa9262e76614bd7fc4834329cb72263c9b9e91afa4037570c2f99f",
+      "expected_test_count": 11,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 11,
+          "passed": 11,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 11,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 8,
+      "project": "qb-is_valid_parenthesization",
+      "function": "is_valid_parenthesization",
+      "source": "python_programs/is_valid_parenthesization.py",
+      "correct_blob_path": "correct_python_programs/is_valid_parenthesization.py",
+      "correct_git_blob_sha": "ae70a3f22f90a68ca74e8af99eddd3eee894099b",
+      "correct_sha256": "77d7131ce9cadd9876621835bbf18f8299ee52882a1860593409260e41cbb559",
+      "expected_test_count": 3,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 3,
+          "passed": 3,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 3,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 9,
+      "project": "qb-knapsack",
+      "function": "knapsack",
+      "source": "python_programs/knapsack.py",
+      "correct_blob_path": "correct_python_programs/knapsack.py",
+      "correct_git_blob_sha": "bb2d3dbffde5b16bedd4d99bc721a1e26b77b87b",
+      "correct_sha256": "eb77641ea54529f03ca727bf38b3ab6006ffc17d634540c5e831f9f381aef8b4",
+      "expected_test_count": 10,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "failed",
+        "verification_status": "inconclusive",
+        "failure_class": "not_reproduced",
+        "reason": "Unapproved skipped tests or no actual passing tests",
+        "exit_code": 0,
+        "counts": {
+          "collected": 10,
+          "passed": 9,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 1
+        },
+        "expected_test_count": 10,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": false,
+      "skipped_nodeids": [
+        "python_testcases/test_knapsack.py::test_knapsack[input_data9-13549094]"
+      ],
+      "validation_profile": {
+        "mode": "in_memory_exact_native_skips",
+        "allowed_skips": {
+          "python_testcases/test_knapsack.py::test_knapsack[input_data9-13549094]": "official upstream native test skip"
+        }
+      },
+      "validation_run": {
+        "status": "failed",
+        "verification_status": "inconclusive",
+        "failure_class": "not_reproduced",
+        "reason": "Unapproved skipped tests or no actual passing tests",
+        "exit_code": 0,
+        "counts": {
+          "collected": 10,
+          "passed": 9,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 1
+        },
+        "expected_test_count": 10,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "adapter_contract_passed": false
+    },
+    {
+      "index": 10,
+      "project": "qb-kth",
+      "function": "kth",
+      "source": "python_programs/kth.py",
+      "correct_blob_path": "correct_python_programs/kth.py",
+      "correct_git_blob_sha": "34f11295a0f0ed8a7d057fa809580495629f7398",
+      "correct_sha256": "1a744253b219bf9fee54fbe5f612ac3c6d186cd38f442b57c41736d102524252",
+      "expected_test_count": 7,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 7,
+          "passed": 7,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 7,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 11,
+      "project": "qb-lcs_length",
+      "function": "lcs_length",
+      "source": "python_programs/lcs_length.py",
+      "correct_blob_path": "correct_python_programs/lcs_length.py",
+      "correct_git_blob_sha": "15456a32874889e66b854ff867c19690c5712933",
+      "correct_sha256": "c0c66a9a499e75814743654a7a5403dc9d826ebdd0a151859047f66ddfa0fc27",
+      "expected_test_count": 9,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 9,
+          "passed": 9,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 9,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 12,
+      "project": "qb-levenshtein",
+      "function": "levenshtein",
+      "source": "python_programs/levenshtein.py",
+      "correct_blob_path": "correct_python_programs/levenshtein.py",
+      "correct_git_blob_sha": "52fadb61e87b471cfff974750bfee0fc747f3652",
+      "correct_sha256": "9c44bb70893dbce0af02c54f97dc56cd859cc8dbc08e2985b581d79590abe837",
+      "expected_test_count": 7,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "failed",
+        "verification_status": "inconclusive",
+        "failure_class": "not_reproduced",
+        "reason": "Unapproved skipped tests or no actual passing tests",
+        "exit_code": 0,
+        "counts": {
+          "collected": 7,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 1
+        },
+        "expected_test_count": 7,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": false,
+      "skipped_nodeids": [
+        "python_testcases/test_levenshtein.py::test_levenshtein[input_data3-42]"
+      ],
+      "validation_profile": {
+        "mode": "in_memory_exact_native_skips",
+        "allowed_skips": {
+          "python_testcases/test_levenshtein.py::test_levenshtein[input_data3-42]": "official upstream native test skip"
+        }
+      },
+      "validation_run": {
+        "status": "failed",
+        "verification_status": "inconclusive",
+        "failure_class": "not_reproduced",
+        "reason": "Unapproved skipped tests or no actual passing tests",
+        "exit_code": 0,
+        "counts": {
+          "collected": 7,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 1
+        },
+        "expected_test_count": 7,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "adapter_contract_passed": false
+    },
+    {
+      "index": 13,
+      "project": "qb-lis",
+      "function": "lis",
+      "source": "python_programs/lis.py",
+      "correct_blob_path": "correct_python_programs/lis.py",
+      "correct_git_blob_sha": "5b165427be37091aac80be9adc02a4796192e2ea",
+      "correct_sha256": "f2f14efdb6b419591d565882734ce05c40cdd3b203b45b5727d2838338063a61",
+      "expected_test_count": 12,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 12,
+          "passed": 12,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 12,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 14,
+      "project": "qb-longest_common_subsequence",
+      "function": "longest_common_subsequence",
+      "source": "python_programs/longest_common_subsequence.py",
+      "correct_blob_path": "correct_python_programs/longest_common_subsequence.py",
+      "correct_git_blob_sha": "604c5ecdfdef886d066a3551d8f7a90d4194751c",
+      "correct_sha256": "e59ea6754bc515a15e00d233ab082b6aa9ff7619656007082e9e439051588f6f",
+      "expected_test_count": 10,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 10,
+          "passed": 10,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 10,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 15,
+      "project": "qb-max_sublist_sum",
+      "function": "max_sublist_sum",
+      "source": "python_programs/max_sublist_sum.py",
+      "correct_blob_path": "correct_python_programs/max_sublist_sum.py",
+      "correct_git_blob_sha": "b717485402b95034de64a33d52aecf589fb708cc",
+      "correct_sha256": "2f2b119d49fbbe641707020b6e7cbb637affeffe9ae3ca653cccd5a3bee8d798",
+      "expected_test_count": 6,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 6,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 16,
+      "project": "qb-mergesort",
+      "function": "mergesort",
+      "source": "python_programs/mergesort.py",
+      "correct_blob_path": "correct_python_programs/mergesort.py",
+      "correct_git_blob_sha": "ec2d3b15294ad40ec12469825d8071d4eec37a33",
+      "correct_sha256": "f4b64e3c49b0a050fa99002be491615708eb532be0b137bbc928af683f4da3f7",
+      "expected_test_count": 14,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 14,
+          "passed": 14,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 14,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 17,
+      "project": "qb-next_palindrome",
+      "function": "next_palindrome",
+      "source": "python_programs/next_palindrome.py",
+      "correct_blob_path": "correct_python_programs/next_palindrome.py",
+      "correct_git_blob_sha": "10b375aed8faaa4e7bbc6685faec6c9b6299c377",
+      "correct_sha256": "6b5b1d10c30ff9277d5a8a881cc0daa19a5c0e6bbca42c3e432f87bd634224b6",
+      "expected_test_count": 5,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 5,
+          "passed": 5,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 5,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 18,
+      "project": "qb-next_permutation",
+      "function": "next_permutation",
+      "source": "python_programs/next_permutation.py",
+      "correct_blob_path": "correct_python_programs/next_permutation.py",
+      "correct_git_blob_sha": "8c6e95266f01e63c6daaf1af317023aaca4c382c",
+      "correct_sha256": "93bbb04ed299c44c202ab2eca2aa68318b5ee94fdcb6ce5a3977f24c7ed67957",
+      "expected_test_count": 8,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 8,
+          "passed": 8,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 8,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 19,
+      "project": "qb-pascal",
+      "function": "pascal",
+      "source": "python_programs/pascal.py",
+      "correct_blob_path": "correct_python_programs/pascal.py",
+      "correct_git_blob_sha": "d85ab1ad7dc9b1b6f89d0e154f15d5937d68339b",
+      "correct_sha256": "96b7da947feab99eb7e273c6d1d0e7f1692c04b3f0d9654a1a4253ce57dfcaa8",
+      "expected_test_count": 5,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 5,
+          "passed": 5,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 5,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 20,
+      "project": "qb-possible_change",
+      "function": "possible_change",
+      "source": "python_programs/possible_change.py",
+      "correct_blob_path": "correct_python_programs/possible_change.py",
+      "correct_git_blob_sha": "c5aa9d63cdb8ff89f55f81d50af803e163972b48",
+      "correct_sha256": "195f5cdc05e838b4c14553090b95e297c75401a6ce778b2738e7e9f47ec18cd0",
+      "expected_test_count": 10,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 10,
+          "passed": 10,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 10,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 21,
+      "project": "qb-powerset",
+      "function": "powerset",
+      "source": "python_programs/powerset.py",
+      "correct_blob_path": "correct_python_programs/powerset.py",
+      "correct_git_blob_sha": "235f310909b00758985fffbacd85af5ad6dcd1cf",
+      "correct_sha256": "b53f71a04fec20cbd20c5f0edd64ec1c49796b693677d46b3e7e02b5e3aaf46e",
+      "expected_test_count": 5,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 5,
+          "passed": 5,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 5,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 22,
+      "project": "qb-quicksort",
+      "function": "quicksort",
+      "source": "python_programs/quicksort.py",
+      "correct_blob_path": "correct_python_programs/quicksort.py",
+      "correct_git_blob_sha": "bcd5b7e83e476ab688b7754109194ed7e79c6bf5",
+      "correct_sha256": "2b9aa475d442ab534de2f1a5912de4ae3049282db3093f17f2bd88b6b356ba54",
+      "expected_test_count": 13,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 13,
+          "passed": 13,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 13,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 23,
+      "project": "qb-rpn_eval",
+      "function": "rpn_eval",
+      "source": "python_programs/rpn_eval.py",
+      "correct_blob_path": "correct_python_programs/rpn_eval.py",
+      "correct_git_blob_sha": "306a19077f8c2256c0e51c59bbac9dfc392fde84",
+      "correct_sha256": "a5f9ec92795e5703653039bfb6b08e8a1298c18ea89a842d3c67e7bc67a2030e",
+      "expected_test_count": 6,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 6,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 24,
+      "project": "qb-sieve",
+      "function": "sieve",
+      "source": "python_programs/sieve.py",
+      "correct_blob_path": "correct_python_programs/sieve.py",
+      "correct_git_blob_sha": "84166058443ca0ceefbc850ac278223834c0d582",
+      "correct_sha256": "624b6480828391cd5316f7418acd9d2654fafa04b3821d07e6c99f062857da44",
+      "expected_test_count": 6,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 6,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 25,
+      "project": "qb-sqrt",
+      "function": "sqrt",
+      "source": "python_programs/sqrt.py",
+      "correct_blob_path": "correct_python_programs/sqrt.py",
+      "correct_git_blob_sha": "77e1f135cd47b49d23a909c12285fcd6f1329da5",
+      "correct_sha256": "8abad14937a9cd1cfe0e1c7f20f92861a0a86c6305e473f184ae813b6120375e",
+      "expected_test_count": 7,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 7,
+          "passed": 7,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 7,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 26,
+      "project": "qb-subsequences",
+      "function": "subsequences",
+      "source": "python_programs/subsequences.py",
+      "correct_blob_path": "correct_python_programs/subsequences.py",
+      "correct_git_blob_sha": "dff4e750fc2b91e534ed0851e00d21ac82199f1c",
+      "correct_sha256": "cc04b2d74db77bdd93af52c8a0b7ab2c7eb9adc83719ebe739bd74b71d46a185",
+      "expected_test_count": 12,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 12,
+          "passed": 12,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 12,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 27,
+      "project": "qb-to_base",
+      "function": "to_base",
+      "source": "python_programs/to_base.py",
+      "correct_blob_path": "correct_python_programs/to_base.py",
+      "correct_git_blob_sha": "bfe5c9880100b3dfc86499ddd7e11666cf055468",
+      "correct_sha256": "bebdb1310d6db38977227a0a4c25a8e3861cd67faee92ab66bb7cbd314d92bc0",
+      "expected_test_count": 10,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 10,
+          "passed": 10,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 10,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    },
+    {
+      "index": 28,
+      "project": "qb-wrap",
+      "function": "wrap",
+      "source": "python_programs/wrap.py",
+      "correct_blob_path": "correct_python_programs/wrap.py",
+      "correct_git_blob_sha": "82edd4c8cdbcb18a049a4d21c067b94f91573bb9",
+      "correct_sha256": "19dba14cdf9fe3380abf4dd3b2d5726f38bbd4af39e0f19e725f9f3bdd236bc6",
+      "expected_test_count": 5,
+      "production_profile": {
+        "allowed_skips": {}
+      },
+      "production_run": {
+        "status": "ok",
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "reason": "Expected identities and complete lifecycle verified against JUnit",
+        "exit_code": 0,
+        "counts": {
+          "collected": 5,
+          "passed": 5,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "expected_test_count": 5,
+        "isolation_ready": true,
+        "cleanup_passed": true,
+        "artifact_channel": "docker-cp",
+        "trust_boundary": "separate_candidate_and_test_containers",
+        "evidence_matches_current_version": true,
+        "candidate_audit": {
+          "logs_captured": true,
+          "event_kinds": [],
+          "fake_report_output": false,
+          "violation": null,
+          "reason": null
+        }
+      },
+      "production_passed": true,
+      "skipped_nodeids": [],
+      "adapter_contract_passed": true,
+      "validation_profile": "production"
+    }
+  ]
+}

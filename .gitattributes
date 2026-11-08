@@ -61,3 +61,8 @@ evidence/docker-isolation/** -text -whitespace
 evidence/real-run/** -text -whitespace
 evidence/integration-docker-loop/** -text -whitespace
 docs/99_历史归档/2026-11/原始交付/Docker隔离资格/** -text -whitespace
+
+# Batch handoff and integration evidence preserve captured bytes.
+evidence/quixbugs* -text -whitespace
+evidence/quixbugs-adapter-validation/** -text -whitespace
+evidence/integration-quixbugs/** -text -whitespace

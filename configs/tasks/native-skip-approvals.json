@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "approvals": {
+    "qb-knapsack": {
+      "python_testcases/test_knapsack.py::test_knapsack[input_data9-13549094]": "official upstream native test skip: takes about 4 minutes to pass"
+    },
+    "qb-levenshtein": {
+      "python_testcases/test_levenshtein.py::test_levenshtein[input_data3-42]": "official upstream native test skip: takes too long to pass"
+    }
+  }
+}

@@ -199,3 +199,21 @@ def test_public_task_routes_registered_source_and_clean_copy_with_stubs_only(tmp
         assert list(material['readonly_code']) == ['python_testcases/node.py']
         assert 'class Node' in material['readonly_code']['python_testcases/node.py']
         assert not any(path.startswith('correct_') for path in material['readonly_code'])
+
+
+def test_baseline_code_runtime_error_is_accepted_as_reproduced_defect(tmp_path):
+    # Option A (2026-11-06): a baseline that crashes the candidate still counts
+    # as the registered defect and may enter the repair loop.
+    status, result, runner, model, *_ = execute(tmp_path, ['code_runtime_error', 'passed', 'passed'])
+    assert status == 'success' and result['final_result'] == 'passed'
+    assert result['baseline_failure_class'] == 'code_runtime_error'
+    assert runner.phases == ['development', 'development', 'final_check']
+    assert model.roles == ['repairer', 'detector', 'scheduler']
+
+
+@pytest.mark.parametrize('baseline', ['environment_error', 'timeout', 'passed', 'unknown_evidence'])
+def test_baseline_outside_approved_classes_stops_before_any_model_call(tmp_path, baseline):
+    status, result, runner, model, *_ = execute(tmp_path, [baseline, 'passed'])
+    assert status in {'paused', 'stopped'} and runner.phases == ['development']
+    assert model.roles == [] and result['model_calls'] == 0
+    assert result['baseline_failure_class'] == baseline
