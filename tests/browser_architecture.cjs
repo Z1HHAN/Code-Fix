@@ -33,6 +33,9 @@ const watchdog=setTimeout(()=>{browser.kill();process.exit(1);},90000);
   async function inject(n,status='running'){await ev(`renderTrace(${JSON.stringify({...fixture})},${JSON.stringify(sequence.slice(0,n))})`);}
   await ev(`display('page-title','离线注入演示 · 不是真实执行');renderTrace(${JSON.stringify({...fixture,status:'created'})},[])`);
   await inject(2);assert.equal(await ev("document.querySelector('[data-module=repairer]').classList.contains('arch-active')"),true);
+  const layout=await ev(`(()=>{const n=document.querySelector('.arch-node'),r=n.getBoundingClientRect(),i=document.querySelector('.workbench-grid>.inspector').getBoundingClientRect();return {font:parseFloat(getComputedStyle(n.querySelector('strong')).fontSize),nodeWidth:r.width,inspectorWidth:i.width,zoom:getComputedStyle(document.querySelector('.architecture-canvas')).zoom};})()`);
+  assert.ok(layout.font>=15);assert.ok(layout.nodeWidth>=156);assert.ok(layout.inspectorWidth>=260&&layout.inspectorWidth<=300);assert.equal(Number(layout.zoom),1);
+  const overlaps=await ev(`(()=>{const a=[...document.querySelectorAll('.arch-node')].map(n=>n.getBoundingClientRect());return a.some((r,i)=>a.slice(i+1).some(s=>r.left<s.right&&r.right>s.left&&r.top<s.bottom&&r.bottom>s.top));})()`);assert.equal(overlaps,false);
   await inject(4);assert.ok(await ev("document.querySelector('.arch-transmission[data-from=a][data-to=t]')!==null"));await shot('transfer');
   await inject(10);assert.equal(await ev("document.querySelector('[data-module=locator]').classList.contains('arch-active')"),true);assert.ok(await ev("document.querySelector('.arch-transmission[data-from=d][data-to=l]')!==null"));await shot('locator');
   await sleep(1500);assert.equal(await ev("document.querySelectorAll('.arch-transmission').length"),0);assert.equal(await ev("document.querySelector('[data-module=locator]').classList.contains('arch-active')"),true);

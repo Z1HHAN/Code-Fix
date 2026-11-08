@@ -125,7 +125,7 @@ async function refresh() {
     const result = run.result || {};
     renderTrace(run, events);
     renderRun(run,events);renderRecords();
-    const canvas=byId('trace-flow').querySelector('.trace-canvas');if(canvas)canvas.style.zoom=scale;const architecture=byId('architecture-flow').querySelector('.architecture-canvas');if(architecture){architecture.dataset.zoomFactor=scale;architecture.style.zoom=scale*Math.min(1,Math.max(.35,(architecture.parentElement.clientWidth-24)/1010));}
+    const canvas=byId('trace-flow').querySelector('.trace-canvas');if(canvas)canvas.style.zoom=scale;const architecture=byId('architecture-flow').querySelector('.architecture-canvas');if(architecture){architecture.dataset.zoomFactor=scale;architecture.style.zoom=scale;}
     display('status', `${run.run_id}\n状态：${run.status} · 题目：${run.task.project} · 模式：${run.task.mode}`);
     display('summary', [
       `执行来源：${CodeFixTrace.provenance(run, events)}`,
@@ -190,7 +190,7 @@ byId('close-task').onclick=byId('cancel-task').onclick=()=>byId('new-task-dialog
 for(const button of document.querySelectorAll('[data-evidence]'))button.onclick=()=>showEvidence(button.dataset.evidence);
 byId('copy-evidence').onclick=async()=>{try{await navigator.clipboard.writeText(byId('artifact-viewer').textContent);display('artifact-path','已复制 · '+(byId('artifact-path').textContent.replace(/^已复制 · /,'')));}catch{display('error','浏览器未允许复制，可选中文本手动复制。');}};
 for(const [id,change] of [['zoom-in',.1],['zoom-out',-.1]])byId(id).onclick=()=>{
-  scale=Math.max(.5,Math.min(1.5,Math.round((scale+change)*10)/10));const canvas=byId('trace-flow').querySelector('.trace-canvas');if(canvas)canvas.style.zoom=scale;const architecture=byId('architecture-flow').querySelector('.architecture-canvas');if(architecture){architecture.dataset.zoomFactor=scale;architecture.style.zoom=scale*Math.min(1,Math.max(.35,(architecture.parentElement.clientWidth-24)/1010));}
+  scale=Math.max(.5,Math.min(1.5,Math.round((scale+change)*10)/10));const canvas=byId('trace-flow').querySelector('.trace-canvas');if(canvas)canvas.style.zoom=scale;const architecture=byId('architecture-flow').querySelector('.architecture-canvas');if(architecture){architecture.dataset.zoomFactor=scale;architecture.style.zoom=scale;}
 };
 byId('locate-last').onclick=()=>{byId('actual-view').click();byId('architecture-flow').querySelector('.arch-controls button')?.click();const current=byId('architecture-flow').querySelector('.arch-active');if(current){current.scrollIntoView({block:'nearest',inline:'nearest'});current.focus({preventScroll:true});}};
 for(const [id,guide] of [['actual-view',false],['template-view',true]])byId(id).onclick=()=>{

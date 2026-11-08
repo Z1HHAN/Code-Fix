@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-09",
+  "parent_commit": "cd07d6c",
+  "branch": "codex/model-config-console",
+  "scope": "Authorized workbench size and node styling only; offline events; no model, Docker or real repair",
+  "node_tests": {
+    "passed": 28,
+    "failed": 0,
+    "command": "node --test tests/ui_architecture.test.cjs tests/ui_trace.test.cjs tests/ui_budget.test.cjs tests/ui_prototype.test.cjs",
+    "note": "Passed after geometry and layout changes; final followup only added tooltip, scroll hint and disabled-node opacity."
+  },
+  "browser": {
+    "passed": true,
+    "command": "CODE_FIX_ARCH_BROWSER_OUTPUT=runs/architecture-readable-final node tests/browser_architecture.cjs",
+    "desktop": {
+      "width": 1600,
+      "node_title_min_px": 15,
+      "node_width_min_px": 156,
+      "inspector_width_range_px": [
+        260,
+        300
+      ],
+      "default_zoom": 1,
+      "node_overlap": false
+    },
+    "narrow_page_overflow": false,
+    "post_requests": 0,
+    "js_errors": 0
+  },
+  "source_sha256": {
+    "ui/app/architecture.js": "63c5c49b9603586b1d1889e45bf3932e5806c1a24331b5ea581028213f1864be",
+    "ui/app/architecture.css": "468bdc6ae0ec7e8638b06b457eb8bb0bff0b2282846f0cba17da2240e4f928e4",
+    "ui/app/app.js": "7c62c08329a676284fb97ababb57d576d705d16a23ae065cada9cd350eddd6b2",
+    "tests/browser_architecture.cjs": "f61734c5c70554d963b59d610ec54c964e7b7d35357388d64d6642535cf00c1d"
+  },
+  "limitations": [
+    "Graph scrolls internally at native font size; some right-side modules need horizontal scrolling.",
+    "Previous raw evidence preserved; this does not replace real full-chain acceptance or C signoff."
+  ]
+}

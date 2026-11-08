@@ -1,0 +1,6 @@
+{
+  "scope": "browser-injected-offline-events-only; no model, Docker or real repair",
+  "passed": true,
+  "errors": [],
+  "writes": []
+}

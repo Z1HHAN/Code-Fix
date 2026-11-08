@@ -1,6 +1,7 @@
 'use strict';
 (function(root){
-  const slots={entry:[235,35,'用户入口'],service:[540,35,'任务服务'],isolation:[235,172,'隔离前置检查'],program:[490,172,'独立程序调度'],guard:[790,172,'预算与权限'],locator:[490,305,'定位员·按需参与'],baseline:[205,414,'隔离基线测试'],repairer:[337,414,'修复与补丁校验'],pytest:[469,414,'隔离开发测试'],detector:[601,414,'检测员'],scheduler:[733,414,'模型调度员'],final:[865,414,'最终复验'],trace:[235,556,'Trace事件'],logs:[425,556,'测试日志 / JUnit'],diff:[615,556,'候选diff'],cost:[805,556,'费用账本']};
+  const nodeWidth=156,nodeHeight=88;
+  const slots={entry:[230,35,'用户入口'],service:[620,35,'任务服务'],isolation:[230,195,'隔离前置检查'],program:[550,195,'独立程序调度'],guard:[900,195,'预算与权限'],locator:[550,345,'定位员·按需参与'],baseline:[180,470,'隔离基线测试'],repairer:[348,470,'修复与补丁校验'],pytest:[516,470,'隔离开发测试'],detector:[684,470,'检测员'],scheduler:[852,470,'模型调度员'],final:[1020,470,'最终复验'],trace:[230,640,'Trace事件'],logs:[470,640,'测试日志 / JUnit'],diff:[710,640,'候选diff'],cost:[950,640,'费用账本']};
   function slot(node){const f=node.facts;return f.node_id==='pytest'?(f.phase==='final_check'?'final':f.round===0?'baseline':'pytest'):f.node_id==='apply_candidate'?'repairer':f.node_id==='program_dispatch'?'program':f.node_id==='isolation_preflight'?'isolation':slots[f.node_id]?f.node_id:null;}
   function projection(run,events,trace){
     const graph=trace.project(run,events),mapped=new Map(),byStep=new Map();
@@ -16,7 +17,6 @@
     const controls=el('div',null,'arch-controls'),state=el('span'),follow=el('button','返回当前步骤'),back=el('button','上一步'),next=el('button','下一步'),play=el('button','历史回放'),pause=el('button','暂停回放');
     for(const b of [follow,back,next,play,pause]){b.type='button';controls.append(b);}controls.prepend(state);
     const viewport=el('div',null,'arch-viewport'),canvas=el('div',null,'architecture-canvas'),steps=el('div',null,'arch-steps'),hint=el('p',null,'arch-hint');viewport.append(canvas);host.append(controls,viewport,steps,hint);
-    if(typeof ResizeObserver!=='undefined')new ResizeObserver(()=>{const factor=Number(canvas.dataset.zoomFactor||1);canvas.style.zoom=factor*Math.min(1,Math.max(.35,(viewport.clientWidth-24)/1010));}).observe(viewport);
     function stop(){clearTimeout(timer);timer=null;replaying=false;}
     function historyAt(i){stop();following=false;index=Math.max(0,Math.min(events.length-1,i));transfers.clear();draw();}
     follow.onclick=()=>{stop();following=true;selected=null;transfers.clear();draw();};back.onclick=()=>historyAt((following?events.length-1:index)-1);next.onclick=()=>historyAt((following?events.length-1:index)+1);
@@ -30,23 +30,24 @@
       const p=projection(viewRun,visible,trace);canvas.replaceChildren();steps.replaceChildren();
       state.textContent=following?'实时事件视图':replaying?'历史回放 · 仅播放已记录事件':'历史查看 · 不执行任务';
       state.setAttribute('role','status');follow.disabled=following;back.disabled=!events.length||(!following&&index===0);next.disabled=!events.length||following||index>=events.length-1;play.disabled=!events.length||replaying;pause.disabled=!replaying;
-      hint.textContent=p.graph.provenance+'。分层为架构映射；执行连线仅据父步骤记录。灰色表示未执行或未记录，查看与回放不触发模型请求。';
-      const links=svg('svg');links.setAttribute('class','arch-links');links.setAttribute('viewBox','0 0 1010 655');
+      hint.textContent=p.graph.provenance+'。默认原始字号，超出时可在图内横向滚动。分层为架构映射；执行连线仅据父步骤记录。灰色表示未执行或未记录，查看与回放不触发模型请求。';
+      const links=svg('svg');links.setAttribute('class','arch-links');links.setAttribute('viewBox','0 0 1200 770');
       const defs=svg('defs'),marker=svg('marker');marker.setAttribute('id','arch-arrow');marker.setAttribute('viewBox','0 0 10 10');marker.setAttribute('refX','9');marker.setAttribute('refY','5');marker.setAttribute('markerWidth','5');marker.setAttribute('markerHeight','5');marker.setAttribute('orient','auto');const arrow=svg('path');arrow.setAttribute('d','M0 0L10 5L0 10Z');arrow.setAttribute('fill','#6b8cca');marker.append(arrow);defs.append(marker);links.append(defs);
-      for(const [y,h,title]of [[15,102,'用户入口'],[150,102,'独立调度层'],[285,215,'Agent与工具'],[535,100,'证据与持久化']]){const band=el('div',null,'arch-band');band.style.cssText=`top:${y}px;height:${h}px`;band.append(el('strong',title));canvas.append(band);}
+      for(const [y,h,title]of [[15,130,'用户入口'],[175,130,'独立调度层'],[335,245,'Agent与工具'],[625,125,'证据与持久化']]){const band=el('div',null,'arch-band');band.style.cssText=`top:${y}px;height:${h}px`;band.append(el('strong',title));canvas.append(band);}
       function line(d,cls,attrs={}){const n=svg('path');n.setAttribute('d',d);n.setAttribute('class',cls);n.setAttribute('marker-end','url(#arch-arrow)');for(const [k,v]of Object.entries(attrs))n.setAttribute(k,v);links.append(n);return n;}
       // Structural downward backbone is deliberately distinct from step-to-step execution edges.
-      for(const [a,b]of [[117,150],[252,285],[500,535]])line(`M90 ${a}V${b-3}`,'arch-structural');
-      line('M355 67H537','arch-structural');
+      for(const [a,b]of [[145,175],[305,335],[580,625]])line(`M90 ${a}V${b-3}`,'arch-structural');
+      line('M386 79H617','arch-structural');
       const live=following&&run.status==='running';
       const animate=(live||replaying)&&!p.terminal;
-      if(p.started){line('M600 99V133H295V169','arch-context');if(animate&&transfers.has('entry'))line('M600 99V133H295V169','arch-transmission');}
+      if(p.started){line('M698 123V158H308V192','arch-context');if(animate&&transfers.has('entry'))line('M698 123V158H308V192','arch-transmission');}
       const now=Date.now();for(const [k,t]of transfers)if(t<=now)transfers.delete(k);
       for(const edge of p.edges){
         const a=slots[edge.source],b=slots[edge.target];let d;
-        if(edge.source===edge.target)d=`M${a[0]+120} ${a[1]+20}h12v-32h-80v10`;
-        else if(a[1]===b[1]&&b[0]>a[0])d=`M${a[0]+120} ${a[1]+32}H${b[0]-3}`;
-        else {const mid=a[1]+(b[1]>a[1]?90:78);d=`M${a[0]+60} ${a[1]+64}V${mid}H${b[0]+60}V${b[1]-3}`;}
+        if(edge.source===edge.target)d=`M${a[0]+nodeWidth} ${a[1]+24}h8v-35h-90v8`;
+        else if(a[1]===b[1]&&b[0]>a[0])d=`M${a[0]+nodeWidth} ${a[1]+nodeHeight/2}H${b[0]-3}`;
+        else if(b[1]<a[1])d=`M${a[0]+nodeWidth/2} ${a[1]+nodeHeight}V600H1188V${b[1]+nodeHeight+20}H${b[0]+nodeWidth/2}V${b[1]+nodeHeight+3}`;
+        else {const mid=a[1]+112;d=`M${a[0]+nodeWidth/2} ${a[1]+nodeHeight}V${mid}H${b[0]+nodeWidth/2}V${b[1]-3}`;}
         line(d,'arch-visited',{'data-from':edge.from,'data-to':edge.to});
         const target=p.graph.nodes.find(n=>n.id===edge.to),key=edge.from+'>'+edge.to;
         const replayNew=replayTick&&target?.events.some(e=>e.event==='step_started'&&identity(e)===identity(visible.at(-1)));
@@ -59,7 +60,7 @@
         const key=slot(node);if(!key||!node.completed)continue;
         const replayComplete=replayTick&&visible.at(-1)?.event==='step_completed'&&visible.at(-1)?.step_id===node.id;
         if(!transfers.has('evidence:'+node.id)&&!replayComplete)continue;
-        const a=slots[key];line(`M${a[0]+60} ${a[1]+64}V522H295V553`,'arch-transmission',{'data-evidence-step':node.id});
+        const a=slots[key];line(`M${a[0]+nodeWidth/2} ${a[1]+nodeHeight}V605H308V637`,'arch-transmission',{'data-evidence-step':node.id});
       }
       canvas.append(links);
       for(const [key,[x,y,title]]of Object.entries(slots)){
@@ -69,6 +70,7 @@
         const recorded=node||evidenceSlots.has(key)||(['entry','service'].includes(key)&&p.started);
         const button=el('button',null,'arch-node'+(active?' arch-active':failed?' arch-failed':recorded?' arch-done':''));button.type='button';button.style.cssText=`left:${x}px;top:${y}px`;button.dataset.module=key;button.setAttribute('aria-pressed',String(node?.id===selected));
         const status=node?(active?'执行中':node.statusLabel):key==='guard'?'每步强制校验（规则说明）':recorded?'已有事件记录':key==='locator'?'按需参与 · 未调用':'未执行 / 未记录';
+        button.title=title+' · '+status;
         button.append(el('strong',title),el('span',status),el('small',node?.round!=null?'第'+node.round+'轮':''));
         button.disabled=!node;
         button.onclick=()=>{selected=node.id;following=false;index=events.findIndex(e=>identity(e)===identity(node.events.at(-1)));stop();transfers.clear();draw();};canvas.append(button);
