@@ -13,6 +13,14 @@ from app.split_runner import SplitDockerRunner
 from app.runner import code_version
 
 def test_split_container_mounts_exclude_tests_and_reports_from_candidate(tmp_path, monkeypatch):
+    _assert_split_cleanup(tmp_path, monkeypatch, False)
+
+
+def test_audit_cleanup_error_still_removes_containers_and_volume(tmp_path, monkeypatch):
+    _assert_split_cleanup(tmp_path, monkeypatch, True)
+
+
+def _assert_split_cleanup(tmp_path, monkeypatch, audit_cleanup_error):
     runner = SplitDockerRunner(); runner.ready=True; runner.executable='docker-stub'; runner.image='sha256:'+'a'*64
     work = runner.task.prepare(tmp_path/'work')
     attack = b"raise RuntimeError('must never execute on host or trusted container')\n"
@@ -34,6 +42,8 @@ def test_split_container_mounts_exclude_tests_and_reports_from_candidate(tmp_pat
             for stream in ('stdout', 'stderr'):
                 (folder / f'candidate-{stream}.txt').write_bytes(b'')
         def finish(self):
+            if audit_cleanup_error:
+                raise subprocess.TimeoutExpired('synthetic log cleanup', 1)
             return True, False
     monkeypatch.setattr('app.candidate_logs.CandidateLogs', LogDouble)
     monkeypatch.setattr('app.docker_runner.DockerRunner._execute',trusted)

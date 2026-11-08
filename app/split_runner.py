@@ -236,8 +236,12 @@ class SplitDockerRunner(DockerRunner):
                                              self.task.profile, result['exit_code']))
         finally:
             if getattr(self, 'candidate_logs', None) is not None:
-                self.candidate_logs.finish()
-                self.candidate_logs = None
+                try:
+                    self.candidate_logs.finish()
+                except (OSError, subprocess.SubprocessError) as exc:
+                    errors.append({'operation': 'audit_cleanup', 'error_type': type(exc).__name__})
+                finally:
+                    self.candidate_logs = None
             self.rpc_volume = None
             for args in (['rm','--force',name], ['volume','rm',volume]):
                 try:
