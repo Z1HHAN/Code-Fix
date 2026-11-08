@@ -66,10 +66,15 @@ function renderRun(run,events){
   display('config-models',info.length?info:'暂无调用记录，不能推断有效模型绑定。');
   showView(location.hash.slice(1)||'records',false);
 }
-const renderTrace = CodeFixTrace.mount(document, byId('trace-flow'), byId('trace-detail'),
+const renderRecordedTrace = CodeFixTrace.mount(document, byId('trace-flow'), byId('trace-detail'),
   async (runId, path) => (await api(`/tasks/${runId}/artifact?path=${encodeURIComponent(path)}`)).text(),{
     artifactContainer:byId('artifact-viewer'),onArtifact:path=>{display('artifact-path',path||'选择节点中的证据文件');if(path)showEvidence('artifact');}
   });
+const renderArchitecture = CodeFixArchitecture.mount(document, byId('architecture-flow'), CodeFixTrace, (id,run,events) => {
+  renderRecordedTrace(run,events);
+  const b=[...byId('trace-flow').querySelectorAll('.trace-node')].find(n=>n.dataset.stepId===id);if(b)b.click();
+});
+function renderTrace(run,events){renderArchitecture(run,events);}
 async function api(path, options = {}) {
   const response = await fetch('/api/v3' + path, { ...options, headers: {'Content-Type': 'application/json', 'X-Codefix-Token': token, ...(options.headers || {})} });
   if (!response.ok) {
@@ -120,7 +125,7 @@ async function refresh() {
     const result = run.result || {};
     renderTrace(run, events);
     renderRun(run,events);renderRecords();
-    const canvas=byId('trace-flow').querySelector('.trace-canvas');if(canvas)canvas.style.zoom=scale;
+    const canvas=byId('trace-flow').querySelector('.trace-canvas');if(canvas)canvas.style.zoom=scale;const architecture=byId('architecture-flow').querySelector('.architecture-canvas');if(architecture){architecture.dataset.zoomFactor=scale;architecture.style.zoom=scale*Math.min(1,Math.max(.35,(architecture.parentElement.clientWidth-24)/1010));}
     display('status', `${run.run_id}\n状态：${run.status} · 题目：${run.task.project} · 模式：${run.task.mode}`);
     display('summary', [
       `执行来源：${CodeFixTrace.provenance(run, events)}`,
@@ -185,11 +190,11 @@ byId('close-task').onclick=byId('cancel-task').onclick=()=>byId('new-task-dialog
 for(const button of document.querySelectorAll('[data-evidence]'))button.onclick=()=>showEvidence(button.dataset.evidence);
 byId('copy-evidence').onclick=async()=>{try{await navigator.clipboard.writeText(byId('artifact-viewer').textContent);display('artifact-path','已复制 · '+(byId('artifact-path').textContent.replace(/^已复制 · /,'')));}catch{display('error','浏览器未允许复制，可选中文本手动复制。');}};
 for(const [id,change] of [['zoom-in',.1],['zoom-out',-.1]])byId(id).onclick=()=>{
-  scale=Math.max(.5,Math.min(1.5,Math.round((scale+change)*10)/10));const canvas=byId('trace-flow').querySelector('.trace-canvas');if(canvas)canvas.style.zoom=scale;
+  scale=Math.max(.5,Math.min(1.5,Math.round((scale+change)*10)/10));const canvas=byId('trace-flow').querySelector('.trace-canvas');if(canvas)canvas.style.zoom=scale;const architecture=byId('architecture-flow').querySelector('.architecture-canvas');if(architecture){architecture.dataset.zoomFactor=scale;architecture.style.zoom=scale*Math.min(1,Math.max(.35,(architecture.parentElement.clientWidth-24)/1010));}
 };
-byId('locate-last').onclick=()=>{byId('actual-view').click();const last=[...byId('trace-flow').querySelectorAll('.trace-node')].at(-1);if(last){last.click();last.scrollIntoView({block:'nearest',inline:'nearest'});last.focus({preventScroll:true});}};
+byId('locate-last').onclick=()=>{byId('actual-view').click();byId('architecture-flow').querySelector('.arch-controls button')?.click();const current=byId('architecture-flow').querySelector('.arch-active');if(current){current.scrollIntoView({block:'nearest',inline:'nearest'});current.focus({preventScroll:true});}};
 for(const [id,guide] of [['actual-view',false],['template-view',true]])byId(id).onclick=()=>{
-  byId('flow-guide').hidden=!guide;byId('trace-flow').hidden=guide;
+  byId('flow-guide').hidden=!guide;byId('trace-flow').hidden=guide;byId('architecture-flow').hidden=guide;byId('recorded-trace').hidden=guide;
   for(const [button,active] of [['actual-view',!guide],['template-view',guide]]){byId(button).classList.toggle('active',active);byId(button).setAttribute('aria-pressed',String(active));}
 };
 showView(location.hash.slice(1)||'records',false);

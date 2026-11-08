@@ -24,13 +24,15 @@ python -m venv .venv
 
 模型与配置现支持角色账号/模型选择、任务上限、结构校验及保存为新配置；新建任务可引用保存版本，历史记录保持只读。费用与条件读取本项目估算账本和本机状态，保存不代表模型/隔离通过。使用步骤见[项目运行指南](docs/2026-11-03_项目持续维护/项目运行指南.md)；本轮限定验证见固定台账040。
 
+编排工作台增加事件驱动分层全景：节点执行中高亮、交接连线光带、按需定位分支及只读历史回放；原始步骤仍可展开。当前组件仅离线验证，真实全过程验收保持待复跑，见固定记录042与[演示说明](docs/2026-11-03_项目持续维护/演示流程与回放说明.md)。
+
 ## 如何测试
 
 平台回归使用已审查的仓库测试与可信夹具。Windows每次选择一个未使用的短临时目录：
 
 ```powershell
 .\.venv\Scripts\python.exe -B -X utf8 -m pytest -q --basetemp=runs/pcheck-new -p no:cacheprovider
-node --test tests/ui_prototype.test.cjs tests/ui_budget.test.cjs tests/ui_trace.test.cjs
+node --test tests/ui_prototype.test.cjs tests/ui_budget.test.cjs tests/ui_trace.test.cjs tests/ui_architecture.test.cjs
 ```
 
 完整C入口默认要求干净Git提交；`--allow-dirty`仅供开发检查。25项门槛及执行前置见[测试与验收计划](docs/2026-11-03_项目持续维护/当前测试与验收计划.md)。模拟模型/执行器的组件结果与真实修复、独立验收分别记录，不能互相替代。

@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-09",
+  "branch": "codex/model-config-console",
+  "parent_commit": "fe092f6",
+  "scope": "UI event projection and offline browser fixtures only; no model, Docker, real repair or C signoff",
+  "node": {
+    "command": "node --test tests/ui_architecture.test.cjs tests/ui_trace.test.cjs tests/ui_budget.test.cjs tests/ui_prototype.test.cjs",
+    "passed": 28,
+    "failed": 0
+  },
+  "browser": {
+    "command": "CODE_FIX_ARCH_BROWSER_OUTPUT=runs/architecture-browser-delivery node tests/browser_architecture.cjs",
+    "result": "result.json",
+    "passed": true,
+    "post_requests": 0,
+    "js_errors": 0
+  },
+  "sources_sha256": {
+    "ui/app/architecture.js": "739a76fb189143250a9aa50389c489b1c27d944c9bfeee5c47fa24f77f0a3ad4",
+    "ui/app/architecture.css": "03743daa4bdd4ed75a1067645a1951df6c4a5a3173f9303a09e6bccde8a23f93",
+    "ui/app/app.js": "d63b7f2b724ac7cd7331b0ebb41738a6b6d3a3ca12ea2dcc3b4f55a13297817d",
+    "ui/app/index.html": "620adbcc3ff3c82ac603bc2b2324e031ea357209fa66341a1c21d0f76c8d8619",
+    "tests/ui_architecture.test.cjs": "3dce1d89513ff9e0674565e70542433fe23d9f74e10b7a7bc7f1ed941ae445b4",
+    "tests/browser_architecture.cjs": "e9b1e2608ff2bdcad9f6301145e66548e3599ea9dd53941f4979296980736675"
+  },
+  "earlier_browser_issue": "First delivery browser run injected before initial polling completed; assertion failed. Wait now requires initialized interval and !refreshing; original assertions retained. Final re-run passed.",
+  "local_demo": {
+    "run_id": "run-eb98f304d955482c92e144b5d976b8ce",
+    "store": "runs/config-console-preview",
+    "mode": "offline_visualization",
+    "status": "stopped",
+    "real_model_or_test_execution": false
+  },
+  "limitations": [
+    "Architecture module groups repeated steps; individual instances remain in step strip and expandable raw trace.",
+    "Missing historical parent ids do not produce execution edges.",
+    "Context arrows are architecture mapping, not recorded step parent evidence.",
+    "No full backend regression run for this frontend-only change."
+  ]
+}
