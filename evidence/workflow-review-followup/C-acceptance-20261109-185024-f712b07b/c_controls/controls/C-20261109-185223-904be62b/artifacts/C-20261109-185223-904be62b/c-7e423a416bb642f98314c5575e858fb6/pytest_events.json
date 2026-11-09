@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "collected_nodeids": [],
+  "collection_errors": [
+    {
+      "nodeid": "tests/test_leap.py",
+      "details": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Lib\\site-packages\\_pytest\\python.py:493: in importtestmodule\n    mod = import_path(\nC:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Lib\\site-packages\\_pytest\\pathlib.py:587: in import_path\n    importlib.import_module(module_name)\nC:\\Users\\lenovo\\.codex\\visualizations\\2026\\10\\30\\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\\code-fix-c-audit-20261102\\Code-Fix-C-20261101\\.runtime\\python314\\tools\\Lib\\importlib\\__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n<frozen importlib._bootstrap>:1406: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:1371: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:938: in _load_unlocked\n    ???\nC:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Lib\\site-packages\\_pytest\\assertion\\rewrite.py:185: in exec_module\n    exec(co, module.__dict__)\ntests\\test_leap.py:1: in <module>\n    from leap_app.leap_year import is_leap\nE     File \"C:\\Users\\lenovo\\AppData\\Local\\Temp\\e07-full\\C-acceptance-20261109-185024-f712b07b\\c_controls\\controls\\C-20261109-185223-904be62b\\artifacts\\C-20261109-185223-904be62b\\c-7e423a416bb642f98314c5575e858fb6\\work\\leap_app\\leap_year.py\", line 1\nE       def is_leap(year)\nE                        ^\nE   SyntaxError: expected ':'"
+    }
+  ],
+  "reports": [],
+  "session_finished": true,
+  "exit_code": 2
+}
