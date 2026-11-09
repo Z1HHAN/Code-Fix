@@ -2,13 +2,15 @@
 window.CodeFixConfig = (() => {
   const roles={repairer:['修复员','生成候选修改，不能修改测试'],detector:['检测员','分析失败证据，不能覆盖测试结论'],scheduler:['模型调度员','提出路由建议，由程序最终裁决'],locator:['定位员','按分支参与，提供位置与假设']};
   let catalog=null,saved=null,snapshotId=null,revision=0,loading=false;
-  const accounts={sf_account1:'账号1',sf_account2:'账号2'};
-  const accountName=p=>`${p.provider} / ${accounts[p.account]||p.account||'未记录账号'}`;
+  let accountNames=new Map();
+  const accountLabel=id=>accountNames.get(id)||'未命名账号';
+  const readAccountNames=data=>{accountNames=new Map((data.accounts||[]).map(a=>[a.account_id,a.display_name]));};
+  const accountName=p=>`${p.provider} / ${accountLabel(p.account)}`;
   function tab(name){
     for(const b of document.querySelectorAll('[data-config-tab]'))b.setAttribute('aria-selected',String(b.dataset.configTab===name));
     for(const n of ['roles','conditions','snapshot'])byId('config-'+n).hidden=n!==name;
   }
-  function dirty(){revision++;saved=null;key=null;byId('use-saved-config').checked=false;byId('use-saved-config').disabled=true;display('task-config-label','尚未保存');display('config-draft-id','未保存');display('config-message','草稿已修改，请重新校验并保存。');}
+  function dirty(){revision++;saved=null;key=null;byId('use-saved-config').checked=false;byId('use-saved-config').disabled=true;display('task-config-label','尚未保存');display('config-draft-id','未保存');display('config-message','草稿已修改，请重新校验并保存。');syncTaskForm();}
   function selectProfiles(role,accountSelect,modelSelect,preferred){
     const rows=catalog.profiles.filter(p=>p.account===accountSelect.value);
     modelSelect.replaceChildren(...rows.map(p=>{const o=element('option',p.model);o.value=p.profile_ref;return o;}));
@@ -25,7 +27,7 @@ window.CodeFixConfig = (() => {
       const data=await(await api(validateOnly?'/configurations/validate':'/configurations',{method:'POST',body:JSON.stringify(draft())})).json();
       if(version!==revision){display('config-message','草稿已变更，本次响应不应用；请重新保存。');return;}
       display('config-message',data.note);
-      if(!validateOnly){saved=data;display('config-draft-id',data.config_id);byId('use-saved-config').disabled=false;byId('use-saved-config').checked=true;display('task-config-label',data.config_id.slice(0,16)+'…');display('config-message',data.note+'。已选用于下次新建任务；创建不会自动启动。');}
+      if(!validateOnly){saved=data;display('config-draft-id',data.config_id);byId('use-saved-config').disabled=false;byId('use-saved-config').checked=true;display('task-config-label',data.config_id.slice(0,16)+'…');display('config-message',data.note+'。已选用于下次新建任务；创建不会自动启动。');syncTaskForm();}
     }catch(error){display('config-message','未保存：'+error.message);}
     finally{loading=false;byId('validate-config').disabled=byId('save-config').disabled=false;}
   }
@@ -37,9 +39,10 @@ window.CodeFixConfig = (() => {
     try{
       const [health,budget,models]=await Promise.all([api('/health').then(r=>r.json()),api('/budget').then(r=>r.json()),api('/configuration/catalog').then(r=>r.json())]);
       display('health',health);display('budget',budgetText(budget));
-      for(const a of budget.accounts||[]){const row=element('tr');for(const v of [accounts[a.account_id]||a.account_id,a.authorized_cny,a.estimated_spent_cny,a.reserved_cny,a.estimated_remaining_cny,a.warning_threshold_cny])row.append(element('td',v==null?'未知':String(v)));if(a.low_balance)row.append(element('td','低余额提醒','warn'));byId('account-rows').append(row);}
+      readAccountNames(models);
+      for(const a of budget.accounts||[]){const row=element('tr');for(const v of [accountLabel(a.account_id),a.authorized_cny,a.estimated_spent_cny,a.reserved_cny,a.estimated_remaining_cny,a.warning_threshold_cny])row.append(element('td',v==null?'未知':String(v)));if(a.low_balance)row.append(element('td','低余额提醒','warn'));byId('account-rows').append(row);}
       display('budget-note',(budget.paid_calls_blocked?'存在未结算费用，阻止所有账号新付费请求。 ':'')+(budget.note||'仅本项目估算，不是实时平台余额。')+' 金额单位：人民币元；累计额度不按天重置。');
-      const values=[['Docker命令',health.docker_available?'可找到；尚不代表隔离通过':'未找到'],['隔离探针',health.isolation_verified===true?'已记录通过':'待本次任务启动验证'],['模型调用配置',health.model_configured?'默认配置可解析，未请求验证':'默认配置未就绪'],['执行机','当前服务所在本机；不代表B机'],['前置阻塞',(health.blockers||[]).join('；')||'未报告；仍须每次运行检查']];
+      const values=[['Docker命令',health.docker_available?'可找到；尚不代表隔离通过':'未找到'],['隔离探针','本次环境概览未执行探针；历史结果见所选任务记录，每次启动仍须重新验证'],['模型调用配置',health.model_configured?'默认配置可解析，未请求验证':'默认配置未就绪'],['执行机','当前服务所在本机；不代表B机'],['前置阻塞',(health.blockers||[]).join('；')||'未报告；仍须每次运行检查']];
       for(const [k,v]of values)byId('isolation-values').append(element('dt',k),element('dd',v));
       renderModelReadiness(models.profiles);
       display('conditions-note','已读取本机状态；模型、费用预留和隔离仍以任务启动检查为准。');
@@ -55,11 +58,11 @@ window.CodeFixConfig = (() => {
       group.append(element(provider==='siliconflow'?'h3':'summary',provider==='siliconflow'?'硅基流动':provider==='aliyun_maas'?'阿里云百炼':provider));
       const content=element('div',null,'readiness-layout'),scroll=element('div',null,'table-scroll'),table=element('table',null,'run-table readiness-table'),head=element('thead'),tr=element('tr'),body=element('tbody'),detail=element('aside',null,'readiness-detail');
       const rows=profiles.filter(p=>p.provider===provider),aids=[...new Set(rows.map(p=>p.account))];
-      tr.append(element('th','模型'));for(const aid of aids)tr.append(element('th',accounts[aid]||aid||'未记录账号'));head.append(tr);table.append(head,body);scroll.append(table);content.append(scroll,detail);group.append(content);host.append(group);
+      tr.append(element('th','模型'));for(const aid of aids)tr.append(element('th',accountLabel(aid)));head.append(tr);table.append(head,body);scroll.append(table);content.append(scroll,detail);group.append(content);host.append(group);
       const buttons=[];
       function select(p,b){
         for(const button of buttons){button.classList.toggle('selected',button===b);button.setAttribute('aria-pressed',String(button===b));}
-        detail.replaceChildren(element('h3','检查详情'),element('strong',`${accounts[p.account]||p.account} · ${p.model.split('/').at(-1)}`));
+        detail.replaceChildren(element('h3','检查详情'),element('strong',`${accountLabel(p.account)} · ${p.model.split('/').at(-1)}`));
         const dl=element('dl',null,'config-values');
         for(const check of p.checks||[]){const v=element('dd',check.status,check.ok?'check-ok':'check-pending');dl.append(element('dt',check.name),v);}detail.append(dl);
         if(!(p.checks||[]).length)detail.append(element('p','检查详情未记录；请重启新版本后端后刷新。'));
@@ -69,7 +72,7 @@ window.CodeFixConfig = (() => {
       for(const model of [...new Set(rows.map(p=>p.model))]){
         const row=element('tr'),name=element('td',model.split('/').at(-1));name.title=model;row.append(name);
         for(const aid of aids){const cell=element('td'),p=rows.find(p=>p.model===model&&p.account===aid);
-          if(p){const b=element('button',p.configured?'配置可解析 ›':'待核对 ›','readiness-status');b.type='button';b.setAttribute('aria-label',`${accounts[aid]||aid} ${model}检查详情`);b.onclick=()=>select(p,b);buttons.push(b);cell.append(b);if(buttons.length===1)select(p,b);}
+          if(p){const b=element('button',p.configured?'配置可解析 ›':'待核对 ›','readiness-status');b.type='button';b.setAttribute('aria-label',`${accountLabel(aid)} ${model}检查详情`);b.onclick=()=>select(p,b);buttons.push(b);cell.append(b);if(buttons.length===1)select(p,b);}
           else cell.textContent='未登记';row.append(cell);
         }body.append(row);
       }
@@ -93,9 +96,12 @@ window.CodeFixConfig = (() => {
     byId('validate-config').onclick=()=>save(true);byId('save-config').onclick=()=>save(false);byId('refresh-conditions').onclick=conditions;
     for(const id of ['config-rounds','config-calls','config-seconds','config-strategy'])byId(id).oninput=dirty;
     byId('use-saved-config').onchange=()=>{key=null;syncTaskForm();};
+    byId('mode').onchange=syncTaskForm;
+    byId('task-config-open').onclick=()=>{byId('new-task-dialog').close();showView('config');tab('roles');};
+    byId('show-isolation-history').onclick=()=>{if(!currentRun){display('conditions-note','请先在运行记录中选择任务，再查看该任务的隔离探针记录。');return;}showView('workspace');byId('actual-view').click();byId('metric-environment').scrollIntoView({block:'center'});};
     const originalOpen=byId('new-task').onclick;byId('new-task').onclick=()=>{originalOpen();syncTaskForm();};
     try{
-      catalog=await(await api('/configuration/catalog')).json();byId('binding-rows').replaceChildren();
+      catalog=await(await api('/configuration/catalog')).json();readAccountNames(catalog);byId('binding-rows').replaceChildren();
       for(const [role,[name,description]]of Object.entries(roles)){
         const row=element('tr'),labelCell=element('td'),aCell=element('td'),mCell=element('td'),a=element('select'),m=element('select');m.id='binding-'+role;m.setAttribute('aria-label',name+'模型');a.setAttribute('aria-label',name+'账号');
         labelCell.append(element('strong',name),element('small',description));
@@ -112,6 +118,8 @@ window.CodeFixConfig = (() => {
   }
   function syncTaskForm(){
     const using=byId('use-saved-config').checked&&saved;
+    const source=using?'使用已保存配置 '+saved.config_id.slice(0,16)+'…':'使用默认模型配置；本页未保存草稿不会应用，可先保存以固定配置';
+    display('task-mode-hint',byId('mode').value==='repair'?source+'。启动时仍须核验模型授权、费用及隔离条件，创建任务不代表可以执行。':'基线检查不调用模型；公开题目仍需隔离执行。');
     for(const [id,k]of [['rounds','max_rounds'],['calls','max_calls'],['seconds','total_seconds']]){byId(id).disabled=Boolean(using);if(using)byId(id).value=saved.parameters[k];}
   }
   return {init,tab,snapshot,apply};

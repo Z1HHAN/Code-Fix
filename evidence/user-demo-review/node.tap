@@ -1,0 +1,47 @@
+✔ replay pause resumes the same prefix and remaining arrow travel, including after polling (6.0766ms)
+✔ entry replay illuminates both entry nodes and gives every segment a directed arrow (0.8767ms)
+✔ last started event retains the full handoff window then ends without claiming task completion (0.984ms)
+✔ completion metadata advances promptly while its evidence arrows preserve elapsed travel (0.7095ms)
+✔ finished event removes motion and switching run cancels replay and resume state (1.1814ms)
+✔ layout maps baseline and final separately; no invented parent links (0.1808ms)
+✔ new actual edges transmit once, unchanged polls do not rebuild, terminal stops all motion (0.8263ms)
+✔ locator only lights when actually invoked and failure survives completion (0.6429ms)
+✔ history selection freezes prefix and evidence inspector, new live events do not pull it back (1.3075ms)
+✔ initial historical load has no transfer animation and playback only consumes recorded events (0.6724ms)
+✔ moving arrow follows the directed edge once and terminal removes the packet (1.3697ms)
+✔ remaining three warns without claiming platform balance (0.9144ms)
+✔ unknown charge is not rendered as zero balance (0.1825ms)
+✔ empty registry is explicit (0.1162ms)
+✔ idle slows down, running stays responsive, background pauses and foreground refreshes (5.6262ms)
+✔ failed refresh backs off to a cap and successful manual refresh resets delay (1.3266ms)
+✔ inflight refreshes never overlap; user actions get one fresh follow-up (0.9572ms)
+✔ background completion does not schedule polling; foreground catches up (0.3442ms)
+✔ thrown errors retry, stop prevents late completion from rearming (0.2886ms)
+✔ active demo cannot be reset or restarted, including direct handler dispatch (9.417ms)
+✔ editing invalidates preview; startup consumes the reviewed snapshot (1.461ms)
+✔ invalid fields and unsupported roles do not receive a successful preview (8.367ms)
+✔ relocation preserves the failed applied candidate and highlights the next round (1.3517ms)
+✔ stopped snapshot reflects the configured cap and contains failure evidence (2.4126ms)
+✔ success and final-check failure have distinct consistent decisions (1.3155ms)
+✔ unimplemented controls remain disabled without downloads, model or tool calls (3.0543ms)
+✔ a terminal demo requires fresh preview and receives a new identity after reset (1.4344ms)
+✔ one-round cap cannot display a second repair round (1.2632ms)
+✔ one node per real invocation, actual decision overrides advisory, no inferred edges (2.0444ms)
+✔ legacy rows preserve evidence without inventing real step IDs or parents (0.8815ms)
+✔ configured live mode alone cannot claim real model requests or successful repair (0.1679ms)
+✔ overlapping incremental pages deduplicate and preserve sequence (0.2251ms)
+✔ decision evidence IDs resolve real tool logs and reject injected paths (0.5902ms)
+✔ clicking a node only reads artifacts; unchanged polls preserve viewer (1.8004ms)
+✔ late artifact response cannot contaminate a different run (0.4398ms)
+✔ missing artifact reports error and never substitutes sample output (1.2838ms)
+✔ terminal run without completion cannot leave stale running detail (0.4731ms)
+✔ layout positions do not introduce edges across unrelated or missing parents (0.2698ms)
+✔ workbench external evidence viewer resets on task switch and rejects late responses (0.5057ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 185.0367

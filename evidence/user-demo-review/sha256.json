@@ -1,0 +1,11 @@
+{
+  "development-collection-error.xml": "503207f25ea3084911943bc47f6d70ee63e75b97e725670ff2def36b1ca773e8",
+  "development-command-error.xml": "bc6917ab047d1d556917e0597bd0446f7c6f24c3d19ff83a13c2c9ea17fec423",
+  "node.tap": "5fe1ffc9deb4a2f1f1d725db0f3db32e96ba3fd78fcf588e88295eb115c8ad47",
+  "targeted.xml": "e961b0b07769282a932948afe1fe2757b8d851b14b04617411abd1f5f33e5493",
+  "verification.json": "c3ffd8fdcd8fb132d0cf08e7dcaceba9665527453002a91a98d32fa2313b15d6",
+  "browser/archived-record.png": "a9c39c9a22e0455eaa2ab47e452eec4c1185e6860e06240eaf1b454b39493f80",
+  "browser/narrow-hint.png": "6219779057b8caa0da87dc269bc6e8c72f5c00a06fdcdfe3e7bf2562f010a664",
+  "browser/repair-config-hint.png": "466cbb67ea16e5ea5ae12c1e2d82a5da791850e06c66769dbf5875643a87725b",
+  "browser/result.json": "d8f0990fc010603a81ee91f5f0f134c0c8f42a159460483bcb76f1a2e45a7223"
+}

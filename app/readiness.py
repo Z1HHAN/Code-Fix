@@ -25,5 +25,5 @@ def readiness():
         blockers.append('不可信代码执行授权未配置')
     return {'python': sys.version.split()[0], 'baseline_available': sys.version_info[:2] == (3, 14),
             'model_configured': model_configured, 'docker_available': bool(shutil.which('docker')),
-            'isolation_verified': False, 'note': '每次修复任务启动时运行独立隔离探针；配置存在不等于验证通过',
+            'isolation_verified': False, 'note': '本次环境概览未执行隔离探针；历史结果请查看所选任务的探针记录，每次修复任务启动仍须重新验证',
             'blockers': blockers}

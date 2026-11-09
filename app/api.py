@@ -126,8 +126,16 @@ def create_app(root=None):
         return service.store.create(value, request.headers.get('idempotency-key'))
 
     @app.get('/api/v3/tasks')
-    def tasks():
-        return service.store.list()
+    def tasks(include_archived: bool = False):
+        return service.store.list(include_archived=include_archived)
+
+    @app.post('/api/v3/tasks/{run_id}/archive')
+    def archive(run_id: str):
+        return service.store.set_archived(run_id, True)
+
+    @app.post('/api/v3/tasks/{run_id}/restore')
+    def restore(run_id: str):
+        return service.store.set_archived(run_id, False)
 
     @app.get('/api/v3/tasks/{run_id}')
     def task(run_id: str):
@@ -136,8 +144,8 @@ def create_app(root=None):
     @app.post('/api/v3/tasks/{run_id}/start', status_code=202)
     def start(run_id: str):
         run = service.store.get(run_id)
-        if run['status'] != 'created':
-            raise StateConflict('仅新建任务可以启动')
+        if run['status'] != 'created' or run['archived_at']:
+            raise StateConflict('仅未归档的新建任务可以启动；请先恢复已归档任务')
         if not capacity.acquire(blocking=False):
             raise HTTPException(503, '执行容量已满，请稍后重试；任务尚未启动')
         try:

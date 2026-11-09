@@ -11,6 +11,18 @@ from .decision import DecisionEngine
 from .repair_output import InvalidModelOutput, parse_locator_output, parse_repair_output
 
 ROOT = Path(__file__).resolve().parents[1]
+COMMAND_HELP = {
+    'validate-config': '校验项目配置与登记任务',
+    'decision-fixtures': '运行离线决策规则示例',
+    'run-baseline': '复现冻结闰年基线，不调用模型',
+    'model-dry-run': '检查模拟模型编排，不发真实请求',
+    'start-task': '启动未归档的新建任务',
+    'task-status': '读取任务状态与参数',
+    'task-report': '生成任务报告，保留完整证据',
+    'interrupt-task': '请求中断运行中的任务',
+    'archive-task': '归档非运行任务，保留证据并从默认列表隐藏',
+    'restore-task': '恢复已归档任务的列表可见性，不自动执行',
+}
 
 
 def run_baseline() -> int:
@@ -24,11 +36,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description='Code-Fix V3任务与证据；模型调用需明确授权及配置')
     sub = parser.add_subparsers(dest='command', required=True)
     for name in ('validate-config', 'decision-fixtures', 'run-baseline', 'model-dry-run'):
-        sub.add_parser(name)
-    parse = sub.add_parser('parse-output')
+        sub.add_parser(name, help=COMMAND_HELP[name])
+    parse = sub.add_parser('parse-output', help='校验定位或修复模型输出文件')
     parse.add_argument('kind', choices=['locator', 'repairer'])
     parse.add_argument('path')
-    create = sub.add_parser('create-task')
+    create = sub.add_parser('create-task', help='保存任务参数，不自动启动')
     create.add_argument('--mode', choices=['baseline', 'repair'], default='baseline')
     create.add_argument('--description')
     create.add_argument('--project', default='leap')
@@ -36,20 +48,21 @@ def main() -> int:
     create.add_argument('--max-calls', type=int, default=12)
     create.add_argument('--total-seconds', type=int, default=300)
     create.add_argument('--idempotency-key')
-    for name in ('start-task', 'task-status', 'task-report', 'interrupt-task'):
-        command = sub.add_parser(name)
+    for name in ('start-task', 'task-status', 'task-report', 'interrupt-task', 'archive-task', 'restore-task'):
+        command = sub.add_parser(name, help=COMMAND_HELP[name])
         command.add_argument('run_id')
-    sub.add_parser('list-tasks')
-    sub.add_parser('list-projects')
-    importer = sub.add_parser('import-quixbugs')
+    listing = sub.add_parser('list-tasks', help='列出最近任务，默认隐藏已归档任务')
+    listing.add_argument('--include-archived', action='store_true', help='同时列出已归档任务')
+    sub.add_parser('list-projects', help='列出已登记题目与执行条件')
+    importer = sub.add_parser('import-quixbugs', help='预览QuixBugs资产导入；仅--write时写入')
     importer.add_argument('--source-bundle')
     importer.add_argument('--write', action='store_true', help='默认只预览；指定后导入已校验资产并更新目录')
-    sub.add_parser('doctor')
+    sub.add_parser('doctor', help='查看本机环境概览，不执行隔离探针')
     sub.add_parser('provider-check', help='仅查询已登记账号的模型列表，不调用付费聊天')
     sub.add_parser('budget-status', help='本项目人民币额度估算，不是平台实时余额')
     smoke = sub.add_parser('provider-smoke', help='一次有上限的JSON接口测试；不是修复闭环')
     smoke.add_argument('--profile', default='sf_account1_v32')
-    serve = sub.add_parser('serve')
+    serve = sub.add_parser('serve', help='启动本机Web工作台，正常关闭后退出')
     serve.add_argument('--port', type=int, default=8000, help='固定监听端口1024至65535；不支持0随机分配')
     reconcile = sub.add_parser('budget-reconcile', help='人工对账；仅本机CLI，不调用模型、不改变额度')
     reconcile.add_argument('--call-id', required=True)
@@ -94,7 +107,7 @@ def main() -> int:
                 raise ValueError('端口须为1024至65535')
             uvicorn.run(create_app(), host='127.0.0.1', port=args.port)
             return 0
-        if args.command in {'create-task', 'start-task', 'task-status', 'task-report', 'list-tasks', 'interrupt-task'}:
+        if args.command in {'create-task', 'start-task', 'task-status', 'task-report', 'list-tasks', 'interrupt-task', 'archive-task', 'restore-task'}:
             from .service import TaskService
             service = TaskService(os.environ.get('CODE_FIX_RUN_ROOT'))
             if args.command == 'create-task':
@@ -112,10 +125,12 @@ def main() -> int:
             elif args.command == 'interrupt-task':
                 service.store.interrupt(args.run_id)
                 result = service.store.get(args.run_id)
+            elif args.command in {'archive-task', 'restore-task'}:
+                result = service.store.set_archived(args.run_id, args.command == 'archive-task')
             else:
-                result = service.store.list()
+                result = service.store.list(include_archived=args.include_archived)
             print(json.dumps(result, ensure_ascii=False, indent=2))
-            return 2 if isinstance(result, dict) and result.get('status') in {'blocked', 'failed'} else 0
+            return 2 if args.command not in {'archive-task', 'restore-task'} and isinstance(result, dict) and result.get('status') in {'blocked', 'failed'} else 0
         if args.command == 'validate-config':
             task = load_task_spec(ROOT / 'configs/tasks/leap-baseline.json')
             errors = validate_draft_configs(ROOT)

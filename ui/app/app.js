@@ -6,6 +6,11 @@ const labels = {created:'已创建',running:'运行中',stopped:'已停止',bloc
 const label = value => labels[value] || value || '未知';
 let token = '', selected = localStorage.getItem('codefix.selected') || '', key = null, busy = false, refreshing = false;
 let projects = [], allRuns=[], currentRun=null, currentEvents=[], recordsKey='', historyKey='', scale=1;
+const poller=CodeFixPolling.createPoller({refresh:refreshNow,isRunning:()=>allRuns.some(r=>r.status==='running'),isHidden:()=>document.hidden});
+function refresh(){return poller.request();}
+document.addEventListener('visibilitychange',()=>poller.visibilityChanged());
+window.addEventListener('pagehide',()=>poller.stop());
+window.addEventListener('pageshow',event=>{if(event.persisted)poller.start();});
 const element=(tag,text,cls)=>{const node=document.createElement(tag);if(text!=null)node.textContent=text;if(cls)node.className=cls;return node;};
 const shortId=id=>id?.startsWith('run-')?'run-'+id.slice(4,12):id||'未记录';
 const taskName=run=>projects.find(p=>p.project===run.task.project)?.title||run.task.project||'未记录题目';
@@ -36,12 +41,15 @@ function renderRecords(){
   for(const run of rows){
     const row=element('tr'),nameCell=element('td'),name=element('button',`${taskName(run)} · ${modeName(run)}`,'run-name');
     name.type='button';name.onclick=()=>selectRun(run.run_id);nameCell.append(name,element('span',shortId(run.run_id),'run-id'));nameCell.title=run.run_id;
-    const statusCell=element('td');statusCell.append(element('span',label(run.status),'badge '+(run.status==='success'?'good':run.status==='failed'?'bad':['blocked','stopped'].includes(run.status)?'warn':run.status==='running'?'blue':'')));
+    const statusCell=element('td');statusCell.append(element('span',label(run.status)+(run.archived_at?' · 已归档':''),'badge '+(run.status==='success'?'good':run.status==='failed'?'bad':['blocked','stopped'].includes(run.status)?'warn':run.status==='running'?'blue':'')));
     const source=CodeFixTrace.provenance(run,eventCache.get(run.run_id)||[]);
     const sourceCell=element('td');sourceCell.append(element('span',source.includes('离线')?'离线演示':source.includes('已记录真实')?'真实调用':source.includes('基线')?'基线检查':'待核对事件','badge'));
     const date=run.updated_at?new Date(run.updated_at):null;
     const timeCell=element('td',date&&!Number.isNaN(date.getTime())?date.toLocaleString('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}):'未记录');
     const actionCell=element('td'),open=element('button','查看链路 →','btn compact');open.type='button';open.onclick=()=>selectRun(run.run_id);actionCell.append(open);
+    const archive=element('button',run.archived_at?'恢复':'归档','btn compact');archive.type='button';archive.disabled=run.status==='running';
+    archive.setAttribute('aria-label',(run.archived_at?'恢复':'归档')+' '+shortId(run.run_id));
+    archive.onclick=()=>action(async()=>{await api(`/tasks/${run.run_id}/${run.archived_at?'restore':'archive'}`,{method:'POST'});});actionCell.append(archive);
     row.append(nameCell,statusCell,sourceCell,timeCell,actionCell);byId('run-rows').append(row);
   }
   byId('records-empty').hidden=rows.length!==0;
@@ -90,11 +98,13 @@ async function action(work) {
   try { await work(); } catch (error) { display('error', error.message);display('form-error',error.message); }
   finally { busy = false; byId('create').disabled = false; await refresh(); }
 }
-async function refresh() {
+async function refreshNow() {
   if (refreshing) return;
   refreshing = true;
   try {
-    const [runs, budget] = await Promise.all([api('/tasks').then(x => x.json()), api('/budget').then(x => x.json())]);
+    const includeArchived=byId('include-archived').checked;
+    const [runs, budget] = await Promise.all([api('/tasks'+(includeArchived?'?include_archived=true':'')).then(x => x.json()), api('/budget').then(x => x.json())]);
+    if(includeArchived!==byId('include-archived').checked)return true;
     allRuns=runs;renderRecords();
     display('budget', budgetText(budget));
     const history = byId('history');
@@ -110,8 +120,12 @@ async function refresh() {
     if (!selected) {
       currentRun=null;currentEvents=[];
       renderTrace({run_id:'',status:'created',task:{}},[]);
-      for(const id of ['start','pause','stop','report','bundle'])byId(id).disabled=true;
-      showView(location.hash.slice(1)||'records',false);return;
+      for(const id of ['start','pause','stop','report','bundle','archive-run'])byId(id).disabled=true;
+      for(const id of ['status','summary','events','development','final','decisions','patch','call-records'])display(id,'尚未选择任务');
+      for(const id of ['metric-status','metric-rounds','metric-calls','metric-cost','metric-environment'])display(id,'未选择');
+      display('run-notice','请选择一条运行记录；已归档任务可在运行记录中勾选“包含已归档”查看或恢复。');
+      localStorage.removeItem('codefix.selected');
+      showView(location.hash.slice(1)||'records',false);return true;
     }
     localStorage.setItem('codefix.selected', selected);
     const snapshot = selected;
@@ -136,7 +150,7 @@ async function refresh() {
       `说明：${result.reason || (run.status === 'created' ? '任务已保存，等待启动' : '历史记录未提供说明')}`
     ].join('\n'));
     const names = {started:'开始运行',finished:'运行结束',agent_call:'Agent调用',test_completed:'测试完成',
-      candidate_applied:'候选已应用',decision:'调度决策',isolation_checked:'隔离检查',control_requested:'收到控制请求'};
+      candidate_applied:'候选已应用',decision:'调度决策',isolation_checked:'隔离检查',control_requested:'收到控制请求',archived:'已归档',restored:'已恢复'};
     display('events', events.length ? events.map(event => [event.created_at, names[event.event] || event.event,
       event.role || '', event.status ? label(event.status) : '', event.failure_class || '', event.reason || ''].filter(Boolean).join(' · ')).join('\n\n') : '尚无执行事件');
     const tests = events.filter(x => x.event === 'test_completed');
@@ -151,11 +165,13 @@ async function refresh() {
       const response = await api(`/tasks/${snapshot}/artifact?path=${encodeURIComponent(`patch-${patch.round}/patch.diff`)}`);
       const text = await response.text(); if (snapshot === selected) display('patch', text);
     }
-    byId('start').disabled = busy || run.status !== 'created';
+    byId('start').disabled = busy || run.status !== 'created' || Boolean(run.archived_at);
+    byId('archive-run').disabled=busy||run.status==='running';byId('archive-run').textContent=run.archived_at?'恢复任务':'归档任务';
     byId('pause').disabled = byId('stop').disabled = busy || run.status !== 'running' || run.task.mode !== 'repair';
     byId('report').disabled = false;
     byId('bundle').disabled = ['created', 'running'].includes(run.status);
-  } catch (error) { display('error', error.message); display('budget', '额度状态暂时无法刷新，请重新核对；旧余额不作当前余额。'); }
+    return true;
+  } catch (error) { display('error', error.message); display('budget', '额度状态暂时无法刷新，请重新核对；旧余额不作当前余额。');return false; }
   finally { refreshing = false; }
 }
 byId('task-form').onsubmit = event => {event.preventDefault();if(!byId('task-form').reportValidity())return;action(async () => {
@@ -180,6 +196,8 @@ for (const operation of ['pause', 'stop']) byId(operation).onclick = () => actio
   await api(`/tasks/${selected}/control`, {method:'POST', body:JSON.stringify({action:operation})});
 });
 byId('history').onchange = () => { selected = byId('history').value; refresh(); };
+byId('include-archived').onchange=()=>refresh();
+byId('archive-run').onclick=()=>action(async()=>{if(currentRun)await api(`/tasks/${currentRun.run_id}/${currentRun.archived_at?'restore':'archive'}`,{method:'POST'});});
 byId('refresh').onclick = refresh;
 for(const button of document.querySelectorAll('[data-view]'))button.onclick=()=>showView(button.dataset.view);
 window.addEventListener('hashchange',()=>showView(location.hash.slice(1)||'records',false));
@@ -220,6 +238,6 @@ byId('report').onclick = () => download('report'); byId('bundle').onclick = () =
     display('health', await (await api('/health')).json());
     if(window.CodeFixConfig)await CodeFixConfig.init();
     display('connection', '已连接任务后端 · 运行来源见Trace标识');
-    await refresh(); setInterval(refresh, 1200);
+    await poller.start();
   } catch (error) { display('connection', '后端连接失败'); display('error', error.message); }
 })();
