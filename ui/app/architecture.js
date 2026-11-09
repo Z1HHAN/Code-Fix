@@ -10,25 +10,40 @@
     const edges=graph.edges.filter(e=>byStep.has(e.from)&&byStep.has(e.to)).map(e=>({...e,source:byStep.get(e.from),target:byStep.get(e.to)}));
     return {graph,mapped,edges,started:events.some(e=>e.event==='started'),terminal:!['created','running'].includes(run.status)};
   }
+  function evidenceTargets(node,events,trace){
+    const targets=new Set(),paths=trace.artifacts(node,events);
+    if(node.completed)targets.add('trace');
+    if(paths.some(x=>/stdout|stderr|junit|structured/.test(x)))targets.add('logs');
+    if(node.facts.node_id==='apply_candidate'&&paths.length)targets.add('diff');
+    if(node.decision?.counters?.cost!=null)targets.add('cost');
+    return targets;
+  }
   function mount(document,host,trace,onSelect){
     const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!=null)n.textContent=text;if(cls)n.className=cls;return n;};
     const svg=tag=>document.createElementNS('http://www.w3.org/2000/svg',tag);
     let run=null,events=[],runId=null,seen=new Set(),selected=null,following=true,replaying=false,index=0,timer=null,transfers=new Map(),motionTimer=null,signature=null;
-    let pausedAt=null,remaining=0,due=0,replayEnded=false;
+    let pausedAt=null,remaining=0,due=0,replayEnded=false,pendingEvents=0;
+    const motionPreference=(document.defaultView||root).matchMedia?.('(prefers-reduced-motion: reduce)');
     const identity=e=>Number.isInteger(e.sequence)?'seq:'+e.sequence:JSON.stringify(e);
     const controls=el('div',null,'arch-controls'),state=el('span'),follow=el('button','返回当前步骤'),back=el('button','上一步'),next=el('button','下一步'),play=el('button','历史回放'),pause=el('button','暂停回放');
-    for(const b of [follow,back,next,play,pause]){b.type='button';controls.append(b);}controls.prepend(state);
+    const fromStep=el('button','从此步骤回放'),notice=el('span',null,'arch-new-events');notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');
+    for(const b of [follow,back,next,play,pause,fromStep]){b.type='button';controls.append(b);}controls.prepend(state);controls.append(notice);
     const viewport=el('div',null,'arch-viewport'),canvas=el('div',null,'architecture-canvas'),steps=el('div',null,'arch-steps'),hint=el('p',null,'arch-hint');viewport.append(canvas);host.append(controls,viewport,steps,hint);
     function stop(){clearTimeout(timer);timer=null;replaying=false;}
     function historyAt(i){stop();pausedAt=null;replayEnded=false;following=false;index=Math.max(0,Math.min(events.length-1,i));transfers.clear();draw();}
-    follow.onclick=()=>{stop();pausedAt=null;replayEnded=false;following=true;selected=null;transfers.clear();draw();};back.onclick=()=>historyAt((following?events.length-1:index)-1);next.onclick=()=>historyAt((following?events.length-1:index)+1);
+    follow.onclick=()=>{stop();pausedAt=null;replayEnded=false;pendingEvents=0;following=true;selected=null;transfers.clear();draw();};back.onclick=()=>historyAt((following?events.length-1:index)-1);next.onclick=()=>historyAt((following?events.length-1:index)+1);
     pause.onclick=()=>{if(!replaying)return;remaining=Math.max(0,due-Date.now());pausedAt=Date.now();stop();draw();};
     play.onclick=()=>{
       if(!run||!events.length||replaying)return;
       clearTimeout(motionTimer);
       if(pausedAt!==null){const shift=Date.now()-pausedAt;for(const [key,end]of transfers)transfers.set(key,end+shift);pausedAt=null;replaying=true;draw();schedule(remaining);return;}
-      stop();following=false;selected=null;replaying=true;replayEnded=false;index=0;transfers.clear();tick();
+      startReplay(0);
     };
+    function startReplay(at){stop();clearTimeout(motionTimer);pausedAt=null;pendingEvents=0;following=false;selected=null;replaying=true;replayEnded=false;index=at;transfers.clear();tick();}
+    const selectedStart=()=>events.findIndex(e=>e.step_id===selected&&e.event==='step_started');
+    fromStep.onclick=()=>{const at=selectedStart();if(at>=0&&!replaying)startReplay(at);};
+    function updatePending(){notice.hidden=following||!pendingEvents;notice.textContent=notice.hidden?'':`新增 ${pendingEvents} 个事件，返回当前步骤查看`;}
+    motionPreference?.addEventListener('change',()=>{if(run)draw();});
     function schedule(delay){due=Date.now()+delay;timer=setTimeout(()=>{if(index>=events.length-1){stop();transfers.clear();replayEnded=true;draw();}else{index++;tick();}},delay);}
     function tick(){
       if(!replaying)return;
@@ -39,8 +54,8 @@
       if(event.event==='finished')transfers.clear();
       draw();
       // Completion evidence can travel while subsequent metadata is consumed. Only
-      // entry/actual step handoffs hold the cursor for a full readable transmission.
-      let delay=event.event==='started'||(event.event==='step_started'&&p.edges.some(e=>e.to===event.step_id))?handoffMs:650;
+      // Actual step handoffs hold the cursor. Entry travels alongside later events.
+      let delay=event.event==='step_started'&&p.edges.some(e=>e.to===event.step_id)?handoffMs:650;
       if(index>=events.length-1)delay=Math.max(delay,...[...transfers.values()].map(t=>t-Date.now()));
       schedule(delay);
     }
@@ -51,6 +66,7 @@
       const p=projection(viewRun,visible,trace);canvas.replaceChildren();steps.replaceChildren();
       state.textContent=following?'实时事件视图':replaying?`历史回放 · ${index+1}/${events.length} · 仅播放已记录事件`:pausedAt!==null?`回放已暂停 · ${index+1}/${events.length}`:replayEnded?'回放结束 · 已播放全部已记录事件':'历史查看 · 不执行任务';
       play.textContent=pausedAt!==null?'继续回放':replayEnded?'重新回放':'历史回放';
+      fromStep.disabled=replaying||selectedStart()<0;updatePending();
       state.setAttribute('role','status');follow.disabled=following;back.disabled=!events.length||(!following&&index===0);next.disabled=!events.length||following||index>=events.length-1;play.disabled=!events.length||replaying;pause.disabled=!replaying;
       hint.textContent=p.graph.provenance+'。默认原始字号，超出时可在图内横向滚动。分层为架构映射；执行连线仅据父步骤记录。灰色表示未执行或未记录，查看与回放不触发模型请求。';
       const links=svg('svg');links.setAttribute('class','arch-links');links.setAttribute('viewBox','0 0 1200 770');
@@ -58,7 +74,7 @@
       for(const [y,h,title]of [[15,130,'用户入口'],[175,130,'独立调度层'],[335,245,'Agent与工具'],[625,125,'证据与持久化']]){const band=el('div',null,'arch-band');band.style.cssText=`top:${y}px;height:${h}px`;band.append(el('strong',title));canvas.append(band);}
       function line(d,cls,attrs={}){
         const n=svg('path');n.setAttribute('d',d);n.setAttribute('class',cls);n.setAttribute('marker-end','url(#arch-arrow)');for(const [k,v]of Object.entries(attrs))n.setAttribute(k,v);links.append(n);
-        if(cls==='arch-transmission'){
+        if(cls==='arch-transmission'&&!motionPreference?.matches){
           // Move the arrow itself along the same directed path, including return routes.
           // Preserve elapsed time if another new event rebuilds this SVG during a handoff.
           const key=attrs['data-from']?attrs['data-from']+'>'+attrs['data-to']:attrs['data-evidence-step']?'evidence:'+attrs['data-evidence-step']:'entry';
@@ -92,11 +108,13 @@
       }
       // Evidence pulses require a newly recorded completion with an evidence path.
       const evidenceSlots=new Set();
-      for(const node of p.graph.nodes){if(node.completed)evidenceSlots.add('trace');const paths=trace.artifacts(node,visible);if(paths.some(x=>/stdout|stderr|junit|structured/.test(x)))evidenceSlots.add('logs');if(node.facts.node_id==='apply_candidate'&&paths.length)evidenceSlots.add('diff');if(node.decision?.counters?.cost)evidenceSlots.add('cost');}
+      for(const node of p.graph.nodes)for(const target of evidenceTargets(node,visible,trace))evidenceSlots.add(target);
       if(animate)for(const node of p.graph.nodes){
         const key=slot(node);if(!key||!node.completed)continue;
         if(!transfers.has('evidence:'+node.id))continue;
-        const a=slots[key];line(`M${a[0]+nodeWidth/2} ${a[1]+nodeHeight}V605H308V637`,'arch-transmission',{'data-evidence-step':node.id});
+        const a=slots[key];for(const target of evidenceTargets(node,visible,trace)){
+          const b=slots[target];line(`M${a[0]+nodeWidth/2} ${a[1]+nodeHeight}V605H${b[0]+nodeWidth/2}V${b[1]-3}`,'arch-transmission',{'data-evidence-step':node.id,'data-evidence-target':target});
+        }
       }
       canvas.append(links);
       for(const [key,[x,y,title]]of Object.entries(slots)){
@@ -107,11 +125,11 @@
         const button=el('button',null,'arch-node'+(active?' arch-active':failed?' arch-failed':recorded?' arch-done':''));button.type='button';button.style.cssText=`left:${x}px;top:${y}px`;button.dataset.module=key;button.setAttribute('aria-pressed',String(node?.id===selected));
         const status=node?(active?'执行中':node.statusLabel):key==='guard'?'每步强制校验（规则说明）':recorded?'已有事件记录':key==='locator'?'按需参与 · 未调用':'未执行 / 未记录';
         button.title=title+' · '+status;
-        button.append(el('strong',title),el('span',status),el('small',node?.round!=null?'第'+node.round+'轮':''));
+        button.append(el('strong',title),el('span',status),el('small',node?trace.roundLabel(node):''));
         button.disabled=!node;
         button.onclick=()=>{selected=node.id;historyAt(events.findIndex(e=>identity(e)===identity(node.events.at(-1))));};canvas.append(button);
       }
-      for(const node of p.graph.nodes){const b=el('button',`${node.title}${node.round!=null?' · '+node.round+'轮':''} · ${node.statusLabel}`,'arch-step');b.type='button';b.setAttribute('aria-pressed',String(selected===node.id));b.onclick=()=>{selected=node.id;historyAt(events.findIndex(e=>identity(e)===identity(node.events.at(-1))));};steps.append(b);}
+      for(const node of p.graph.nodes){const b=el('button',`${node.title}${trace.roundLabel(node)?' · '+trace.roundLabel(node):''} · ${node.statusLabel}`,'arch-step');b.type='button';b.setAttribute('aria-pressed',String(selected===node.id));b.onclick=()=>{selected=node.id;historyAt(events.findIndex(e=>identity(e)===identity(node.events.at(-1))));};steps.append(b);}
       if(!p.graph.nodes.length)steps.append(el('span',p.started?'已收到启动事件，等待步骤记录。':'尚未启动或暂无步骤证据。'));
       if(p.terminal)canvas.append(el('div','运行已结束 · '+(viewRun.result?.reason||viewRun.status),'arch-terminal'));
       const chosen=following||replaying?p.graph.nodes.at(-1):p.graph.nodes.find(n=>n.id===selected)||p.graph.nodes.at(-1);
@@ -120,9 +138,10 @@
     return function render(value,page){
       const changed=runId!==value.run_id;
       const signatureNext=JSON.stringify([value.run_id,value.status,value.result,page]);if(signature===signatureNext)return;signature=signatureNext;
-      if(changed){stop();pausedAt=null;replayEnded=false;clearTimeout(motionTimer);runId=value.run_id;seen=new Set(page.map(identity));transfers.clear();selected=null;following=true;}
+      if(changed){stop();pausedAt=null;replayEnded=false;pendingEvents=0;clearTimeout(motionTimer);runId=value.run_id;seen=new Set(page.map(identity));transfers.clear();selected=null;following=true;}
       const fresh=changed?[]:page.filter(e=>!seen.has(identity(e)));
       run=value;events=page;for(const e of page)seen.add(identity(e));
+      if(!following&&fresh.length){pendingEvents+=fresh.length;updatePending();}
       const p=projection(value,page,trace);
       if(following&&run.status==='running'){
         if(fresh.some(e=>e.event==='started'||(e.event==='step_started'&&!e.parent_step_id)))transfers.set('entry',Date.now()+handoffMs);
