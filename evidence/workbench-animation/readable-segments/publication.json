@@ -1,0 +1,7 @@
+{
+  "feature_commit": "cfa1707df4e4617bbae6244b5d160302aab8e3b0",
+  "remote_main_observed": "cfa1707df4e4617bbae6244b5d160302aab8e3b0",
+  "push_exit_code": 0,
+  "scope": "UI slowdown and solid arrows only; offline visibility checks",
+  "note": "Subsequent documentation commit records this observation; final identity from Git."
+}
