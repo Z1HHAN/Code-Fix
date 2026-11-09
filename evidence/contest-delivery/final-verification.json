@@ -1,0 +1,85 @@
+{
+  "created_at": "2026-11-09T15:25:52.674581+00:00",
+  "tested_commit": "ebc7450973081fe95d88a777f49f26633aa5d851",
+  "origin_main_after_fetch": "731dc0060b7b46c3d434fd85c8fea197f669df34",
+  "branch": "codex/contest-strategies-config-comparison",
+  "scope": "clean commit offline reviewed tests; no Docker, model requests or B/C personal signoff",
+  "c_acceptance": "evidence/contest-delivery/C-acceptance-20261109-232022-f8888473",
+  "acceptance_status": "passed_offline_scope",
+  "source_unchanged": true,
+  "raw_files": 170,
+  "copy_byte_identity": true,
+  "steps": [
+    {
+      "stage": "doctor",
+      "status": "passed",
+      "exit_code": 0
+    },
+    {
+      "stage": "validate_config",
+      "status": "passed",
+      "exit_code": 0
+    },
+    {
+      "stage": "platform_pytest",
+      "status": "passed",
+      "exit_code": 0,
+      "counts": {
+        "collected": 573,
+        "passed": 572,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 1
+      }
+    },
+    {
+      "stage": "node_ui",
+      "status": "passed",
+      "exit_code": 0,
+      "counts": {
+        "tests": 24,
+        "pass": 24,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "stage": "c_controls",
+      "status": "passed",
+      "exit_code": 0
+    },
+    {
+      "stage": "repair_gates",
+      "status": "passed",
+      "exit_code": 0,
+      "counts": {
+        "collected": 25,
+        "passed": 25,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "node_extended": {
+    "passed": 60,
+    "failed": 0,
+    "source": "contest-node-frozen.tap"
+  },
+  "browser": {
+    "passed": true,
+    "source": "final-browser/result.json",
+    "writes": "only configuration validate/save, task create, comparison create; no /start"
+  },
+  "real_validation": {
+    "B_Docker": "not_run_for_this_commit",
+    "natural_model_repair": "not_run",
+    "paired_real_experiment": "not_run",
+    "C_personal_review": "pending",
+    "video": "not_recorded",
+    "rehearsal": "not_run"
+  },
+  "source_snapshot_sha256": "484c3d3d812b011e3809afcac9036b9344ac81a8ade098fa81641f3f08b2a97a"
+}

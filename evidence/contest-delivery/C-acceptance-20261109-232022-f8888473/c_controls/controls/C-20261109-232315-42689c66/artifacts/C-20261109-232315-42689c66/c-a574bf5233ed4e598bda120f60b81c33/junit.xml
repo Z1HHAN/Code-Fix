@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.077" timestamp="2026-11-09T23:23:23.450758+08:00" hostname="LAPTOP-8477LI5E"><testcase classname="tests.test_leap" name="test_2024_is_leap" time="0.000" /></testsuite></testsuites>

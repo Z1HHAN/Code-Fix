@@ -1,0 +1,13 @@
+leap_bad: True / failed / assertion_failed
+leap_good: True / ok / passed
+output_timeout: True / timeout / timeout
+all_skipped: True / failed / not_reproduced
+zero_tests: True / failed / not_reproduced
+incomplete_tests: True / failed / not_reproduced
+dependency_error: True / failed / environment_error
+syntax_error: True / failed / syntax_error
+runtime_error: True / failed / code_runtime_error
+stale_version: True / blocked / permission_violation
+modified_tests: True / blocked / permission_violation
+model_candidate_blocked: True / blocked / permission_violation
+Evidence: C:\Users\lenovo\AppData\Local\Temp\cf-contest-delivery\C-acceptance-20261109-232022-f8888473\c_controls\controls\C-20261109-232315-42689c66
