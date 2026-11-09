@@ -1,6 +1,7 @@
 'use strict';
 (function(root){
   const nodeWidth=156,nodeHeight=88;
+  const travelMs=2200,staggerMs=700,handoffMs=3800;
   const slots={entry:[230,35,'用户入口'],service:[620,35,'任务服务'],isolation:[230,195,'隔离前置检查'],program:[550,195,'独立程序调度'],guard:[900,195,'预算与权限'],locator:[550,345,'定位员·按需参与'],baseline:[180,470,'隔离基线测试'],repairer:[348,470,'修复与补丁校验'],pytest:[516,470,'隔离开发测试'],detector:[684,470,'检测员'],scheduler:[852,470,'模型调度员'],final:[1020,470,'最终复验'],trace:[230,640,'Trace事件'],logs:[470,640,'测试日志 / JUnit'],diff:[710,640,'候选diff'],cost:[950,640,'费用账本']};
   function slot(node){const f=node.facts;return f.node_id==='pytest'?(f.phase==='final_check'?'final':f.round===0?'baseline':'pytest'):f.node_id==='apply_candidate'?'repairer':f.node_id==='program_dispatch'?'program':f.node_id==='isolation_preflight'?'isolation':slots[f.node_id]?f.node_id:null;}
   function projection(run,events,trace){
@@ -22,7 +23,7 @@
     follow.onclick=()=>{stop();following=true;selected=null;transfers.clear();draw();};back.onclick=()=>historyAt((following?events.length-1:index)-1);next.onclick=()=>historyAt((following?events.length-1:index)+1);
     pause.onclick=()=>{stop();draw();};
     play.onclick=()=>{if(!run||!events.length)return;stop();following=false;replaying=true;index=0;transfers.clear();tick();};
-    function tick(){if(!replaying)return;draw(true);if(index>=events.length-1){stop();draw();return;}timer=setTimeout(()=>{index++;tick();},900);}
+    function tick(){if(!replaying)return;draw(true);if(index>=events.length-1){stop();draw();return;}timer=setTimeout(()=>{index++;tick();},['started','step_started','step_completed'].includes(events[index]?.event)?handoffMs+100:650);}
     function draw(replayTick=false){
       if(!run)return;
       const visible=following?events:events.slice(0,index+1),finished=visible.some(e=>e.event==='finished');
@@ -40,13 +41,13 @@
           // Move the arrow itself along the same directed path, including return routes.
           // Preserve elapsed time if another new event rebuilds this SVG during a handoff.
           const key=attrs['data-from']?attrs['data-from']+'>'+attrs['data-to']:attrs['data-evidence-step']?'evidence:'+attrs['data-evidence-step']:'entry';
-          const elapsed=replayTick?0:Math.max(0,1300-((transfers.get(key)||Date.now()+1300)-Date.now()));
+          const elapsed=replayTick?0:Math.max(0,handoffMs-((transfers.get(key)||Date.now()+handoffMs)-Date.now()));
           for(let segment=0;segment<3;segment++){
-          const begin=((segment*160-elapsed)/1000)+'s',packet=svg('g');packet.setAttribute('data-segment',String(segment));packet.setAttribute('class','arch-packet');packet.setAttribute('opacity','0');packet.setAttribute('aria-hidden','true');
+          const begin=((segment*staggerMs-elapsed)/1000)+'s',packet=svg('g');packet.setAttribute('data-segment',String(segment));packet.setAttribute('class','arch-packet');packet.setAttribute('opacity','0');packet.setAttribute('aria-hidden','true');
           for(const [k,v]of Object.entries(attrs))packet.setAttribute(k,v);
-          const shape=svg('path');shape.setAttribute('d','M-16 -2H-7V-5L0 0L-7 5V2H-16Z');shape.setAttribute('class','arch-packet-arrow');packet.append(shape);
-          const motion=svg('animateMotion');motion.setAttribute('path',d);motion.setAttribute('rotate','auto');motion.setAttribute('dur','0.54s');motion.setAttribute('begin',begin);motion.setAttribute('repeatCount','1');motion.setAttribute('fill','freeze');motion.setAttribute('calcMode','paced');packet.append(motion);
-          const visibility=svg('animate');visibility.setAttribute('attributeName','opacity');visibility.setAttribute('values','0;1;1;0');visibility.setAttribute('keyTimes','0;0.06;0.9;1');visibility.setAttribute('dur','0.54s');visibility.setAttribute('begin',begin);visibility.setAttribute('fill','freeze');packet.append(visibility);links.append(packet);
+          const shape=svg('path');shape.setAttribute('d','M-30 -3.5H-12V-9L0 0L-12 9V3.5H-30Z');shape.setAttribute('class','arch-packet-arrow');packet.append(shape);
+          const motion=svg('animateMotion');motion.setAttribute('path',d);motion.setAttribute('rotate','auto');motion.setAttribute('dur',(travelMs/1000)+'s');motion.setAttribute('begin',begin);motion.setAttribute('repeatCount','1');motion.setAttribute('fill','freeze');motion.setAttribute('calcMode','paced');packet.append(motion);
+          const visibility=svg('animate');visibility.setAttribute('attributeName','opacity');visibility.setAttribute('values','0;1;1;0');visibility.setAttribute('keyTimes','0;0.06;0.9;1');visibility.setAttribute('dur',(travelMs/1000)+'s');visibility.setAttribute('begin',begin);visibility.setAttribute('fill','freeze');packet.append(visibility);links.append(packet);
           }
         }
         return n;
@@ -61,7 +62,7 @@
       for(const edge of p.edges){
         const a=slots[edge.source],b=slots[edge.target];let d;
         if(edge.source===edge.target)d=`M${a[0]+nodeWidth} ${a[1]+24}h8v-35h-90v8`;
-        else if(a[1]===b[1]&&b[0]>a[0])d=`M${a[0]+nodeWidth} ${a[1]+nodeHeight/2}H${b[0]-3}`;
+        else if(a[1]===b[1]&&b[0]>a[0])d=`M${a[0]+nodeWidth/2} ${a[1]}V${a[1]-22}H${b[0]+nodeWidth/2}V${b[1]-3}`;
         else if(b[1]<a[1])d=`M${a[0]+nodeWidth/2} ${a[1]+nodeHeight}V600H1188V${b[1]+nodeHeight+20}H${b[0]+nodeWidth/2}V${b[1]+nodeHeight+3}`;
         else {const mid=a[1]+112;d=`M${a[0]+nodeWidth/2} ${a[1]+nodeHeight}V${mid}H${b[0]+nodeWidth/2}V${b[1]-3}`;}
         line(d,'arch-visited',{'data-from':edge.from,'data-to':edge.to});
@@ -105,13 +106,13 @@
       run=value;events=page;for(const e of page)seen.add(identity(e));
       const p=projection(value,page,trace);
       if(following&&run.status==='running'){
-        if(fresh.some(e=>e.event==='started'||(e.event==='step_started'&&!e.parent_step_id)))transfers.set('entry',Date.now()+1300);
-        for(const edge of p.edges){if(fresh.some(e=>e.event==='step_started'&&e.step_id===edge.to))transfers.set(edge.from+'>'+edge.to,Date.now()+1300);}
-        for(const e of fresh)if(e.event==='step_completed'&&e.step_id)transfers.set('evidence:'+e.step_id,Date.now()+1300);
+        if(fresh.some(e=>e.event==='started'||(e.event==='step_started'&&!e.parent_step_id)))transfers.set('entry',Date.now()+handoffMs);
+        for(const edge of p.edges){if(fresh.some(e=>e.event==='step_started'&&e.step_id===edge.to))transfers.set(edge.from+'>'+edge.to,Date.now()+handoffMs);}
+        for(const e of fresh)if(e.event==='step_completed'&&e.step_id)transfers.set('evidence:'+e.step_id,Date.now()+handoffMs);
       }
       if(run.status!=='running')transfers.clear();
       if(following||changed)draw();
-      if(transfers.size){clearTimeout(motionTimer);motionTimer=setTimeout(()=>{transfers.clear();if(following)draw();},1350);}
+      if(transfers.size){clearTimeout(motionTimer);motionTimer=setTimeout(()=>{transfers.clear();if(following)draw();},handoffMs+50);}
     };
   }
   const api={projection,slot,mount};if(typeof module!=='undefined')module.exports=api;root.CodeFixArchitecture=api;

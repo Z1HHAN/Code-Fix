@@ -48,7 +48,7 @@ test('moving arrow follows the directed edge once and terminal removes the packe
  for(const p of packets)assert.ok(p.children.some(n=>n.attributes.class==='arch-packet-arrow'));
  const packet=packets[0];
  const motion=packet.children.find(n=>n.tagName==='animateMotion');
- assert.equal(motion.attributes.path,edge.attributes.d);assert.equal(motion.attributes.rotate,'auto');assert.equal(motion.attributes.repeatCount,'1');
+ assert.equal(motion.attributes.path,edge.attributes.d);assert.equal(motion.attributes.rotate,'auto');assert.equal(motion.attributes.repeatCount,'1');assert.equal(motion.attributes.dur,'2.2s');
  const completed=[...events,{sequence:11,event:'step_completed',step_id:'l',node_id:'locator',status:'ok'},{sequence:12,event:'step_started',step_id:'back',parent_step_id:'l',node_id:'program_dispatch'}];
  ui.render(run,completed);assert.ok(ui.find(n=>n.attributes.class==='arch-packet'&&n.attributes['data-from']==='l'&&n.attributes['data-to']==='back').length);
  ui.render({...run,status:'stopped'},completed);assert.equal(ui.find(n=>n.attributes.class==='arch-packet').length,0);ui.cleanup();

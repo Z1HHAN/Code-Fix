@@ -11,7 +11,7 @@
 .arch-context{fill:none;stroke:#a2b5d1;stroke-width:1.5;stroke-dasharray:4 4}
 .arch-visited{fill:none;stroke:#8aaee9;stroke-width:2}
 .arch-transmission{fill:none;stroke:#76a3f6;stroke-width:2}
-.arch-packet-arrow{fill:#1e63ff;stroke:#fff;stroke-width:1;stroke-linejoin:round;filter:drop-shadow(0 0 3px #4888ff)}
+.arch-packet-arrow{fill:#0752df;stroke:#fff;stroke-width:1.4;stroke-linejoin:round;filter:drop-shadow(0 1px 1px #1654b840)}
 .arch-node{position:absolute;box-sizing:border-box;width:156px;height:88px;background:#fff;border:1px solid #ccd6e5;border-radius:8px;text-align:left;padding:11px 12px;display:flex;flex-direction:column;gap:5px;cursor:pointer;color:#56657b;box-shadow:0 2px 5px #263d5b08}
 .arch-node strong{font-size:15px;line-height:20px;letter-spacing:-.2px}
 .arch-node span{font-size:13px;line-height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;flex-shrink:0}

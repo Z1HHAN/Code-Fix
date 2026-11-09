@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-09",
+  "scope": "UI visibility correction only; offline Trace fixtures; no paid model/Docker/backend acceptance",
+  "baseline": "f9f0933",
+  "node_passed": 29,
+  "browser_passed": true,
+  "travel_seconds": 2.2,
+  "stagger_seconds": 0.7,
+  "last_arrival_seconds": 3.6,
+  "live_window_seconds": 3.8,
+  "replay_handoff_hold_seconds": 3.9,
+  "arrow_head_height_px": 18,
+  "wall_clock_visible_after_1_1_seconds": 2,
+  "commands": [
+    "node --test tests/ui_architecture.test.cjs tests/ui_trace.test.cjs tests/ui_budget.test.cjs tests/ui_prototype.test.cjs",
+    "CODE_FIX_ARCH_BROWSER_OUTPUT=runs/directional-readable-final node tests/browser_architecture.cjs"
+  ],
+  "source_sha256": {
+    "ui/app/architecture.js": "dd6eb37f9248629a6c5f03cb347709362756db0a7fc76369c6cd18a9bd583c4b",
+    "ui/app/architecture.css": "78623590e438b2dc7fc8064b34cb3a5c4187149f037975603f18e4ace533b57a",
+    "tests/ui_architecture.test.cjs": "6f9e7082bf7a54fc39fbef1ee9bdb1c008a9987c7f6e056b8083eada8bd3f055",
+    "tests/browser_architecture.cjs": "1fa135b16d62b6613b30c46e8345d462ffb7dc4db649a7a23cc1b32361eae092"
+  }
+}
