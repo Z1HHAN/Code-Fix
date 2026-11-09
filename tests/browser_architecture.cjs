@@ -40,9 +40,9 @@ const watchdog=setTimeout(()=>{browser.kill();process.exit(1);},90000);
   await inject(10);assert.equal(await ev("document.querySelector('[data-module=locator]').classList.contains('arch-active')"),true);assert.ok(await ev("document.querySelector('.arch-transmission[data-from=d][data-to=l]')!==null"));
   async function direction(from,to,name){
     const samples=await ev(`(()=>{const packets=[...document.querySelectorAll('.arch-packet[data-from="${from}"][data-to="${to}"]')],svg=packets[0].ownerSVGElement,path=document.querySelector('.arch-transmission[data-from="${from}"][data-to="${to}"]');svg.pauseAnimations();const len=path.getTotalLength();return packets.map(packet=>{const motion=packet.querySelector('animateMotion'),begin=parseFloat(motion.getAttribute('begin')),duration=parseFloat(motion.getAttribute('dur'));return [.24,.68].map(fraction=>{const offset=fraction*duration,t=begin+offset;svg.setCurrentTime(t);const f=offset/duration,p=path.getPointAtLength(len*f),q=path.getPointAtLength(Math.min(len,len*f+.1)),m=svg.getScreenCTM().inverse().multiply(packet.getScreenCTM()),norm=Math.hypot(q.x-p.x,q.y-p.y);return {fraction:f,x:m.e,y:m.f,error:Math.hypot(m.e-p.x,m.f-p.y),dot:(m.a*(q.x-p.x)+m.b*(q.y-p.y))/norm};});});})()`);
-    assert.equal(samples.length,3);for(const segment of samples){assert.ok(segment[1].fraction>segment[0].fraction);for(const v of segment){assert.ok(v.error<1,JSON.stringify(v));assert.ok(v.dot>.99,JSON.stringify(v));}}
+    const length=await ev(`document.querySelector('.arch-transmission[data-from="${from}"][data-to="${to}"]').getTotalLength()`);assert.equal(samples.length,length<260?1:length<600?2:3);for(const segment of samples){assert.ok(segment[1].fraction>segment[0].fraction);for(const v of segment){assert.ok(v.error<1,JSON.stringify(v));assert.ok(v.dot>.99,JSON.stringify(v));}}
     await ev("document.querySelector('.arch-links').setCurrentTime(1.8)");
-    assert.equal(await ev(`Array.from(document.querySelectorAll('.arch-packet[data-from="${from}"][data-to="${to}"]')).filter(n=>Number(getComputedStyle(n).opacity)>0).length`),3);
+    assert.equal(await ev(`Array.from(document.querySelectorAll('.arch-packet[data-from="${from}"][data-to="${to}"]')).filter(n=>Number(getComputedStyle(n).opacity)>0).length`),samples.length);
     await shot(name);await ev("document.querySelector('.arch-links').setCurrentTime(4)");assert.equal(await ev(`Array.from(document.querySelectorAll('.arch-packet[data-from="${from}"][data-to="${to}"]')).every(n=>getComputedStyle(n).opacity==='0')`),true);
     return samples;
   }
@@ -52,12 +52,13 @@ const watchdog=setTimeout(()=>{browser.kill();process.exit(1);},90000);
   await sleep(4100);assert.equal(await ev("document.querySelectorAll('.arch-transmission').length"),0);assert.equal(await ev("document.querySelector('[data-module=locator]').classList.contains('arch-active')"),true);
   const returned=[...sequence,{sequence:11,event:'step_completed',step_id:'l',node_id:'locator',status:'ok'},{sequence:12,event:'step_started',step_id:'return',parent_step_id:'l',node_id:'program_dispatch'}];
   await ev(`renderTrace(${JSON.stringify(fixture)},${JSON.stringify(returned)})`);const returnSamples=await direction('l','return','return-route');
+  assert.equal(await ev("document.querySelector('.arch-transmission[data-from=l][data-to=return]').getTotalLength()"),251);
   const visibilityRun={...fixture,run_id:'visible-duration-fixture'};
   await ev(`renderTrace(${JSON.stringify({...visibilityRun,status:'created'})},[]);renderTrace(${JSON.stringify(visibilityRun)},${JSON.stringify(sequence.slice(0,9))});renderTrace(${JSON.stringify(visibilityRun)},${JSON.stringify(sequence)})`);
   await sleep(1100);
-  const wallClockVisible=await ev("Array.from(document.querySelectorAll('.arch-packet[data-from=d][data-to=l]')).filter(n=>Number(getComputedStyle(n).opacity)>.5).length");assert.ok(wallClockVisible>=2);
+  const wallClockVisible=await ev("Array.from(document.querySelectorAll('.arch-packet[data-from=d][data-to=l]')).filter(n=>Number(getComputedStyle(n).opacity)>.5).length");assert.ok(wallClockVisible>=1);
   await ev(`renderTrace(${JSON.stringify(visibilityRun)},${JSON.stringify([...sequence,{sequence:11,event:'observation',note:'unrelated event must not restart or remove the handoff'}])})`);
-  assert.equal(await ev("document.querySelectorAll('.arch-packet[data-from=d][data-to=l]').length"),3);
+  assert.equal(await ev("document.querySelectorAll('.arch-packet[data-from=d][data-to=l]').length"),1);
   await ev("document.querySelector('[data-module=repairer]').click()");assert.match(await ev("document.querySelector('.arch-controls').textContent"),/历史查看/);assert.equal(await ev("document.querySelectorAll('.arch-active').length"),0);
   await ev("[...document.querySelectorAll('.arch-controls button')].find(x=>x.textContent==='返回当前步骤').click()");
   await ev(`renderTrace(${JSON.stringify({...fixture,status:'stopped'})},${JSON.stringify(sequence)})`);assert.equal(await ev("document.querySelectorAll('.arch-active,.arch-transmission,.arch-packet').length"),0);await shot('terminal');
@@ -65,13 +66,13 @@ const watchdog=setTimeout(()=>{browser.kill();process.exit(1);},90000);
   assert.match(await ev("document.querySelector('.arch-controls').textContent"),/回放已暂停/);
   await ev("[...document.querySelectorAll('.arch-controls button')].find(x=>x.textContent==='继续回放').click()");
   assert.match(await ev("document.querySelector('.arch-controls [role=status]').textContent"),/1\/10/);
-  assert.equal(await ev("document.querySelectorAll('.arch-packet').length"),3);
+  assert.equal(await ev("document.querySelectorAll('.arch-packet').length"),2);
   await wait("document.querySelector('.arch-controls [role=status]').textContent.includes('2/10')");
   const replayTail={...fixture,run_id:'offline-replay-tail'};
   const tailEvents=sequence.slice(1,4);
   await ev(`renderTrace(${JSON.stringify(replayTail)},${JSON.stringify(tailEvents)});[...document.querySelectorAll('.arch-controls button')].find(x=>x.textContent==='历史回放').click()`);
   await wait("document.querySelector('.arch-controls [role=status]').textContent.includes('3/3')");
-  await sleep(1100);assert.ok(await ev("[...document.querySelectorAll('.arch-packet[data-from=a][data-to=t]')].filter(n=>Number(getComputedStyle(n).opacity)>.5).length>=2"));
+  await sleep(1100);assert.ok(await ev("[...document.querySelectorAll('.arch-packet[data-from=a][data-to=t]')].filter(n=>Number(getComputedStyle(n).opacity)>.5).length>=1"));
   await shot('replay-tail');await wait("document.querySelector('.arch-controls [role=status]').textContent.includes('回放结束')");
   assert.equal(await ev("document.querySelectorAll('.arch-packet').length"),0);
   assert.equal(await ev("document.querySelectorAll('.arch-terminal').length"),0);
@@ -106,6 +107,27 @@ const watchdog=setTimeout(()=>{browser.kill();process.exit(1);},90000);
   await ev("[...document.querySelectorAll('.arch-controls button')].find(x=>x.textContent==='返回当前步骤').click()");
   assert.equal(await ev("document.querySelector('.arch-new-events').hidden"),true);
 
+  // Locate-current must use its action, even when a different control is first.
+  await ev("document.querySelector('[data-module=repairer]').click();const controls=document.querySelector('.arch-controls');controls.prepend([...controls.querySelectorAll('button')].find(x=>x.textContent==='上一步'));document.getElementById('locate-last').click()");
+  assert.equal(await ev("document.querySelector('.arch-controls [role=status]').textContent"),'实时事件视图');
+  await ev("document.getElementById('zoom-in').click()");
+  assert.equal(await ev("Number(getComputedStyle(document.querySelector('.architecture-canvas')).zoom)"),1.1);
+  assert.equal(await ev("document.querySelector('.architecture-canvas').hasAttribute('data-zoom-factor')"),false);
+  await ev("document.getElementById('zoom-out').click()");
+  assert.equal(await ev("Number(getComputedStyle(document.querySelector('.architecture-canvas')).zoom)"),1);
+
+  // A successful/failed recorded finish fades static highlights only. No terminal
+  // packet, SMIL animation or blue executing node survives the status transition.
+  const settlingSamples=[];
+  for(const status of ['success','failed']){
+    const r={...fixture,run_id:'offline-settle-'+status};
+    await ev(`renderTrace(${JSON.stringify({...r,status:'created'})},[]);renderTrace(${JSON.stringify(r)},${JSON.stringify(sequence.slice(0,3))});renderTrace(${JSON.stringify(r)},${JSON.stringify(sequence.slice(0,4))});renderTrace(${JSON.stringify({...r,status})},${JSON.stringify([...sequence.slice(0,4),{sequence:5,event:'finished'}])})`);
+    const sample=await ev(`(()=>{const paths=[...document.querySelectorAll('.arch-settling')];for(const p of paths)for(const a of p.getAnimations()){a.pause();a.currentTime=150;}return {status:${JSON.stringify(status)},paths:paths.length,opacity:paths.map(p=>Number(getComputedStyle(p).opacity)),motion:document.querySelectorAll('.arch-packet,.arch-links animateMotion,.arch-links animate,.arch-active').length,terminal:document.querySelectorAll('.arch-terminal').length};})()`);
+    assert.ok(sample.paths>0);assert.ok(sample.opacity.every(x=>x>0&&x<1));assert.equal(sample.motion,0);assert.equal(sample.terminal,1);settlingSamples.push(sample);
+    if(status==='success')await shot('completion-fade');
+    await sleep(350);assert.equal(await ev("document.querySelectorAll('.arch-settling').length"),0);
+  }
+
   await s('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});await ev("[...document.querySelectorAll('.arch-controls button')].find(x=>x.textContent==='返回当前步骤').click()");await inject(10);assert.equal(await ev("getComputedStyle(document.querySelector('.arch-active')).animationName"),'none');assert.equal(await ev("[...document.querySelectorAll('.arch-packet')].every(n=>getComputedStyle(n).display==='none')"),true);
 
   const reducedRun={...fixture,run_id:'offline-reduced-motion'};
@@ -119,5 +141,5 @@ const watchdog=setTimeout(()=>{browser.kill();process.exit(1);},90000);
 
   await s('Emulation.setDeviceMetricsOverride',{width:480,height:1000,deviceScaleFactor:1,mobile:false});assert.equal(await ev("document.documentElement.scrollWidth<=window.innerWidth"),true);await shot('narrow');
   assert.equal(errors.length,0,JSON.stringify(errors));assert.equal(writes.length,0);
-  const result={scope:'browser-injected-offline-events-only; no model, Docker or real repair',passed:true,errors,writes,forwardSamples,returnSamples,evidenceSamples,wallClockVisible};fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result));
+  const result={scope:'browser-injected-offline-events-only; no model, Docker or real repair',passed:true,errors,writes,forwardSamples,returnSamples,evidenceSamples,wallClockVisible,settlingSamples,semanticLocateAfterReorder:true,zoomWithoutDataset:true};fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result));
 })().catch(e=>{console.error(e);process.exitCode=1;}).finally(()=>{clearTimeout(watchdog);socket?.close();browser.kill();});

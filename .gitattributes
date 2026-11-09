@@ -94,3 +94,5 @@ evidence/workflow-review-followup/** -text -whitespace
 evidence/user-demo-review/** -text -whitespace
 
 evidence/workbench-animation/review-a/** -text -whitespace
+
+evidence/workbench-animation/review-b/** -text -whitespace

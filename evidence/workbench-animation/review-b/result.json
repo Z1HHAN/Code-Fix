@@ -1,0 +1,107 @@
+{
+  "scope": "browser-injected-offline-events-only; no model, Docker or real repair",
+  "passed": true,
+  "errors": [],
+  "writes": [],
+  "forwardSamples": [
+    [
+      {
+        "fraction": 0.24,
+        "x": 628,
+        "y": 297.15997314453125,
+        "error": 0.000030517578125,
+        "dot": 1
+      },
+      {
+        "fraction": 0.68,
+        "x": 628,
+        "y": 323.1199951171875,
+        "error": 0,
+        "dot": 1
+      }
+    ]
+  ],
+  "returnSamples": [
+    [
+      {
+        "fraction": 0.24,
+        "x": 676.2398681640625,
+        "y": 333,
+        "error": 0.0001220703125,
+        "dot": 1
+      },
+      {
+        "fraction": 0.68,
+        "x": 699.3200073242188,
+        "y": 295,
+        "error": 0,
+        "dot": 1
+      }
+    ]
+  ],
+  "evidenceSamples": [
+    {
+      "target": "trace",
+      "step": "base",
+      "path": "M258 558V605H308V637",
+      "error": 0.00006103515625
+    },
+    {
+      "target": "logs",
+      "step": "base",
+      "path": "M258 558V605H548V637",
+      "error": 0.0001220703125
+    },
+    {
+      "target": "trace",
+      "step": "patch",
+      "path": "M426 558V605H308V637",
+      "error": 0.0001220703125
+    },
+    {
+      "target": "diff",
+      "step": "patch",
+      "path": "M426 558V605H788V637",
+      "error": 0.00018310546875
+    },
+    {
+      "target": "trace",
+      "step": "cost",
+      "path": "M628 283V605H308V637",
+      "error": 0.00030517578125
+    },
+    {
+      "target": "cost",
+      "step": "cost",
+      "path": "M628 283V605H1028V637",
+      "error": 0.0003662109375
+    }
+  ],
+  "wallClockVisible": 1,
+  "settlingSamples": [
+    {
+      "status": "success",
+      "paths": 3,
+      "opacity": [
+        0.315357,
+        0.315357,
+        0.315357
+      ],
+      "motion": 0,
+      "terminal": 1
+    },
+    {
+      "status": "failed",
+      "paths": 3,
+      "opacity": [
+        0.315357,
+        0.315357,
+        0.315357
+      ],
+      "motion": 0,
+      "terminal": 1
+    }
+  ],
+  "semanticLocateAfterReorder": true,
+  "zoomWithoutDataset": true
+}

@@ -1,0 +1,176 @@
+✔ packet density uses travelled bends with explicit short/medium/long boundaries (1.1749ms)
+✔ upward return stays beside its nodes and short repair handoff has one packet (4.7263ms)
+✔ normal success fades only existing paths for 300ms, never terminal execution (1.9311ms)
+✔ normal failed fades only existing paths for 300ms, never terminal execution (0.7584ms)
+✖ stopped removes all motion and highlights immediately (1.7018ms)
+✖ interrupted removes all motion and highlights immediately (0.5295ms)
+✖ paused removes all motion and highlights immediately (0.5224ms)
+✖ blocked removes all motion and highlights immediately (0.5128ms)
+✖ terminal fade requires recorded finish and current motion, respects reduced motion and cancels on task switch (1.0668ms)
+✔ return-current control has a semantic action independent of button order (1.2276ms)
+✔ replay pause resumes the same prefix and remaining arrow travel, including after polling (1.0345ms)
+✔ entry replay illuminates both entry nodes and gives every segment a directed arrow (0.605ms)
+✔ last started event retains the full handoff window then ends without claiming task completion (1.3497ms)
+✔ completion holds for 1500ms while evidence preserves elapsed travel (0.8439ms)
+✔ finished event removes motion and switching run cancels replay and resume state (0.7085ms)
+✔ layout maps baseline and final separately; no invented parent links (0.1496ms)
+✔ new actual edges transmit once, unchanged polls do not rebuild, terminal stops all motion (1.0461ms)
+✔ locator only lights when actually invoked and failure survives completion (0.5203ms)
+✔ history selection freezes prefix and evidence inspector, new live events do not pull it back (0.4708ms)
+✔ initial historical load has no transfer animation and playback only consumes recorded events (0.9366ms)
+✔ moving arrow follows the directed edge once and terminal removes the packet (2.1529ms)
+✔ baseline labels preserve raw round zero and do not label preparation as a repair round (0.5975ms)
+✔ completion evidence travels only to recorded trace/log/diff/cost destinations (1.2698ms)
+✔ missing evidence never creates logs/diff/cost transfers (0.3964ms)
+✔ entry advances in 650ms while its packets retain elapsed travel (0.5279ms)
+✔ entry-only replay drains the final packet instead of cutting it off (0.4409ms)
+✔ click keeps the result frame; explicit replay starts at that step start (0.5128ms)
+✔ reduced motion omits all SMIL and responds to preference changes (0.7478ms)
+✔ paused/history views count fresh events without moving inspector, deduplicate, and clear on return (1.1187ms)
+✔ paused replay receives a new-event notice without changing its prefix or resuming (0.4955ms)
+✔ a legacy step without a start event cannot replay a fabricated execution (0.2997ms)
+✔ remaining three warns without claiming platform balance (1.1173ms)
+✔ unknown charge is not rendered as zero balance (0.1798ms)
+✔ empty registry is explicit (0.1189ms)
+✔ idle slows down, running stays responsive, background pauses and foreground refreshes (3.6112ms)
+✔ failed refresh backs off to a cap and successful manual refresh resets delay (0.9612ms)
+✔ inflight refreshes never overlap; user actions get one fresh follow-up (0.5669ms)
+✔ background completion does not schedule polling; foreground catches up (0.3123ms)
+✔ thrown errors retry, stop prevents late completion from rearming (0.284ms)
+✔ active demo cannot be reset or restarted, including direct handler dispatch (8.9958ms)
+✔ editing invalidates preview; startup consumes the reviewed snapshot (1.9293ms)
+✔ invalid fields and unsupported roles do not receive a successful preview (8.7732ms)
+✔ relocation preserves the failed applied candidate and highlights the next round (1.3682ms)
+✔ stopped snapshot reflects the configured cap and contains failure evidence (2.3375ms)
+✔ success and final-check failure have distinct consistent decisions (1.3128ms)
+✔ unimplemented controls remain disabled without downloads, model or tool calls (3.0823ms)
+✔ a terminal demo requires fresh preview and receives a new identity after reset (1.4132ms)
+✔ one-round cap cannot display a second repair round (1.2484ms)
+✔ one node per real invocation, actual decision overrides advisory, no inferred edges (2.6712ms)
+✔ legacy rows preserve evidence without inventing real step IDs or parents (0.2153ms)
+✔ configured live mode alone cannot claim real model requests or successful repair (0.1655ms)
+✔ overlapping incremental pages deduplicate and preserve sequence (0.2243ms)
+✔ decision evidence IDs resolve real tool logs and reject injected paths (0.5517ms)
+✔ baseline titles and inspector use baseline while original round metadata remains zero (1.2875ms)
+✔ clicking a node only reads artifacts; unchanged polls preserve viewer (0.8132ms)
+✔ late artifact response cannot contaminate a different run (1.2071ms)
+✔ missing artifact reports error and never substitutes sample output (0.6164ms)
+✔ terminal run without completion cannot leave stale running detail (0.4461ms)
+✔ layout positions do not introduce edges across unrelated or missing parents (0.1922ms)
+✔ workbench external evidence viewer resets on task switch and rejects late responses (0.4093ms)
+ℹ tests 60
+ℹ suites 0
+ℹ pass 55
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 183.9028
+
+✖ failing tests:
+
+test at tests\ui_architecture.test.cjs:46:66
+✖ stopped removes all motion and highlights immediately (1.7018ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  4 !== 3
+  
+      at C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:49:172
+      at withClock (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:20:6)
+      at TestContext.<anonymous> (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:46:133)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1306:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:897:18)
+      at Test.postRun (node:internal/test_runner/test:1447:19)
+      at Test.run (node:internal/test_runner/test:1372:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:897:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 4,
+    expected: 3,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\ui_architecture.test.cjs:46:66
+✖ interrupted removes all motion and highlights immediately (0.5295ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  4 !== 3
+  
+      at C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:49:172
+      at withClock (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:20:6)
+      at TestContext.<anonymous> (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:46:133)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1306:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:897:18)
+      at Test.postRun (node:internal/test_runner/test:1447:19)
+      at Test.run (node:internal/test_runner/test:1372:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:897:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 4,
+    expected: 3,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\ui_architecture.test.cjs:46:66
+✖ paused removes all motion and highlights immediately (0.5224ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  4 !== 3
+  
+      at C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:49:172
+      at withClock (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:20:6)
+      at TestContext.<anonymous> (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:46:133)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1306:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:897:18)
+      at Test.postRun (node:internal/test_runner/test:1447:19)
+      at Test.run (node:internal/test_runner/test:1372:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:897:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 4,
+    expected: 3,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\ui_architecture.test.cjs:46:66
+✖ blocked removes all motion and highlights immediately (0.5128ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  4 !== 3
+  
+      at C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:49:172
+      at withClock (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:20:6)
+      at TestContext.<anonymous> (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:46:133)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1306:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:897:18)
+      at Test.postRun (node:internal/test_runner/test:1447:19)
+      at Test.run (node:internal/test_runner/test:1372:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:897:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 4,
+    expected: 3,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\ui_architecture.test.cjs:52:1
+✖ terminal fade requires recorded finish and current motion, respects reduced motion and cancels on task switch (1.0668ms)
+  TypeError: motionPreference?.addEventListener is not a function
+      at Object.mount (C:\Users\lenovo\Documents\ChatGPT\Code Fix\ui\app\architecture.js:63:23)
+      at setup (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:15:198)
+      at C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:54:12
+      at withClock (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:20:6)
+      at TestContext.<anonymous> (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:52:122)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1306:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:897:18)
+      at Test.postRun (node:internal/test_runner/test:1447:19)
+      at Test.run (node:internal/test_runner/test:1372:12)

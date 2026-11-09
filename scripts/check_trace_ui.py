@@ -16,7 +16,7 @@ from app.api import create_app
 def main():
     os.chdir(ROOT)
     os.environ['CODE_FIX_CONFIG_BROWSER_URL'] = 'http://127.0.0.1:8782'
-    os.environ['CODE_FIX_ARCH_BROWSER_OUTPUT'] = 'runs/trace-demo-browser'
+    os.environ.setdefault('CODE_FIX_ARCH_BROWSER_OUTPUT', 'runs/trace-demo-browser')
     server = uvicorn.Server(uvicorn.Config(create_app('runs/a-browser-store'),
                                          host='127.0.0.1', port=8782, log_level='warning'))
     thread = threading.Thread(target=server.run, daemon=True)

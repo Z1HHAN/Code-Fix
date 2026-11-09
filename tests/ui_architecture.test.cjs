@@ -20,10 +20,54 @@ function withClock(check){
  try{check(advance);}finally{global.setTimeout=original.setTimeout;global.clearTimeout=original.clearTimeout;Date.now=original.now;}
 }
 
+test('packet density uses travelled bends with explicit short/medium/long boundaries',()=>{
+ for(const [d,count]of [['M0 0H259',1],['M0 0H260',2],['M0 0V300H299',2],['M0 0V300H300',3],['M100 100h-100v-100h100v100',2]])assert.equal(arch.packetCount(d),count);
+});
+
+test('upward return stays beside its nodes and short repair handoff has one packet',()=>{
+ const ui=setup();ui.render(run,events.slice(0,3));ui.render(run,events.slice(0,4));
+ assert.equal(ui.find(n=>n.attributes.class==='arch-packet'&&n.attributes['data-from']==='a').length,1);
+ ui.render(run,events);
+ ui.render(run,[...events,{sequence:11,event:'step_completed',step_id:'l',node_id:'locator',status:'ok'},{sequence:12,event:'step_started',step_id:'back',parent_step_id:'l',node_id:'program_dispatch'}]);
+ const path=ui.find(n=>n.attributes.class==='arch-transmission'&&n.attributes['data-from']==='l')[0].attributes.d;
+ assert.equal(path,'M628 345V333H724V295H628V286');assert.equal(arch.packetCount(path),1);ui.cleanup();
+});
+
+for(const status of ['success','failed'])test(`normal ${status} fades only existing paths for 300ms, never terminal execution`,()=>withClock(advance=>{
+ const ui=setup();ui.render(run,events.slice(0,3));ui.render(run,events.slice(0,4));
+ const paths=ui.find(n=>n.attributes.class==='arch-transmission').map(n=>n.attributes.d);
+ ui.render({...run,status},[...events.slice(0,4),{sequence:5,event:'finished'}]);
+ assert.deepEqual(ui.find(n=>n.attributes.class==='arch-settling').map(n=>n.attributes.d),paths);
+ assert.equal(ui.find(n=>n.attributes.class==='arch-packet'||n.tagName==='animateMotion'||n.tagName==='animate'||n.className?.includes('arch-active')).length,0);
+ assert.equal(ui.find(n=>n.className==='arch-terminal').length,1);
+ advance(299);assert.ok(ui.find(n=>n.attributes.class==='arch-settling').length);advance(1);assert.equal(ui.find(n=>n.attributes.class==='arch-settling').length,0);ui.cleanup();
+}));
+
+for(const status of ['stopped','interrupted','paused','blocked'])test(`${status} removes all motion and highlights immediately`,()=>withClock(advance=>{
+ const ui=setup();ui.render(run,events.slice(0,3));ui.render(run,events.slice(0,4));
+ ui.render({...run,status},[...events.slice(0,4),{sequence:5,event:'finished'}]);
+ assert.equal(ui.find(n=>['arch-transmission','arch-settling','arch-packet'].includes(n.attributes.class)).length,0);const count=ui.selections.length;advance(4000);assert.equal(ui.selections.length,count);ui.cleanup();
+}));
+
+test('terminal fade requires recorded finish and current motion, respects reduced motion and cancels on task switch',()=>withClock(advance=>{
+ for(const motion of [undefined,{matches:true,addEventListener(){}}]){
+  const ui=setup(motion);ui.render(run,events.slice(0,3));ui.render(run,events.slice(0,4));
+  ui.render({...run,status:'success'},events.slice(0,4));assert.equal(ui.find(n=>n.attributes.class==='arch-settling').length,0);ui.cleanup();
+ }
+ const ui=setup({matches:true,addEventListener(){}});ui.render(run,events.slice(0,3));ui.render(run,events.slice(0,4));ui.render({...run,status:'success'},[...events,{sequence:11,event:'finished'}]);assert.equal(ui.find(n=>n.attributes.class==='arch-settling').length,0);ui.cleanup();
+ const other=setup();other.render(run,events.slice(0,3));other.render(run,events.slice(0,4));other.render({...run,status:'success'},[...events,{sequence:11,event:'finished'}]);assert.ok(other.find(n=>n.attributes.class==='arch-settling').length);
+ other.cleanup();const count=other.selections.length;advance(4000);assert.equal(other.selections.length,count);assert.equal(other.find(n=>n.attributes.class==='arch-settling').length,0);
+}));
+
+test('return-current control has a semantic action independent of button order',()=>{
+ const ui=setup();ui.render(run,events);ui.find(n=>n.dataset.module==='repairer')[0].onclick();
+ const follow=ui.find(n=>n.attributes['data-action']==='follow')[0];assert.equal(follow.textContent,'返回当前步骤');follow.onclick();assert.equal(ui.selections.at(-1)[0],'l');ui.cleanup();
+});
+
 test('replay pause resumes the same prefix and remaining arrow travel, including after polling',()=>withClock(advance=>{
  const ui=setup();ui.render({...run,status:'stopped'},events);
  ui.find(n=>n.textContent==='历史回放')[0].onclick();advance(300);
- assert.equal(ui.find(n=>n.attributes.class==='arch-packet').length,3);
+ assert.equal(ui.find(n=>n.attributes.class==='arch-packet').length,2);
  ui.find(n=>n.textContent==='暂停回放')[0].onclick();const prefix=ui.selections.at(-1)[2].length;
  advance(10000);ui.render({...run,status:'stopped',result:{mode:'test_stub',note:'poll'}},events);
  ui.find(n=>n.textContent==='继续回放')[0].onclick();assert.equal(ui.selections.at(-1)[2].length,prefix);
@@ -34,22 +78,22 @@ test('replay pause resumes the same prefix and remaining arrow travel, including
 test('entry replay illuminates both entry nodes and gives every segment a directed arrow',()=>withClock(()=>{
  const ui=setup();ui.render({...run,status:'stopped'},events);ui.find(n=>n.textContent==='历史回放')[0].onclick();
  for(const key of ['entry','service'])assert.ok(ui.find(n=>n.dataset.module===key)[0].className.includes('arch-active'));
- const packets=ui.find(n=>n.attributes.class==='arch-packet');assert.equal(packets.length,3);
+ const packets=ui.find(n=>n.attributes.class==='arch-packet');assert.equal(packets.length,arch.packetCount(packets[0].children.find(n=>n.tagName==='animateMotion').attributes.path));
  for(const packet of packets){assert.ok(packet.children.some(n=>n.attributes.class==='arch-packet-arrow'));assert.equal(packet.children.find(n=>n.tagName==='animateMotion').attributes.rotate,'auto');}ui.cleanup();
 }));
 
 test('last started event retains the full handoff window then ends without claiming task completion',()=>withClock(advance=>{
  const ui=setup();const page=[events[1],events[2],events[3]];ui.render(run,page);ui.find(n=>n.textContent==='历史回放')[0].onclick();
- advance(1300);assert.equal(ui.selections.at(-1)[2].length,3);assert.ok(ui.find(n=>n.attributes['data-from']==='a'&&n.attributes.class==='arch-packet').length);
+ advance(2150);assert.equal(ui.selections.at(-1)[2].length,3);assert.ok(ui.find(n=>n.attributes['data-from']==='a'&&n.attributes.class==='arch-packet').length);
  advance(3799);assert.equal(ui.find(n=>n.textContent==='暂停回放')[0].disabled,false);
  advance(1);assert.equal(ui.find(n=>n.attributes.class==='arch-packet').length,0);assert.equal(ui.find(n=>n.textContent==='重新回放').length,1);
  assert.equal(ui.find(n=>n.className==='arch-terminal').length,0);ui.cleanup();
 }));
 
-test('completion metadata advances promptly while its evidence arrows preserve elapsed travel',()=>withClock(advance=>{
+test('completion holds for 1500ms while evidence preserves elapsed travel',()=>withClock(advance=>{
  const ui=setup();ui.render(run,[events[1],events[2],events[3],{sequence:5,event:'observation'}]);ui.find(n=>n.textContent==='历史回放')[0].onclick();
- advance(650);assert.equal(ui.selections.at(-1)[2].length,2);advance(650);assert.equal(ui.selections.at(-1)[2].length,3);
- const packet=ui.find(n=>n.attributes['data-evidence-step']==='a'&&n.attributes.class==='arch-packet')[0];assert.equal(packet.children.find(n=>n.tagName==='animateMotion').attributes.begin,'-0.65s');ui.cleanup();
+ advance(650);assert.equal(ui.selections.at(-1)[2].length,2);advance(1499);assert.equal(ui.selections.at(-1)[2].length,2);advance(1);assert.equal(ui.selections.at(-1)[2].length,3);
+ const packet=ui.find(n=>n.attributes['data-evidence-step']==='a'&&n.attributes.class==='arch-packet')[0];assert.equal(packet.children.find(n=>n.tagName==='animateMotion').attributes.begin,'-1.5s');ui.cleanup();
 }));
 
 test('finished event removes motion and switching run cancels replay and resume state',()=>withClock(advance=>{
@@ -89,7 +133,7 @@ test('initial historical load has no transfer animation and playback only consum
 test('moving arrow follows the directed edge once and terminal removes the packet',()=>{
  const ui=setup();ui.render(run,events.slice(0,9));ui.render(run,events);
  const edge=ui.find(n=>n.attributes.class==='arch-transmission'&&n.attributes['data-from']==='d')[0];
- const packets=ui.find(n=>n.attributes.class==='arch-packet'&&n.attributes['data-from']==='d');assert.equal(packets.length,3);
+ const packets=ui.find(n=>n.attributes.class==='arch-packet'&&n.attributes['data-from']==='d');assert.equal(packets.length,arch.packetCount(packets[0].children.find(n=>n.tagName==='animateMotion').attributes.path));
  for(const p of packets)assert.ok(p.children.some(n=>n.attributes.class==='arch-packet-arrow'));
  const packet=packets[0];
  const motion=packet.children.find(n=>n.tagName==='animateMotion');
@@ -123,7 +167,7 @@ test('completion evidence travels only to recorded trace/log/diff/cost destinati
   const lines=ui.find(n=>n.attributes.class==='arch-transmission'&&n.attributes['data-evidence-target']===target);assert.ok(lines.length);
   for(const line of lines)assert.ok(line.attributes.d.endsWith(`H${x}V637`));
  }
- assert.equal(ui.find(n=>n.attributes.class==='arch-packet'&&n.attributes['data-evidence-target']==='logs').length,3);ui.cleanup();
+ assert.equal(ui.find(n=>n.attributes.class==='arch-packet'&&n.attributes['data-evidence-target']==='logs').length,1);ui.cleanup();
 }));
 
 test('missing evidence never creates logs/diff/cost transfers',()=>withClock(()=>{
@@ -134,12 +178,12 @@ test('missing evidence never creates logs/diff/cost transfers',()=>withClock(()=
 test('entry advances in 650ms while its packets retain elapsed travel',()=>withClock(advance=>{
  const ui=setup();ui.render(run,events);ui.find(n=>n.textContent==='历史回放')[0].onclick();advance(649);assert.equal(ui.selections.at(-1)[2].length,1);
  advance(1);assert.equal(ui.selections.at(-1)[2].length,2);
- const entry=ui.find(n=>n.attributes.class==='arch-packet'&&!n.attributes['data-from']&&!n.attributes['data-evidence-step']);assert.equal(entry.length,3);
+ const entry=ui.find(n=>n.attributes.class==='arch-packet'&&!n.attributes['data-from']&&!n.attributes['data-evidence-step']);assert.equal(entry.length,2);
  assert.equal(entry[0].children.find(n=>n.tagName==='animateMotion').attributes.begin,'-0.65s');ui.cleanup();
 }));
 
 test('entry-only replay drains the final packet instead of cutting it off',()=>withClock(advance=>{
- const ui=setup();ui.render(run,[events[0]]);ui.find(n=>n.textContent==='历史回放')[0].onclick();advance(650);assert.equal(ui.find(n=>n.attributes.class==='arch-packet').length,3);
+ const ui=setup();ui.render(run,[events[0]]);ui.find(n=>n.textContent==='历史回放')[0].onclick();advance(650);assert.equal(ui.find(n=>n.attributes.class==='arch-packet').length,2);
  advance(3150);assert.equal(ui.find(n=>n.attributes.class==='arch-packet').length,0);assert.ok(ui.find(n=>n.textContent==='重新回放').length);ui.cleanup();
 }));
 
