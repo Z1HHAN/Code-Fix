@@ -112,6 +112,8 @@ def test_saved_config_wire_request_and_call_evidence_match_per_role(tmp_path, mo
                                         'generation': {'max_output_tokens': 200 + i, 'temperature': .1 * i, 'top_p': .7}}
                                for i, role in enumerate(value['bindings'])}
     preview, saved = configs.validate(value), configs.save(value)
+    assert preview['role_overrides_sha256'] == digest(preview['role_overrides'])
+    assert preview['effective_roles_sha256'] == digest(preview['effective_roles'])
     runtime = configs.runtime(saved['config_id'])
     initial_resolved = ModelRouter.resolve(runtime)
     captures = []
@@ -147,6 +149,8 @@ def test_saved_config_wire_request_and_call_evidence_match_per_role(tmp_path, mo
         assert evidence['messages'] == wire['messages']
         assert evidence['provenance']['messages_sha256'] == digest(wire['messages'])
         assert record['provenance']['model_binding']['effective_parameters'] == expected['parameters']
+        assert record['provenance']['model_binding']['effective_parameters_sha256'] == expected['parameters_sha256']
+        assert record['provenance']['task_instruction_sha256'] == expected['task_instruction_sha256']
         assert router.clients[role].settings.billable_output_tokens == initial_resolved[0][role].billable_output_tokens
     assert len({c['max_tokens'] for c in captures}) == 4
     assert all(s.max_output_tokens == 2048 for s in initial_resolved[0].values())

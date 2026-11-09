@@ -1,0 +1,154 @@
+TAP version 13
+# Subtest: remaining three warns without claiming platform balance
+ok 1 - remaining three warns without claiming platform balance
+  ---
+  duration_ms: 0.8544
+  type: 'test'
+  ...
+# Subtest: unknown charge is not rendered as zero balance
+ok 2 - unknown charge is not rendered as zero balance
+  ---
+  duration_ms: 0.1644
+  type: 'test'
+  ...
+# Subtest: empty registry is explicit
+ok 3 - empty registry is explicit
+  ---
+  duration_ms: 0.1301
+  type: 'test'
+  ...
+# Subtest: active demo cannot be reset or restarted, including direct handler dispatch
+ok 4 - active demo cannot be reset or restarted, including direct handler dispatch
+  ---
+  duration_ms: 9.1336
+  type: 'test'
+  ...
+# Subtest: editing invalidates preview; startup consumes the reviewed snapshot
+ok 5 - editing invalidates preview; startup consumes the reviewed snapshot
+  ---
+  duration_ms: 1.3934
+  type: 'test'
+  ...
+# Subtest: invalid fields and unsupported roles do not receive a successful preview
+ok 6 - invalid fields and unsupported roles do not receive a successful preview
+  ---
+  duration_ms: 8.3868
+  type: 'test'
+  ...
+# Subtest: relocation preserves the failed applied candidate and highlights the next round
+ok 7 - relocation preserves the failed applied candidate and highlights the next round
+  ---
+  duration_ms: 1.3869
+  type: 'test'
+  ...
+# Subtest: stopped snapshot reflects the configured cap and contains failure evidence
+ok 8 - stopped snapshot reflects the configured cap and contains failure evidence
+  ---
+  duration_ms: 2.4524
+  type: 'test'
+  ...
+# Subtest: success and final-check failure have distinct consistent decisions
+ok 9 - success and final-check failure have distinct consistent decisions
+  ---
+  duration_ms: 1.6362
+  type: 'test'
+  ...
+# Subtest: unimplemented controls remain disabled without downloads, model or tool calls
+ok 10 - unimplemented controls remain disabled without downloads, model or tool calls
+  ---
+  duration_ms: 3.0711
+  type: 'test'
+  ...
+# Subtest: a terminal demo requires fresh preview and receives a new identity after reset
+ok 11 - a terminal demo requires fresh preview and receives a new identity after reset
+  ---
+  duration_ms: 1.4423
+  type: 'test'
+  ...
+# Subtest: one-round cap cannot display a second repair round
+ok 12 - one-round cap cannot display a second repair round
+  ---
+  duration_ms: 1.3844
+  type: 'test'
+  ...
+# Subtest: one node per real invocation, actual decision overrides advisory, no inferred edges
+ok 13 - one node per real invocation, actual decision overrides advisory, no inferred edges
+  ---
+  duration_ms: 2.8468
+  type: 'test'
+  ...
+# Subtest: legacy rows preserve evidence without inventing real step IDs or parents
+ok 14 - legacy rows preserve evidence without inventing real step IDs or parents
+  ---
+  duration_ms: 0.2172
+  type: 'test'
+  ...
+# Subtest: configured live mode alone cannot claim real model requests or successful repair
+ok 15 - configured live mode alone cannot claim real model requests or successful repair
+  ---
+  duration_ms: 0.1638
+  type: 'test'
+  ...
+# Subtest: overlapping incremental pages deduplicate and preserve sequence
+ok 16 - overlapping incremental pages deduplicate and preserve sequence
+  ---
+  duration_ms: 0.2192
+  type: 'test'
+  ...
+# Subtest: decision evidence IDs resolve real tool logs and reject injected paths
+ok 17 - decision evidence IDs resolve real tool logs and reject injected paths
+  ---
+  duration_ms: 0.5764
+  type: 'test'
+  ...
+# Subtest: baseline titles and inspector use baseline while original round metadata remains zero
+ok 18 - baseline titles and inspector use baseline while original round metadata remains zero
+  ---
+  duration_ms: 1.2563
+  type: 'test'
+  ...
+# Subtest: clicking a node only reads artifacts; unchanged polls preserve viewer
+ok 19 - clicking a node only reads artifacts; unchanged polls preserve viewer
+  ---
+  duration_ms: 0.8495
+  type: 'test'
+  ...
+# Subtest: late artifact response cannot contaminate a different run
+ok 20 - late artifact response cannot contaminate a different run
+  ---
+  duration_ms: 0.4494
+  type: 'test'
+  ...
+# Subtest: missing artifact reports error and never substitutes sample output
+ok 21 - missing artifact reports error and never substitutes sample output
+  ---
+  duration_ms: 0.6479
+  type: 'test'
+  ...
+# Subtest: terminal run without completion cannot leave stale running detail
+ok 22 - terminal run without completion cannot leave stale running detail
+  ---
+  duration_ms: 0.433
+  type: 'test'
+  ...
+# Subtest: layout positions do not introduce edges across unrelated or missing parents
+ok 23 - layout positions do not introduce edges across unrelated or missing parents
+  ---
+  duration_ms: 0.1803
+  type: 'test'
+  ...
+# Subtest: workbench external evidence viewer resets on task switch and rejects late responses
+ok 24 - workbench external evidence viewer resets on task switch and rejects late responses
+  ---
+  duration_ms: 0.3934
+  type: 'test'
+  ...
+1..24
+# tests 24
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 136.327

@@ -19,7 +19,7 @@ window.CodeFixConfig = (() => {
   function draft(){
     const bindings={};for(const role of Object.keys(roles))bindings[role]=byId('binding-'+role).value;
     const role_overrides={};for(const role of Object.keys(roles)){const task_instruction=byId('instruction-'+role).value;const generation={};for(const k of ['max_output_tokens','temperature','top_p']){const n=byId('parameter-'+role+'-'+k);if(!n.disabled&&n.value!=='')generation[k]=Number(n.value);}if(task_instruction||Object.keys(generation).length)role_overrides[role]={task_instruction,generation};}
-    return {bindings,...(Object.keys(role_overrides).length?{role_overrides}:{}),strategy:byId('config-strategy').value,parameters:{max_rounds:Number(byId('config-rounds').value),max_calls:Number(byId('config-calls').value),total_seconds:Number(byId('config-seconds').value)}};
+    return {bindings,role_overrides,strategy:byId('config-strategy').value,parameters:{max_rounds:Number(byId('config-rounds').value),max_calls:Number(byId('config-calls').value),total_seconds:Number(byId('config-seconds').value)}};
   }
   function roleEditor(role,name){
     const block=element('fieldset',null,'role-editor');block.append(element('legend',name));
@@ -102,7 +102,7 @@ window.CodeFixConfig = (() => {
     if(snapshotId===id)return;snapshotId=id;
     display('saved-snapshot',id?'读取保存配置中…':'历史未关联保存配置；不能按当前默认值补填。');
     if(!id)return;
-    try{const data=await(await api('/configurations/'+encodeURIComponent(id))).json();if(snapshotId===id)display('saved-snapshot',{config_id:data.config_id,created_at:data.created_at,bindings:data.bindings,parameters:data.parameters,strategy:data.strategy,role_overrides:data.role_overrides||'历史未记录',effective_roles:data.effective_roles||'历史未记录',profiles_sha256:data.profiles_sha256});}
+    try{const data=await(await api('/configurations/'+encodeURIComponent(id))).json();if(snapshotId===id)display('saved-snapshot',{config_id:data.config_id,created_at:data.created_at,bindings:data.bindings,parameters:data.parameters,strategy:data.strategy,role_overrides:data.role_overrides||'历史未记录',effective_roles:data.effective_roles||'历史未记录',effective_roles_sha256:data.effective_roles_sha256||'历史未记录',role_overrides_sha256:data.role_overrides_sha256||'历史未记录',profiles_sha256:data.profiles_sha256});}
     catch(e){if(snapshotId===id){snapshotId=null;display('saved-snapshot','未能读取保存配置：'+e.message);}}
   }
   function apply(task){

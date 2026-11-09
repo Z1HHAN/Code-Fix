@@ -46,6 +46,23 @@ def test_explicit_manifest_rates_evidence_and_durable_snapshot(tmp_path):
     assert csv.startswith('\ufeffproject,') and value['pairs'][0]['fixed'] in csv and '未运行' in csv
 
 
+def test_different_configuration_ids_allow_same_effective_conditions(tmp_path):
+    from app.configuration import ConfigurationStore
+    from test_configuration import draft
+    store = RunStore(tmp_path)
+    configs = ConfigurationStore(store)
+    ids, runs = {}, {}
+    for strategy in ('fixed', 'dynamic'):
+        saved = configs.save(draft() | {'strategy': strategy, 'role_overrides': {}})
+        ids[strategy] = saved['config_id']
+        runs[strategy] = execute(tmp_path, ['assertion_failed', 'passed', 'passed'],
+                                  {'config_id': saved['config_id'], **saved['parameters'], 'strategy': strategy})[-1]
+    assert ids['fixed'] != ids['dynamic']
+    result = ComparisonStore(store).create({'title': 'different IDs, same conditions', 'scope': 'offline',
+        'pairs': [{'project': 'leap', **runs, 'not_run_reason': {}}]})
+    assert result['pairs'][0]['paired']
+
+
 @pytest.mark.parametrize('difference', ['task_limits', 'bindings', 'prompts_sha256', 'code', 'image'])
 def test_any_frozen_condition_difference_rejects_pair(tmp_path, difference):
     value = pair(tmp_path)

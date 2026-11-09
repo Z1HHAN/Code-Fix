@@ -1,0 +1,69 @@
+{
+  "scenario": "model_candidate_blocked",
+  "run_type": "fault_injection",
+  "test_profile": "leap_good",
+  "expected": {
+    "status": "blocked",
+    "verification_status": "not_run",
+    "failure_class": null
+  },
+  "checks": {
+    "status": true,
+    "verification": true,
+    "failure_class": true,
+    "no_false_pass": true,
+    "output_agent_null": true,
+    "stdout_exists": true,
+    "stderr_exists": true
+  },
+  "control_check_passed": true,
+  "result": {
+    "interface_version": "0.2-20261101-draft",
+    "interface_status": "pending_BC_confirmation",
+    "call_id": "c-46c465c4e4e34700a58763cfd2e2f4e7",
+    "run_id": "C-20261109-231310-0443f0fb",
+    "task_id": "C-control-model_candidate_blocked",
+    "tool": "run_tests",
+    "phase": "development",
+    "status": "blocked",
+    "verification_status": "not_run",
+    "failure_class": "permission_violation",
+    "exit_code": null,
+    "counts": {
+      "collected": null,
+      "passed": null,
+      "failed": null,
+      "errors": null,
+      "skipped": null
+    },
+    "stdout_path": "C-20261109-231310-0443f0fb/c-46c465c4e4e34700a58763cfd2e2f4e7/stdout.txt",
+    "stderr_path": "C-20261109-231310-0443f0fb/c-46c465c4e4e34700a58763cfd2e2f4e7/stderr.txt",
+    "junit_path": null,
+    "junit_missing_reason": "Test process has not started",
+    "structured_path": null,
+    "duration_ms": 3,
+    "code_version": null,
+    "requested_code_version": "sha256:cc8248edc1a48315fd5afabd1ef909dba9fb77b75cc4e957074f31722c196ee1",
+    "code_version_scheme": "sha256-canonical-files-v1",
+    "test_suite_version": null,
+    "expected_test_count": null,
+    "output_agent": null,
+    "artifact_paths_relative_to": "artifact_dir",
+    "result_path": "C-20261109-231310-0443f0fb/c-46c465c4e4e34700a58763cfd2e2f4e7/result.json",
+    "isolation_ready": false,
+    "execution_mode": "model_candidate",
+    "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "run_type": "tool_check",
+    "started_at": "2026-11-09T23:13:23.043+08:00",
+    "cleanup": {
+      "parent_reaped": false,
+      "pipes_drained": false,
+      "tree_termination_attempted": false,
+      "full_process_tree_verified": false,
+      "scope": "reviewed fixture parent; full process-tree isolation not certified"
+    },
+    "reason": "Isolation is unverified: model/unreviewed candidate execution is disabled",
+    "command": null,
+    "finished_at": "2026-11-09T23:13:23.043+08:00"
+  }
+}

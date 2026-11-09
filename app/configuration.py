@@ -118,6 +118,11 @@ class ConfigurationStore:
                           effective_roles={role: {'task_instruction': overrides.get(role, {}).get('task_instruction', ''),
                               'parameters': effective_parameters(registry['profiles'][ref], overrides.get(role, {}))}
                               for role, ref in value['bindings'].items()})
+            for effective in result['effective_roles'].values():
+                effective['task_instruction_sha256'] = digest(effective['task_instruction'])
+                effective['parameters_sha256'] = digest(effective['parameters'])
+            result['role_overrides_sha256'] = digest(overrides)
+            result['effective_roles_sha256'] = digest(result['effective_roles'])
         return result
 
     def save(self, value):
