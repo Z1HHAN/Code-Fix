@@ -20,6 +20,23 @@ from .trace import RunTrace
 from .diagnostics import record_exception
 
 ROOT = Path(__file__).resolve().parents[1]
+DIAGNOSTIC_TYPES = frozenset({
+    'ImportError', 'ModuleNotFoundError', 'SyntaxError', 'IndentationError',
+    'TabError', 'TypeError', 'ValueError', 'AttributeError', 'NameError',
+    'UnboundLocalError', 'RuntimeError', 'OSError', 'FileNotFoundError',
+    'PermissionError', 'TimeoutError', 'AssertionError', 'KeyError',
+    'IndexError', 'ZeroDivisionError', 'RecursionError', 'MemoryError',
+})
+
+
+def _exception_header(line):
+    """Recognize trusted type names, including pytest short summaries."""
+    if line.lstrip().startswith(('FAILED ', 'ERROR ')) and ' - ' in line:
+        line = line.split(' - ', 1)[1]
+    match = re.match(r'^\s*(?:E\s+)?(?:ErrorType:\s*)?([A-Za-z][A-Za-z0-9]*)(?::|\s*$)', line)
+    return match if match and match.group(1) in DIAGNOSTIC_TYPES else None
+
+
 # Production guards precede the historical v0.2 rule table. Invalid output does
 # not enter that table's R15 repair retry; this release deliberately stops once.
 RUNTIME_POLICY = {'version': '1.0.0', 'invalid_model_output': 'stop',
@@ -131,7 +148,7 @@ class WorkflowRun:
     def test(self, work, phase, name):
         self.boundary()
         expected_version = self.version if phase == 'final_check' else code_version(work, (self.source,))
-        if code_version(work, (self.source,)) != expected_version:
+        if phase == 'final_check' and code_version(work, (self.source,)) != expected_version:
             raise IsolationBlocked('最终候选版本已改变')
         from .runtime_limits import runtime_limits
         limit = runtime_limits()['max_tool_calls']
@@ -177,20 +194,17 @@ class WorkflowRun:
         for line in text.splitlines():
             if line.lstrip().startswith(('CODEFIX_REPORT:', 'E ', '> ', 'assert ', 'AssertionError')):
                 continue
-            # Pytest's short summary puts assertion values after the nodeid.
+            # Preserve only allowlisted non-assertion types, never messages.
             if line.lstrip().startswith(('FAILED ', 'ERROR ')) and ' - ' in line:
-                line = line.split(' - ', 1)[0] + ' - [details redacted]'
+                match = _exception_header(line)
+                detail = match.group(1) if match and match.group(1) != 'AssertionError' else '[details redacted]'
+                line = line.split(' - ', 1)[0] + ' - ' + detail
             lines.append(re.sub(r'\[[^\]\n]*\]', '[parameters redacted]', line))
         return '\n'.join(lines)
 
     @staticmethod
     def diagnostics(result, folder):
         """Extract allowlisted types/module identifiers, never arbitrary messages."""
-        allowed = {'ImportError', 'ModuleNotFoundError', 'SyntaxError', 'IndentationError',
-                   'TabError', 'TypeError', 'ValueError', 'AttributeError', 'NameError',
-                   'UnboundLocalError', 'RuntimeError', 'OSError', 'FileNotFoundError',
-                   'PermissionError', 'TimeoutError', 'AssertionError', 'KeyError',
-                   'IndexError', 'ZeroDivisionError', 'RecursionError', 'MemoryError'}
         exception_types = []
         missing_modules = []
         for name in ('stdout_path', 'stderr_path'):
@@ -200,10 +214,10 @@ class WorkflowRun:
             with path.open('rb') as stream:
                 text = stream.read(8000).decode('utf-8', errors='replace')
             for line in text.splitlines():
-                # Accept pytest's E prefix and explicit ErrorType headers;
+                # Accept pytest E/summary lines and explicit ErrorType headers;
                 # assert lines, source lines and traceback frames never match.
-                match = re.match(r'^\s*(?:E\s+)?(?:ErrorType:\s*)?([A-Za-z][A-Za-z0-9]*)(?::|\s*$)', line)
-                if not match or match.group(1) not in allowed:
+                match = _exception_header(line)
+                if not match:
                     continue
                 exc_type = match.group(1)
                 if exc_type not in exception_types:
@@ -212,7 +226,7 @@ class WorkflowRun:
                     continue
                 module = re.fullmatch(
                     r'''\s*No module named ['"]([A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*)['"]\s*''',
-                    line[match.end():])
+                    match.string[match.end():])
                 if module and len(module.group(1)) <= 200 and module.group(1) not in missing_modules:
                     missing_modules.append(module.group(1))
         return {'exception_types': exception_types, 'missing_modules': missing_modules} if exception_types else None
@@ -318,8 +332,7 @@ class WorkflowRun:
                                  [{'path': self.source, 'new_content': payload.decode('utf-8')}],
                                  self.directory / 'final-patch', project=self.task['project'])
         if ((final_work / self.source).read_bytes() != payload
-                or record['candidate_version'] != self.version
-                or code_version(final_work, (self.source,)) != self.version):
+                or record['candidate_version'] != self.version):
             raise IsolationBlocked('最终验收字节与候选版本不一致')
         checked, _ = self.test(final_work, 'final_check', 'final-check')
         self.final['final_result'] = checked['verification_status']

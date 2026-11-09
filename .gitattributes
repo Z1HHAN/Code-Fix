@@ -86,3 +86,6 @@ evidence/model-console-merge/** -text -whitespace
 
 # Branch integration evidence retains captured bytes.
 evidence/integration-branches/** -text -whitespace
+
+
+evidence/workflow-review-followup/** -text -whitespace
