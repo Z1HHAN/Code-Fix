@@ -1,0 +1,9 @@
+{
+  "time": "2026-11-09T20:09:17.602152+08:00",
+  "remote": "origin",
+  "main_before": "79b33eccd37c99f443f43c30be7d80cc92793f46",
+  "published_tested_merge": "0d77f0067a23a20aad365615964f124898047e50",
+  "ls_remote_main": "0d77f0067a23a20aad365615964f124898047e50",
+  "method": "git merge --ff-only codex/integrate-reviewed-fixes; git push origin main; git ls-remote origin refs/heads/main",
+  "note": "This publication identity binds the tested code merge. The following evidence/document-only commit is tracked by Git and pushed with a final remote check."
+}

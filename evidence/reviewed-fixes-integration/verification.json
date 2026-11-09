@@ -1,0 +1,60 @@
+{
+  "time": "2026-11-09T20:09:17.601124+08:00",
+  "record": "助手-四分支合并准确版本复跑与发布-061",
+  "tested_commit": "0d77f0067a23a20aad365615964f124898047e50",
+  "git_clean_at_test": true,
+  "source_unchanged": true,
+  "source_snapshot_sha256": "a46844dc7372006041012ef242eab30103c05f448ba19ee8a15b9c7943c1c9d5",
+  "full_acceptance_command": "& 'runs/v3-venv/Scripts/python.exe' -B -X utf8 scripts/c_acceptance.py --output-root C:/Users/lenovo/AppData/Local/Temp/m-review --node 'C:/Program Files/nodejs/node.exe'",
+  "full_acceptance_exit": 0,
+  "counts": {
+    "doctor": "passed",
+    "validate_config": "passed",
+    "platform_pytest": {
+      "collected": 535,
+      "passed": 534,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "node_ui": {
+      "tests": 24,
+      "pass": 24,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "c_controls": 12,
+    "repair_gates": {
+      "collected": 25,
+      "passed": 25,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "node_frontend": {
+    "command": "& 'C:/Program Files/nodejs/node.exe' --test tests/ui_architecture.test.cjs tests/ui_trace.test.cjs tests/ui_prototype.test.cjs tests/ui_budget.test.cjs tests/ui_polling.test.cjs",
+    "exit": 0,
+    "passed": 60
+  },
+  "browser": {
+    "command": "$env:CODE_FIX_ARCH_BROWSER_OUTPUT='runs/main-integration-browser'; & 'runs/v3-venv/Scripts/python.exe' -B -X utf8 scripts/check_trace_ui.py",
+    "exit": 0,
+    "scope": "injected offline events, no task/model/Docker started",
+    "errors": 0,
+    "posts": 0
+  },
+  "archival": {
+    "original_full_files": 170,
+    "byte_identity_verified": true,
+    "initial_copy_issue": "ordinary destination path exceeded Windows MAX_PATH (WinError 206); resumed using extended absolute paths, preserving names and raw bytes; original test result unchanged"
+  },
+  "limits": [
+    "One specified host symlink-permission skip in platform tests",
+    "No real Docker, model or B/C independent acceptance",
+    "No stable release tag",
+    "Old branch refs retained with original classification"
+  ]
+}

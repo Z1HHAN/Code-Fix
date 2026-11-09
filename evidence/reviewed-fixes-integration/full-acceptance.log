@@ -1,0 +1,13 @@
+[doctor] running
+[doctor] passed: see original evidence
+[validate_config] running
+[validate_config] passed: see original evidence
+[platform_pytest] running
+[platform_pytest] passed: see original evidence
+[node_ui] running
+[node_ui] passed: see original evidence
+[c_controls] running
+[c_controls] passed: see original evidence
+[repair_gates] running
+[repair_gates] passed: see original evidence
+Evidence: C:\Users\lenovo\AppData\Local\Temp\m-review\C-acceptance-20261109-200204-e0fab3ac
