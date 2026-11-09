@@ -65,6 +65,10 @@
     const gaps = nodes.filter(n => n.legacy || !n.started || (n.parent && !byId.has(n.parent)) || n.status === 'incomplete').length;
     return {nodes,edges,gaps,provenance:provenance(run,events)};
   }
+  function roundLabel(node) {
+    if(node.round===0)return node.facts.node_id==='pytest'&&node.phase!=='final_check'?'基线':'';
+    return node.round!=null?'第'+node.round+'轮':'';
+  }
   function safePath(path) {
     return typeof path === 'string' && path.length > 0 && !/[\\:\x00-\x1f]/.test(path) &&
       !path.startsWith('/') && path.split('/').every(p => p && p !== '.' && p !== '..');
@@ -139,11 +143,11 @@
         if(key===detailKey)return;
         detailKey=key;
         const ticket=++generation; detail.replaceChildren();
-        detail.append(el('h3',`${node.title}${node.round!=null?' · 第'+node.round+'轮':''}`,'inspector-title'));
+        detail.append(el('h3',`${node.title}${roundLabel(node)?' · '+roundLabel(node):''}`,'inspector-title'));
         detail.append(el('p',node.statusLabel,'step-caption'));
         const d=node.decision;
         const data={身份:node.legacy?'历史事件：没有真实step_id':node.id,父步骤:node.parent || '未记录／首步骤',
-          轮次:node.round ?? '未记录',阶段:node.phase,状态:node.statusLabel,耗时毫秒:node.duration ?? '未记录',
+          轮次:node.round===0?(roundLabel(node)||'不适用'):node.round ?? '未记录',阶段:node.phase,状态:node.statusLabel,耗时毫秒:node.duration ?? '未记录',
           代码版本:node.facts.code_version ?? '未记录',测试版本:node.facts.test_suite_version ?? '未记录',证据ID:node.evidenceIds};
         const tabs=el('div',null,'inspector-tabs');tabs.setAttribute('role','tablist');
         const panes=['决策详情','关联证据','技术信息'].map(()=>el('div',null,'trace-detail-pane'));
@@ -191,7 +195,7 @@
       for (const node of graph.nodes) {
         const li=el('li'),point=placement.positions.get(node.id);li.setAttribute('style',`left:${point.x}px;top:${point.y}px`);list.append(li);
         const button=el('button',null,'trace-node '+(node.status==='running'?'trace-active':node.test?.verification_status==='failed'?'trace-test-failed':node.status==='failed'?'trace-failed':''));button.type='button';button.dataset.stepId=node.id;
-        const top=el('span',null,'node-top');top.append(el('span',`${node.title}${node.round!=null?' · 第'+node.round+'轮':''}`,'node-title'),el('span',String(buttons.length+1).padStart(2,'0'),'node-index'));
+        const top=el('span',null,'node-top');top.append(el('span',`${node.title}${roundLabel(node)?' · '+roundLabel(node):''}`,'node-title'),el('span',String(buttons.length+1).padStart(2,'0'),'node-index'));
         button.append(top,el('span',node.test?.verification_status==='failed'?'! 测试未通过':(node.status==='ok'?'✓ ':'')+node.statusLabel,'node-state'),
           el('span',node.decision?(actions[node.decision.effective_action||node.decision.action]||'裁决已记录'):`${node.legacy?'历史格式':node.phase}${node.duration!=null?' · '+node.duration+'ms':''}`,'node-result'));
         button.setAttribute('aria-label',`${node.title}，${node.statusLabel}`);
@@ -203,7 +207,7 @@
       if(focused)buttons.find(b=>b.dataset.stepId===focused)?.focus();
     };
   }
-  const api={project,mergeEvents,provenance,artifacts,safePath,costText,layout,mount};
+  const api={project,roundLabel,mergeEvents,provenance,artifacts,safePath,costText,layout,mount};
   if(typeof module!=='undefined')module.exports=api;
   root.CodeFixTrace=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

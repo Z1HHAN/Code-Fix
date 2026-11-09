@@ -57,6 +57,15 @@ class Element {
 function descendants(e){return [e,...e.children.flatMap(descendants)];}
 function ui(loader){const doc={createElement:tag=>new Element(tag)};const graph=new Element('div'),detail=new Element('div');
   return {graph,detail,render:trace.mount(doc,graph,detail,loader)};}
+
+test('baseline titles and inspector use baseline while original round metadata remains zero',()=>{
+  const page=[{sequence:1,event:'step_started',step_id:'base',node_id:'pytest',round:0,phase:'development'}];
+  const view=ui(async()=>{throw Error('no artifact requested');});view.render({...run,status:'running'},page);
+  assert.ok(descendants(view.graph).find(e=>e.className==='node-title').textContent.includes('基线'));
+  assert.ok(descendants(view.detail).find(e=>e.className==='inspector-title').textContent.includes('基线'));
+  assert.equal(descendants(view.graph).some(e=>e.textContent.includes('第0轮')),false);
+  assert.equal(page[0].round,0);
+});
 test('clicking a node only reads artifacts; unchanged polls preserve viewer',async()=>{
   const calls=[];const view=ui(async(rid,path)=>{calls.push([rid,path]);return '<script>literal output</script>';});
   view.render(run,events);

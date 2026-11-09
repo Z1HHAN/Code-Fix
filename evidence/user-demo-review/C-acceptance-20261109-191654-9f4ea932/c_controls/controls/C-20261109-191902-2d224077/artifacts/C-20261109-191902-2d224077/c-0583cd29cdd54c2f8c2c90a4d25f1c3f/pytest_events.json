@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "collected_nodeids": [
+    "tests/test_timeout.py::test_output_timeout"
+  ],
+  "collection_errors": [],
+  "reports": [
+    {
+      "nodeid": "tests/test_timeout.py::test_output_timeout",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    }
+  ],
+  "session_finished": false,
+  "exit_code": null
+}

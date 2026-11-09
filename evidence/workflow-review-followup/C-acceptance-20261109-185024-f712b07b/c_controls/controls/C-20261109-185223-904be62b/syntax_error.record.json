@@ -1,0 +1,109 @@
+{
+  "scenario": "syntax_error",
+  "run_type": "fault_injection",
+  "test_profile": "collection_syntax_error",
+  "expected": {
+    "status": null,
+    "verification_status": null,
+    "failure_class": "syntax_error"
+  },
+  "checks": {
+    "status": true,
+    "verification": true,
+    "failure_class": true,
+    "no_false_pass": true,
+    "output_agent_null": true,
+    "stdout_exists": true,
+    "stderr_exists": true
+  },
+  "control_check_passed": true,
+  "result": {
+    "interface_version": "0.2-20261101-draft",
+    "interface_status": "pending_BC_confirmation",
+    "call_id": "c-7e423a416bb642f98314c5575e858fb6",
+    "run_id": "C-20261109-185223-904be62b",
+    "task_id": "C-control-syntax_error",
+    "tool": "run_tests",
+    "phase": "development",
+    "status": "failed",
+    "verification_status": "failed",
+    "failure_class": "syntax_error",
+    "exit_code": 2,
+    "counts": {
+      "collected": 0,
+      "passed": 0,
+      "failed": 0,
+      "errors": 1,
+      "skipped": 0
+    },
+    "stdout_path": "C-20261109-185223-904be62b/c-7e423a416bb642f98314c5575e858fb6/stdout.txt",
+    "stderr_path": "C-20261109-185223-904be62b/c-7e423a416bb642f98314c5575e858fb6/stderr.txt",
+    "junit_path": "C-20261109-185223-904be62b/c-7e423a416bb642f98314c5575e858fb6/junit.xml",
+    "junit_missing_reason": null,
+    "structured_path": "C-20261109-185223-904be62b/c-7e423a416bb642f98314c5575e858fb6/pytest_events.json",
+    "duration_ms": 1371,
+    "code_version": "sha256:77908e06e60fd8110ef2a5b0ee2d8dc53c53b5487d0b8c157f4ef65311953458",
+    "requested_code_version": "sha256:77908e06e60fd8110ef2a5b0ee2d8dc53c53b5487d0b8c157f4ef65311953458",
+    "code_version_scheme": "sha256-canonical-files-v1",
+    "test_suite_version": "sha256:2ea03f30704e7dbba8a717333045002ff34eb7b904c47b2f6e713e8f89be2642",
+    "expected_test_count": 4,
+    "output_agent": null,
+    "artifact_paths_relative_to": "artifact_dir",
+    "result_path": "C-20261109-185223-904be62b/c-7e423a416bb642f98314c5575e858fb6/result.json",
+    "isolation_ready": false,
+    "execution_mode": "reviewed_fixture",
+    "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "run_type": "fault_injection",
+    "started_at": "2026-11-09T18:52:32.536+08:00",
+    "cleanup": {
+      "parent_reaped": true,
+      "pipes_drained": true,
+      "tree_termination_attempted": false,
+      "full_process_tree_verified": true,
+      "scope": "reviewed fixture parent; full process-tree isolation not certified"
+    },
+    "reason": "Registered source syntax error confirmed without executing source",
+    "command": [
+      "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-X",
+      "utf8",
+      "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\c_runner\\pytest_entry.py",
+      "C:\\Users\\lenovo\\AppData\\Local\\Temp\\e07-full\\C-acceptance-20261109-185024-f712b07b\\c_controls\\controls\\C-20261109-185223-904be62b\\artifacts\\C-20261109-185223-904be62b\\c-7e423a416bb642f98314c5575e858fb6\\pytest_events.json",
+      "C:\\Users\\lenovo\\AppData\\Local\\Temp\\e07-full\\C-acceptance-20261109-185024-f712b07b\\c_controls\\controls\\C-20261109-185223-904be62b\\artifacts\\C-20261109-185223-904be62b\\c-7e423a416bb642f98314c5575e858fb6\\junit.xml",
+      "C:\\Users\\lenovo\\AppData\\Local\\Temp\\e07-full\\C-acceptance-20261109-185024-f712b07b\\c_controls\\controls\\C-20261109-185223-904be62b\\artifacts\\C-20261109-185223-904be62b\\c-7e423a416bb642f98314c5575e858fb6\\pytest.ini",
+      "tests"
+    ],
+    "test_profile": "collection_syntax_error",
+    "environment_policy": "minimal_allowlist_no_inherited_credentials_or_plugins",
+    "source_syntax_errors": [
+      "leap_app/leap_year.py"
+    ],
+    "process_id": 77400,
+    "coverage": {
+      "expected_nodeids": [
+        "tests/test_leap.py::test_2024_is_leap",
+        "tests/test_leap.py::test_2023_is_not_leap",
+        "tests/test_leap.py::test_1900_is_not_leap",
+        "tests/test_leap.py::test_2000_is_leap"
+      ],
+      "collected_nodeids": [],
+      "expected_collected_match": false,
+      "junit_identities": [
+        [
+          "",
+          "tests.test_leap"
+        ]
+      ],
+      "junit_expected_match": false,
+      "session_finished": true
+    },
+    "integrity": {
+      "executed_copy_unchanged": true,
+      "input_workspace_unchanged": true
+    },
+    "evidence_matches_current_version": true,
+    "finished_at": "2026-11-09T18:52:33.905+08:00"
+  }
+}

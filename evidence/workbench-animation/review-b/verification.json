@@ -1,0 +1,50 @@
+{
+  "record": "助手-动画节奏与路径收尾-059",
+  "time": "2026-11-09T19:53:32.536888+08:00",
+  "branch": "codex/trace-animation-polish",
+  "base_commit": "73c4062bdd87dccc1b0e74da8b9709dae06fb506",
+  "main_commit": "79b33eccd37c99f443f43c30be7d80cc92793f46",
+  "source_identity": "uncommitted development workspace; exact source hashes below, subsequent commit identity is recorded by Git",
+  "source_sha256": {
+    "ui/app/architecture.js": "98ec09420b3747a09bf86378f9b03ce673d23d4c25bc8b70de582b5e299bd1c1",
+    "ui/app/architecture.css": "75f4709490534e2fd39f49281787cd77b099592d5de87f57e2605fd485c7f6c0",
+    "ui/app/app.js": "feab694c23eb5dd2b6bae63b1ca2d39ccc8b7509fa28619c3b46dd3b2fab757c",
+    "ui/app/trace.js": "0de20b220286aa1558e3b280566f6ea450720478743ff4aeb99113f620e0ff6c",
+    "tests/ui_architecture.test.cjs": "2887d860b57137768cb9103690b4ed9fa879405b378e3129ab985e973e779636",
+    "tests/ui_trace.test.cjs": "3236e08c47f627d7e8d519e1a334856c8580ccdd8e72c170bc4c3cda5fdc2f16",
+    "tests/ui_prototype.test.cjs": "292fd864dd8d49d1d87f625e6da5aa1845437a6839f6847622a19746f738f4ef",
+    "tests/ui_budget.test.cjs": "c1420ce5212eb3bd98673f55645ee73659ef99504b14e7ff6a536541c63bfb05",
+    "tests/ui_polling.test.cjs": "df999e524555695099b0422c33a3b4ab3ea9a46031b6d544cd0fbe55219b2946",
+    "tests/browser_architecture.cjs": "60107b2c5b8a7d3742d61092acc7e95ddc5625072e568d9449a18cb6b6dfdfef",
+    "scripts/check_trace_ui.py": "a31cf71389b45252b68fdea77bf769d246ab153ec914b2cfc948331107ac1220"
+  },
+  "node": {
+    "command": "& 'C:/Program Files/nodejs/node.exe' --test tests/ui_architecture.test.cjs tests/ui_trace.test.cjs tests/ui_prototype.test.cjs tests/ui_budget.test.cjs tests/ui_polling.test.cjs",
+    "exit_code": 0,
+    "passed": 60,
+    "failed": 0
+  },
+  "browser": {
+    "command": "$env:CODE_FIX_ARCH_BROWSER_OUTPUT='runs/trace-polish-browser'; & 'runs/v3-venv/Scripts/python.exe' -B -X utf8 scripts/check_trace_ui.py",
+    "exit_code": 0,
+    "scope": "Edge local HTTP, injected offline events only",
+    "js_errors": 0,
+    "post_requests": 0,
+    "screenshots_visually_checked": [
+      "return-route.png",
+      "completion-fade.png"
+    ]
+  },
+  "prior_attempts": {
+    "node-initial.tap": "19 passed, 2 failed: stale packet-count and entry offset expectations",
+    "node-intermediate.tap": "test fixture missing addEventListener plus terminal redraw timer regression; raw output retained",
+    "node-terminal-timer-failure.tap": "four terminal redraw timer failures; fixed by canceling the existing timer on terminal status",
+    "browser-sandbox-attempt.log": "sandbox browser attempt did not complete; stopped the test-owned processes and reran with original Windows user; this attempt is not a passing result"
+  },
+  "limitations": [
+    "No new Python full-suite or C-controls run",
+    "No Docker, real repair, model requests or B/C independent acceptance",
+    "No main merge or remote push in this round",
+    "Browser runner requires installed Windows Edge/Node and free ports 8782/9331"
+  ]
+}

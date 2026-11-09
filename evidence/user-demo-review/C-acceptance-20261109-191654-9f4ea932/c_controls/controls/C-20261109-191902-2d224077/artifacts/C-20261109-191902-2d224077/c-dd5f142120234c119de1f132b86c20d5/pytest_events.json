@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "collected_nodeids": [],
+  "collection_errors": [
+    {
+      "nodeid": "tests/test_leap.py",
+      "details": "ImportError while importing test module 'C:\\Users\\lenovo\\AppData\\Local\\Temp\\u-full\\C-acceptance-20261109-191654-9f4ea932\\c_controls\\controls\\C-20261109-191902-2d224077\\artifacts\\C-20261109-191902-2d224077\\c-dd5f142120234c119de1f132b86c20d5\\work\\tests\\test_leap.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\nC:\\Users\\lenovo\\.codex\\visualizations\\2026\\10\\30\\01a18c30-2cd0-7b00-b5a1-5ee1db7310c9\\code-fix-c-audit-20261102\\Code-Fix-C-20261101\\.runtime\\python314\\tools\\Lib\\importlib\\__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests\\test_leap.py:1: in <module>\n    from leap_app.leap_year import is_leap\nleap_app\\leap_year.py:1: in <module>\n    import c_fixture_deliberately_missing_dependency_20261101\nE   ModuleNotFoundError: No module named 'c_fixture_deliberately_missing_dependency_20261101'"
+    }
+  ],
+  "reports": [],
+  "session_finished": true,
+  "exit_code": 2
+}

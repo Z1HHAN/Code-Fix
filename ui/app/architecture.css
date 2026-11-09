@@ -39,6 +39,8 @@
 .decision-action{padding:9px 10px;margin-bottom:12px;line-height:1.6}
 .evidence-title{padding-top:12px}
 @keyframes arch-breathe{50%{box-shadow:0 0 0 4px #2864e818}}
+.arch-settling{fill:none;stroke:#0752df;stroke-width:3;animation:arch-settle .3s ease-out forwards}
+@keyframes arch-settle{from{opacity:1}to{opacity:0}}
 @media(min-width:1700px){.workbench-grid{grid-template-columns:minmax(0,1fr) 280px}}
 @media(max-width:1250px){.workbench-grid{grid-template-columns:minmax(0,1fr) 260px}}
 @media(max-width:950px){.workbench-grid{grid-template-columns:minmax(0,1fr)}.workbench-grid>.inspector{position:static;max-height:480px}}

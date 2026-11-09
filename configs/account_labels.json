@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "labels": {
+    "sf_account1": "账号1",
+    "sf_account2": "账号2",
+    "aliyun_maas": "百炼账号"
+  }
+}

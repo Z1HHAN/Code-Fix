@@ -1,0 +1,77 @@
+✔ replay pause resumes the same prefix and remaining arrow travel, including after polling (6.1268ms)
+✔ entry replay illuminates both entry nodes and gives every segment a directed arrow (1.513ms)
+✔ last started event retains the full handoff window then ends without claiming task completion (1.2038ms)
+✔ completion holds for 1500ms while evidence preserves elapsed travel (1.2006ms)
+✔ finished event removes motion and switching run cancels replay and resume state (0.7878ms)
+✔ layout maps baseline and final separately; no invented parent links (0.1958ms)
+✔ new actual edges transmit once, unchanged polls do not rebuild, terminal stops all motion (0.8528ms)
+✔ locator only lights when actually invoked and failure survives completion (0.651ms)
+✔ history selection freezes prefix and evidence inspector, new live events do not pull it back (0.7747ms)
+✔ initial historical load has no transfer animation and playback only consumes recorded events (0.6491ms)
+✔ moving arrow follows the directed edge once and terminal removes the packet (1.0427ms)
+✔ baseline labels preserve raw round zero and do not label preparation as a repair round (0.8083ms)
+✖ completion evidence travels only to recorded trace/log/diff/cost destinations (2.5297ms)
+✔ missing evidence never creates logs/diff/cost transfers (0.4112ms)
+✖ entry advances in 650ms while its packets retain elapsed travel (0.75ms)
+✔ entry-only replay drains the final packet instead of cutting it off (1.429ms)
+✔ click keeps the result frame; explicit replay starts at that step start (0.5511ms)
+✔ reduced motion omits all SMIL and responds to preference changes (0.7404ms)
+✔ paused/history views count fresh events without moving inspector, deduplicate, and clear on return (1.7218ms)
+✔ paused replay receives a new-event notice without changing its prefix or resuming (0.5552ms)
+✔ a legacy step without a start event cannot replay a fabricated execution (0.3298ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 19
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 140.6828
+
+✖ failing tests:
+
+test at tests\ui_architecture.test.cjs:110:1
+✖ completion evidence travels only to recorded trace/log/diff/cost destinations (2.5297ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 2
+  
+      at C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:126:9
+      at withClock (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:20:6)
+      at TestContext.<anonymous> (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:110:90)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1306:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:897:18)
+      at Test.postRun (node:internal/test_runner/test:1447:19)
+      at Test.run (node:internal/test_runner/test:1372:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:897:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\ui_architecture.test.cjs:134:1
+✖ entry advances in 650ms while its packets retain elapsed travel (0.75ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  '-0.65s' !== '-1.5s'
+  
+      at C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:138:9
+      at withClock (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:20:6)
+      at TestContext.<anonymous> (C:\Users\lenovo\Documents\ChatGPT\Code Fix\tests\ui_architecture.test.cjs:134:76)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1306:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:897:18)
+      at Test.postRun (node:internal/test_runner/test:1447:19)
+      at Test.run (node:internal/test_runner/test:1372:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:897:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '-0.65s',
+    expected: '-1.5s',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

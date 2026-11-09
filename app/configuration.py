@@ -5,7 +5,7 @@ import re
 import os
 from pathlib import Path
 
-from .config import ConfigError
+from .config import ConfigError, read_json
 from .errors import InputValidationError
 from .model_profiles import load_profiles, profile_settings
 from .live_model import ModelBlocked
@@ -49,6 +49,20 @@ class ConfigurationStore:
 
     def catalog(self):
         registry = load_profiles(self.root)
+        # Display metadata is separate from immutable billing/profile hashes.
+        labels_path = self.root / 'configs/account_labels.json'
+        labels = read_json(labels_path) if labels_path.exists() else {'schema_version': 1, 'labels': {}}
+        if (not isinstance(labels, dict) or set(labels) != {'schema_version', 'labels'}
+                or labels['schema_version'] != 1 or not isinstance(labels['labels'], dict)
+                or any(not isinstance(v, str) or not 1 <= len(v.strip()) <= 80
+                       or any(ord(c) < 32 for c in v) for v in labels['labels'].values())):
+            raise ConfigError('账号显示名称配置无效')
+        accounts, counts = [], {}
+        for aid, account in registry.get('accounts', {}).items():
+            provider = account['provider_id']
+            counts[provider] = counts.get(provider, 0) + 1
+            accounts.append({'account_id': aid, 'provider': provider,
+                             'display_name': labels['labels'].get(aid, f'账号{counts[provider]}')})
         current = RoleConfig(self.root)
         rows = []
         for ref, profile in registry['profiles'].items():
@@ -62,7 +76,7 @@ class ConfigurationStore:
                              account=profile.get('account_ref'), configured=ready, note=reason,
                              billing_bound_known=profile.get('billable_output_tokens') is not None,
                              checks=checks))
-        return {'profiles': rows, 'bindings': {role: current.snapshot['models'][agent['model_ref']].get('profile_ref')
+        return {'accounts': accounts, 'profiles': rows, 'bindings': {role: current.snapshot['models'][agent['model_ref']].get('profile_ref')
                 for role, agent in current.agents.items()},
                 'limits': runtime_limits(),
                 'strategies': [{'value': 'dynamic', 'label': '动态编排', 'enabled': True},

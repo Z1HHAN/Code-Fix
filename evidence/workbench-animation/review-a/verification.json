@@ -1,0 +1,27 @@
+{
+  "time": "2026-11-09T19:36:51.973797+08:00",
+  "baseline_commit": "da1d0cc1e948ef82da7d1d5ca5ada82126f39135",
+  "branch": "codex/trace-demo-review",
+  "test_identity": "working source SHA256; component development evidence, not clean-commit C acceptance",
+  "source_sha256": {
+    "ui/app/architecture.js": "d36535b85fd20006bbc56efb7cdb2826f965f51ac7a0a6fff4b15189b753ee86",
+    "ui/app/trace.js": "0de20b220286aa1558e3b280566f6ea450720478743ff4aeb99113f620e0ff6c",
+    "tests/ui_architecture.test.cjs": "864c538f60320389e67c3a88ae7291d950ae19081cfad9551cae86bfbb9603ec",
+    "tests/ui_trace.test.cjs": "3236e08c47f627d7e8d519e1a334856c8580ccdd8e72c170bc4c3cda5fdc2f16",
+    "tests/browser_architecture.cjs": "eb1d9eaebd797020b7e574a3c21bc985ca3a0ff9f489a2d01b568b32fb6bcad6",
+    "scripts/check_trace_ui.py": "08eaa06aa8acf4dde104c63ce3e9ce0c5d8d6a5792e2e04adeca6873598afc2c"
+  },
+  "node_command": "& 'C:/Program Files/nodejs/node.exe' --test tests/ui_architecture.test.cjs tests/ui_trace.test.cjs tests/ui_prototype.test.cjs tests/ui_budget.test.cjs tests/ui_polling.test.cjs",
+  "node_passed": 50,
+  "node_exit": 0,
+  "browser_command": "& runs/v3-venv/Scripts/python.exe -B -X utf8 scripts/check_trace_ui.py",
+  "browser_exit": 0,
+  "browser_scope": "Windows headless Edge; temporary local server 8782 and CDP 9331; injected offline events only; POST0; no tasks, paid calls or Docker",
+  "visual_inspection": [
+    "evidence-routing.png",
+    "new-event-notice.png"
+  ],
+  "deferred": [
+    "A-07 projection optimization"
+  ]
+}

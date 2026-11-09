@@ -1,0 +1,111 @@
+{
+  "time": "2026-11-09T19:59:36.773882+08:00",
+  "main_before": "79b33eccd37c99f443f43c30be7d80cc92793f46",
+  "workspace_clean_before": true,
+  "sources": [
+    {
+      "branch": "codex/workflow-review-e07-e10",
+      "sha": "047c0d8a54611e8914d6c685def4ce6d3a7139c9"
+    },
+    {
+      "branch": "codex/user-demo-review",
+      "sha": "da1d0cc1e948ef82da7d1d5ca5ada82126f39135"
+    },
+    {
+      "branch": "codex/trace-demo-review",
+      "sha": "73c4062bdd87dccc1b0e74da8b9709dae06fb506"
+    },
+    {
+      "branch": "codex/trace-animation-polish",
+      "sha": "0bcb962527a9d0870547762cd238c1769a16fb4a"
+    }
+  ],
+  "strategy": "single non-fast-forward merge of the tip, preserving ancestry of all four linear approved branches",
+  "unmerged_refs_before": [
+    {
+      "ref": "codex/integration-v02-delivery",
+      "sha": "64aa2c89ef50aea5e00d3f3fcce4cae46004cd3b",
+      "ahead_behind": "116\t1",
+      "classification": "historical reference; disposition retained from fixed records 046/047"
+    },
+    {
+      "ref": "codex/integration-v02-runner",
+      "sha": "11447726f7bdc0fb163aff85ce4c501f8f899117",
+      "ahead_behind": "116\t1",
+      "classification": "historical reference; disposition retained from fixed records 046/047"
+    },
+    {
+      "ref": "codex/integration-v02-ui",
+      "sha": "fd8bd0d4c0aee665ffa253c78a6139f4823443a9",
+      "ahead_behind": "116\t1",
+      "classification": "historical reference; disposition retained from fixed records 046/047"
+    },
+    {
+      "ref": "codex/trace-animation-polish",
+      "sha": "0bcb962527a9d0870547762cd238c1769a16fb4a",
+      "ahead_behind": "0\t6",
+      "classification": "approved new delivery"
+    },
+    {
+      "ref": "codex/trace-demo-review",
+      "sha": "73c4062bdd87dccc1b0e74da8b9709dae06fb506",
+      "ahead_behind": "0\t5",
+      "classification": "approved new delivery"
+    },
+    {
+      "ref": "codex/user-demo-review",
+      "sha": "da1d0cc1e948ef82da7d1d5ca5ada82126f39135",
+      "ahead_behind": "0\t4",
+      "classification": "approved new delivery"
+    },
+    {
+      "ref": "codex/v0.2-candidate",
+      "sha": "fcff59946baf77034f0d770b86c34a85fa14ccad",
+      "ahead_behind": "117\t1",
+      "classification": "historical reference; disposition retained from fixed records 046/047"
+    },
+    {
+      "ref": "codex/workflow-review-e07-e10",
+      "sha": "047c0d8a54611e8914d6c685def4ce6d3a7139c9",
+      "ahead_behind": "0\t2",
+      "classification": "approved new delivery"
+    },
+    {
+      "ref": "demo/readme-note",
+      "sha": "be9273f4282282b11a5440f0b39a0d60efee324f",
+      "ahead_behind": "118\t1",
+      "classification": "historical reference; disposition retained from fixed records 046/047"
+    },
+    {
+      "ref": "origin/codex/day1-repair-demo-review-20261031",
+      "sha": "743727c0891b26c96c99f974a04a85add80b3073",
+      "ahead_behind": "119\t3",
+      "classification": "historical reference; disposition retained from fixed records 046/047"
+    },
+    {
+      "ref": "origin/codex/runner-regression-fix",
+      "sha": "b125ca924b8e3689c14145c675b53682ff175c03",
+      "ahead_behind": "117\t1",
+      "classification": "historical reference; disposition retained from fixed records 046/047"
+    },
+    {
+      "ref": "origin/codex/v0.2-candidate",
+      "sha": "fcff59946baf77034f0d770b86c34a85fa14ccad",
+      "ahead_behind": "117\t1",
+      "classification": "historical reference; disposition retained from fixed records 046/047"
+    },
+    {
+      "ref": "origin/demo/readme-note",
+      "sha": "fe12addd56fc730d01e22986e0ef32e0e792ec13",
+      "ahead_behind": "118\t3",
+      "classification": "historical reference; disposition retained from fixed records 046/047"
+    },
+    {
+      "ref": "origin/ui/day1-repair-ui-20261101",
+      "sha": "43c333c5a79dccb5204a77f060da45c5c0f2763a",
+      "ahead_behind": "119\t4",
+      "classification": "historical reference; disposition retained from fixed records 046/047"
+    }
+  ],
+  "historical_policy": "No force/ours/unrelated-history merges or branch deletion; fixed 046/047 dispositions remain."
+}

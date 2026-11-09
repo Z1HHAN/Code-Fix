@@ -1,0 +1,15 @@
+{
+  "scope": "local-browser-disposable-store; no tasks started, no model or Docker",
+  "run_id": "run-51b023c788a141ab8b3d31ae3e8e566b",
+  "config_id": "cfg-53435aa1cdf8786c54a5d8b9b28dc43513e27d0c2663b04add877549f6eae190",
+  "passed": true,
+  "idle_window_ms": 2600,
+  "idle_task_budget_requests": 0,
+  "errors": [],
+  "writes": [
+    "http://127.0.0.1:8781/api/v3/configurations",
+    "http://127.0.0.1:8781/api/v3/tasks",
+    "http://127.0.0.1:8781/api/v3/tasks/run-51b023c788a141ab8b3d31ae3e8e566b/archive",
+    "http://127.0.0.1:8781/api/v3/tasks/run-51b023c788a141ab8b3d31ae3e8e566b/restore"
+  ]
+}

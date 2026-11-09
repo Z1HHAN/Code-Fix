@@ -1,0 +1,26 @@
+{
+  "time": "2026-11-09T19:14:10.465329+08:00",
+  "baseline": "047c0d8",
+  "branch": "codex/user-demo-review",
+  "python_command": "runs/v3-venv/Scripts/python.exe -B -X utf8 -m pytest -q tests/test_user_demo_review.py tests/test_configuration.py tests/test_api_v3.py -p no:cacheprovider --basetemp=runs/u-target2 --junitxml=runs/u-target2.xml",
+  "python_passed": 27,
+  "node_command": "node --test tests/ui_polling.test.cjs tests/ui_prototype.test.cjs tests/ui_budget.test.cjs tests/ui_trace.test.cjs tests/ui_architecture.test.cjs",
+  "node_passed": 39,
+  "browser_command": "runs/v3-venv/Scripts/python.exe -B -X utf8 runs/run_demo_browser.py (temporary local uvicorn on 8781, then node tests/browser_user_demo.cjs; finally server shutdown)",
+  "scope": "local disposable database and headless Edge; no task started, no model or Docker",
+  "source_sha256": {
+    "app/run_store.py": "e99831b88b1b62c8085a992c42dd4d6e33047e37a5532f9d902602861c16e5b9",
+    "app/api.py": "d75dbaac0fff3eb766f0fbb7decf70d6682d072c2e2b6154f9b4f705c2b084e9",
+    "app/cli.py": "6d18adfd85baec7d1177f06370558e7cc034b542565b67a5f7e5e156a674f95f",
+    "app/configuration.py": "58957914079176debc479675f9fb62015fc044efb15700c31b0192e12b713c64",
+    "app/readiness.py": "bef43dfc0465bd1e70341e964976039416dc5a40800ea80d58134dcd5c570e41",
+    "configs/account_labels.json": "761a3e6d0a7d071a3c4379a41f24b486f1a4a672639af906e8e750bcf921fe8d",
+    "ui/app/app.js": "d6e44716741e41db5e1fb42c259fd73fa94288888992f9540f67ded9e68b0d62",
+    "ui/app/config.js": "05678eb1482275bbd25034b8b46474482eb02e5e6bacfd7f07ce99396d83484c",
+    "ui/app/polling.js": "08f01f6993fe6eb8145b2915e323e759b1d515aba79322b76e966a9b532c1494",
+    "ui/app/index.html": "4228511ce68f1e819fbbca2e22de414e2d04981986738f044db7b99f3bf23105",
+    "tests/test_user_demo_review.py": "ad81485fdaa84d0dea1fc5a732c0e2b554a0537dd311f7491091de196a326c2b",
+    "tests/ui_polling.test.cjs": "df999e524555695099b0422c33a3b4ab3ea9a46031b6d544cd0fbe55219b2946",
+    "tests/browser_user_demo.cjs": "99135a51dd328f82021df1fd01de3cc8611990503e60e093b6d23909209fb553"
+  }
+}

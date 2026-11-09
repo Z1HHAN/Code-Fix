@@ -60,6 +60,8 @@ class RunStore:
                 CREATE TABLE IF NOT EXISTS events (
                     sequence INTEGER PRIMARY KEY AUTOINCREMENT, run_id TEXT NOT NULL,
                     created_at TEXT NOT NULL, payload TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS run_archives (
+                    run_id TEXT PRIMARY KEY, archived_at TEXT NOT NULL);
             ''')
 
     @contextmanager
@@ -89,7 +91,7 @@ class RunStore:
         with self.connect() as db:
             db.execute('BEGIN IMMEDIATE')
             if key:
-                old = db.execute('SELECT * FROM runs WHERE idempotency_key=?', (key,)).fetchone()
+                old = db.execute('SELECT r.*,a.archived_at FROM runs r LEFT JOIN run_archives a ON a.run_id=r.run_id WHERE r.idempotency_key=?', (key,)).fetchone()
                 if old:
                     if old['fingerprint'] != fingerprint:
                         raise StateConflict('同一幂等键不能对应不同任务')
@@ -103,6 +105,7 @@ class RunStore:
         if row is None:
             raise RunNotFound('任务不存在')
         value = dict(row)
+        value.setdefault('archived_at', None)
         for name in ('task', 'result'):
             value[name] = json.loads(value[name]) if value[name] else None
         return {k: v for k, v in value.items() if k not in {'fingerprint', 'idempotency_key'}}
@@ -110,11 +113,33 @@ class RunStore:
     def get(self, run_id):
         self.directory(run_id)
         with self.connect() as db:
-            return self._decode(db.execute('SELECT * FROM runs WHERE run_id=?', (run_id,)).fetchone())
+            return self._decode(db.execute('SELECT r.*,a.archived_at FROM runs r LEFT JOIN run_archives a ON a.run_id=r.run_id WHERE r.run_id=?', (run_id,)).fetchone())
 
-    def list(self):
+    def list(self, *, include_archived=False):
         with self.connect() as db:
-            return [self._decode(r) for r in db.execute('SELECT * FROM runs ORDER BY created_at DESC LIMIT 100')]
+            return [self._decode(r) for r in db.execute('''SELECT r.*,a.archived_at FROM runs r
+                LEFT JOIN run_archives a ON a.run_id=r.run_id
+                WHERE (? OR a.run_id IS NULL) ORDER BY r.created_at DESC LIMIT 100''', (include_archived,))]
+
+    def set_archived(self, run_id, archived):
+        self.directory(run_id)
+        if type(archived) is not bool:
+            raise InputValidationError('归档状态须为布尔值')
+        with self.connect() as db:
+            # Serialize against claim: a running task must never become hidden.
+            db.execute('BEGIN IMMEDIATE')
+            run = db.execute('SELECT status FROM runs WHERE run_id=?', (run_id,)).fetchone()
+            if run is None:
+                raise RunNotFound('任务不存在')
+            if archived and run['status'] == 'running':
+                raise StateConflict('运行中的任务不能归档')
+            if archived:
+                changed = db.execute('INSERT OR IGNORE INTO run_archives VALUES (?,?)', (run_id, now())).rowcount
+            else:
+                changed = db.execute('DELETE FROM run_archives WHERE run_id=?', (run_id,)).rowcount
+            if changed:
+                self._event(db, run_id, {'event': 'archived' if archived else 'restored'})
+        return self.get(run_id)
 
     def directory(self, run_id):
         if not isinstance(run_id, str) or not re.fullmatch(r'run-[a-f0-9]{32}', run_id):
@@ -127,10 +152,10 @@ class RunStore:
     def claim(self, run_id):
         directory = self.directory(run_id)
         with self.connect() as db:
-            changed = db.execute("UPDATE runs SET status='running',updated_at=? WHERE run_id=? AND status='created'",
+            changed = db.execute("UPDATE runs SET status='running',updated_at=? WHERE run_id=? AND status='created' AND NOT EXISTS (SELECT 1 FROM run_archives WHERE run_archives.run_id=runs.run_id)",
                                  (now(), run_id)).rowcount
             if changed != 1:
-                raise StateConflict('任务已启动或已结束，不能重复执行')
+                raise StateConflict('任务已归档、已启动或已结束；已归档任务须先恢复')
             directory.mkdir(exist_ok=True)
             self._event(db, run_id, {'event': 'started'})
 
@@ -191,7 +216,7 @@ class RunStore:
         self.directory(run_id)
         with self.connect() as db:
             db.execute('BEGIN')
-            run = self._decode(db.execute('SELECT * FROM runs WHERE run_id=?', (run_id,)).fetchone())
+            run = self._decode(db.execute('SELECT r.*,a.archived_at FROM runs r LEFT JOIN run_archives a ON a.run_id=r.run_id WHERE r.run_id=?', (run_id,)).fetchone())
             return {'run': run, 'events': self._events(db, run_id)}
 
     def interrupt(self, run_id):

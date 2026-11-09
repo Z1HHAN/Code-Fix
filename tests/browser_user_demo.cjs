@@ -1,0 +1,68 @@
+// Real browser/HTTP interaction with a disposable local store. No task is started.
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),{spawn}=require('node:child_process');
+const out=path.resolve(process.env.CODE_FIX_DEMO_BROWSER_OUTPUT||'runs/user-demo-browser');fs.mkdirSync(out,{recursive:true});
+const base=process.env.CODE_FIX_DEMO_BROWSER_URL||'http://127.0.0.1:8781';
+assert.match(base,/^http:\/\/127\.0\.0\.1:\d+$/);
+const browser=spawn('C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',['--headless=new','--disable-gpu','--no-first-run','--disable-background-networking','--remote-debugging-address=127.0.0.1','--remote-debugging-port=9331','--user-data-dir='+path.join(out,'profile'),'about:blank'],{windowsHide:true,stdio:'ignore'});
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));let socket;const errors=[],writes=[];
+const watchdog=setTimeout(()=>{browser.kill();process.exit(1);},90000);
+(async()=>{
+  let v;for(let i=0;i<100;i++){try{v=await(await fetch('http://127.0.0.1:9331/json/version')).json();break;}catch{}await sleep(100);}
+  assert.ok(v);socket=new WebSocket(v.webSocketDebuggerUrl);await new Promise((r,j)=>{socket.onopen=r;socket.onerror=j;});
+  let id=0;const pending=new Map();socket.onmessage=e=>{const d=JSON.parse(e.data);if(d.method==='Runtime.exceptionThrown')errors.push(d.params.exceptionDetails);if(d.method==='Network.requestWillBeSent'&&d.params.request.method==='POST')writes.push(d.params.request.url);if(pending.has(d.id)){const p=pending.get(d.id);pending.delete(d.id);d.error?p.reject(Error(JSON.stringify(d.error))):p.resolve(d.result);}};
+  const send=(method,params={},sessionId)=>new Promise((resolve,reject)=>{const mid=++id;pending.set(mid,{resolve,reject});socket.send(JSON.stringify({id:mid,method,params,sessionId}));});
+  const {targetId}=await send('Target.createTarget',{url:'about:blank'});const {sessionId}=await send('Target.attachToTarget',{targetId,flatten:true});
+  const s=(m,p)=>send(m,p,sessionId);await s('Page.enable');await s('Runtime.enable');await s('Network.enable');await s('Emulation.setDeviceMetricsOverride',{width:1600,height:1100,deviceScaleFactor:1,mobile:false});
+  const ev=async expression=>{const r=await s('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw Error(JSON.stringify(r.exceptionDetails));return r.result.value;};
+  const wait=async condition=>{for(let i=0;i<120;i++){if(await ev(condition))return;await sleep(100);}throw Error('Timeout '+condition);};
+  const shot=async name=>{const r=await s('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});fs.writeFileSync(path.join(out,name+'.png'),Buffer.from(r.data,'base64'));};
+
+  await s('Page.navigate',{url:base+'/#records'});await wait("document.querySelectorAll('#binding-rows tr').length===4 && !refreshing");
+  await ev("document.getElementById('new-task').click()");
+  assert.match(await ev("document.getElementById('task-mode-hint').textContent"),/基线检查不调用模型/);
+  await ev("document.getElementById('mode').value='repair';document.getElementById('mode').dispatchEvent(new Event('change'))");
+  assert.match(await ev("document.getElementById('task-mode-hint').textContent"),/使用默认模型配置.*未保存草稿不会应用/);
+  await ev("document.getElementById('task-config-open').click()");
+  assert.equal(await ev("document.getElementById('new-task-dialog').open"),false);
+  await ev("document.getElementById('save-config').click()");await wait("document.getElementById('config-draft-id').textContent.startsWith('cfg-')");
+  const config=await ev("document.getElementById('config-draft-id').textContent");
+  await ev("document.getElementById('new-task').click()");
+  assert.match(await ev("document.getElementById('task-mode-hint').textContent"),/使用已保存配置.*仍须核验/);
+  await shot('repair-config-hint');
+  await ev("document.getElementById('create').click()");await wait("!busy && !document.getElementById('new-task-dialog').open && document.getElementById('history').value.startsWith('run-')");
+  const rid=await ev("document.getElementById('history').value");
+  let run=await(await fetch(base+'/api/v3/tasks/'+rid)).json();assert.equal(run.task.config_id,config);assert.equal(run.status,'created');
+  await ev("document.getElementById('archive-run').click()");
+  await wait("!busy && !allRuns.some(r=>r.run_id==="+JSON.stringify(rid)+")");
+  assert.equal((await(await fetch(base+'/api/v3/tasks/'+rid)).json()).status,'created');
+  assert.ok((await(await fetch(base+'/api/v3/tasks/'+rid)).json()).archived_at);
+  await ev("document.querySelector('[data-view=records]').click();document.getElementById('include-archived').click()");
+  await wait("allRuns.some(r=>r.run_id==="+JSON.stringify(rid)+" && r.archived_at)");
+  await shot('archived-record');
+  await ev("document.getElementById('archive-run').click()");
+  await wait("!busy && currentRun && !currentRun.archived_at");
+  run=await(await fetch(base+'/api/v3/tasks/'+rid)).json();assert.equal(run.status,'created');assert.equal(run.archived_at,null);
+  await ev("document.querySelector('[data-view=config]').click();document.querySelector('[data-config-tab=conditions]').click()");
+  await wait("document.getElementById('account-rows').children.length>0");
+  assert.match(await ev("document.getElementById('isolation-values').textContent"),/本次环境概览未执行探针/);
+  assert.match(await ev("document.getElementById('account-rows').textContent"),/账号1/);
+  await ev("document.getElementById('show-isolation-history').click()");
+  assert.equal(await ev("document.getElementById('view-workspace').hidden"),false);
+  assert.equal(await ev("document.getElementById('metric-environment').textContent"),'未记录');
+  // Idle traffic: no automatic task/budget polling during a 2.6s idle window.
+  await wait("!refreshing");await sleep(300);
+  const requests=[];let measuring=true;
+  const listener=e=>{const d=JSON.parse(e.data);if(measuring&&d.method==='Network.requestWillBeSent'&&/\/api\/v3\/(tasks|budget)/.test(d.params.request.url))requests.push(d.params.request.url);};
+  socket.addEventListener('message',listener);await sleep(2600);measuring=false;socket.removeEventListener('message',listener);
+  assert.equal(requests.length,0,JSON.stringify(requests));
+  await ev("document.getElementById('new-task').click();document.getElementById('use-saved-config').click()");
+  assert.match(await ev("document.getElementById('task-mode-hint').textContent"),/使用默认模型配置/);
+  await ev("document.getElementById('task-config-open').click();document.getElementById('config-calls').value=10;document.getElementById('config-calls').dispatchEvent(new Event('input'))");
+  assert.equal(await ev("document.getElementById('use-saved-config').disabled"),true);
+  await ev("document.getElementById('new-task').click()");assert.equal(await ev("document.getElementById('calls').disabled"),false);
+  await s('Emulation.setDeviceMetricsOverride',{width:720,height:1000,deviceScaleFactor:1,mobile:false});await shot('narrow-hint');
+  assert.equal(await ev("document.documentElement.scrollWidth>innerWidth"),false);
+  assert.equal(errors.length,0,JSON.stringify(errors));assert.ok(writes.every(url=>!url.endsWith('/start')));
+  const result={scope:'local-browser-disposable-store; no tasks started, no model or Docker',run_id:rid,config_id:config,passed:true,idle_window_ms:2600,idle_task_budget_requests:requests.length,errors,writes};
+  fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result));
+})().catch(e=>{console.error(e);process.exitCode=1;}).finally(()=>{clearTimeout(watchdog);socket?.close();browser.kill();});
