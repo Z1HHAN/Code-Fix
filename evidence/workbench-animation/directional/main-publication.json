@@ -1,0 +1,8 @@
+{
+  "observed_at": "2026-11-09T17:44:10.833654+08:00",
+  "published_feature_commit": "9e05b16a30a0d9650e5866c5448ce46c6c8d3b5f",
+  "remote_main_observed": "9e05b16a30a0d9650e5866c5448ce46c6c8d3b5f",
+  "push_exit_code": 0,
+  "scope": "frontend directional animation; offline browser verification only",
+  "note": "This publication record is saved in a subsequent documentation-only commit; final identity is traceable through Git."
+}
