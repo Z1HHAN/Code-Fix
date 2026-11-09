@@ -27,5 +27,5 @@
     "tests/ui_architecture.test.cjs": "c13e72e6c8b21fb5e833f8567eb2803814dcf64d6238c2d35074c5e1d2da4a8e",
     "tests/browser_architecture.cjs": "59c6f3a7d0fee1a6678663b738e3895d3baead52ad7c1feb34b3a2aef8aca623"
   },
-  "publication": "pending commit; not yet merged or pushed"
+  "publication": "feature eca1d68 fast-forward merged and pushed to main; push exit success; documentation follow-up tracked by Git"
 }
