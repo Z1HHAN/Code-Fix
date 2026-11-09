@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-09",
+  "branch": "codex/directional-trace",
+  "baseline": "f2539b4",
+  "scope": "Approved frontend directional handoff; offline injected events, no real model/test candidate/Docker execution",
+  "node": {
+    "passed": 29,
+    "failed": 0,
+    "command": "node --test tests/ui_architecture.test.cjs tests/ui_trace.test.cjs tests/ui_budget.test.cjs tests/ui_prototype.test.cjs"
+  },
+  "browser": {
+    "command": "CODE_FIX_ARCH_BROWSER_OUTPUT=runs/directional-arrow-browser node tests/browser_architecture.cjs",
+    "passed": true,
+    "position_error_px_max": 0.0021,
+    "heading_tangent_dot": 1,
+    "single_pass_seconds": 0.8,
+    "finish_opacity": 0,
+    "writes": 0,
+    "js_errors": 0,
+    "source": "result.json"
+  },
+  "source_sha256": {
+    "ui/app/architecture.js": "3713135f390883c8ff7cbf8faa6b945725b50638359edd40fe4beaea13f24a3d",
+    "ui/app/architecture.css": "30075c3ca7c7ee14cac492133137c612665b31a67710498d78dc49b7836ad35f",
+    "tests/ui_architecture.test.cjs": "c23910e43e103022ade355f4a08d8a530040ab222b6bb94fdc906ffaa70034b2",
+    "tests/browser_architecture.cjs": "451c293f50641263d15862c3100033ca2884281079bf1752afed320cf993f4b6"
+  },
+  "limits": [
+    "Browser checks use synthetic Trace, not real agent repair.",
+    "prefers-reduced-motion hides moving arrows and retains static route direction.",
+    "No backend or isolation code changed; backend regression is historical, not rerun this round."
+  ]
+}

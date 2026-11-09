@@ -40,3 +40,14 @@ test('initial historical load has no transfer animation and playback only consum
  ui.find(n=>n.textContent==='历史回放')[0].onclick();assert.equal(ui.selections.at(-1)[2].length,1);
  ui.find(n=>n.textContent==='暂停回放')[0].onclick();assert.equal(ui.find(n=>n.className?.includes('arch-active')).length,0);ui.cleanup();
 });
+
+test('moving arrow follows the directed edge once and terminal removes the packet',()=>{
+ const ui=setup();ui.render(run,events.slice(0,9));ui.render(run,events);
+ const edge=ui.find(n=>n.attributes.class==='arch-transmission'&&n.attributes['data-from']==='d')[0];
+ const packet=ui.find(n=>n.attributes.class==='arch-packet'&&n.attributes['data-from']==='d')[0];
+ const motion=packet.children.find(n=>n.tagName==='animateMotion');
+ assert.equal(motion.attributes.path,edge.attributes.d);assert.equal(motion.attributes.rotate,'auto');assert.equal(motion.attributes.repeatCount,'1');
+ const completed=[...events,{sequence:11,event:'step_completed',step_id:'l',node_id:'locator',status:'ok'},{sequence:12,event:'step_started',step_id:'back',parent_step_id:'l',node_id:'program_dispatch'}];
+ ui.render(run,completed);assert.ok(ui.find(n=>n.attributes.class==='arch-packet'&&n.attributes['data-from']==='l'&&n.attributes['data-to']==='back').length);
+ ui.render({...run,status:'stopped'},completed);assert.equal(ui.find(n=>n.attributes.class==='arch-packet').length,0);ui.cleanup();
+});
