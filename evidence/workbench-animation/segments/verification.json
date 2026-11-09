@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-09",
+  "scope": "UI offline fixture only; no real model, Docker or candidate tests",
+  "baseline": "9460857",
+  "node_passed": 29,
+  "browser_passed": true,
+  "segments_per_handoff": 3,
+  "seconds_per_segment": 0.54,
+  "stagger_seconds": 0.16,
+  "checks": "Each segment has an arrow, three visible together, forward/return position and heading, arrival opacity zero, terminal removes all, reduced motion hides all",
+  "commands": [
+    "node --test tests/ui_architecture.test.cjs tests/ui_trace.test.cjs tests/ui_budget.test.cjs tests/ui_prototype.test.cjs",
+    "CODE_FIX_ARCH_BROWSER_OUTPUT=runs/directional-segments node tests/browser_architecture.cjs"
+  ],
+  "source_sha256": {
+    "ui/app/architecture.js": "160490e19b283c7d2799e648d49dec9a47c644ebbdcb3edf32d17801e3f6a417",
+    "tests/ui_architecture.test.cjs": "5246bf0de9927d0ce0ed07a243ecd63ee591c3f5e49d719e77c10b360d389403",
+    "tests/browser_architecture.cjs": "2978c9392687ae2278b3ce17e1582716510ca4eaf67cd003bf9c7cea3d2e9082"
+  }
+}

@@ -44,7 +44,9 @@ test('initial historical load has no transfer animation and playback only consum
 test('moving arrow follows the directed edge once and terminal removes the packet',()=>{
  const ui=setup();ui.render(run,events.slice(0,9));ui.render(run,events);
  const edge=ui.find(n=>n.attributes.class==='arch-transmission'&&n.attributes['data-from']==='d')[0];
- const packet=ui.find(n=>n.attributes.class==='arch-packet'&&n.attributes['data-from']==='d')[0];
+ const packets=ui.find(n=>n.attributes.class==='arch-packet'&&n.attributes['data-from']==='d');assert.equal(packets.length,3);
+ for(const p of packets)assert.ok(p.children.some(n=>n.attributes.class==='arch-packet-arrow'));
+ const packet=packets[0];
  const motion=packet.children.find(n=>n.tagName==='animateMotion');
  assert.equal(motion.attributes.path,edge.attributes.d);assert.equal(motion.attributes.rotate,'auto');assert.equal(motion.attributes.repeatCount,'1');
  const completed=[...events,{sequence:11,event:'step_completed',step_id:'l',node_id:'locator',status:'ok'},{sequence:12,event:'step_started',step_id:'back',parent_step_id:'l',node_id:'program_dispatch'}];

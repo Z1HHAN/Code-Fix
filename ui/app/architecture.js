@@ -41,11 +41,13 @@
           // Preserve elapsed time if another new event rebuilds this SVG during a handoff.
           const key=attrs['data-from']?attrs['data-from']+'>'+attrs['data-to']:attrs['data-evidence-step']?'evidence:'+attrs['data-evidence-step']:'entry';
           const elapsed=replayTick?0:Math.max(0,1300-((transfers.get(key)||Date.now()+1300)-Date.now()));
-          const begin='-'+(elapsed/1000)+'s',packet=svg('g');packet.setAttribute('class','arch-packet');packet.setAttribute('opacity','0');packet.setAttribute('aria-hidden','true');
+          for(let segment=0;segment<3;segment++){
+          const begin=((segment*160-elapsed)/1000)+'s',packet=svg('g');packet.setAttribute('data-segment',String(segment));packet.setAttribute('class','arch-packet');packet.setAttribute('opacity','0');packet.setAttribute('aria-hidden','true');
           for(const [k,v]of Object.entries(attrs))packet.setAttribute(k,v);
-          const shape=svg('path');shape.setAttribute('d','M-30 -2.5H-10V-7L0 0L-10 7V2.5H-30Z');shape.setAttribute('class','arch-packet-arrow');packet.append(shape);
-          const motion=svg('animateMotion');motion.setAttribute('path',d);motion.setAttribute('rotate','auto');motion.setAttribute('dur','0.8s');motion.setAttribute('begin',begin);motion.setAttribute('repeatCount','1');motion.setAttribute('fill','freeze');motion.setAttribute('calcMode','paced');packet.append(motion);
-          const visibility=svg('animate');visibility.setAttribute('attributeName','opacity');visibility.setAttribute('values','0;1;1;0');visibility.setAttribute('keyTimes','0;0.06;0.9;1');visibility.setAttribute('dur','0.8s');visibility.setAttribute('begin',begin);visibility.setAttribute('fill','freeze');packet.append(visibility);links.append(packet);
+          const shape=svg('path');shape.setAttribute('d','M-16 -2H-7V-5L0 0L-7 5V2H-16Z');shape.setAttribute('class','arch-packet-arrow');packet.append(shape);
+          const motion=svg('animateMotion');motion.setAttribute('path',d);motion.setAttribute('rotate','auto');motion.setAttribute('dur','0.54s');motion.setAttribute('begin',begin);motion.setAttribute('repeatCount','1');motion.setAttribute('fill','freeze');motion.setAttribute('calcMode','paced');packet.append(motion);
+          const visibility=svg('animate');visibility.setAttribute('attributeName','opacity');visibility.setAttribute('values','0;1;1;0');visibility.setAttribute('keyTimes','0;0.06;0.9;1');visibility.setAttribute('dur','0.54s');visibility.setAttribute('begin',begin);visibility.setAttribute('fill','freeze');packet.append(visibility);links.append(packet);
+          }
         }
         return n;
       }
