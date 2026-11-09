@@ -1,0 +1,466 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-09T17:45:15.083676Z",
+  "repository": {
+    "name": "Z1HHAN/Code-Fix",
+    "branch": "codex/contest-strategies-config-comparison",
+    "frozen_feature_commit": "ebc7450973081fe95d88a777f49f26633aa5d851",
+    "worktree_clean_before_collection": true,
+    "main_not_touched": true,
+    "note": "本轮功能未合入 main；本提交只新增证据与文档，不改冻结功能代码",
+    "base_commit": "ebc7450973081fe95d88a777f49f26633aa5d851",
+    "branch_head_before_archive": "a70fa55938bb061e04b7d8f85731988f049d2db3"
+  },
+  "docker": {
+    "server_version": "29.9.2",
+    "ostype": "linux",
+    "architecture": "x86_64",
+    "kernel": "6.18.54.1-microsoft-standard-WSL2",
+    "engine_id": "9a5e7540-074f-4549-9e6a-02f78d140e9a",
+    "backend": "Docker Desktop / WSL2 Linux containers"
+  },
+  "images": {
+    "runner": {
+      "id": "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+      "created": "2026-11-04T17:14:14.806743013Z",
+      "platform": "linux/amd64",
+      "reverified_with": "docker image inspect"
+    },
+    "evidence": {
+      "id": "sha256:6cceb56a1ad064ab7f3e3c092c42bc1698802160b62bd0382a5e055cfa639c2a",
+      "created": "2026-11-04T16:24:08.258309924Z",
+      "platform": "linux/amd64",
+      "reverified_with": "docker image inspect"
+    }
+  },
+  "runtime": {
+    "container_python": "3.14.10",
+    "host_python": "3.13.0",
+    "note": "候选执行一律在 Docker 镜像内；宿主 Python 仅启动本地工作台"
+  },
+  "model": {
+    "profile_ref": "aliyun_maas_ds_v41_flash",
+    "provider": "aliyun_maas",
+    "model": "deepseek-v4.1-flash-1017",
+    "price_version": "operator-delegated-estimate-2026-11-06;aliyun-bailian-ds-class-peak",
+    "pricing_cny_per_million_tokens": {
+      "input": 2,
+      "output": 8,
+      "cache_hit": 0.04,
+      "off_peak_input": 1,
+      "off_peak_output": 4
+    },
+    "max_input_tokens": 16000,
+    "max_output_tokens": 8192,
+    "billable_output_tokens": 8192,
+    "credentials": "阿里云 key 以 DPAPI 保存，仅注入进程环境变量；证据包不含明文或指纹"
+  },
+  "task_parameters": {
+    "max_rounds": 3,
+    "max_calls": 12,
+    "total_seconds": 300,
+    "project_limits": {
+      "max_calls": 30,
+      "max_tool_calls": 5,
+      "total_seconds": 1800
+    }
+  },
+  "configs": {
+    "dynamic": {
+      "config_id": "cfg-667da81832b592fb4f808b87e2c33c69b7bf5374c3d37ed9ad9e7e5f1419a671",
+      "strategy": "dynamic",
+      "sha256_of_file": "dcdcf64394c5df8b80e6b14362282f21f4bdedd4baaf0df40b3dc4c44d365400"
+    },
+    "fixed": {
+      "config_id": "cfg-6a8269e35bd95a18107ad4d7d3d9a3152ac7d70fc1215a682593b89a7ab136a2",
+      "strategy": "fixed",
+      "sha256_of_file": "14b875422149469f1e358e1dd24619405e533227fb33f3d62589997096a3d8f4"
+    },
+    "identical_except_strategy": true,
+    "roles_equal": true,
+    "prompts_equal": true,
+    "profiles_equal": true
+  },
+  "runs": [
+    {
+      "run_id": "run-fc80fc68ed934a4d9b7de6d0d36f9b91",
+      "project": "qb-get_factors",
+      "strategy": "dynamic",
+      "task_mode": "repair",
+      "status": "success",
+      "final_result": "passed",
+      "dev_result": "passed",
+      "rounds_used": 1,
+      "model_calls": 3,
+      "tool_calls": 3,
+      "model_api_called": true,
+      "isolation_ready": true,
+      "evidence_matches_current_version": true,
+      "code_version": "sha256:c8fcd46111881cb2689c484f421eec32cea0d8f67e0b5d142ecd739f59f503b8",
+      "test_suite_version": "sha256:66eda806f5cbc19e9767e5a53b7ff873199a0f22ba1f8346cca43651f1245394",
+      "config_id": "cfg-667da81832b592fb4f808b87e2c33c69b7bf5374c3d37ed9ad9e7e5f1419a671",
+      "created_at": "2026-11-09T17:24:35.716851+00:00",
+      "updated_at": "2026-11-09T17:25:27.400280+00:00",
+      "amount_cny": "0.02081",
+      "cost_status": "estimated",
+      "ledger_after_cny": "0.971776",
+      "evidence_dir": "runs/run-fc80fc68ed934a4d9b7de6d0d36f9b91",
+      "ledger_calls": 3,
+      "ledger_call_statuses": [
+        "known"
+      ],
+      "ledger_actual_cny": "0.020810"
+    },
+    {
+      "run_id": "run-24ee936a26144ebdabc74d62f2d256c1",
+      "project": "qb-get_factors",
+      "strategy": "fixed",
+      "task_mode": "repair",
+      "status": "success",
+      "final_result": "passed",
+      "dev_result": "passed",
+      "rounds_used": 1,
+      "model_calls": 3,
+      "tool_calls": 3,
+      "model_api_called": true,
+      "isolation_ready": true,
+      "evidence_matches_current_version": true,
+      "code_version": "sha256:030c6e7d20286e03443fc0c02e4916021813692d95ce9a5b240065a346231c0a",
+      "test_suite_version": "sha256:66eda806f5cbc19e9767e5a53b7ff873199a0f22ba1f8346cca43651f1245394",
+      "config_id": "cfg-6a8269e35bd95a18107ad4d7d3d9a3152ac7d70fc1215a682593b89a7ab136a2",
+      "created_at": "2026-11-09T17:26:27.431103+00:00",
+      "updated_at": "2026-11-09T17:27:12.851294+00:00",
+      "amount_cny": "0.02366",
+      "cost_status": "estimated",
+      "ledger_after_cny": "0.995436",
+      "evidence_dir": "runs/run-24ee936a26144ebdabc74d62f2d256c1",
+      "ledger_calls": 3,
+      "ledger_call_statuses": [
+        "known"
+      ],
+      "ledger_actual_cny": "0.023660"
+    },
+    {
+      "run_id": "run-0847d6ab11644e69aeb21d23d1e68871",
+      "project": "qb-gcd",
+      "strategy": "dynamic",
+      "task_mode": "repair",
+      "status": "success",
+      "final_result": "passed",
+      "dev_result": "passed",
+      "rounds_used": 1,
+      "model_calls": 3,
+      "tool_calls": 3,
+      "model_api_called": true,
+      "isolation_ready": true,
+      "evidence_matches_current_version": true,
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "config_id": "cfg-667da81832b592fb4f808b87e2c33c69b7bf5374c3d37ed9ad9e7e5f1419a671",
+      "created_at": "2026-11-09T17:28:55.260834+00:00",
+      "updated_at": "2026-11-09T17:29:42.882665+00:00",
+      "amount_cny": "0.028106",
+      "cost_status": "estimated",
+      "ledger_after_cny": "1.023542",
+      "evidence_dir": "runs/run-0847d6ab11644e69aeb21d23d1e68871",
+      "ledger_calls": 3,
+      "ledger_call_statuses": [
+        "known"
+      ],
+      "ledger_actual_cny": "0.028106"
+    },
+    {
+      "run_id": "run-2027f3554be444788651e7a96a64d2fd",
+      "project": "qb-gcd",
+      "strategy": "fixed",
+      "task_mode": "repair",
+      "status": "success",
+      "final_result": "passed",
+      "dev_result": "passed",
+      "rounds_used": 1,
+      "model_calls": 3,
+      "tool_calls": 3,
+      "model_api_called": true,
+      "isolation_ready": true,
+      "evidence_matches_current_version": true,
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "config_id": "cfg-6a8269e35bd95a18107ad4d7d3d9a3152ac7d70fc1215a682593b89a7ab136a2",
+      "created_at": "2026-11-09T17:29:45.488607+00:00",
+      "updated_at": "2026-11-09T17:30:26.918577+00:00",
+      "amount_cny": "0.023506",
+      "cost_status": "estimated",
+      "ledger_after_cny": "1.047048",
+      "evidence_dir": "runs/run-2027f3554be444788651e7a96a64d2fd",
+      "ledger_calls": 3,
+      "ledger_call_statuses": [
+        "known"
+      ],
+      "ledger_actual_cny": "0.023506"
+    },
+    {
+      "run_id": "run-e9993ae6676543149fd36e08a8bc89f2",
+      "project": "qb-max_sublist_sum",
+      "strategy": "dynamic",
+      "task_mode": "repair",
+      "status": "success",
+      "final_result": "passed",
+      "dev_result": "passed",
+      "rounds_used": 1,
+      "model_calls": 3,
+      "tool_calls": 3,
+      "model_api_called": true,
+      "isolation_ready": true,
+      "evidence_matches_current_version": true,
+      "code_version": "sha256:a672e38a77864ce36b9674eab68ac708670ec24073604c6b0d52c304ad81ac54",
+      "test_suite_version": "sha256:5ef4f028924aa0ae998a18febe0c41839fbc64650814eee28ec895362370db43",
+      "config_id": "cfg-667da81832b592fb4f808b87e2c33c69b7bf5374c3d37ed9ad9e7e5f1419a671",
+      "created_at": "2026-11-09T17:30:35.740806+00:00",
+      "updated_at": "2026-11-09T17:31:21.178987+00:00",
+      "amount_cny": "0.025864",
+      "cost_status": "estimated",
+      "ledger_after_cny": "1.072912",
+      "evidence_dir": "runs/run-e9993ae6676543149fd36e08a8bc89f2",
+      "ledger_calls": 3,
+      "ledger_call_statuses": [
+        "known"
+      ],
+      "ledger_actual_cny": "0.025864"
+    },
+    {
+      "run_id": "run-0ec9da90642c4c5784da4734b8f69270",
+      "project": "qb-max_sublist_sum",
+      "strategy": "fixed",
+      "task_mode": "repair",
+      "status": "success",
+      "final_result": "passed",
+      "dev_result": "passed",
+      "rounds_used": 1,
+      "model_calls": 3,
+      "tool_calls": 3,
+      "model_api_called": true,
+      "isolation_ready": true,
+      "evidence_matches_current_version": true,
+      "code_version": "sha256:a672e38a77864ce36b9674eab68ac708670ec24073604c6b0d52c304ad81ac54",
+      "test_suite_version": "sha256:5ef4f028924aa0ae998a18febe0c41839fbc64650814eee28ec895362370db43",
+      "config_id": "cfg-6a8269e35bd95a18107ad4d7d3d9a3152ac7d70fc1215a682593b89a7ab136a2",
+      "created_at": "2026-11-09T17:31:25.968015+00:00",
+      "updated_at": "2026-11-09T17:32:12.776620+00:00",
+      "amount_cny": "0.026082",
+      "cost_status": "estimated",
+      "ledger_after_cny": "1.098994",
+      "evidence_dir": "runs/run-0ec9da90642c4c5784da4734b8f69270",
+      "ledger_calls": 3,
+      "ledger_call_statuses": [
+        "known"
+      ],
+      "ledger_actual_cny": "0.026082"
+    }
+  ],
+  "comparison": {
+    "comparison_id": "cmp-d09069c8a415e694f921b145c9c00daf039df7c34698d9e9baf3d1003a7008ff",
+    "scope": "formal",
+    "summary": {
+      "fixed": {
+        "planned": 3,
+        "ran": 3,
+        "executed": 3,
+        "success": 3,
+        "failed": 0,
+        "blocked": 0,
+        "not_run": 0,
+        "success_rate_all": 1.0,
+        "success_rate_executed": 1.0,
+        "candidate_rounds": 3,
+        "requests": 9,
+        "cost": {
+          "cny": {
+            "known_subtotal": "0.073248",
+            "unknown_runs": 0,
+            "total": "0.073248"
+          },
+          "usd": {
+            "known_subtotal": "0",
+            "unknown_runs": 0,
+            "total": null
+          }
+        }
+      },
+      "dynamic": {
+        "planned": 3,
+        "ran": 3,
+        "executed": 3,
+        "success": 3,
+        "failed": 0,
+        "blocked": 0,
+        "not_run": 0,
+        "success_rate_all": 1.0,
+        "success_rate_executed": 1.0,
+        "candidate_rounds": 3,
+        "requests": 9,
+        "cost": {
+          "cny": {
+            "known_subtotal": "0.074780",
+            "unknown_runs": 0,
+            "total": "0.074780"
+          },
+          "usd": {
+            "known_subtotal": "0",
+            "unknown_runs": 0,
+            "total": null
+          }
+        }
+      }
+    },
+    "exports": [
+      "comparison/comparison.json",
+      "comparison/comparison.csv",
+      "comparison/comparison.png"
+    ]
+  },
+  "isolation_audit": {
+    "evidence_dir": "isolation/docker-repair-132b0464623c",
+    "status": "passed",
+    "model_api_called": false,
+    "git_commit": "ebc7450973081fe95d88a777f49f26633aa5d851",
+    "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+    "controls": {
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true,
+      "CapDrop": [
+        "ALL"
+      ],
+      "SecurityOpt": [
+        "no-new-privileges"
+      ],
+      "Memory": 268435456,
+      "NanoCpus": 1000000000,
+      "PidsLimit": 64,
+      "Ulimits": [
+        {
+          "Name": "nofile",
+          "Hard": 128,
+          "Soft": 128
+        }
+      ],
+      "Tmpfs": {
+        "/tmp": "rw,noexec,nosuid,size=67108864"
+      }
+    },
+    "cases": [
+      {
+        "name": "normal",
+        "check_passed": true,
+        "status": "ok",
+        "verification_status": "passed"
+      },
+      {
+        "name": "fake_stdout",
+        "check_passed": true,
+        "status": "failed",
+        "verification_status": "failed"
+      },
+      {
+        "name": "audit_overflow",
+        "check_passed": true,
+        "status": "failed",
+        "verification_status": "inconclusive"
+      },
+      {
+        "name": "early_violation_then_overflow",
+        "check_passed": true,
+        "status": "failed",
+        "verification_status": "inconclusive"
+      },
+      {
+        "name": "delayed_report_write",
+        "check_passed": true,
+        "status": "failed",
+        "verification_status": "failed"
+      }
+    ]
+  },
+  "baseline": {
+    "run_id": "run-ec65ae064ecb4a889236b3891bd99112",
+    "project": "qb-get_factors",
+    "status": "stopped",
+    "final_result": "not_run",
+    "dev_result": "failed",
+    "model_api_called": false,
+    "model_calls": 0,
+    "failure_class": "assertion_failed",
+    "exit_code": 1,
+    "counts": {
+      "collected": 11,
+      "passed": 1,
+      "failed": 10,
+      "errors": 0,
+      "skipped": 0
+    },
+    "code_version": "sha256:84c68b2af81a5aa6169f620edf255182f046371307c60634a565771ca6ab54be",
+    "test_suite_version": "sha256:66eda806f5cbc19e9767e5a53b7ff873199a0f22ba1f8346cca43651f1245394",
+    "evidence_dir": "baseline/run-ec65ae064ecb4a889236b3891bd99112"
+  },
+  "ledger": {
+    "db": "runs/platform/model-ledger.sqlite3",
+    "reused_existing": true,
+    "new_ledger_created": false,
+    "before_cny": "0.950966",
+    "delta_cny": "0.148028",
+    "after_cny": "1.098994",
+    "unsettled_calls": 0,
+    "reserved_cny": "0",
+    "authorized_cny": "16",
+    "remaining_cny": "14.901006",
+    "db_total_actual_cny": "1.098994",
+    "db_unsettled_reserved_cny": "0.000000",
+    "per_run": [
+      {
+        "run_id": "run-fc80fc68ed934a4d9b7de6d0d36f9b91",
+        "amount_cny": "0.02081",
+        "ledger_actual_cny": "0.020810",
+        "ledger_after_cny": "0.971776"
+      },
+      {
+        "run_id": "run-24ee936a26144ebdabc74d62f2d256c1",
+        "amount_cny": "0.02366",
+        "ledger_actual_cny": "0.023660",
+        "ledger_after_cny": "0.995436"
+      },
+      {
+        "run_id": "run-0847d6ab11644e69aeb21d23d1e68871",
+        "amount_cny": "0.028106",
+        "ledger_actual_cny": "0.028106",
+        "ledger_after_cny": "1.023542"
+      },
+      {
+        "run_id": "run-2027f3554be444788651e7a96a64d2fd",
+        "amount_cny": "0.023506",
+        "ledger_actual_cny": "0.023506",
+        "ledger_after_cny": "1.047048"
+      },
+      {
+        "run_id": "run-e9993ae6676543149fd36e08a8bc89f2",
+        "amount_cny": "0.025864",
+        "ledger_actual_cny": "0.025864",
+        "ledger_after_cny": "1.072912"
+      },
+      {
+        "run_id": "run-0ec9da90642c4c5784da4734b8f69270",
+        "amount_cny": "0.026082",
+        "ledger_actual_cny": "0.026082",
+        "ledger_after_cny": "1.098994"
+      }
+    ],
+    "note": "项目账本估算，不等于云控制台真实余额"
+  },
+  "not_run": [],
+  "blockers": [],
+  "limitations": [
+    "6 次运行均为 1 轮通过，样本小、题目难度低，不能据此宣称两种策略成功率等价",
+    "隔离为 Linux 容器级隔离，非 VM 等价认证",
+    "qb-gcd / qb-max_sublist_sum 的项目清单 qualification_status 未回写，仍为 pending_docker_collection_and_baseline",
+    "11 道此前被阻断的 QuixBugs 题未补适配器，不在本轮范围",
+    "费用为估算值，平台真实账单以控制台为准"
+  ]
+}
