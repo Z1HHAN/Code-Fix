@@ -39,7 +39,7 @@ def string_list(value, name):
 
 
 class RoleConfig:
-    def __init__(self, root, snapshot=None):
+    def __init__(self, root, snapshot=None, *, role_overrides=None):
         self.root = Path(root)
         document = read_json(checked_file(root, 'configs/agents.json'))
         data = document.get('runtime_v3') if snapshot is None else snapshot
@@ -95,6 +95,13 @@ class RoleConfig:
             raise ConfigError('生产角色集合必须完整；停用请设置enabled=false')
         self.snapshot = data
         self.sha256 = digest(data)
+        self.role_overrides = {}
+        if role_overrides is not None:
+            from .role_overrides import validate_overrides
+            from .model_profiles import load_profiles
+            bindings = {role: data['models'][agent['model_ref']]['profile_ref'] for role, agent in self.agents.items()}
+            self.role_overrides = validate_overrides(role_overrides, bindings, load_profiles(root))
+            self.sha256 = digest({'roles': data, 'role_overrides': self.role_overrides})
 
     def require(self, role):
         agent = self.agents.get(role)
@@ -110,7 +117,8 @@ class RoleConfig:
             self.require(role)
 
     def provenance(self, role):
-        return {'protocol': PROTOCOL, 'parser_version': PARSER_VERSION,
+        return {'role_override': self.role_overrides.get(role, {}), 'role_overrides_sha256': digest(self.role_overrides),
+                'protocol': PROTOCOL, 'parser_version': PARSER_VERSION,
                 'config_version': self.snapshot['config_version'],
                 'effective_config': self.snapshot, 'config_sha256': self.sha256,
                 'prompt_ref': self.agents[role]['prompt_ref'],

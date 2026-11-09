@@ -74,6 +74,7 @@ class WorkflowRun:
         self.run_id = run_id
         self.engine = None
         self.task = self.store.get(self.run_id)['task']
+        self.strategy = self.task.get('strategy', 'dynamic')
         self.definition = get_task(self.task['project'])
         self.source = self.definition.source
         self.runner = self.runner or SplitDockerRunner(self.task['project'])
@@ -85,6 +86,7 @@ class WorkflowRun:
         self.final = {'final_result': 'not_run', 'dev_result': 'not_run', 'rounds_used': 0,
                  'model_calls': 0, 'tool_calls': 0, 'model_api_called': False,
                  'mode': getattr(self.model, 'mode', 'live'), 'isolation_ready': False,
+                 'strategy': self.strategy,
                  'project': self.task['project'], 'test_suite_version': self.definition.summary()['test_suite_version']}
 
     def cancelled(self):
@@ -284,6 +286,8 @@ class WorkflowRun:
         else:
             config = RoleConfig(ROOT)
         config.preflight()
+        from .experiment_identity import freeze
+        self.trace.write('trace/experiment.json', freeze(ROOT, self.task, self.definition, config, self.runner, self.model))
         resolved = None
         blockers = []
         if self.model is None:
@@ -307,6 +311,7 @@ class WorkflowRun:
         self.final['mode'] = getattr(self.model, 'mode', 'unknown')
         rules = read_json(ROOT / 'configs/decision_rules.json')
         self.trace.write('trace/configuration.json', {'roles': config.snapshot, 'config_sha256': config.sha256,
+                    'strategy': self.strategy, 'role_overrides': config.role_overrides,
                     'runtime_limits': read_json(ROOT / 'configs/runtime_limits.json'),
                     'bindings': {role: self.model.binding(role) for role in config.agents}
                     if hasattr(self.model, 'binding') else {'mode': getattr(self.model, 'mode', 'unknown')},
@@ -377,15 +382,26 @@ class WorkflowRun:
             return result, folder, self.finish('paused' if decision['action'] == 'pause' else 'stopped', decision['reason'])
         # Advisory model calls must not consume the last chance to
         # validate an already passing candidate with the tool executor.
+        advice, skipped = None, None
         if decision['action'] == 'final_check' and self.task['max_calls']-self.model_calls < 2:
-            advice = {'action': 'final_check', 'reason': '开发通过；预算不足时跳过非必需模型建议'}
+            skipped = '开发通过；剩余调用不足，跳过非必需分析与建议，优先干净复验'
+        elif self.strategy == 'dynamic' and result['failure_class'] == 'syntax_error':
+            skipped = '动态策略：语法失败直接重修，跳过检测与模型调度建议'
         else:
             detector = self.call('detector', ev, round_number)
             advice = self.call('scheduler', ev, round_number, detector)
-        effective = advice['action'] if advice['action'] in {'pause', 'stop'} else decision['action']
-        reason = advice['reason'] if effective in {'pause', 'stop'} else decision['reason']
-        override = ('模型要求保守停止，程序允许停止；不采纳推进动作'
-                    if effective in {'pause', 'stop'} else '模型建议不能覆盖工具证据与强制规则') if advice['action'] != decision['action'] else None
+        planned = 'repair' if self.strategy == 'fixed' and decision['action'] == 'locate' else decision['action']
+        effective = advice['action'] if advice and advice['action'] in {'pause', 'stop'} else planned
+        reason = advice['reason'] if advice and effective in {'pause', 'stop'} else decision['reason']
+        overrides = []
+        if advice and advice['action'] != planned:
+            overrides.append('模型要求保守停止，程序允许停止；不采纳推进动作'
+                             if effective in {'pause', 'stop'} else '模型建议不能覆盖工具证据与强制规则')
+        if planned != decision['action']:
+            overrides.append('固定策略不追加定位员；保留共同保护，失败时下一轮按固定顺序重修')
+        if skipped:
+            overrides.append(skipped)
+        override = '；'.join(overrides) or None
         if effective == 'locate' and self.model_calls >= self.task['max_calls']:
             effective, reason = 'stop', '模型调用次数到达上限'
             override = '定位需要新增模型调用；剩余调用预算不足，停止调度'
@@ -396,7 +412,7 @@ class WorkflowRun:
                        suite_version=self.final['test_suite_version'], counters=self.counters(), round_number=round_number)
         if self.final.get('guard_id') == 'V3_MODEL_CALL_LIMIT':
             return result, folder, self.finish('blocked', reason)
-        if advice['action'] in {'pause', 'stop'}:
+        if advice and advice['action'] in {'pause', 'stop'}:
             return result, folder, self.finish('paused' if advice['action'] == 'pause' else 'stopped', advice['reason'])
         if decision['action'] == 'final_check':
             return result, folder, self.final_check()

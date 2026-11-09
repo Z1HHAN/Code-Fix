@@ -1,0 +1,13 @@
+{
+  "scope": "local-browser-no-model-no-docker",
+  "run_id": "run-ab4fe1153a7a4b93be2d30f4ac86ce7d",
+  "config_id": "cfg-79d2b411cbd8b0b59f2a6ca4a799decbf2bb86632bbf44a4fd6f8bf1f5c63813",
+  "passed": true,
+  "errors": [],
+  "writes": [
+    "http://127.0.0.1:8783/api/v3/configurations/validate",
+    "http://127.0.0.1:8783/api/v3/configurations",
+    "http://127.0.0.1:8783/api/v3/tasks",
+    "http://127.0.0.1:8783/api/v3/comparisons"
+  ]
+}

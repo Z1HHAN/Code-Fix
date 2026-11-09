@@ -46,7 +46,8 @@ def create_app(root=None):
             if not provided.isascii() or not secrets.compare_digest(provided, token):
                 return JSONResponse({'detail': '会话令牌无效；刷新页面后重试'}, status_code=403)
             size = request.headers.get('content-length')
-            if size and (not size.isdecimal() or int(size) > 8192):
+            limit = 131072 if request.url.path in {'/api/v3/configurations', '/api/v3/configurations/validate'} else 8192
+            if size and (not size.isdecimal() or int(size) > limit):
                 return JSONResponse({'detail': '请求体过大'}, status_code=413)
         response = await call_next(request)
         response.headers['X-Content-Type-Options'] = 'nosniff'
@@ -87,6 +88,35 @@ def create_app(root=None):
 
     from .configuration import ConfigurationStore
     configurations = ConfigurationStore(service.store)
+    from .comparisons import ComparisonStore, export_csv
+    comparisons = ComparisonStore(service.store)
+
+    @app.get('/api/v3/comparisons')
+    def comparison_list():
+        return comparisons.list()
+
+    @app.post('/api/v3/comparisons', status_code=201)
+    async def comparison_create(request: Request):
+        import json
+        try:
+            value = json.loads(await limited_body(request, 8192))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            raise HTTPException(422, '无效JSON') from None
+        return comparisons.create(value)
+
+    @app.get('/api/v3/comparisons/{comparison_id}')
+    def comparison_get(comparison_id: str):
+        return comparisons.get(comparison_id)
+
+    @app.get('/api/v3/comparisons/{comparison_id}/export')
+    def comparison_export(comparison_id: str, format: str = 'json'):
+        import json
+        data = comparisons.get(comparison_id)
+        if format not in {'json', 'csv'}:
+            raise HTTPException(422, '服务端提供json/csv；PNG由页面使用同一快照导出')
+        content = export_csv(data) if format == 'csv' else json.dumps(data, ensure_ascii=False, indent=2)
+        return Response(content, media_type='text/csv' if format == 'csv' else 'application/json',
+                        headers={'Content-Disposition': f'attachment; filename="{comparison_id}.{format}"'})
 
     @app.get('/api/v3/configuration/catalog')
     def configuration_catalog():
@@ -102,7 +132,7 @@ def create_app(root=None):
         import json
         from .config import ConfigError
         try:
-            value = json.loads(await limited_body(request, 8192))
+            value = json.loads(await limited_body(request, 131072))
             return configurations.validate(value) if request.url.path.endswith('/validate') else configurations.save(value)
         except (ValueError, ConfigError, UnicodeDecodeError) as exc:
             raise HTTPException(422, str(exc)) from None

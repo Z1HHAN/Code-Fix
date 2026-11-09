@@ -103,12 +103,19 @@ class AgentGateway:
         if context:
             material['readonly_code'] = context
         messages = [{'role': 'system', 'content': prompt}, {'role': 'user', 'content': json.dumps(material, ensure_ascii=False)}]
+        override = self.config.role_overrides.get(role, {})
+        if override.get('task_instruction'):
+            material['role_task_instruction'] = override['task_instruction']
+            messages[1]['content'] = json.dumps(material, ensure_ascii=False)
         import uuid
         call_id = 'm-' + uuid.uuid4().hex
         folder = self.store.directory(run_id) / 'calls' / call_id
         folder.mkdir(parents=True)
         safe = getattr(self.model, 'redact', lambda x: x)
         provenance = self.config.provenance(role)
+        from .role_config import digest
+        provenance['messages_sha256'] = digest(messages)
+        provenance['task_instruction_sha256'] = digest(override.get('task_instruction', ''))
         provenance['model_binding'] = {'model_ref': agent['model_ref'], **self.config.snapshot['models'][agent['model_ref']],
                                        'mode': getattr(self.model, 'mode', 'unknown'),
                                        'model': getattr(getattr(self.model, 'settings', None), 'model', None)}

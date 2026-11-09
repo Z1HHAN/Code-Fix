@@ -10,7 +10,7 @@ window.CodeFixConfig = (() => {
     for(const b of document.querySelectorAll('[data-config-tab]'))b.setAttribute('aria-selected',String(b.dataset.configTab===name));
     for(const n of ['roles','conditions','snapshot'])byId('config-'+n).hidden=n!==name;
   }
-  function dirty(){revision++;saved=null;key=null;byId('use-saved-config').checked=false;byId('use-saved-config').disabled=true;display('task-config-label','尚未保存');display('config-draft-id','未保存');display('config-message','草稿已修改，请重新校验并保存。');syncTaskForm();}
+  function dirty(){revision++;saved=null;key=null;byId('use-saved-config').checked=false;byId('use-saved-config').disabled=true;display('task-config-label','尚未保存');display('config-draft-id','未保存');display('config-message','草稿已修改，请重新校验并保存。');display('effective-preview','草稿已修改，原预览失效。');syncTaskForm();}
   function selectProfiles(role,accountSelect,modelSelect,preferred){
     const rows=catalog.profiles.filter(p=>p.account===accountSelect.value);
     modelSelect.replaceChildren(...rows.map(p=>{const o=element('option',p.model);o.value=p.profile_ref;return o;}));
@@ -18,7 +18,26 @@ window.CodeFixConfig = (() => {
   }
   function draft(){
     const bindings={};for(const role of Object.keys(roles))bindings[role]=byId('binding-'+role).value;
-    return {bindings,strategy:byId('config-strategy').value,parameters:{max_rounds:Number(byId('config-rounds').value),max_calls:Number(byId('config-calls').value),total_seconds:Number(byId('config-seconds').value)}};
+    const role_overrides={};for(const role of Object.keys(roles)){const task_instruction=byId('instruction-'+role).value;const generation={};for(const k of ['max_output_tokens','temperature','top_p']){const n=byId('parameter-'+role+'-'+k);if(!n.disabled&&n.value!=='')generation[k]=Number(n.value);}if(task_instruction||Object.keys(generation).length)role_overrides[role]={task_instruction,generation};}
+    return {bindings,...(Object.keys(role_overrides).length?{role_overrides}:{}),strategy:byId('config-strategy').value,parameters:{max_rounds:Number(byId('config-rounds').value),max_calls:Number(byId('config-calls').value),total_seconds:Number(byId('config-seconds').value)}};
+  }
+  function roleEditor(role,name){
+    const block=element('fieldset',null,'role-editor');block.append(element('legend',name));
+    const label=element('label','独立任务指令（最多4000字符）','field'),area=element('textarea');area.id='instruction-'+role;area.maxLength=4000;area.rows=3;area.oninput=dirty;label.append(area);block.append(label);
+    const fields=element('div',null,'three-col');
+    for(const [key,title]of Object.entries({max_output_tokens:'可见输出上限',temperature:'temperature',top_p:'top_p'})){
+      const label=element('label',title,'field'),input=element('input');input.type='number';input.id='parameter-'+role+'-'+key;input.oninput=dirty;
+      const note=element('small');note.id='capability-'+role+'-'+key;label.append(input,note);fields.append(label);
+    }block.append(fields);byId('role-editors').append(block);
+  }
+  function updateCapabilities(role){
+    const p=catalog.profiles.find(p=>p.profile_ref===byId('binding-'+role).value);
+    for(const key of ['max_output_tokens','temperature','top_p']){
+      const cap=p?.capabilities?.[key],input=byId('parameter-'+role+'-'+key);input.value='';input.disabled=!cap?.supported;
+      input.step=key==='max_output_tokens'?'1':'0.01';input.min=cap?.minimum??'';input.max=cap?.maximum??'';
+      input.placeholder=cap?.default==null?'沿用服务商默认':String(cap.default);
+      display('capability-'+role+'-'+key,cap?.supported?`${cap.minimum}–${cap.maximum}；${cap.reason}`:cap?.reason||'能力未登记');
+    }
   }
   async function save(validateOnly){
     if(loading||!catalog)return;loading=true;const version=revision;
@@ -26,7 +45,7 @@ window.CodeFixConfig = (() => {
     try{
       const data=await(await api(validateOnly?'/configurations/validate':'/configurations',{method:'POST',body:JSON.stringify(draft())})).json();
       if(version!==revision){display('config-message','草稿已变更，本次响应不应用；请重新保存。');return;}
-      display('config-message',data.note);
+      display('config-message',data.note);display('effective-preview',data);
       if(!validateOnly){saved=data;display('config-draft-id',data.config_id);byId('use-saved-config').disabled=false;byId('use-saved-config').checked=true;display('task-config-label',data.config_id.slice(0,16)+'…');display('config-message',data.note+'。已选用于下次新建任务；创建不会自动启动。');syncTaskForm();}
     }catch(error){display('config-message','未保存：'+error.message);}
     finally{loading=false;byId('validate-config').disabled=byId('save-config').disabled=false;}
@@ -83,13 +102,13 @@ window.CodeFixConfig = (() => {
     if(snapshotId===id)return;snapshotId=id;
     display('saved-snapshot',id?'读取保存配置中…':'历史未关联保存配置；不能按当前默认值补填。');
     if(!id)return;
-    try{const data=await(await api('/configurations/'+encodeURIComponent(id))).json();if(snapshotId===id)display('saved-snapshot',{config_id:data.config_id,created_at:data.created_at,bindings:data.bindings,parameters:data.parameters,strategy:data.strategy,profiles_sha256:data.profiles_sha256});}
+    try{const data=await(await api('/configurations/'+encodeURIComponent(id))).json();if(snapshotId===id)display('saved-snapshot',{config_id:data.config_id,created_at:data.created_at,bindings:data.bindings,parameters:data.parameters,strategy:data.strategy,role_overrides:data.role_overrides||'历史未记录',effective_roles:data.effective_roles||'历史未记录',profiles_sha256:data.profiles_sha256});}
     catch(e){if(snapshotId===id){snapshotId=null;display('saved-snapshot','未能读取保存配置：'+e.message);}}
   }
   function apply(task){
     if(!byId('use-saved-config').checked)return;
     if(!saved)throw new Error('配置已修改或尚未保存，请重新保存。');
-    Object.assign(task,saved.parameters,{config_id:saved.config_id});
+    Object.assign(task,saved.parameters,{config_id:saved.config_id,strategy:task.mode==='repair'?saved.strategy:'dynamic'});
   }
   async function init(){
     for(const b of document.querySelectorAll('[data-config-tab]'))b.onclick=()=>{tab(b.dataset.configTab);if(b.dataset.configTab==='conditions')conditions();};
@@ -108,8 +127,8 @@ window.CodeFixConfig = (() => {
         const unique=[...new Set(catalog.profiles.map(p=>p.account))];
         for(const account of unique){const p=catalog.profiles.find(p=>p.account===account),o=element('option',accountName(p));o.value=account;a.append(o);}
         const preferred=catalog.profiles.find(p=>p.profile_ref===catalog.bindings[role]);if(preferred)a.value=preferred.account;
-        selectProfiles(role,a,m,catalog.bindings[role]);a.onchange=()=>{selectProfiles(role,a,m);dirty();};m.onchange=dirty;
-        aCell.append(a);mCell.append(m);row.append(labelCell,aCell,mCell);byId('binding-rows').append(row);
+        selectProfiles(role,a,m,catalog.bindings[role]);a.onchange=()=>{selectProfiles(role,a,m);updateCapabilities(role);dirty();};m.onchange=()=>{updateCapabilities(role);dirty();};
+        aCell.append(a);mCell.append(m);row.append(labelCell,aCell,mCell);byId('binding-rows').append(row);roleEditor(role,name);updateCapabilities(role);
       }
       for(const [id,k]of [['config-rounds','max_rounds'],['config-calls','max_calls'],['config-seconds','total_seconds']])byId(id).max=catalog.limits[k];
       const seen=new Set();for(const p of catalog.profiles){if(seen.has(p.provider+p.model))continue;seen.add(p.provider+p.model);const row=element('div',p.model,'candidate-model');row.append(element('small',p.provider+' · 受控档案；能力以实际检查为准'));byId('model-candidates').append(row);}
@@ -118,6 +137,7 @@ window.CodeFixConfig = (() => {
   }
   function syncTaskForm(){
     const using=byId('use-saved-config').checked&&saved;
+    const strategy=byId('task-strategy');strategy.disabled=Boolean(using)||byId('mode').value!=='repair';if(using)strategy.value=saved.strategy;
     const source=using?'使用已保存配置 '+saved.config_id.slice(0,16)+'…':'使用默认模型配置；本页未保存草稿不会应用，可先保存以固定配置';
     display('task-mode-hint',byId('mode').value==='repair'?source+'。启动时仍须核验模型授权、费用及隔离条件，创建任务不代表可以执行。':'基线检查不调用模型；公开题目仍需隔离执行。');
     for(const [id,k]of [['rounds','max_rounds'],['calls','max_calls'],['seconds','total_seconds']]){byId(id).disabled=Boolean(using);if(using)byId(id).value=saved.parameters[k];}

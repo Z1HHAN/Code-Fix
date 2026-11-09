@@ -21,12 +21,16 @@ def now():
 
 
 def validate_task(value):
-    fields = {'description', 'project', 'mode', 'max_rounds', 'max_calls', 'total_seconds', 'config_id'}
+    fields = {'description', 'project', 'mode', 'max_rounds', 'max_calls', 'total_seconds', 'config_id', 'strategy'}
     if not isinstance(value, dict) or set(value) - fields:
         raise InputValidationError('未知任务字段；不能提交路径、命令或密钥')
     task = dict(description='修复闰年判断', project='leap', mode='baseline',
                 max_rounds=3, max_calls=12, total_seconds=300)
     task.update(value)
+    if not isinstance(task.get('strategy', 'dynamic'), str) or task.get('strategy', 'dynamic') not in {'fixed', 'dynamic'}:
+        raise InputValidationError('策略须为fixed/dynamic')
+    if task['mode'] == 'baseline' and task.get('strategy', 'dynamic') != 'dynamic':
+        raise InputValidationError('baseline不使用固定修复策略')
     if 'config_id' in task and (not isinstance(task['config_id'], str) or not re.fullmatch(r'cfg-[a-f0-9]{64}', task['config_id'])):
         raise InputValidationError('非法配置编号')
     from .tasks_v3 import get_task
@@ -81,8 +85,15 @@ class RunStore:
         if 'config_id' in task:
             from .configuration import ConfigurationStore
             configuration = ConfigurationStore(self).get(task['config_id'])
+            if 'strategy' in value and value['strategy'] != configuration['strategy']:
+                raise InputValidationError('任务策略与保存配置不一致')
+            task['strategy'] = configuration['strategy']
+            if task['mode'] == 'baseline' and task['strategy'] != 'dynamic':
+                raise InputValidationError('固定策略配置仅用于repair任务')
             if any(task[k] != configuration['parameters'][k] for k in configuration['parameters']):
                 raise InputValidationError('任务参数与保存配置不一致；请保存新配置')
+        if task['mode'] == 'repair':
+            task.setdefault('strategy', 'dynamic')
         if key is not None and (not isinstance(key, str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', key)):
             raise InputValidationError('幂等键须为1至100位字母数字、下划线或短横线')
         encoded = json.dumps(task, ensure_ascii=False, sort_keys=True)

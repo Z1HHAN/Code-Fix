@@ -179,6 +179,19 @@ class ModelRouter:
 
     def __init__(self, config, ledger, resolved=None, *, transports=None):
         settings, registry = resolved or self.resolve(config)
+        settings = dict(settings)
+        from dataclasses import replace
+        # Saved configurations allocate a separate model_ref for each role.
+        for role, override in config.role_overrides.items():
+            ref = config.require(role)['model_ref']
+            if sum(a['model_ref'] == ref for a in config.agents.values()) != 1:
+                raise ConfigError('角色覆盖须使用独立模型引用；请保存新配置')
+            generation = override.get('generation', {})
+            current = settings[ref]
+            settings[ref] = replace(current,
+                max_output_tokens=generation.get('max_output_tokens', current.max_output_tokens),
+                request_parameters={**(current.request_parameters or {}),
+                                    **{k: v for k, v in generation.items() if k != 'max_output_tokens'}})
         self.registry = registry
         self.config, self.ledger = config, ledger
         if transports is not None and (set(transports) != set(settings) or any(t is None for t in transports.values())):
@@ -207,6 +220,7 @@ class ModelRouter:
                            input_cny_per_million=str(s.input_per_million), output_cny_per_million=str(s.output_per_million),
                            billable_output_tokens=s.billable_output_tokens,
                            effective_parameters={s.token_limit_parameter: s.max_output_tokens, **(s.request_parameters or {})})
+        binding['effective_parameters_sha256'] = digest(binding['effective_parameters'])
         return binding
 
     def call_for_role(self, role, messages, **kwargs):

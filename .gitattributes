@@ -98,3 +98,5 @@ evidence/workbench-animation/review-a/** -text -whitespace
 evidence/workbench-animation/review-b/** -text -whitespace
 
 evidence/reviewed-fixes-integration/** -text -whitespace
+
+evidence/contest-delivery/** -text -whitespace

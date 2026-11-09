@@ -20,16 +20,17 @@ function showEvidence(name){
   for(const id of ['artifact','testing','diff','calls','raw'])byId('evidence-'+id).hidden=id!==name;
 }
 function showView(view,updateHash=true){
-  if(!['records','workspace','config','evidence'].includes(view))view='records';
+  if(!['records','workspace','config','comparisons','evidence'].includes(view))view='records';
   const actual=view==='evidence'?'workspace':view;
-  for(const id of ['records','workspace','config'])byId('view-'+id).hidden=id!==actual;
+  for(const id of ['records','workspace','config','comparisons'])byId('view-'+id).hidden=id!==actual;
   for(const button of document.querySelectorAll('[data-view]')){
     if(button.dataset.view===view)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');
   }
   if(updateHash&&location.hash!=='#'+view)history.replaceState(null,'','#'+view);
-  const title=view==='records'?'运行记录':view==='config'?'模型与配置':currentRun?taskName(currentRun)+' · '+modeName(currentRun):'编排工作台';
-  display('page-title',title);display('breadcrumb','工作空间 / '+({records:'运行记录',workspace:'编排工作台',config:'模型与配置',evidence:'证据浏览'}[view]));
-  display('page-subtitle',view==='records'?'从一次运行出发，查看Agent流转与决策依据。':view==='config'?'设置新任务模型与参数，核对费用条件，查看只读运行记录。':currentRun?`${shortId(currentRun.run_id)} · ${currentRun.task.strategy || '策略未单独记录'} · ${label(currentRun.status)}`:'请先从运行记录选择任务。');
+  const title=view==='records'?'运行记录':view==='config'?'模型与配置':view==='comparisons'?'实验对照':currentRun?taskName(currentRun)+' · '+modeName(currentRun):'编排工作台';
+  display('page-title',title);display('breadcrumb','工作空间 / '+({records:'运行记录',workspace:'编排工作台',config:'模型与配置',comparisons:'实验对照',evidence:'证据浏览'}[view]));
+  display('page-subtitle',view==='records'?'从一次运行出发，查看Agent流转与决策依据。':view==='comparisons'?'按显式清单比较已有证据；创建、刷新和导出不会启动任务。':view==='config'?'设置新任务模型与参数，核对费用条件，查看只读运行记录。':currentRun?`${shortId(currentRun.run_id)} · ${currentRun.task.strategy || '策略未单独记录'} · ${label(currentRun.status)}`:'请先从运行记录选择任务。');
+  if(view==='comparisons'&&window.CodeFixComparisons)CodeFixComparisons.load();
   if(view==='evidence'&&updateHash){showEvidence('artifact');document.querySelector('.evidence-dock').scrollIntoView({block:'start',behavior:'smooth'});}
 }
 function selectRun(id){selected=id;showView('workspace');refresh();}
@@ -176,7 +177,7 @@ async function refreshNow() {
 }
 byId('task-form').onsubmit = event => {event.preventDefault();if(!byId('task-form').reportValidity())return;action(async () => {
   key ||= crypto.randomUUID();
-  const task = {project:byId('project').value, mode:byId('mode').value, description:byId('description').value,
+  const task = {project:byId('project').value, mode:byId('mode').value, strategy:byId('mode').value==='repair'?byId('task-strategy').value:'dynamic', description:byId('description').value,
     max_rounds:Number(byId('rounds').value), max_calls:Number(byId('calls').value), total_seconds:Number(byId('seconds').value)};
   if(window.CodeFixConfig)CodeFixConfig.apply(task);
   const run = await (await api('/tasks', {method:'POST', headers:{'Idempotency-Key':key}, body:JSON.stringify(task)})).json();
