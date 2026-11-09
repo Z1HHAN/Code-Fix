@@ -1,0 +1,383 @@
+{
+  "url": "http://127.0.0.1:8770",
+  "health": {
+    "python": "3.14.6",
+    "baseline_available": true,
+    "model_configured": true,
+    "docker_available": false,
+    "isolation_verified": false,
+    "note": "每次修复任务启动时运行独立隔离探针；配置存在不等于验证通过",
+    "blockers": [
+      "找不到Docker；候选不会回退到宿主执行",
+      "不可信代码执行授权未配置"
+    ]
+  },
+  "bindings": {
+    "locator": "sf_account1_v32",
+    "repairer": "sf_account1_v32",
+    "detector": "sf_account1_v32",
+    "scheduler": "sf_account1_v32"
+  },
+  "siliconflow_profiles": [
+    {
+      "profile_ref": "sf_account1_v41_flash",
+      "provider": "siliconflow",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "account": "sf_account1",
+      "configured": true,
+      "note": "本机调用配置可解析；未发请求验证",
+      "billing_bound_known": true,
+      "checks": [
+        {
+          "name": "调用授权",
+          "ok": true,
+          "status": "已启用"
+        },
+        {
+          "name": "凭据读取",
+          "ok": true,
+          "status": "可读取"
+        },
+        {
+          "name": "计费价格",
+          "ok": true,
+          "status": "已配置"
+        },
+        {
+          "name": "计费输出上限",
+          "ok": true,
+          "status": "已登记"
+        }
+      ]
+    },
+    {
+      "profile_ref": "sf_account1_glm53_flash",
+      "provider": "siliconflow",
+      "model": "zai-org/GLM-5.3-Flash",
+      "account": "sf_account1",
+      "configured": false,
+      "note": "授权、凭据、价格或计费上限未就绪；未发请求",
+      "billing_bound_known": false,
+      "checks": [
+        {
+          "name": "调用授权",
+          "ok": true,
+          "status": "已启用"
+        },
+        {
+          "name": "凭据读取",
+          "ok": true,
+          "status": "可读取"
+        },
+        {
+          "name": "计费价格",
+          "ok": false,
+          "status": "未正确配置"
+        },
+        {
+          "name": "计费输出上限",
+          "ok": false,
+          "status": "待核实"
+        }
+      ]
+    },
+    {
+      "profile_ref": "sf_account1_v32",
+      "provider": "siliconflow",
+      "model": "Pro/deepseek-ai/DeepSeek-V3.2",
+      "account": "sf_account1",
+      "configured": true,
+      "note": "本机调用配置可解析；未发请求验证",
+      "billing_bound_known": true,
+      "checks": [
+        {
+          "name": "调用授权",
+          "ok": true,
+          "status": "已启用"
+        },
+        {
+          "name": "凭据读取",
+          "ok": true,
+          "status": "可读取"
+        },
+        {
+          "name": "计费价格",
+          "ok": true,
+          "status": "已配置"
+        },
+        {
+          "name": "计费输出上限",
+          "ok": true,
+          "status": "已登记"
+        }
+      ]
+    },
+    {
+      "profile_ref": "sf_account1_qwen36",
+      "provider": "siliconflow",
+      "model": "Qwen/Qwen3.6-27B",
+      "account": "sf_account1",
+      "configured": false,
+      "note": "授权、凭据、价格或计费上限未就绪；未发请求",
+      "billing_bound_known": false,
+      "checks": [
+        {
+          "name": "调用授权",
+          "ok": true,
+          "status": "已启用"
+        },
+        {
+          "name": "凭据读取",
+          "ok": true,
+          "status": "可读取"
+        },
+        {
+          "name": "计费价格",
+          "ok": true,
+          "status": "已配置"
+        },
+        {
+          "name": "计费输出上限",
+          "ok": false,
+          "status": "待核实"
+        }
+      ]
+    },
+    {
+      "profile_ref": "sf_account1_glm51",
+      "provider": "siliconflow",
+      "model": "Pro/zai-org/GLM-5.1",
+      "account": "sf_account1",
+      "configured": false,
+      "note": "授权、凭据、价格或计费上限未就绪；未发请求",
+      "billing_bound_known": false,
+      "checks": [
+        {
+          "name": "调用授权",
+          "ok": true,
+          "status": "已启用"
+        },
+        {
+          "name": "凭据读取",
+          "ok": true,
+          "status": "可读取"
+        },
+        {
+          "name": "计费价格",
+          "ok": true,
+          "status": "已配置"
+        },
+        {
+          "name": "计费输出上限",
+          "ok": false,
+          "status": "待核实"
+        }
+      ]
+    },
+    {
+      "profile_ref": "sf_account2_v41_flash",
+      "provider": "siliconflow",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "account": "sf_account2",
+      "configured": false,
+      "note": "授权、凭据、价格或计费上限未就绪；未发请求",
+      "billing_bound_known": false,
+      "checks": [
+        {
+          "name": "调用授权",
+          "ok": true,
+          "status": "已启用"
+        },
+        {
+          "name": "凭据读取",
+          "ok": true,
+          "status": "可读取"
+        },
+        {
+          "name": "计费价格",
+          "ok": true,
+          "status": "已配置"
+        },
+        {
+          "name": "计费输出上限",
+          "ok": false,
+          "status": "待核实"
+        }
+      ]
+    },
+    {
+      "profile_ref": "sf_account2_glm53_flash",
+      "provider": "siliconflow",
+      "model": "zai-org/GLM-5.3-Flash",
+      "account": "sf_account2",
+      "configured": false,
+      "note": "授权、凭据、价格或计费上限未就绪；未发请求",
+      "billing_bound_known": false,
+      "checks": [
+        {
+          "name": "调用授权",
+          "ok": true,
+          "status": "已启用"
+        },
+        {
+          "name": "凭据读取",
+          "ok": true,
+          "status": "可读取"
+        },
+        {
+          "name": "计费价格",
+          "ok": false,
+          "status": "未正确配置"
+        },
+        {
+          "name": "计费输出上限",
+          "ok": false,
+          "status": "待核实"
+        }
+      ]
+    },
+    {
+      "profile_ref": "sf_account2_v32",
+      "provider": "siliconflow",
+      "model": "Pro/deepseek-ai/DeepSeek-V3.2",
+      "account": "sf_account2",
+      "configured": true,
+      "note": "本机调用配置可解析；未发请求验证",
+      "billing_bound_known": true,
+      "checks": [
+        {
+          "name": "调用授权",
+          "ok": true,
+          "status": "已启用"
+        },
+        {
+          "name": "凭据读取",
+          "ok": true,
+          "status": "可读取"
+        },
+        {
+          "name": "计费价格",
+          "ok": true,
+          "status": "已配置"
+        },
+        {
+          "name": "计费输出上限",
+          "ok": true,
+          "status": "已登记"
+        }
+      ]
+    },
+    {
+      "profile_ref": "sf_account2_qwen36",
+      "provider": "siliconflow",
+      "model": "Qwen/Qwen3.6-27B",
+      "account": "sf_account2",
+      "configured": false,
+      "note": "授权、凭据、价格或计费上限未就绪；未发请求",
+      "billing_bound_known": false,
+      "checks": [
+        {
+          "name": "调用授权",
+          "ok": true,
+          "status": "已启用"
+        },
+        {
+          "name": "凭据读取",
+          "ok": true,
+          "status": "可读取"
+        },
+        {
+          "name": "计费价格",
+          "ok": true,
+          "status": "已配置"
+        },
+        {
+          "name": "计费输出上限",
+          "ok": false,
+          "status": "待核实"
+        }
+      ]
+    },
+    {
+      "profile_ref": "sf_account2_glm51",
+      "provider": "siliconflow",
+      "model": "Pro/zai-org/GLM-5.1",
+      "account": "sf_account2",
+      "configured": false,
+      "note": "授权、凭据、价格或计费上限未就绪；未发请求",
+      "billing_bound_known": false,
+      "checks": [
+        {
+          "name": "调用授权",
+          "ok": true,
+          "status": "已启用"
+        },
+        {
+          "name": "凭据读取",
+          "ok": true,
+          "status": "可读取"
+        },
+        {
+          "name": "计费价格",
+          "ok": true,
+          "status": "已配置"
+        },
+        {
+          "name": "计费输出上限",
+          "ok": false,
+          "status": "待核实"
+        }
+      ]
+    }
+  ],
+  "budget": {
+    "currency": "CNY",
+    "basis": "project_ledger_estimate_not_platform_balance",
+    "accounts": [
+      {
+        "account_id": "sf_account1",
+        "provider_id": "siliconflow",
+        "currency": "CNY",
+        "authorized_cny": "16",
+        "estimated_spent_cny": "0.000246",
+        "reserved_cny": "0",
+        "unsettled_calls": 0,
+        "estimated_remaining_cny": "15.999754",
+        "remaining_after_reservations_cny": "15.999754",
+        "warning_threshold_cny": "3",
+        "low_balance": false,
+        "status": "estimated"
+      },
+      {
+        "account_id": "sf_account2",
+        "provider_id": "siliconflow",
+        "currency": "CNY",
+        "status": "declared_not_started",
+        "authorized_cny": "16",
+        "estimated_spent_cny": "0",
+        "reserved_cny": "0",
+        "unsettled_calls": 0,
+        "estimated_remaining_cny": "16",
+        "warning_threshold_cny": "3",
+        "low_balance": false
+      },
+      {
+        "account_id": "aliyun_maas",
+        "provider_id": "aliyun_maas",
+        "currency": "CNY",
+        "status": "declared_not_started",
+        "authorized_cny": "16",
+        "estimated_spent_cny": "0",
+        "reserved_cny": "0",
+        "unsettled_calls": 0,
+        "estimated_remaining_cny": "16",
+        "warning_threshold_cny": "3",
+        "low_balance": false
+      }
+    ],
+    "alerts": [],
+    "paid_calls_blocked": false,
+    "platform_balance_verified": false,
+    "note": "仅本项目账本估算，包含预留；不含平台其他消费，真实余额请核对控制台"
+  }
+}

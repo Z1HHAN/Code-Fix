@@ -1,0 +1,117 @@
+{
+  "bindings": {
+    "locator": "sf_account1_v32",
+    "repairer": "sf_account1_v32",
+    "detector": "sf_account1_v32",
+    "scheduler": "sf_account1_v32"
+  },
+  "parameters": {
+    "max_rounds": 3,
+    "max_calls": 12,
+    "total_seconds": 300
+  },
+  "strategy": "dynamic",
+  "roles": {
+    "config_version": "1.1.0",
+    "protocol": "codefix-json-v1",
+    "models": {
+      "locator": {
+        "binding": "approved_profile",
+        "profile_ref": "sf_account1_v32"
+      },
+      "repairer": {
+        "binding": "approved_profile",
+        "profile_ref": "sf_account1_v32"
+      },
+      "detector": {
+        "binding": "approved_profile",
+        "profile_ref": "sf_account1_v32"
+      },
+      "scheduler": {
+        "binding": "approved_profile",
+        "profile_ref": "sf_account1_v32"
+      }
+    },
+    "agents": [
+      {
+        "agent_id": "locator",
+        "enabled": true,
+        "role_type": "llm",
+        "model_ref": "locator",
+        "prompt_ref": "prompts/locator.md",
+        "tool_allowlist": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "knowledge_ids": [
+          "project_structure",
+          "business_rules",
+          "testing",
+          "public_tasks"
+        ],
+        "output_schema": "LocatorOutput"
+      },
+      {
+        "agent_id": "repairer",
+        "enabled": true,
+        "role_type": "llm",
+        "model_ref": "repairer",
+        "prompt_ref": "prompts/repairer.md",
+        "tool_allowlist": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "knowledge_ids": [
+          "business_rules",
+          "testing",
+          "public_tasks"
+        ],
+        "output_schema": "RepairOutput"
+      },
+      {
+        "agent_id": "detector",
+        "enabled": true,
+        "role_type": "llm",
+        "model_ref": "detector",
+        "prompt_ref": "prompts/detector.md",
+        "tool_allowlist": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "knowledge_ids": [
+          "business_rules",
+          "testing",
+          "public_tasks"
+        ],
+        "output_schema": "DetectorOutput"
+      },
+      {
+        "agent_id": "scheduler",
+        "enabled": true,
+        "role_type": "llm",
+        "model_ref": "scheduler",
+        "prompt_ref": "prompts/scheduler.md",
+        "tool_allowlist": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "knowledge_ids": [
+          "business_rules",
+          "testing",
+          "public_tasks"
+        ],
+        "output_schema": "SchedulerOutput"
+      }
+    ]
+  },
+  "profiles_sha256": "c54db8d1e6390aa74642b848874f9012d8da34cd579da7e6c67afec427513f42",
+  "prompts_sha256": {
+    "locator": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+    "repairer": "5d78e4c3f12752b9a4d66584c1a95b1229fb3d023c92d9e6d736625dc2d8e177",
+    "detector": "6efdcb821ae1464cb0ac6e3972c39746a35bbbd0683f7e0937ef46dd443a9926",
+    "scheduler": "345b41671e2e47938111ac6ff5d93ab28bc2cd4e6dc289594eaa8c889d8eb79a"
+  },
+  "note": "结构校验通过；不代表模型请求、费用预留或隔离资格通过",
+  "config_id": "cfg-53435aa1cdf8786c54a5d8b9b28dc43513e27d0c2663b04add877549f6eae190",
+  "created_at": "2026-11-09T10:26:55.324988+00:00"
+}

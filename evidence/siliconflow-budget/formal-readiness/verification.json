@@ -1,0 +1,78 @@
+{
+  "scope": "Real SiliconFlow JSON interface and local API readiness; not candidate repair acceptance",
+  "baseline_commit": "b809f61b591bb8da60faaaafe61ab453ea74bc69",
+  "working_tree_change": "configs/agents.json primary changed from aliyun_maas_ds_v41_flash to sf_account1_v32; tests used working tree, not C independent acceptance",
+  "default_roles": {
+    "locator": "sf_account1_v32",
+    "repairer": "sf_account1_v32",
+    "detector": "sf_account1_v32",
+    "scheduler": "sf_account1_v32"
+  },
+  "account_limits_cny": {
+    "sf_account1": "16",
+    "sf_account2": "16",
+    "team": "32",
+    "warning_remaining": "3"
+  },
+  "ledger_root": "runs/platform",
+  "official_price_source": "https://www.siliconflow.cn/pricing",
+  "official_api_source": "https://docs.siliconflow.cn/docs/api/chat-completions-post",
+  "price_check": "2026-11-09 official pricing still lists Pro/DeepSeek-V3.2 input 4 CNY/million and output 6 CNY/million",
+  "metadata_check": {
+    "source": "actual start_siliconflow.ps1 -Action check output in this turn",
+    "accounts_queried": 2,
+    "all_five_requested_models_available": true,
+    "paid_chat_requests": 0,
+    "sandbox_attempt": "DPAPI blocked without network call; elevated retry passed"
+  },
+  "smoke": {
+    "file": "smoke.json",
+    "paid_requests": 1,
+    "profile": "sf_account1_v32",
+    "cost_estimate_cny": "0.000132",
+    "remaining_estimate_cny": "15.999754",
+    "not_provider_balance": true
+  },
+  "offline_tests": {
+    "passed": 103,
+    "junit": "offline-tests.xml",
+    "warnings": [
+      "Starlette/httpx deprecation",
+      "two pytest cache directory warnings"
+    ],
+    "command": "runs/v3-venv/Scripts/python.exe -B -X utf8 -m pytest tests/test_configuration.py tests/test_role_config.py tests/test_siliconflow_budget.py tests/test_agents_v3.py tests/test_contest_core.py -q --basetemp=runs/sf-formal-check -o cache_dir=runs/pytest-cache --junitxml=evidence/siliconflow-budget/formal-readiness/offline-tests.xml"
+  },
+  "local_platform_url": "http://127.0.0.1:8770",
+  "platform_health": {
+    "model_configured": true,
+    "docker_available": false,
+    "isolation_verified": false
+  },
+  "baseline": {
+    "run_id": "run-8058dc013cff4fee8073fe15b056c488",
+    "counts": {
+      "passed": 3,
+      "failed": 1
+    },
+    "expected_failure": "1900 is not leap",
+    "model_api_called": false,
+    "final_result": "not_run"
+  },
+  "blocked_preflight": {
+    "run_id": "run-bdad1ce35da745d084adf88832b9eecd",
+    "status": "blocked",
+    "model_calls": 0,
+    "tool_calls": 0,
+    "ledger_unchanged": true,
+    "handoff": "pending_human"
+  },
+  "limitations": [
+    "No Docker installation or system settings changed",
+    "No generated candidate or QuixBugs source executed on host",
+    "Other model readiness separately recorded in platform-check.json; availability is not chat qualification",
+    "C has not personally rerun this version",
+    "Independent machines must reconcile actual platform balance and prior project spending before using an independent ledger"
+  ],
+  "source_sha256": "18ec6a0d4c5901c54d264ebe4cd39b7456b2287281ab7c4cea61464e54456927",
+  "publication": "pending"
+}
