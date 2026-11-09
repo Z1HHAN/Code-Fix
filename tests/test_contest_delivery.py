@@ -72,6 +72,19 @@ def test_saved_strategy_is_authoritative_and_conflicts_rejected(tmp_path):
     assert store.create({'mode': 'repair'})['task']['strategy'] == 'dynamic'
 
 
+def test_offline_freeze_never_starts_git_process_or_claims_git_identity(tmp_path, monkeypatch):
+    import subprocess
+    def denied(*args, **kwargs):
+        pytest.fail('offline evidence must not start a child process, including git')
+    monkeypatch.setattr(subprocess, 'Popen', denied)
+    status, _, _, _, store, rid = execute(tmp_path, ['assertion_failed', 'passed', 'passed'])
+    assert status == 'success'
+    frozen = json.loads((store.directory(rid) / 'trace/experiment.json').read_text(encoding='utf-8'))
+    assert frozen['execution_kind'] == 'offline'
+    assert frozen['identity']['code']['commit'] is None
+    assert frozen['identity']['code']['source_sha256']
+
+
 @pytest.mark.parametrize('override', [
     {'task_instruction': 'x' * 4001}, {'task_instruction': None}, {'system_prompt': 'x'},
     {'generation': {'temperature': True}}, {'generation': {'top_p': 0}},

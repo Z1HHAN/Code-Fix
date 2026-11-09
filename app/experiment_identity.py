@@ -10,10 +10,21 @@ from .role_config import digest
 from .role_overrides import effective_parameters
 
 SOURCE_PATHS = ('app', 'c_runner', 'docker', 'configs', 'prompts', 'knowledge', 'ui',
-                'tests', 'scripts', 'acceptance_tests', 'requirements.txt', 'pyproject.toml')
+                'tests', 'scripts', 'acceptance_tests', 'requirements.txt', 'requirements-lock.txt',
+                'pytest.ini', 'pyproject.toml')
 
 
-def code_identity(root):
+def code_identity(root, *, read_git=True):
+    if not read_git:
+        # Offline doubles must remain usable under the independent gate's
+        # strict no-process boundary. They never acquire a claimed Git commit.
+        files = {}
+        for name in SOURCE_PATHS:
+            source = root / name
+            for path in source.rglob('*') if source.is_dir() else (source,):
+                if path.is_file() and not any(p in {'__pycache__', '.pytest_cache'} for p in path.parts):
+                    files[path.relative_to(root).as_posix()] = hashlib.sha256(path.read_bytes()).hexdigest()
+        return {'commit': None, 'source_sha256': digest(files), 'dirty': None}
     def git(*args):
         return subprocess.run(['git', '-C', str(root), *args], check=True,
                               capture_output=True, timeout=15).stdout
@@ -34,6 +45,8 @@ def freeze(root, task, definition, config, runner, model):
     from .model_profiles import ModelRouter
     registry = load_profiles(root)
     profiles = registry['profiles']
+    # Type and transport originate in the running process, not a submitted label.
+    real = type(runner) is SplitDockerRunner and (model is None or type(model) is ModelRouter and model.mode == 'live')
     def numeric_env(name):
         try:
             return str(positive_decimal(os.environ.get(name)))
@@ -54,7 +67,7 @@ def freeze(root, task, definition, config, runner, model):
                          'input_price': numeric_env(p['input_price_env']) if p else None,
                          'output_price': numeric_env(p['output_price_env']) if p else None,
                          'request_seconds': numeric_env(p['request_seconds_env']) if p else None}
-    identity = {'code': code_identity(root), 'project': task['project'], 'description': task['description'],
+    identity = {'code': code_identity(root, read_git=real), 'project': task['project'], 'description': task['description'],
                 'task_limits': {k: task[k] for k in ('max_rounds', 'max_calls', 'total_seconds')},
                 'approved_files': definition.profile['approved_files'],
                 'test_suite_version': definition.summary()['test_suite_version'],
@@ -62,8 +75,6 @@ def freeze(root, task, definition, config, runner, model):
                 'prompts_sha256': {r: p[1] for r, p in config.prompts.items()},
                 'profiles_sha256': digest(registry), 'bindings': bindings,
                 'image': getattr(runner, 'image', None)}
-    # Type and transport originate in the running process, not a submitted label.
-    real = type(runner) is SplitDockerRunner and (model is None or type(model) is ModelRouter and model.mode == 'live')
     return {'schema_version': 1, 'strategy': task.get('strategy', 'dynamic'),
             'execution_kind': 'real' if real else 'offline', 'identity': identity,
             'identity_sha256': digest(identity)}
