@@ -74,5 +74,5 @@
     "Independent machines must reconcile actual platform balance and prior project spending before using an independent ledger"
   ],
   "source_sha256": "18ec6a0d4c5901c54d264ebe4cd39b7456b2287281ab7c4cea61464e54456927",
-  "publication": "pending"
+  "publication": "feature 9dbf07c fast-forward merged and pushed to main; metadata follow-up tracked by Git"
 }
