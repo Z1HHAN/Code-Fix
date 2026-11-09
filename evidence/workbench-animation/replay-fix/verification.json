@@ -1,0 +1,31 @@
+{
+  "scope": "offline frontend replay only; no model, Docker, backend execution or C acceptance",
+  "baseline_commit": "8923ae3e27456c8c376786a83e8d19f712fc3819",
+  "node_tests": {
+    "passed": 34,
+    "failed": 0,
+    "command": "node --test tests/ui_architecture.test.cjs tests/ui_trace.test.cjs tests/ui_budget.test.cjs tests/ui_prototype.test.cjs"
+  },
+  "browser": {
+    "passed": true,
+    "command": "CODE_FIX_ARCH_BROWSER_OUTPUT=runs/replay-fix-browser-approved node tests/browser_architecture.cjs",
+    "result": "result.json",
+    "screenshot": "replay-tail.png",
+    "first_attempt": "sandbox browser debug connection unavailable; watchdog exit 1; no result; approved retry passed"
+  },
+  "coverage": [
+    "pause/resume preserves prefix and remaining travel",
+    "poll while paused does not reset replay",
+    "entry highlights and three directed arrows",
+    "last handoff completes before replay ends",
+    "metadata advances at 650ms while evidence packets retain elapsed time",
+    "finished clears motion",
+    "task switch cancels replay and resume state"
+  ],
+  "source_sha256": {
+    "ui/app/architecture.js": "329c22e3401c2b8fa8204ded856cb5b3f23ced94cabc2aae84a79f11a1f49647",
+    "tests/ui_architecture.test.cjs": "c13e72e6c8b21fb5e833f8567eb2803814dcf64d6238c2d35074c5e1d2da4a8e",
+    "tests/browser_architecture.cjs": "59c6f3a7d0fee1a6678663b738e3895d3baead52ad7c1feb34b3a2aef8aca623"
+  },
+  "publication": "pending commit; not yet merged or pushed"
+}
