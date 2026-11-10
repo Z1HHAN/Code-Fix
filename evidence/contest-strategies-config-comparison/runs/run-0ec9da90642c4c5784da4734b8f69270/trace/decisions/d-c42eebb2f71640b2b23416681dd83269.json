@@ -1,0 +1,81 @@
+{
+  "decision_id": "d-c42eebb2f71640b2b23416681dd83269",
+  "run_id": "run-0ec9da90642c4c5784da4734b8f69270",
+  "code_version": "sha256:a672e38a77864ce36b9674eab68ac708670ec24073604c6b0d52c304ad81ac54",
+  "evidence_ids": [
+    "test-final-check"
+  ],
+  "failure_class": "passed",
+  "action": "finish",
+  "target_agent": null,
+  "reason": "独立验收实际通过且证据对应最终代码版本。",
+  "retries_left": 2,
+  "rule_id": "R07",
+  "terminal_status": "success",
+  "trace_version": "1.0.0",
+  "step_id": "s-a09acb25a1044203a6d0feab28c4b979",
+  "parent_step_id": "s-8b84bbe5749546a3ad685481f00f1ecf",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "final_check",
+  "strategy": "fixed",
+  "program_decision": {
+    "decision_id": "d-c42eebb2f71640b2b23416681dd83269",
+    "run_id": "run-0ec9da90642c4c5784da4734b8f69270",
+    "code_version": "sha256:a672e38a77864ce36b9674eab68ac708670ec24073604c6b0d52c304ad81ac54",
+    "evidence_ids": [
+      "test-final-check"
+    ],
+    "failure_class": "passed",
+    "action": "finish",
+    "target_agent": null,
+    "reason": "独立验收实际通过且证据对应最终代码版本。",
+    "retries_left": 2,
+    "rule_id": "R07",
+    "terminal_status": "success"
+  },
+  "model_advice": null,
+  "effective_action": "finish",
+  "override_reason": null,
+  "test_suite_version": "sha256:5ef4f028924aa0ae998a18febe0c41839fbc64650814eee28ec895362370db43",
+  "counters": {
+    "model_calls": 3,
+    "tool_calls": 3,
+    "rounds_used": 1,
+    "cost": {
+      "calls": 3,
+      "status": "estimated",
+      "currency": "CNY",
+      "amount_cny": "0.026082",
+      "amount_usd": null,
+      "budget": {
+        "currency": "CNY",
+        "basis": "project_ledger_estimate_not_platform_balance",
+        "accounts": [
+          {
+            "account_id": "aliyun_maas",
+            "provider_id": "aliyun_maas",
+            "currency": "CNY",
+            "authorized_cny": "16",
+            "estimated_spent_cny": "1.098994",
+            "reserved_cny": "0",
+            "unsettled_calls": 0,
+            "estimated_remaining_cny": "14.901006",
+            "remaining_after_reservations_cny": "14.901006",
+            "warning_threshold_cny": "3",
+            "low_balance": false,
+            "status": "estimated"
+          }
+        ],
+        "alerts": [],
+        "paid_calls_blocked": false
+      }
+    },
+    "remaining_seconds": 253.42457920000015,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}

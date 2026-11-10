@@ -1,0 +1,14 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.10, pytest-8.3.5, pluggy-1.7.0 -- /usr/local/bin/python
+rootdir: /w
+configfile: ../out/pytest.ini
+collecting ... collected 4 items
+
+tests/test_leap.py::test_2024_is_leap PASSED
+tests/test_leap.py::test_2023_is_not_leap PASSED
+tests/test_leap.py::test_1900_is_not_leap PASSED
+tests/test_leap.py::test_2000_is_leap PASSED
+
+---------------------- generated xml file: /out/junit.xml ----------------------
+============================== 4 passed in 0.30s ===============================
+CODEFIX_READY

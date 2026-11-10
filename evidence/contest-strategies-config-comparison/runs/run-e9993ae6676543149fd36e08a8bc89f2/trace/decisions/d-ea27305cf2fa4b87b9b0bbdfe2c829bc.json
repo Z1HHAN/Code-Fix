@@ -1,0 +1,68 @@
+{
+  "action": "finish",
+  "rule_id": "R07",
+  "reason": "开发测试及干净副本同套原生测试均实际通过",
+  "trace_version": "1.0.0",
+  "run_id": "run-e9993ae6676543149fd36e08a8bc89f2",
+  "step_id": "s-7a0664a0be4e468d8bc3c70f05af18e1",
+  "parent_step_id": "s-9cc338fe3ef6492c9a1398cd6669e53f",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "final_check",
+  "strategy": "dynamic",
+  "evidence_ids": [
+    "test-final-check"
+  ],
+  "decision_id": "d-ea27305cf2fa4b87b9b0bbdfe2c829bc",
+  "program_decision": {
+    "action": "finish",
+    "rule_id": "R07",
+    "reason": "开发测试及干净副本同套原生测试均实际通过"
+  },
+  "model_advice": null,
+  "effective_action": "finish",
+  "target_agent": null,
+  "override_reason": null,
+  "code_version": "sha256:a672e38a77864ce36b9674eab68ac708670ec24073604c6b0d52c304ad81ac54",
+  "test_suite_version": "sha256:5ef4f028924aa0ae998a18febe0c41839fbc64650814eee28ec895362370db43",
+  "counters": {
+    "model_calls": 3,
+    "tool_calls": 3,
+    "rounds_used": 1,
+    "cost": {
+      "calls": 3,
+      "status": "estimated",
+      "currency": "CNY",
+      "amount_cny": "0.025864",
+      "amount_usd": null,
+      "budget": {
+        "currency": "CNY",
+        "basis": "project_ledger_estimate_not_platform_balance",
+        "accounts": [
+          {
+            "account_id": "aliyun_maas",
+            "provider_id": "aliyun_maas",
+            "currency": "CNY",
+            "authorized_cny": "16",
+            "estimated_spent_cny": "1.072912",
+            "reserved_cny": "0",
+            "unsettled_calls": 0,
+            "estimated_remaining_cny": "14.927088",
+            "remaining_after_reservations_cny": "14.927088",
+            "warning_threshold_cny": "3",
+            "low_balance": false,
+            "status": "estimated"
+          }
+        ],
+        "alerts": [],
+        "paid_calls_blocked": false
+      }
+    },
+    "remaining_seconds": 254.73085229999924,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}

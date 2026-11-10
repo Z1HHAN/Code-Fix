@@ -1,0 +1,7 @@
+﻿project,strategy,run_id,status,executed,candidate_rounds,requests,amount_cny,amount_usd,cost_status,elapsed_seconds,reason,report_url
+qb-get_factors,fixed,run-24ee936a26144ebdabc74d62f2d256c1,success,True,1,3,0.02366,,estimated,45.334472,开发测试及干净副本同套原生测试均实际通过,/api/v3/tasks/run-24ee936a26144ebdabc74d62f2d256c1/report
+qb-get_factors,dynamic,run-fc80fc68ed934a4d9b7de6d0d36f9b91,success,True,1,3,0.02081,,estimated,51.59469,开发测试及干净副本同套原生测试均实际通过,/api/v3/tasks/run-fc80fc68ed934a4d9b7de6d0d36f9b91/report
+qb-gcd,fixed,run-2027f3554be444788651e7a96a64d2fd,success,True,1,3,0.023506,,estimated,41.3731,开发测试及干净副本同套原生测试均实际通过,/api/v3/tasks/run-2027f3554be444788651e7a96a64d2fd/report
+qb-gcd,dynamic,run-0847d6ab11644e69aeb21d23d1e68871,success,True,1,3,0.028106,,estimated,47.568674,开发测试及干净副本同套原生测试均实际通过,/api/v3/tasks/run-0847d6ab11644e69aeb21d23d1e68871/report
+qb-max_sublist_sum,fixed,run-0ec9da90642c4c5784da4734b8f69270,success,True,1,3,0.026082,,estimated,46.761632,开发测试及干净副本同套原生测试均实际通过,/api/v3/tasks/run-0ec9da90642c4c5784da4734b8f69270/report
+qb-max_sublist_sum,dynamic,run-e9993ae6676543149fd36e08a8bc89f2,success,True,1,3,0.025864,,estimated,45.389924,开发测试及干净副本同套原生测试均实际通过,/api/v3/tasks/run-e9993ae6676543149fd36e08a8bc89f2/report

@@ -1,0 +1,169 @@
+{
+  "call_id": "codefix-d623caf6c55d4c42a98b5cc368e140a9",
+  "exit_code": 1,
+  "timed_out": false,
+  "duration_ms": 3477,
+  "stdout_path": "trusted-run/stdout.txt",
+  "stderr_path": "trusted-run/stderr.txt",
+  "command": [
+    "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.EXE",
+    "run",
+    "--mount",
+    "type=volume,source=codefix-rpc-4d154bd896eb4a3d8ef9c74d7ad6fe7c,target=/rpc,readonly",
+    "-i",
+    "--name",
+    "codefix-d623caf6c55d4c42a98b5cc368e140a9",
+    "--pull=never",
+    "--network=none",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--pids-limit=64",
+    "--memory=256m",
+    "--memory-swap=256m",
+    "--cpus=1",
+    "--user=65534:65534",
+    "--ulimit=nofile=128:128",
+    "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+    "--log-driver=none",
+    "--mount",
+    "type=volume,source=codefix-out-0322a4b26475420cbac06ef75cccb6f9,target=/out",
+    "--mount",
+    "type=bind,source=C:\\Users\\yang0\\Documents\\Codex\\2026-10-31\\wo\\projects\\Code-Fix-main\\Code-Fix-main\\runs\\platform\\run-ec65ae064ecb4a889236b3891bd99112\\baseline\\trusted-tests,target=/w,readonly",
+    "--mount",
+    "type=bind,source=C:\\Users\\yang0\\Documents\\Codex\\2026-10-31\\wo\\projects\\Code-Fix-main\\Code-Fix-main\\c_runner\\pytest_entry.py,target=/entry.py,readonly",
+    "--mount",
+    "type=bind,source=C:\\Users\\yang0\\Documents\\Codex\\2026-10-31\\wo\\projects\\Code-Fix-main\\Code-Fix-main\\docker\\candidate_entry.py,target=/harness.py,readonly",
+    "--workdir=/w",
+    "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+    "--env=PYTHONDONTWRITEBYTECODE=1",
+    "--entrypoint=python",
+    "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "/harness.py",
+    "python_testcases/test_get_factors.py"
+  ],
+  "artifact_channel": "docker-cp",
+  "artifact_error": null,
+  "artifact_detail": null,
+  "cleanup_passed": true,
+  "output_volume": "codefix-out-0322a4b26475420cbac06ef75cccb6f9",
+  "phase": "development",
+  "code_version": "sha256:84c68b2af81a5aa6169f620edf255182f046371307c60634a565771ca6ab54be",
+  "project": "qb-get_factors",
+  "execution_mode": "docker-split-rpc",
+  "isolation_ready": true,
+  "test_suite_version": "sha256:66eda806f5cbc19e9767e5a53b7ff873199a0f22ba1f8346cca43651f1245394",
+  "expected_test_count": 11,
+  "junit_path": "trusted-run/output/junit.xml",
+  "structured_path": "trusted-run/output/pytest_events.json",
+  "evidence_matches_current_version": true,
+  "trust_boundary": "separate_candidate_and_test_containers",
+  "candidate_audit": {
+    "container": "codefix-candidate-38e02b7dc5424ff6b214b6a48b312153",
+    "logs_captured": true,
+    "events": [],
+    "event_kinds": [],
+    "fake_report_output": false,
+    "violation": null,
+    "reason": null,
+    "output_limit_exceeded": false
+  },
+  "runner_classification": {
+    "status": null,
+    "verification_status": null,
+    "failure_class": null,
+    "reason": null
+  },
+  "counts": {
+    "collected": 11,
+    "passed": 1,
+    "failed": 10,
+    "errors": 0,
+    "skipped": 0
+  },
+  "status": "failed",
+  "verification_status": "failed",
+  "failure_class": "assertion_failed",
+  "reason": "Frozen native fixture tests completed with a recorded failure",
+  "coverage": {
+    "expected_nodeids": [
+      "python_testcases/test_get_factors.py::test_get_factors[input_data0-expected0]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data1-expected1]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data2-expected2]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data3-expected3]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data4-expected4]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data5-expected5]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data6-expected6]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data7-expected7]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data8-expected8]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data9-expected9]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data10-expected10]"
+    ],
+    "collected_nodeids": [
+      "python_testcases/test_get_factors.py::test_get_factors[input_data0-expected0]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data1-expected1]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data2-expected2]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data3-expected3]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data4-expected4]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data5-expected5]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data6-expected6]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data7-expected7]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data8-expected8]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data9-expected9]",
+      "python_testcases/test_get_factors.py::test_get_factors[input_data10-expected10]"
+    ],
+    "expected_collected_match": true,
+    "junit_identities": [
+      [
+        "python_testcases.test_get_factors",
+        "test_get_factors[input_data0-expected0]"
+      ],
+      [
+        "python_testcases.test_get_factors",
+        "test_get_factors[input_data1-expected1]"
+      ],
+      [
+        "python_testcases.test_get_factors",
+        "test_get_factors[input_data2-expected2]"
+      ],
+      [
+        "python_testcases.test_get_factors",
+        "test_get_factors[input_data3-expected3]"
+      ],
+      [
+        "python_testcases.test_get_factors",
+        "test_get_factors[input_data4-expected4]"
+      ],
+      [
+        "python_testcases.test_get_factors",
+        "test_get_factors[input_data5-expected5]"
+      ],
+      [
+        "python_testcases.test_get_factors",
+        "test_get_factors[input_data6-expected6]"
+      ],
+      [
+        "python_testcases.test_get_factors",
+        "test_get_factors[input_data7-expected7]"
+      ],
+      [
+        "python_testcases.test_get_factors",
+        "test_get_factors[input_data8-expected8]"
+      ],
+      [
+        "python_testcases.test_get_factors",
+        "test_get_factors[input_data9-expected9]"
+      ],
+      [
+        "python_testcases.test_get_factors",
+        "test_get_factors[input_data10-expected10]"
+      ]
+    ],
+    "junit_expected_match": true,
+    "session_finished": true
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "role": "scheduler",
+  "mode": "live",
+  "model_api_called": true,
+  "model": "deepseek-v4.1-flash-1017",
+  "call_id": "m-5286e377718c4afeb230f45f4f47a7cf",
+  "status": "ok",
+  "provider_id": "aliyun_maas",
+  "price_version": "operator-delegated-estimate-2026-11-06;aliyun-bailian-ds-class-peak",
+  "usage": {
+    "prompt_tokens": 1481,
+    "total_tokens": 1681,
+    "completion_tokens": 200,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024,
+      "image_tokens": 0,
+      "text_tokens": 1481
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 99,
+      "text_tokens": 100
+    }
+  },
+  "cost": {
+    "status": "estimated",
+    "currency": "CNY",
+    "amount_cny": "0.004562",
+    "amount_usd": null,
+    "account_id": "aliyun_maas",
+    "basis": "configured_CNY_rates_not_provider_invoice",
+    "budget": {
+      "currency": "CNY",
+      "basis": "project_ledger_estimate_not_platform_balance",
+      "accounts": [
+        {
+          "account_id": "aliyun_maas",
+          "provider_id": "aliyun_maas",
+          "currency": "CNY",
+          "authorized_cny": "16",
+          "estimated_spent_cny": "1.047048",
+          "reserved_cny": "0",
+          "unsettled_calls": 0,
+          "estimated_remaining_cny": "14.952952",
+          "remaining_after_reservations_cny": "14.952952",
+          "warning_threshold_cny": "3",
+          "low_balance": false,
+          "status": "estimated"
+        }
+      ],
+      "alerts": [],
+      "paid_calls_blocked": false
+    }
+  },
+  "attempts": 1,
+  "max_attempts": 1,
+  "transport_request_started": true,
+  "failure_class": null,
+  "raw_text": "{\"action\":\"final_check\",\"reason\":\"开发测试证据 test-development-1 显示当前代码版本的 6 条原生测试全部通过，退出码为 0，未观察到失败；但按规则开发测试通过不等于最终成功，应建议由评测端在干净副本中独立重跑同一套冻结测试进行验收，本轮不宣布成功。\",\"evidence_ids\":[\"test-development-1\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+  "provider_model": "deepseek-v4.1-flash-1017",
+  "provider_response_id": "chatcmpl-45d6aafc-52ea-929e-bedf-b5f3cc245ee2",
+  "duration_ms": 3824,
+  "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+  "round": 1,
+  "provenance": {
+    "role_override": {},
+    "role_overrides_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "protocol": "codefix-json-v1",
+    "parser_version": "1.0.0",
+    "config_version": "1.1.0",
+    "effective_config": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "aliyun_maas_ds_v41_flash"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "aliyun_maas_ds_v41_flash"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "aliyun_maas_ds_v41_flash"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "aliyun_maas_ds_v41_flash"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "config_sha256": "6a7361c9c07578fd92aa853fcd4df9745be730b5a1469caebc3b03c935ab9dc0",
+    "prompt_ref": "prompts/scheduler.md",
+    "prompt_sha256": "345b41671e2e47938111ac6ff5d93ab28bc2cd4e6dc289594eaa8c889d8eb79a",
+    "system_prompt_sha256": "345b41671e2e47938111ac6ff5d93ab28bc2cd4e6dc289594eaa8c889d8eb79a",
+    "messages_sha256": "945f965abaf141c13a011f05696c171884af451f15fe9d48d9a43df863dce1f9",
+    "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "model_binding": {
+      "model_ref": "scheduler",
+      "binding": "approved_profile",
+      "profile_ref": "aliyun_maas_ds_v41_flash",
+      "mode": "live",
+      "provider_id": "aliyun_maas",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "operator-delegated-estimate-2026-11-06;aliyun-bailian-ds-class-peak",
+      "base_url": "https://ws-twhbaof7fzagz198.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+      "profiles_sha256": "c54db8d1e6390aa74642b848874f9012d8da34cd579da7e6c67afec427513f42",
+      "effective_parameters": {
+        "max_tokens": 8192
+      },
+      "request_seconds": 120.0,
+      "currency": "CNY",
+      "account_id": "aliyun_maas",
+      "total_account_cny": "16",
+      "total_team_cny": "32",
+      "warning_balance_cny": "3",
+      "input_cny_per_million": "2",
+      "output_cny_per_million": "8",
+      "billable_output_tokens": 8192,
+      "effective_parameters_sha256": "a2fcc2d3c58b3d90310d549cde894b97d7e57f62a6c6ea75b33ccc0b0e0c7745"
+    }
+  },
+  "step_id": "s-aaa56dc7f8964d929de6ecbe72952164",
+  "parent_step_id": "s-003b7b013cf44e2e9689aadc61ed95fe",
+  "parsed_output": {
+    "action": "final_check",
+    "reason": "开发测试证据 test-development-1 显示当前代码版本的 6 条原生测试全部通过，退出码为 0，未观察到失败；但按规则开发测试通过不等于最终成功，应建议由评测端在干净副本中独立重跑同一套冻结测试进行验收，本轮不宣布成功。",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "knowledge_citations": [
+      "knowledge-public_tasks",
+      "knowledge-testing"
+    ]
+  }
+}
