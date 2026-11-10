@@ -1,4 +1,4 @@
-"""Two-container trust boundary for registered pure JSON functions only.
+"""Two-container trust boundary for registered JSON and closed typed interfaces.
 
 Only the candidate container imports candidate bytes. The trusted test container
 has tests and a fixed proxy, and alone generates reports. Shared volume contains
@@ -17,30 +17,22 @@ from c_runner.runner import compute_test_suite_version, parse_evidence
 from .docker_runner import DockerRunner, IsolationBlocked, ROOT
 from .runner import code_version
 
-# Reviewed pure-JSON adapters.  Registration is per task, not per dataset: the
-# only thing a name unlocks is "call this one function with JSON args inside the
-# candidate container".  Every entry below was reviewed against the pinned test
-# for three properties, and an entry that fails any of them stays out:
-#   1. the module exports exactly that callable and the pinned test imports it
-#      by that name;
-#   2. every argument the pinned test passes survives a JSON round-trip
-#      unchanged (no `node.Node` graphs, no tuple-keyed dicts);
-#   3. the return value the pinned test compares survives a JSON round-trip
-#      unchanged (no sets, no tuples, no generators, no Infinity).
-# The one reviewed exception to (3) is MATERIALIZE_AS_LIST: those functions
-# return a generator and their pinned test compares `list(f(...))`.  The
-# candidate endpoint applies exactly that `list(...)` before serialising, so the
-# RPC side evaluates the same expression the native test evaluates.  It is
-# declared per function -- returns of every other entry are never coerced -- and
-# mirrored in docker/candidate_rpc.py, with a regression test pinning equality.
-# Excluded on purpose: breadth_first_search, depth_first_search, detect_cycle,
-# reverse_linked_list, shortest_path_length, shortest_paths, topological_ordering,
-# shortest_path_lengths (Node objects / tuple keys), hanoi (list of tuples),
-# minimum_spanning_tree (set).  Isolation controls are identical for every
-# entry; this table only decides which function may be invoked over the RPC
-# socket.
+# Explicit per-task RPC admission. Existing JSON adapters retain their wire
+# format; ten additional interfaces use the closed v2 codec. Registration does
+# not bypass execution approval, isolation preflight or frozen-test verification.
 FUNCTIONS = {
     'leap': 'is_leap',
+    'qb-topological_ordering': 'topological_ordering',
+    'qb-shortest_path_length': 'shortest_path_length',
+    'qb-reverse_linked_list': 'reverse_linked_list',
+    'qb-detect_cycle': 'detect_cycle',
+    'qb-depth_first_search': 'depth_first_search',
+    'qb-breadth_first_search': 'breadth_first_search',
+    'qb-shortest_path_lengths': 'shortest_path_lengths',
+    'qb-shortest_paths': 'shortest_paths',
+    'qb-minimum_spanning_tree': 'minimum_spanning_tree',
+    'qb-hanoi': 'hanoi',
+    'qb-shunting_yard': 'shunting_yard',
     'qb-bitcount': 'bitcount',
     'qb-bucketsort': 'bucketsort',
     'qb-find_first_in_sorted': 'find_first_in_sorted',
@@ -101,20 +93,29 @@ class SplitDockerRunner(DockerRunner):
     def preflight(self, evidence_dir):
         if self.task.project not in FUNCTIONS:
             folder = Path(evidence_dir); folder.mkdir(parents=True, exist_ok=True)
-            report = {'isolation_ready': False, 'reason': 'Task has no approved pure JSON RPC adapter'}
+            report = {'isolation_ready': False, 'reason': 'Task has no approved RPC adapter'}
             (folder/'isolation.json').write_text(json.dumps(report),encoding='utf-8')
             return report
         return super().preflight(evidence_dir)
 
     def command(self, *args):
-        command = super().command(*args)
+        command = self._with_codec(super().command(*args))
         if getattr(self, 'rpc_volume', None):
             command[2:2] = ['--mount', f'type=volume,source={self.rpc_volume},target=/rpc,readonly']
+        return command
+
+    @staticmethod
+    def _with_codec(command):
+        codec = ROOT / 'docker/rpc_codec.py'
+        if ',' in str(codec) or codec.is_symlink() or getattr(codec, 'is_junction', lambda: False)():
+            raise IsolationBlocked('RPC codec mount must be a fixed regular path')
+        command[2:2] = ['--mount', f'type=bind,source={codec.resolve()},target=/rpc_codec.py,readonly']
         return command
 
     def _candidate_command(self, name, candidate, volume):
         command = super().command(name, candidate, candidate, ROOT / 'docker/candidate_rpc.py',
                                   ['/entry.py', '/w/' + self.task.source])
+        command = self._with_codec(command)
         command[2:2] = ['-d', '--mount', f'type=volume,source={volume},target=/rpc']
         # 候选容器的 stderr 是审计通道（audit hook 固定前缀），必须可读；
         # 基础命令里的 --log-driver=none 会丢弃它，这里换成有上限的 json-file。
@@ -180,7 +181,7 @@ class SplitDockerRunner(DockerRunner):
         if not self.ready:
             raise IsolationBlocked('Isolation probe required')
         if self.task.project not in FUNCTIONS:
-            raise IsolationBlocked('Task has no approved pure JSON RPC adapter')
+            raise IsolationBlocked('Task has no approved RPC adapter')
         function = FUNCTIONS[self.task.project]
         if not isinstance(function, str) or not function.isidentifier() or keyword.iskeyword(function):
             raise IsolationBlocked('RPC function must be a non-keyword Python identifier')

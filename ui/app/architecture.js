@@ -82,7 +82,10 @@
       const visible=following?events:events.slice(0,index+1),finished=visible.some(e=>e.event==='finished');
       const viewRun=following||finished?run:{...run,status:visible.some(e=>e.event==='started')?'running':'created',result:null};
       const p=projection(viewRun,visible,trace),drawnPaths=[];canvas.replaceChildren();steps.replaceChildren();
-      state.textContent=following?'实时事件视图':replaying?`历史回放 · ${index+1}/${events.length} · 仅播放已记录事件`:pausedAt!==null?`回放已暂停 · ${index+1}/${events.length}`:replayEnded?'回放结束 · 已播放全部已记录事件':'历史查看 · 不执行任务';
+      // Source describes the complete record, not the prefix at the playhead.
+      // A real request does not by itself prove isolation or final acceptance.
+      const replaySource={real_requests:'真实历史回放',simulation:'离线／模拟回放',baseline:'基线历史回放',unknown:'历史回放（来源未确认）'}[trace.provenanceKind(run,events)];
+      state.textContent=following?(run.status==='running'?'实时事件视图':`${replaySource} · 记录查看 · 不执行任务`):replaying?`${replaySource} · ${index+1}/${events.length} · 仅播放已记录事件`:pausedAt!==null?`${replaySource} · 回放已暂停 · ${index+1}/${events.length}`:replayEnded?`${replaySource} · 回放结束 · 已播放全部已记录事件`:`${replaySource} · 历史查看 · 不执行任务`;
       play.textContent=pausedAt!==null?'继续回放':replayEnded?'重新回放':'历史回放';
       fromStep.disabled=replaying||selectedStart()<0;updatePending();
       state.setAttribute('role','status');follow.disabled=following;back.disabled=!events.length||(!following&&index===0);next.disabled=!events.length||following||index>=events.length-1;play.disabled=!events.length||replaying;pause.disabled=!replaying;

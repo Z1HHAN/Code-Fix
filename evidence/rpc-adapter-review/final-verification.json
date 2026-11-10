@@ -1,0 +1,17 @@
+{
+  "scope": "assistant local offline verification, not B Docker or C personal signoff",
+  "command": "python -B -X utf8 -m pytest -q tests c_tests -p no:cacheprovider --basetemp=runs/rpc-final-combined --junitxml=evidence/rpc-adapter-review/final-combined.xml --tb=short",
+  "result": {
+    "passed": 656,
+    "skipped": 1,
+    "warnings": 1,
+    "seconds": 221.99
+  },
+  "source_manifest": "final-combined-source-before.json",
+  "verified_source_files": 169,
+  "changed_during_run": [],
+  "head": "aa34002e5b6941cf17797c1b8b7cc3bc4e3e3dfb",
+  "remote_main": "731dc0060b7b46c3d434fd85c8fea197f669df34",
+  "remote_B": "43efb37a16e00a61be8aed9b81a2f5d0bd3614b0",
+  "published": false
+}

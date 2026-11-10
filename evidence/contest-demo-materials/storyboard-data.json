@@ -1,0 +1,32 @@
+{
+  "scope": "offline visual storyboard, not final PPTX or independent acceptance",
+  "slides": 12,
+  "model_requests": 0,
+  "task_starts": 0,
+  "comparison_totals": {
+    "fixed": {
+      "success": 3,
+      "requests": 9,
+      "estimated_cny": "0.073248",
+      "sum_elapsed_seconds": "133.469204"
+    },
+    "dynamic": {
+      "success": 3,
+      "requests": 9,
+      "estimated_cny": "0.074780",
+      "sum_elapsed_seconds": "144.553288"
+    }
+  },
+  "historical_coverage": {
+    "date": "2026-11-06",
+    "source": "evidence/quixbugs-batch1.md",
+    "source_sha256": "718e3d6c7fd4a680b2aa0066da71eaaebf598a569a6ce578a7c2040c3c8f8eea",
+    "max_rounds": 3,
+    "max_calls": 12,
+    "total_seconds": 600,
+    "traversed": 40,
+    "reported_final_passed": 29,
+    "preflight_blocked": 11,
+    "caveat": "Summary includes reruns and configuration fixes; not a frozen first-attempt success-rate estimate"
+  }
+}

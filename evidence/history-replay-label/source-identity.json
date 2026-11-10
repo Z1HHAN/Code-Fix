@@ -1,0 +1,9 @@
+{
+  "scope": "assistant local development, not B execution or C signoff",
+  "baseline": "aa34002e5b6941cf17797c1b8b7cc3bc4e3e3dfb",
+  "files": {
+    "ui/app/trace.js": "3d200b6cd8bda3137e9c80d7885a44d5001d80ae78184d2c75e35937d6c930cf",
+    "ui/app/architecture.js": "802c1339343d3f61b6ba6cc84e17abfec21c1c2f3c3bc54235de656410f62219",
+    "tests/ui_architecture.test.cjs": "b164e36bf8ad38667750d9bd371ef1b624e5483d247f6b504e4ce214ceb10d8a"
+  }
+}

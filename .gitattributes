@@ -104,3 +104,11 @@ evidence/contest-delivery/** -text -whitespace
 # Received B live-run originals and the separate receipt review retain exact bytes.
 evidence/contest-strategies-config-comparison/** -text -whitespace
 evidence/contest-receipt-review/** -text -whitespace
+
+# Current coverage inventory, development results and presentation sources.
+evidence/quixbugs-coverage-review/** -text -whitespace
+evidence/contest-demo-materials/** -text -whitespace
+
+# Local development originals retain exact bytes.
+evidence/history-replay-label/** -text -whitespace
+evidence/rpc-adapter-review/** -text -whitespace

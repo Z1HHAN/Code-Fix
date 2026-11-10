@@ -38,14 +38,16 @@ const watchdog=setTimeout(()=>{browser.kill();process.exit(1);},90000);
   assert.equal((await(await fetch(base+'/api/v3/tasks/'+rid)).json()).task.max_calls,12);
   await s('Emulation.setDeviceMetricsOverride',{width:720,height:1000,deviceScaleFactor:1,mobile:false});await shot('narrow');
 
+  await wait("!document.getElementById('comparison-create').disabled&&JSON.parse(document.getElementById('comparison-plan').value).pairs.length===40");
+  const defaultProjects=await ev("JSON.parse(document.getElementById('comparison-plan').value).pairs.map(p=>p.project)");assert.equal(new Set(defaultProjects).size,40);assert.ok(!defaultProjects.includes('leap'));assert.ok(defaultProjects.includes('qb-reverse_linked_list'));
   await ev("document.querySelector('[data-view=comparisons]').click();document.querySelector('#comparison-plan').parentElement.parentElement.open=true;document.getElementById('comparison-create').click()");
   await wait("!document.getElementById('comparison-results').hidden");
-  const cmp=await ev("JSON.parse(document.getElementById('comparison-json').textContent)");assert.equal(cmp.summary.fixed.not_run,3);assert.equal(cmp.summary.dynamic.success_rate_executed,null);
+  const cmp=await ev("JSON.parse(document.getElementById('comparison-json').textContent)");assert.equal(cmp.summary.fixed.not_run,40);assert.equal(cmp.summary.dynamic.not_run,40);assert.equal(cmp.summary.dynamic.success_rate_executed,null);
   const response=await fetch(base+'/api/v3/comparisons/'+cmp.comparison_id+'/export?format=csv');assert.equal(response.status,200);assert.match(await response.text(),/qb-get_factors/);
   const png=await ev("document.getElementById('comparison-chart').toDataURL('image/png')");fs.writeFileSync(path.join(out,'comparison-export.png'),Buffer.from(png.split(',')[1],'base64'));await shot('comparisons');
   await s('Page.reload');await sleep(500);await wait("document.querySelectorAll('#comparison-record option').length>1");
   await ev("document.getElementById('comparison-record').value='"+cmp.comparison_id+"';document.getElementById('comparison-record').dispatchEvent(new Event('change'))");await wait("!document.getElementById('comparison-results').hidden");
   assert.equal((await(await fetch(base+'/api/v3/tasks/'+rid)).json()).status,'created');
   assert.equal(errors.length,0,JSON.stringify(errors));assert.ok(writes.every(url=>!url.endsWith('/start')));
-  const result={scope:'local-browser-no-model-no-docker',run_id:rid,config_id:config,passed:true,errors,writes};fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result));
+  const result={scope:'local-browser-no-model-no-docker',run_id:rid,config_id:config,comparison_id:cmp.comparison_id,default_projects:defaultProjects,summary:cmp.summary,passed:true,errors,writes};fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result));
 })().catch(e=>{console.error(e);process.exitCode=1;}).finally(()=>{clearTimeout(watchdog);socket?.close();browser.kill();});

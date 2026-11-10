@@ -1,0 +1,81 @@
+{
+  "scope": "A-side real B history browser review; no UI task creation/start, model request or Docker execution",
+  "original_B_commit": "43efb37",
+  "inspected": [
+    {
+      "run_id": "run-0847d6ab11644e69aeb21d23d1e68871",
+      "project": "qb-gcd",
+      "strategy": "dynamic",
+      "status": "success",
+      "cost": "0.028106",
+      "report_equal": true,
+      "bundle_readable": true,
+      "final_log_visible": true
+    },
+    {
+      "run_id": "run-0ec9da90642c4c5784da4734b8f69270",
+      "project": "qb-max_sublist_sum",
+      "strategy": "fixed",
+      "status": "success",
+      "cost": "0.026082",
+      "report_equal": true,
+      "bundle_readable": true,
+      "final_log_visible": true
+    },
+    {
+      "run_id": "run-2027f3554be444788651e7a96a64d2fd",
+      "project": "qb-gcd",
+      "strategy": "fixed",
+      "status": "success",
+      "cost": "0.023506",
+      "report_equal": true,
+      "bundle_readable": true,
+      "final_log_visible": true
+    },
+    {
+      "run_id": "run-24ee936a26144ebdabc74d62f2d256c1",
+      "project": "qb-get_factors",
+      "strategy": "fixed",
+      "status": "success",
+      "cost": "0.02366",
+      "report_equal": true,
+      "bundle_readable": true,
+      "final_log_visible": true
+    },
+    {
+      "run_id": "run-e9993ae6676543149fd36e08a8bc89f2",
+      "project": "qb-max_sublist_sum",
+      "strategy": "dynamic",
+      "status": "success",
+      "cost": "0.025864",
+      "report_equal": true,
+      "bundle_readable": true,
+      "final_log_visible": true
+    },
+    {
+      "run_id": "run-fc80fc68ed934a4d9b7de6d0d36f9b91",
+      "project": "qb-get_factors",
+      "strategy": "dynamic",
+      "status": "success",
+      "cost": "0.02081",
+      "report_equal": true,
+      "bundle_readable": true,
+      "final_log_visible": true
+    }
+  ],
+  "comparison_id": "cmp-d09069c8a415e694f921b145c9c00daf039df7c34698d9e9baf3d1003a7008ff",
+  "comparison_json_equal": true,
+  "csv_equal": true,
+  "replay_pause": true,
+  "reload_no_start": true,
+  "errors": [],
+  "writes": [],
+  "badResponses": [],
+  "warnings": [
+    {
+      "url": "http://127.0.0.1:8784/favicon.ico",
+      "status": 404
+    }
+  ],
+  "passed": true
+}

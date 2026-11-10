@@ -1,0 +1,46 @@
+{
+  "status": "draft_not_C_accepted_not_rehearsed",
+  "functional_commit": "ebc7450973081fe95d88a777f49f26633aa5d851",
+  "B_commit": "43efb37a16e00a61be8aed9b81a2f5d0bd3614b0",
+  "comparison_id": "cmp-d09069c8a415e694f921b145c9c00daf039df7c34698d9e9baf3d1003a7008ff",
+  "run_ids": [
+    "run-24ee936a26144ebdabc74d62f2d256c1",
+    "run-fc80fc68ed934a4d9b7de6d0d36f9b91",
+    "run-2027f3554be444788651e7a96a64d2fd",
+    "run-0847d6ab11644e69aeb21d23d1e68871",
+    "run-0ec9da90642c4c5784da4734b8f69270",
+    "run-e9993ae6676543149fd36e08a8bc89f2"
+  ],
+  "statistics": [
+    [
+      "固定顺序",
+      "3/3",
+      3,
+      9,
+      "0.073248",
+      "133.47"
+    ],
+    [
+      "动态编排",
+      "3/3",
+      3,
+      9,
+      "0.074780",
+      "144.55"
+    ]
+  ],
+  "target_duration_seconds": 390,
+  "contains_paid_dispatch": false,
+  "presentation_format": "HTML; PPTX runtime unavailable",
+  "pending": [
+    "B UI initiation",
+    "nonempty role overrides live",
+    "real controlled branches",
+    "per-file source identity",
+    "per-call ledger",
+    "C personal acceptance",
+    "second provider real verification",
+    "formal video",
+    "full rehearsal"
+  ]
+}

@@ -132,18 +132,23 @@ def test_static_analysis_does_not_run_top_level_code():
 @pytest.mark.parametrize('persistent', [False, True])
 def test_windows_permission_failure_is_bounded_and_registry_remains_safe(tmp_path, monkeypatch, persistent):
     import app.quixbugs_import as module
+    from types import SimpleNamespace
     path = empty_registry(tmp_path)
     original = path.read_bytes()
     rename = Path.rename
     attempts = []
     waits = []
     def denied(source, destination):
+        if not source.is_relative_to(tmp_path):
+            return rename(source, destination)
         attempts.append(source)
         if persistent or len(attempts) == 1:
             raise PermissionError('injected file move denial')
         return rename(source, destination)
     monkeypatch.setattr(module.Path, 'rename', denied)
-    monkeypatch.setattr(module.time, 'sleep', waits.append)
+    # Replacing time.sleep itself also intercepts background service threads.
+    # Keep the exact retry assertions while limiting the double to this module.
+    monkeypatch.setattr(module, 'time', SimpleNamespace(sleep=waits.append))
     if persistent:
         with pytest.raises(PermissionError):
             import_dataset(root=tmp_path, write=True)

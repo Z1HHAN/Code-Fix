@@ -1,0 +1,108 @@
+{
+  "scope": "local-browser-no-model-no-docker",
+  "run_id": "run-4f0a7be60b7746209323e295d2c363db",
+  "config_id": "cfg-f53dd12c9d2f834ab0e055c159f3f7684bf742ed9c5547a7b87469d121d7484a",
+  "comparison_id": "cmp-d0b6dfba2cfac0aaff1fe0ede8b747aef401299a5ebfc2a0d806358b6017d3b3",
+  "default_projects": [
+    "qb-bitcount",
+    "qb-breadth_first_search",
+    "qb-bucketsort",
+    "qb-depth_first_search",
+    "qb-detect_cycle",
+    "qb-find_first_in_sorted",
+    "qb-find_in_sorted",
+    "qb-flatten",
+    "qb-gcd",
+    "qb-get_factors",
+    "qb-hanoi",
+    "qb-is_valid_parenthesization",
+    "qb-kheapsort",
+    "qb-knapsack",
+    "qb-kth",
+    "qb-lcs_length",
+    "qb-levenshtein",
+    "qb-lis",
+    "qb-longest_common_subsequence",
+    "qb-max_sublist_sum",
+    "qb-mergesort",
+    "qb-minimum_spanning_tree",
+    "qb-next_palindrome",
+    "qb-next_permutation",
+    "qb-pascal",
+    "qb-possible_change",
+    "qb-powerset",
+    "qb-quicksort",
+    "qb-reverse_linked_list",
+    "qb-rpn_eval",
+    "qb-shortest_path_length",
+    "qb-shortest_path_lengths",
+    "qb-shortest_paths",
+    "qb-shunting_yard",
+    "qb-sieve",
+    "qb-sqrt",
+    "qb-subsequences",
+    "qb-to_base",
+    "qb-topological_ordering",
+    "qb-wrap"
+  ],
+  "summary": {
+    "fixed": {
+      "planned": 40,
+      "ran": 0,
+      "executed": 0,
+      "success": 0,
+      "failed": 0,
+      "blocked": 0,
+      "not_run": 40,
+      "success_rate_all": 0,
+      "success_rate_executed": null,
+      "candidate_rounds": 0,
+      "requests": 0,
+      "cost": {
+        "cny": {
+          "known_subtotal": "0",
+          "unknown_runs": 0,
+          "total": null
+        },
+        "usd": {
+          "known_subtotal": "0",
+          "unknown_runs": 0,
+          "total": null
+        }
+      }
+    },
+    "dynamic": {
+      "planned": 40,
+      "ran": 0,
+      "executed": 0,
+      "success": 0,
+      "failed": 0,
+      "blocked": 0,
+      "not_run": 40,
+      "success_rate_all": 0,
+      "success_rate_executed": null,
+      "candidate_rounds": 0,
+      "requests": 0,
+      "cost": {
+        "cny": {
+          "known_subtotal": "0",
+          "unknown_runs": 0,
+          "total": null
+        },
+        "usd": {
+          "known_subtotal": "0",
+          "unknown_runs": 0,
+          "total": null
+        }
+      }
+    }
+  },
+  "passed": true,
+  "errors": [],
+  "writes": [
+    "http://127.0.0.1:8783/api/v3/configurations/validate",
+    "http://127.0.0.1:8783/api/v3/configurations",
+    "http://127.0.0.1:8783/api/v3/tasks",
+    "http://127.0.0.1:8783/api/v3/comparisons"
+  ]
+}

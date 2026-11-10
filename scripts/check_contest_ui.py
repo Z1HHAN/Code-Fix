@@ -17,7 +17,7 @@ def main():
     os.chdir(ROOT)
     os.environ['CODE_FIX_CONFIG_BROWSER_URL'] = 'http://127.0.0.1:8783'
     os.environ.setdefault('CODE_FIX_CONFIG_BROWSER_OUTPUT', 'runs/contest-browser')
-    server = uvicorn.Server(uvicorn.Config(create_app('runs/contest-browser-store'),
+    server = uvicorn.Server(uvicorn.Config(create_app(os.environ.get('CODE_FIX_CONFIG_BROWSER_STORE', 'runs/contest-browser-store')),
                                          host='127.0.0.1', port=8783, log_level='warning'))
     thread = threading.Thread(target=server.run, daemon=True)
     thread.start()

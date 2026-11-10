@@ -21,10 +21,16 @@ window.CodeFixComparisons=(()=>{
   async function load(){
     if(loading)return;loading=true;try{const rows=await(await api('/comparisons')).json(),select=byId('comparison-record');select.replaceChildren(element('option','选择对照记录'));for(const r of rows){const o=element('option',r.title+' · '+scopes[r.scope]);o.value=r.comparison_id;select.append(o);}if(current)select.value=current.comparison_id;display('comparison-message',rows.length?'已读取对照记录；不会启动任务。':'尚无对照记录。请先完成运行或明确登记未运行项。');}catch(e){display('comparison-message',e.message);}finally{loading=false;}
   }
-  function init(){
-    byId('comparison-plan').value=JSON.stringify({title:'赛事三题配对',scope:'formal',pairs:['qb-get_factors','qb-gcd','qb-max_sublist_sum'].map(project=>({project,fixed:null,dynamic:null,not_run_reason:{fixed:'待B机资格核对与真实运行',dynamic:'待B机资格核对与真实运行'}}))},null,2);
+  async function init(){
     byId('comparison-refresh').onclick=load;byId('comparison-record').onchange=async e=>{if(!e.target.value)return;try{show(await(await api('/comparisons/'+e.target.value)).json());}catch(error){display('comparison-message',error.message);}};
     byId('comparison-create').onclick=async()=>{const b=byId('comparison-create');b.disabled=true;try{const plan=JSON.parse(byId('comparison-plan').value),data=await(await api('/comparisons',{method:'POST',body:JSON.stringify(plan)})).json();show(data);await load();display('comparison-message','已保存证据快照；未启动任何任务。');}catch(e){display('comparison-message','未保存：'+e.message);}finally{b.disabled=false;}};
+    const create=byId('comparison-create');create.disabled=true;
+    try{
+      const registered=await(await api('/projects')).json(),projects=registered.map(p=>p.project).filter(p=>p.startsWith('qb-')).sort();
+      if(projects.length!==40)throw new Error('登记题目不是预期的40道QuixBugs-Python，请核对正式范围。');
+      if(!byId('comparison-plan').value.trim())byId('comparison-plan').value=JSON.stringify({title:'QuixBugs-Python 全量40题配对',scope:'formal',pairs:projects.map(project=>({project,fixed:null,dynamic:null,not_run_reason:{fixed:'待本批资格核对与同版本配对',dynamic:'待本批资格核对与同版本配对'}}))},null,2);
+    }catch(e){display('comparison-message','默认清单未生成：'+e.message);}
+    finally{create.disabled=false;}
     if(location.hash==='#comparisons')load();
   }
   return {init,load};

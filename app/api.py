@@ -46,7 +46,10 @@ def create_app(root=None):
             if not provided.isascii() or not secrets.compare_digest(provided, token):
                 return JSONResponse({'detail': '会话令牌无效；刷新页面后重试'}, status_code=403)
             size = request.headers.get('content-length')
-            limit = 131072 if request.url.path in {'/api/v3/configurations', '/api/v3/configurations/validate'} else 8192
+            limit = 131072 if request.url.path in {
+                '/api/v3/configurations', '/api/v3/configurations/validate',
+                '/api/v3/comparisons',
+            } else 8192
             if size and (not size.isdecimal() or int(size) > limit):
                 return JSONResponse({'detail': '请求体过大'}, status_code=413)
         response = await call_next(request)
@@ -99,7 +102,8 @@ def create_app(root=None):
     async def comparison_create(request: Request):
         import json
         try:
-            value = json.loads(await limited_body(request, 8192))
+            # Forty pairs with two 500-character UTF-8 reasons fit in 128 KiB.
+            value = json.loads(await limited_body(request, 131072))
         except (json.JSONDecodeError, UnicodeDecodeError):
             raise HTTPException(422, '无效JSON') from None
         return comparisons.create(value)

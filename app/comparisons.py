@@ -12,7 +12,21 @@ from .run_store import now
 from .tasks_v3 import get_task
 
 STRATEGIES = ('fixed', 'dynamic')
-FORMAL_PROJECTS = {'qb-get_factors', 'qb-gcd', 'qb-max_sublist_sum'}
+# A-approved QuixBugs-Python scope. New registrations need explicit admission;
+# collecting a plan does not qualify adapters or dispatch any of these tasks.
+FORMAL_PROJECTS = frozenset({
+    'qb-bitcount', 'qb-breadth_first_search', 'qb-bucketsort',
+    'qb-depth_first_search', 'qb-detect_cycle', 'qb-find_first_in_sorted',
+    'qb-find_in_sorted', 'qb-flatten', 'qb-gcd', 'qb-get_factors', 'qb-hanoi',
+    'qb-is_valid_parenthesization', 'qb-kheapsort', 'qb-knapsack', 'qb-kth',
+    'qb-lcs_length', 'qb-levenshtein', 'qb-lis', 'qb-longest_common_subsequence',
+    'qb-max_sublist_sum', 'qb-mergesort', 'qb-minimum_spanning_tree',
+    'qb-next_palindrome', 'qb-next_permutation', 'qb-pascal',
+    'qb-possible_change', 'qb-powerset', 'qb-quicksort', 'qb-reverse_linked_list',
+    'qb-rpn_eval', 'qb-shortest_path_length', 'qb-shortest_path_lengths',
+    'qb-shortest_paths', 'qb-shunting_yard', 'qb-sieve', 'qb-sqrt',
+    'qb-subsequences', 'qb-to_base', 'qb-topological_ordering', 'qb-wrap',
+})
 
 
 def amount(value):
@@ -133,7 +147,7 @@ class ComparisonStore:
             if project in seen_projects:
                 raise InputValidationError('同一清单题目不能重复；不接受挑选最佳重跑')
             if value['scope'] == 'formal' and project not in FORMAL_PROJECTS:
-                raise InputValidationError('正式计划仅包含已批准的三道题目')
+                raise InputValidationError('正式计划仅包含已批准的40道QuixBugs-Python题目')
             seen_projects.add(project)
             reasons = pair['not_run_reason']
             if not isinstance(reasons, dict) or set(reasons) - set(STRATEGIES):

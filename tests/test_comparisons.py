@@ -1,5 +1,7 @@
 """Evidence-only paired summaries: offline executions never become formal data."""
 from copy import deepcopy
+import csv
+import io
 import json
 
 from fastapi.testclient import TestClient
@@ -10,6 +12,7 @@ from app.comparisons import ComparisonStore, export_csv
 from app.errors import InputValidationError
 from app.role_config import digest
 from app.run_store import RunStore
+from app.tasks_v3 import catalog
 from test_workflow_v3 import execute
 
 
@@ -150,3 +153,55 @@ def test_approved_plan_can_record_missing_qualification_without_fake_run(tmp_pat
     assert result['summary']['fixed']['success_rate_all'] == 0
     assert result['summary']['fixed']['success_rate_executed'] is None
     assert result['summary']['fixed']['not_run'] == 3
+
+
+def test_full_quixbugs_manifest_exports_without_tasks_or_changing_old_snapshot(tmp_path, monkeypatch):
+    app = create_app(tmp_path)
+    service = app.state.service
+    monkeypatch.setattr(service, 'run_claimed', lambda *_: pytest.fail('Comparison dispatched a task'))
+    projects = sorted(p for p in catalog() if p.startswith('qb-'))
+    assert len(projects) == 40
+    value = {'title': '全量40题，资格和真实配对待核', 'scope': 'formal', 'pairs': [
+        {'project': p, 'fixed': None, 'dynamic': None,
+         'not_run_reason': {'fixed': '待' * 500, 'dynamic': '待' * 500}}
+        for p in projects]}
+    body = json.dumps(value, ensure_ascii=False, separators=(',', ':')).encode()
+    assert 8192 < len(body) < 131072
+    with TestClient(app) as client:
+        headers = {'X-Codefix-Token': client.get('/api/v3/session').json()['token']}
+        old = client.post('/api/v3/comparisons', headers=headers,
+                          json=value | {'title': '历史三题快照', 'pairs': value['pairs'][:3]})
+        assert old.status_code == 201, old.text
+        old_url = '/api/v3/comparisons/' + old.json()['comparison_id']
+        old_bytes = client.get(old_url).content
+        response = client.post('/api/v3/comparisons', headers=headers, content=body)
+        assert response.status_code == 201, response.text
+        saved = response.json()
+        url = '/api/v3/comparisons/' + saved['comparison_id']
+        for strategy in ('fixed', 'dynamic'):
+            summary = saved['summary'][strategy]
+            assert summary['planned'] == summary['not_run'] == 40
+            assert summary['ran'] == summary['executed'] == summary['success'] == summary['blocked'] == 0
+            assert summary['success_rate_all'] == 0
+            assert summary['success_rate_executed'] is None
+            assert summary['cost']['cny']['total'] is None
+        assert client.get(url).json() == client.get(url + '/export').json() == saved
+        exported = client.get(url + '/export?format=csv')
+        assert exported.status_code == 200
+        rows = list(csv.DictReader(io.StringIO(exported.text.lstrip('\ufeff'))))
+        assert len(rows) == 80
+        assert {r['project'] for r in rows} == set(projects)
+        assert all(r['status'] == 'not_run' and not r['run_id'] and not r['amount_cny'] for r in rows)
+        # Chunked writes obey the same bound, while task creation retains 8 KiB.
+        streamed = client.post('/api/v3/comparisons', headers=headers,
+                               content=iter(body[i:i+16000] for i in range(0, len(body), 16000)))
+        assert streamed.status_code == 201, streamed.text
+        assert streamed.json() == saved
+        assert client.post('/api/v3/tasks', headers=headers, content=body).status_code == 413
+        assert client.post('/api/v3/comparisons', headers=headers, content=b' ' * 131073).status_code == 413
+        assert client.post('/api/v3/comparisons', headers=headers,
+                           content=iter([b' ' * 70000, b' ' * 70000])).status_code == 413
+        assert client.get(old_url).content == old_bytes
+        assert len(client.get('/api/v3/comparisons').json()) == 2
+        assert client.get('/api/v3/tasks').json() == []
+    assert service.store.list() == []
