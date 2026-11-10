@@ -1,0 +1,431 @@
+{
+  "scope": "A-side browser inspection of received B real histories; no UI task initiation",
+  "copied_store": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\b-real-replay-store-70d50200e0",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/theme.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/trace.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/config.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/architecture.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/budget.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/trace.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/architecture.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/polling.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/app.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/config.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/comparisons.js"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/session"
+    },
+    {
+      "method": "GET",
+      "path": "/favicon.ico"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/health"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/configuration/catalog"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/budget"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0ec9da90642c4c5784da4734b8f69270"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0ec9da90642c4c5784da4734b8f69270/events"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/configurations/cfg-6a8269e35bd95a18107ad4d7d3d9a3152ac7d70fc1215a682593b89a7ab136a2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0ec9da90642c4c5784da4734b8f69270/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/budget"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0847d6ab11644e69aeb21d23d1e68871"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0847d6ab11644e69aeb21d23d1e68871/events"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/configurations/cfg-667da81832b592fb4f808b87e2c33c69b7bf5374c3d37ed9ad9e7e5f1419a671"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0847d6ab11644e69aeb21d23d1e68871/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0847d6ab11644e69aeb21d23d1e68871/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0847d6ab11644e69aeb21d23d1e68871"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0847d6ab11644e69aeb21d23d1e68871/report"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0847d6ab11644e69aeb21d23d1e68871/bundle"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/budget"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0ec9da90642c4c5784da4734b8f69270"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0ec9da90642c4c5784da4734b8f69270/events"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/configurations/cfg-6a8269e35bd95a18107ad4d7d3d9a3152ac7d70fc1215a682593b89a7ab136a2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0ec9da90642c4c5784da4734b8f69270/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0ec9da90642c4c5784da4734b8f69270/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0ec9da90642c4c5784da4734b8f69270"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0ec9da90642c4c5784da4734b8f69270/report"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-0ec9da90642c4c5784da4734b8f69270/bundle"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/budget"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-2027f3554be444788651e7a96a64d2fd"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-2027f3554be444788651e7a96a64d2fd/events"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-2027f3554be444788651e7a96a64d2fd/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-2027f3554be444788651e7a96a64d2fd/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-2027f3554be444788651e7a96a64d2fd"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-2027f3554be444788651e7a96a64d2fd/report"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-2027f3554be444788651e7a96a64d2fd/bundle"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/budget"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-24ee936a26144ebdabc74d62f2d256c1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-24ee936a26144ebdabc74d62f2d256c1/events"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-24ee936a26144ebdabc74d62f2d256c1/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-24ee936a26144ebdabc74d62f2d256c1/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-24ee936a26144ebdabc74d62f2d256c1"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-24ee936a26144ebdabc74d62f2d256c1/report"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-24ee936a26144ebdabc74d62f2d256c1/bundle"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/budget"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-e9993ae6676543149fd36e08a8bc89f2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-e9993ae6676543149fd36e08a8bc89f2/events"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/configurations/cfg-667da81832b592fb4f808b87e2c33c69b7bf5374c3d37ed9ad9e7e5f1419a671"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-e9993ae6676543149fd36e08a8bc89f2/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-e9993ae6676543149fd36e08a8bc89f2/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-e9993ae6676543149fd36e08a8bc89f2"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-e9993ae6676543149fd36e08a8bc89f2/report"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-e9993ae6676543149fd36e08a8bc89f2/bundle"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/budget"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-fc80fc68ed934a4d9b7de6d0d36f9b91"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-fc80fc68ed934a4d9b7de6d0d36f9b91/events"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-fc80fc68ed934a4d9b7de6d0d36f9b91/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-fc80fc68ed934a4d9b7de6d0d36f9b91/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-fc80fc68ed934a4d9b7de6d0d36f9b91"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-fc80fc68ed934a4d9b7de6d0d36f9b91/report"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-fc80fc68ed934a4d9b7de6d0d36f9b91/bundle"
+    },
+    {
+      "method": "GET",
+      "path": "/"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/theme.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/trace.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/architecture.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/config.css"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/budget.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/trace.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/architecture.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/polling.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/app.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/config.js"
+    },
+    {
+      "method": "GET",
+      "path": "/assets/comparisons.js"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/projects"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/health"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/configuration/catalog"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/budget"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-fc80fc68ed934a4d9b7de6d0d36f9b91"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-fc80fc68ed934a4d9b7de6d0d36f9b91/events"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/configurations/cfg-667da81832b592fb4f808b87e2c33c69b7bf5374c3d37ed9ad9e7e5f1419a671"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/tasks/run-fc80fc68ed934a4d9b7de6d0d36f9b91/artifact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/comparisons"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/comparisons/cmp-d09069c8a415e694f921b145c9c00daf039df7c34698d9e9baf3d1003a7008ff"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v3/comparisons/cmp-d09069c8a415e694f921b145c9c00daf039df7c34698d9e9baf3d1003a7008ff/export"
+    }
+  ],
+  "mutations": 0,
+  "original_runs": 6,
+  "original_events": 210,
+  "states_unchanged": true,
+  "browser_exit_code": 1
+}

@@ -1,0 +1,21 @@
+{
+  "review_commit": "7d8a8ca1d6647e03d19c82d00fd0559d8267dbe1",
+  "functional_commit": "ebc7450973081fe95d88a777f49f26633aa5d851",
+  "functional_source_diff_empty": true,
+  "original_B_commit": "43efb37a16e00a61be8aed9b81a2f5d0bd3614b0",
+  "scope": "A-side read-only browser review of copied B histories; no UI task initiation or real C signoff",
+  "UI_sha256_after_browser": {
+    "ui/app/app.js": "919fd36769d2802498be06a1e92eeaea2b4b4ceb2742adade6e570a0bb1a9f38",
+    "ui/app/architecture.css": "75f4709490534e2fd39f49281787cd77b099592d5de87f57e2605fd485c7f6c0",
+    "ui/app/architecture.js": "98ec09420b3747a09bf86378f9b03ce673d23d4c25bc8b70de582b5e299bd1c1",
+    "ui/app/budget.js": "6db1431b247a10fa602b7ba68ef704c8b6cc822f0cf173a4c518c62ae6d41cc6",
+    "ui/app/comparisons.js": "29f7aac94d62424157b4c5015e95e5e2eb1356b143b1dba9947cf48cb59f15c3",
+    "ui/app/config.css": "2e9d8924611ff0b56f29e1e4e7da4984735b5fd1cd1ec9be619d1d551f22a143",
+    "ui/app/config.js": "1efa0fb4a3643e9bf0b7636472d0dd6fbeb7ad5619d7b16b9a23b69c7e9747bf",
+    "ui/app/index.html": "71bb2b36e85a5dd7085d730736d4d0811682576b8bf14da89df4e2ed1a66f98d",
+    "ui/app/polling.js": "0d4308c9e09dfc5a655daff2d1614171aae61105213c5a5b473feee119d553f9",
+    "ui/app/theme.css": "53b38181e137b35bb3ffca6f7b91d9276a2a6b1e1e2a62768c92b02569e37928",
+    "ui/app/trace.css": "fe79fcc0e95321b0af11c5f2d84189232389e1aba50e7e112e8e749d5fe73082",
+    "ui/app/trace.js": "0de20b220286aa1558e3b280566f6ea450720478743ff4aeb99113f620e0ff6c"
+  }
+}
