@@ -112,3 +112,7 @@ evidence/contest-demo-materials/** -text -whitespace
 # Local development originals retain exact bytes.
 evidence/history-replay-label/** -text -whitespace
 evidence/rpc-adapter-review/** -text -whitespace
+
+# Application cloud scripts keep Linux line endings; package remains binary.
+scripts/*execution*.sh text eol=lf
+deploy/cloud/*.zip binary

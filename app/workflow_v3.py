@@ -63,6 +63,9 @@ class Workflow:
         finally:
             self.runner, self.model = context.runner, context.model
             self.model_calls, self.tool_calls = context.model_calls, context.tool_calls
+            from .remote_runner import RemoteRunner
+            if isinstance(context.runner, RemoteRunner):
+                context.runner.close()
 
 
 class WorkflowRun:
@@ -77,12 +80,15 @@ class WorkflowRun:
         self.strategy = self.task.get('strategy', 'dynamic')
         self.definition = get_task(self.task['project'])
         self.source = self.definition.source
-        self.runner = self.runner or SplitDockerRunner(self.task['project'])
+        if self.runner is None:
+            from .remote_runner import execution_runner
+            self.runner = execution_runner(self.task['project'], local_factory=SplitDockerRunner)
         self.runner.cancelled = self.cancelled
         self.directory = self.store.directory(self.run_id)
         self.trace = RunTrace(self.store, self.run_id)
         self.latest_evidence = []
         self.deadline = time.monotonic() + self.task['total_seconds']
+        self.runner.deadline = self.deadline
         self.final = {'final_result': 'not_run', 'dev_result': 'not_run', 'rounds_used': 0,
                  'model_calls': 0, 'tool_calls': 0, 'model_api_called': False,
                  'mode': getattr(self.model, 'mode', 'live'), 'isolation_ready': False,
@@ -300,6 +306,10 @@ class WorkflowRun:
         self.store.event(self.run_id, {'event': 'isolation_checked', **isolation})
         self.trace.complete('ok' if isolation['isolation_ready'] else 'blocked', evidence_path='isolation', **isolation)
         self.final['isolation_ready'] = isolation['isolation_ready']
+        from .remote_runner import RemoteRunner
+        if isinstance(self.runner, RemoteRunner) and isolation['isolation_ready']:
+            # Probe resolves the immutable cloud image/build before model requests.
+            self.trace.write('trace/experiment.json', freeze(ROOT, self.task, self.definition, config, self.runner, self.model))
         self.boundary()
         if not isolation['isolation_ready']:
             blockers.append(isolation.get('reason', '隔离未就绪'))

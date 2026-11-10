@@ -6,10 +6,9 @@ from .runner import code_version
 from .tasks_v3 import get_task
 
 
-def run_public_baseline(store, run_id, runner=None):
+def _run_public_baseline(store, run_id, runner):
     run = store.get(run_id)
     task = get_task(run['task']['project'])
-    runner = runner or SplitDockerRunner(task.project)
     runner.cancelled = lambda: store.get(run_id)['control'] == 'stop' or store.get(run_id)['status'] not in {'created', 'running'}
     directory = store.directory(run_id)
     deadline = time.monotonic() + run['task']['total_seconds']
@@ -56,3 +55,13 @@ def run_public_baseline(store, run_id, runner=None):
     if stopped := boundary():
         return stopped
     return ('blocked' if tested['verification_status'] in {'not_run', 'inconclusive'} else 'stopped'), result
+
+
+def run_public_baseline(store, run_id, runner=None):
+    from .remote_runner import RemoteRunner, execution_runner
+    runner = runner or execution_runner(store.get(run_id)['task']['project'], local_factory=SplitDockerRunner)
+    try:
+        return _run_public_baseline(store, run_id, runner)
+    finally:
+        if isinstance(runner, RemoteRunner):
+            runner.close()

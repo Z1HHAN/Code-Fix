@@ -42,11 +42,13 @@ def code_identity(root, *, read_git=True):
 
 def freeze(root, task, definition, config, runner, model):
     from .split_runner import SplitDockerRunner
+    from .remote_runner import RemoteRunner
     from .model_profiles import ModelRouter
     registry = load_profiles(root)
     profiles = registry['profiles']
     # Type and transport originate in the running process, not a submitted label.
-    real = type(runner) is SplitDockerRunner and (model is None or type(model) is ModelRouter and model.mode == 'live')
+    remote = type(runner) is RemoteRunner and runner.transport_mode == 'live'
+    real = (type(runner) is SplitDockerRunner or remote) and (model is None or type(model) is ModelRouter and model.mode == 'live')
     def numeric_env(name):
         try:
             return str(positive_decimal(os.environ.get(name)))
@@ -67,7 +69,7 @@ def freeze(root, task, definition, config, runner, model):
                          'input_price': numeric_env(p['input_price_env']) if p else None,
                          'output_price': numeric_env(p['output_price_env']) if p else None,
                          'request_seconds': numeric_env(p['request_seconds_env']) if p else None}
-    identity = {'code': code_identity(root, read_git=real), 'project': task['project'], 'description': task['description'],
+    identity = {'code': code_identity(root, read_git=real and not remote), 'project': task['project'], 'description': task['description'],
                 'task_limits': {k: task[k] for k in ('max_rounds', 'max_calls', 'total_seconds')},
                 'approved_files': definition.profile['approved_files'],
                 'test_suite_version': definition.summary()['test_suite_version'],
@@ -75,6 +77,9 @@ def freeze(root, task, definition, config, runner, model):
                 'prompts_sha256': {r: p[1] for r, p in config.prompts.items()},
                 'profiles_sha256': digest(registry), 'bindings': bindings,
                 'image': getattr(runner, 'image', None)}
+    if remote:
+        identity['execution_endpoint'] = runner.url
+        identity['execution_server_build_sha256'] = runner.server_build_sha256
     return {'schema_version': 1, 'strategy': task.get('strategy', 'dynamic'),
             'execution_kind': 'real' if real else 'offline', 'identity': identity,
             'identity_sha256': digest(identity)}
