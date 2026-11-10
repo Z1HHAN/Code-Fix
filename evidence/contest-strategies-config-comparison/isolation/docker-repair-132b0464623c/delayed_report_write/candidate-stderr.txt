@@ -1,0 +1,4 @@
+CODEFIX_AUDIT {"event": "artifact_write", "detail": "/out/junit.xml"}
+CODEFIX_AUDIT {"event": "artifact_write", "detail": "/out/junit.xml"}
+CODEFIX_AUDIT {"event": "artifact_write", "detail": "/out/junit.xml"}
+CODEFIX_AUDIT {"event": "artifact_write", "detail": "/out/junit.xml"}

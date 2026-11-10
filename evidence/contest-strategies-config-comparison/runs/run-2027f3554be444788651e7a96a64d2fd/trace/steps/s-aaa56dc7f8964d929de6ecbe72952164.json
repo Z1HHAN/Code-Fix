@@ -1,0 +1,19 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-2027f3554be444788651e7a96a64d2fd",
+  "step_id": "s-aaa56dc7f8964d929de6ecbe72952164",
+  "parent_step_id": "s-003b7b013cf44e2e9689aadc61ed95fe",
+  "node_id": "scheduler",
+  "round": 1,
+  "phase": "development",
+  "strategy": "fixed",
+  "evidence_ids": [
+    "test-development-1"
+  ],
+  "status": "ok",
+  "call_id": "m-5286e377718c4afeb230f45f4f47a7cf",
+  "artifact_path": "calls/m-5286e377718c4afeb230f45f4f47a7cf",
+  "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+  "failure_class": null,
+  "duration_ms": 3884
+}

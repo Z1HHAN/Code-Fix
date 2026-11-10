@@ -1,0 +1,91 @@
+{
+  "decision_id": "d-1",
+  "run_id": "run-0ec9da90642c4c5784da4734b8f69270",
+  "code_version": "sha256:a672e38a77864ce36b9674eab68ac708670ec24073604c6b0d52c304ad81ac54",
+  "evidence_ids": [
+    "test-development-1"
+  ],
+  "failure_class": "passed",
+  "action": "final_check",
+  "target_agent": null,
+  "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+  "retries_left": 2,
+  "rule_id": "R16",
+  "terminal_status": null,
+  "trace_version": "1.0.0",
+  "step_id": "s-59f3571be0cb458a9e307e6879c314e0",
+  "parent_step_id": "s-007d3338be704666a720c22abba0cd7b",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "development",
+  "strategy": "fixed",
+  "program_decision": {
+    "decision_id": "d-1",
+    "run_id": "run-0ec9da90642c4c5784da4734b8f69270",
+    "code_version": "sha256:a672e38a77864ce36b9674eab68ac708670ec24073604c6b0d52c304ad81ac54",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "failure_class": "passed",
+    "action": "final_check",
+    "target_agent": null,
+    "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+    "retries_left": 2,
+    "rule_id": "R16",
+    "terminal_status": null
+  },
+  "model_advice": {
+    "action": "final_check",
+    "reason": "唯一开发测试证据 test-development-1 显示 6 个原生测试全部通过，退出码 0，失败和错误均为 0；本轮没有可归因的失败。开发测试通过后仍需按规则在干净副本中独立重跑同一套原生测试，不能由本调度直接宣布最终成功。",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "knowledge_citations": [
+      "knowledge-public_tasks",
+      "knowledge-testing"
+    ]
+  },
+  "effective_action": "final_check",
+  "override_reason": null,
+  "test_suite_version": "sha256:5ef4f028924aa0ae998a18febe0c41839fbc64650814eee28ec895362370db43",
+  "counters": {
+    "model_calls": 3,
+    "tool_calls": 2,
+    "rounds_used": 1,
+    "cost": {
+      "calls": 3,
+      "status": "estimated",
+      "currency": "CNY",
+      "amount_cny": "0.026082",
+      "amount_usd": null,
+      "budget": {
+        "currency": "CNY",
+        "basis": "project_ledger_estimate_not_platform_balance",
+        "accounts": [
+          {
+            "account_id": "aliyun_maas",
+            "provider_id": "aliyun_maas",
+            "currency": "CNY",
+            "authorized_cny": "16",
+            "estimated_spent_cny": "1.098994",
+            "reserved_cny": "0",
+            "unsettled_calls": 0,
+            "estimated_remaining_cny": "14.901006",
+            "remaining_after_reservations_cny": "14.901006",
+            "warning_threshold_cny": "3",
+            "low_balance": false,
+            "status": "estimated"
+          }
+        ],
+        "alerts": [],
+        "paid_calls_blocked": false
+      }
+    },
+    "remaining_seconds": 258.92941880000217,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}

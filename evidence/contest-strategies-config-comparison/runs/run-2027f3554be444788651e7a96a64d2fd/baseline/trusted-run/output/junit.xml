@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="6" time="0.570" timestamp="2026-11-09T17:29:52.056011+00:00" hostname="28fa9d03072d"><testcase classname="python_testcases.test_gcd" name="test_gcd[input_data0-17]" time="0.018" /><testcase classname="python_testcases.test_gcd" name="test_gcd[input_data1-13]" time="0.013"><failure message="RuntimeError: candidate RPC failed">input_data = [13, 13], expected = 13
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_gcd(input_data, expected):
+&gt;       assert gcd(*input_data) == expected
+
+python_testcases/test_gcd.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/gcd.py:31: in gcd
+    return invoke('gcd', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'gcd', args = (13, 13), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) &gt; 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+                    client.connect('/rpc/channel.sock')
+                    break
+                except (FileNotFoundError, ConnectionRefusedError):
+                    if attempt == 99:
+                        raise
+                    time.sleep(.02)
+            client.sendall(request)
+            with client.makefile('rb') as stream:
+                raw = stream.readline(65537)
+            if len(raw) &gt; 65536 or not raw.endswith(b'\n'):
+                raise ValueError('RPC response exceeds bound or is incomplete')
+            result = json.loads(raw)
+            if not isinstance(result, dict) or set(result) != {'value'}:
+&gt;               raise RuntimeError('candidate RPC failed')
+E               RuntimeError: candidate RPC failed
+
+python_programs/gcd.py:27: RuntimeError</failure></testcase><testcase classname="python_testcases.test_gcd" name="test_gcd[input_data2-1]" time="0.013"><failure message="RuntimeError: candidate RPC failed">input_data = [37, 600], expected = 1
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_gcd(input_data, expected):
+&gt;       assert gcd(*input_data) == expected
+
+python_testcases/test_gcd.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/gcd.py:31: in gcd
+    return invoke('gcd', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'gcd', args = (37, 600), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) &gt; 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+                    client.connect('/rpc/channel.sock')
+                    break
+                except (FileNotFoundError, ConnectionRefusedError):
+                    if attempt == 99:
+                        raise
+                    time.sleep(.02)
+            client.sendall(request)
+            with client.makefile('rb') as stream:
+                raw = stream.readline(65537)
+            if len(raw) &gt; 65536 or not raw.endswith(b'\n'):
+                raise ValueError('RPC response exceeds bound or is incomplete')
+            result = json.loads(raw)
+            if not isinstance(result, dict) or set(result) != {'value'}:
+&gt;               raise RuntimeError('candidate RPC failed')
+E               RuntimeError: candidate RPC failed
+
+python_programs/gcd.py:27: RuntimeError</failure></testcase><testcase classname="python_testcases.test_gcd" name="test_gcd[input_data3-20]" time="0.012"><failure message="RuntimeError: candidate RPC failed">input_data = [20, 100], expected = 20
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_gcd(input_data, expected):
+&gt;       assert gcd(*input_data) == expected
+
+python_testcases/test_gcd.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/gcd.py:31: in gcd
+    return invoke('gcd', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'gcd', args = (20, 100), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) &gt; 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+                    client.connect('/rpc/channel.sock')
+                    break
+                except (FileNotFoundError, ConnectionRefusedError):
+                    if attempt == 99:
+                        raise
+                    time.sleep(.02)
+            client.sendall(request)
+            with client.makefile('rb') as stream:
+                raw = stream.readline(65537)
+            if len(raw) &gt; 65536 or not raw.endswith(b'\n'):
+                raise ValueError('RPC response exceeds bound or is incomplete')
+            result = json.loads(raw)
+            if not isinstance(result, dict) or set(result) != {'value'}:
+&gt;               raise RuntimeError('candidate RPC failed')
+E               RuntimeError: candidate RPC failed
+
+python_programs/gcd.py:27: RuntimeError</failure></testcase><testcase classname="python_testcases.test_gcd" name="test_gcd[input_data4-18913]" time="0.011"><failure message="RuntimeError: candidate RPC failed">input_data = [624129, 2061517], expected = 18913
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_gcd(input_data, expected):
+&gt;       assert gcd(*input_data) == expected
+
+python_testcases/test_gcd.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/gcd.py:31: in gcd
+    return invoke('gcd', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'gcd', args = (624129, 2061517), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) &gt; 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+                    client.connect('/rpc/channel.sock')
+                    break
+                except (FileNotFoundError, ConnectionRefusedError):
+                    if attempt == 99:
+                        raise
+                    time.sleep(.02)
+            client.sendall(request)
+            with client.makefile('rb') as stream:
+                raw = stream.readline(65537)
+            if len(raw) &gt; 65536 or not raw.endswith(b'\n'):
+                raise ValueError('RPC response exceeds bound or is incomplete')
+            result = json.loads(raw)
+            if not isinstance(result, dict) or set(result) != {'value'}:
+&gt;               raise RuntimeError('candidate RPC failed')
+E               RuntimeError: candidate RPC failed
+
+python_programs/gcd.py:27: RuntimeError</failure></testcase><testcase classname="python_testcases.test_gcd" name="test_gcd[input_data5-3]" time="0.013"><failure message="RuntimeError: candidate RPC failed">input_data = [3, 12], expected = 3
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_gcd(input_data, expected):
+&gt;       assert gcd(*input_data) == expected
+
+python_testcases/test_gcd.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/gcd.py:31: in gcd
+    return invoke('gcd', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'gcd', args = (3, 12), kwargs = {}
+
+    def invoke(function, args, kwargs):
+        request = json.dumps({'function': function, 'args': args, 'kwargs': kwargs}, allow_nan=False).encode() + b'\n'
+        if len(request) &gt; 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+                    client.connect('/rpc/channel.sock')
+                    break
+                except (FileNotFoundError, ConnectionRefusedError):
+                    if attempt == 99:
+                        raise
+                    time.sleep(.02)
+            client.sendall(request)
+            with client.makefile('rb') as stream:
+                raw = stream.readline(65537)
+            if len(raw) &gt; 65536 or not raw.endswith(b'\n'):
+                raise ValueError('RPC response exceeds bound or is incomplete')
+            result = json.loads(raw)
+            if not isinstance(result, dict) or set(result) != {'value'}:
+&gt;               raise RuntimeError('candidate RPC failed')
+E               RuntimeError: candidate RPC failed
+
+python_programs/gcd.py:27: RuntimeError</failure></testcase></testsuite></testsuites>

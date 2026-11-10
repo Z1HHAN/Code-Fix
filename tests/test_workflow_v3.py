@@ -87,7 +87,7 @@ def test_final_failure_ends_without_new_model_calls(tmp_path):
 
 
 @pytest.mark.parametrize('outcome, expected, roles', [
-    ('syntax_error', 'success', ['repairer', 'detector', 'scheduler', 'repairer', 'detector', 'scheduler']),
+    ('syntax_error', 'success', ['repairer', 'repairer', 'detector', 'scheduler']),
     ('assertion_failed', 'success', ['repairer', 'detector', 'scheduler', 'locator', 'repairer', 'detector', 'scheduler']),
     ('environment_error', 'paused', ['repairer']),
     ('timeout', 'stopped', ['repairer'])])

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="15" skipped="0" tests="25" time="4.888" timestamp="2026-11-09T23:05:28.195935+08:00" hostname="LAPTOP-8477LI5E"><testcase classname="acceptance_tests.test_repair_gates" name="test_code01_forged_stdout_cannot_become_passed[legacy_single_report]" time="0.129" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code01_forged_stdout_cannot_become_passed[legacy_report_with_end]" time="0.101" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code01_forged_stdout_cannot_become_passed[versioned_report_with_end]" time="0.101" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code02_baseline_failure_keeps_cause_and_rule[environment_error-paused-R03]" time="0.232"><failure message="AssertionError: CODE-02: environment_error must not become generic defect-not-reproduced&#10;assert 'failed' == 'paused'&#10;  &#10;  - paused&#10;  + failed">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code02_baseline_failure_k0')
+outcome = 'environment_error', expected_status = 'paused', rule = 'R03'
+
+    @pytest.mark.parametrize('outcome, expected_status, rule', [
+        ('environment_error', 'paused', 'R03'), ('timeout', 'stopped', 'R04'), ('not_reproduced', 'paused', 'R06')])
+    def test_code02_baseline_failure_keeps_cause_and_rule(tmp_path, outcome, expected_status, rule):
+        status, result, runner, model, store, rid = execute(tmp_path, [outcome])
+&gt;       assert status == expected_status, f'CODE-02: {outcome} must not become generic defect-not-reproduced'
+E       AssertionError: CODE-02: environment_error must not become generic defect-not-reproduced
+E       assert 'failed' == 'paused'
+E         
+E         - paused
+E         + failed
+
+acceptance_tests\test_repair_gates.py:146: AssertionError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_code02_baseline_failure_keeps_cause_and_rule[timeout-stopped-R04]" time="0.196"><failure message="AssertionError: CODE-02: timeout must not become generic defect-not-reproduced&#10;assert 'failed' == 'stopped'&#10;  &#10;  - stopped&#10;  + failed">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code02_baseline_failure_k1')
+outcome = 'timeout', expected_status = 'stopped', rule = 'R04'
+
+    @pytest.mark.parametrize('outcome, expected_status, rule', [
+        ('environment_error', 'paused', 'R03'), ('timeout', 'stopped', 'R04'), ('not_reproduced', 'paused', 'R06')])
+    def test_code02_baseline_failure_keeps_cause_and_rule(tmp_path, outcome, expected_status, rule):
+        status, result, runner, model, store, rid = execute(tmp_path, [outcome])
+&gt;       assert status == expected_status, f'CODE-02: {outcome} must not become generic defect-not-reproduced'
+E       AssertionError: CODE-02: timeout must not become generic defect-not-reproduced
+E       assert 'failed' == 'stopped'
+E         
+E         - stopped
+E         + failed
+
+acceptance_tests\test_repair_gates.py:146: AssertionError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_code02_baseline_failure_keeps_cause_and_rule[not_reproduced-paused-R06]" time="0.186"><failure message="AssertionError: CODE-02: not_reproduced must not become generic defect-not-reproduced&#10;assert 'failed' == 'paused'&#10;  &#10;  - paused&#10;  + failed">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code02_baseline_failure_k2')
+outcome = 'not_reproduced', expected_status = 'paused', rule = 'R06'
+
+    @pytest.mark.parametrize('outcome, expected_status, rule', [
+        ('environment_error', 'paused', 'R03'), ('timeout', 'stopped', 'R04'), ('not_reproduced', 'paused', 'R06')])
+    def test_code02_baseline_failure_keeps_cause_and_rule(tmp_path, outcome, expected_status, rule):
+        status, result, runner, model, store, rid = execute(tmp_path, [outcome])
+&gt;       assert status == expected_status, f'CODE-02: {outcome} must not become generic defect-not-reproduced'
+E       AssertionError: CODE-02: not_reproduced must not become generic defect-not-reproduced
+E       assert 'failed' == 'paused'
+E         
+E         - paused
+E         + failed
+
+acceptance_tests\test_repair_gates.py:146: AssertionError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_code03_final_stage_records_actual_rule[passed-R07]" time="0.203"><failure message="IndexError: list index out of range">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code03_final_stage_record0')
+outcome = 'passed', rule = 'R07'
+
+    @pytest.mark.parametrize('outcome, rule', [('passed', 'R07'), ('assertion_failed', 'R08N'), ('unknown_evidence', 'R17')])
+    def test_code03_final_stage_records_actual_rule(tmp_path, outcome, rule):
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed', outcome])
+&gt;       assert runner.phases[-1] == 'final_check'
+E       IndexError: list index out of range
+
+acceptance_tests\test_repair_gates.py:156: IndexError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_code03_final_stage_records_actual_rule[assertion_failed-R08N]" time="0.203"><failure message="IndexError: list index out of range">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code03_final_stage_record1')
+outcome = 'assertion_failed', rule = 'R08N'
+
+    @pytest.mark.parametrize('outcome, rule', [('passed', 'R07'), ('assertion_failed', 'R08N'), ('unknown_evidence', 'R17')])
+    def test_code03_final_stage_records_actual_rule(tmp_path, outcome, rule):
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed', outcome])
+&gt;       assert runner.phases[-1] == 'final_check'
+E       IndexError: list index out of range
+
+acceptance_tests\test_repair_gates.py:156: IndexError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_code03_final_stage_records_actual_rule[unknown_evidence-R17]" time="0.208"><failure message="IndexError: list index out of range">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code03_final_stage_record2')
+outcome = 'unknown_evidence', rule = 'R17'
+
+    @pytest.mark.parametrize('outcome, rule', [('passed', 'R07'), ('assertion_failed', 'R08N'), ('unknown_evidence', 'R17')])
+    def test_code03_final_stage_records_actual_rule(tmp_path, outcome, rule):
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed', outcome])
+&gt;       assert runner.phases[-1] == 'final_check'
+E       IndexError: list index out of range
+
+acceptance_tests\test_repair_gates.py:156: IndexError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_code03_pause_boundary_records_r02_without_more_work" time="0.233"><failure message="AssertionError: assert ('failed' == 'paused'&#10;  &#10;  - paused&#10;  + failed)">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code03_pause_boundary_rec0')
+
+    def test_code03_pause_boundary_records_r02_without_more_work(tmp_path):
+        store = RunStore(tmp_path)
+        rid = store.create({'mode': 'repair'})['run_id']
+        store.claim(rid)
+        class PausingModel(ModelDouble):
+            def call(self, *args, **kwargs):
+                response = super().call(*args, **kwargs)
+                store.request_control(rid, 'pause')
+                return response
+        runner, model = ExecutorDouble(['assertion_failed']), PausingModel()
+        status, result = Workflow(store, runner, model).run(rid)
+&gt;       assert status == 'paused' and model.roles == ['repairer']
+E       AssertionError: assert ('failed' == 'paused'
+E         
+E         - paused
+E         + failed)
+
+acceptance_tests\test_repair_gates.py:174: AssertionError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_code04_passed_candidate_can_use_final_check_at_model_limit" time="0.190"><failure message="AssertionError: CODE-04: advisory calls must not starve final validation&#10;assert [] == ['development...'final_check']&#10;  &#10;  Right contains 3 more items, first extra item: 'development'&#10;  Use -v to get more diff">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code04_passed_candidate_c0')
+
+    def test_code04_passed_candidate_can_use_final_check_at_model_limit(tmp_path):
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed', 'passed'], task={'max_calls': 1})
+&gt;       assert runner.phases == ['development', 'development', 'final_check'], 'CODE-04: advisory calls must not starve final validation'
+E       AssertionError: CODE-04: advisory calls must not starve final validation
+E       assert [] == ['development...'final_check']
+E         
+E         Right contains 3 more items, first extra item: 'development'
+E         Use -v to get more diff
+
+acceptance_tests\test_repair_gates.py:181: AssertionError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_code05_test_modification_is_permission_violation" time="0.194"><failure message="AssertionError: CODE-05: valid JSON carrying a forbidden edit is not bad JSON&#10;assert None == 'permission_violation'&#10; +  where None = &lt;built-in method get of dict object at 0x000002AE3723E500&gt;('failure_class')&#10; +    where &lt;built-in method get of dict object at 0x000002AE3723E500&gt; = {'cost': {'amount_usd': None, 'status': 'not_called'}, 'dev_result': 'not_run', 'diagnostic_path': 'diagnostics/ef04482df0f9471183f2cffc1208345b.json', 'error_type': 'AssertionError', ...}.get">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code05_test_modification_0')
+
+    def test_code05_test_modification_is_permission_violation(tmp_path):
+        class ForbiddenChange(ModelDouble):
+            def call(self, messages, **kwargs):
+                record = super().call(messages, **kwargs)
+                output = json.loads(record['raw_text'])
+                output['changes'][0]['path'] = 'tests/test_leap.py'
+                return record | {'raw_text': json.dumps(output)}
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed'], model=ForbiddenChange())
+&gt;       assert result.get('failure_class') == 'permission_violation', 'CODE-05: valid JSON carrying a forbidden edit is not bad JSON'
+E       AssertionError: CODE-05: valid JSON carrying a forbidden edit is not bad JSON
+E       assert None == 'permission_violation'
+E        +  where None = &lt;built-in method get of dict object at 0x000002AE3723E500&gt;('failure_class')
+E        +    where &lt;built-in method get of dict object at 0x000002AE3723E500&gt; = {'cost': {'amount_usd': None, 'status': 'not_called'}, 'dev_result': 'not_run', 'diagnostic_path': 'diagnostics/ef04482df0f9471183f2cffc1208345b.json', 'error_type': 'AssertionError', ...}.get
+
+acceptance_tests\test_repair_gates.py:194: AssertionError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_code06_transport_failure_pauses_with_guard" time="0.231"><failure message="AssertionError: CODE-06: transport diagnosis should follow the pause policy&#10;assert 'failed' == 'paused'&#10;  &#10;  - paused&#10;  + failed">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code06_transport_failure_0')
+
+    def test_code06_transport_failure_pauses_with_guard(tmp_path):
+        class TransportFailure(ModelDouble):
+            def call(self, *args, **kwargs):
+                return {'status': 'failed', 'failure_class': 'model_transport_error',
+                        'model_api_called': False, 'mode': 'test_stub', 'reason': 'OFFLINE injected transport failure'}
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed'], model=TransportFailure())
+&gt;       assert status == 'paused', 'CODE-06: transport diagnosis should follow the pause policy'
+E       AssertionError: CODE-06: transport diagnosis should follow the pause policy
+E       assert 'failed' == 'paused'
+E         
+E         - paused
+E         + failed
+
+acceptance_tests\test_repair_gates.py:206: AssertionError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_code08_interrupt_during_model_call_prevents_new_calls" time="0.209"><failure message="AssertionError: CODE-08: interruption cannot permit further model calls&#10;assert [] == ['repairer']&#10;  &#10;  Right contains one more item: 'repairer'&#10;  Use -v to get more diff">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code08_interrupt_during_m0')
+
+    def test_code08_interrupt_during_model_call_prevents_new_calls(tmp_path):
+        store = RunStore(tmp_path)
+        rid = store.create({'mode': 'repair'})['run_id']
+        store.claim(rid)
+        class InterruptingModel(ModelDouble):
+            def call(self, *args, **kwargs):
+                response = super().call(*args, **kwargs)
+                if len(self.roles) == 1:
+                    store.interrupt(rid)
+                return response
+        model = InterruptingModel()
+        runner = ExecutorDouble(['assertion_failed', 'passed', 'passed'])
+        status, result = Workflow(store, runner, model).run(rid)
+&gt;       assert model.roles == ['repairer'], 'CODE-08: interruption cannot permit further model calls'
+E       AssertionError: CODE-08: interruption cannot permit further model calls
+E       assert [] == ['repairer']
+E         
+E         Right contains one more item: 'repairer'
+E         Use -v to get more diff
+
+acceptance_tests\test_repair_gates.py:225: AssertionError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_code07_execution_version_bound_to_snapshot_during_mutation" time="0.116" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code09_parameter_expected_value_not_forwarded_to_model" time="0.193"><failure message="AssertionError: Control did not exercise a production model-context boundary&#10;assert []&#10; +  where [] = &lt;test_repair_gates.ModelDouble object at 0x000002AE3739D260&gt;.messages">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code09_parameter_expected0')
+
+    def test_code09_parameter_expected_value_not_forwarded_to_model(tmp_path):
+        marker = '987654321.123456789'
+        native_nodeid = f'python_testcases/test_sqrt.py::test_sqrt[input_data0-{marker}]'
+        _, _, runner, model, _, _ = execute(tmp_path, ['assertion_failed', 'passed', 'passed'],
+                                           task={'project': 'qb-sqrt'}, stdout=native_nodeid + ' FAILED\n')
+&gt;       assert model.messages, 'Control did not exercise a production model-context boundary'
+E       AssertionError: Control did not exercise a production model-context boundary
+E       assert []
+E        +  where [] = &lt;test_repair_gates.ModelDouble object at 0x000002AE3739D260&gt;.messages
+
+acceptance_tests\test_repair_gates.py:273: AssertionError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_code11_deferred_offline_router_is_not_labelled_live" time="0.258"><failure message="AssertionError: Control must complete through the deferred offline model branch&#10;assert 'failed' == 'success'&#10;  &#10;  - success&#10;  + failed">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code11_deferred_offline_r0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002AE383A8730&gt;
+
+    def test_code11_deferred_offline_router_is_not_labelled_live(tmp_path, monkeypatch):
+        model = ModelDouble()
+        class OfflineRouter:
+            @staticmethod
+            def resolve(config):
+                return {'scope': 'offline-double'}
+            def __new__(cls, *args, **kwargs):
+                return model
+        monkeypatch.setattr('app.workflow_v3.ModelRouter', OfflineRouter)
+        store = RunStore(tmp_path)
+        rid = store.create({'mode': 'repair'})['run_id']
+        store.claim(rid)
+        status, result = Workflow(store, ExecutorDouble(['assertion_failed', 'passed', 'passed'])).run(rid)
+&gt;       assert status == 'success', 'Control must complete through the deferred offline model branch'
+E       AssertionError: Control must complete through the deferred offline model branch
+E       assert 'failed' == 'success'
+E         
+E         - success
+E         + failed
+
+acceptance_tests\test_repair_gates.py:290: AssertionError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_code10_production_gateway_rejects_unapproved_evidence_fields[repairer]" time="0.118" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code10_production_gateway_rejects_unapproved_evidence_fields[locator]" time="0.120" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code10_production_gateway_rejects_unapproved_evidence_fields[detector]" time="0.106" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code10_production_gateway_rejects_unapproved_evidence_fields[scheduler]" time="0.107" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code12_trace_preserves_engine_decision_identity" time="0.149" /><testcase classname="acceptance_tests.test_repair_gates" name="test_code13_failed_active_step_is_not_recorded_interrupted" time="0.215"><failure message="assert 0 == 1&#10; +  where 0 = len([])">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_code13_failed_active_step0')
+
+    def test_code13_failed_active_step_is_not_recorded_interrupted(tmp_path):
+        class BrokenExecutor(ExecutorDouble):
+            def run(self, *args, **kwargs):
+                raise RuntimeError('OFFLINE controlled executor failure')
+        store = RunStore(tmp_path)
+        rid = store.create({'mode': 'repair'})['run_id']
+        store.claim(rid)
+        status, result = Workflow(store, BrokenExecutor([]), ModelDouble()).run(rid)
+        assert status == 'failed'
+        completed = [e for e in store.events(rid) if e['event'] == 'step_completed' and e['node_id'] == 'pytest']
+&gt;       assert len(completed) == 1
+E       assert 0 == 1
+E        +  where 0 = len([])
+
+acceptance_tests\test_repair_gates.py:340: AssertionError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_control_normal_offline_flow_still_reaches_final" time="0.191"><failure message="AssertionError: assert ('failed' == 'success'&#10;  &#10;  - success&#10;  + failed)">tmp_path = WindowsPath('C:/Users/lenovo/AppData/Local/Temp/ca-de13edd3/g/test_control_normal_offline_fl0')
+
+    def test_control_normal_offline_flow_still_reaches_final(tmp_path):
+        status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed', 'passed'])
+&gt;       assert status == 'success' and result['final_result'] == 'passed'
+E       AssertionError: assert ('failed' == 'success'
+E         
+E         - success
+E         + failed)
+
+acceptance_tests\test_repair_gates.py:346: AssertionError</failure></testcase><testcase classname="acceptance_tests.test_repair_gates" name="test_control_unverified_docker_still_denies_candidate" time="0.008" /></testsuite></testsuites>

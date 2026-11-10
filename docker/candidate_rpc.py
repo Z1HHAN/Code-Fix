@@ -4,7 +4,16 @@ import importlib.util
 import json
 import os
 import socket
+from pathlib import Path
+import types
 import sys
+
+# The controller and codec are separate fixed read-only mounts. No candidate
+# path participates in resolving this module, including under Python -I.
+_codec_path = Path('/rpc_codec.py') if Path('/rpc_codec.py').is_file() else Path(__file__).with_name('rpc_codec.py')
+_codec_spec = importlib.util.spec_from_file_location('_codefix_rpc_codec', _codec_path)
+codec = importlib.util.module_from_spec(_codec_spec)
+_codec_spec.loader.exec_module(codec)
 
 AUDIT_PREFIX = 'CODEFIX_AUDIT '
 _WRITE_FLAGS = os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_APPEND | os.O_TRUNC
@@ -73,6 +82,17 @@ def _audit(event, args):
 # This standalone entry has no access to the host app package. New adapters
 # must register their reviewed name here and in app.split_runner.FUNCTIONS.
 ALLOWED_FUNCTIONS = frozenset({
+    'topological_ordering',
+    'shortest_path_length',
+    'reverse_linked_list',
+    'detect_cycle',
+    'depth_first_search',
+    'breadth_first_search',
+    'shortest_path_lengths',
+    'shortest_paths',
+    'minimum_spanning_tree',
+    'hanoi',
+    'shunting_yard',
     'bitcount',
     'bucketsort',
     'find_first_in_sorted',
@@ -135,6 +155,30 @@ def execute_request(request, source):
         return value
 
 
+def execute_wire_request(request, source):
+    # Reject functions and malformed graphs before importing candidate bytes.
+    if (type(request) is not dict or type(request.get('function')) is not str
+            or request['function'] not in ALLOWED_FUNCTIONS):
+        raise ValueError('unapproved RPC request')
+    function = request['function']
+    if function not in codec.TYPED_FUNCTIONS:
+        return {'value': execute_request(request, source)}
+    if set(request) != {'function', 'payload'}:
+        raise ValueError('invalid typed RPC request')
+    node_type = codec.Node if function in codec.NODE_FUNCTIONS else None
+    inputs, objects = codec.unpack(request['payload'], node_type)
+    if (type(inputs) is not list or len(inputs) != 2 or type(inputs[0]) is not list
+            or type(inputs[1]) is not dict or any(type(k) is not str for k in inputs[1])):
+        raise ValueError('invalid typed RPC arguments')
+    if node_type is not None:
+        interface = types.ModuleType('node')
+        interface.Node = codec.Node
+        sys.modules['node'] = interface
+    value = execute_request({'function': function, 'args': inputs[0], 'kwargs': inputs[1]}, source)
+    payload, _ = codec.pack(value, node_type, seeds=objects)
+    return {'payload': payload}
+
+
 def main():
     sys.addaudithook(_audit)
     with socket.socket(socket.AF_UNIX) as server:
@@ -147,8 +191,8 @@ def main():
                     raw = stream.readline(65537)
                     if len(raw) > 65536 or not raw.endswith(b'\n'):
                         raise ValueError('invalid RPC input length')
-                    value = execute_request(json.loads(raw), sys.argv[1])
-                    response = json.dumps({'value': value}, allow_nan=False).encode() + b'\n'
+                    value = execute_wire_request(codec.loads(raw), sys.argv[1])
+                    response = codec.dumps(value)
                     if len(response) > 65536:
                         raise ValueError('response too large')
                 except SystemExit as exc:

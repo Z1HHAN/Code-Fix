@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="4" time="0.205" timestamp="2026-11-09T23:13:22.616445+08:00" hostname="LAPTOP-8477LI5E"><testcase classname="tests.test_leap" name="test_2024_is_leap" time="0.000"><failure message="ValueError: C reviewed runtime-error fixture">def test_2024_is_leap():
+&gt;       assert is_leap(2024) is True
+
+tests\test_leap.py:5: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+year = 2024
+
+    def is_leap(year):
+&gt;       raise ValueError("C reviewed runtime-error fixture")
+E       ValueError: C reviewed runtime-error fixture
+
+leap_app\leap_year.py:2: ValueError</failure></testcase><testcase classname="tests.test_leap" name="test_2023_is_not_leap" time="0.000"><failure message="ValueError: C reviewed runtime-error fixture">def test_2023_is_not_leap():
+&gt;       assert is_leap(2023) is False
+
+tests\test_leap.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+year = 2023
+
+    def is_leap(year):
+&gt;       raise ValueError("C reviewed runtime-error fixture")
+E       ValueError: C reviewed runtime-error fixture
+
+leap_app\leap_year.py:2: ValueError</failure></testcase><testcase classname="tests.test_leap" name="test_1900_is_not_leap" time="0.000"><failure message="ValueError: C reviewed runtime-error fixture">def test_1900_is_not_leap():
+&gt;       assert is_leap(1900) is False
+
+tests\test_leap.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+year = 1900
+
+    def is_leap(year):
+&gt;       raise ValueError("C reviewed runtime-error fixture")
+E       ValueError: C reviewed runtime-error fixture
+
+leap_app\leap_year.py:2: ValueError</failure></testcase><testcase classname="tests.test_leap" name="test_2000_is_leap" time="0.000"><failure message="ValueError: C reviewed runtime-error fixture">def test_2000_is_leap():
+&gt;       assert is_leap(2000) is True
+
+tests\test_leap.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+year = 2000
+
+    def is_leap(year):
+&gt;       raise ValueError("C reviewed runtime-error fixture")
+E       ValueError: C reviewed runtime-error fixture
+
+leap_app\leap_year.py:2: ValueError</failure></testcase></testsuite></testsuites>

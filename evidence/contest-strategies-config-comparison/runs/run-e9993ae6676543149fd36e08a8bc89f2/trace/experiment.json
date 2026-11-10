@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "strategy": "dynamic",
+  "execution_kind": "real",
+  "identity": {
+    "code": {
+      "commit": "ebc7450973081fe95d88a777f49f26633aa5d851",
+      "source_sha256": "7b1cc5bca3e7312cd0f79a209cba55f0edba53d0393454570a8aba5d71a7c591",
+      "dirty": false
+    },
+    "project": "qb-max_sublist_sum",
+    "description": "修复max_sublist_sum缺陷，使预登记的原生测试通过；不修改测试。",
+    "task_limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    },
+    "approved_files": {
+      "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+      "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+      "python_programs/max_sublist_sum.py": "aab26d9f3984f177adcff110fe72de97e54c5f85ad476c38e49c949a873d85b5",
+      "python_testcases/test_max_sublist_sum.py": "a93255549d80e5ae3ac046905c538d8168b02a833ba296188088b93cf2338525",
+      "json_testcases/max_sublist_sum.json": "87970bc353d75cdc34f25d96715f4c4859dca57becd96cf398dd0a475dd819bf",
+      "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+    },
+    "test_suite_version": "sha256:5ef4f028924aa0ae998a18febe0c41839fbc64650814eee28ec895362370db43",
+    "roles": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "aliyun_maas_ds_v41_flash"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "aliyun_maas_ds_v41_flash"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "aliyun_maas_ds_v41_flash"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "aliyun_maas_ds_v41_flash"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "role_overrides": {},
+    "prompts_sha256": {
+      "locator": "bdc608ab82376807b472a1d7bb6cd112118e8fdd9b55f970294b60a886c068e4",
+      "repairer": "638ba6f34303cee630fd9304cc46ce12bd6775ad08c780ae95e920f93aafc6ab",
+      "detector": "6efdcb821ae1464cb0ac6e3972c39746a35bbbd0683f7e0937ef46dd443a9926",
+      "scheduler": "345b41671e2e47938111ac6ff5d93ab28bc2cd4e6dc289594eaa8c889d8eb79a"
+    },
+    "profiles_sha256": "c54db8d1e6390aa74642b848874f9012d8da34cd579da7e6c67afec427513f42",
+    "bindings": {
+      "locator": {
+        "profile_ref": "aliyun_maas_ds_v41_flash",
+        "base_url": "https://ws-twhbaof7fzagz198.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+        "currency": "CNY",
+        "parameters": {
+          "max_tokens": 8192
+        },
+        "input_price": "2",
+        "output_price": "8",
+        "request_seconds": "120"
+      },
+      "repairer": {
+        "profile_ref": "aliyun_maas_ds_v41_flash",
+        "base_url": "https://ws-twhbaof7fzagz198.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+        "currency": "CNY",
+        "parameters": {
+          "max_tokens": 8192
+        },
+        "input_price": "2",
+        "output_price": "8",
+        "request_seconds": "120"
+      },
+      "detector": {
+        "profile_ref": "aliyun_maas_ds_v41_flash",
+        "base_url": "https://ws-twhbaof7fzagz198.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+        "currency": "CNY",
+        "parameters": {
+          "max_tokens": 8192
+        },
+        "input_price": "2",
+        "output_price": "8",
+        "request_seconds": "120"
+      },
+      "scheduler": {
+        "profile_ref": "aliyun_maas_ds_v41_flash",
+        "base_url": "https://ws-twhbaof7fzagz198.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+        "currency": "CNY",
+        "parameters": {
+          "max_tokens": 8192
+        },
+        "input_price": "2",
+        "output_price": "8",
+        "request_seconds": "120"
+      }
+    },
+    "image": "sha256:512bc2a4e681d483b63e94a711be9bfe8c6b85dde1b8cd3c7ce6c1c6c634e97f"
+  },
+  "identity_sha256": "16f23e5d95987c69a0c2bdd0e322c56eac493c43e6481ed6dd413f34e3f7ce08"
+}

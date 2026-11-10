@@ -1,0 +1,269 @@
+{
+  "scope": "received B artifact consistency review; no candidate execution, no paid calls, no C personal signoff",
+  "B_commit": "43efb37",
+  "frozen_commit": "ebc7450973081fe95d88a777f49f26633aa5d851",
+  "checks": 1828,
+  "errors": [],
+  "checksum_entries": 738,
+  "runs": [
+    {
+      "run_id": "run-0847d6ab11644e69aeb21d23d1e68871",
+      "project": "qb-gcd",
+      "strategy": "dynamic",
+      "status": "success",
+      "cost_cny": "0.028106",
+      "identity_sha256": "6e59bdeca700f7ebf76edccc8fd8d151911844e905989bf1400119736c1a2643",
+      "counts": {
+        "baseline": {
+          "collected": 6,
+          "passed": 1,
+          "failed": 5,
+          "errors": 0,
+          "skipped": 0
+        },
+        "development-1": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "final-check": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "run_id": "run-0ec9da90642c4c5784da4734b8f69270",
+      "project": "qb-max_sublist_sum",
+      "strategy": "fixed",
+      "status": "success",
+      "cost_cny": "0.026082",
+      "identity_sha256": "16f23e5d95987c69a0c2bdd0e322c56eac493c43e6481ed6dd413f34e3f7ce08",
+      "counts": {
+        "baseline": {
+          "collected": 6,
+          "passed": 2,
+          "failed": 4,
+          "errors": 0,
+          "skipped": 0
+        },
+        "development-1": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "final-check": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "run_id": "run-2027f3554be444788651e7a96a64d2fd",
+      "project": "qb-gcd",
+      "strategy": "fixed",
+      "status": "success",
+      "cost_cny": "0.023506",
+      "identity_sha256": "6e59bdeca700f7ebf76edccc8fd8d151911844e905989bf1400119736c1a2643",
+      "counts": {
+        "baseline": {
+          "collected": 6,
+          "passed": 1,
+          "failed": 5,
+          "errors": 0,
+          "skipped": 0
+        },
+        "development-1": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "final-check": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "run_id": "run-24ee936a26144ebdabc74d62f2d256c1",
+      "project": "qb-get_factors",
+      "strategy": "fixed",
+      "status": "success",
+      "cost_cny": "0.023660",
+      "identity_sha256": "464d4c7919ae75a0353491dd1cd82cffdec11d0d9da36b5e6295fdbce478cbd8",
+      "counts": {
+        "baseline": {
+          "collected": 11,
+          "passed": 1,
+          "failed": 10,
+          "errors": 0,
+          "skipped": 0
+        },
+        "development-1": {
+          "collected": 11,
+          "passed": 11,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "final-check": {
+          "collected": 11,
+          "passed": 11,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "run_id": "run-e9993ae6676543149fd36e08a8bc89f2",
+      "project": "qb-max_sublist_sum",
+      "strategy": "dynamic",
+      "status": "success",
+      "cost_cny": "0.025864",
+      "identity_sha256": "16f23e5d95987c69a0c2bdd0e322c56eac493c43e6481ed6dd413f34e3f7ce08",
+      "counts": {
+        "baseline": {
+          "collected": 6,
+          "passed": 2,
+          "failed": 4,
+          "errors": 0,
+          "skipped": 0
+        },
+        "development-1": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "final-check": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    },
+    {
+      "run_id": "run-fc80fc68ed934a4d9b7de6d0d36f9b91",
+      "project": "qb-get_factors",
+      "strategy": "dynamic",
+      "status": "success",
+      "cost_cny": "0.020810",
+      "identity_sha256": "464d4c7919ae75a0353491dd1cd82cffdec11d0d9da36b5e6295fdbce478cbd8",
+      "counts": {
+        "baseline": {
+          "collected": 11,
+          "passed": 1,
+          "failed": 10,
+          "errors": 0,
+          "skipped": 0
+        },
+        "development-1": {
+          "collected": 11,
+          "passed": 11,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "final-check": {
+          "collected": 11,
+          "passed": 11,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      }
+    }
+  ],
+  "summary": {
+    "fixed": {
+      "planned": 3,
+      "ran": 3,
+      "executed": 3,
+      "success": 3,
+      "failed": 0,
+      "blocked": 0,
+      "not_run": 0,
+      "success_rate_all": 1.0,
+      "success_rate_executed": 1.0,
+      "candidate_rounds": 3,
+      "requests": 9,
+      "cost": {
+        "cny": {
+          "known_subtotal": "0.073248",
+          "unknown_runs": 0,
+          "total": "0.073248"
+        },
+        "usd": {
+          "known_subtotal": "0",
+          "unknown_runs": 0,
+          "total": null
+        }
+      }
+    },
+    "dynamic": {
+      "planned": 3,
+      "ran": 3,
+      "executed": 3,
+      "success": 3,
+      "failed": 0,
+      "blocked": 0,
+      "not_run": 0,
+      "success_rate_all": 1.0,
+      "success_rate_executed": 1.0,
+      "candidate_rounds": 3,
+      "requests": 9,
+      "cost": {
+        "cny": {
+          "known_subtotal": "0.074780",
+          "unknown_runs": 0,
+          "total": "0.074780"
+        },
+        "usd": {
+          "known_subtotal": "0",
+          "unknown_runs": 0,
+          "total": null
+        }
+      }
+    }
+  },
+  "event_export_note": "Incremental API events omit raw_text; reports and per-call originals retain it. Compared remaining fields and order exactly.",
+  "ui_initiation": "User confirmed API/CLI initiation; UI creation/start requirement not achieved.",
+  "source_identity_review": {
+    "B_reported": [
+      "7b1cc5bca3e7312cd0f79a209cba55f0edba53d0393454570a8aba5d71a7c591"
+    ],
+    "local_checkout": "9b73ee1ac38d2944ae47dccde2eea8a3aafdbb726b6a74369ff9e09562712eea",
+    "frozen_git_blob_bytes": "a9855bd76f26e8bab18862ba455bc590526ef1019f88e85d352366669a1db013",
+    "tracked_source_files": 163,
+    "status": "not independently reproduced; request B per-file source manifest or source archive",
+    "note": "Different checkout bytes may affect aggregate hashes; cause not established. Do not infer tampering or dismiss as newline-only."
+  },
+  "estimated_total_cny": "0.148028",
+  "limitations": [
+    "All six runs pass at first candidate; no retry, upper-limit or human-handoff real-run proof.",
+    "Saved configurations omit role_overrides; live evidence covers defaults, not edited instructions or advanced values.",
+    "User confirmed API/CLI initiation, so these six runs do not satisfy the requested UI initiation.",
+    "Source aggregate hash cannot yet be independently reproduced from local checkout or frozen Git blobs; B per-file source hashes are required.",
+    "Ledger exports include budget snapshots, not the original ledger or independently exported per-call ledger rows.",
+    "No C personal exact-version review, formal video or rehearsal record in this package."
+  ]
+}

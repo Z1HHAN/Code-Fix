@@ -17,15 +17,18 @@
     }
     return [...indexed.values()].sort((a,b) => (a.sequence ?? 0) - (b.sequence ?? 0));
   }
-  function provenance(run, events) {
+  function provenanceKind(run, events) {
     const result = run.result || {};
     const calls = events.filter(e => e.event === 'agent_call');
     const modes = [result.mode, ...calls.map(e => e.mode)].filter(Boolean);
     const simulated = modes.some(m => /mock|stub|test|offline|simulat/i.test(m));
     const real = !simulated && calls.some(e => e.mode === 'live' && e.model_api_called === true);
     const baseline = run.task?.mode === 'baseline' && calls.length === 0;
-    return simulated ? '离线／模拟：不代表真实修复成功' : real ? '已记录真实模型请求；验收范围见工具证据' :
-      baseline ? '基线检查：不含模型修复' : '来源未确认／尚无真实模型请求证据';
+    return simulated ? 'simulation' : real ? 'real_requests' : baseline ? 'baseline' : 'unknown';
+  }
+  function provenance(run, events) {
+    return {simulation:'离线／模拟：不代表真实修复成功',real_requests:'已记录真实模型请求；验收范围见工具证据',
+      baseline:'基线检查：不含模型修复',unknown:'来源未确认／尚无真实模型请求证据'}[provenanceKind(run,events)];
   }
   function project(run, events) {
     const nodes = [], byId = new Map();
@@ -207,7 +210,7 @@
       if(focused)buttons.find(b=>b.dataset.stepId===focused)?.focus();
     };
   }
-  const api={project,roundLabel,mergeEvents,provenance,artifacts,safePath,costText,layout,mount};
+  const api={project,roundLabel,mergeEvents,provenance,provenanceKind,artifacts,safePath,costText,layout,mount};
   if(typeof module!=='undefined')module.exports=api;
   root.CodeFixTrace=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

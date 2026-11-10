@@ -1,0 +1,6 @@
+{
+  "scope": "First browser review attempt; no B artifact failure",
+  "browser_exit_code": 1,
+  "cause": "Final blanket network assertion included /favicon.ico HTTP 404; all earlier six-run, replay, report/bundle and comparison checks had completed.",
+  "correction": "Track favicon 404 as warning; continue to fail any API/asset error. No product code changes."
+}

@@ -12,6 +12,7 @@ from .live_model import ModelBlocked
 from .role_config import RoleConfig, digest, SCHEMAS
 from .run_store import now, validate_task
 from .runtime_limits import runtime_limits
+from .role_overrides import capabilities, validate_overrides, effective_parameters
 
 
 def profile_checks(profile):
@@ -75,18 +76,19 @@ class ConfigurationStore:
             rows.append(dict(profile_ref=ref, provider=profile['provider_id'], model=profile['model'],
                              account=profile.get('account_ref'), configured=ready, note=reason,
                              billing_bound_known=profile.get('billable_output_tokens') is not None,
-                             checks=checks))
+                             checks=checks, capabilities=capabilities(profile)))
         return {'accounts': accounts, 'profiles': rows, 'bindings': {role: current.snapshot['models'][agent['model_ref']].get('profile_ref')
                 for role, agent in current.agents.items()},
                 'limits': runtime_limits(),
                 'strategies': [{'value': 'dynamic', 'label': '动态编排', 'enabled': True},
-                               {'value': 'fixed', 'label': '固定顺序（尚未开放）', 'enabled': False}]}
+                               {'value': 'fixed', 'label': '固定顺序', 'enabled': True}]}
 
     def validate(self, value):
-        if not isinstance(value, dict) or set(value) != {'bindings', 'parameters', 'strategy'}:
+        if (not isinstance(value, dict) or not {'bindings', 'parameters', 'strategy'} <= set(value)
+                or set(value) - {'bindings', 'parameters', 'strategy', 'role_overrides'}):
             raise InputValidationError('仅接受角色绑定、任务参数和策略')
-        if value['strategy'] != 'dynamic':
-            raise InputValidationError('当前仅支持动态编排；固定顺序尚未开放')
+        if not isinstance(value['strategy'], str) or value['strategy'] not in {'dynamic', 'fixed'}:
+            raise InputValidationError('策略须为fixed/dynamic')
         if not isinstance(value['bindings'], dict) or set(value['bindings']) != set(SCHEMAS):
             raise InputValidationError('必须保留四个角色的模型绑定')
         params = value['parameters']
@@ -105,10 +107,23 @@ class ConfigurationStore:
             agent['model_ref'] = role
         config = RoleConfig(self.root, runtime)
         config.preflight()
-        return {'bindings': deepcopy(value['bindings']), 'parameters': deepcopy(params), 'strategy': 'dynamic',
+        result = {'bindings': deepcopy(value['bindings']), 'parameters': deepcopy(params), 'strategy': value['strategy'],
                 'roles': config.snapshot, 'profiles_sha256': digest(registry),
                 'prompts_sha256': {r: p[1] for r, p in config.prompts.items()},
                 'note': '结构校验通过；不代表模型请求、费用预留或隔离资格通过'}
+        if 'role_overrides' in value:
+            overrides = validate_overrides(value['role_overrides'], value['bindings'], registry)
+            result.update(schema_version=2, role_overrides=overrides,
+                          capabilities_sha256=digest({ref: capabilities(p) for ref, p in registry['profiles'].items()}),
+                          effective_roles={role: {'task_instruction': overrides.get(role, {}).get('task_instruction', ''),
+                              'parameters': effective_parameters(registry['profiles'][ref], overrides.get(role, {}))}
+                              for role, ref in value['bindings'].items()})
+            for effective in result['effective_roles'].values():
+                effective['task_instruction_sha256'] = digest(effective['task_instruction'])
+                effective['parameters_sha256'] = digest(effective['parameters'])
+            result['role_overrides_sha256'] = digest(overrides)
+            result['effective_roles_sha256'] = digest(result['effective_roles'])
+        return result
 
     def save(self, value):
         snapshot = self.validate(value)
@@ -134,8 +149,11 @@ class ConfigurationStore:
 
     def runtime(self, identifier):
         snapshot = self.get(identifier)
-        config = RoleConfig(self.root, snapshot['roles'])
+        config = RoleConfig(self.root, snapshot['roles'], role_overrides=snapshot.get('role_overrides'))
         if (digest(load_profiles(self.root)) != snapshot['profiles_sha256'] or
                 {r: p[1] for r, p in config.prompts.items()} != snapshot['prompts_sha256']):
             raise ConfigError('模型档案或提示词已变更；请校验并保存新配置后创建新任务')
+        if ('capabilities_sha256' in snapshot and snapshot['capabilities_sha256'] !=
+                digest({ref: capabilities(p) for ref, p in load_profiles(self.root)['profiles'].items()})):
+            raise ConfigError('参数能力已变更；请保存新配置')
         return config

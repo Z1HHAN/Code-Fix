@@ -20,6 +20,32 @@ function withClock(check){
  try{check(advance);}finally{global.setTimeout=original.setTimeout;global.clearTimeout=original.clearTimeout;Date.now=original.now;}
 }
 
+test('real replay keeps full-record provenance at entry, pause and end without exposing future steps',()=>withClock(advance=>{
+ const ui=setup(),history={...run,status:'success',result:{mode:'live'}};
+ const page=[{sequence:1,event:'started'},
+  {sequence:2,event:'agent_call',mode:'live',model_api_called:true,step_id:'r',node_id:'repairer'},
+  {sequence:3,event:'finished'}];
+ ui.render(history,page);assert.match(ui.find(n=>n.attributes.role==='status')[0].textContent,/真实历史回放.*不执行任务/);
+ ui.find(n=>n.textContent==='历史回放')[0].onclick();
+ assert.match(ui.find(n=>n.attributes.role==='status')[0].textContent,/真实历史回放 · 1\/3/);
+ assert.equal(ui.selections.at(-1)[2].length,1);
+ assert.equal(ui.find(n=>n.className==='arch-terminal').length,0);
+ ui.find(n=>n.textContent==='暂停回放')[0].onclick();
+ assert.match(ui.find(n=>n.attributes.role==='status')[0].textContent,/真实历史回放.*回放已暂停/);
+ ui.find(n=>n.textContent==='继续回放')[0].onclick();advance(10000);
+ assert.match(ui.find(n=>n.attributes.role==='status')[0].textContent,/真实历史回放.*回放结束/);ui.cleanup();
+}));
+
+for(const [result,task,calls,label] of [
+ [{mode:'live'},{mode:'repair'},[],/来源未确认/],
+ [{mode:'test_stub'},{mode:'repair'},[{event:'agent_call',mode:'live',model_api_called:true}],/离线／模拟回放/],
+ [{},{mode:'baseline'},[],/基线历史回放/]
+])test(`history source does not infer a real run from ${label}`,()=>withClock(()=>{
+ const ui=setup();ui.render({...run,status:'stopped',result,task},[{event:'started'},...calls]);
+ ui.find(n=>n.textContent==='历史回放')[0].onclick();
+ assert.match(ui.find(n=>n.attributes.role==='status')[0].textContent,label);ui.cleanup();
+}));
+
 test('packet density uses travelled bends with explicit short/medium/long boundaries',()=>{
  for(const [d,count]of [['M0 0H259',1],['M0 0H260',2],['M0 0V300H299',2],['M0 0V300H300',3],['M100 100h-100v-100h100v100',2]])assert.equal(arch.packetCount(d),count);
 });

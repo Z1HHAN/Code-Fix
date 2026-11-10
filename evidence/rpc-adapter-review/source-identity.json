@@ -1,0 +1,11 @@
+{
+  "scope": "assistant local development, not B execution or C signoff",
+  "baseline": "aa34002e5b6941cf17797c1b8b7cc3bc4e3e3dfb",
+  "files": {
+    "app/split_runner.py": "20788032a69eee2e3d4513c357e85d8b0601a3cd22a72672043a8e187922a44d",
+    "docker/rpc_codec.py": "faaad3e63e81a948115c30b3714e469c1d1f7c3759451dc5bdbef252aae6f70e",
+    "docker/rpc_proxy.py": "03439e243acf266daf721b8891e23c70440b0e569f50085ff5af3d4c2ed0c646",
+    "docker/candidate_rpc.py": "1367ccfff594c1e2ddf1af926ad9c4cbaf8dc3debf5a0d28ebacf3b2a4ab30ed",
+    "tests/test_rpc_codec.py": "dd9bef0edc2347d22212f0d352133ac10536878567339b45de7f5dce16a8bf80"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "scope": "assistant synthetic protocol and static interface review, not native task execution",
+  "tests": 209,
+  "warning": "existing Starlette/httpx deprecation",
+  "junit": "interface-wire.xml",
+  "full_regression_before_constructor_change": "full-platform.xml",
+  "source_sha256": {
+    "app/split_runner.py": "20788032a69eee2e3d4513c357e85d8b0601a3cd22a72672043a8e187922a44d",
+    "docker/rpc_codec.py": "5c394fb0cd4d493ee9471533d16c3d4637f4946e66757f45d674cffdd92fd967",
+    "docker/rpc_proxy.py": "03439e243acf266daf721b8891e23c70440b0e569f50085ff5af3d4c2ed0c646",
+    "docker/candidate_rpc.py": "1367ccfff594c1e2ddf1af926ad9c4cbaf8dc3debf5a0d28ebacf3b2a4ab30ed",
+    "tests/test_rpc_codec.py": "d9d4c5c81d3fd1202b6e1c4b8093e24de8058615e3d73bb3fe58edd247d8ab5e"
+  },
+  "git_publication": false
+}

@@ -1,0 +1,22 @@
+{
+  "project": "qb-max_sublist_sum",
+  "base_version": "sha256:fd14b5fd6d1ffebe5075236d3513aebfa67cda21880110f98ca59d88254300d3",
+  "candidate_version": "sha256:a672e38a77864ce36b9674eab68ac708670ec24073604c6b0d52c304ad81ac54",
+  "test_suite_version": "sha256:5ef4f028924aa0ae998a18febe0c41839fbc64650814eee28ec895362370db43",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_max_sublist_sum.py": "a93255549d80e5ae3ac046905c538d8168b02a833ba296188088b93cf2338525",
+    "json_testcases/max_sublist_sum.json": "87970bc353d75cdc34f25d96715f4c4859dca57becd96cf398dd0a475dd819bf",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/max_sublist_sum.py",
+      "new_content": "\ndef max_sublist_sum(arr):\n    max_ending_here = 0\n    max_so_far = 0\n\n    for x in arr:\n        max_ending_here = max(0, max_ending_here + x)\n        max_so_far = max(max_so_far, max_ending_here)\n\n    return max_so_far\n\n\n\"\"\"\nMax Sublist Sum\nmax-sublist-sum\n\nEfficient equivalent to max(sum(arr[i:j]) for 0 <= i <= j <= len(arr))\n\nAlgorithm source: WordAligned.org by Thomas Guest\n\n\nInput:\n    arr: A list of ints\n\nOutput:\n    The maximum sublist sum\n\nExample:\n    >>> max_sublist_sum([4, -5, 2, 1, -1, 3])\n    5\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_max_sublist_sum.py": "a93255549d80e5ae3ac046905c538d8168b02a833ba296188088b93cf2338525"
+  }
+}

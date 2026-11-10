@@ -42,6 +42,8 @@ def main() -> int:
     parse.add_argument('path')
     create = sub.add_parser('create-task', help='保存任务参数，不自动启动')
     create.add_argument('--mode', choices=['baseline', 'repair'], default='baseline')
+    create.add_argument('--strategy', choices=['fixed', 'dynamic'], help='修复编排策略，默认dynamic；保存配置优先')
+    create.add_argument('--config-id', help='引用已保存的不可变配置')
     create.add_argument('--description')
     create.add_argument('--project', default='leap')
     create.add_argument('--max-rounds', type=int, default=3)
@@ -115,7 +117,9 @@ def main() -> int:
                 result = service.store.create({'mode': args.mode, 'project': args.project,
                                                'description': args.description if args.description is not None else get_task(args.project).data['description'],
                                                'max_rounds': args.max_rounds, 'max_calls': args.max_calls,
-                                               'total_seconds': args.total_seconds}, args.idempotency_key)
+                                               'total_seconds': args.total_seconds,
+                                               **({'strategy': args.strategy} if args.strategy else {}),
+                                               **({'config_id': args.config_id} if args.config_id else {})}, args.idempotency_key)
             elif args.command == 'start-task':
                 result = service.execute(args.run_id)
             elif args.command == 'task-status':

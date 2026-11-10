@@ -12,6 +12,7 @@ class RunTrace:
         self.active = None
         self.evidence_ids = []
         self.decisions = []
+        self.strategy = store.get(run_id)['task'].get('strategy', 'dynamic')
 
     def write(self, relative, value):
         path = self.directory / relative
@@ -26,7 +27,7 @@ class RunTrace:
             raise ValueError('上一执行步骤尚未结束')
         self.active = {'trace_version': '1.0.0', 'run_id': self.run_id,
                        'step_id': 's-' + uuid.uuid4().hex, 'parent_step_id': self.parent,
-                       'node_id': node_id, 'round': round_number, 'phase': phase,
+                       'node_id': node_id, 'round': round_number, 'phase': phase, 'strategy': self.strategy,
                        'evidence_ids': list(evidence_ids)}
         self.started = time.monotonic()
         self.store.event(self.run_id, {'event': 'step_started', **self.active})

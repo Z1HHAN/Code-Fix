@@ -1,0 +1,35 @@
+{
+  "scope": "assistant offline development, not C personal signoff or B Docker qualification",
+  "changes": [
+    "bound expanded tuple-key hashing work",
+    "reject numeric overflow nonfinite JSON"
+  ],
+  "source_sha256": {
+    "app/split_runner.py": "20788032a69eee2e3d4513c357e85d8b0601a3cd22a72672043a8e187922a44d",
+    "docker/rpc_codec.py": "2c4d6b7e312ad8d2dfc1260e5c2efa3f9e06fdaeccef669b7c0296272aefccfe",
+    "docker/rpc_proxy.py": "03439e243acf266daf721b8891e23c70440b0e569f50085ff5af3d4c2ed0c646",
+    "docker/candidate_rpc.py": "1367ccfff594c1e2ddf1af926ad9c4cbaf8dc3debf5a0d28ebacf3b2a4ab30ed",
+    "tests/test_rpc_codec.py": "3211b7094760fcf409fc462f8a9886ce398cff3e41881424aabbb29450cff676"
+  },
+  "platform": {
+    "passed": 590,
+    "skipped": 1,
+    "warnings": 1,
+    "seconds": 205.01,
+    "junit": "full-platform.xml"
+  },
+  "repair_gates": {
+    "passed": 25,
+    "junit": "repair-gates.xml"
+  },
+  "controls": {
+    "passed": 12,
+    "original_root": "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\evaluation\\c_runs\\C-20261110-234145-2376151d"
+  },
+  "remaining": [
+    "constructor semantics and interface compatibility review",
+    "B real socket/container/native qualification",
+    "C personal exact-version review",
+    "frozen commit and publication"
+  ]
+}
