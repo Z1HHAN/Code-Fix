@@ -1,0 +1,94 @@
+name: Build cloud offline images
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloud-offline-images
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout selected version
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+
+      - name: Verify and extract the released cloud source package
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/cloud-source" "$RUNNER_TEMP/cloud-offline"
+          unzip -q deploy/cloud/codefix-execution.zip -d "$RUNNER_TEMP/cloud-source"
+          python3 "$RUNNER_TEMP/cloud-source/scripts/verify_execution_package.py"
+          cp deploy/cloud/codefix-execution.zip "$RUNNER_TEMP/cloud-offline/"
+
+      - name: Build Linux amd64 images without model calls
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = x86_64
+          test "$(docker info --format '{{.OSType}}')" = linux
+          cd "$RUNNER_TEMP/cloud-source"
+          docker pull --platform linux/amd64 python:3.14-slim
+          docker build --pull --platform linux/amd64 -f docker/runner.Dockerfile -t codefix-test:local docker
+          docker build --pull --platform linux/amd64 -f docker/execution-service.Dockerfile -t codefix-execution:local .
+          for image in python:3.14-slim codefix-test:local codefix-execution:local; do
+            test "$(docker image inspect "$image" --format '{{.Os}}/{{.Architecture}}')" = linux/amd64
+          done
+          # Smoke checks only: no model, candidate execution, or Docker socket.
+          docker run --rm --pull=never --network none --read-only python:3.14-slim python --version
+          docker run --rm --pull=never --network none --read-only codefix-test:local python -m pytest --version
+          docker run --rm --pull=never --network none --read-only \
+            --mount "type=bind,src=$RUNNER_TEMP/cloud-source,dst=/opt/codefix,readonly" \
+            codefix-execution:local python -B -m app.execution_server --help
+          docker run --rm --pull=never --network none --read-only codefix-execution:local docker --version
+
+      - name: Export images and exact build identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/cloud-offline"
+          docker image inspect python:3.14-slim codefix-test:local codefix-execution:local > images.json
+          docker save python:3.14-slim codefix-test:local codefix-execution:local | gzip -1 > codefix-images.tar.gz
+          {
+            printf 'Repository: %s\nCommit: %s\nRun: %s/%s/actions/runs/%s\n' \
+              "$GITHUB_REPOSITORY" "$GITHUB_SHA" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID"
+            printf 'Platform: linux/amd64\nModel calls: none\n'
+            printf 'Source: bundled codefix-execution.zip, not the full repository\n'
+          } > BUILD.txt
+          cat > IMPORT.txt <<'IMPORT'
+          Extract this GitHub artifact on your computer. Upload all six files
+          to one dedicated directory on the Linux x86_64 server, then run there:
+            sha256sum -c SHA256SUMS
+          Continue only if all five checks report OK:
+            docker load -i codefix-images.tar.gz
+          Use the matching codefix-execution.zip for /opt/codefix. Do not overwrite
+          an existing deployment. If source is already extracted, verify it:
+            docker run --rm --pull=never --network none --read-only --mount type=bind,src=/opt/codefix,dst=/opt/codefix,readonly --entrypoint python python:3.14-slim /opt/codefix/scripts/verify_execution_package.py
+          Prepare the data directory:
+            mkdir -p /opt/codefix-data
+            chmod 700 /opt/codefix-data
+          Then follow deploy/cloud/README.md inside the source package, starting
+          at create-access. Do not rerun prepare_execution_cloud.sh: that rebuilds
+          images and requires network access. Imported images are already built.
+          This is an image build, not target-machine isolation qualification.
+          IMPORT
+          sha256sum codefix-images.tar.gz codefix-execution.zip images.json BUILD.txt IMPORT.txt > SHA256SUMS
+          cat BUILD.txt >> "$GITHUB_STEP_SUMMARY"
+          printf '\nDownload the cloud-offline artifact. It expires after 3 days.\n' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload offline deployment files
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: cloud-offline-${{ github.sha }}
+          path: ${{ runner.temp }}/cloud-offline/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 3

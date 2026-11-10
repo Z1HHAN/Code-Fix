@@ -1,5 +1,15 @@
 # 云端隔离执行服务（开发预览）
 
+## Docker Hub 无法访问：离线镜像交付
+
+仓库 **Actions → Build cloud offline images → Run workflow → 选择 main → Run workflow**。仅手动触发，无模型调用，不需要配置模型密钥。构建成功后在该次运行底部Artifacts下载`cloud-offline-<commit>`，需登录并有仓库访问权限，产物保留3天。Actions额度不足时查看运行页报错，不自动购买额度。
+
+在电脑解压下载的Artifacts压缩包，将里面6个文件一起上传到服务器同一个独立目录。进入该目录先执行`sha256sum -c SHA256SUMS`，5项均为OK才执行`docker load -i codefix-images.tar.gz`。随附`images.json`、`BUILD.txt`和`IMPORT.txt`记录提交、构建链接及镜像ID/架构；构建使用发布ZIP中的源码，不打包整个仓库或账号配置。
+
+已在`/opt/codefix`解压同版源码者，按`IMPORT.txt`用导入的Python镜像验证现有文件；尚未解压者只向空目录解压随附`codefix-execution.zip`。执行`mkdir -p /opt/codefix-data && chmod 700 /opt/codefix-data`后，从下方第3步创建访问码继续。**不要重跑第2步构建脚本**，否则又会请求Docker Hub。构建成功不等于目标机服务部署或隔离资格通过。
+
+## 服务器可下载基础镜像时
+
 仅部署到本项目专用 Linux 主机。客户端仍在本机调用使用者自己的模型；本服务不接收模型密钥。默认一个执行任务、其余排队，实际隔离资格需在目标机验证。
 
 1. 将发布 ZIP 上传至 `/tmp/codefix-execution.zip`，解压至空目录 `/opt/codefix`。不要覆盖正在运行的部署；更新另行停止并核对版本。
