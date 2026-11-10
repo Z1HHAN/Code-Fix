@@ -100,3 +100,7 @@ evidence/workbench-animation/review-b/** -text -whitespace
 evidence/reviewed-fixes-integration/** -text -whitespace
 
 evidence/contest-delivery/** -text -whitespace
+
+# Received B live-run originals and the separate receipt review retain exact bytes.
+evidence/contest-strategies-config-comparison/** -text -whitespace
+evidence/contest-receipt-review/** -text -whitespace
