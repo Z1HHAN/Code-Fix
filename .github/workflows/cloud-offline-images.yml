@@ -43,12 +43,17 @@ jobs:
             test "$(docker image inspect "$image" --format '{{.Os}}/{{.Architecture}}')" = linux/amd64
           done
           # Smoke checks only: no model, candidate execution, or Docker socket.
-          docker run --rm --pull=never --network none --read-only python:3.14-slim python --version
-          docker run --rm --pull=never --network none --read-only codefix-test:local python -m pytest --version
+          # The test image runs as uid 65534; tempfile needs a writable /tmp.
           docker run --rm --pull=never --network none --read-only \
+            --tmpfs /tmp:rw,nosuid,nodev,size=67108864,mode=1777 python:3.14-slim python --version
+          docker run --rm --pull=never --network none --read-only \
+            --tmpfs /tmp:rw,nosuid,nodev,size=67108864,mode=1777 codefix-test:local python -m pytest --version
+          docker run --rm --pull=never --network none --read-only \
+            --tmpfs /tmp:rw,nosuid,nodev,size=67108864,mode=1777 \
             --mount "type=bind,src=$RUNNER_TEMP/cloud-source,dst=/opt/codefix,readonly" \
             codefix-execution:local python -B -m app.execution_server --help
-          docker run --rm --pull=never --network none --read-only codefix-execution:local docker --version
+          docker run --rm --pull=never --network none --read-only \
+            --tmpfs /tmp:rw,nosuid,nodev,size=67108864,mode=1777 codefix-execution:local docker --version
 
       - name: Export images and exact build identity
         shell: bash

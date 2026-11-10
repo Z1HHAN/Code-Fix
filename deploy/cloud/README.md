@@ -2,6 +2,8 @@
 
 ## Docker Hub 无法访问：离线镜像交付
 
+若曾遇到`No usable temporary directory`：请在更新后的main上新点Run workflow；Re-run旧运行仍使用旧版本。新workflow已给只读冒烟容器提供可写临时目录。
+
 仓库 **Actions → Build cloud offline images → Run workflow → 选择 main → Run workflow**。仅手动触发，无模型调用，不需要配置模型密钥。构建成功后在该次运行底部Artifacts下载`cloud-offline-<commit>`，需登录并有仓库访问权限，产物保留3天。Actions额度不足时查看运行页报错，不自动购买额度。
 
 在电脑解压下载的Artifacts压缩包，将里面6个文件一起上传到服务器同一个独立目录。进入该目录先执行`sha256sum -c SHA256SUMS`，5项均为OK才执行`docker load -i codefix-images.tar.gz`。随附`images.json`、`BUILD.txt`和`IMPORT.txt`记录提交、构建链接及镜像ID/架构；构建使用发布ZIP中的源码，不打包整个仓库或账号配置。
