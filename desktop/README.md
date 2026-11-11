@@ -2,6 +2,8 @@
 
 GitHub Actions → **Build Windows desktop app** → Run workflow → main。成功后下载`windows-desktop-<commit>`，保留3天；包含安装版`CodeFix-Setup-*.exe`、免安装版`CodeFix-Portable-*.exe`、SHA256SUMS、准确构建身份和首次启动截图。二选一使用，不需要另装Python或Docker。尚未签名，构建成功不等于老师电脑的真实验收通过。
 
+安装版提供安装位置、开始菜单/桌面快捷方式和卸载入口，适合老师长期使用；免安装版双击运行，适合临时核验，首次解包可能稍慢。功能相同，无需同时安装。两者都会在当前电脑的应用数据目录保存加密配置；免安装不代表密钥随exe移动，换电脑需要重新填写。
+
 首次打开填写自己的兼容Chat Completions接口的API Base URL、API Key、模型ID、输出上限与参数名，以及云端执行地址/个人访问码。没有预置团队账号。密钥使用Electron safeStorage（Windows当前用户加密）保存，不回显、不写入报告；安装包不带个人配置。更新保留用户数据，换电脑请重新配置。顶部菜单“应用 → 模型与云端连接设置”可修改；正在运行的任务结束前拒绝重启后端。
 
 模型地址使用HTTPS，填写服务商文档中的兼容接口根路径，例如`https://你的服务商/v1`；应用追加`/chat/completions`。自填模型的temperature/top_p尚未核实能力，保持禁用；角色任务指令和输出长度在工作台校验保存后可用。保存、刷新和历史回放不调用模型；只有启动修复任务才可能收费。
