@@ -33,7 +33,7 @@ class TaskService:
                                   {'final_result': 'not_run', 'reason': '按用户请求在执行前停止推进',
                                    'model_api_called': False, 'model_calls': 0, 'tool_calls': 0})
                 return
-            if task['mode'] == 'baseline' and task['project'] != 'leap':
+            if task['mode'] == 'baseline' and (task['project'] != 'leap' or os.environ.get('CODE_FIX_PERSONAL_MODE') == '1'):
                 from .public_baseline import run_public_baseline
                 status, result = run_public_baseline(self.store, run_id)
             elif task['mode'] == 'baseline':

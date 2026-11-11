@@ -4,6 +4,7 @@
 configs/model_profiles.json 无法把某个服务商的密钥指向别家域名——必须先改代码。
 """
 from urllib.parse import urlsplit
+import os
 
 
 PROVIDERS = {
@@ -15,6 +16,8 @@ PROVIDERS = {
 
 
 def registered(provider):
+    if provider == 'personal':
+        return os.environ.get('CODE_FIX_PERSONAL_MODE') == '1' and bool(os.environ.get('CODE_FIX_PERSONAL_BASE_URL'))
     entry = PROVIDERS.get(provider)
     return isinstance(entry, dict) and bool(entry.get('hosts'))
 
@@ -29,6 +32,8 @@ def allowed_host(provider, hostname):
     if not registered(provider) or not isinstance(hostname, str) or not hostname:
         return False
     host = hostname.lower().rstrip('.')
+    if provider == 'personal':
+        return host == (urlsplit(os.environ['CODE_FIX_PERSONAL_BASE_URL']).hostname or '').lower().rstrip('.')
     for allowed in hosts(provider):
         allowed = allowed.lower()
         if allowed.startswith('.'):
@@ -53,4 +58,6 @@ def validate_url(provider, url):
         return False
     if parsed.username or parsed.password or parsed.query or parsed.fragment:
         return False
+    if provider == 'personal':
+        return registered(provider) and url.rstrip('/') == os.environ['CODE_FIX_PERSONAL_BASE_URL'].rstrip('/')
     return allowed_host(provider, parsed.hostname)

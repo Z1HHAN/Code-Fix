@@ -28,13 +28,16 @@ def profile_checks(profile):
     except (ValueError, OSError):
         credential, status = False, '无法读取'
     checks.append({'name': '凭据读取', 'ok': credential, 'status': status})
+    personal_unpriced = (profile.get('provider_id') == 'personal'
+                        and os.environ.get('CODE_FIX_PERSONAL_BUDGET') == 'usage')
     try:
         positive_decimal(os.environ.get(profile['input_price_env']))
         positive_decimal(os.environ.get(profile['output_price_env']))
         priced = True
     except (ModelBlocked, ValueError):
         priced = False
-    checks.append({'name': '计费价格', 'ok': priced, 'status': '已配置' if priced else '未正确配置'})
+    checks.append({'name': '计费价格', 'ok': priced or personal_unpriced,
+                   'status': '金额预算未启用，费用显示未知' if personal_unpriced else '已配置' if priced else '未正确配置'})
     bounded = profile.get('currency') != 'CNY' or profile.get('billable_output_tokens') is not None
     checks.append({'name': '计费输出上限', 'ok': bounded, 'status': '已登记' if bounded else '待核实'})
     return checks
@@ -59,6 +62,8 @@ class ConfigurationStore:
                        or any(ord(c) < 32 for c in v) for v in labels['labels'].values())):
             raise ConfigError('账号显示名称配置无效')
         accounts, counts = [], {}
+        if any(p['provider_id'] == 'personal' for p in registry['profiles'].values()):
+            accounts.append({'account_id': 'personal', 'provider': 'personal', 'display_name': '我的模型'})
         for aid, account in registry.get('accounts', {}).items():
             provider = account['provider_id']
             counts[provider] = counts.get(provider, 0) + 1
@@ -74,7 +79,7 @@ class ConfigurationStore:
             except (ModelBlocked, ConfigError, OSError, ValueError):
                 ready, reason = False, '授权、凭据、价格或计费上限未就绪；未发请求'
             rows.append(dict(profile_ref=ref, provider=profile['provider_id'], model=profile['model'],
-                             account=profile.get('account_ref'), configured=ready, note=reason,
+                             account='personal' if profile['provider_id'] == 'personal' else profile.get('account_ref'), configured=ready, note=reason,
                              billing_bound_known=profile.get('billable_output_tokens') is not None,
                              checks=checks, capabilities=capabilities(profile)))
         return {'accounts': accounts, 'profiles': rows, 'bindings': {role: current.snapshot['models'][agent['model_ref']].get('profile_ref')

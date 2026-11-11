@@ -1,6 +1,7 @@
 """Provider-scoped metadata checks and capped JSON smoke, never code execution."""
 import asyncio
 import json
+import os
 from pathlib import Path
 import time
 import uuid
@@ -20,6 +21,15 @@ ROOT = Path(__file__).resolve().parents[1]
 def budget_status(run_root, root=ROOT):
     registry = load_profiles(root)
     ledger = Ledger(run_root)
+    if os.environ.get('CODE_FIX_PERSONAL_MODE') == '1':
+        import sqlite3
+        with sqlite3.connect(ledger.path) as db:
+            blocked = bool(db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
+                           or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone())
+        return {'personal': True, 'accounts': [], 'paid_calls_blocked': blocked,
+                'monetary_budget_enabled': os.environ.get('CODE_FIX_PERSONAL_BUDGET') != 'usage',
+                'platform_balance_verified': False,
+                'note': '个人模型配置；金额未设置时费用未知。逐次用量和估算见运行记录，不是服务商实时余额。'}
     result = AccountBudget(ledger.path).snapshot()
     actual = {a['account_id']: a for a in result['accounts']}
     for aid, account in registry.get('accounts', {}).items():

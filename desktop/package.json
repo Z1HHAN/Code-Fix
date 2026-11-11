@@ -1,0 +1,27 @@
+{
+  "name": "codefix-desktop",
+  "version": "0.3.0-dev",
+  "private": true,
+  "description": "验链个人桌面应用",
+  "author": "Code Fix",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test settings.test.cjs",
+    "predist": "node -e \"require('electron')\"",
+    "dist": "electron-builder --win nsis portable --x64"
+  },
+  "devDependencies": {"electron": "45.2.3", "electron-builder": "26.18.0"},
+  "build": {
+    "appId": "org.codefix.desktop",
+    "productName": "CodeFix",
+    "electronDist": "node_modules/electron/dist",
+    "directories": {"output": "dist"},
+    "files": ["main.cjs", "preload.cjs", "settings.cjs", "setup.html", "setup.js", "setup.css", "package.json"],
+    "extraResources": [{"from": "build/backend", "to": "backend"}, {"from": "build/python", "to": "python"}],
+    "win": {"signAndEditExecutable": false},
+    "portable": {"artifactName": "CodeFix-Portable-${version}-${arch}.${ext}"},
+    "nsis": {"oneClick": false, "perMachine": false, "allowToChangeInstallationDirectory": true,
+      "artifactName": "CodeFix-Setup-${version}-${arch}.${ext}"}
+  }
+}

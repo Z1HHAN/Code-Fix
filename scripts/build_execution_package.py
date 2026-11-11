@@ -8,6 +8,15 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def write_readable(archive, name, raw):
+    # zipfile.writestr defaults to 0600; non-root bind-mounted runners need 0644.
+    entry = zipfile.ZipInfo(name)
+    entry.create_system = 3
+    entry.external_attr = 0o100644 << 16
+    entry.compress_type = zipfile.ZIP_DEFLATED
+    archive.writestr(entry, raw)
+
+
 def package_files(root=ROOT):
     from app.tasks_v3 import catalog
     files = set()
@@ -43,8 +52,8 @@ def build(destination):
             if name.endswith('.sh'):
                 raw = raw.replace(b'\r\n', b'\n')
             fingerprints[name] = hashlib.sha256(raw).hexdigest()
-            archive.writestr(name, raw)
-        archive.writestr('execution-package-manifest.json', json.dumps({
+            write_readable(archive, name, raw)
+        write_readable(archive, 'execution-package-manifest.json', json.dumps({
             'schema_version': 1, 'scope': 'cloud isolation service; no model configuration or model credentials',
             'files': fingerprints}, ensure_ascii=False, indent=2))
     print(json.dumps({'path': str(destination.resolve()), 'files': len(files),

@@ -247,6 +247,7 @@ def test_cloud_upload_contains_only_code_and_registered_assets(tmp_path):
     target = tmp_path / 'execution.zip'
     build(target)
     with zipfile.ZipFile(target) as archive:
+        assert all((entry.external_attr >> 16) & 0o777 == 0o644 for entry in archive.infolist())
         names = set(archive.namelist())
         assert 'configs/tasks/catalog-v3.json' in names
         assert 'scripts/verify_execution_package.py' in names

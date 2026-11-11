@@ -60,8 +60,9 @@ window.CodeFixConfig = (() => {
       display('health',health);display('budget',budgetText(budget));
       readAccountNames(models);
       for(const a of budget.accounts||[]){const row=element('tr');for(const v of [accountLabel(a.account_id),a.authorized_cny,a.estimated_spent_cny,a.reserved_cny,a.estimated_remaining_cny,a.warning_threshold_cny])row.append(element('td',v==null?'未知':String(v)));if(a.low_balance)row.append(element('td','低余额提醒','warn'));byId('account-rows').append(row);}
-      display('budget-note',(budget.paid_calls_blocked?'存在未结算费用，阻止所有账号新付费请求。 ':'')+(budget.note||'仅本项目估算，不是实时平台余额。')+' 金额单位：人民币元；累计额度不按天重置。');
-      const values=[['Docker命令',health.docker_available?'可找到；尚不代表隔离通过':'未找到'],['隔离探针','本次环境概览未执行探针；历史结果见所选任务记录，每次启动仍须重新验证'],['模型调用配置',health.model_configured?'默认配置可解析，未请求验证':'默认配置未就绪'],['执行机','当前服务所在本机；不代表B机'],['前置阻塞',(health.blockers||[]).join('；')||'未报告；仍须每次运行检查']];
+      display('budget-note',(budget.paid_calls_blocked?'存在未结算费用，阻止新付费请求。 ':'')+(budget.note||'仅本项目估算，不是实时平台余额。')+(budget.personal?'':' 金额单位：人民币元；累计额度不按天重置。'));
+      const remote=health.execution_mode==='remote-docker';
+      const values=[['Docker命令',remote?'由远程执行服务提供，本机不需要安装':health.docker_available?'可找到；尚不代表隔离通过':'未找到'],['隔离探针','本次环境概览未执行探针；历史结果见所选任务记录，每次启动仍须重新验证'],['模型调用配置',health.model_configured?'默认配置可解析，未请求验证':'默认配置未就绪'],['执行机',remote?'远程隔离服务：'+health.execution_endpoint:'当前服务所在本机；不代表B机'],['前置阻塞',(health.blockers||[]).join('；')||'未报告；仍须每次运行检查']];
       for(const [k,v]of values)byId('isolation-values').append(element('dt',k),element('dd',v));
       renderModelReadiness(models.profiles);
       display('conditions-note','已读取本机状态；模型、费用预留和隔离仍以任务启动检查为准。');

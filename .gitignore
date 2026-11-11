@@ -60,3 +60,8 @@ runs/
 !.env.example
 *.key
 secrets/
+
+# Desktop build/runtime outputs; never bundle developer credentials or runs.
+desktop/node_modules/
+desktop/build/
+desktop/dist/

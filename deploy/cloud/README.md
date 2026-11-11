@@ -12,6 +12,8 @@
 
 ## 服务器可下载基础镜像时
 
+旧版源码ZIP的文件模式为0600。若非root容器报`/entry.py`或`/harness.py: Permission denied`，仅对部署源码执行`find /opt/codefix -type d -exec chmod 755 {} +`及`find /opt/codefix -type f -exec chmod 644 {} +`，不修改`/opt/codefix-data`。新打包器已固定0644；既有发布ZIP及其校验值保留，不能把权限修复误写成旧包已替换。
+
 仅部署到本项目专用 Linux 主机。客户端仍在本机调用使用者自己的模型；本服务不接收模型密钥。默认一个执行任务、其余排队，实际隔离资格需在目标机验证。
 
 1. 将发布 ZIP 上传至 `/tmp/codefix-execution.zip`，解压至空目录 `/opt/codefix`。不要覆盖正在运行的部署；更新另行停止并核对版本。

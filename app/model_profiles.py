@@ -129,6 +129,9 @@ def profile_settings(profile, registry=None):
         raise ModelBlocked('本机加密凭证不可读取；需原Windows用户或本机环境变量配置') from None
     if not key:
         raise ModelBlocked('模型档案密钥未配置')
+    if profile['provider_id'] == 'personal':
+        from .personal import settings_for_profile
+        return settings_for_profile(profile, key, base_url)
     timeout = positive_decimal(os.environ.get(profile['request_seconds_env']))
     if timeout > 120:
         raise ModelBlocked('模型单请求时限不能超过120秒')
@@ -220,6 +223,9 @@ class ModelRouter:
                            input_cny_per_million=str(s.input_per_million), output_cny_per_million=str(s.output_per_million),
                            billable_output_tokens=s.billable_output_tokens,
                            effective_parameters={s.token_limit_parameter: s.max_output_tokens, **(s.request_parameters or {})})
+        if s.currency == 'USAGE':
+            binding.update(currency=None, monetary_budget_enabled=False, daily_shared_usd=None,
+                           input_usd_per_million=None, output_usd_per_million=None)
         binding['effective_parameters_sha256'] = digest(binding['effective_parameters'])
         return binding
 

@@ -1,0 +1,18 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"><title>验链 · 个人配置</title><link rel="stylesheet" href="setup.css"></head>
+<body><main><header><small>CODE FIX · 个人桌面应用</small><h1>连接你的模型与执行环境</h1><p>模型请求由本机发出。云端只接收候选代码与测试任务，不接收模型密钥。</p></header>
+<form id="settings"><section><h2>自己的模型</h2>
+<label>API Base URL<input id="base_url" type="url" placeholder="https://你的服务商地址/v1" required></label>
+<label>API Key<input id="api_key" type="password" autocomplete="off" placeholder="填写自己的密钥" maxlength="4096"></label>
+<label>模型 ID<input id="model" placeholder="服务商提供的完整模型名称" maxlength="200" required></label>
+<div class="row"><label>单次输出上限<input id="max_output_tokens" type="number" value="2048" min="256" max="32768" required></label><label>输出长度参数<select id="token_parameter"><option value="max_tokens">max_tokens（兼容接口常用）</option><option value="max_completion_tokens">max_completion_tokens</option></select></label></div>
+<p class="hint">请按服务商文档填写地址与模型。未知能力的采样参数保持禁用；角色指令及任务上限进入工作台后编辑。</p></section>
+<section><h2>云端隔离执行</h2><label><input id="ssh_tunnel" type="checkbox" checked>通过已建立的 SSH 隧道连接</label>
+<label>执行服务地址<input id="execution_url" type="url" value="http://127.0.0.1:17880" required></label>
+<label>个人执行访问码<input id="execution_token" type="password" autocomplete="off" maxlength="256" placeholder="管理员单独发放的访问码"></label>
+<p class="hint">隧道模式需要先保持 SSH 窗口连接；公网服务请使用 HTTPS。这里填写执行访问码，与模型 API Key 不同。</p></section>
+<section><h2>费用与限制</h2><label><input id="monetary_budget" type="checkbox">启用美元金额预算（按自己填写的价格估算）</label>
+<div id="money" hidden class="row"><label>每日额度 USD<input id="daily_usd" type="number" min="0.000001" step="any"></label><label>输入 USD / 百万 token<input id="input_price" type="number" min="0.000001" step="any"></label><label>输出 USD / 百万 token<input id="output_price" type="number" min="0.000001" step="any"></label></div>
+<p class="hint">不启用金额预算时，费用显示未知，不会填零。每任务默认3轮、12次调用、300秒；请求超时或用量未知仍会阻止继续调用，等待核对。</p>
+<label><input id="approved" type="checkbox" required>我确认使用自己的 API 额度，知悉启动修复任务可能产生服务商费用。</label></section>
+<div class="actions"><button id="save" type="submit">保存并打开工作台</button><span id="message" role="status">保存不会调用模型或启动修复。</span></div></form>
+<footer>凭据使用当前 Windows 用户的系统加密存储。切换电脑需要重新填写；安装包没有预置账号。</footer></main><script src="setup.js"></script></body></html>

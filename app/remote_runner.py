@@ -24,9 +24,11 @@ class RemoteRunner:
         self.task = get_task(project)
         self.url = (url or os.environ.get('CODE_FIX_EXECUTION_URL', '')).rstrip('/')
         parsed = urlsplit(self.url)
-        if (parsed.scheme != 'https' or not parsed.hostname or parsed.username or parsed.password
+        tunnel = (os.environ.get('CODE_FIX_EXECUTION_SSH_TUNNEL') == '1'
+                  and parsed.scheme == 'http' and parsed.hostname == '127.0.0.1')
+        if ((parsed.scheme != 'https' and not tunnel) or not parsed.hostname or parsed.username or parsed.password
                 or parsed.query or parsed.fragment or parsed.path not in ('', '/')):
-            raise IsolationBlocked('远程执行地址须为HTTPS服务根地址')
+            raise IsolationBlocked('远程执行地址须为HTTPS根地址；显式SSH隧道仅允许127.0.0.1')
         token = token or os.environ.get('CODE_FIX_EXECUTION_TOKEN', '')
         if not isinstance(token, str) or not 32 <= len(token) <= 256 or not token.isascii() or any(c.isspace() for c in token):
             raise IsolationBlocked('请配置有效的远程执行访问码')

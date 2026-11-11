@@ -98,11 +98,12 @@ class Ledger:
         if settings.currency == 'CNY':
             from .account_budget import AccountBudget
             return AccountBudget(self.path).reserve(call_id, run_id, settings, max_calls, upper_input)
-        if settings.currency != 'USD':
+        if settings.currency not in {'USD', 'USAGE'}:
             raise ModelBlocked('未实现的费用币种')
         day = datetime.now(timezone(timedelta(hours=8))).date().isoformat()
-        amount = int((upper_input * settings.input_per_million + settings.max_output_tokens * settings.output_per_million).to_integral_value(rounding=ROUND_CEILING))
-        limit = int(settings.daily_limit * 1_000_000)
+        amount = (int((upper_input * settings.input_per_million + settings.max_output_tokens * settings.output_per_million).to_integral_value(rounding=ROUND_CEILING))
+                  if settings.currency == 'USD' else 0)
+        limit = int(settings.daily_limit * 1_000_000) if settings.currency == 'USD' else None
         with sqlite3.connect(self.path, timeout=10) as db:
             db.execute('BEGIN IMMEDIATE')
             if (db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
@@ -115,7 +116,7 @@ class Ledger:
             if count >= max_calls:
                 raise ModelBlocked('达到本任务模型调用上限')
             used = db.execute('SELECT coalesce(sum(coalesce(actual_microusd,reserved_microusd)),0) FROM calls WHERE day=?', (day,)).fetchone()[0]
-            if used + amount > limit:
+            if limit is not None and used + amount > limit:
                 raise ModelBlocked('达到队伍每日共享费用上限')
             db.execute('''INSERT INTO calls (call_id,run_id,day,reserved_microusd,status,
                        provider_id,model,price_version) VALUES (?,?,?,?,?,?,?,?)''',
@@ -127,6 +128,12 @@ class Ledger:
             from .account_budget import AccountBudget
             return AccountBudget(self.path).settle(call_id, usage, settings)
         valid = isinstance(usage, dict) and all(type(usage.get(k)) is int and usage[k] >= 0 for k in ('prompt_tokens', 'completion_tokens'))
+        if settings.currency == 'USAGE':
+            with sqlite3.connect(self.path) as db:
+                db.execute('UPDATE calls SET status=?,actual_microusd=NULL WHERE call_id=?',
+                           ('unpriced' if valid else 'unknown', call_id))
+            return {'status': 'unpriced' if valid else 'unknown', 'amount_usd': None,
+                    'usage': usage if valid else None, 'basis': 'no_prices_configured; no_monetary_estimate'}
         amount = None
         if valid:
             amount = int((usage['prompt_tokens'] * settings.input_per_million + usage['completion_tokens'] * settings.output_per_million).to_integral_value(rounding=ROUND_CEILING))
@@ -154,13 +161,14 @@ class Ledger:
                                                   'unsettled_calls': 0, 'reserved_microusd': 0})
             item['calls'] += 1
             item['estimated_microusd'] += actual or 0
-            if status != 'known':
+            if status in {'pending', 'unknown'}:
                 item['unsettled_calls'] += 1
                 item['reserved_microusd'] += reserved
         unknown = any(x['unsettled_calls'] for x in providers.values())
+        unpriced = any(row[1] == 'unpriced' for row in rows)
         total = sum(x['estimated_microusd'] for x in providers.values())
-        result = {'status': 'unknown' if unknown else 'estimated' if rows else 'not_called',
-                'amount_usd': None if unknown else str(Decimal(total) / 1_000_000),
+        result = {'status': 'unknown' if unknown else 'unpriced' if unpriced else 'estimated' if rows else 'not_called',
+                'amount_usd': None if unknown or unpriced else str(Decimal(total) / 1_000_000),
                 'providers': providers, 'basis': 'operator_configured_rates; not provider invoice'}
         if cny['calls']:
             result = {'status': 'unknown' if unknown or cny['status'] == 'unknown' else 'mixed_currencies',
