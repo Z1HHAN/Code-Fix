@@ -116,3 +116,10 @@ evidence/rpc-adapter-review/** -text -whitespace
 # Application cloud scripts keep Linux line endings; package remains binary.
 scripts/*execution*.sh text eol=lf
 deploy/cloud/*.zip binary
+
+# Selected repair originals and release checks keep their captured bytes.
+evidence/repair-chain-review/** -text -whitespace
+evidence/release-integration/108/** -text -whitespace
+evidence/presentation-brief/verification.json -text -whitespace
+# The handoff records this prompt's byte identity for reproducible editing.
+docs/2026-11-03_项目持续维护/PPT完整制作提示词.md -text whitespace=cr-at-eol

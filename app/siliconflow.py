@@ -25,7 +25,8 @@ def budget_status(run_root, root=ROOT):
         import sqlite3
         with sqlite3.connect(ledger.path) as db:
             blocked = bool(db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
-                           or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone())
+                           or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()
+                           or db.execute("SELECT 1 FROM personal_calls WHERE status IN ('pending','unknown')").fetchone())
         return {'personal': True, 'accounts': [], 'paid_calls_blocked': blocked,
                 'monetary_budget_enabled': os.environ.get('CODE_FIX_PERSONAL_BUDGET') != 'usage',
                 'platform_balance_verified': False,

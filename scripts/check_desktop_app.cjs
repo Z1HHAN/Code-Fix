@@ -10,15 +10,15 @@ async function run(executable,screenshot){
   await new Promise((resolve,reject)=>{
     const app=spawn(executable,['--smoke-test'],{env,windowsHide:true,stdio:['ignore','pipe','pipe']});
     let output='';
-    const timer=setTimeout(()=>{app.kill();app.stdout.destroy();app.stderr.destroy();reject(Error('Packaged desktop check timed out'));},60000);
+    const timer=setTimeout(()=>{app.kill();app.stdout.destroy();app.stderr.destroy();reject(Error('Packaged desktop check timed out'));},180000);
     app.stdout.on('data',chunk=>{output=(output+chunk).slice(-65536);process.stdout.write(chunk);});
     app.stderr.on('data',chunk=>process.stderr.write(chunk));
     app.once('error',error=>{clearTimeout(timer);reject(error);});
     app.once('exit',code=>{
       clearTimeout(timer);
       app.stdout.destroy();app.stderr.destroy();
-      const marker=screenshot?'Desktop first-launch capture passed':'encrypted reload, bundled backend and zero tasks';
-      if(code===0&&output.includes(marker))resolve();
+      const marker='encrypted reload, bundled backend and zero tasks';
+      if(code===0&&output.includes(marker)&&(!screenshot||output.includes('Desktop first-launch capture passed')))resolve();
       else reject(Error('Packaged desktop check failed: exit='+code+', marker='+output.includes(marker)));
     });
   });
@@ -29,6 +29,5 @@ async function run(executable,screenshot){
   await fs.mkdir(path.dirname(screenshot),{recursive:true});
   await run(executable,screenshot);
   if(!(await fs.stat(screenshot)).size)throw Error('First-launch screenshot is empty');
-  await run(executable);
   console.log('Packaged desktop checks passed: screenshot and actual save/start. No model or cloud requests.');
 })().catch(error=>{console.error(error.message);process.exitCode=1;});

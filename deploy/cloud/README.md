@@ -1,5 +1,13 @@
 # 云端隔离执行服务（开发预览）
 
+## 当前下载与接入
+
+直接下载[精简云端部署ZIP](https://github.com/Z1HHAN/Code-Fix/raw/refs/heads/main/deploy/cloud/codefix-execution.zip)，不需要整个仓库。对应校验文件为[SHA256SUMS](SHA256SUMS)。源码ZIP包含当前执行服务、登记测试、RPC兼容修复和HTTPS配置脚本，不包含Docker镜像、模型账号或访问码；无法拉取镜像时使用下文离线镜像流程。
+
+新部署先按下文导入/构建镜像、创建访问码和检查隔离，再执行`bash /opt/codefix/scripts/enable_execution_https.sh <公网IPv4> --agree-tos`配置HTTPS；须先开放80/443。用户只需在桌面应用填写自己的模型、HTTPS执行地址与个人访问码，8780保持仅本机监听。已有服务器更新须保留数据和访问码、等待活动任务结束，再核对并部署新版本，不直接覆盖正在运行的目录。
+
+本项目已有目标机HTTPS和真实修复原件；这不代表新部署机器已自动取得隔离资格。每次目标机更新后仍需运行资格检查。当前发布身份、回归和限制见[固定交付108](../../docs/2026-11-03_项目持续维护/持续交付与变更记录.md#助手-应用整理与主线合并-1082026-11-13)。
+
 ## Docker Hub 无法访问：离线镜像交付
 
 若曾遇到`No usable temporary directory`：请在更新后的main上新点Run workflow；Re-run旧运行仍使用旧版本。新workflow已给只读冒烟容器提供可写临时目录。

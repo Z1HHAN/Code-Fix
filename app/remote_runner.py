@@ -3,6 +3,8 @@ import base64
 import hashlib
 import json
 import os
+import socket
+import errno
 from pathlib import Path
 import re
 import time
@@ -31,7 +33,7 @@ class RemoteRunner:
             raise IsolationBlocked('远程执行地址须为HTTPS根地址；显式SSH隧道仅允许127.0.0.1')
         token = token or os.environ.get('CODE_FIX_EXECUTION_TOKEN', '')
         if not isinstance(token, str) or not 32 <= len(token) <= 256 or not token.isascii() or any(c.isspace() for c in token):
-            raise IsolationBlocked('请配置有效的远程执行访问码')
+            raise IsolationBlocked('请配置有效的远程执行访问码（32-256位，不含空格和中文）')
         from .redaction import register_secret
         self.token = register_secret(token)
         self.transport_mode = 'test_transport' if client is not None else 'live'
@@ -52,13 +54,29 @@ class RemoteRunner:
                                     headers={'Authorization': 'Bearer ' + self.token},
                                     timeout=max(.01, seconds), follow_redirects=False) as response:
                 if response.status_code >= 300:
-                    raise IsolationBlocked('远程执行服务返回HTTP ' + str(response.status_code))
+                    hints = {401: '执行访问码无效或已撤销，请重新填写维护者发放的访问码',
+                             403: '执行访问码没有权限，请联系维护者',
+                             503: '执行服务暂时不可用，请维护者检查服务状态及访问码注册表',
+                             429: '执行队列繁忙，请稍后重试'}
+                    raise IsolationBlocked('远程执行服务返回HTTP ' + str(response.status_code)
+                                           + '；' + hints.get(response.status_code, '请核对服务状态和接口路径'))
                 body = bytearray()
                 for chunk in response.iter_bytes():
                     body.extend(chunk)
                     if len(body) > limit:
                         raise IsolationBlocked('远程执行响应超过大小上限')
             return json.loads(body)
+        except httpx.TimeoutException:
+            raise IsolationBlocked('连接执行服务超时；检查网络及维护者提供的HTTPS入口') from None
+        except httpx.ConnectError as exc:
+            cause = exc
+            while cause is not None:
+                if isinstance(cause, socket.gaierror):
+                    raise IsolationBlocked('无法解析执行服务地址，请核对域名和网络DNS') from None
+                if isinstance(cause, ConnectionRefusedError) or getattr(cause, 'errno', None) in {errno.ECONNREFUSED, 10061}:
+                    raise IsolationBlocked('执行服务连接被拒绝；请维护者检查服务监听和HTTPS转发，隧道模式另检查隧道是否建立') from None
+                cause = cause.__cause__
+            raise IsolationBlocked('无法建立执行服务连接；请核对HTTPS证书和网络，联系维护者检查入口') from None
         except (httpx.HTTPError, ValueError, UnicodeDecodeError):
             raise IsolationBlocked('远程执行连接或响应异常；没有自动重提任务') from None
 

@@ -20,6 +20,10 @@ class ModelBlocked(ValueError):
     pass
 
 
+class BudgetBlocked(ModelBlocked):
+    pass
+
+
 def positive_decimal(value):
     try:
         number = Decimal(str(value))
@@ -51,6 +55,9 @@ class LiveSettings:
     team_limit: Decimal | None = None
     billable_output_tokens: int | None = None
     request_parameters: dict | None = None
+    personal_pricing: dict | None = None
+    authorization_id: str | None = None
+    authorization_limit: Decimal | None = None
 
     @classmethod
     def from_env(cls):
@@ -93,8 +100,13 @@ class Ledger:
                     db.execute(f"ALTER TABLE calls ADD COLUMN {name} TEXT NOT NULL DEFAULT '{default}'")
             from .account_budget import AccountBudget
             AccountBudget.initialize(db)
+            from .personal_ledger import initialize
+            initialize(db)
 
     def reserve(self, call_id, run_id, settings, max_calls, upper_input):
+        if settings.personal_pricing:
+            from .personal_ledger import reserve
+            return reserve(self.path, call_id, run_id, settings, max_calls, upper_input)
         if settings.currency == 'CNY':
             from .account_budget import AccountBudget
             return AccountBudget(self.path).reserve(call_id, run_id, settings, max_calls, upper_input)
@@ -107,12 +119,15 @@ class Ledger:
         with sqlite3.connect(self.path, timeout=10) as db:
             db.execute('BEGIN IMMEDIATE')
             if (db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
-                    or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()):
+                    or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()
+                    or db.execute("SELECT 1 FROM personal_calls WHERE status IN ('pending','unknown')").fetchone()):
                 unknown = (db.execute("SELECT 1 FROM calls WHERE status='unknown'").fetchone()
-                           or db.execute("SELECT 1 FROM cny_calls WHERE status='unknown'").fetchone())
+                           or db.execute("SELECT 1 FROM cny_calls WHERE status='unknown'").fetchone()
+                           or db.execute("SELECT 1 FROM personal_calls WHERE status='unknown'").fetchone())
                 raise ModelBlocked('存在费用未知请求，需人工核对后恢复' if unknown else '存在进行中请求，请等待其结算后重试')
             count = db.execute('SELECT count(*) FROM calls WHERE run_id=?', (run_id,)).fetchone()[0]
             count += db.execute('SELECT count(*) FROM cny_calls WHERE run_id=?', (run_id,)).fetchone()[0]
+            count += db.execute('SELECT count(*) FROM personal_calls WHERE run_id=?', (run_id,)).fetchone()[0]
             if count >= max_calls:
                 raise ModelBlocked('达到本任务模型调用上限')
             used = db.execute('SELECT coalesce(sum(coalesce(actual_microusd,reserved_microusd)),0) FROM calls WHERE day=?', (day,)).fetchone()[0]
@@ -124,6 +139,9 @@ class Ledger:
                         settings.model, settings.price_version))
 
     def settle(self, call_id, usage, settings):
+        if settings.personal_pricing:
+            from .personal_ledger import settle
+            return settle(self.path, call_id, usage)
         if settings.currency == 'CNY':
             from .account_budget import AccountBudget
             return AccountBudget(self.path).settle(call_id, usage, settings)
@@ -148,12 +166,16 @@ class Ledger:
 
 
     def summary(self, run_id):
+        from .personal_ledger import summary
+        personal = summary(self.path, run_id)
         with sqlite3.connect(self.path) as db:
             rows = db.execute('''SELECT provider_id,status,actual_microusd,reserved_microusd
                                FROM calls WHERE run_id=? ORDER BY rowid''', (run_id,)).fetchall()
         from .account_budget import AccountBudget
         cny = AccountBudget(self.path).summary(run_id)
-        if cny['calls'] and not rows:
+        if personal['calls'] and not rows and not cny['calls']:
+            return personal
+        if cny['calls'] and not rows and not personal['calls']:
             return cny
         providers = {}
         for provider, status, actual, reserved in rows:
@@ -174,6 +196,9 @@ class Ledger:
             result = {'status': 'unknown' if unknown or cny['status'] == 'unknown' else 'mixed_currencies',
                       'amount_usd': result['amount_usd'], 'amount_cny': cny['amount_cny'],
                       'budget': cny['budget'], 'basis': 'separate_currencies_no_conversion'}
+        if personal['calls']:
+            return {'status': 'unknown', 'amount_cny': None, 'amount_usd': None,
+                    'components': [result, personal], 'basis': 'mixed_legacy_and_personal; inspect_components'}
         return result
 
 
@@ -221,13 +246,17 @@ class LiveModel:
         upper_input = sum(len(m['content'].encode('utf-8')) + 100 for m in messages) + 100
         if upper_input > self.settings.max_input_tokens:
             raise ModelBlocked('输入过长，拒绝未经计账的截断')
-        self.ledger.reserve(call_id, run_id, self.settings, max_calls, upper_input)
+        try:
+            self.ledger.reserve(call_id, run_id, self.settings, max_calls, upper_input)
+        except ModelBlocked as exc:
+            raise BudgetBlocked(str(exc)) from None
         record = {'role': None, 'mode': self.mode, 'model_api_called': False,
                   'model': self.settings.model, 'call_id': call_id, 'status': 'failed',
                   'provider_id': self.settings.provider_id, 'price_version': self.settings.price_version,
                   'usage': None, 'cost': {'status': 'unknown', 'amount_usd': None},
                   'attempts': 1, 'max_attempts': 1, 'transport_request_started': False,
                   'failure_class': 'model_transport_error'}
+        record['budget_check'] = {'status': 'ok', 'reason': '调用次数、未结算请求及适用费用上限检查通过，已预留'}
         started = time.monotonic()
         settled = False
         try:
@@ -242,19 +271,53 @@ class LiveModel:
             record['usage'] = value.get('usage')
             record['cost'] = self.ledger.settle(call_id, record['usage'], self.settings)
             settled = True
-            content = value['choices'][0]['message']['content']
-            if not isinstance(content, str) or not content.strip():
-                raise ValueError('缺少响应文本')
-            record.update(raw_text=content, status='ok', failure_class=None,
-                          provider_model=value.get('model'), provider_response_id=value.get('id'))
+            record.update(provider_model=value.get('model'), provider_response_id=value.get('id'))
+            # Unknown usage has priority over content validation: it must never
+            # become a format failure that automatically sends another request.
             if record['cost']['status'] == 'unknown':
-                record.update(status='blocked', failure_class='cost_unknown')
+                record.update(status='blocked', failure_class='cost_unknown',
+                              reason='服务商用量或费用未知，须先核对，停止后续调用')
+            else:
+                choice = value['choices'][0]
+                finish = choice.get('finish_reason')
+                record['finish_reason'] = (finish if isinstance(finish, str) and finish in {
+                    'stop', 'length', 'content_filter', 'tool_calls', 'function_call'} else None if finish is None else 'other')
+                content = choice['message'].get('content')
+                if content is None or isinstance(content, str) and not content.strip():
+                    details = record['usage'].get('completion_tokens_details')
+                    details = details if isinstance(details, dict) else {}
+                    counts = {name: details[name] if type(details.get(name)) is int and details[name] >= 0 else None
+                              for name in ('reasoning_tokens', 'text_tokens')}
+                    record.update(status='failed', failure_class='invalid_model_output', error_type='EmptyModelOutput',
+                        reason=('模型没有返回正文；输出上限为' + str(self.settings.max_output_tokens)
+                            + ('，服务商标记输出已截断' if finish == 'length' else '')
+                            + '。请在剩余轮次内直接给出符合协议的JSON，减少解释。'),
+                        output_diagnostics={'kind': 'reasoning_budget_exhausted' if counts['reasoning_tokens'] == self.settings.max_output_tokens and counts['text_tokens'] == 0 else 'empty_content',
+                            'empty_content': True, 'max_output_tokens': self.settings.max_output_tokens, **counts,
+                            'suggested_action': '在模型与配置中检查该角色输出上限；支持时限制思考，或选择更大的已批准输出上限。'})
+                elif not isinstance(content, str):
+                    raise ValueError('响应文本类型不支持')
+                elif finish == 'length':
+                    record.update(raw_text=content, status='failed', failure_class='invalid_model_output',
+                        error_type='TruncatedModelOutput',
+                        reason='服务商标记输出达到长度上限，正文可能不完整；本次不应用修改，在剩余额度内重新输出完整协议JSON。',
+                        output_diagnostics={'kind': 'truncated_output', 'empty_content': False,
+                            'max_output_tokens': self.settings.max_output_tokens,
+                            'suggested_action': '检查该角色输出上限；可在模型登记范围内增加长度，避免长解释占用代码空间。'})
+                else:
+                    record.update(raw_text=content, status='ok', failure_class=None)
         except Exception as exc:
             if not settled:
                 usage = None if record['transport_request_started'] else {'prompt_tokens': 0, 'completion_tokens': 0}
                 record['cost'] = self.ledger.settle(call_id, usage, self.settings)
             record['error_type'] = type(exc).__name__
-            if isinstance(exc, (TimeoutError, httpx.TimeoutException)):
+            if isinstance(exc, httpx.HTTPStatusError):
+                record['http_status'] = exc.response.status_code
+                from .connection_checks import http_hint
+                detail, action = http_hint(exc.response.status_code, model=True)
+                record['reason'] = detail + '；' + action
+            elif isinstance(exc, (TimeoutError, httpx.TimeoutException)):
+                record['reason'] = '请求超过时限；用量未知时先核对账单，不自动重试'
                 record['failure_class'] = ('model_request_timeout' if record['transport_request_started'] else 'model_deadline_before_send')
             elif isinstance(exc, (ValueError, KeyError, IndexError, TypeError)):
                 record['failure_class'] = 'invalid_model_response'

@@ -1,0 +1,276 @@
+{
+  "backend_sha256": "21046b0b9ced76265f7adc3c79ffedac19ef8599a370a2419f7ebe81744555b7",
+  "backend_files": 327,
+  "scope": "RPC semantic boundary repair and wrap task clarification; not a full40 rerun",
+  "rows": [
+    {
+      "source": "live-103",
+      "project": "qb-wrap",
+      "run_id": "run-5d3abe3b256c4092a8b0e66d00e3d00f",
+      "status": "stopped",
+      "rounds": 3,
+      "requests": 10,
+      "estimated_cny": "0.058199",
+      "contract": {
+        "version": "wrap-contract-1",
+        "notice": "换行处的分隔空格不留在输出行末。原源码末尾关于保留全部空格的历史注释与当前登记契约冲突，以本登记契约为准。此处仅说明行为约束，不提供测试输入、期望输出或参考实现。"
+      },
+      "roles": [
+        {
+          "role": "locator",
+          "round": 2,
+          "status": "ok"
+        },
+        {
+          "role": "scheduler",
+          "round": 1,
+          "status": "ok"
+        },
+        {
+          "role": "repairer",
+          "round": 1,
+          "status": "ok"
+        },
+        {
+          "role": "repairer",
+          "round": 3,
+          "status": "ok"
+        },
+        {
+          "role": "detector",
+          "round": 2,
+          "status": "ok"
+        },
+        {
+          "role": "repairer",
+          "round": 2,
+          "status": "ok"
+        },
+        {
+          "role": "detector",
+          "round": 1,
+          "status": "ok"
+        },
+        {
+          "role": "locator",
+          "round": 2,
+          "status": "failed"
+        },
+        {
+          "role": "locator",
+          "round": 1,
+          "status": "ok"
+        },
+        {
+          "role": "scheduler",
+          "round": 2,
+          "status": "ok"
+        }
+      ],
+      "tests": [
+        {
+          "stage": "baseline",
+          "round": 0,
+          "verification_status": "failed",
+          "failure_class": "assertion_failed",
+          "counts": {
+            "collected": 5,
+            "passed": 0,
+            "failed": 5,
+            "errors": 0,
+            "skipped": 0
+          },
+          "meaning": "缺陷已复现，可以开始修复",
+          "evidence_path": "baseline",
+          "step_id": "s-e83138e28fb84b55a2e55b4166559613",
+          "code_version": "sha256:f85423ac0f964b6144b9e4ae073a49ec13cf21dc3890ca3a3b2ee15c32f25e59",
+          "test_suite_version": "sha256:7b43145680d614770b3b73619583cfda5865725dd96477defbb1a26154de348b"
+        },
+        {
+          "stage": "candidate",
+          "round": 1,
+          "verification_status": "failed",
+          "failure_class": "assertion_failed",
+          "counts": {
+            "collected": 5,
+            "passed": 0,
+            "failed": 5,
+            "errors": 0,
+            "skipped": 0
+          },
+          "meaning": "候选仍未修好",
+          "evidence_path": "development-1",
+          "step_id": "s-20bf091aec294390acfd6acd83301fe8",
+          "code_version": "sha256:7bbbddc8449451dc435b39a0523dc522327a544a1518169812498141f8d513c0",
+          "test_suite_version": "sha256:7b43145680d614770b3b73619583cfda5865725dd96477defbb1a26154de348b"
+        },
+        {
+          "stage": "candidate",
+          "round": 2,
+          "verification_status": "failed",
+          "failure_class": "assertion_failed",
+          "counts": {
+            "collected": 5,
+            "passed": 0,
+            "failed": 5,
+            "errors": 0,
+            "skipped": 0
+          },
+          "meaning": "候选仍未修好",
+          "evidence_path": "development-2",
+          "step_id": "s-35a96f3bd8554acfb05242c56c7a6f58",
+          "code_version": "sha256:b4888c7e133e7e64e7a3b25acf9db18c014f26611599eeadad80eeb0cdf21057",
+          "test_suite_version": "sha256:7b43145680d614770b3b73619583cfda5865725dd96477defbb1a26154de348b"
+        },
+        {
+          "stage": "candidate",
+          "round": 3,
+          "verification_status": "failed",
+          "failure_class": "assertion_failed",
+          "counts": {
+            "collected": 5,
+            "passed": 0,
+            "failed": 5,
+            "errors": 0,
+            "skipped": 0
+          },
+          "meaning": "候选仍未修好",
+          "evidence_path": "development-3",
+          "step_id": "s-38b390f735de40cba70685aeeeba9fe4",
+          "code_version": "sha256:1680bb72ea9831d5d162f050fd992c959f603b5652b4995e8133d117e74bf22d",
+          "test_suite_version": "sha256:7b43145680d614770b3b73619583cfda5865725dd96477defbb1a26154de348b"
+        }
+      ]
+    },
+    {
+      "source": "live-104",
+      "project": "qb-wrap",
+      "run_id": "run-bfd7eff82c26423ca72fa7166fa5d01b",
+      "status": "success",
+      "rounds": 2,
+      "requests": 6,
+      "estimated_cny": "0.031973",
+      "contract": {
+        "version": "wrap-contract-2",
+        "preserve_text": true,
+        "separator_position": "next_line",
+        "notice": "保留所有输入字符及其顺序，输出各行直接拼接必须等于原文。按空格断行时分隔空格归下一行开头，不移到上一行尾，也不能通过strip删除。原源码关于保留空格的业务说明仍有效。此处仅明确行为约束，不提供测试输入、期望输出或参考实现。"
+      },
+      "roles": [
+        {
+          "role": "repairer",
+          "round": 1,
+          "status": "ok"
+        },
+        {
+          "role": "locator",
+          "round": 1,
+          "status": "ok"
+        },
+        {
+          "role": "scheduler",
+          "round": 1,
+          "status": "ok"
+        },
+        {
+          "role": "repairer",
+          "round": 2,
+          "status": "ok"
+        },
+        {
+          "role": "locator",
+          "round": 1,
+          "status": "failed"
+        },
+        {
+          "role": "detector",
+          "round": 1,
+          "status": "ok"
+        }
+      ],
+      "tests": [
+        {
+          "stage": "baseline",
+          "round": 0,
+          "verification_status": "failed",
+          "failure_class": "assertion_failed",
+          "counts": {
+            "collected": 5,
+            "passed": 0,
+            "failed": 5,
+            "errors": 0,
+            "skipped": 0
+          },
+          "meaning": "缺陷已复现，可以开始修复",
+          "evidence_path": "baseline",
+          "step_id": "s-423923fa412640ab9a84398190dc40c9",
+          "code_version": "sha256:f85423ac0f964b6144b9e4ae073a49ec13cf21dc3890ca3a3b2ee15c32f25e59",
+          "test_suite_version": "sha256:7b43145680d614770b3b73619583cfda5865725dd96477defbb1a26154de348b"
+        },
+        {
+          "stage": "candidate",
+          "round": 1,
+          "verification_status": "failed",
+          "failure_class": "assertion_failed",
+          "counts": {
+            "collected": 5,
+            "passed": 0,
+            "failed": 5,
+            "errors": 0,
+            "skipped": 0
+          },
+          "meaning": "候选仍未修好",
+          "evidence_path": "development-1",
+          "step_id": "s-3c366a8b4eef46f195b023ce69801cdf",
+          "code_version": "sha256:ad71840dd5078187f590cf22f8e6e9c62ddb0ec769eb3a7c090cb957d44a559a",
+          "test_suite_version": "sha256:7b43145680d614770b3b73619583cfda5865725dd96477defbb1a26154de348b"
+        },
+        {
+          "stage": "candidate",
+          "round": 2,
+          "verification_status": "passed",
+          "failure_class": "passed",
+          "counts": {
+            "collected": 5,
+            "passed": 5,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "meaning": "候选通过，待最终复验",
+          "evidence_path": "development-2",
+          "step_id": "s-5d7e6ffc5cba411e8b4453f8927c6db1",
+          "code_version": "sha256:e504bd2b4a9a207354451553cbe6f6618ce52acb5127add2289bcc4010ab13dc",
+          "test_suite_version": "sha256:7b43145680d614770b3b73619583cfda5865725dd96477defbb1a26154de348b"
+        },
+        {
+          "stage": "final",
+          "round": 2,
+          "verification_status": "passed",
+          "failure_class": "passed",
+          "counts": {
+            "collected": 5,
+            "passed": 5,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "meaning": "最终复验通过",
+          "evidence_path": "final-check",
+          "step_id": "s-bffe202f6e154cf085ddf63581007122",
+          "code_version": "sha256:e504bd2b4a9a207354451553cbe6f6618ce52acb5127add2289bcc4010ab13dc",
+          "test_suite_version": "sha256:7b43145680d614770b3b73619583cfda5865725dd96477defbb1a26154de348b"
+        }
+      ]
+    }
+  ],
+  "batch_requests": 16,
+  "batch_estimated_cny": "0.090172",
+  "authorization": {
+    "requests": 156,
+    "estimated_cny": "1.807192",
+    "unknown_or_pending": 0
+  },
+  "server": "three-file upgrade packaged and tested on disposable copies; actual deployment and shortest_path_lengths real recheck pending operator",
+  "correction": "102/initial103 incorrectly inferred prose/test conflict. Frozen wrap cases concatenate exactly to input. Actual issue is separator placement, not an inconsistent test suite."
+}

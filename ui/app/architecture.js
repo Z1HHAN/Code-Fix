@@ -18,7 +18,7 @@
     return length<260?1:length<600?2:3;
   }
   const slots={entry:[230,35,'用户入口'],service:[620,35,'任务服务'],isolation:[230,195,'隔离前置检查'],program:[550,195,'独立程序调度'],guard:[900,195,'预算与权限'],locator:[550,345,'定位员·按需参与'],baseline:[180,470,'隔离基线测试'],repairer:[348,470,'修复与补丁校验'],pytest:[516,470,'隔离开发测试'],detector:[684,470,'检测员'],scheduler:[852,470,'模型调度员'],final:[1020,470,'最终复验'],trace:[230,640,'Trace事件'],logs:[470,640,'测试日志 / JUnit'],diff:[710,640,'候选diff'],cost:[950,640,'费用账本']};
-  function slot(node){const f=node.facts;return f.node_id==='pytest'?(f.phase==='final_check'?'final':f.round===0?'baseline':'pytest'):f.node_id==='apply_candidate'?'repairer':f.node_id==='program_dispatch'?'program':f.node_id==='isolation_preflight'?'isolation':slots[f.node_id]?f.node_id:null;}
+  function slot(node){const f=node.facts;return ['budget_check','permission_check','configuration_check'].includes(f.node_id)?'guard':f.node_id==='pytest'?(f.phase==='final_check'?'final':f.round===0?'baseline':'pytest'):f.node_id==='apply_candidate'?'repairer':f.node_id==='program_dispatch'?'program':f.node_id==='isolation_preflight'?'isolation':slots[f.node_id]?f.node_id:null;}
   function projection(run,events,trace){
     const graph=trace.project(run,events),mapped=new Map(),byStep=new Map();
     for(const node of graph.nodes){const key=slot(node);if(key){mapped.set(key,node);byStep.set(node.id,key);}}

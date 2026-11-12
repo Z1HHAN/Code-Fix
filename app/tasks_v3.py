@@ -41,6 +41,7 @@ class RegisteredTask:
                 'test_suite_version': compute_test_suite_version(self.profile),
                 'requires_isolation': self.requires_isolation, 'source': self.data['source'],
                 'admission_blocker': self.admission_blocker,
+                **({'registered_contract': self.data['registered_contract']} if self.data.get('registered_contract') else {}),
                 'qualification_status': self.data.get('qualification_status', 'reviewed_fixture_or_legacy_registration')}
 
     def verify(self, workspace, *, candidate=False):

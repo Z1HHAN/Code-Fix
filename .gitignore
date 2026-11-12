@@ -65,3 +65,18 @@ secrets/
 desktop/node_modules/
 desktop/build/
 desktop/dist/
+desktop/dist-preflight/
+
+# Local release builds, acceptance workspaces and presentation toolchains.
+/desktop/dist-*/
+/evaluation/c_runs/
+/r98/
+/s100/
+/y[0-9]/
+/z[0-9]/
+/evidence/contest-demo-materials/editable-deck/
+/evidence/contest-demo-materials/toolchain-check/
+/evidence/presentation-brief/sources/
+# New raw runs stay local; selected original evidence is explicitly published.
+/evidence/repair-chain-review/
+/evidence/presentation-brief/

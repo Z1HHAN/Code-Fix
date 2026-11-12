@@ -1,0 +1,221 @@
+{
+  "role": "detector",
+  "mode": "live",
+  "model_api_called": true,
+  "model": "deepseek-v4.1-flash-1017",
+  "call_id": "m-fc1b489064004c35b3378d5b3ffb22ec",
+  "status": "ok",
+  "provider_id": "personal",
+  "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+  "usage": {
+    "prompt_tokens": 1815,
+    "total_tokens": 2142,
+    "completion_tokens": 327,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "image_tokens": 0,
+      "text_tokens": 1815
+    },
+    "completion_tokens_details": {
+      "text_tokens": 327
+    }
+  },
+  "cost": {
+    "status": "estimated",
+    "amount_cny": "0.006246",
+    "currency": "CNY",
+    "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+    "upper_estimate": false,
+    "basis": "versioned_model_rates; not_provider_invoice"
+  },
+  "attempts": 1,
+  "max_attempts": 1,
+  "transport_request_started": true,
+  "failure_class": null,
+  "budget_check": {
+    "status": "ok",
+    "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+  },
+  "provider_model": "deepseek-v4.1-flash-1017",
+  "provider_response_id": "chatcmpl-fc29e4bc-7da7-9c53-8dbf-e4b7349a35cf",
+  "finish_reason": "stop",
+  "raw_text": "{\"analysis\":\"5条原生测试全部在断言处失败，当前代码的核心行为与登记契约 separator_position=next_line 直接冲突：当在 text[0:cols+1] 中找到空格时，代码执行 end=end+1，把分隔空格保留在上一行行尾（line 包含该空格，下一行不以空格开头），而契约要求按空格断行时分隔空格归下一行开头。这会导致返回的行列表与期望输出在空格的所属行上不一致，即便各行直接拼接仍能还原原文。此外，现有切分逻辑在无空格时会以 cols 强断；当前证据只显示5个断言失败计数，未暴露具体输入/期望输出（已脱敏），因此不能确定是否还有空行、连续空格、cols边界等其他差异；但空格位置错误已足以解释本次断言失败。证据仅来自开发阶段测试运行，不能据此断言所有输入均正确。\",\"failure_class\":\"assertion_failed\",\"suggested_checks\":[\"针对含空格的输入，确认返回列表中分隔空格位于下一行开头而非上一行末尾\",\"用断言验证 ''.join(wrap(text, cols)) == text 以确认字符与顺序完全保留\",\"检查切分位置选择是否仍保证每行长度不超过 cols，同时不通过 strip/去除空格改变原文\",\"开发测试通过后按登记要求在干净副本独立重跑同一套原生测试，未执行不得称为通过\"],\"evidence_ids\":[\"test-development-1\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+  "duration_ms": 3062,
+  "code_version": "sha256:ad71840dd5078187f590cf22f8e6e9c62ddb0ec769eb3a7c090cb957d44a559a",
+  "round": 1,
+  "provenance": {
+    "role_override": {
+      "task_instruction": "",
+      "generation": {
+        "max_output_tokens": 4096,
+        "enable_thinking": false
+      }
+    },
+    "role_overrides_sha256": "deb29934ba490aae704432dc5493ccfdb5be4e7b695b137a02f0ccbd15be819f",
+    "protocol": "codefix-json-v1",
+    "parser_version": "1.0.0",
+    "config_version": "1.1.0",
+    "effective_config": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "config_sha256": "c5d0f9bb3bb1edb5de3a5b427b717f28739c4ecb692765d7b199703101696ed4",
+    "prompt_ref": "prompts/detector.md",
+    "prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+    "system_prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+    "messages_sha256": "c87b762f9b8e31be4b8d5ea0458b83cc65a874ed474f371cd9fa781a709037b9",
+    "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "model_binding": {
+      "model_ref": "detector",
+      "binding": "approved_profile",
+      "profile_ref": "personal_model",
+      "mode": "live",
+      "provider_id": "personal",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+      "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+      "effective_parameters": {
+        "max_tokens": 4096,
+        "enable_thinking": false
+      },
+      "request_seconds": 60,
+      "daily_shared_usd": null,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "effective_parameters_sha256": "85c185f9b4018df9c4996420f62c6bc458c12d5fd29241373a1f57f347be3f4f",
+      "currency": "CNY",
+      "personal_pricing": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      },
+      "daily_limit": "5",
+      "monetary_budget_enabled": true
+    }
+  },
+  "step_id": "s-36418f3be71f4150aa2fe1337f177244",
+  "parent_step_id": "s-3c366a8b4eef46f195b023ce69801cdf",
+  "parsed_output": {
+    "analysis": "5条原生测试全部在断言处失败，当前代码的核心行为与登记契约 separator_position=next_line 直接冲突：当在 text[0:cols+1] 中找到空格时，代码执行 end=end+1，把分隔空格保留在上一行行尾（line 包含该空格，下一行不以空格开头），而契约要求按空格断行时分隔空格归下一行开头。这会导致返回的行列表与期望输出在空格的所属行上不一致，即便各行直接拼接仍能还原原文。此外，现有切分逻辑在无空格时会以 cols 强断；当前证据只显示5个断言失败计数，未暴露具体输入/期望输出（已脱敏），因此不能确定是否还有空行、连续空格、cols边界等其他差异；但空格位置错误已足以解释本次断言失败。证据仅来自开发阶段测试运行，不能据此断言所有输入均正确。",
+    "failure_class": "assertion_failed",
+    "suggested_checks": [
+      "针对含空格的输入，确认返回列表中分隔空格位于下一行开头而非上一行末尾",
+      "用断言验证 ''.join(wrap(text, cols)) == text 以确认字符与顺序完全保留",
+      "检查切分位置选择是否仍保证每行长度不超过 cols，同时不通过 strip/去除空格改变原文",
+      "开发测试通过后按登记要求在干净副本独立重跑同一套原生测试，未执行不得称为通过"
+    ],
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "knowledge_citations": [
+      "knowledge-public_tasks",
+      "knowledge-testing"
+    ]
+  }
+}

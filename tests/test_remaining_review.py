@@ -69,13 +69,18 @@ def test_unsent_deadline_releases_reservation(tmp_path, monkeypatch):
         assert db.execute('SELECT status,actual_microusd FROM calls').fetchone() == ('known', 0)
 
 
-@pytest.mark.parametrize('payload', [None, [], {}, {'usage': {'prompt_tokens': 0, 'completion_tokens': 0},
-    'choices': [{'message': {'content': ''}}]}])
-def test_invalid_200_has_explicit_class(tmp_path, payload):
+@pytest.mark.parametrize('payload,expected_class', [
+    (None, 'invalid_model_response'),
+    ([], 'invalid_model_response'),
+    ({}, 'cost_unknown'),
+    ({'usage': {'prompt_tokens': 0, 'completion_tokens': 0},
+      'choices': [{'message': {'content': ''}}]}, 'invalid_model_output'),
+])
+def test_invalid_200_has_explicit_class(tmp_path, payload, expected_class):
     model = LiveModel(settings(), Ledger(tmp_path), transport=httpx.MockTransport(
         lambda r: httpx.Response(200, content=b'' if payload is None else json.dumps(payload).encode())))
     record = model.call([], run_id='r', call_id='c', max_calls=2, deadline=time.monotonic()+5)
-    assert record['failure_class'] == 'invalid_model_response'
+    assert record['failure_class'] == expected_class
     assert record['status'] != 'ok'
 
 
@@ -221,7 +226,7 @@ def test_success_trace_is_ok():
     from app.workflow_v3 import WorkflowRun
     ctx = object.__new__(WorkflowRun)
     ctx.final = {'rounds_used': 0, 'test_suite_version': 'synthetic'}
-    ctx.model_calls = ctx.tool_calls = 0
+    ctx.model_calls = ctx.tool_calls = ctx.actual_requests = 0
     ctx.counters = lambda: {'cost': {}}
     ctx.latest_evidence = []
     observed = []

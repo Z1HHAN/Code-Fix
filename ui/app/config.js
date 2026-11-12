@@ -18,25 +18,25 @@ window.CodeFixConfig = (() => {
   }
   function draft(){
     const bindings={};for(const role of Object.keys(roles))bindings[role]=byId('binding-'+role).value;
-    const role_overrides={};for(const role of Object.keys(roles)){const task_instruction=byId('instruction-'+role).value;const generation={};for(const k of ['max_output_tokens','temperature','top_p']){const n=byId('parameter-'+role+'-'+k);if(!n.disabled&&n.value!=='')generation[k]=Number(n.value);}if(task_instruction||Object.keys(generation).length)role_overrides[role]={task_instruction,generation};}
+    const role_overrides={};for(const role of Object.keys(roles)){const task_instruction=byId('instruction-'+role).value;const generation={};for(const k of ['max_output_tokens','temperature','top_p','enable_thinking','reasoning_effort']){const n=byId('parameter-'+role+'-'+k);if(!n.disabled&&n.value!=='')generation[k]=k==='enable_thinking'?n.value==='true':k==='reasoning_effort'?n.value:Number(n.value);}if(task_instruction||Object.keys(generation).length)role_overrides[role]={task_instruction,generation};}
     return {bindings,role_overrides,strategy:byId('config-strategy').value,parameters:{max_rounds:Number(byId('config-rounds').value),max_calls:Number(byId('config-calls').value),total_seconds:Number(byId('config-seconds').value)}};
   }
   function roleEditor(role,name){
     const block=element('fieldset',null,'role-editor');block.append(element('legend',name));
     const label=element('label','独立任务指令（最多4000字符）','field'),area=element('textarea');area.id='instruction-'+role;area.maxLength=4000;area.rows=3;area.oninput=dirty;label.append(area);block.append(label);
     const fields=element('div',null,'three-col');
-    for(const [key,title]of Object.entries({max_output_tokens:'可见输出上限',temperature:'temperature',top_p:'top_p'})){
-      const label=element('label',title,'field'),input=element('input');input.type='number';input.id='parameter-'+role+'-'+key;input.oninput=dirty;
+    for(const [key,title]of Object.entries({max_output_tokens:'输出Token上限（部分模型包含思考）',temperature:'temperature',top_p:'top_p',enable_thinking:'思考模式',reasoning_effort:'思考强度'})){
+      const label=element('label',title,'field'),input=element(['enable_thinking','reasoning_effort'].includes(key)?'select':'input');if(!['enable_thinking','reasoning_effort'].includes(key))input.type='number';input.id='parameter-'+role+'-'+key;input.oninput=dirty;
       const note=element('small');note.id='capability-'+role+'-'+key;label.append(input,note);fields.append(label);
     }block.append(fields);byId('role-editors').append(block);
   }
   function updateCapabilities(role){
     const p=catalog.profiles.find(p=>p.profile_ref===byId('binding-'+role).value);
-    for(const key of ['max_output_tokens','temperature','top_p']){
+    for(const key of ['max_output_tokens','temperature','top_p','enable_thinking','reasoning_effort']){
       const cap=p?.capabilities?.[key],input=byId('parameter-'+role+'-'+key);input.value='';input.disabled=!cap?.supported;
-      input.step=key==='max_output_tokens'?'1':'0.01';input.min=cap?.minimum??'';input.max=cap?.maximum??'';
+      if(['enable_thinking','reasoning_effort'].includes(key)){const values=key==='enable_thinking'?['true','false']:cap?.values||[];input.replaceChildren(...['',...values].map(v=>{const o=element('option',v===''?'沿用服务商默认':v==='true'?'开启思考':v==='false'?'关闭思考':({low:'低',high:'高',max:'最大'}[v]||v));o.value=v;return o;}));}input.step=key==='max_output_tokens'?'1':'0.01';input.min=cap?.minimum??'';input.max=cap?.maximum??'';
       input.placeholder=cap?.default==null?'沿用服务商默认':String(cap.default);
-      display('capability-'+role+'-'+key,cap?.supported?`${cap.minimum}–${cap.maximum}；${cap.reason}`:cap?.reason||'能力未登记');
+      display('capability-'+role+'-'+key,cap?.supported?(cap.type?cap.reason:`${cap.minimum}–${cap.maximum}；${cap.reason}`)+(key==='max_output_tokens'?'。各角色独立生效；可选2048/4096/8192，但不能超过当前模型登记上限。若当前仅2048，请先在桌面设置核实并调整上限，再保存新配置。':''):cap?.reason||'能力未登记');
     }
   }
   async function save(validateOnly){
@@ -62,7 +62,7 @@ window.CodeFixConfig = (() => {
       for(const a of budget.accounts||[]){const row=element('tr');for(const v of [accountLabel(a.account_id),a.authorized_cny,a.estimated_spent_cny,a.reserved_cny,a.estimated_remaining_cny,a.warning_threshold_cny])row.append(element('td',v==null?'未知':String(v)));if(a.low_balance)row.append(element('td','低余额提醒','warn'));byId('account-rows').append(row);}
       display('budget-note',(budget.paid_calls_blocked?'存在未结算费用，阻止新付费请求。 ':'')+(budget.note||'仅本项目估算，不是实时平台余额。')+(budget.personal?'':' 金额单位：人民币元；累计额度不按天重置。'));
       const remote=health.execution_mode==='remote-docker';
-      const values=[['Docker命令',remote?'由远程执行服务提供，本机不需要安装':health.docker_available?'可找到；尚不代表隔离通过':'未找到'],['隔离探针','本次环境概览未执行探针；历史结果见所选任务记录，每次启动仍须重新验证'],['模型调用配置',health.model_configured?'默认配置可解析，未请求验证':'默认配置未就绪'],['执行机',remote?'远程隔离服务：'+health.execution_endpoint:'当前服务所在本机；不代表B机'],['前置阻塞',(health.blockers||[]).join('；')||'未报告；仍须每次运行检查']];
+      const values=[['Docker命令',remote?'由远程执行服务提供，本机不需要安装':health.docker_available?'可找到；尚不代表隔离通过':'未找到'],['隔离探针',health.note||'本次环境概览未执行探针；历史结果见所选任务记录，每次启动仍须重新验证'],['模型调用配置',health.model_configured?'默认配置可解析；真实连通请使用桌面设置中的模型测试':'默认配置未就绪'],['执行机',remote?'远程隔离服务：'+health.execution_endpoint:'当前服务所在本机；不代表B机'],['前置阻塞',(health.blockers||[]).join('；')||'未报告；仍须每次运行检查']];
       for(const [k,v]of values)byId('isolation-values').append(element('dt',k),element('dd',v));
       renderModelReadiness(models.profiles);
       display('conditions-note','已读取本机状态；模型、费用预留和隔离仍以任务启动检查为准。');

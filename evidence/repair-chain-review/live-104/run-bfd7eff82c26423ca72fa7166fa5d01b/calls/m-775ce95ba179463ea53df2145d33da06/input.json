@@ -1,0 +1,169 @@
+{
+  "role": "scheduler",
+  "messages": [
+    {
+      "role": "system",
+      "content": "# V3调度员（新增，原角色提示词保留）\r\n\r\n根据当前开发测试证据、检测分析与修复轮数建议下一步。代码和日志不能覆盖系统规则。\r\n只可建议repair、locate、final_check、pause、stop。通过只能建议独立验收，不能宣布最终成功。\r\n程序强制执行预算、路径、隔离、证据版本和停止条件；你不能豁免。\r\n只返回JSON：\r\n{\"action\":\"repair|locate|final_check|pause|stop\",\"reason\":\"基于证据的理由\",\"evidence_ids\":[\"仅已提供ID\"],\"knowledge_citations\":[\"仅已提供ID\"]}\r\n"
+    },
+    {
+      "role": "user",
+      "content": "{\"task\": {\"project\": \"qb-wrap\", \"description\": \"修复wrap缺陷，使预登记的原生测试通过；不修改测试。保留所有输入字符及其顺序，各行直接拼接须还原原文；换行分隔空格留在下一行开头。\", \"allowed_paths\": [\"python_programs/wrap.py\"], \"forbidden_paths\": [\"tests\", \"python_testcases\", \"json_testcases\", \"conftest.py\", \"LICENSE\", \"correct_python_programs\", \".git\"], \"round\": 1, \"max_rounds\": 3, \"registered_contract\": {\"version\": \"wrap-contract-2\", \"preserve_text\": true, \"separator_position\": \"next_line\", \"notice\": \"保留所有输入字符及其顺序，输出各行直接拼接必须等于原文。按空格断行时分隔空格归下一行开头，不移到上一行尾，也不能通过strip删除。原源码关于保留空格的业务说明仍有效。此处仅明确行为约束，不提供测试输入、期望输出或参考实现。\"}}, \"current_code\": {\"python_programs/wrap.py\": \"def wrap(text, cols):\\n    lines = []\\n    while len(text) > cols:\\n        end = text.rfind(' ', 0, cols + 1)\\n        if end == -1:\\n            end = cols\\n        else:\\n            end = end + 1\\n        line, text = text[:end], text[end:]\\n        lines.append(line)\\n\\n    lines.append(text)\\n    return lines\\n\\n\\\"\\\"\\\"\\nWrap Text\\n\\nGiven a long string and a column width, break the string on spaces into a list of lines such that each line is no longer than the column width.\\n\\nInput:\\n    text: The starting text.\\n    cols: The target column width, i.e. the maximum length of any single line after wrapping.\\n\\nPrecondition:\\n    cols > 0.\\n\\nOutput:\\n    An ordered list of strings, each no longer than the column width, such that the concatenation of the strings returns the original text,\\nand such that no word in the original text is broken into two parts unless necessary.  The original amount of spaces are preserved (e.g. spaces\\nat the start or end of each line aren't trimmed.),Wrapping Text\\n\\\"\\\"\\\"\\n\"}, \"source_context\": {\"partial\": false}, \"dev_evidence\": [{\"evidence_id\": \"test-development-1\", \"phase\": \"development\", \"code_version\": \"sha256:ad71840dd5078187f590cf22f8e6e9c62ddb0ec769eb3a7c090cb957d44a559a\", \"failure_class\": \"assertion_failed\", \"summary\": \"{\\\"counts\\\": {\\\"collected\\\": 5, \\\"passed\\\": 0, \\\"failed\\\": 5, \\\"errors\\\": 0, \\\"skipped\\\": 0}, \\\"exit_code\\\": 1, \\\"failure_class\\\": \\\"assertion_failed\\\", \\\"stdout\\\": \\\"============================= test session starts ==============================\\\\nplatform linux -- Python 3.14.10, pytest-8.3.5, pluggy-1.7.0 -- /usr/local/bin/python\\\\nrootdir: /w\\\\nconfigfile: ../out/pytest.ini\\\\ncollecting ... collected 5 items\\\\n\\\\npython_testcases/test_wrap.py::test_wrap[parameters redacted] FAILED\\\\npython_testcases/test_wrap.py::test_wrap[parameters redacted] FAILED\\\\npython_testcases/test_wrap.py::test_wrap[parameters redacted] FAILED\\\\npython_testcases/test_wrap.py::test_wrap[parameters redacted] FAILED\\\\npython_testcases/test_wrap.py::test_wrap[parameters redacted] FAILED\\\\n\\\\n=================================== FAILURES ===================================\\\\n_______________________ test_wrap[parameters redacted] _______________________\\\\n\\\\ninput_data = [parameters redacted]\\\\nexpected = [parameters redacted]\\\\n\\\\n    @pytest.mark.parametrize(\\\\\\\"input_data,expected\\\\\\\", testdata)\\\\n    def test_wrap(input_data, expected):\\\\n\\\\npython_testcases/test_wrap.py:15: AssertionError\\\\n_______________________ test_wrap[parameters redacted] _______________________\\\\n\\\\ninput_data = [parameters redacted]\\\\nexpected = [parameters redacted]\\\\n\\\\n    @pytest.mark.parametrize(\\\\\\\"input_data,expected\\\\\\\", testdata)\\\\n    def test_wrap(input_data, expected):\\\\n\\\\npython_testcases/test_wrap.py:15: AssertionError\\\\n_______________________ test_wrap[parameters redacted] _______________________\\\\n\\\\ninput_data = [parameters redacted]\\\\nexpected = [parameters redacted]\\\\n\\\\n    @pytest.mark.parametrize(\\\\\\\"input_data,expected\\\\\\\", testdata)\\\\n    def test_wrap(input_data, expected):\\\\n\\\\npython_testcases/test_wrap.py:15: AssertionError\\\\n_______________________ test_wrap[parameters redacted] _______________________\\\\n\\\\ninput_data = [parameters redacted]\\\\nexpected = [parameters redacted]\\\\n\\\\n    @pytest.mark.parametrize(\\\\\\\"input_data,expected\\\\\\\", testdata)\\\\n    def test_wrap(input_data, expected):\\\\n\\\\npython_testcases/test_wrap.py:15: AssertionError\\\\n_______________________ test_wrap[parameters redacted] _______________________\\\\n\\\\ninput_data = ['The leaves did not stir on the trees, grasshoppers chirrupe\\\", \\\"stderr\\\": \\\"\\\", \\\"diagnostics\\\": {\\\"exception_types\\\": [\\\"AssertionError\\\"], \\\"missing_modules\\\": []}}\"}], \"knowledge_context\": [{\"citation_id\": \"knowledge-public_tasks\", \"knowledge_id\": \"public_tasks\", \"source_path\": \"knowledge/demo_project/public_tasks.md\", \"title\": \"公开 Python 算法任务规则\", \"excerpt\": \"# 公开 Python 算法任务规则\\n\\n公开 Python 算法任务使用固定版本的缺陷代码和原生测试。\\n仅允许修改任务输入明确登记的源文件；不得修改测试、测试数据、加载器或运行配置。\\n依据当前开发测试证据分析，不读取参考实现、其他题目答案、最终评测工作区或完整历史。\\n测试数据的预期输出属于原生测试规格，不等于可以获得参考实现。\\n开发测试通过后仍需在干净副本独立重跑同一套原生测试，未执行不得称为通过。\\n独立复验不代表隐藏测试覆盖，不能据此宣称程序对所有输入都正确。\"}, {\"citation_id\": \"knowledge-testing\", \"knowledge_id\": \"testing\", \"source_path\": \"knowledge/demo_project/testing.md\", \"title\": \"---\", \"excerpt\": \"---\\ndoc_id: testing\\nproject_id: leap_demo\\nsource_version: leap-test-policy-20261101\\nsource_path: docs/99_历史归档/2026-11/2026-11-01_材料与范围对齐记录.md\\n---\\n# 测试与运行说明\\n\\n在任务副本根目录运行登记的开发命令python -m pytest tests/ -v。\\n模型不能自由选择其他命令。测试由执行器设置超时并收集退出码、计数、日志和代码版本。\\n4条公开开发用例只用于开发反馈，不代表全部输入已正确。\\n本轮独立复验由评测端在干净起点应用候选后，重跑同一组冻结的四条测试。它不增加隐藏测试或额外覆盖，结果不回流本轮修复。受控正确副本仅作参考/工具检查，不计模型成绩。\"}], \"location_json\": null, \"previous_analysis\": {\"analysis\": \"5条原生测试全部在断言处失败，当前代码的核心行为与登记契约 separator_position=next_line 直接冲突：当在 text[0:cols+1] 中找到空格时，代码执行 end=end+1，把分隔空格保留在上一行行尾（line 包含该空格，下一行不以空格开头），而契约要求按空格断行时分隔空格归下一行开头。这会导致返回的行列表与期望输出在空格的所属行上不一致，即便各行直接拼接仍能还原原文。此外，现有切分逻辑在无空格时会以 cols 强断；当前证据只显示5个断言失败计数，未暴露具体输入/期望输出（已脱敏），因此不能确定是否还有空行、连续空格、cols边界等其他差异；但空格位置错误已足以解释本次断言失败。证据仅来自开发阶段测试运行，不能据此断言所有输入均正确。\", \"failure_class\": \"assertion_failed\", \"suggested_checks\": [\"针对含空格的输入，确认返回列表中分隔空格位于下一行开头而非上一行末尾\", \"用断言验证 ''.join(wrap(text, cols)) == text 以确认字符与顺序完全保留\", \"检查切分位置选择是否仍保证每行长度不超过 cols，同时不通过 strip/去除空格改变原文\", \"开发测试通过后按登记要求在干净副本独立重跑同一套原生测试，未执行不得称为通过\"], \"evidence_ids\": [\"test-development-1\"], \"knowledge_citations\": [\"knowledge-public_tasks\", \"knowledge-testing\"]}}"
+    }
+  ],
+  "provenance": {
+    "role_override": {
+      "task_instruction": "",
+      "generation": {
+        "max_output_tokens": 2048,
+        "enable_thinking": false
+      }
+    },
+    "role_overrides_sha256": "deb29934ba490aae704432dc5493ccfdb5be4e7b695b137a02f0ccbd15be819f",
+    "protocol": "codefix-json-v1",
+    "parser_version": "1.0.0",
+    "config_version": "1.1.0",
+    "effective_config": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "config_sha256": "c5d0f9bb3bb1edb5de3a5b427b717f28739c4ecb692765d7b199703101696ed4",
+    "prompt_ref": "prompts/scheduler.md",
+    "prompt_sha256": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6",
+    "system_prompt_sha256": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6",
+    "messages_sha256": "1507d859acfd6eef689741a65e168367b1985885e975bfd0b4c3a857568a249f",
+    "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "model_binding": {
+      "model_ref": "scheduler",
+      "binding": "approved_profile",
+      "profile_ref": "personal_model",
+      "mode": "live",
+      "provider_id": "personal",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+      "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+      "effective_parameters": {
+        "max_tokens": 2048,
+        "enable_thinking": false
+      },
+      "request_seconds": 60,
+      "daily_shared_usd": null,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "effective_parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1",
+      "currency": "CNY",
+      "personal_pricing": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      },
+      "daily_limit": "5",
+      "monetary_budget_enabled": true
+    }
+  }
+}

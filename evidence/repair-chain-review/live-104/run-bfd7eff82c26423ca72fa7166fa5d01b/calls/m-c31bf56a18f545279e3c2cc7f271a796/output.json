@@ -1,0 +1,211 @@
+{
+  "role": "locator",
+  "mode": "live",
+  "model_api_called": true,
+  "model": "deepseek-v4.1-flash-1017",
+  "call_id": "m-c31bf56a18f545279e3c2cc7f271a796",
+  "status": "failed",
+  "provider_id": "personal",
+  "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+  "usage": {
+    "prompt_tokens": 1895,
+    "total_tokens": 2022,
+    "completion_tokens": 127,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "image_tokens": 0,
+      "text_tokens": 1895
+    },
+    "completion_tokens_details": {
+      "text_tokens": 127
+    }
+  },
+  "cost": {
+    "status": "estimated",
+    "amount_cny": "0.004806",
+    "currency": "CNY",
+    "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+    "upper_estimate": false,
+    "basis": "versioned_model_rates; not_provider_invoice"
+  },
+  "attempts": 1,
+  "max_attempts": 1,
+  "transport_request_started": true,
+  "failure_class": "invalid_model_output",
+  "budget_check": {
+    "status": "ok",
+    "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+  },
+  "provider_model": "deepseek-v4.1-flash-1017",
+  "provider_response_id": "chatcmpl-58c27c0c-25f5-9630-80d4-09e619da6283",
+  "finish_reason": "stop",
+  "raw_text": "{\"file\":\"python_programs/wrap.py\",\"function\":\"wrap\",\"hypothesis\":\"当前实现按 text.rfind(' ', 0, cols+1) 找到空格后执行 end=end+1，把该空格包含在上一行末尾，导致分隔空格留在上一行尾而非下一行开头，违反 separator_position=next_line 的契约；虽然各行拼接仍等于原文（preserve_text 成立），但空格位置错误。修复方向：断行点应取空格位置本身（end 不含空格），或 end+1 后把空格归入剩余文本。\"/></s>",
+  "duration_ms": 2728,
+  "code_version": "sha256:ad71840dd5078187f590cf22f8e6e9c62ddb0ec769eb3a7c090cb957d44a559a",
+  "round": 1,
+  "provenance": {
+    "role_override": {
+      "task_instruction": "",
+      "generation": {
+        "max_output_tokens": 4096,
+        "enable_thinking": false
+      }
+    },
+    "role_overrides_sha256": "deb29934ba490aae704432dc5493ccfdb5be4e7b695b137a02f0ccbd15be819f",
+    "protocol": "codefix-json-v1",
+    "parser_version": "1.0.0",
+    "config_version": "1.1.0",
+    "effective_config": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "config_sha256": "c5d0f9bb3bb1edb5de3a5b427b717f28739c4ecb692765d7b199703101696ed4",
+    "prompt_ref": "prompts/locator.md",
+    "prompt_sha256": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+    "system_prompt_sha256": "4dfdec9630855fc4dca2512cc61d36def3d6aaf60934d75d12250d7619ed77de",
+    "messages_sha256": "dec3aac20139ca8ae1182cd308ca60d8c023fbc3028cf184e3f1708446496c22",
+    "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "model_binding": {
+      "model_ref": "locator",
+      "binding": "approved_profile",
+      "profile_ref": "personal_model",
+      "mode": "live",
+      "provider_id": "personal",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+      "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+      "effective_parameters": {
+        "max_tokens": 4096,
+        "enable_thinking": false
+      },
+      "request_seconds": 60,
+      "daily_shared_usd": null,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "effective_parameters_sha256": "85c185f9b4018df9c4996420f62c6bc458c12d5fd29241373a1f57f347be3f4f",
+      "currency": "CNY",
+      "personal_pricing": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      },
+      "daily_limit": "5",
+      "monetary_budget_enabled": true
+    }
+  },
+  "step_id": "s-8e110f3753d84cff89464dd0d3e33b78",
+  "parent_step_id": "s-09b08b28369f49ccb363be34580356af",
+  "error_type": "InvalidModelOutput",
+  "reason": "模型输出不是有效 JSON",
+  "output_diagnostics": {
+    "kind": "invalid_format",
+    "validation_error": "模型输出不是有效 JSON",
+    "suggested_action": "按校验错误纠正JSON字段和路径；系统仅在剩余轮次、调用及费用内重试。"
+  }
+}

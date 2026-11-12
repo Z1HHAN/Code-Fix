@@ -24,6 +24,8 @@ class AccountBudget:
 
     @staticmethod
     def initialize(db):
+        from .personal_ledger import initialize
+        initialize(db)
         db.execute('''CREATE TABLE IF NOT EXISTS account_limits (
             account_id TEXT PRIMARY KEY, provider_id TEXT NOT NULL,
             authorized_microcny INTEGER NOT NULL, warning_microcny INTEGER NOT NULL,
@@ -146,13 +148,16 @@ class AccountBudget:
             db.execute('BEGIN IMMEDIATE')
             self._register(db, settings)
             if (db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
-                    or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()):
+                    or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()
+                    or db.execute("SELECT 1 FROM personal_calls WHERE status IN ('pending','unknown')").fetchone()):
                 unknown = (db.execute("SELECT 1 FROM calls WHERE status='unknown'").fetchone()
-                           or db.execute("SELECT 1 FROM cny_calls WHERE status='unknown'").fetchone())
+                           or db.execute("SELECT 1 FROM cny_calls WHERE status='unknown'").fetchone()
+                           or db.execute("SELECT 1 FROM personal_calls WHERE status='unknown'").fetchone())
                 raise ModelBlocked('存在费用未知请求，暂停所有账号及币种，需人工核对' if unknown
                                    else '存在进行中请求，所有账号及币种等待结算后重试')
             count = db.execute('SELECT count(*) FROM calls WHERE run_id=?', (run_id,)).fetchone()[0]
             count += db.execute('SELECT count(*) FROM cny_calls WHERE run_id=?', (run_id,)).fetchone()[0]
+            count += db.execute('SELECT count(*) FROM personal_calls WHERE run_id=?', (run_id,)).fetchone()[0]
             if count >= max_calls:
                 raise ModelBlocked('达到本任务模型调用上限')
             used = db.execute('SELECT coalesce(sum(coalesce(actual_microcny,reserved_microcny)),0) FROM cny_calls WHERE account_id=?',
@@ -232,7 +237,8 @@ class AccountBudget:
                 alerts.append(payload | {'created_at': row[1], 'updated_at': row[2],
                                          'status': row[3], 'resolved_at': row[4]})
             blocked = bool(db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()
-                           or db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone())
+                           or db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
+                           or db.execute("SELECT 1 FROM personal_calls WHERE status IN ('pending','unknown')").fetchone())
         return {'currency': 'CNY', 'basis': 'project_ledger_estimate_not_platform_balance',
                 'accounts': accounts, 'alerts': alerts, 'paid_calls_blocked': blocked}
 

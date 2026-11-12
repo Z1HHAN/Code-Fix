@@ -15,6 +15,17 @@ from urllib.request import urlopen, Request, build_opener, ProxyHandler
 def check(python, backend):
     assert not (backend / 'configs/model_profiles.json').exists(), 'Bundle must not ship personal profiles'
     assert not (backend / 'configs/agents.json').exists(), 'Bundle must not ship team accounts'
+    # Exercise the actual generated check entrypoint without any network request.
+    # An invalid HTTP model endpoint must return a structured failure, not crash
+    # because desktop-only pruning removed a required import.
+    checked = subprocess.run([str(python), '-I', '-B', '-X', 'utf8', str(backend / 'desktop-check.py')],
+        input=json.dumps({'check_mode': 'models', 'base_url': 'http://invalid.example',
+                          'api_key': 'fake-check-key'}).encode(), capture_output=True, timeout=20,
+        env={**os.environ, 'CODE_FIX_RUN_ROOT': str(backend / 'unused-check-root')})
+    assert checked.returncode == 0, 'Desktop check helper failed to import'
+    assert b'fake-check-key' not in checked.stdout + checked.stderr
+    result = json.loads(checked.stdout)['check_result']
+    assert result['ready'] is False and result['checks'][0]['status'] == 'blocked'
     with tempfile.TemporaryDirectory(prefix='codefix-desktop-check-') as temp:
         folder = Path(temp)
         runtime = folder / 'runtime'

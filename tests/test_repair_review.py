@@ -87,6 +87,7 @@ def test_assertion_values_are_absent_at_gateway_boundary(tmp_path):
     ctx = object.__new__(WorkflowRun)
     ctx.boundary = lambda: None
     ctx.model_calls = 0
+    ctx.output_feedback = None
     ctx.task = {'max_calls': 1}
     ctx.trace = SimpleNamespace(start=lambda *a, **k: {'step_id': 'step', 'parent_step_id': None})
     ctx.gateway = SimpleNamespace(invoke=invoke)

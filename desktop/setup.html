@@ -3,16 +3,35 @@
 <form id="settings"><section><h2>自己的模型</h2>
 <label>API Base URL<input id="base_url" type="url" placeholder="https://你的服务商地址/v1" required></label>
 <label>API Key<input id="api_key" type="password" autocomplete="off" placeholder="填写自己的密钥" maxlength="4096"></label>
-<label>模型 ID<input id="model" placeholder="服务商提供的完整模型名称" maxlength="200" required></label>
-<div class="row"><label>单次输出上限<input id="max_output_tokens" type="number" value="2048" min="256" max="32768" required></label><label>输出长度参数<select id="token_parameter"><option value="max_tokens">max_tokens（兼容接口常用）</option><option value="max_completion_tokens">max_completion_tokens</option></select></label></div>
+<div class="actions"><button id="read-models" type="button">读取模型列表（不生成内容）</button><button id="test-model" type="button">测试模型调用（可能收费）</button></div>
+<label>默认模型 ID<input id="model" list="model-options" placeholder="先读取列表选择，也可手动填写完整模型名称" maxlength="200" required></label><datalist id="model-options"></datalist>
+<label>其他可用模型（每行一个，含默认模型最多12个）<textarea id="models" rows="3" placeholder="进入工作台后给不同角色分别绑定"></textarea></label>
+<div class="row"><label>单次输出上限（部分模型包含思考Token）<input id="max_output_tokens" type="number" value="2048" min="256" max="32768" required><small>请按模型文档填写。可按需要选2048、4096或8192；工作台可为各角色单独设置不超过此值的上限。提高长度会增加费用预留，不会自动修改已有任务。</small></label><label>输出长度参数<select id="token_parameter"><option value="max_tokens">max_tokens（兼容接口常用）</option><option value="max_completion_tokens">max_completion_tokens</option></select></label></div>
 <p class="hint">请按服务商文档填写地址与模型。未知能力的采样参数保持禁用；角色指令及任务上限进入工作台后编辑。</p></section>
-<section><h2>云端隔离执行</h2><label><input id="ssh_tunnel" type="checkbox" checked>通过已建立的 SSH 隧道连接</label>
-<label>执行服务地址<input id="execution_url" type="url" value="http://127.0.0.1:17880" required></label>
+<section><h2>云端隔离执行</h2>
+<label>执行服务地址<input id="execution_url" type="url" placeholder="维护者提供的https://执行服务地址" required></label>
 <label>个人执行访问码<input id="execution_token" type="password" autocomplete="off" maxlength="256" placeholder="管理员单独发放的访问码"></label>
-<p class="hint">隧道模式需要先保持 SSH 窗口连接；公网服务请使用 HTTPS。这里填写执行访问码，与模型 API Key 不同。</p></section>
-<section><h2>费用与限制</h2><label><input id="monetary_budget" type="checkbox">启用美元金额预算（按自己填写的价格估算）</label>
+<button id="check-execution" type="button">重新检查执行服务与隔离</button>
+<p class="hint">填好地址和访问码后自动检查鉴权与真实隔离探针。用户电脑无需安装Docker。访问码与模型API Key不同。</p>
+<details><summary>维护者联调选项</summary><label><input id="ssh_tunnel" type="checkbox">使用维护者已建立的本机SSH隧道（普通用户无需勾选）</label></details></section>
+<section><h2>费用与限制</h2><label><input id="monetary_budget" type="checkbox">启用金额预算（优先使用逐模型价格；兼容原美元配置）</label>
 <div id="money" hidden class="row"><label>每日额度 USD<input id="daily_usd" type="number" min="0.000001" step="any"></label><label>输入 USD / 百万 token<input id="input_price" type="number" min="0.000001" step="any"></label><label>输出 USD / 百万 token<input id="output_price" type="number" min="0.000001" step="any"></label></div>
+<details open><summary>逐模型价格：官方目录或 JSON / CSV 导入</summary>
+<p class="hint">价格为本地版本快照，不是服务商账单。按型号、地域、模式匹配；更新不会改动历史任务。缓存单价未核实则按标准输入估算上界。</p>
+<button id="load-price-catalog" type="button">读取百炼／千问平台官方价格快照</button>
+<label>选择已核实价格<select id="price-catalog"><option value="">先读取目录</option></select></label>
+<button id="use-price-catalog" type="button">放入导入草稿</button>
+<label>导入文件<input id="price-file" type="file" accept=".json,.csv"></label>
+<label>格式<select id="price-format"><option value="json">JSON</option><option value="csv">CSV</option></select></label>
+<label>价格草稿<textarea id="price-text" rows="6" spellcheck="false" placeholder="粘贴逐模型价格JSON，或选择CSV文件"></textarea></label>
+<button id="preview-prices" type="button">校验并预览价格差异</button><button id="confirm-prices" type="button" disabled>确认采用预览价格</button>
+<button type="button" id="clear-prices">清除草稿中的逐模型价格</button>
+<pre id="price-preview">尚未导入。未匹配型号可手动导入，不能套用其他服务商价格。</pre>
+<label>预算币种<select id="budget_currency"><option value="CNY">人民币 CNY</option><option value="USD">美元 USD</option></select></label>
+<label>个人每日费用上限<input id="daily_limit" type="number" min="0.000001" step="any" value="5"></label>
+</details>
 <p class="hint">不启用金额预算时，费用显示未知，不会填零。每任务默认3轮、12次调用、300秒；请求超时或用量未知仍会阻止继续调用，等待核对。</p>
-<label><input id="approved" type="checkbox" required>我确认使用自己的 API 额度，知悉启动修复任务可能产生服务商费用。</label></section>
+<label><input id="approved" type="checkbox" required>我确认使用自己的API额度，知悉主动点击“测试模型调用”或启动修复可能产生服务商费用。保存和自动检查不生成模型内容。</label></section>
+<section><h2>连接检查结果</h2><div id="checks" aria-live="polite"><p>分别检查模型接口、云端访问码和真实隔离环境；模型真实调用需主动点击测试。</p></div></section>
 <div class="actions"><button id="save" type="submit">保存并打开工作台</button><span id="message" role="status">保存不会调用模型或启动修复。</span></div></form>
 <footer>凭据使用当前 Windows 用户的系统加密存储。切换电脑需要重新填写；安装包没有预置账号。</footer></main><script src="setup.js"></script></body></html>

@@ -6,11 +6,88 @@ import ast
 import sys
 from pathlib import Path
 from types import SimpleNamespace
+from collections import defaultdict
 
 import pytest
 
 from docker import rpc_codec as codec
 from app.split_runner import FUNCTIONS, SplitDockerRunner
+
+
+def test_registered_defaultdict_preserves_type_factory_missing_keys_and_aliases():
+    value = defaultdict(lambda: float('inf'), {(0, 0): 0, (0, 1): float('-inf')})
+    packet, _ = codec.pack([value, value], allow_defaultdict=True)
+    restored, _ = codec.unpack(codec.loads(codec.dumps(packet)), allow_defaultdict=True)
+    assert type(restored[0]) is defaultdict and restored[0] is restored[1]
+    assert restored[0][0, 0] == 0 and restored[0][0, 1] == float('-inf')
+    assert (1, 0) not in restored[0]
+    assert restored[0][1, 0] == float('inf') and (1, 0) in restored[0]
+    with pytest.raises(ValueError):
+        codec.pack(value)
+    with pytest.raises(ValueError):
+        codec.unpack(packet)
+
+
+def test_defaultdict_factory_is_never_executed_or_transmitted():
+    called = []
+    def arbitrary():
+        called.append(True)
+        return float('inf')
+    with pytest.raises(ValueError, match='factory'):
+        codec.pack(defaultdict(arbitrary), allow_defaultdict=True)
+    assert not called
+    packet, _ = codec.pack(defaultdict(None, {'key': 1}), allow_defaultdict=True)
+    restored, _ = codec.unpack(packet, allow_defaultdict=True)
+    assert restored.default_factory is None
+    with pytest.raises(KeyError):
+        restored['missing']
+    bad = deepcopy(packet)
+    bad['objects'][0]['factory'] = '__import__'
+    with pytest.raises(ValueError, match='factory'):
+        codec.unpack(bad, allow_defaultdict=True)
+
+
+def test_defaultdict_rejects_overridden_float_without_calling_it():
+    namespace = {'float': lambda _: 12}
+    exec("factory = lambda: float('inf')", namespace)
+    with pytest.raises(ValueError, match='factory'):
+        codec.pack(defaultdict(namespace['factory']), allow_defaultdict=True)
+
+
+def test_shortest_path_lengths_endpoint_preserves_defaultdict(monkeypatch):
+    ep = endpoint()
+    expected = defaultdict(lambda: float('inf'), {(0, 0): 0, (0, 1): 3})
+    monkeypatch.setattr(ep, 'execute_request', lambda request, source: expected)
+    packet, _ = codec.pack([[2, {(0, 1): 3}], {}])
+    response = ep.execute_wire_request({'function': 'shortest_path_lengths', 'payload': packet}, 'synthetic')
+    actual, _ = codec.unpack(response['payload'], allow_defaultdict=True)
+    assert type(actual) is defaultdict and actual[1, 0] == float('inf')
+    with pytest.raises(ValueError):
+        ep.execute_wire_request({'function': 'hanoi', 'payload': packet}, 'synthetic')
+
+
+@pytest.mark.parametrize('distance,passes', [(3, True), (99, False)])
+def test_proxy_defaultdict_retains_native_assertion_result(monkeypatch, distance, passes):
+    from docker import rpc_proxy as proxy
+    ep = endpoint()
+    expected = {(0, 0): 0, (0, 1): 3}
+    # Synthetic callable; no candidate or reference implementation is imported.
+    value = defaultdict(lambda: float('inf'), {(0, 0): 0, (0, 1): distance})
+    monkeypatch.setattr(ep, 'execute_request', lambda request, source: value)
+    class Client:
+        def __enter__(self): return self
+        def __exit__(self, *args): pass
+        def settimeout(self, value): pass
+        def connect(self, address): pass
+        def sendall(self, raw):
+            self.response = codec.dumps(ep.execute_wire_request(codec.loads(raw), 'synthetic'))
+        def makefile(self, mode): return io.BytesIO(self.response)
+    monkeypatch.setattr(proxy.socket, 'socket', lambda *args: Client())
+    monkeypatch.setattr(proxy.socket, 'AF_UNIX', 1, raising=False)
+    actual = proxy.invoke('shortest_path_lengths', (2, {(0, 1): 3}), {})
+    assert type(actual) is defaultdict
+    assert (actual == expected) is passes  # wrong values must still fail
+    assert actual[1, 0] == float('inf')
 
 
 def endpoint():

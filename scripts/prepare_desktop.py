@@ -15,6 +15,9 @@ def prepare_backend(destination):
     destination = Path(destination)
     destination.mkdir(parents=True, exist_ok=False)
     for name in package_files():
+        if name in {'app/cli.py', 'app/model_client.py', 'app/mock_workflow.py',
+                    'app/model_context.py', 'app/quixbugs_import.py'}:
+            continue
         target = destination / name
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / name, target)
@@ -31,6 +34,9 @@ def prepare_backend(destination):
     (destination / 'desktop-launch.py').write_text(
         'import sys\nfrom pathlib import Path\nsys.path.insert(0,str(Path(__file__).resolve().parent))\n'
         'from app.desktop_bootstrap import main\nmain()\n', encoding='utf-8')
+    (destination / 'desktop-check.py').write_text(
+        'import sys\nfrom pathlib import Path\nsys.path.insert(0,str(Path(__file__).resolve().parent))\n'
+        'from app.connection_checks import main\nmain()\n', encoding='utf-8')
     manifest = {p.relative_to(destination).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in sorted(destination.rglob('*')) if p.is_file()}
     fingerprint = hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest()

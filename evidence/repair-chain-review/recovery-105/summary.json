@@ -1,0 +1,77 @@
+{
+  "record": "105",
+  "product_backend_sha256": "21046b0b9ced76265f7adc3c79ffedac19ef8599a370a2419f7ebe81744555b7",
+  "run_id": "run-15d750d5f33b4c038ec5dfc8350d89fd",
+  "project": "qb-shortest_path_lengths",
+  "status": "success",
+  "rounds": 1,
+  "requests": 1,
+  "tests": [
+    {
+      "stage": "baseline",
+      "round": 0,
+      "verification_status": "failed",
+      "failure_class": "assertion_failed",
+      "counts": {
+        "collected": 4,
+        "passed": 0,
+        "failed": 4,
+        "errors": 0,
+        "skipped": 0
+      },
+      "meaning": "缺陷已复现，可以开始修复",
+      "evidence_path": "baseline",
+      "step_id": "s-e11236d5876848f3bcf424b76bfee519",
+      "code_version": "sha256:6591fed27195e0a37cb85dc4f853a528551dea3cd17d577976b474772d93ed9c",
+      "test_suite_version": "sha256:5f6f0db4c7fd33942dcb35064c9a106602679a9ee21869e974a7fa19c01b6a87"
+    },
+    {
+      "stage": "candidate",
+      "round": 1,
+      "verification_status": "passed",
+      "failure_class": "passed",
+      "counts": {
+        "collected": 4,
+        "passed": 4,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "meaning": "候选通过，待最终复验",
+      "evidence_path": "development-1",
+      "step_id": "s-698e56f558cb4c8aa0eb717f9540b365",
+      "code_version": "sha256:fbf4016cb53ab5b71f6b69efd7fd9aad128a8a5394b299538ed12dea899d117c",
+      "test_suite_version": "sha256:5f6f0db4c7fd33942dcb35064c9a106602679a9ee21869e974a7fa19c01b6a87"
+    },
+    {
+      "stage": "final",
+      "round": 1,
+      "verification_status": "passed",
+      "failure_class": "passed",
+      "counts": {
+        "collected": 4,
+        "passed": 4,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "meaning": "最终复验通过",
+      "evidence_path": "final-check",
+      "step_id": "s-06fcef1d57944ad69df8345a164e1aee",
+      "code_version": "sha256:fbf4016cb53ab5b71f6b69efd7fd9aad128a8a5394b299538ed12dea899d117c",
+      "test_suite_version": "sha256:5f6f0db4c7fd33942dcb35064c9a106602679a9ee21869e974a7fa19c01b6a87"
+    }
+  ],
+  "estimated_cny": "0.004271",
+  "authorization": {
+    "requests": 157,
+    "estimated_cny": "1.811463",
+    "unknown_or_pending": 0
+  },
+  "execution_server_build_sha256": "81306bc486bc2448bd09f79e937e9776301c38a74d83e164aa8252454a908445",
+  "candidate_sha256": "a7f41f0053bac62dbf125e4973d3917c7e5a0295417ea5e46a1223987e27a380",
+  "same_candidate_as_102_round1": true,
+  "old_candidate_failure": "code_runtime_error",
+  "new_candidate_result": "4/4 passed; clean final4/4 passed",
+  "scope": "unchanged frozen104 product, updated server RPC103; not full40 new-version rerun or C signoff"
+}

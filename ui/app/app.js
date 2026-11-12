@@ -5,6 +5,7 @@ const display = (id, value) => { byId(id).textContent = typeof value === 'string
 const labels = {created:'已创建',running:'运行中',stopped:'已停止',blocked:'条件未就绪',failed:'失败',success:'独立验收通过',paused:'已暂停',interrupted:'已中断',not_run:'未运行',passed:'通过',inconclusive:'证据不足'};
 const label = value => labels[value] || value || '未知';
 let token = '', selected = localStorage.getItem('codefix.selected') || '', key = null, busy = false, refreshing = false;
+let resultKey='',resultRequest=0;
 let projects = [], allRuns=[], currentRun=null, currentEvents=[], recordsKey='', historyKey='', scale=1;
 const poller=CodeFixPolling.createPoller({refresh:refreshNow,isRunning:()=>allRuns.some(r=>r.status==='running'),isHidden:()=>document.hidden});
 function refresh(){return poller.request();}
@@ -60,7 +61,7 @@ function renderRun(run,events){
   currentRun=run;currentEvents=events;
   const result=run.result||{},source=CodeFixTrace.provenance(run,events);
   display('metric-status',label(run.status));display('metric-rounds',`${result.rounds_used ?? '未记录'} / ${run.task.max_rounds ?? '未记录'}`);
-  display('metric-calls',result.model_calls==null?'未记录':`${result.model_calls} 次${source.includes('离线')?' · 模拟':''}`);
+  display('metric-calls',result.actual_model_requests==null?(result.model_calls==null?'未记录':`${result.model_calls} 次尝试`):`${result.actual_model_requests} 次请求 / ${result.model_attempts} 次尝试`);
   display('metric-cost',CodeFixTrace.costText(run,events).replace(/^费用(?:估算)?[：:]/,''));
   const isolation=events.filter(e=>e.event==='isolation_checked').at(-1);
   display('metric-environment',source.includes('离线')?'模拟事件':isolation?.isolation_ready===true?'隔离探针通过':isolation?'隔离未就绪':run.task.mode==='baseline'?'查看测试证据':'未记录');
@@ -119,7 +120,7 @@ async function refreshNow() {
     if (!selected || !runs.some(run => run.run_id === selected)) selected = runs[0]?.run_id || '';
     history.value = selected;
     if (!selected) {
-      currentRun=null;currentEvents=[];
+      currentRun=null;currentEvents=[];byId('repair-result').hidden=true;resultKey='';resultRequest++;
       renderTrace({run_id:'',status:'created',task:{}},[]);
       for(const id of ['start','pause','stop','report','bundle','archive-run'])byId(id).disabled=true;
       for(const id of ['status','summary','events','development','final','decisions','patch','call-records'])display(id,'尚未选择任务');
@@ -139,7 +140,7 @@ async function refreshNow() {
     eventCache.set(snapshot, events);
     const result = run.result || {};
     renderTrace(run, events);
-    renderRun(run,events);renderRecords();
+    renderRun(run,events);renderRecords();await renderRepairResult(run);
     const canvas=byId('trace-flow').querySelector('.trace-canvas');if(canvas)canvas.style.zoom=scale;const architecture=byId('architecture-flow').querySelector('.architecture-canvas');if(architecture){architecture.style.zoom=scale;}
     display('status', `${run.run_id}\n状态：${run.status} · 题目：${run.task.project} · 模式：${run.task.mode}`);
     display('summary', [
@@ -242,3 +243,25 @@ byId('report').onclick = () => download('report'); byId('bundle').onclick = () =
     await poller.start();
   } catch (error) { display('connection', '后端连接失败'); display('error', error.message); }
 })();
+
+async function renderRepairResult(run){
+ const signature=JSON.stringify([run.run_id,run.status,run.updated_at]);
+ if(signature===resultKey)return;
+ const ticket=++resultRequest;byId('repair-result').hidden=true;
+ if(['created','running'].includes(run.status)){resultKey=signature;return;}
+ const response=await api(`/tasks/${run.run_id}/result-summary`),summary=await response.json();
+ if(ticket!==resultRequest||selected!==run.run_id)return;
+ resultKey=signature;byId('repair-result').hidden=false;
+ display('repair-outcome',(summary.success?'修复成功：干净副本最终复验通过。':'本次未取得最终通过结论。')+' '+(summary.reason||'原因未记录'));
+ display('repair-stats',`修复尝试 ${summary.rounds_used??'未记录'} / ${summary.max_rounds}；真实模型请求 ${summary.actual_model_requests??'未记录'}，角色尝试 ${summary.model_attempts??'未记录'}；耗时 ${summary.duration_ms==null?'未记录':(summary.duration_ms/1000).toFixed(1)+'秒'}。成功会提前结束，最大轮次是上限。`);
+ const table=element('table'),head=element('tr');for(const h of ['阶段','轮次','测试结论','数量','业务含义','证据'])head.append(element('th',h));table.append(head);
+ for(const t of summary.tests){const row=element('tr');for(const v of [{baseline:'隔离基线',candidate:'候选隔离测试',final:'干净最终复验'}[t.stage],t.stage==='baseline'?'基线':t.round??'未记录',label(t.verification_status),t.counts?JSON.stringify(t.counts):'数量未记录',t.meaning])row.append(element('td',String(v)));const cell=element('td');if(t.evidence_path){const a=element('button','查看证据','btn compact');a.onclick=()=>showResultEvidence(run.run_id,t.evidence_path+'/result.json');cell.append(a);}row.append(cell);table.append(row);}
+ byId('repair-test-table').replaceChildren(table);
+ for(const [id,record] of [['repair-before',summary.before],['repair-after',summary.after],['repair-diff',{content:summary.combined_diff??summary.diff?.content}]])display(id,record?.content||'未记录或尚无已应用候选');
+ display('repair-explanations',[...summary.explanations.map(x=>`第${x.round}轮：${x.explanation||'说明未记录'}`),...(summary.model_output_issues||[]).map(x=>`第${x.round??'未记录'}轮 · ${x.role||'角色未记录'} · ${x.reason||'输出异常'}\n${x.diagnostics?.suggested_action||''}`)].join('\n'));
+ display('repair-checks',summary.checks.length?summary.checks.map(x=>`${x.node_id} · ${x.status} · ${x.reason||''}`).join('\n'):'历史记录缺少逐项检查，不能补造通过。');
+ byId('repair-downloads').replaceChildren();
+ for(const [title,record] of [['下载候选代码',summary.after],['下载补丁',summary.diff]])if(record){const a=element('a',title);a.href=`/api/v3/tasks/${run.run_id}/artifact?path=${encodeURIComponent(record.path)}`;a.download=record.path.split('/').at(-1);if(title==='下载补丁'&&summary.combined_diff!=null){a.onclick=event=>{event.preventDefault();const url=URL.createObjectURL(new Blob([summary.combined_diff],{type:'text/plain;charset=utf-8'}));const link=element('a');link.href=url;link.download='original-to-final.patch';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};}byId('repair-downloads').append(a);}
+}
+
+async function showResultEvidence(rid,path){try{const r=await api(`/tasks/${rid}/artifact?path=${encodeURIComponent(path)}`);const text=await r.text();if(selected===rid){display('artifact-path',path);byId('artifact-viewer').replaceChildren(element('pre',text,'trace-artifact'));showEvidence('artifact');}}catch(e){display('error',e.message);}}

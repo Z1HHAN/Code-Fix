@@ -1,0 +1,20 @@
+{
+  "suite": "bundle",
+  "commit": "274bd4b3c52bb29e6cd4f827f074a0c9ca6e166f",
+  "command": [
+    "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "scripts/check_desktop_bundle.py",
+    "--python",
+    "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\main-review-integration\\desktop\\dist-chain-104-release\\win-unpacked\\resources\\python\\python.exe",
+    "--backend",
+    "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\main-review-integration\\desktop\\dist-chain-104-release\\win-unpacked\\resources\\backend"
+  ],
+  "started_at": "2026-11-12T18:51:56.489160+00:00",
+  "finished_at": "2026-11-12T18:52:11.318126+00:00",
+  "exit_code": 0,
+  "scope": "offline development regression; no model requests; not independent C sign-off",
+  "log": "evidence/release-integration/108/bundle.log"
+}

@@ -76,19 +76,61 @@ def test_stub_success_requires_independent_call_and_no_final_feedback(tmp_path):
     assert status == 'success' and result['final_result'] == 'passed'
     assert result['mode'] == 'test_stub' and not result['model_api_called']
     assert runner.phases == ['development', 'development', 'final_check']
-    assert model.roles == ['repairer', 'detector', 'scheduler']
+    assert model.roles == ['repairer']
     assert (store.directory(rid) / 'final-patch/patch.diff').is_file()
 
 
 def test_final_failure_ends_without_new_model_calls(tmp_path):
     status, result, runner, model, *_ = execute(tmp_path, ['assertion_failed', 'passed', 'assertion_failed'])
     assert status == 'failed' and result['final_result'] == 'failed'
-    assert len(model.roles) == 3
+    assert len(model.roles) == 1
+
+
+@pytest.mark.parametrize('ready', [True, False])
+def test_remote_probe_freezes_identity_once_before_model_call(tmp_path, monkeypatch, ready):
+    from app.remote_runner import RemoteRunner
+    from app.role_config import digest
+
+    store = RunStore(tmp_path)
+    rid = store.create({'mode': 'repair'})['run_id']
+    store.claim(rid)
+    # Mock the network boundary, retaining the actual RemoteRunner type that
+    # triggered the installed application's duplicate exclusive-write failure.
+    runner = RemoteRunner(url='https://execution.example', token='x' * 40)
+    executor = ExecutorStub(['assertion_failed', 'passed', 'passed'])
+    def preflight(folder):
+        runner.image = 'sha256:' + 'a' * 64
+        runner.server_build_sha256 = 'b' * 64
+        return {'isolation_ready': ready, 'reason': 'offline probe fixture'}
+    monkeypatch.setattr(runner, 'preflight', preflight)
+    monkeypatch.setattr(runner, 'run', executor.run)
+
+    class CheckedModel(ModelStub):
+        def call(self, messages, **kwargs):
+            frozen = json.loads((store.directory(rid) / 'trace/experiment.json').read_text())
+            assert frozen['identity']['image'] == runner.image
+            assert frozen['identity_sha256'] == digest(frozen['identity'])
+            return super().call(messages, **kwargs)
+
+    model = CheckedModel()
+    try:
+        status, result = Workflow(store, runner, model).run(rid)
+    finally:
+        runner.close()
+    folder = store.directory(rid) / 'trace'
+    initial = json.loads((folder / 'experiment-preflight.json').read_text())
+    final = json.loads((folder / 'experiment.json').read_text())
+    assert initial['identity']['image'] is None
+    assert final['identity']['image'] == 'sha256:' + 'a' * 64
+    assert final['identity_sha256'] == digest(final['identity'])
+    assert status == ('success' if ready else 'blocked')
+    assert model.roles == (['repairer'] if ready else [])
+    assert not list((store.directory(rid) / 'diagnostics').glob('*.json'))
 
 
 @pytest.mark.parametrize('outcome, expected, roles', [
-    ('syntax_error', 'success', ['repairer', 'repairer', 'detector', 'scheduler']),
-    ('assertion_failed', 'success', ['repairer', 'detector', 'scheduler', 'locator', 'repairer', 'detector', 'scheduler']),
+    ('syntax_error', 'success', ['repairer', 'repairer']),
+    ('assertion_failed', 'success', ['repairer', 'detector', 'scheduler', 'locator', 'repairer']),
     ('environment_error', 'paused', ['repairer']),
     ('timeout', 'stopped', ['repairer'])])
 def test_failure_types_change_actual_next_role(tmp_path, outcome, expected, roles):
@@ -103,7 +145,7 @@ def test_round_limit_stops_and_model_cannot_force_final_check(tmp_path):
 
 
 def test_scheduler_can_pause_but_cannot_forge_success(tmp_path):
-    status, result, runner, model, *_ = execute(tmp_path, ['assertion_failed', 'passed'], scheduler='pause')
+    status, result, runner, model, *_ = execute(tmp_path, ['assertion_failed', 'assertion_failed'], scheduler='pause')
     assert status == 'paused' and result['final_result'] == 'not_run'
 
 
@@ -186,7 +228,7 @@ def test_public_task_routes_registered_source_and_clean_copy_with_stubs_only(tmp
     status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'assertion_failed', 'passed', 'passed'], {'project': project})
     assert status == 'success' and result['mode'] == 'test_stub' and not result['model_api_called']
     assert runner.phases == ['development', 'development', 'development', 'final_check']
-    assert model.roles == ['repairer', 'detector', 'scheduler', 'locator', 'repairer', 'detector', 'scheduler']
+    assert model.roles == ['repairer', 'detector', 'scheduler', 'locator', 'repairer']
     folder = store.directory(rid)
     assert (folder / 'candidate-1' / definition.source).is_file()
     definition.verify(folder / 'final-work', candidate=True)
@@ -209,7 +251,7 @@ def test_baseline_code_runtime_error_is_accepted_as_reproduced_defect(tmp_path):
     assert status == 'success' and result['final_result'] == 'passed'
     assert result['baseline_failure_class'] == 'code_runtime_error'
     assert runner.phases == ['development', 'development', 'final_check']
-    assert model.roles == ['repairer', 'detector', 'scheduler']
+    assert model.roles == ['repairer']
 
 
 @pytest.mark.parametrize('baseline', ['environment_error', 'timeout', 'passed', 'unknown_evidence'])

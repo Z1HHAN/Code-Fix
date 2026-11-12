@@ -18,7 +18,7 @@
     "electronDist": "node_modules/electron/dist",
     "directories": {"output": "dist"},
     "files": ["main.cjs", "preload.cjs", "settings.cjs", "setup.html", "setup.js", "setup.css", "package.json"],
-    "extraResources": [{"from": "build/backend", "to": "backend"}, {"from": "build/python", "to": "python"}],
+    "extraResources": [{"from": "build/backend", "to": "backend"}, {"from": "build/python", "to": "python", "filter": ["**/*", "!**/__pycache__{,/**/*}", "!**/*.pyc", "!Lib/site-packages/fastapi/.agents{,/**/*}"]}],
     "win": {"signAndEditExecutable": false},
     "portable": {"artifactName": "CodeFix-Portable-${version}-${arch}.${ext}"},
     "nsis": {"oneClick": false, "perMachine": false, "allowToChangeInstallationDirectory": true,

@@ -1,0 +1,15 @@
+{
+  "suite": "desktop",
+  "commit": "274bd4b3c52bb29e6cd4f827f074a0c9ca6e166f",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "scripts/check_desktop_app.cjs",
+    "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\main-review-integration\\desktop\\dist-chain-104-release\\win-unpacked\\CodeFix.exe",
+    "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\main-review-integration\\evidence\\release-integration\\108\\desktop-first-launch.png"
+  ],
+  "started_at": "2026-11-12T18:52:47.798849+00:00",
+  "finished_at": "2026-11-12T18:52:56.538205+00:00",
+  "exit_code": 0,
+  "scope": "offline development regression; no model requests; not independent C sign-off",
+  "log": "evidence/release-integration/108/desktop.log"
+}

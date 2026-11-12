@@ -19,7 +19,7 @@ const events=[
 test('one node per real invocation, actual decision overrides advisory, no inferred edges',()=>{
   const graph=trace.project(run,events);
   assert.equal(graph.nodes.length,4);
-  assert.match(graph.nodes.find(n=>n.id==='t').statusLabel,/验证未通过/);
+  assert.match(graph.nodes.find(n=>n.id==='t').statusLabel,/候选仍未修好/);
   assert.deepEqual(graph.nodes.filter(n=>n.title==='修复员').map(n=>n.round),[1,2]);
   assert.equal(graph.edges.find(e=>e.from==='d').action,'stop');
   assert.equal(graph.nodes.find(n=>n.id==='d').decision.override_reason,'预算不足');

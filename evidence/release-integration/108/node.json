@@ -1,0 +1,20 @@
+{
+  "suite": "node",
+  "commit": "274bd4b3c52bb29e6cd4f827f074a0c9ca6e166f",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--test",
+    "tests\\check_log.test.cjs",
+    "tests\\ui_architecture.test.cjs",
+    "tests\\ui_budget.test.cjs",
+    "tests\\ui_polling.test.cjs",
+    "tests\\ui_prototype.test.cjs",
+    "tests\\ui_trace.test.cjs",
+    "desktop/settings.test.cjs"
+  ],
+  "started_at": "2026-11-12T18:45:53.168475+00:00",
+  "finished_at": "2026-11-12T18:45:53.693790+00:00",
+  "exit_code": 0,
+  "scope": "offline development regression; no model requests; not independent C sign-off",
+  "log": "evidence/release-integration/108/node.log"
+}

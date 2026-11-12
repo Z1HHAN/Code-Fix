@@ -175,7 +175,10 @@ def execute_wire_request(request, source):
         interface.Node = codec.Node
         sys.modules['node'] = interface
     value = execute_request({'function': function, 'args': inputs[0], 'kwargs': inputs[1]}, source)
-    payload, _ = codec.pack(value, node_type, seeds=objects)
+    # Only this registered interface returns the native defaultdict. The codec
+    # recognizes its constant factory without executing or shipping a callable.
+    payload, _ = codec.pack(value, node_type, seeds=objects,
+                            allow_defaultdict=function == 'shortest_path_lengths')
     return {'payload': payload}
 
 

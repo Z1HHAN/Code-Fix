@@ -69,6 +69,8 @@ def freeze(root, task, definition, config, runner, model):
                          'input_price': numeric_env(p['input_price_env']) if p else None,
                          'output_price': numeric_env(p['output_price_env']) if p else None,
                          'request_seconds': numeric_env(p['request_seconds_env']) if p else None}
+        if p and p.get('personal_pricing'):
+            bindings[role]['personal_pricing'] = p['personal_pricing']
     identity = {'code': code_identity(root, read_git=real and not remote), 'project': task['project'], 'description': task['description'],
                 'task_limits': {k: task[k] for k in ('max_rounds', 'max_calls', 'total_seconds')},
                 'approved_files': definition.profile['approved_files'],
@@ -77,6 +79,8 @@ def freeze(root, task, definition, config, runner, model):
                 'prompts_sha256': {r: p[1] for r, p in config.prompts.items()},
                 'profiles_sha256': digest(registry), 'bindings': bindings,
                 'image': getattr(runner, 'image', None)}
+    if definition.data.get('registered_contract'):
+        identity['registered_contract'] = definition.data['registered_contract']
     if remote:
         identity['execution_endpoint'] = runner.url
         identity['execution_server_build_sha256'] = runner.server_build_sha256
