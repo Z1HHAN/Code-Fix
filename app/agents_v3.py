@@ -92,11 +92,15 @@ class AgentGateway:
         knowledge = ([x.to_dict() for x in search_knowledge(self.config.root, ids, definition.data['knowledge_query'])]
                      if 'search_knowledge' in agent['tool_allowlist'] else [])
         prompt = self.config.prompts[role][0]
+        from .source_context import source_context
+        shown_code, context_info = source_context(code, extra)
         material = {'task': {'project': definition.project, 'description': task['description'], 'allowed_paths': [source],
                              'forbidden_paths': list(FORBIDDEN), 'round': round_number, 'max_rounds': task['max_rounds']},
-                    'current_code': {source: code}, 'dev_evidence': [evidence],
+                    'current_code': {source: shown_code}, 'source_context': context_info, 'dev_evidence': [evidence],
                     'knowledge_context': knowledge, 'location_json': extra if role == 'repairer' else None,
                     'previous_analysis': extra if role != 'repairer' else None}
+        if definition.data.get('registered_contract'):
+            material['task']['registered_contract'] = definition.data['registered_contract']
         # Only explicitly registered interface helpers, never reference answers,
         # whole test files, evaluation workspaces or the complete dataset bundle.
         context = readonly_material(definition, work)
@@ -132,23 +136,43 @@ class AgentGateway:
             from .live_model import ModelBlocked
             if isinstance(exc, ModelBlocked):
                 record['reason'] = str(exc)
+                from .live_model import BudgetBlocked
+                if isinstance(exc, BudgetBlocked):
+                    record['budget_check'] = {'status': 'blocked', 'reason': str(exc)}
             else:
                 record.update(record_exception(self.store.directory(run_id), exc, model=self.model))
         record.update(role=role, code_version=version, call_id=call_id, round=round_number, provenance=provenance)
         record.update(trace or {})
+        if record.get('budget_check'):
+            self.store.event(run_id, {'event': 'guard_check', 'step_id': call_id + '-budget',
+                'parent_step_id': (trace or {}).get('step_id'), 'node_id': 'budget_check',
+                'role': role, 'round': round_number, 'code_version': version, **record['budget_check']})
         if record['status'] == 'ok':
             try:
                 record['parsed_output'] = parse_role(role, record['raw_text'], [evidence['evidence_id']], [k['citation_id'] for k in knowledge])
                 if role == 'repairer':
+                    if context_info['partial'] and any('edits' not in c for c in record['parsed_output']['changes']):
+                        raise InvalidModelOutput('当前只提供部分源码，必须使用edits，不能重写完整文件')
+                    from .source_edits import expand_changes
+                    record['parsed_output']['changes'] = expand_changes(record['parsed_output']['changes'],
+                        work=work, source=source, forbidden=FORBIDDEN)
                     validate_changes(record['parsed_output']['changes'], allowed_paths=(source,), forbidden_paths=FORBIDDEN, work_root=work)
                 if role == 'locator' and record['parsed_output']['file'] not in {'', source}:
                     raise InvalidModelOutput('定位文件必须属于当前任务')
                 if role == 'detector' and record['parsed_output']['failure_class'] != evidence['failure_class']:
                     raise InvalidModelOutput('检测建议不能覆盖真实分类')
             except PermissionViolation as exc:
-                record.update(status='failed', failure_class='permission_violation', error_type=type(exc).__name__)
+                record.update(status='failed', failure_class='permission_violation', error_type=type(exc).__name__, reason=str(exc)[:1000])
             except (ValueError, OSError) as exc:
-                record.update(status='failed', failure_class='invalid_model_output', error_type=type(exc).__name__)
+                record.update(status='failed', failure_class='invalid_model_output', error_type=type(exc).__name__, reason=str(exc)[:1000],
+                    output_diagnostics={'kind': 'invalid_format', 'validation_error': str(exc)[:1000],
+                        'suggested_action': '按校验错误纠正JSON字段和路径；系统仅在剩余轮次、调用及费用内重试。'})
+        if role == 'repairer' and record.get('failure_class') != 'invalid_model_output':
+            self.store.event(run_id, {'event': 'guard_check', 'check': 'patch_permission',
+                'step_id': call_id + '-permission', 'parent_step_id': (trace or {}).get('step_id'),
+                'node_id': 'permission_check', 'round': round_number, 'code_version': version,
+                'status': 'blocked' if record.get('failure_class') == 'permission_violation' else 'ok' if record['status'] == 'ok' else 'not_run',
+                'reason': record.get('reason') or ('补丁路径及结构检查通过' if record['status'] == 'ok' else '未取得有效候选，未检查补丁权限')})
         (folder / 'output.json').write_text(json.dumps(safe(record), ensure_ascii=False, indent=2), encoding='utf-8')
         self.store.event(run_id, {'event': 'agent_call', **safe(record)})
         return record

@@ -36,6 +36,15 @@ def reconcile(ledger, *, call_id, currency, amount, evidence, operator, reason, 
         cursor = db.execute(select_sql, (call_id,))
         row = cursor.fetchone()
         columns = [column[0] for column in cursor.description]
+        personal = db.execute('SELECT * FROM personal_calls WHERE call_id=?', (call_id,))
+        personal_row = personal.fetchone()
+        if personal_row is not None:
+            if row is not None:
+                raise ValueError('请求编号跨账本冲突，需先核对')
+            row, columns = personal_row, [column[0] for column in personal.description]
+            if dict(zip(columns, row))['currency'] != currency:
+                raise ValueError('对账币种与原始价格快照不一致')
+            update_sql = "UPDATE personal_calls SET status='reconciled',actual=? WHERE call_id=?"
         if row is None:
             raise ValueError('请求不存在')
         before = dict(zip(columns,row))

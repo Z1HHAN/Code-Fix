@@ -64,6 +64,7 @@ class RunTrace:
         handoff = {'schema_version': '1.0.0', 'run_id': self.run_id,
                    'handling_status': 'pending_human', 'automation_stopped': True,
                    'run_status': status, 'reason': result['reason'],
+                   'model_recovery': result.get('model_recovery'),
                    'project': task['project'], 'mode': result['mode'],
                    'model_api_called': result['model_api_called'],
                    'code_version': result.get('code_version'),
@@ -74,7 +75,7 @@ class RunTrace:
                    'consumption': {k: result[k] for k in ('rounds_used', 'model_calls', 'tool_calls', 'cost')},
                    'limits': {k: task[k] for k in ('max_rounds', 'max_calls', 'total_seconds')},
                    'next_steps': ['核对停止原因及关联证据', 'B/C对明确代码与测试版本复核',
-                                  '满足授权与隔离条件后创建新任务；本运行不自动恢复'],
+                                  '可在模型与配置中选择代码模型或调整思考模式，保存新配置后创建新任务；本运行不自动恢复'],
                    'accepted_by': None}
         path = self.write('handoff.json', handoff)
         self.store.event(self.run_id, {'event': 'handoff_created', 'handling_status': 'pending_human',

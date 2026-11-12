@@ -36,9 +36,16 @@ def profile_checks(profile):
         priced = True
     except (ModelBlocked, ValueError):
         priced = False
+    if profile.get('personal_pricing'):
+        from .personal_pricing import validate_price
+        try:
+            validate_price(profile['personal_pricing'])
+            priced = True
+        except ValueError:
+            priced = False
     checks.append({'name': '计费价格', 'ok': priced or personal_unpriced,
                    'status': '金额预算未启用，费用显示未知' if personal_unpriced else '已配置' if priced else '未正确配置'})
-    bounded = profile.get('currency') != 'CNY' or profile.get('billable_output_tokens') is not None
+    bounded = profile.get('currency') != 'CNY' or profile.get('billable_output_tokens') is not None or bool(profile.get('personal_pricing'))
     checks.append({'name': '计费输出上限', 'ok': bounded, 'status': '已登记' if bounded else '待核实'})
     return checks
 
@@ -80,7 +87,7 @@ class ConfigurationStore:
                 ready, reason = False, '授权、凭据、价格或计费上限未就绪；未发请求'
             rows.append(dict(profile_ref=ref, provider=profile['provider_id'], model=profile['model'],
                              account='personal' if profile['provider_id'] == 'personal' else profile.get('account_ref'), configured=ready, note=reason,
-                             billing_bound_known=profile.get('billable_output_tokens') is not None,
+                             billing_bound_known=profile.get('billable_output_tokens') is not None or bool(profile.get('personal_pricing')),
                              checks=checks, capabilities=capabilities(profile)))
         return {'accounts': accounts, 'profiles': rows, 'bindings': {role: current.snapshot['models'][agent['model_ref']].get('profile_ref')
                 for role, agent in current.agents.items()},
@@ -116,6 +123,9 @@ class ConfigurationStore:
                 'roles': config.snapshot, 'profiles_sha256': digest(registry),
                 'prompts_sha256': {r: p[1] for r, p in config.prompts.items()},
                 'note': '结构校验通过；不代表模型请求、费用预留或隔离资格通过'}
+        personal_prices = {ref: deepcopy(p['personal_pricing']) for ref, p in registry['profiles'].items() if p.get('personal_pricing')}
+        if personal_prices:
+            result['personal_price_snapshots'] = personal_prices
         if 'role_overrides' in value:
             overrides = validate_overrides(value['role_overrides'], value['bindings'], registry)
             result.update(schema_version=2, role_overrides=overrides,
@@ -160,5 +170,11 @@ class ConfigurationStore:
             raise ConfigError('模型档案或提示词已变更；请校验并保存新配置后创建新任务')
         if ('capabilities_sha256' in snapshot and snapshot['capabilities_sha256'] !=
                 digest({ref: capabilities(p) for ref, p in load_profiles(self.root)['profiles'].items()})):
-            raise ConfigError('参数能力已变更；请保存新配置')
+            legacy = {ref: {k: v for k, v in capabilities(p).items()
+                if k not in {'enable_thinking', 'reasoning_effort'}}
+                for ref, p in load_profiles(self.root)['profiles'].items()}
+            if (snapshot['capabilities_sha256'] != digest(legacy)
+                    or any(set(o.get('generation', {})) & {'enable_thinking', 'reasoning_effort'}
+                           for o in snapshot.get('role_overrides', {}).values())):
+                raise ConfigError('参数能力已变更；请保存新配置')
         return config

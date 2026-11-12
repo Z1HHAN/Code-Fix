@@ -33,7 +33,7 @@ from test_workflow_v3 import ExecutorStub, ModelStub, execute
     (['assertion_failed', 'syntax_error', 'passed', 'passed'], {}, 'locate', 'success'),
     (['assertion_failed', 'assertion_failed'], {'max_rounds': 1}, 'final_check', 'stopped'),
     (['assertion_failed', 'environment_error'], {}, 'repair', 'paused'),
-    (['assertion_failed', 'passed'], {}, 'pause', 'paused'),
+    (['assertion_failed', 'assertion_failed'], {}, 'pause', 'paused'),
     (['assertion_failed', 'passed', 'assertion_failed'], {}, 'repair', 'failed'),
     (['assertion_failed', 'assertion_failed'], {'max_calls': 3}, 'repair', 'blocked'),
 ])
@@ -82,7 +82,7 @@ def test_actual_dispatch_and_every_exit_have_versioned_evidence(tmp_path, outcom
     assert len(repair_steps) == model.roles.count('repairer')
 
 
-def test_invalid_json_stops_once_and_records_production_guard(tmp_path):
+def test_invalid_json_exhausts_bounded_rounds_and_records_production_guard(tmp_path):
     class Invalid(ModelStub):
         def call(self, *args, **kwargs):
             return {'status': 'ok', 'mode': 'test_stub', 'model_api_called': False, 'raw_text': 'not JSON'}
@@ -91,11 +91,12 @@ def test_invalid_json_stops_once_and_records_production_guard(tmp_path):
     store.claim(rid)
     runner = ExecutorStub(['assertion_failed'])
     status, result = Workflow(store, runner, Invalid()).run(rid)
-    assert status == 'blocked' and result['model_calls'] == 1
-    assert result['guard_id'] == 'V3_INVALID_MODEL_OUTPUT_STOP'
+    assert status == 'stopped' and result['model_calls'] == 3
+    assert result['rounds_used'] == 3
+    assert len([e for e in store.events(rid) if e['event'] == 'format_retry']) == 3
     assert not (store.directory(rid) / 'candidate-1').exists()
     assert [e for e in store.events(rid) if e['event'] == 'decision'][-1]['action'] == 'stop'
-    assert json.loads((store.directory(rid) / 'trace/configuration.json').read_text(encoding='utf-8'))['production_guards']['invalid_model_output'] == 'stop'
+    assert json.loads((store.directory(rid) / 'trace/configuration.json').read_text(encoding='utf-8'))['production_guards']['invalid_model_output'] == 'bounded_retry'
 
 
 @pytest.mark.parametrize('kind', ['code_version', 'test_suite_version', 'exception'])

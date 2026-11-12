@@ -84,11 +84,19 @@ def parse_repair_output(raw: str, *, allowed_evidence_ids: Collection[str] | Non
         raise InvalidModelOutput('changes 必须是非空数组')
     paths = []
     for change in value['changes']:
-        if not isinstance(change, dict) or set(change) != {'path', 'new_content'}:
-            raise InvalidModelOutput('changes 项必须只包含 path 和 new_content')
-        if not isinstance(change['path'], str) or not change['path'].strip() or not isinstance(change['new_content'], str):
+        if not isinstance(change, dict) or set(change) not in ({'path', 'new_content'}, {'path', 'edits'}):
+            raise InvalidModelOutput('changes项须包含path及new_content或edits，二者不能混用')
+        if (not isinstance(change['path'], str) or not change['path'].strip()
+                or ('new_content' in change and not isinstance(change['new_content'], str))):
             raise InvalidModelOutput('path 必须是非空字符串，new_content 必须是字符串')
         paths.append(change['path'])
+        if 'edits' in change:
+            edits = change['edits']
+            if (not isinstance(edits, list) or not 1 <= len(edits) <= 20
+                    or any(not isinstance(e, dict) or set(e) != {'old', 'new'}
+                        or not isinstance(e['old'], str) or not e['old'] or not isinstance(e['new'], str)
+                        for e in edits)):
+                raise InvalidModelOutput('edits须为1至20项old/new精确替换，old不能为空')
     if len(set(paths)) != len(paths):
         raise InvalidModelOutput('changes 路径不能重复')
     _citations(value, allowed_evidence_ids, allowed_knowledge_ids)

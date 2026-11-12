@@ -130,6 +130,28 @@ def test_static_analysis_does_not_run_top_level_code():
 
 
 @pytest.mark.parametrize('persistent', [False, True])
+def test_publish_permission_retries_have_exact_backoff(monkeypatch, persistent):
+    import app.quixbugs_import as module
+    from types import SimpleNamespace
+    attempts, waits = [], []
+    def operation(source, destination):
+        attempts.append((source, destination))
+        if persistent or len(attempts) == 1:
+            raise PermissionError('injected denial; no filesystem involved')
+        return 'published'
+    monkeypatch.setattr(module, 'time', SimpleNamespace(sleep=waits.append))
+    if persistent:
+        with pytest.raises(PermissionError):
+            module._publish(operation, 'source', 'destination')
+        assert attempts == [('source', 'destination')] * 6
+        assert waits == [0.05, 0.1, 0.2, 0.4, 0.8]
+    else:
+        assert module._publish(operation, 'source', 'destination') == 'published'
+        assert attempts == [('source', 'destination')] * 2
+        assert waits == [0.05]
+
+
+@pytest.mark.parametrize('persistent', [False, True])
 def test_windows_permission_failure_is_bounded_and_registry_remains_safe(tmp_path, monkeypatch, persistent):
     import app.quixbugs_import as module
     from types import SimpleNamespace
@@ -138,17 +160,24 @@ def test_windows_permission_failure_is_bounded_and_registry_remains_safe(tmp_pat
     rename = Path.rename
     attempts = []
     waits = []
+    published = []
     def denied(source, destination):
         if not source.is_relative_to(tmp_path):
             return rename(source, destination)
         attempts.append(source)
         if persistent or len(attempts) == 1:
             raise PermissionError('injected file move denial')
-        return rename(source, destination)
+        result = rename(source, destination)
+        published.append(Path(destination))
+        return result
     monkeypatch.setattr(module.Path, 'rename', denied)
-    # Replacing time.sleep itself also intercepts background service threads.
-    # Keep the exact retry assertions while limiting the double to this module.
-    monkeypatch.setattr(module, 'time', SimpleNamespace(sleep=waits.append))
+    # Use real backoff for real Windows moves. Exact retry counts are tested
+    # above with a deterministic operation; OS locks can add permission retries.
+    sleep = module.time.sleep
+    def wait(seconds):
+        waits.append(seconds)
+        sleep(seconds)
+    monkeypatch.setattr(module, 'time', SimpleNamespace(sleep=wait))
     if persistent:
         with pytest.raises(PermissionError):
             import_dataset(root=tmp_path, write=True)
@@ -158,7 +187,10 @@ def test_windows_permission_failure_is_bounded_and_registry_remains_safe(tmp_pat
         assert import_dataset(root=tmp_path, write=True)['public_tasks'] == 40
     else:
         assert import_dataset(root=tmp_path, write=True)['public_tasks'] == 40
-        assert waits == [0.05] and len(attempts) == 41
+        assert len(published) == len(set(published)) == 40
+        assert len(attempts) == len(published) + len(waits)
+        assert 1 <= len(waits) <= 5 * 40
+        assert set(waits) <= {0.05, 0.1, 0.2, 0.4, 0.8}
     assert len(json.loads(path.read_bytes())['projects']) == 41
 
 

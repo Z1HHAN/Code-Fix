@@ -6,6 +6,28 @@ objects, after validating the complete response. This is not pickle.
 """
 import json
 import math
+from collections import defaultdict
+from types import FunctionType
+
+_FLOAT = float
+_infinity_factory = lambda: float('inf')
+
+
+def _factory_tag(factory):
+    """Recognize the native constant factory without calling candidate code."""
+    if factory is None:
+        return 'missing'
+    if type(factory) is FunctionType:
+        code, fixed = factory.__code__, _infinity_factory.__code__
+        attributes = ('co_code', 'co_consts', 'co_names', 'co_varnames',
+                      'co_freevars', 'co_cellvars', 'co_argcount',
+                      'co_kwonlyargcount', 'co_posonlyargcount')
+        if (all(getattr(code, name) == getattr(fixed, name) for name in attributes)
+                and factory.__closure__ is None and factory.__defaults__ is None
+                and factory.__kwdefaults__ is None
+                and factory.__globals__.get('float', factory.__builtins__.get('float')) is _FLOAT):
+            return 'positive_infinity'
+    raise ValueError('unapproved defaultdict factory')
 
 VERSION = 2
 MAX_BYTES = 65536
@@ -71,7 +93,7 @@ def dumps(value):
     return raw
 
 
-def pack(root, node_type=None, *, seeds=()):
+def pack(root, node_type=None, *, seeds=(), allow_defaultdict=False):
     objects = list(seeds)
     index = {id(value): i for i, value in enumerate(objects)}
     if len(index) != len(objects) or len(objects) > MAX_OBJECTS:
@@ -91,7 +113,9 @@ def pack(root, node_type=None, *, seeds=()):
             if math.isnan(value):
                 raise ValueError('NaN is not an approved value')
             return value if math.isfinite(value) else {'float': 'inf' if value > 0 else '-inf'}
-        if kind not in (list, tuple, dict, set) and (node_type is None or kind is not node_type):
+        if (kind not in (list, tuple, dict, set)
+                and not (allow_defaultdict and kind is defaultdict)
+                and (node_type is None or kind is not node_type)):
             raise ValueError('unapproved RPC value type')
         key = id(value)
         if key not in index:
@@ -112,8 +136,10 @@ def pack(root, node_type=None, *, seeds=()):
             if set(vars(value)) != set(NODE_FIELDS):
                 raise ValueError('unapproved Node fields')
             row = {'type': 'node', 'items': [atom(vars(value)[name], depth) for name in NODE_FIELDS]}
-        elif kind is dict:
+        elif kind is dict or (allow_defaultdict and kind is defaultdict):
             row = {'type': 'dict', 'items': [[atom(k, depth), atom(v, depth)] for k, v in value.items()]}
+            if kind is defaultdict:
+                row.update(type='defaultdict', factory=_factory_tag(value.default_factory))
         elif kind in (list, tuple, set):
             row = {'type': kind.__name__, 'items': [atom(v, depth) for v in value]}
         else:
@@ -125,7 +151,7 @@ def pack(root, node_type=None, *, seeds=()):
     return packet, objects
 
 
-def unpack(packet, node_type=None, *, existing=(), original=None):
+def unpack(packet, node_type=None, *, existing=(), original=None, allow_defaultdict=False):
     """Validate first, then commit mutations. Immutable input tuples cannot change."""
     if (type(packet) is not dict or set(packet) != {'version', 'root', 'objects'}
             or type(packet['version']) is not int or packet['version'] != VERSION
@@ -134,6 +160,8 @@ def unpack(packet, node_type=None, *, existing=(), original=None):
     dumps(packet)
     rows = packet['objects']
     expected_types = {'list': list, 'tuple': tuple, 'set': set, 'dict': dict, 'node': node_type}
+    if allow_defaultdict:
+        expected_types['defaultdict'] = defaultdict
     count = 0
 
     def check_atom(value):
@@ -154,14 +182,17 @@ def unpack(packet, node_type=None, *, existing=(), original=None):
 
     check_atom(packet['root'])
     for row in rows:
-        if (type(row) is not dict or set(row) != {'type', 'items'}
+        if (type(row) is not dict
+                or set(row) != ({'type', 'items', 'factory'} if row.get('type') == 'defaultdict' else {'type', 'items'})
                 or type(row['type']) is not str or row['type'] not in expected_types
                 or expected_types[row['type']] is None or type(row['items']) is not list):
             raise ValueError('unapproved RPC object record')
+        if row['type'] == 'defaultdict' and row['factory'] not in ('missing', 'positive_infinity'):
+            raise ValueError('unapproved defaultdict factory')
         if row['type'] == 'node' and len(row['items']) != len(NODE_FIELDS):
             raise ValueError('invalid Node field count')
         for value in row['items']:
-            if row['type'] == 'dict':
+            if row['type'] in ('dict', 'defaultdict'):
                 if type(value) is not list or len(value) != 2:
                     raise ValueError('invalid RPC dictionary pair')
                 check_atom(value[0]); check_atom(value[1])
@@ -177,7 +208,7 @@ def unpack(packet, node_type=None, *, existing=(), original=None):
             if type(value) is tuple and rows[i] != original['objects'][i]:
                 raise ValueError('immutable RPC tuple changed')
         # A rejected response must leave the trusted inputs byte-for-byte intact.
-        unpack(packet, node_type)
+        unpack(packet, node_type, allow_defaultdict=allow_defaultdict)
 
     objects = [None] * len(rows)
     for i, row in enumerate(rows):
@@ -223,7 +254,7 @@ def unpack(packet, node_type=None, *, existing=(), original=None):
                             raise ValueError('RPC key complexity limit')
                     hash_costs[key] = total
                 return hash_costs[key]
-            if type(item) in (list, dict, set):
+            if type(item) in (list, dict, set, defaultdict):
                 raise ValueError('unhashable RPC key')
             return 1
         hash_work += cost(value)
@@ -235,7 +266,7 @@ def unpack(packet, node_type=None, *, existing=(), original=None):
         kind = row['type']
         if kind == 'tuple':
             atom({'ref': i}); prepared.append(None)
-        elif kind == 'dict':
+        elif kind in ('dict', 'defaultdict'):
             value = {}
             for key, item in row['items']:
                 key, item = atom(key), atom(item)
@@ -263,8 +294,10 @@ def unpack(packet, node_type=None, *, existing=(), original=None):
     for obj, row, value in zip(objects, rows, prepared):
         if row['type'] == 'list':
             obj[:] = value
-        elif row['type'] in ('dict', 'set'):
+        elif row['type'] in ('dict', 'set', 'defaultdict'):
             obj.clear(); obj.update(value)
+            if row['type'] == 'defaultdict':
+                obj.default_factory = _infinity_factory if row['factory'] == 'positive_infinity' else None
         elif row['type'] == 'node':
             vars(obj).update(zip(NODE_FIELDS, value))
     return result, objects

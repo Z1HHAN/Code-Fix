@@ -3,7 +3,8 @@
 (function (root) {
   const names = {repairer:'修复员', detector:'检测员', scheduler:'模型调度员', locator:'定位员',
     pytest:'pytest执行器', program_dispatch:'程序调度', isolation_preflight:'隔离检查',
-    handoff_created:'人工移交包', decision:'程序调度（历史事件）'};
+    handoff_created:'人工移交包', decision:'程序调度（历史事件）',
+    configuration_check:'配置与协议检查', budget_check:'调用预算检查', permission_check:'补丁权限检查'};
   const states = {ok:'完成', running:'执行中', failed:'失败', blocked:'阻塞', interrupted:'中断',
     passed:'通过', inconclusive:'证据不足', timeout:'超时'};
   const actions = {repair:'重试修复', locate:'重新定位', final_check:'进入最终复验',
@@ -33,7 +34,7 @@
   function project(run, events) {
     const nodes = [], byId = new Map();
     for (const event of events) {
-      if (!['step_started','step_completed','agent_call','test_completed','decision','handoff_created'].includes(event.event)) continue;
+      if (!['step_started','step_completed','agent_call','test_completed','decision','handoff_created','guard_check'].includes(event.event)) continue;
       const legacy = !event.step_id;
       const id = event.step_id || `legacy:${event.sequence ?? nodes.length}`;
       let node = byId.get(id);
@@ -46,6 +47,7 @@
       node.evidenceIds = unique([...node.evidenceIds, ...(event.evidence_ids || []), event.evidence_id]);
       if (event.event === 'step_started') node.started = true;
       if (event.event === 'step_completed') node.completed = true;
+      if (event.event === 'guard_check') {node.started=true;node.completed=true;}
       if (event.event === 'decision') node.decision = event;
       if (event.event === 'test_completed') node.test = event;
       if (event.event === 'agent_call') node.call = event;
@@ -60,7 +62,13 @@
       node.status = node.completed ? (f.status || 'ok') : node.started ? (terminal ? 'incomplete' : 'running') :
         (node.test?.verification_status || node.call?.status || 'unknown');
       node.statusLabel = node.status === 'incomplete' ? '步骤未闭合／事件尚未加载完整' : states[node.status] || '状态未记录';
-      if(node.test)node.statusLabel += ' · ' + ({passed:'验证通过',failed:'验证未通过',inconclusive:'验证证据不足',not_run:'验证未运行'}[node.test.verification_status] || '验证结论未记录');
+      if(node.test){
+        const failure=node.test.failure_class,baseline=node.round===0&&node.phase!=='final_check';
+        node.executionStatus=node.completed?'执行完成':'执行中';
+        node.meaning=baseline&&['assertion_failed','code_runtime_error'].includes(failure)?'缺陷已复现，可以开始修复':baseline&&failure==='passed'?'起点未复现缺陷':failure==='passed'?(node.phase==='final_check'?'最终复验通过':'候选通过，待最终复验'):node.test.verification_status==='inconclusive'?'验证证据不足':['environment_error','timeout'].includes(failure)?'执行环境异常':'候选仍未修好';
+        node.statusLabel=node.executionStatus+' · '+node.meaning;
+        if(node.completed&&!baseline&&failure!=='passed')node.status='failed';
+      }
       node.duration = f.duration_ms ?? null;
     }
     const edges = nodes.filter(n => n.parent && byId.has(n.parent)).map(n => ({from:n.parent,to:n.id,
@@ -95,9 +103,10 @@
     if (cost.status === 'not_called') return '费用：未调用模型';
     if (cost.status === 'not_applicable') return '费用：离线模拟，无真实账单';
     if (['unknown','pending'].includes(cost.status)) return '费用：未知／预留，尚未结算';
-    const amount = cost.currency === 'CNY' ? cost.amount_cny : cost.amount_usd;
+    const currency=cost.currency||(cost.amount_cny!=null?'CNY':'USD');
+    const amount = currency === 'CNY' ? cost.amount_cny : cost.amount_usd;
     if (amount == null) return '费用：未记录／未知';
-    return `费用估算：${cost.currency || 'USD'} ${amount}（不是平台账单）`;
+    return cost.status==='reconciled'?`费用：${currency} ${amount}（凭据已人工核对）`:`费用估算：${currency} ${amount}（不是平台账单）`;
   }
   // Positions arrange recorded steps for reading; only graph.edges define execution links.
   function layout(graph) {
@@ -199,7 +208,7 @@
         const li=el('li'),point=placement.positions.get(node.id);li.setAttribute('style',`left:${point.x}px;top:${point.y}px`);list.append(li);
         const button=el('button',null,'trace-node '+(node.status==='running'?'trace-active':node.test?.verification_status==='failed'?'trace-test-failed':node.status==='failed'?'trace-failed':''));button.type='button';button.dataset.stepId=node.id;
         const top=el('span',null,'node-top');top.append(el('span',`${node.title}${roundLabel(node)?' · '+roundLabel(node):''}`,'node-title'),el('span',String(buttons.length+1).padStart(2,'0'),'node-index'));
-        button.append(top,el('span',node.test?.verification_status==='failed'?'! 测试未通过':(node.status==='ok'?'✓ ':'')+node.statusLabel,'node-state'),
+        button.append(top,el('span',(node.status==='failed'?'! ':node.status==='ok'?'✓ ':'')+node.statusLabel,'node-state'),
           el('span',node.decision?(actions[node.decision.effective_action||node.decision.action]||'裁决已记录'):`${node.legacy?'历史格式':node.phase}${node.duration!=null?' · '+node.duration+'ms':''}`,'node-result'));
         button.setAttribute('aria-label',`${node.title}，${node.statusLabel}`);
         button.setAttribute('aria-pressed',String(node.id===selected));

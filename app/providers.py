@@ -50,7 +50,10 @@ def validate_url(provider, url):
         return False
     try:
         parsed = urlsplit(url)
-        if parsed.port not in (None, 443):
+        if provider == 'personal':
+            if parsed.port in {0, 22, 25, 53, 135, 136, 137, 138, 139, 445}:
+                return False
+        elif parsed.port not in (None, 443):
             return False
     except ValueError:
         return False

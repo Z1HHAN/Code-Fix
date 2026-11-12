@@ -2028,7 +2028,13 @@
     },
     "qb-wrap": {
       "title": "QuixBugs · 文本换行",
-      "description": "修复wrap缺陷，使预登记的原生测试通过；不修改测试。",
+      "description": "修复wrap缺陷，使预登记的原生测试通过；不修改测试。保留所有输入字符及其顺序，各行直接拼接须还原原文；换行分隔空格留在下一行开头。",
+      "registered_contract": {
+        "version": "wrap-contract-2",
+        "preserve_text": true,
+        "separator_position": "next_line",
+        "notice": "保留所有输入字符及其顺序，输出各行直接拼接必须等于原文。按空格断行时分隔空格归下一行开头，不移到上一行尾，也不能通过strip删除。原源码关于保留空格的业务说明仍有效。此处仅明确行为约束，不提供测试输入、期望输出或参考实现。"
+      },
       "requires_isolation": true,
       "admission_blocker": null,
       "qualification_status": "pending_docker_collection_and_baseline",

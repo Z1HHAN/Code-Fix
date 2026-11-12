@@ -11,6 +11,12 @@
 只返回JSON，不加围栏：
 {"changes":[{"path":"允许修改的文件","new_content":"该文件完整的新代码"}],"explanation":"改动原因","evidence_ids":[],"knowledge_citations":[]}
 
+优先使用最小精确替换，避免重写长文件：changes中的一项也可写为
+{"path":"允许修改的文件","edits":[{"old":"当前源码中精确且唯一出现的原片段","new":"替换后的片段"}]}。
+同一文件只能一项change；最多20项互不重叠的edits，全部针对当前源码原始位置匹配。
+old必须包含足够上下文以唯一匹配，不能使用省略号；不能同时提交edits和new_content。
+代码上下文标记为partial时必须使用edits；程序会在完整源码中校验并合并。
+
 任务与路径约束：{{task_context}}
 当前代码：{{current_code}}
 定位结论：{{location_json}}

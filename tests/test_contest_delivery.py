@@ -26,7 +26,7 @@ def test_fixed_repeats_analysis_without_locator(tmp_path, failure):
     status, result, runner, model, store, rid = execute(
         tmp_path, ['assertion_failed', failure, 'passed', 'passed'], {'strategy': 'fixed'})
     assert status == 'success'
-    assert model.roles == ['repairer', 'detector', 'scheduler'] * 2
+    assert model.roles == ['repairer', 'detector', 'scheduler', 'repairer']
     events = store.snapshot(rid)['events']
     assert all(e['strategy'] == 'fixed' for e in events if e['event'] == 'decision')
     if failure == 'assertion_failed':
@@ -37,7 +37,7 @@ def test_fixed_repeats_analysis_without_locator(tmp_path, failure):
 @pytest.mark.parametrize('strategy', ['fixed', 'dynamic'])
 @pytest.mark.parametrize('advice,status', [('pause', 'paused'), ('stop', 'stopped')])
 def test_both_strategies_accept_conservative_advice(tmp_path, strategy, advice, status):
-    outcome, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed'],
+    outcome, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'assertion_failed'],
                                                 {'strategy': strategy}, scheduler=advice)
     assert outcome == status and result['final_result'] == 'not_run'
     assert 'final_check' not in runner.phases

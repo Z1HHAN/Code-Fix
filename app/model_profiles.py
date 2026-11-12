@@ -85,8 +85,19 @@ def load_profiles(root):
         if team > total:
             raise ConfigError('队伍总额度不能超过账号累计额度之和')
     for ref, profile in data['profiles'].items():
-        if not re.fullmatch(r'[a-z][a-z0-9_\-]{0,63}', ref) or not isinstance(profile, dict) or set(profile) != FIELDS | (CNY_FIELDS if cny else set()):
+        personal_fields = ({'personal_pricing', 'currency'} if isinstance(profile, dict)
+            and profile.get('provider_id') == 'personal' and 'personal_pricing' in profile
+            and os.environ.get('CODE_FIX_PERSONAL_MODE') == '1' and not cny else set())
+        if not re.fullmatch(r'[a-z][a-z0-9_\-]{0,63}', ref) or not isinstance(profile, dict) or set(profile) != FIELDS | (CNY_FIELDS if cny else personal_fields):
             raise ConfigError('模型档案ID或字段无效')
+        if personal_fields:
+            from .personal_pricing import validate_price
+            try:
+                price = validate_price(profile['personal_pricing'])
+                if price['model'] != profile['model'] or price['currency'] != profile['currency']:
+                    raise ValueError('价格型号或币种不匹配')
+            except ValueError as exc:
+                raise ConfigError(str(exc)) from None
         if any(not isinstance(profile[k], str) or not profile[k].strip()
                for k in FIELDS - {'max_input_tokens', 'max_output_tokens'}):
             raise ConfigError('模型档案字符串字段无效')
@@ -215,7 +226,7 @@ class ModelRouter:
                 'request_seconds': s.timeout, 'daily_shared_usd': str(s.daily_limit),
                 'input_usd_per_million': str(s.input_per_million),
                 'output_usd_per_million': str(s.output_per_million)}
-        if s.currency == 'CNY':
+        if s.currency == 'CNY' and not s.personal_pricing:
             for old in ('daily_shared_usd', 'input_usd_per_million', 'output_usd_per_million'):
                 binding.pop(old)
             binding.update(currency='CNY', account_id=s.account_id, total_account_cny=str(s.account_limit),
@@ -227,6 +238,12 @@ class ModelRouter:
             binding.update(currency=None, monetary_budget_enabled=False, daily_shared_usd=None,
                            input_usd_per_million=None, output_usd_per_million=None)
         binding['effective_parameters_sha256'] = digest(binding['effective_parameters'])
+        if s.personal_pricing:
+            binding.update(currency=s.currency, personal_pricing=s.personal_pricing,
+                           daily_limit=str(s.daily_limit), monetary_budget_enabled=True,
+                           input_usd_per_million=None, output_usd_per_million=None, daily_shared_usd=None,
+                           effective_parameters={s.token_limit_parameter: s.max_output_tokens, **(s.request_parameters or {})})
+            binding['effective_parameters_sha256'] = digest(binding['effective_parameters'])
         return binding
 
     def call_for_role(self, role, messages, **kwargs):

@@ -24,7 +24,7 @@ def package_files(root=ROOT):
         files.update(p.relative_to(root).as_posix() for p in (root / name).rglob('*.py'))
     for name in ('c_runner/profiles.json', 'configs/tasks/catalog-v3.json', 'requirements-lock.txt',
                  'docker/runner.Dockerfile', 'docker/execution-service.Dockerfile', 'docker/.dockerignore',
-                 'scripts/prepare_execution_cloud.sh', 'scripts/start_execution_cloud.sh',
+                 'scripts/prepare_execution_cloud.sh', 'scripts/start_execution_cloud.sh', 'scripts/enable_execution_https.sh',
                  'scripts/verify_execution_package.py', 'deploy/cloud/README.md'):
         files.add(name)
     files.update(p.relative_to(root).as_posix() for p in (root / 'docker').glob('*.py'))

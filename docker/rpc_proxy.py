@@ -43,7 +43,8 @@ def invoke(function, args, kwargs):
         if packet is not None:
             if type(result) is not dict or set(result) != {'payload'}:
                 raise RuntimeError('candidate typed RPC failed')
-            return codec.unpack(result['payload'], node_type, existing=objects, original=packet)[0]
+            return codec.unpack(result['payload'], node_type, existing=objects, original=packet,
+                                allow_defaultdict=function == 'shortest_path_lengths')[0]
         if not isinstance(result, dict) or set(result) != {'value'}:
             raise RuntimeError('candidate RPC failed')
         return result['value']

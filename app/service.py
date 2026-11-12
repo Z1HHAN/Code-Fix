@@ -68,6 +68,8 @@ class TaskService:
 
     def report(self, run_id):
         report = {'schema_version': 'v3', **self.store.snapshot(run_id)}
+        from .result_summary import summarize
+        report['result_summary'] = summarize(self.store, report)
         config_id = self.store.get(run_id)['task'].get('config_id')
         if config_id:
             from .configuration import ConfigurationStore

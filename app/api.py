@@ -216,6 +216,10 @@ def create_app(root=None):
     def report(run_id: str):
         return service.report(run_id)
 
+    @app.get('/api/v3/tasks/{run_id}/result-summary')
+    def result_summary(run_id: str):
+        return service.report(run_id)['result_summary']
+
     @app.get('/api/v3/tasks/{run_id}/artifact')
     def artifact(run_id: str, path: str):
         from .security import normalise_relpath, PermissionViolation

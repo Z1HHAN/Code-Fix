@@ -37,9 +37,9 @@ def _exception_header(line):
     return match if match and match.group(1) in DIAGNOSTIC_TYPES else None
 
 
-# Production guards precede the historical v0.2 rule table. Invalid output does
-# not enter that table's R15 repair retry; this release deliberately stops once.
-RUNTIME_POLICY = {'version': '1.0.0', 'invalid_model_output': 'stop',
+# Repairer format failures consume a round; advisory format correction is bounded.
+RUNTIME_POLICY = {'version': '1.1.0', 'invalid_model_output': 'bounded_retry',
+                  'advisory_format_retries': 1,
                   'transport_attempts': 1, 'final_feedback_to_agents': False}
 # A baseline run reproduces the registered defect when the frozen native tests
 # fail through an assertion or through a candidate runtime error.  Both classes
@@ -74,6 +74,9 @@ class WorkflowRun:
     def __init__(self, workflow, run_id):
         self.store, self.runner, self.model = workflow.store, workflow.runner, workflow.model
         self.model_calls = self.tool_calls = 0
+        self.actual_requests = 0
+        self.output_feedback = None
+        self.empty_reasoning_streak = {}
         self.run_id = run_id
         self.engine = None
         self.task = self.store.get(self.run_id)['task']
@@ -110,6 +113,7 @@ class WorkflowRun:
 
     def finish(self, status, reason):
         self.final.update(reason=reason, model_calls=self.model_calls, tool_calls=self.tool_calls,
+                     model_attempts=self.model_calls, actual_model_requests=self.actual_requests,
                      cost=self.counters()['cost'])
         self.trace.complete({'success': 'ok', 'failed': 'failed', 'blocked': 'blocked'}.get(status, 'interrupted'), reason=reason)
         action = 'finish' if status in {'success', 'failed'} else 'pause' if status == 'paused' else 'stop'
@@ -250,6 +254,28 @@ class WorkflowRun:
                 'failure_class': result['failure_class'], 'summary': json.dumps(summary, ensure_ascii=False)}
 
     def call(self, role, ev, round_number, extra=None):
+        correction = None
+        for attempt in range(2 if role in {'detector', 'scheduler', 'locator'} else 1):
+            material = {'previous_analysis': extra, 'output_validation_error': correction} if correction else extra
+            if role == 'repairer' and self.output_feedback:
+                material = {'location': extra, 'output_validation_error': self.output_feedback}
+            try:
+                value = self._call_once(role, ev, round_number, material)
+                self.empty_reasoning_streak[role] = 0
+                if role == 'repairer':
+                    self.output_feedback = None
+                return value
+            except InvalidRoleOutput as exc:
+                empty = exc.diagnostics.get('kind') == 'reasoning_budget_exhausted'
+                self.empty_reasoning_streak[role] = self.empty_reasoning_streak.get(role, 0) + 1 if empty else 0
+                exc.repeated_empty = self.empty_reasoning_streak[role] >= 2
+                if attempt or exc.repeated_empty or role not in {'detector', 'scheduler', 'locator'}:
+                    raise
+                correction = str(exc)
+                self.store.event(self.run_id, {'event': 'format_retry', 'role': role,
+                    'round': round_number, 'reason': correction, 'remaining_format_retries': 0})
+
+    def _call_once(self, role, ev, round_number, extra=None):
         self.boundary()
         if self.model_calls >= self.task['max_calls']:
             raise ModelBlocked('模型调用次数到达上限')
@@ -260,6 +286,7 @@ class WorkflowRun:
                                 version=self.version, work=self.current, task=self.task, deadline=self.deadline, extra=extra,
                                 trace={k: step[k] for k in ('step_id', 'parent_step_id')})
         self.final['model_api_called'] |= record.get('model_api_called', False)
+        self.actual_requests += int(record.get('model_api_called') is True)
         budget = record.get('cost', {}).get('budget')
         if budget and budget.get('alerts'):
             self.store.event(self.run_id, {'event': 'budget_alert', 'step_id': step['step_id'],
@@ -273,7 +300,7 @@ class WorkflowRun:
         if record['status'] != 'ok':
             self.final['failure_class'] = record.get('failure_class', 'unknown')
             if self.final['failure_class'] == 'invalid_model_output':
-                self.final['guard_id'] = 'V3_INVALID_MODEL_OUTPUT_STOP'
+                raise InvalidRoleOutput(role, record.get('reason') or '输出不符合角色JSON协议', record.get('output_diagnostics'))
             elif self.final['failure_class'] in {'permission_violation', 'model_transport_error'}:
                 self.final['guard_id'] = 'V3_' + self.final['failure_class'].upper()
                 routed = self.route(self.final['failure_class'])
@@ -291,9 +318,16 @@ class WorkflowRun:
             config = ConfigurationStore(self.store).runtime(self.task['config_id'])
         else:
             config = RoleConfig(ROOT)
-        config.preflight()
+        try:
+            config.preflight()
+        except (ConfigError, ModelBlocked) as exc:
+            self.store.event(self.run_id, {'event': 'guard_check', 'step_id': 'configuration-check',
+                'node_id': 'configuration_check', 'status': 'blocked', 'reason': str(exc)})
+            raise
+        self.store.event(self.run_id, {'event': 'guard_check', 'step_id': 'configuration-check',
+            'node_id': 'configuration_check', 'status': 'ok', 'reason': '角色配置、提示词和输出协议检查通过'})
         from .experiment_identity import freeze
-        self.trace.write('trace/experiment.json', freeze(ROOT, self.task, self.definition, config, self.runner, self.model))
+        self.trace.write('trace/experiment-preflight.json', freeze(ROOT, self.task, self.definition, config, self.runner, self.model))
         resolved = None
         blockers = []
         if self.model is None:
@@ -306,10 +340,9 @@ class WorkflowRun:
         self.store.event(self.run_id, {'event': 'isolation_checked', **isolation})
         self.trace.complete('ok' if isolation['isolation_ready'] else 'blocked', evidence_path='isolation', **isolation)
         self.final['isolation_ready'] = isolation['isolation_ready']
-        from .remote_runner import RemoteRunner
-        if isinstance(self.runner, RemoteRunner) and isolation['isolation_ready']:
-            # Probe resolves the immutable cloud image/build before model requests.
-            self.trace.write('trace/experiment.json', freeze(ROOT, self.task, self.definition, config, self.runner, self.model))
+        # Keep the initial inputs separately. The probe resolves the cloud image
+        # and build; write the final identity once, before any model request.
+        self.trace.write('trace/experiment.json', freeze(ROOT, self.task, self.definition, config, self.runner, self.model))
         self.boundary()
         if not isolation['isolation_ready']:
             blockers.append(isolation.get('reason', '隔离未就绪'))
@@ -351,6 +384,7 @@ class WorkflowRun:
             raise IsolationBlocked('最终验收字节与候选版本不一致')
         checked, _ = self.test(final_work, 'final_check', 'final-check')
         self.final['final_result'] = checked['verification_status']
+        self.final['failure_class'] = checked['failure_class']
         self.boundary()
         final_failure = checked['failure_class']
         if final_failure in {'assertion_failed', 'syntax_error', 'code_runtime_error'}:
@@ -393,8 +427,8 @@ class WorkflowRun:
         # Advisory model calls must not consume the last chance to
         # validate an already passing candidate with the tool executor.
         advice, skipped = None, None
-        if decision['action'] == 'final_check' and self.task['max_calls']-self.model_calls < 2:
-            skipped = '开发通过；剩余调用不足，跳过非必需分析与建议，优先干净复验'
+        if decision['action'] == 'final_check':
+            skipped = '开发通过；跳过非必需检测与模型调度建议，直接干净复验'
         elif self.strategy == 'dynamic' and result['failure_class'] == 'syntax_error':
             skipped = '动态策略：语法失败直接重修，跳过检测与模型调度建议'
         else:
@@ -411,6 +445,8 @@ class WorkflowRun:
             overrides.append('固定策略不追加定位员；保留共同保护，失败时下一轮按固定顺序重修')
         if skipped:
             overrides.append(skipped)
+            self.store.event(self.run_id, {'event': 'roles_skipped', 'roles': ['detector', 'scheduler'],
+                'round': round_number, 'reason': skipped, 'code_version': self.version})
         override = '；'.join(overrides) or None
         if effective == 'locate' and self.model_calls >= self.task['max_calls']:
             effective, reason = 'stop', '模型调用次数到达上限'
@@ -428,7 +464,19 @@ class WorkflowRun:
             return result, folder, self.final_check()
         # A model cannot force final validation of failing code or bypass syntax rules.
         if effective == 'locate':
-            self.location = self.call('locator', ev, round_number)
+            try:
+                self.location = self.call('locator', ev, round_number)
+            except InvalidRoleOutput as exc:
+                self.location = None
+                self.output_feedback = '定位员未返回有效定位结果，请依据当前开发测试证据自行定位并修复。' + str(exc)
+                self.store.event(self.run_id, {'event': 'locator_fallback', 'round': round_number,
+                    'reason': str(exc), 'effective_action': 'repair', 'code_version': self.version,
+                    'evidence_ids': [ev['evidence_id']]})
+                self.trace.decision(program={'action': 'repair', 'rule_id': 'locator_output_fallback',
+                    'reason': '定位输出纠正后仍无效，保留失败并回到修复'}, effective_action='repair',
+                    reason='定位失败；下一轮使用同一候选的开发证据，不伪造定位结果',
+                    evidence_ids=[ev['evidence_id']], version=self.version,
+                    suite_version=self.final['test_suite_version'], counters=self.counters(), round_number=round_number)
         else:
             self.location = None
         return result, folder, None
@@ -447,7 +495,21 @@ class WorkflowRun:
                 routed = self.route('not_reproduced' if baseline_failure == 'passed' else baseline_failure)
                 return self.finish('stopped' if routed['action'] == 'stop' else 'paused', routed['reason'])
             for round_number in range(1, self.task['max_rounds'] + 1):
-                result, folder, terminal = self.repair_round(result, folder, round_number)
+                try:
+                    result, folder, terminal = self.repair_round(result, folder, round_number)
+                except InvalidRoleOutput as exc:
+                    if exc.repeated_empty:
+                        self.final['model_recovery'] = {'role': exc.role, 'kind': 'repeated_reasoning_exhaustion',
+                            'automatic_model_switch': False, 'requires_new_task': True,
+                            'suggested_action': '调整已支持的思考模式，或选择已配置的代码模型；保存新配置后创建新任务。'}
+                        return self.finish('blocked', f'{exc.role}连续两次耗尽思考额度且正文为空，停止原样重试并移交人工')
+                    if exc.role != 'repairer':
+                        return self.finish('blocked', f'{exc.role}格式纠正后仍无效：{exc}')
+                    self.output_feedback = str(exc)
+                    self.store.event(self.run_id, {'event': 'format_retry', 'role': exc.role,
+                        'round': round_number, 'reason': str(exc),
+                        'remaining_rounds': self.task['max_rounds'] - round_number})
+                    continue
                 if terminal is not None:
                     return terminal
             return self.finish('stopped', '达到最大修复轮次')
@@ -471,6 +533,14 @@ class WorkflowRun:
 class ControlRequested(Exception):
     def __init__(self, action):
         self.action = action
+
+
+class InvalidRoleOutput(Exception):
+    def __init__(self, role, reason, diagnostics=None):
+        self.role = role
+        self.diagnostics = diagnostics or {}
+        self.repeated_empty = False
+        super().__init__(reason)
 
 
 class RoutedFailure(Exception):

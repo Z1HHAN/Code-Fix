@@ -14,6 +14,8 @@ def apply_candidate(base, destination, changes, evidence_dir, *, project='leap')
     base, destination, evidence_dir = Path(base), Path(destination), Path(evidence_dir)
     task = get_task(project)
     source = task.source
+    from .source_edits import expand_changes
+    changes = expand_changes(changes, work=base, source=source, forbidden=FORBIDDEN)
     validate_changes(changes, allowed_paths=(source,), forbidden_paths=FORBIDDEN, work_root=base)
     if len(changes) != 1:
         raise ValueError('当前单文件项目只接受一项替换')
