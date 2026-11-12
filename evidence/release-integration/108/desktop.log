@@ -1,0 +1,1177 @@
+
+Desktop smoke: disposable process starting
+Desktop smoke: Electron ready
+Desktop smoke: loading settings
+Desktop smoke: settings loaded
+(electron) 'safeStorage.isEncryptionAvailable' is deprecated and will be removed. Please use 'safeStorage.isAsyncEncryptionAvailable' instead.
+Desktop first-launch capture passed; no configuration or requests.
+Desktop price preview and confirmation passed with synthetic prices.
+Desktop smoke: save dispatched
+(electron) 'safeStorage.encryptString' is deprecated and will be removed. Please use 'safeStorage.encryptStringAsync' instead.
+Desktop smoke: backend assets copied
+import time: self [us] | cumulative | imported package
+
+import time:       109 |        109 | winreg
+
+import time:       214 |        214 |   _io
+import time:        36 |         36 |   marshal
+
+import time:       170 |        170 |   nt
+
+import time:       650 |       1069 | _frozen_importlib_external
+
+import time:      1655 |       1655 |   time
+import time:       248 |       1903 | zipimport
+
+import time:        51 |         51 |     _codecs
+
+import time:       407 |        458 |   codecs
+
+import time:      2751 |       2751 |   encodings.aliases
+
+import time:      1099 |       1099 |   encodings._win_cp_codecs
+import time:      4944 |       9250 | encodings
+
+import time:       934 |        934 | encodings.utf_8
+
+import time:        59 |         59 | _signal
+
+import time:        42 |         42 |       _abc
+import time:       187 |        228 |     abc
+
+import time:        49 |         49 |       _stat
+
+import time:       149 |        197 |     stat
+
+import time:       801 |        801 |     _collections_abc
+
+import time:        99 |         99 |       genericpath
+
+import time:        87 |         87 |       _winapi
+
+import time:       264 |        450 |     ntpath
+
+import time:       636 |       2309 |   os
+
+import time:        99 |         99 |   _sitebuiltins
+
+import time:        56 |         56 |   errno
+
+import time:       720 |        720 |   sitecustomize
+import time:      1008 |       4191 | site
+
+import time:       242 |        242 |   io
+
+import time:       116 |        116 |     _operator
+import time:      3762 |       3878 |   operator
+
+import time:       168 |        168 |     posix
+
+import time:       109 |        109 |     posix
+import time:       173 |        450 |   posixpath
+
+import time:       156 |        156 |         itertools
+
+import time:      1032 |       1032 |         keyword
+
+import time:      2562 |       2562 |         reprlib
+
+import time:        91 |         91 |         _collections
+
+import time:     12773 |      16612 |       collections
+
+import time:        66 |         66 |           _types
+import time:      3008 |       3074 |         types
+
+import time:        64 |         64 |         _functools
+
+import time:      9837 |      12975 |       functools
+
+import time:      4927 |      34513 |     contextlib
+
+import time:     16314 |      16314 |       enum
+
+import time:       106 |        106 |         _sre
+
+import time:      1930 |       1930 |           re._constants
+
+import time:      8979 |      10909 |         re._parser
+
+import time:      1131 |       1131 |         re._casefix
+import time:      7505 |      19649 |       re._compiler
+
+import time:      2111 |       2111 |       copyreg
+
+import time:      3076 |      41149 |     re
+
+import time:      2099 |       2099 |     fnmatch
+
+import time:      5212 |      82971 |   glob
+
+import time:       161 |        161 |   pwd
+
+import time:       109 |        109 |   grp
+
+import time:       184 |        184 |     fcntl
+
+import time:       110 |        110 |     posix
+import time:      4442 |       4735 |   pathlib._os
+
+import time:     10313 |     102856 | pathlib
+
+import time:      3355 |       3355 |   app
+
+import time:        90 |         90 |         _json
+
+import time:      1696 |       1786 |       json.scanner
+
+import time:      3425 |       5211 |     json.decoder
+
+import time:      3546 |       3546 |     json.encoder
+import time:      1799 |      10555 |   json
+
+import time:      4783 |       4783 |     _socket
+
+import time:      6767 |      11549 |   socket
+import time:     11722 |      37179 | app.desktop_bootstrap
+
+import time:      6750 |       6750 |     _hashlib
+
+import time:        72 |         72 |     _blake2
+import time:      2114 |       8936 |   hashlib
+
+import time:      2044 |       2044 |           _weakrefset
+
+import time:      4759 |       6803 |         weakref
+import time:      2396 |       9198 |       copy
+
+import time:       108 |        108 |             _ast
+
+import time:      6158 |       6266 |           ast
+
+import time:      9194 |      15459 |         annotationlib
+
+import time:        85 |         85 |             _opcode
+
+import time:      1852 |       1852 |             _opcode_metadata
+
+import time:      1718 |       3654 |           opcode
+
+import time:     10700 |      14353 |         dis
+
+import time:      1548 |       1548 |           importlib
+import time:        99 |       1647 |         importlib.machinery
+
+import time:      2344 |       2344 |         linecache
+
+import time:      1557 |       1557 |           token
+
+import time:        55 |         55 |           _tokenize
+
+import time:      5264 |       6875 |         tokenize
+
+import time:     23945 |      64621 |       inspect
+
+import time:     16544 |      90363 |     dataclasses
+
+import time:       998 |        998 |           concurrent
+
+import time:      3784 |       3784 |                 textwrap
+
+import time:        85 |         85 |                     _contextvars
+
+import time:      9805 |       9889 |                   _py_warnings
+import time:      1334 |      11223 |                 warnings
+
+import time:      1479 |       1479 |                   __future__
+import time:      1819 |       3297 |                 codeop
+
+import time:      8571 |       8571 |                 _colorize
+
+import time:     15125 |      41998 |               traceback
+
+import time:        69 |         69 |                 _string
+
+import time:      3207 |       3276 |               string
+
+import time:     10086 |      10086 |               threading
+
+import time:        62 |         62 |               atexit
+
+import time:     13257 |      68678 |             logging
+
+import time:      5452 |      74130 |           concurrent.futures._base
+import time:        74 |         74 |           _interpreters
+import time:      1487 |      76687 |         concurrent.futures
+
+import time:        98 |         98 |           _heapq
+import time:      3504 |       3602 |         heapq
+
+import time:       100 |        100 |             _locale
+
+import time:      9679 |       9779 |           locale
+
+import time:      1737 |       1737 |           signal
+
+import time:       197 |        197 |           fcntl
+
+import time:        51 |         51 |           msvcrt
+
+import time:     14144 |      25906 |         subprocess
+
+import time:      3226 |       3226 |           _ssl
+
+import time:       104 |        104 |               _struct
+import time:       992 |       1095 |             struct
+
+import time:        63 |         63 |             binascii
+import time:      4707 |       5864 |           base64
+
+import time:     10541 |      19631 |         ssl
+
+import time:      1016 |       1016 |         asyncio.constants
+
+import time:      1414 |       1414 |         asyncio.coroutines
+
+import time:      1086 |       1086 |           contextvars
+
+import time:      1403 |       1403 |           asyncio.format_helpers
+
+import time:      1313 |       1313 |             asyncio.base_futures
+
+import time:      1314 |       1314 |             asyncio.exceptions
+
+import time:      1668 |       1668 |             asyncio.base_tasks
+import time:      1891 |       6185 |           _asyncio
+
+import time:      5109 |      13781 |         asyncio.events
+
+import time:      3328 |       3328 |         asyncio.futures
+
+import time:      2040 |       2040 |         asyncio.protocols
+
+import time:      2250 |       2250 |           asyncio.transports
+
+import time:      1278 |       1278 |           asyncio.log
+
+import time:      7405 |      10931 |         asyncio.sslproto
+
+import time:      1077 |       1077 |             asyncio.mixins
+
+import time:      4884 |       5960 |           asyncio.locks
+
+import time:       104 |        104 |             math
+
+import time:      3348 |       3348 |             asyncio.queues
+
+import time:      2504 |       2504 |             asyncio.timeouts
+
+import time:      8885 |      14840 |           asyncio.tasks
+import time:      2212 |      23011 |         asyncio.staggered
+
+import time:      1609 |       1609 |         asyncio.trsock
+
+import time:     19411 |     202361 |       asyncio.base_events
+
+import time:      3910 |       3910 |       asyncio.graph
+
+import time:      3186 |       3186 |       asyncio.runners
+
+import time:      5410 |       5410 |       asyncio.streams
+
+import time:      3405 |       3405 |       asyncio.subprocess
+
+import time:      3476 |       3476 |       asyncio.taskgroups
+
+import time:       995 |        995 |       asyncio.threads
+
+import time:      3802 |       3802 |         _overlapped
+
+import time:      3389 |       3389 |         asyncio.base_subprocess
+
+import time:      7678 |       7678 |         asyncio.proactor_events
+
+import time:      1861 |       1861 |             select
+
+import time:      4841 |       6702 |           selectors
+
+import time:     11989 |      18691 |         asyncio.selector_events
+
+import time:      2623 |       2623 |         asyncio.windows_utils
+
+import time:     10279 |      46459 |       asyncio.windows_events
+import time:      1505 |     270703 |     asyncio
+
+import time:        78 |         78 |       _datetime
+import time:       968 |       1045 |     datetime
+
+import time:      3038 |       3038 |         numbers
+
+import time:      2437 |       5475 |       _decimal
+import time:       841 |       6315 |     decimal
+
+import time:      4325 |       4325 |         _sqlite3
+import time:      2246 |       6571 |       sqlite3.dbapi2
+
+import time:      1221 |       7791 |     sqlite3
+
+import time:      1280 |       1280 |       httpx.__version__
+
+import time:        80 |         80 |           _typing
+
+import time:     36433 |      36512 |         typing
+
+import time:       901 |        901 |               urllib
+
+import time:        71 |         71 |                 _bisect
+import time:      1689 |       1760 |               bisect
+
+import time:      1235 |       1235 |               email
+
+import time:      2459 |       2459 |                 http
+
+import time:      2207 |       2207 |                     email.errors
+
+import time:      2689 |       2689 |                         email.quoprimime
+
+import time:      1357 |       1357 |                         email.base64mime
+
+import time:      2507 |       2507 |                             quopri
+import time:      1210 |       3716 |                           email.encoders
+
+import time:      2374 |       6090 |                         email.charset
+
+import time:      4590 |      14724 |                       email.header
+
+import time:     15039 |      15039 |                           ipaddress
+
+import time:      9182 |      24220 |                         urllib.parse
+
+import time:      4483 |       4483 |                         email._parseaddr
+
+import time:      3755 |      32457 |                       email.utils
+
+import time:      2698 |      49877 |                     email._policybase
+
+import time:      4317 |      56401 |                   email.feedparser
+import time:      2124 |      58524 |                 email.parser
+
+import time:      2161 |       2161 |                   email._encoded_words
+
+import time:      1361 |       1361 |                   email.iterators
+
+import time:      8579 |      12100 |                 email.message
+
+import time:     10062 |      83144 |               http.client
+
+import time:       129 |        129 |                   zlib
+
+import time:       983 |        983 |                       compression
+
+import time:      1255 |       2238 |                     compression._common
+
+import time:      2229 |       2229 |                     compression._common._streams
+
+import time:      1871 |       1871 |                     _bz2
+import time:      2769 |       9105 |                   bz2
+
+import time:      1883 |       1883 |                     _lzma
+
+import time:      2732 |       4615 |                   lzma
+
+import time:      1878 |       1878 |                     _zstd
+
+import time:      3058 |       3058 |                     compression.zstd._zstdfile
+
+import time:      2685 |       7620 |                   compression.zstd
+
+import time:     11201 |      32669 |                 shutil
+
+import time:        83 |         83 |                   _random
+import time:      7212 |       7295 |                 random
+
+import time:      6588 |      46551 |               tempfile
+
+import time:      1555 |       1555 |                 urllib.response
+
+import time:      1553 |       3108 |               urllib.error
+
+import time:     15572 |     152267 |             urllib.request
+
+import time:      2774 |       2774 |             httpx._exceptions
+
+import time:      9348 |       9348 |                 calendar
+
+import time:     16468 |      25816 |               http.cookiejar
+
+import time:      4663 |       4663 |                   mimetypes
+
+import time:      2542 |       2542 |                   httpx._types
+
+import time:      2455 |       2455 |                   httpx._utils
+import time:      3895 |      13553 |                 httpx._multipart
+
+import time:      3197 |      16750 |               httpx._content
+
+import time:       205 |        205 |                 brotli
+
+import time:       139 |        139 |                 brotlicffi
+
+import time:       122 |        122 |                 zstandard
+
+import time:      3597 |       4062 |               httpx._decoders
+
+import time:      2418 |       2418 |               httpx._status_codes
+
+import time:      1748 |       1748 |                     unicodedata
+
+import time:      4374 |       4374 |                     idna.idnadata
+
+import time:      1380 |       1380 |                     idna.intranges
+
+import time:      7356 |      14857 |                   idna.core
+
+import time:       858 |        858 |                   idna.package_data
+import time:      1193 |      16908 |                 idna
+
+import time:      5574 |       5574 |                 httpx._urlparse
+
+import time:      4627 |      27108 |               httpx._urls
+
+import time:     11774 |      87925 |             httpx._models
+
+import time:      3691 |     246656 |           httpx._auth
+
+import time:      2650 |       2650 |           httpx._config
+
+import time:      1394 |       1394 |                 httpx._transports.base
+
+import time:      2461 |       3854 |               httpx._transports.asgi
+
+import time:      3869 |       3869 |               httpx._transports.default
+
+import time:      1216 |       1216 |               httpx._transports.mock
+
+import time:      1812 |       1812 |               httpx._transports.wsgi
+import time:       993 |      11741 |             httpx._transports
+
+import time:        42 |      11783 |           httpx._transports.base
+
+import time:     11389 |     272476 |         httpx._client
+import time:      2532 |     311519 |       httpx._api
+
+import time:      5056 |       5056 |             gettext
+
+import time:      2326 |       2326 |                 _uuid
+
+import time:      7259 |       9585 |               uuid
+
+import time:      7632 |       7632 |                     sysconfig
+
+import time:      3413 |       3413 |                     _ctypes
+
+import time:      2045 |       2045 |                     ctypes._endian
+import time:      5828 |      18917 |                   ctypes
+
+import time:      2595 |       2595 |                     ctypes._layout
+
+import time:      2706 |       5301 |                   ctypes.wintypes
+
+import time:      4277 |      28494 |                 click._winconsole
+
+import time:      5223 |      33717 |               click._compat
+
+import time:      1458 |       1458 |                 click.globals
+
+import time:      4777 |       4777 |                 click.utils
+
+import time:      3645 |       9879 |               click.exceptions
+
+import time:     11727 |      64906 |             click.types
+
+import time:      1267 |       1267 |             click._utils
+
+import time:      4479 |       4479 |               click.parser
+
+import time:      3505 |       7983 |             click.formatting
+
+import time:      5886 |       5886 |             click.termui
+
+import time:     27937 |     113032 |           click.core
+
+import time:      4266 |       4266 |           click.decorators
+import time:      1572 |     118869 |         click
+
+import time:       187 |        187 |           pygments
+import time:        28 |        214 |         pygments.lexers
+import time:      4293 |     123376 |       httpx._main
+
+import time:      1424 |     437598 |     httpx
+
+import time:     19484 |     833297 |   app.live_model
+import time:      4386 |     846617 | app.personal
+
+import time:      4365 |       4365 | app.providers
+
+import time:       114 |        114 |     _csv
+
+import time:      3879 |       3993 |   csv
+
+import time:      4088 |       4088 |   app.errors
+
+import time:      4787 |       4787 |     app.config
+import time:      5935 |      10722 |   app.role_config
+import time:     15877 |      34678 | app.personal_pricing
+
+import time:      1481 |       1481 |       _queue
+import time:      2723 |       4204 |     queue
+
+import time:      2724 |       6927 |   concurrent.futures.thread
+
+import time:        98 |         98 |       _hmac
+import time:      2368 |       2466 |     hmac
+
+import time:      1015 |       3480 |   secrets
+
+import time:       769 |        769 |     starlette
+
+import time:      1272 |       1272 |       starlette.exceptions
+import time:      1725 |       2997 |     starlette.status
+
+import time:      1335 |       1335 |         annotated_doc.main
+import time:      1042 |       2376 |       annotated_doc
+
+import time:      2715 |       2715 |           anyio._lazyimport
+
+import time:      3226 |       5941 |         anyio
+
+import time:      2057 |       2057 |         anyio.abc
+
+import time:      1099 |       1099 |           anyio._core
+
+import time:      2732 |       3831 |         anyio._core._exceptions
+
+import time:     38565 |      38565 |           typing_extensions
+import time:      1583 |      40148 |         anyio._core._typedattr
+
+import time:      1317 |       1317 |         anyio.abc._resources
+
+import time:      2262 |       2262 |                       pydantic_core._pydantic_core
+
+import time:      8179 |       8179 |                         fractions
+
+import time:     29787 |      37966 |                       pydantic_core.core_schema
+
+import time:      1919 |      42146 |                     pydantic_core
+import time:      1558 |      43704 |                   pydantic.version
+
+import time:      2011 |      45714 |                 pydantic.warnings
+import time:      2460 |      48174 |               pydantic._migration
+
+import time:      1049 |       1049 |                   typing_inspection
+
+import time:      3711 |       3711 |                   typing_inspection.typing_objects
+
+import time:      3996 |       8755 |                 typing_inspection.introspection
+
+import time:       950 |        950 |                 pydantic._internal
+
+import time:      2915 |       2915 |                     pydantic._internal._namespace_utils
+
+import time:      4499 |       7413 |                   pydantic._internal._typing_extra
+
+import time:      2518 |       9931 |                 pydantic._internal._repr
+
+import time:      2357 |      21991 |               pydantic.errors
+
+import time:      3217 |      73381 |             pydantic
+
+import time:      3165 |       3165 |               pydantic.aliases
+
+import time:      3508 |       3508 |               pydantic.config
+import time:      3844 |      10517 |             pydantic._internal._config
+
+import time:      1141 |       1141 |                 pydantic._internal._import_utils
+
+import time:      6355 |       6355 |                 pydantic._internal._utils
+import time:      2408 |       9903 |               pydantic._internal._type_refs
+
+import time:     11203 |      21106 |             pydantic._internal._decorators
+
+import time:      1619 |       1619 |                 pydantic._internal._forward_ref
+
+import time:      4905 |       6524 |               pydantic._internal._generics
+
+import time:      2024 |       2024 |               pydantic._internal._docs_extraction
+
+import time:      9626 |      18173 |             pydantic._internal._fields
+
+import time:      2121 |       2121 |                 pydantic.plugin
+
+import time:      2731 |       4852 |               pydantic.plugin._schema_validator
+
+import time:      2846 |       7697 |             pydantic._internal._mock_val_ser
+
+import time:        51 |         51 |                     _sysconfig
+
+import time:      7725 |       7776 |                   zoneinfo._tzpath
+
+import time:      2860 |       2860 |                   zoneinfo._common
+
+import time:      2498 |       2498 |                   _zoneinfo
+import time:      1378 |      14511 |                 zoneinfo
+
+import time:      1848 |       1848 |                 pydantic.annotated_handlers
+
+import time:      7445 |       7445 |                 pydantic.functional_validators
+
+import time:      1722 |       1722 |                   pydantic._internal._core_metadata
+
+import time:      1913 |       1913 |                   pydantic._internal._core_utils
+
+import time:      1717 |       1717 |                   pydantic._internal._schema_generation_shared
+
+import time:     25619 |      30969 |                 pydantic.json_schema
+
+import time:      4182 |       4182 |                 pydantic._internal._discriminated_union
+
+import time:      3378 |       3378 |                 pydantic._internal._known_annotated_metadata
+
+import time:      1188 |       1188 |                 pydantic._internal._schema_gather
+
+import time:     31741 |      95258 |               pydantic._internal._generate_schema
+
+import time:      2118 |       2118 |               pydantic._internal._signature
+
+import time:      8160 |     105534 |             pydantic._internal._model_construction
+
+import time:     10099 |      10099 |               annotated_types
+
+import time:      4687 |       4687 |               pydantic._internal._validators
+
+import time:     19494 |      19494 |               pydantic.types
+
+import time:     12780 |      47059 |             pydantic.fields
+
+import time:      1164 |       1164 |                     importlib._abc
+import time:       253 |       1416 |                   importlib.util
+
+import time:      2055 |       2055 |                     zipfile._path.glob
+
+import time:      3685 |       5740 |                   zipfile._path
+import time:     17111 |      24266 |                 zipfile
+
+import time:      1985 |       1985 |                 importlib.metadata._meta
+
+import time:      1162 |       1162 |                 importlib.metadata._collections
+
+import time:      1084 |       1084 |                 importlib.metadata._functools
+
+import time:      1083 |       1083 |                 importlib.metadata._itertools
+
+import time:      2001 |       2001 |                 importlib.abc
+
+import time:      8706 |      40285 |               importlib.metadata
+import time:      1325 |      41609 |             pydantic.plugin._loader
+
+import time:     29720 |     354793 |           fastapi.exceptions
+
+import time:       922 |        922 |             fastapi.openapi
+
+import time:      1036 |       1036 |                 fastapi.types
+
+import time:      3191 |       3191 |                   shlex
+
+import time:      1202 |       1202 |                     starlette.types
+
+import time:      3672 |       4873 |                   starlette._utils
+
+import time:       190 |        190 |                         sniffio
+
+import time:      2193 |       2383 |                       anyio._core._eventloop
+import time:      1244 |       3627 |                     anyio.to_thread
+import time:      1411 |       5037 |                   starlette.concurrency
+
+import time:      9028 |      22129 |                 starlette.datastructures
+import time:      3067 |      26231 |               fastapi._compat.shared
+
+import time:       980 |        980 |                 fastapi.openapi.constants
+
+import time:      9039 |      10018 |               fastapi._compat.v2
+import time:      1060 |      37308 |             fastapi._compat
+
+import time:       882 |        882 |             fastapi.logger
+
+import time:       208 |        208 |             email_validator
+
+import time:     68211 |     107530 |           fastapi.openapi.models
+
+import time:      1954 |       1954 |           fastapi.datastructures
+
+import time:      7312 |     471588 |         fastapi.params
+
+import time:       909 |        909 |           fastapi.dependencies
+
+import time:       980 |        980 |                 fastapi.security.base
+
+import time:      4914 |       4914 |                   http.cookies
+
+import time:       205 |        205 |                     python_multipart
+
+import time:       235 |        235 |                     multipart
+
+import time:      4003 |       4442 |                   starlette.formparsers
+
+import time:       177 |        177 |                     python_multipart
+import time:        26 |        203 |                   python_multipart.multipart
+import time:       127 |        127 |                     multipart
+import time:        16 |        143 |                   multipart.multipart
+
+import time:      4165 |      13865 |                 starlette.requests
+import time:      2394 |      17239 |               fastapi.security.api_key
+
+import time:       975 |        975 |                 fastapi.security.utils
+
+import time:      3503 |       4478 |               fastapi.security.http
+
+import time:      7006 |       7006 |                 fastapi.param_functions
+
+import time:      2870 |       9875 |               fastapi.security.oauth2
+
+import time:      2427 |       2427 |               fastapi.security.open_id_connect_url
+import time:      1130 |      35148 |             fastapi.security
+import time:        55 |      35203 |           fastapi.security.base
+
+import time:      5265 |      41376 |         fastapi.dependencies.models
+
+import time:       368 |        368 |                   opentelemetry
+
+import time:      1994 |       1994 |                     opentelemetry.context.context
+
+import time:      1390 |       1390 |                     opentelemetry.context.contextvars_context
+
+import time:      1162 |       1162 |                     opentelemetry.environment_variables
+import time:      2220 |       6766 |                   opentelemetry.context
+
+import time:      1480 |       1480 |                       opentelemetry._logs.severity
+
+import time:       250 |        250 |                           opentelemetry.util
+
+import time:      1747 |       1747 |                           opentelemetry.util.types
+import time:      2930 |       4926 |                         opentelemetry.attributes
+
+import time:      1666 |       1666 |                             opentelemetry.trace.status
+
+import time:      5088 |       6753 |                           opentelemetry.trace.span
+import time:      1800 |       8553 |                         opentelemetry.trace.propagation
+
+import time:      1625 |       1625 |                         opentelemetry.util._decorator
+
+import time:      1148 |       1148 |                         opentelemetry.util._once
+
+import time:      1100 |       1100 |                         opentelemetry.util._providers
+
+import time:      3870 |      21221 |                       opentelemetry.trace
+
+import time:      4105 |      26805 |                     opentelemetry._logs._internal
+import time:      1111 |      27915 |                   opentelemetry._logs
+
+import time:      1406 |       1406 |                         opentelemetry.metrics._internal.observation
+
+import time:      6734 |       8140 |                       opentelemetry.metrics._internal.instrument
+
+import time:      5725 |      13865 |                     opentelemetry.metrics._internal
+import time:      1162 |      15027 |                   opentelemetry.metrics
+
+import time:      1452 |       1452 |                       starlette.background
+
+import time:      7252 |       8704 |                     starlette.responses
+
+import time:      3113 |      11816 |                   starlette.websockets
+
+import time:      5056 |      66945 |                 fastapi.telemetry._api
+import time:       918 |      67863 |               fastapi.telemetry
+import time:        50 |      67912 |             fastapi.telemetry._api
+import time:      1328 |      69240 |           fastapi.background
+
+import time:      2718 |       2718 |             anyio.lowlevel
+
+import time:      5753 |       5753 |             anyio._core._tasks
+
+import time:      1387 |       1387 |             anyio._core._testing
+
+import time:      9329 |      19186 |           fastapi.concurrency
+
+import time:      1821 |       1821 |           fastapi.utils
+
+import time:     17465 |     107711 |         fastapi.dependencies.utils
+
+import time:      2072 |       2072 |             colorsys
+import time:      6817 |       8889 |           pydantic.color
+
+import time:       194 |        194 |             pydantic_extra_types
+import time:        32 |        226 |           pydantic_extra_types.color
+import time:      2684 |      11798 |         fastapi.encoders
+
+import time:      2940 |       2940 |         fastapi.sse
+
+import time:      1503 |       1503 |           starlette._exception_handler
+
+import time:      1841 |       1841 |           starlette.convertors
+
+import time:      1488 |       1488 |           starlette.middleware
+
+import time:      2560 |       2560 |           starlette.middleware.body_limit
+
+import time:     11400 |      18790 |         starlette.routing
+
+import time:      2845 |       2845 |         starlette.staticfiles
+
+import time:     45157 |     755494 |       fastapi.routing
+
+import time:       790 |        790 |         fastapi.websockets
+import time:      1081 |       1870 |       fastapi.exception_handlers
+
+import time:       730 |        730 |         fastapi.middleware
+
+import time:      1287 |       2017 |       fastapi.middleware.asyncexitstack
+
+import time:      1976 |       1976 |       fastapi.openapi.docs
+
+import time:      1985 |       1985 |         fastapi.responses
+
+import time:      6565 |       8550 |       fastapi.openapi.utils
+
+import time:       224 |        224 |           opentelemetry.propagators
+
+import time:      2042 |       2042 |             opentelemetry.propagators.textmap
+
+import time:      1761 |       3803 |           opentelemetry.propagators.composite
+
+import time:      1849 |       1849 |               opentelemetry.util.re
+import time:      1987 |       3835 |             opentelemetry.baggage
+
+import time:      2398 |       6232 |           opentelemetry.baggage.propagation
+
+import time:      2258 |       2258 |           opentelemetry.trace.propagation.tracecontext
+import time:      1650 |      14167 |         opentelemetry.propagate
+
+import time:      4471 |      18637 |       fastapi.telemetry._asgi
+
+import time:     11317 |      11317 |             html.entities
+
+import time:      1887 |      13204 |           html
+import time:      1987 |      15191 |         starlette.middleware.errors
+
+import time:      1574 |       1574 |         starlette.middleware.exceptions
+import time:      1898 |      18662 |       starlette.applications
+
+import time:      2941 |       2941 |       starlette.middleware.base
+
+import time:     11204 |     823725 |     fastapi.applications
+
+import time:       791 |        791 |     fastapi.requests
+import time:      1061 |     829340 |   fastapi
+
+import time:       650 |        650 |   fastapi.staticfiles
+
+import time:     19900 |      19900 |   app.run_store
+
+import time:       987 |        987 |                 xml
+
+import time:      1233 |       2220 |               xml.etree
+
+import time:      4257 |       4257 |               xml.etree.ElementPath
+
+import time:      1557 |       1557 |                 pyexpat
+import time:      1764 |       3321 |               _elementtree
+import time:     13883 |      23679 |             xml.etree.ElementTree
+
+import time:     20805 |      44483 |           c_runner.runner
+import time:      2919 |      47402 |         c_runner
+import time:      3191 |      50592 |       app.runner
+import time:      4157 |      54748 |     app.baseline
+
+import time:      3353 |       3353 |     app.diagnostics
+
+import time:      6099 |      64199 |   app.service
+
+import time:      2509 |       2509 |   app.version
+
+import time:     17214 |     944216 | app.api
+
+import time:      2439 |       2439 |           _compat_pickle
+import time:       144 |        144 |           _pickle
+
+import time:     19880 |      22462 |         pickle
+
+import time:      8577 |      31039 |       logging.handlers
+
+import time:      4435 |       4435 |       socketserver
+
+import time:      9372 |      44845 |     logging.config
+
+import time:     11706 |      11706 |     configparser
+
+import time:      1027 |       1027 |     uvicorn._ansi
+
+import time:      1400 |       1400 |     uvicorn._compat
+
+import time:      3948 |       3948 |     uvicorn._types
+
+import time:      1073 |       1073 |     uvicorn.importer
+
+import time:      1828 |       1828 |     uvicorn.logging
+
+import time:       794 |        794 |       uvicorn.middleware
+
+import time:      1343 |       2137 |     uvicorn.middleware.asgi2
+
+import time:      1401 |       1401 |     uvicorn.middleware.message_logger
+
+import time:      2058 |       2058 |     uvicorn.middleware.proxy_headers
+
+import time:       207 |        207 |       a2wsgi
+import time:      2239 |       2446 |     uvicorn.middleware.wsgi
+
+import time:      6346 |      80209 |   uvicorn.config
+
+import time:      2399 |       2399 |       _wmi
+
+import time:      8599 |      10998 |     platform
+
+import time:      3530 |       3530 |     uvicorn.server
+
+import time:      3314 |       3314 |               multiprocessing.process
+
+import time:      2795 |       2795 |               multiprocessing.reduction
+import time:      3571 |       9679 |             multiprocessing.context
+
+import time:      1066 |      10745 |           multiprocessing
+
+import time:      4330 |       4330 |             multiprocessing.util
+
+import time:      1686 |       1686 |             _multiprocessing
+
+import time:      9236 |      15252 |           multiprocessing.connection
+import time:      1117 |      27113 |         uvicorn._subprocess
+import time:      2057 |      29170 |       uvicorn.supervisors.basereload
+
+import time:      4145 |       4145 |       uvicorn.supervisors.multiprocess
+
+import time:       214 |        214 |         watchfiles
+import time:      1572 |       1786 |       uvicorn.supervisors.watchfilesreload
+
+import time:      1376 |       1376 |       uvicorn.supervisors.statreload
+import time:       928 |      37403 |     uvicorn.supervisors
+
+import time:      3972 |      55902 |   uvicorn.main
+import time:      1090 |     137200 | uvicorn
+
+Desktop smoke: backend announced port
+import time:     17112 |      17112 |   app.model_profiles
+
+import time:      4671 |       4671 |   app.runtime_limits
+
+import time:      4455 |       4455 |   app.role_overrides
+
+import time:     16409 |      42646 | app.configuration
+
+import time:      3880 |       3880 |     app.security
+
+import time:      6020 |       9900 |   app.tasks_v3
+import time:     17344 |      27243 | app.comparisons
+
+import time:      4747 |       4747 |         pydantic.v1.typing
+
+import time:      5310 |      10057 |       pydantic.v1.errors
+
+import time:       200 |        200 |           cython
+import time:      1310 |       1510 |         pydantic.v1.version
+
+import time:      7206 |       8715 |       pydantic.v1.utils
+import time:      4061 |      22832 |     pydantic.v1.class_validators
+
+import time:      2859 |       2859 |     pydantic.v1.config
+
+import time:      6040 |       6040 |         pydantic.v1.color
+
+import time:      3442 |       3442 |             pydantic.v1.datetime_parse
+import time:      6380 |       9821 |           pydantic.v1.validators
+
+import time:      7714 |      17534 |         pydantic.v1.networks
+
+import time:     11028 |      11028 |         pydantic.v1.types
+import time:      1630 |      36231 |       pydantic.v1.json
+import time:      2593 |      38823 |     pydantic.v1.error_wrappers
+
+import time:     11215 |      11215 |     pydantic.v1.fields
+
+import time:      1622 |       1622 |       pydantic.v1.parse
+
+import time:      8885 |       8885 |       pydantic.v1.schema
+
+import time:     11606 |      22113 |     pydantic.v1.main
+import time:      5105 |     102944 |   pydantic.v1.dataclasses
+
+import time:      1495 |       1495 |   pydantic.v1.annotated_types
+
+import time:      3498 |       3498 |   pydantic.v1.decorator
+
+import time:      4361 |       4361 |   pydantic.v1.env_settings
+
+import time:      1619 |       1619 |   pydantic.v1.tools
+import time:      1414 |     115330 | pydantic.v1
+
+import time:       193 |        193 | uvloop
+
+import time:       765 |        765 | uvicorn.loops.asyncio
+
+import time:       177 |        177 | httptools
+
+import time:      1259 |       1259 |         h11._abnf
+
+import time:      1588 |       1588 |           h11._util
+
+import time:      2518 |       4106 |         h11._headers
+
+import time:      5244 |      10608 |       h11._events
+
+import time:      1707 |       1707 |         h11._receivebuffer
+
+import time:      2549 |       2549 |         h11._state
+
+import time:      3259 |       7514 |       h11._readers
+
+import time:      2007 |       2007 |       h11._writers
+
+import time:      4186 |      24314 |     h11._connection
+
+import time:       741 |        741 |     h11._version
+import time:      1084 |      26138 |   h11
+
+import time:      1327 |       1327 |   uvicorn.protocols.http.flow_control
+
+import time:      1295 |       1295 |   uvicorn.protocols.utils
+
+import time:      5444 |      34203 | uvicorn.protocols.http.h11_impl
+
+import time:       182 |        182 | websockets
+import time:       140 |        140 | wsproto
+
+import time:      2649 |       2649 | fastapi.telemetry._runtime
+
+import time:       138 |        138 | array
+
+import time:       918 |        918 |     anyio.streams
+
+import time:      3088 |       4006 |   anyio.streams.stapled
+
+import time:      5127 |       5127 |   anyio.streams.tls
+
+import time:      9918 |      19051 | anyio._core._sockets
+
+import time:      4901 |       4901 |   anyio.streams.memory
+import time:      1136 |       6036 | anyio._core._streams
+
+import time:      4478 |       4478 | app.readiness
+
+import time:      5761 |       5761 | app.local_credentials
+
+import time:      4659 |       4659 | app.redaction
+
+import time:       235 |        235 |       pwd
+import time:       147 |        147 |       grp
+
+import time:     24003 |      24383 |     tarfile
+
+import time:     19742 |      44124 |   app.docker_runner
+
+import time:     20663 |      20663 |     app.split_runner
+import time:     18027 |      38689 |   app.remote_execution
+import time:     17511 |     100324 | app.remote_runner
+
+import time:      4155 |       4155 |     httpcore._models
+
+import time:       965 |        965 |             httpcore._backends
+
+import time:      1655 |       1655 |             httpcore._exceptions
+
+import time:      1548 |       1548 |             httpcore._utils
+
+import time:      1679 |       1679 |             httpcore._backends.base
+import time:      2961 |       8807 |           httpcore._backends.sync
+
+import time:      2292 |       2292 |                     importlib.resources.abc
+import time:      2666 |       4958 |                   importlib.resources._common
+
+import time:      1407 |       1407 |                   importlib.resources._functional
+import time:      1027 |       7392 |                 importlib.resources
+import time:      1534 |       8925 |               certifi.core
+import time:       935 |       9860 |             certifi
+import time:       880 |      10739 |           httpcore._ssl
+
+import time:       230 |        230 |             trio
+import time:      3141 |       3371 |           httpcore._synchronization
+
+import time:      1894 |       1894 |           httpcore._trace
+
+import time:      1674 |       1674 |             httpcore._sync.interfaces
+
+import time:      3898 |       5571 |           httpcore._sync.http11
+import time:      3026 |      33405 |         httpcore._sync.connection
+
+import time:      3577 |       3577 |         httpcore._sync.connection_pool
+
+import time:      3337 |       3337 |         httpcore._sync.http_proxy
+
+import time:       210 |        210 |             h2
+import time:        59 |        269 |           h2.config
+import time:      4923 |       5192 |         httpcore._sync.http2
+
+import time:       273 |        273 |           socksio
+import time:      2892 |       3164 |         httpcore._sync.socks_proxy
+import time:      1233 |      49906 |       httpcore._sync
+import time:        39 |      49945 |     httpcore._sync.connection_pool
+import time:      1467 |      55566 |   httpcore._api
+
+import time:      1328 |       1328 |       httpcore._backends.auto
+
+import time:      1845 |       1845 |         httpcore._async.interfaces
+
+import time:      4323 |       6167 |       httpcore._async.http11
+import time:      3025 |      10520 |     httpcore._async.connection
+
+import time:      3478 |       3478 |     httpcore._async.connection_pool
+
+import time:      3709 |       3709 |     httpcore._async.http_proxy
+
+import time:       195 |        195 |         h2
+import time:        48 |        242 |       h2.config
+import time:      4995 |       5237 |     httpcore._async.http2
+
+import time:       221 |        221 |       socksio
+import time:      3038 |       3258 |     httpcore._async.socks_proxy
+import time:      1261 |      27461 |   httpcore._async
+
+import time:      2087 |       2087 |   httpcore._backends.mock
+
+import time:      2242 |       2242 |   httpcore._backends.anyio
+
+import time:       248 |        248 |     trio
+import time:      2572 |       2820 |   httpcore._backends.trio
+import time:      1648 |      91821 | httpcore
+
+import time:      2202 |       2202 | importlib.resources._adapters
+
+import time:      1053 |       1053 |     importlib.resources._itertools
+import time:      2560 |       3612 |   importlib.resources.readers
+import time:       875 |       4486 | importlib.readers
+
+import time:      3960 |       3960 | pathlib.types
+
+Desktop smoke: workbench loaded
+(electron) 'safeStorage.decryptString' is deprecated and will be removed. Please use 'safeStorage.decryptStringAsync' instead.
+Desktop packaged smoke passed: first launch, real IPC save, encrypted reload, bundled backend and zero tasks. No model or cloud requests.
+Desktop smoke child exit: null / SIGTERM
+Packaged desktop checks passed: screenshot and actual save/start. No model or cloud requests.

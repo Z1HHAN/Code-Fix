@@ -1,0 +1,4 @@
+
+Desktop smoke: disposable process starting
+[116780:1113/025158.779:FATAL:electron\shell\browser\win\install_dir_access.cc:52] Sandboxed processes cannot read C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\desktop\dist-chain-104-release\win-unpacked: its ACL has an entry for an AppContainer package SID but none for ALL APPLICATION PACKAGES, so Windows denies the sandbox token access. Grant it with: icacls "C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\desktop\dist-chain-104-release\win-unpacked" /grant *S-1-15-2-1:(OI)(CI)(RX)
+Packaged desktop check failed: exit=2147483651, marker=false

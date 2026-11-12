@@ -1,0 +1,23 @@
+{
+  "suite": "gates",
+  "commit": "274bd4b3c52bb29e6cd4f827f074a0c9ca6e166f",
+  "command": [
+    "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "acceptance_tests/test_repair_gates.py",
+    "--basetemp=runs/g108",
+    "-p",
+    "no:cacheprovider",
+    "--junitxml=C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\main-review-integration\\evidence\\release-integration\\108\\gates.xml"
+  ],
+  "started_at": "2026-11-12T18:47:13.563720+00:00",
+  "finished_at": "2026-11-12T18:47:33.944990+00:00",
+  "exit_code": 0,
+  "scope": "offline development regression; no model requests; not independent C sign-off",
+  "log": "evidence/release-integration/108/gates.log"
+}

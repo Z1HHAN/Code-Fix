@@ -1,0 +1,19 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-bfd7eff82c26423ca72fa7166fa5d01b",
+  "step_id": "s-78466b750e884d3c8dcda0ae23ee3657",
+  "parent_step_id": "s-423923fa412640ab9a84398190dc40c9",
+  "node_id": "repairer",
+  "round": 1,
+  "phase": "development",
+  "strategy": "dynamic",
+  "evidence_ids": [
+    "test-baseline"
+  ],
+  "status": "ok",
+  "call_id": "m-2787134e59b64f1ba415d224303f7c24",
+  "artifact_path": "calls/m-2787134e59b64f1ba415d224303f7c24",
+  "code_version": "sha256:f85423ac0f964b6144b9e4ae073a49ec13cf21dc3890ca3a3b2ee15c32f25e59",
+  "failure_class": null,
+  "duration_ms": 4276
+}

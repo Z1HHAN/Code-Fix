@@ -1,0 +1,179 @@
+{
+  "origin_main": "e3f33fa42ff20a3d58515115b9634d4e64cfd4f6",
+  "reviewed_at": "2026-11-12T19:01:26.021731+00:00",
+  "scope": "all current fetched refs reviewed; recent delivery branches already ancestors of main; preserve old histories",
+  "recent_branches_already_in_main": [
+    "codex/contest-strategies-config-comparison",
+    "codex/quixbugs-full-coverage",
+    "codex/integrate-cloud-delivery",
+    "codex/cloud-offline-images",
+    "codex/personal-desktop"
+  ],
+  "older_worktree": "Earlier application changes are included or superseded; preserve its old local notes without overwriting current records.",
+  "unmerged_historical_refs": [
+    {
+      "branch": "codex/integration-v02-delivery",
+      "sha": "64aa2c89ef50aea5e00d3f3fcce4cae46004cd3b",
+      "has_merge_base": true,
+      "ahead": 1,
+      "behind": 145,
+      "unique_commits": [
+        "64aa2c8 fix: integrate C handoff with reproducible delivery verification"
+      ],
+      "patch_equivalence": [
+        "- 64aa2c89ef50aea5e00d3f3fcce4cae46004cd3b"
+      ],
+      "disposition": "patch_already_integrated",
+      "changed_path_count": 49
+    },
+    {
+      "branch": "codex/integration-v02-runner",
+      "sha": "11447726f7bdc0fb163aff85ce4c501f8f899117",
+      "has_merge_base": true,
+      "ahead": 1,
+      "behind": 145,
+      "unique_commits": [
+        "1144772 fix: integrate runner regression and control boundary checks"
+      ],
+      "patch_equivalence": [
+        "- 11447726f7bdc0fb163aff85ce4c501f8f899117"
+      ],
+      "disposition": "patch_already_integrated",
+      "changed_path_count": 13
+    },
+    {
+      "branch": "codex/integration-v02-ui",
+      "sha": "fd8bd0d4c0aee665ffa253c78a6139f4823443a9",
+      "has_merge_base": true,
+      "ahead": 1,
+      "behind": 145,
+      "unique_commits": [
+        "fd8bd0d feat: integrate static UI prototype with guarded demo states"
+      ],
+      "patch_equivalence": [
+        "- fd8bd0d4c0aee665ffa253c78a6139f4823443a9"
+      ],
+      "disposition": "patch_already_integrated",
+      "changed_path_count": 3
+    },
+    {
+      "branch": "codex/v0.2-candidate",
+      "sha": "fcff59946baf77034f0d770b86c34a85fa14ccad",
+      "has_merge_base": true,
+      "ahead": 1,
+      "behind": 146,
+      "unique_commits": [
+        "fcff599 c修改v0.1"
+      ],
+      "patch_equivalence": [
+        "+ fcff59946baf77034f0d770b86c34a85fa14ccad"
+      ],
+      "disposition": "historical_delivery_migrated_and_archived",
+      "changed_path_count": 47
+    },
+    {
+      "branch": "demo/readme-note",
+      "sha": "be9273f4282282b11a5440f0b39a0d60efee324f",
+      "has_merge_base": true,
+      "ahead": 1,
+      "behind": 147,
+      "unique_commits": [
+        "be9273f docs: 演示分支流程（README 加一行）"
+      ],
+      "patch_equivalence": [
+        "+ be9273f4282282b11a5440f0b39a0d60efee324f"
+      ],
+      "disposition": "historical_demo_not_current_requirements",
+      "changed_path_count": 1
+    },
+    {
+      "branch": "origin/codex/day1-repair-demo-review-20261031",
+      "sha": "743727c0891b26c96c99f974a04a85add80b3073",
+      "has_merge_base": false,
+      "ahead": 3,
+      "behind": 148,
+      "unique_commits": [
+        "743727c fix: pass target path correctly to code versioning",
+        "dc4a552 fix: harden day1 repair execution",
+        "3de29d2 Review and secure Day 1 repair demo"
+      ],
+      "patch_equivalence": [
+        "+ 3de29d2fd26bc2f6b108ab40b4aaeab7bb57e0a5",
+        "+ dc4a55293e5c7211cfbcaccfce26841471da4936",
+        "+ 743727c0891b26c96c99f974a04a85add80b3073"
+      ],
+      "disposition": "legacy_unrelated_history_selective_migration_only",
+      "changed_path_count": 7639
+    },
+    {
+      "branch": "origin/codex/runner-regression-fix",
+      "sha": "b125ca924b8e3689c14145c675b53682ff175c03",
+      "has_merge_base": true,
+      "ahead": 1,
+      "behind": 146,
+      "unique_commits": [
+        "b125ca9 fix: guard test pass detection and timeout cleanup"
+      ],
+      "patch_equivalence": [
+        "+ b125ca924b8e3689c14145c675b53682ff175c03"
+      ],
+      "disposition": "superseded_by_reviewed_integration",
+      "changed_path_count": 12
+    },
+    {
+      "branch": "origin/codex/v0.2-candidate",
+      "sha": "fcff59946baf77034f0d770b86c34a85fa14ccad",
+      "has_merge_base": true,
+      "ahead": 1,
+      "behind": 146,
+      "unique_commits": [
+        "fcff599 c修改v0.1"
+      ],
+      "patch_equivalence": [
+        "+ fcff59946baf77034f0d770b86c34a85fa14ccad"
+      ],
+      "disposition": "historical_delivery_migrated_and_archived",
+      "changed_path_count": 47
+    },
+    {
+      "branch": "origin/demo/readme-note",
+      "sha": "fe12addd56fc730d01e22986e0ef32e0e792ec13",
+      "has_merge_base": true,
+      "ahead": 3,
+      "behind": 147,
+      "unique_commits": [
+        "fe12add 复试案例",
+        "a5270e4 提交 C 的 Day1 环境验证与复现",
+        "be9273f docs: 演示分支流程（README 加一行）"
+      ],
+      "patch_equivalence": [
+        "+ be9273f4282282b11a5440f0b39a0d60efee324f",
+        "+ a5270e48f0915c6bb316c5d38da3ffc5190271d4",
+        "+ fe12addd56fc730d01e22986e0ef32e0e792ec13"
+      ],
+      "disposition": "historical_demo_not_current_requirements",
+      "changed_path_count": 45
+    },
+    {
+      "branch": "origin/ui/day1-repair-ui-20261101",
+      "sha": "43c333c5a79dccb5204a77f060da45c5c0f2763a",
+      "has_merge_base": false,
+      "ahead": 4,
+      "behind": 148,
+      "unique_commits": [
+        "43c333c feat: add day1 repair UI",
+        "743727c fix: pass target path correctly to code versioning",
+        "dc4a552 fix: harden day1 repair execution",
+        "3de29d2 Review and secure Day 1 repair demo"
+      ],
+      "patch_equivalence": [
+        "+ 3de29d2fd26bc2f6b108ab40b4aaeab7bb57e0a5",
+        "+ dc4a55293e5c7211cfbcaccfce26841471da4936",
+        "+ 743727c0891b26c96c99f974a04a85add80b3073",
+        "+ 43c333c5a79dccb5204a77f060da45c5c0f2763a"
+      ],
+      "disposition": "legacy_unrelated_history_selective_migration_only",
+      "changed_path_count": 7640
+    }
+  ]
+}

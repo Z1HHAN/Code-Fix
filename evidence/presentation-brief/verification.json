@@ -1,0 +1,206 @@
+{
+  "scope": "presentation prompt static checks only; no new product tests or model requests",
+  "single_delivery": "docs\\2026-11-03_项目持续维护\\PPT完整制作提示词.md",
+  "bytes": 95886,
+  "sha256": "31774c52413a171cbdbbd20c89e791ea140197d4981f5a6c262ebb8b1590404e",
+  "planned_seconds": 480,
+  "main_slides": 12,
+  "full_batch": {
+    "n": 40,
+    "success": 34,
+    "stopped": 4,
+    "blocked": 2,
+    "requests": 63,
+    "estimated_cny": "0.797610"
+  },
+  "test_counts_cross_checked_with_junit": [
+    {
+      "batch": "live-104",
+      "phase": "baseline",
+      "passed": 0,
+      "collected": 5,
+      "junit_matches": true
+    },
+    {
+      "batch": "live-104",
+      "phase": "development-1",
+      "passed": 0,
+      "collected": 5,
+      "junit_matches": true
+    },
+    {
+      "batch": "live-104",
+      "phase": "development-2",
+      "passed": 5,
+      "collected": 5,
+      "junit_matches": true
+    },
+    {
+      "batch": "live-104",
+      "phase": "final-check",
+      "passed": 5,
+      "collected": 5,
+      "junit_matches": true
+    },
+    {
+      "batch": "live-105",
+      "phase": "baseline",
+      "passed": 0,
+      "collected": 4,
+      "junit_matches": true
+    },
+    {
+      "batch": "live-105",
+      "phase": "development-1",
+      "passed": 4,
+      "collected": 4,
+      "junit_matches": true
+    },
+    {
+      "batch": "live-105",
+      "phase": "final-check",
+      "passed": 4,
+      "collected": 4,
+      "junit_matches": true
+    }
+  ],
+  "actual_override": "model repair -> R13 -> locate",
+  "conversation_entries": 7,
+  "entries_without_message_body": [
+    3,
+    4
+  ],
+  "codex_roles": [
+    "C technical/evidence audit",
+    "D narrative/design/editable production"
+  ],
+  "technical_file_references_checked": 44,
+  "technical_paths": [
+    ".github/workflows/cloud-offline-images.yml",
+    ".github/workflows/windows-desktop.yml",
+    "app/agents_v3.py",
+    "app/api.py",
+    "app/candidates.py",
+    "app/configuration.py",
+    "app/decision.py",
+    "app/desktop_bootstrap.py",
+    "app/docker_runner.py",
+    "app/execution_server.py",
+    "app/knowledge.py",
+    "app/live_model.py",
+    "app/local_credentials.py",
+    "app/model_profiles.py",
+    "app/personal.py",
+    "app/personal_ledger.py",
+    "app/personal_pricing.py",
+    "app/remote_execution.py",
+    "app/remote_runner.py",
+    "app/repair_output.py",
+    "app/role_config.py",
+    "app/role_overrides.py",
+    "app/run_store.py",
+    "app/security.py",
+    "app/source_context.py",
+    "app/source_edits.py",
+    "app/split_runner.py",
+    "app/trace.py",
+    "app/workflow_v3.py",
+    "c_runner/pytest_entry.py",
+    "c_runner/runner.py",
+    "desktop/main.cjs",
+    "desktop/package.json",
+    "desktop/preload.cjs",
+    "desktop/settings.cjs",
+    "docker/candidate_rpc.py",
+    "docker/rpc_codec.py",
+    "docker/rpc_proxy.py",
+    "requirements-lock.txt",
+    "scripts/build_execution_package.py",
+    "scripts/prepare_desktop.py",
+    "ui/app/app.js",
+    "ui/app/architecture.js",
+    "ui/app/trace.js"
+  ],
+  "figure_contracts": 10,
+  "legacy_visuals": [
+    {
+      "source": "evidence\\contest-demo-materials\\storyboard-svg\\01.svg",
+      "title": "证据驱动的多Agent编排与验证平台",
+      "sha256": "42aeac2311966b07462896d55b03f122dbef4d6d3aded2c19fae97812c97238f",
+      "preview_exists": true
+    },
+    {
+      "source": "evidence\\contest-demo-materials\\storyboard-svg\\02.svg",
+      "title": "失败证据与下一步动作",
+      "sha256": "76e6d3e1205300a3fedc68334f9b3b3857b615342ca57b987bf54e73ac0c7d15",
+      "preview_exists": true
+    },
+    {
+      "source": "evidence\\contest-demo-materials\\storyboard-svg\\03.svg",
+      "title": "四角色与独立程序调度",
+      "sha256": "f2047f645cd1dee9df5814c86dacba9f7a06e46b01fc802a48226784f46a29ea",
+      "preview_exists": true
+    },
+    {
+      "source": "evidence\\contest-demo-materials\\storyboard-svg\\04.svg",
+      "title": "一条证据怎样改变下一步",
+      "sha256": "1c8214515e69adab79fb1886e68d2821e4c62b4ea2bfde0fcb06fc34f7c36295",
+      "preview_exists": true
+    },
+    {
+      "source": "evidence\\contest-demo-materials\\storyboard-svg\\05.svg",
+      "title": "候选代码与可信测试怎样隔开",
+      "sha256": "f3eb4d5fe08a5d28043844b00430f0cb70ce6e744ddee486e5332816f9f75045",
+      "preview_exists": true
+    },
+    {
+      "source": "evidence\\contest-demo-materials\\storyboard-svg\\06.svg",
+      "title": "角色配置实际进入请求",
+      "sha256": "5c8284fd92b0fac5132fc8f413e2bf4cc9ab92c19cd38aed64aa58014cb065fd",
+      "preview_exists": true
+    },
+    {
+      "source": "evidence\\contest-demo-materials\\storyboard-svg\\07.svg",
+      "title": "同一失败，两种路线",
+      "sha256": "6d555386b94763731ea00cb696e809be5bc0578587dcb923d199de084a05ad91",
+      "preview_exists": true
+    },
+    {
+      "source": "evidence\\contest-demo-materials\\storyboard-svg\\08.svg",
+      "title": "一个候选怎样被判定通过",
+      "sha256": "113ed666af633103bf8a7d002eaa1caecf9d0327e082b6e802ed50a6ed92a95c",
+      "preview_exists": true
+    },
+    {
+      "source": "evidence\\contest-demo-materials\\storyboard-svg\\09.svg",
+      "title": "失败、上限与人工出口",
+      "sha256": "6fef0ef0472f3ca9e7a7fd999e9469cd8b228a8745858af839127788ae44a6ae",
+      "preview_exists": true
+    },
+    {
+      "source": "evidence\\contest-demo-materials\\storyboard-svg\\10.svg",
+      "title": "QuixBugs-Python全量覆盖",
+      "sha256": "15dcdbac09708b0fef0e56748d01c3ba28dd1f58b24d27e4a9797da7c6014a1a",
+      "preview_exists": true
+    },
+    {
+      "source": "evidence\\contest-demo-materials\\storyboard-svg\\11.svg",
+      "title": "效果与代价放在同一张图里",
+      "sha256": "c69393ea504674b636808bada9168563e88b336f5205659b72d130041a08654a",
+      "preview_exists": true
+    },
+    {
+      "source": "evidence\\contest-demo-materials\\storyboard-svg\\12.svg",
+      "title": "技术贡献与验证边界",
+      "sha256": "f972d637f890afc91ef2f24c1dc328a6a6e6f0a75918772d0d3bf9c2c9814f38",
+      "preview_exists": true
+    }
+  ],
+  "legacy_previews_visually_inspected_this_revision": [
+    3,
+    5,
+    7
+  ],
+  "tables_structurally_valid": true,
+  "release108_recheck": "Existing current prompt preserved; no content regeneration. 12-slide timing, full 40-row data, optional legacy-figure scope and fences checked."
+}

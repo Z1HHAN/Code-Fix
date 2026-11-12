@@ -1,0 +1,26 @@
+{
+  "provenance": "User executed supplied command in existing cloud container and returned console text; not assistant remote execution or general C signoff",
+  "hashes_match_local": true,
+  "result": {
+    "passed": true,
+    "case": "test_in_root_symlink_is_rejected_before_resolution",
+    "platform": "Linux",
+    "security_sha256": "6ca01964d8f314045e871ab31cd14a367636497c9fa9a37cb9e97c96262df75e",
+    "test_function_sha256": "197f2a9292e0607441eace4b12d1ae0c8682e9e189b7736dd9b54c8fa29c025f",
+    "reports": [
+      [
+        "setup",
+        "passed"
+      ],
+      [
+        "call",
+        "passed"
+      ],
+      [
+        "teardown",
+        "passed"
+      ]
+    ],
+    "scope": "actual symlink creation and rejection; no model requests"
+  }
+}

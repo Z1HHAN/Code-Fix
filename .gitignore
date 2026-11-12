@@ -77,3 +77,6 @@ desktop/dist-preflight/
 /evidence/contest-demo-materials/editable-deck/
 /evidence/contest-demo-materials/toolchain-check/
 /evidence/presentation-brief/sources/
+# New raw runs stay local; selected original evidence is explicitly published.
+/evidence/repair-chain-review/
+/evidence/presentation-brief/

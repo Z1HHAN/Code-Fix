@@ -1,0 +1,216 @@
+{
+  "role": "locator",
+  "mode": "live",
+  "model_api_called": true,
+  "model": "deepseek-v4.1-flash-1017",
+  "call_id": "m-66321a0a188846078d492a9500b4db0c",
+  "status": "ok",
+  "provider_id": "personal",
+  "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+  "usage": {
+    "prompt_tokens": 1914,
+    "total_tokens": 2132,
+    "completion_tokens": 218,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792,
+      "image_tokens": 0,
+      "text_tokens": 1914
+    },
+    "completion_tokens_details": {
+      "text_tokens": 218
+    }
+  },
+  "cost": {
+    "status": "estimated",
+    "amount_cny": "0.002347",
+    "currency": "CNY",
+    "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+    "upper_estimate": false,
+    "basis": "versioned_model_rates; not_provider_invoice"
+  },
+  "attempts": 1,
+  "max_attempts": 1,
+  "transport_request_started": true,
+  "failure_class": null,
+  "budget_check": {
+    "status": "ok",
+    "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+  },
+  "provider_model": "deepseek-v4.1-flash-1017",
+  "provider_response_id": "chatcmpl-6850c0e7-2706-987c-ae06-8efc848b9ba1",
+  "finish_reason": "stop",
+  "raw_text": "{\"file\":\"python_programs/wrap.py\",\"function\":\"wrap\",\"hypothesis\":\"缺陷在于分隔空格归属错误：当前 rfind 找到空格后执行 end=end+1，使空格留在上一行末尾，且该行的长度可能超过 cols，违反 wrap-contract-2 要求分隔空格归下一行开头、整体直接拼接需还原原文且不通过 strip 删除空格。应在按空格断行时让切分点停在空格之前（end 为空格索引，不含空格），使空格进入剩余文本即下一行开头；仅当 end==-1（窗口内无空格，单词必须断开）时才使用 cols 硬切。这样保留全部输入字符及顺序，拼接可还原原文。开发证据 test-development-1 显示 5 条原生测试全部 AssertionError，与换行位置/空格归属偏差一致，但参数已脱敏，无法确认具体输入。\",\"evidence_ids\":[\"test-development-1\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+  "duration_ms": 4285,
+  "code_version": "sha256:ad71840dd5078187f590cf22f8e6e9c62ddb0ec769eb3a7c090cb957d44a559a",
+  "round": 1,
+  "provenance": {
+    "role_override": {
+      "task_instruction": "",
+      "generation": {
+        "max_output_tokens": 4096,
+        "enable_thinking": false
+      }
+    },
+    "role_overrides_sha256": "deb29934ba490aae704432dc5493ccfdb5be4e7b695b137a02f0ccbd15be819f",
+    "protocol": "codefix-json-v1",
+    "parser_version": "1.0.0",
+    "config_version": "1.1.0",
+    "effective_config": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "config_sha256": "c5d0f9bb3bb1edb5de3a5b427b717f28739c4ecb692765d7b199703101696ed4",
+    "prompt_ref": "prompts/locator.md",
+    "prompt_sha256": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+    "system_prompt_sha256": "4dfdec9630855fc4dca2512cc61d36def3d6aaf60934d75d12250d7619ed77de",
+    "messages_sha256": "b22fefbeac05388bc33f2e3dcf4f8c0b1da6a11bc6bc5fa20a32360958854ddf",
+    "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "model_binding": {
+      "model_ref": "locator",
+      "binding": "approved_profile",
+      "profile_ref": "personal_model",
+      "mode": "live",
+      "provider_id": "personal",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+      "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+      "effective_parameters": {
+        "max_tokens": 4096,
+        "enable_thinking": false
+      },
+      "request_seconds": 60,
+      "daily_shared_usd": null,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "effective_parameters_sha256": "85c185f9b4018df9c4996420f62c6bc458c12d5fd29241373a1f57f347be3f4f",
+      "currency": "CNY",
+      "personal_pricing": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      },
+      "daily_limit": "5",
+      "monetary_budget_enabled": true
+    }
+  },
+  "step_id": "s-ec2fdf50df2d4b17b4a4ce72ea748bf0",
+  "parent_step_id": "s-8e110f3753d84cff89464dd0d3e33b78",
+  "parsed_output": {
+    "file": "python_programs/wrap.py",
+    "function": "wrap",
+    "hypothesis": "缺陷在于分隔空格归属错误：当前 rfind 找到空格后执行 end=end+1，使空格留在上一行末尾，且该行的长度可能超过 cols，违反 wrap-contract-2 要求分隔空格归下一行开头、整体直接拼接需还原原文且不通过 strip 删除空格。应在按空格断行时让切分点停在空格之前（end 为空格索引，不含空格），使空格进入剩余文本即下一行开头；仅当 end==-1（窗口内无空格，单词必须断开）时才使用 cols 硬切。这样保留全部输入字符及顺序，拼接可还原原文。开发证据 test-development-1 显示 5 条原生测试全部 AssertionError，与换行位置/空格归属偏差一致，但参数已脱敏，无法确认具体输入。",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "knowledge_citations": [
+      "knowledge-public_tasks",
+      "knowledge-testing"
+    ]
+  }
+}

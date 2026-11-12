@@ -1,0 +1,175 @@
+{
+  "scope": "application release development verification; no paid model requests; not independent C approval",
+  "main_baseline": "e3f33fa42ff20a3d58515115b9634d4e64cfd4f6",
+  "tested_code_commit": "274bd4b3c52bb29e6cd4f827f074a0c9ca6e166f",
+  "python": {
+    "collected": 787,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 786
+  },
+  "node": {
+    "passed": 74,
+    "failed": 0
+  },
+  "repair_gates": {
+    "collected": 25,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 25
+  },
+  "tool_controls": {
+    "passed": 12,
+    "kind": "reviewed fixtures/fault injection, not human C sign-off"
+  },
+  "actual_packaged_desktop": {
+    "passed": true,
+    "shipped_version": "104",
+    "only_difference_from_fresh_bundle": [
+      "deploy/cloud/README.md"
+    ],
+    "runtime_files_match": 326,
+    "fresh_bundle_source_sha256": "b243416dbc7b5a81a21a1b259b8271e93155d5984ce18a303d30aa3e190d8c85",
+    "shipped_bundle_source_sha256": "21046b0b9ced76265f7adc3c79ffedac19ef8599a370a2419f7ebe81744555b7"
+  },
+  "initial_harness_issues": {
+    "temp_parent_missing": "Initial Python 530 setup errors and gate 25 setup errors; logs preserved locally; fixed harness and reran unchanged code.",
+    "git_ownership": "Precise safe.directory applied per process; no global Git config change.",
+    "desktop_sandbox": "Initial sandbox user ACL failure; same smoke passed as normal Windows user; no app sandbox weakening or ACL changes."
+  },
+  "package": {
+    "files": 305,
+    "bytes": 301996,
+    "sha256": "a5396519abcddc8280c83a04478d27db9091b99c35b4e96cfb270b62348fab3a",
+    "member_hashes_match": true,
+    "non_root_readable": true,
+    "verify_script_output": "Verified package files: 305",
+    "selected_original_evidence_files": 139,
+    "selected_evidence_bytes": 872482,
+    "credential_scan_findings": []
+  },
+  "suites": {
+    "python": {
+      "suite": "python",
+      "commit": "274bd4b3c52bb29e6cd4f827f074a0c9ca6e166f",
+      "command": [
+        "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp=runs/p108",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\main-review-integration\\evidence\\release-integration\\108\\python.xml"
+      ],
+      "started_at": "2026-11-12T18:45:55.813182+00:00",
+      "finished_at": "2026-11-12T18:50:10.832395+00:00",
+      "exit_code": 0,
+      "scope": "offline development regression; no model requests; not independent C sign-off",
+      "log": "evidence/release-integration/108/python.log"
+    },
+    "node": {
+      "suite": "node",
+      "commit": "274bd4b3c52bb29e6cd4f827f074a0c9ca6e166f",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--test",
+        "tests\\check_log.test.cjs",
+        "tests\\ui_architecture.test.cjs",
+        "tests\\ui_budget.test.cjs",
+        "tests\\ui_polling.test.cjs",
+        "tests\\ui_prototype.test.cjs",
+        "tests\\ui_trace.test.cjs",
+        "desktop/settings.test.cjs"
+      ],
+      "started_at": "2026-11-12T18:45:53.168475+00:00",
+      "finished_at": "2026-11-12T18:45:53.693790+00:00",
+      "exit_code": 0,
+      "scope": "offline development regression; no model requests; not independent C sign-off",
+      "log": "evidence/release-integration/108/node.log"
+    },
+    "gates": {
+      "suite": "gates",
+      "commit": "274bd4b3c52bb29e6cd4f827f074a0c9ca6e166f",
+      "command": [
+        "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-q",
+        "acceptance_tests/test_repair_gates.py",
+        "--basetemp=runs/g108",
+        "-p",
+        "no:cacheprovider",
+        "--junitxml=C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\main-review-integration\\evidence\\release-integration\\108\\gates.xml"
+      ],
+      "started_at": "2026-11-12T18:47:13.563720+00:00",
+      "finished_at": "2026-11-12T18:47:33.944990+00:00",
+      "exit_code": 0,
+      "scope": "offline development regression; no model requests; not independent C sign-off",
+      "log": "evidence/release-integration/108/gates.log"
+    },
+    "controls": {
+      "suite": "controls",
+      "commit": "274bd4b3c52bb29e6cd4f827f074a0c9ca6e166f",
+      "command": [
+        "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "scripts/check_c_controls.py",
+        "--output-root",
+        "runs/c108"
+      ],
+      "started_at": "2026-11-12T18:47:13.549957+00:00",
+      "finished_at": "2026-11-12T18:47:29.664499+00:00",
+      "exit_code": 0,
+      "scope": "offline development regression; no model requests; not independent C sign-off",
+      "log": "evidence/release-integration/108/controls.log"
+    },
+    "bundle": {
+      "suite": "bundle",
+      "commit": "274bd4b3c52bb29e6cd4f827f074a0c9ca6e166f",
+      "command": [
+        "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "scripts/check_desktop_bundle.py",
+        "--python",
+        "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\main-review-integration\\desktop\\dist-chain-104-release\\win-unpacked\\resources\\python\\python.exe",
+        "--backend",
+        "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\main-review-integration\\desktop\\dist-chain-104-release\\win-unpacked\\resources\\backend"
+      ],
+      "started_at": "2026-11-12T18:51:56.489160+00:00",
+      "finished_at": "2026-11-12T18:52:11.318126+00:00",
+      "exit_code": 0,
+      "scope": "offline development regression; no model requests; not independent C sign-off",
+      "log": "evidence/release-integration/108/bundle.log"
+    },
+    "desktop": {
+      "suite": "desktop",
+      "commit": "274bd4b3c52bb29e6cd4f827f074a0c9ca6e166f",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "scripts/check_desktop_app.cjs",
+        "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\main-review-integration\\desktop\\dist-chain-104-release\\win-unpacked\\CodeFix.exe",
+        "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\main-review-integration\\evidence\\release-integration\\108\\desktop-first-launch.png"
+      ],
+      "started_at": "2026-11-12T18:52:47.798849+00:00",
+      "finished_at": "2026-11-12T18:52:56.538205+00:00",
+      "exit_code": 0,
+      "scope": "offline development regression; no model requests; not independent C sign-off",
+      "log": "evidence/release-integration/108/desktop.log"
+    }
+  },
+  "real_run_scope": "Historical original manifests/case artifacts preserved; no new real run for this release commit.",
+  "publication_state": "candidate verified; main merge and remote push pending"
+}

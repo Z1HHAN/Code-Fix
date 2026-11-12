@@ -1,0 +1,18 @@
+{
+  "suite": "controls",
+  "commit": "274bd4b3c52bb29e6cd4f827f074a0c9ca6e166f",
+  "command": [
+    "C:\\Users\\lenovo\\Documents\\ChatGPT\\Code Fix\\runs\\v3-venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "scripts/check_c_controls.py",
+    "--output-root",
+    "runs/c108"
+  ],
+  "started_at": "2026-11-12T18:47:13.549957+00:00",
+  "finished_at": "2026-11-12T18:47:29.664499+00:00",
+  "exit_code": 0,
+  "scope": "offline development regression; no model requests; not independent C sign-off",
+  "log": "evidence/release-integration/108/controls.log"
+}

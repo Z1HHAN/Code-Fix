@@ -1,0 +1,17 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-15d750d5f33b4c038ec5dfc8350d89fd",
+  "step_id": "s-31e3ad0f48934d2792bb560941c92e56",
+  "parent_step_id": "s-e0ac6e64e55143f28d83c1782638adbe",
+  "node_id": "apply_candidate",
+  "round": 1,
+  "phase": "development",
+  "strategy": "dynamic",
+  "evidence_ids": [
+    "test-baseline"
+  ],
+  "status": "ok",
+  "code_version": "sha256:fbf4016cb53ab5b71f6b69efd7fd9aad128a8a5394b299538ed12dea899d117c",
+  "artifact_path": "patch-1",
+  "duration_ms": 123
+}

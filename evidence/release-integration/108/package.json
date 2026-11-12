@@ -1,0 +1,11 @@
+{
+  "files": 305,
+  "bytes": 301996,
+  "sha256": "a5396519abcddc8280c83a04478d27db9091b99c35b4e96cfb270b62348fab3a",
+  "member_hashes_match": true,
+  "non_root_readable": true,
+  "verify_script_output": "Verified package files: 305",
+  "selected_original_evidence_files": 139,
+  "selected_evidence_bytes": 872482,
+  "credential_scan_findings": []
+}
