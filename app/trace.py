@@ -44,7 +44,7 @@ class RunTrace:
 
     def decision(self, *, program, effective_action, reason, evidence_ids, version,
                  suite_version, counters, advice=None, override_reason=None, round_number=0,
-                 phase='development'):
+                 phase='development', self_loop=None):
         step = self.start('program_dispatch', round_number=round_number,
                           evidence_ids=evidence_ids, phase=phase)
         record = {**program, **step, 'decision_id': program.get('decision_id') or 'd-' + uuid.uuid4().hex,
@@ -54,6 +54,8 @@ class RunTrace:
                   'reason': reason, 'override_reason': override_reason,
                   'rule_id': program.get('rule_id'), 'code_version': version,
                   'test_suite_version': suite_version, 'counters': counters}
+        if self_loop is not None:
+            record['self_loop'] = self_loop
         path = self.write('trace/decisions/' + record['decision_id'] + '.json', record)
         self.decisions.append(path)
         self.store.event(self.run_id, {'event': 'decision', 'artifact_path': path, **record})

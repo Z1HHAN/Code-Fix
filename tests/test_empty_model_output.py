@@ -68,12 +68,13 @@ def test_known_empty_repair_responses_consume_existing_rounds(tmp_path, empty_co
             self.attempts += 1
             if self.attempts <= empty_count:
                 return empty_model(tmp_path/'ledger').call(messages, **kwargs)
-            assert '没有返回正文' in messages[1]['content']
+            if 'V3检测员' not in messages[0]['content']:
+                assert '没有返回正文' in messages[1]['content']
             return super().call(messages, **kwargs)
     status, result, runner, store, rid = execute(tmp_path/'task', EmptyFirst(),
         ['assertion_failed', 'passed', 'passed'])
     assert status == expected and result['rounds_used'] == rounds
-    assert result['model_attempts'] == rounds
+    assert result['model_attempts'] == rounds + (1 if expected == 'success' else 0)
     assert runner.phases == (['development'] if expected != 'success' else ['development', 'development', 'final_check'])
     calls = [e for e in store.events(rid) if e['event'] == 'agent_call']
     assert all(c['cost']['status'] == 'estimated' for c in calls[:empty_count])

@@ -38,8 +38,9 @@ def _exception_header(line):
 
 
 # Repairer format failures consume a round; advisory format correction is bounded.
-RUNTIME_POLICY = {'version': '1.1.0', 'invalid_model_output': 'bounded_retry',
+RUNTIME_POLICY = {'version': '1.2.0', 'invalid_model_output': 'bounded_retry',
                   'advisory_format_retries': 1,
+                  'candidate_detector_required': True, 'locator_requires_detector_and_dispatch': True,
                   'transport_attempts': 1, 'final_feedback_to_agents': False}
 # A baseline run reproduces the registered defect when the frozen native tests
 # fail through an assertion or through a candidate runtime error.  Both classes
@@ -76,6 +77,8 @@ class WorkflowRun:
         self.model_calls = self.tool_calls = 0
         self.actual_requests = 0
         self.output_feedback = None
+        self.agent_outputs = {}
+        self.pending_loop = None
         self.empty_reasoning_streak = {}
         self.run_id = run_id
         self.engine = None
@@ -280,11 +283,29 @@ class WorkflowRun:
         if self.model_calls >= self.task['max_calls']:
             raise ModelBlocked('模型调用次数到达上限')
         step = self.trace.start(role, round_number=round_number, evidence_ids=[ev['evidence_id']])
+        resumed_loop = self.pending_loop if role == 'repairer' else None
+        if resumed_loop:
+            self.pending_loop = None
+            self.store.event(self.run_id, {'event': 'self_loop_resumed', 'step_id': step['step_id'],
+                'role': role, 'round': round_number, 'code_version': self.version,
+                'evidence_ids': [ev['evidence_id']], **resumed_loop})
         self.model_calls += 1
-        record = self.gateway.invoke(role, run_id=self.run_id, round_number=round_number,
+        from .agent_team import AgentHandoffBlocked
+        try:
+            record = self.gateway.invoke(role, run_id=self.run_id, round_number=round_number,
                                 code=(self.current / self.source).read_text(encoding='utf-8'), evidence=ev,
                                 version=self.version, work=self.current, task=self.task, deadline=self.deadline, extra=extra,
-                                trace={k: step[k] for k in ('step_id', 'parent_step_id')})
+                                trace={k: step[k] for k in ('step_id', 'parent_step_id')},
+                                handoffs=[self.agent_outputs[sender]
+                                    for sender in self.gateway.agents[role].receives_from
+                                    if sender in self.agent_outputs
+                                    and self.agent_outputs[sender]['code_version'] == self.version
+                                    and self.agent_outputs[sender]['evidence_id'] == ev['evidence_id']])
+        except AgentHandoffBlocked as exc:
+            self.final['failure_class'] = 'agent_handoff_blocked'
+            self.trace.complete('blocked', reason=str(exc), code_version=self.version,
+                                failure_class='agent_handoff_blocked', model_api_called=False)
+            raise ModelBlocked(str(exc)) from exc
         self.final['model_api_called'] |= record.get('model_api_called', False)
         self.actual_requests += int(record.get('model_api_called') is True)
         budget = record.get('cost', {}).get('budget')
@@ -293,7 +314,10 @@ class WorkflowRun:
                                      'budget': budget, 'reason': '人民币账号额度提醒；非平台实时余额'})
         self.trace.complete(record['status'], call_id=record['call_id'],
                        artifact_path='calls/' + record['call_id'],
-                       code_version=self.version, failure_class=record.get('failure_class'))
+                       code_version=self.version, failure_class=record.get('failure_class'),
+                       agent_instance_id=record['provenance']['agent_instance_id'],
+                       agent_contract=record['provenance']['agent_contract'],
+                       handoffs=record['provenance']['handoffs'], resumed_loop=resumed_loop)
         # A stop/pause received while the model was in flight must be
         # observed before applying its output or starting another step.
         self.boundary()
@@ -307,6 +331,11 @@ class WorkflowRun:
                 raise RoutedFailure('paused' if routed['action'] == 'pause' else 'stopped', record.get('reason', routed['reason']))
             raise ModelBlocked('角色调用失败：' + record.get('failure_class', 'unknown')
                                + ('；' + record['reason'] if record.get('reason') else ''))
+        from .role_config import digest
+        self.agent_outputs[role] = {'agent_id': role, 'call_id': record['call_id'],
+            'step_id': step['step_id'], 'artifact_path': 'calls/' + record['call_id'],
+            'code_version': self.version, 'evidence_id': ev['evidence_id'],
+            'output': record['parsed_output'], 'output_sha256': digest(record['parsed_output'])}
         return record['parsed_output']
 
     def prepare(self):
@@ -363,6 +392,13 @@ class WorkflowRun:
                     'model_profiles': getattr(self.model, 'registry', None),
                     'provenance': {role: config.provenance(role) for role in config.agents}})
         self.gateway = AgentGateway(self.model, self.store, config)
+        self.trace.write('trace/agent-team.json', {'schema_version': '1.0.0',
+            'run_id': self.run_id, 'strategy': self.strategy,
+            'agents': {role: {**agent.contract(config), 'agent_instance_id': f'{self.run_id}:{role}'}
+                       for role, agent in self.gateway.agents.items()},
+            'execution_authority': 'program_rules_and_verified_tool_evidence',
+            'loop_limits': {k: self.task[k] for k in ('max_rounds', 'max_calls', 'total_seconds')},
+            'shared_cost_guard': True, 'final_feedback_to_agents': False})
         self.engine = DecisionEngine(rules)
         self.base = self.definition.prepare(self.directory / 'base')
         self.current = self.base
@@ -409,6 +445,11 @@ class WorkflowRun:
         self.final.update(dev_result=result['verification_status'], code_version=self.version)
         self.boundary()
         ev = self.evidence(result, folder)
+        # Only usable tool results enter model analysis. Environment, version
+        # and permission failures retain their immediate protective exits.
+        detector = (self.call('detector', ev, round_number)
+                    if result['failure_class'] in {'passed', 'assertion_failed', 'syntax_error', 'code_runtime_error'}
+                    else None)
         # Terminal safety branches take precedence over all model advice.
         context = dict(phase='development', failure_class=result['failure_class'], isolation_ready=self.final['isolation_ready'],
                        user_pause_requested=False, evidence_matches_current_version=self.final.get('evidence_matches_current_version', False),
@@ -424,15 +465,16 @@ class WorkflowRun:
                            evidence_ids=[ev['evidence_id']], version=self.version,
                            suite_version=self.final['test_suite_version'], counters=self.counters(), round_number=round_number)
             return result, folder, self.finish('paused' if decision['action'] == 'pause' else 'stopped', decision['reason'])
+        # Each usable candidate returns to the detector after real tool testing.
+        # The detector interprets evidence; it never replaces the executor.
         # Advisory model calls must not consume the last chance to
         # validate an already passing candidate with the tool executor.
         advice, skipped = None, None
         if decision['action'] == 'final_check':
-            skipped = '开发通过；跳过非必需检测与模型调度建议，直接干净复验'
+            skipped = '隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验'
         elif self.strategy == 'dynamic' and result['failure_class'] == 'syntax_error':
-            skipped = '动态策略：语法失败直接重修，跳过检测与模型调度建议'
+            skipped = '动态策略：检测确认语法失败，直接重修，跳过模型调度建议与定位'
         else:
-            detector = self.call('detector', ev, round_number)
             advice = self.call('scheduler', ev, round_number, detector)
         planned = 'repair' if self.strategy == 'fixed' and decision['action'] == 'locate' else decision['action']
         effective = advice['action'] if advice and advice['action'] in {'pause', 'stop'} else planned
@@ -445,17 +487,23 @@ class WorkflowRun:
             overrides.append('固定策略不追加定位员；保留共同保护，失败时下一轮按固定顺序重修')
         if skipped:
             overrides.append(skipped)
-            self.store.event(self.run_id, {'event': 'roles_skipped', 'roles': ['detector', 'scheduler'],
+            self.store.event(self.run_id, {'event': 'roles_skipped', 'roles': ['scheduler'],
                 'round': round_number, 'reason': skipped, 'code_version': self.version})
         override = '；'.join(overrides) or None
         if effective == 'locate' and self.model_calls >= self.task['max_calls']:
             effective, reason = 'stop', '模型调用次数到达上限'
             override = '定位需要新增模型调用；剩余调用预算不足，停止调度'
             self.final['guard_id'] = 'V3_MODEL_CALL_LIMIT'
-        self.trace.decision(program=decision, effective_action=effective, reason=reason,
+        dispatch_record = self.trace.decision(program=decision, effective_action=effective, reason=reason,
                        advice=advice, override_reason=override,
                        evidence_ids=[ev['evidence_id']], version=self.version,
-                       suite_version=self.final['test_suite_version'], counters=self.counters(), round_number=round_number)
+                       suite_version=self.final['test_suite_version'], counters=self.counters(), round_number=round_number,
+                       self_loop=({'status': 'planned', 'from_round': round_number,
+                           'to_round': round_number + 1, 'failure_class': result['failure_class'],
+                           'via': ['locator', 'repairer'] if effective == 'locate' else ['repairer'],
+                           'evidence_id': ev['evidence_id'], 'code_version': self.version,
+                           'remaining_rounds': self.task['max_rounds'] - round_number}
+                           if effective in {'locate', 'repair'} else None))
         if self.final.get('guard_id') == 'V3_MODEL_CALL_LIMIT':
             return result, folder, self.finish('blocked', reason)
         if advice and advice['action'] in {'pause', 'stop'}:
@@ -464,6 +512,12 @@ class WorkflowRun:
             return result, folder, self.final_check()
         # A model cannot force final validation of failing code or bypass syntax rules.
         if effective == 'locate':
+            self.agent_outputs['scheduler']['dispatch_instruction'] = {
+                'effective_action': 'locate', 'target_agent': 'locator',
+                'rule_id': decision['rule_id'], 'reason': reason,
+                'decision_id': dispatch_record['decision_id'],
+                'artifact_path': 'trace/decisions/' + dispatch_record['decision_id'] + '.json',
+                'code_version': self.version, 'evidence_id': ev['evidence_id']}
             try:
                 self.location = self.call('locator', ev, round_number)
             except InvalidRoleOutput as exc:
@@ -479,6 +533,8 @@ class WorkflowRun:
                     suite_version=self.final['test_suite_version'], counters=self.counters(), round_number=round_number)
         else:
             self.location = None
+        self.pending_loop = {'from_round': round_number, 'to_round': round_number + 1,
+            'trigger_evidence_id': ev['evidence_id'], 'trigger_code_version': self.version}
         return result, folder, None
 
     def run(self):

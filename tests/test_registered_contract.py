@@ -11,7 +11,7 @@ def test_wrap_contract_reaches_summary_model_request_and_frozen_identity(tmp_pat
     original = definition.profile['approved_files'].copy()
     status, result, runner, model, store, rid = execute(tmp_path,
         ['assertion_failed', 'passed', 'passed'], {'project': 'qb-wrap', 'description': 'user description'})
-    assert status == 'success' and model.roles == ['repairer']  # explicit offline doubles
+    assert status == 'success' and model.roles == ['repairer', 'detector']  # explicit offline doubles
     folder = store.directory(rid)
     request = json.loads(next(folder.glob('calls/*/input.json')).read_text(encoding='utf-8'))
     material = json.loads(request['messages'][1]['content'])

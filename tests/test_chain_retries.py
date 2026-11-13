@@ -16,12 +16,12 @@ def execute(tmp_path, model, outcomes, **task):
 
 
 @pytest.mark.parametrize('strategy', ['fixed', 'dynamic'])
-def test_passing_candidate_skips_advice_and_finishes(tmp_path, strategy):
+def test_passing_candidate_requires_detector_skips_scheduler_and_finishes(tmp_path, strategy):
     model = ModelStub(scheduler='pause')
     status, result, runner, store, rid = execute(tmp_path, model, ['assertion_failed', 'passed', 'passed'], strategy=strategy)
-    assert status == 'success' and model.roles == ['repairer']
+    assert status == 'success' and model.roles == ['repairer', 'detector']
     assert runner.phases == ['development', 'development', 'final_check']
-    assert result['actual_model_requests'] == 0 and result['model_attempts'] == 1
+    assert result['actual_model_requests'] == 0 and result['model_attempts'] == 2
     assert any(e['event'] == 'roles_skipped' for e in store.events(rid))
 
 
@@ -33,11 +33,12 @@ def test_bad_repair_json_consumes_round_and_uses_valid_evidence(tmp_path, invali
             self.attempts += 1
             if self.attempts <= invalid_count:
                 return {'status': 'ok', 'raw_text': '{}', 'model_api_called': False}
-            assert 'output_validation_error' in messages[1]['content']
+            if 'V3修复员' in messages[0]['content']:
+                assert 'output_validation_error' in messages[1]['content']
             return super().call(messages, **kwargs)
     status, result, runner, store, rid = execute(tmp_path, BadFirst(), ['assertion_failed', 'passed', 'passed'])
     assert status == expected and result['rounds_used'] == rounds
-    assert result['model_attempts'] == rounds
+    assert result['model_attempts'] == rounds + (1 if expected == 'success' else 0)
     assert runner.phases == (['development'] if expected == 'stopped' else ['development', 'development', 'final_check'])
     assert not (store.directory(rid) / 'candidate-1').exists()
 
@@ -82,7 +83,7 @@ def test_scheduler_format_correction_remains_bounded(tmp_path):
 
 
 @pytest.mark.parametrize('final_outcome,status', [('passed', 'success'), ('assertion_failed', 'failed')])
-def test_last_round_last_model_call_still_gets_final_check(tmp_path, final_outcome, status):
-    actual, result, runner, *_ = execute(tmp_path, ModelStub(), ['assertion_failed', 'passed', final_outcome], max_rounds=1, max_calls=1)
+def test_last_round_last_detector_call_still_gets_final_check(tmp_path, final_outcome, status):
+    actual, result, runner, *_ = execute(tmp_path, ModelStub(), ['assertion_failed', 'passed', final_outcome], max_rounds=1, max_calls=2)
     assert actual == status and runner.phases[-1] == 'final_check'
-    assert result['model_attempts'] == 1
+    assert result['model_attempts'] == 2

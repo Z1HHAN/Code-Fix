@@ -88,9 +88,12 @@ def test_assertion_values_are_absent_at_gateway_boundary(tmp_path):
     ctx.boundary = lambda: None
     ctx.model_calls = 0
     ctx.output_feedback = None
+    ctx.pending_loop = None
+    ctx.agent_outputs = {}
     ctx.task = {'max_calls': 1}
     ctx.trace = SimpleNamespace(start=lambda *a, **k: {'step_id': 'step', 'parent_step_id': None})
-    ctx.gateway = SimpleNamespace(invoke=invoke)
+    from app.agent_team import create_team
+    ctx.gateway = SimpleNamespace(invoke=invoke, agents=create_team())
     ctx.run_id, ctx.version, ctx.deadline = 'synthetic', 'synthetic', 0
     ctx.current, ctx.source = tmp_path, 'source.py'
     with pytest.raises(Captured):

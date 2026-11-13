@@ -76,14 +76,14 @@ def test_stub_success_requires_independent_call_and_no_final_feedback(tmp_path):
     assert status == 'success' and result['final_result'] == 'passed'
     assert result['mode'] == 'test_stub' and not result['model_api_called']
     assert runner.phases == ['development', 'development', 'final_check']
-    assert model.roles == ['repairer']
+    assert model.roles == ['repairer', 'detector']
     assert (store.directory(rid) / 'final-patch/patch.diff').is_file()
 
 
 def test_final_failure_ends_without_new_model_calls(tmp_path):
     status, result, runner, model, *_ = execute(tmp_path, ['assertion_failed', 'passed', 'assertion_failed'])
     assert status == 'failed' and result['final_result'] == 'failed'
-    assert len(model.roles) == 1
+    assert len(model.roles) == 2
 
 
 @pytest.mark.parametrize('ready', [True, False])
@@ -124,13 +124,13 @@ def test_remote_probe_freezes_identity_once_before_model_call(tmp_path, monkeypa
     assert final['identity']['image'] == 'sha256:' + 'a' * 64
     assert final['identity_sha256'] == digest(final['identity'])
     assert status == ('success' if ready else 'blocked')
-    assert model.roles == (['repairer'] if ready else [])
+    assert model.roles == (['repairer', 'detector'] if ready else [])
     assert not list((store.directory(rid) / 'diagnostics').glob('*.json'))
 
 
 @pytest.mark.parametrize('outcome, expected, roles', [
-    ('syntax_error', 'success', ['repairer', 'repairer']),
-    ('assertion_failed', 'success', ['repairer', 'detector', 'scheduler', 'locator', 'repairer']),
+    ('syntax_error', 'success', ['repairer', 'detector', 'repairer', 'detector']),
+    ('assertion_failed', 'success', ['repairer', 'detector', 'scheduler', 'locator', 'repairer', 'detector']),
     ('environment_error', 'paused', ['repairer']),
     ('timeout', 'stopped', ['repairer'])])
 def test_failure_types_change_actual_next_role(tmp_path, outcome, expected, roles):
@@ -214,10 +214,10 @@ def test_expired_total_budget_after_model_prevents_patch(tmp_path, monkeypatch):
     assert not (store.directory(rid) / 'candidate-1').exists()
 
 
-def test_model_call_limit_prevents_extra_roles_but_allows_tool_final_check(tmp_path):
-    status, result, runner, model, *_ = execute(tmp_path, ['assertion_failed', 'passed', 'passed'], {'max_calls': 1})
-    assert status == 'success' and result['model_calls'] == 1
-    assert model.roles == ['repairer']
+def test_model_call_limit_after_required_detector_still_allows_tool_final_check(tmp_path):
+    status, result, runner, model, *_ = execute(tmp_path, ['assertion_failed', 'passed', 'passed'], {'max_calls': 2})
+    assert status == 'success' and result['model_calls'] == 2
+    assert model.roles == ['repairer', 'detector']
     assert runner.phases == ['development', 'development', 'final_check'] and result['final_result'] == 'passed'
 
 
@@ -228,7 +228,7 @@ def test_public_task_routes_registered_source_and_clean_copy_with_stubs_only(tmp
     status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'assertion_failed', 'passed', 'passed'], {'project': project})
     assert status == 'success' and result['mode'] == 'test_stub' and not result['model_api_called']
     assert runner.phases == ['development', 'development', 'development', 'final_check']
-    assert model.roles == ['repairer', 'detector', 'scheduler', 'locator', 'repairer']
+    assert model.roles == ['repairer', 'detector', 'scheduler', 'locator', 'repairer', 'detector']
     folder = store.directory(rid)
     assert (folder / 'candidate-1' / definition.source).is_file()
     definition.verify(folder / 'final-work', candidate=True)
@@ -251,7 +251,7 @@ def test_baseline_code_runtime_error_is_accepted_as_reproduced_defect(tmp_path):
     assert status == 'success' and result['final_result'] == 'passed'
     assert result['baseline_failure_class'] == 'code_runtime_error'
     assert runner.phases == ['development', 'development', 'final_check']
-    assert model.roles == ['repairer']
+    assert model.roles == ['repairer', 'detector']
 
 
 @pytest.mark.parametrize('baseline', ['environment_error', 'timeout', 'passed', 'unknown_evidence'])

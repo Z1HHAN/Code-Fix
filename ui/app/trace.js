@@ -178,10 +178,17 @@
           field('程序裁决',d.reason||'未记录');field('覆盖原因',d.override_reason||'未记录，不推断模型与程序一致');
           field('命中规则',d.rule_id||'未记录');
           field('证据引用',node.evidenceIds.join('、')||'未记录');
+          if(d.self_loop)field('Self-Loop（计划，执行见后续节点）',`第${d.self_loop.from_round}轮 → 第${d.self_loop.to_round}轮 · ${d.self_loop.via.map(x=>names[x]||x).join(' → ')}`);
         }else{
           panes[0].append(el('div',node.test?node.statusLabel:'执行状态：'+node.statusLabel,'decision-action'));
           field('步骤职责',node.title);field('测试结论',node.test?.verification_status||'本步骤无测试结论');
           field('失败类型',node.test?.failure_class||'未记录');field('调用来源',node.call?.mode||'本步骤无模型调用记录');
+          const agent=node.call?.provenance;
+          if(agent?.agent_instance_id){
+            field('独立Agent身份',agent.agent_instance_id);
+            field('输出权限',agent.agent_contract?.permitted_action||'未记录');
+            field('协作输入',(agent.handoffs||[]).map(h=>`${names[h.agent_id]||h.agent_id} · ${h.call_id}`).join('、')||'无上游Agent交接，依据当前工具证据');
+          }
         }
         panes[0].append(fields);
         const viewer=el('pre','选择下方证据文件查看原文。','trace-artifact');
