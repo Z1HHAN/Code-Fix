@@ -177,9 +177,16 @@ def test_code03_pause_boundary_records_r02_without_more_work(tmp_path):
 
 
 def test_code04_passed_candidate_can_use_final_check_at_model_limit(tmp_path):
-    status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed', 'passed'], task={'max_calls': 1})
+    status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed', 'passed'], task={'max_calls': 2})
     assert runner.phases == ['development', 'development', 'final_check'], 'CODE-04: advisory calls must not starve final validation'
     assert result['final_result'] == 'passed' and status == 'success'
+    assert model.roles == ['repairer', 'detector']
+
+
+def test_code04_required_detector_cannot_be_skipped_when_calls_exhausted(tmp_path):
+    status, result, runner, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed'], task={'max_calls': 1})
+    assert status == 'blocked' and result['final_result'] == 'not_run'
+    assert runner.phases == ['development', 'development']
     assert model.roles == ['repairer']
 
 

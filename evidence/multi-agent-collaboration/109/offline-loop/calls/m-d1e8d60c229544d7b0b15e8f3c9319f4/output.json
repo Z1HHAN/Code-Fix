@@ -1,0 +1,144 @@
+{
+  "status": "ok",
+  "mode": "test_stub",
+  "model_api_called": false,
+  "raw_text": "{\"evidence_ids\": [\"test-development-1\"], \"knowledge_citations\": [], \"analysis\": \"offline analysis\", \"failure_class\": \"assertion_failed\", \"suggested_checks\": []}",
+  "role": "detector",
+  "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+  "call_id": "m-d1e8d60c229544d7b0b15e8f3c9319f4",
+  "round": 1,
+  "provenance": {
+    "role_override": {},
+    "role_overrides_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "protocol": "codefix-json-v1",
+    "parser_version": "1.0.0",
+    "config_version": "1.1.0",
+    "effective_config": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "primary": {
+          "binding": "approved_profile",
+          "profile_ref": "sf_account1_v32"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "config_sha256": "b3472a143047be416465bd12b883494daab38dc1dce1b9522c99992eb7d455ba",
+    "prompt_ref": "prompts/detector.md",
+    "prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+    "system_prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+    "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:detector",
+    "agent_contract": {
+      "contract_version": "1.0.0",
+      "agent_id": "detector",
+      "title": "检测员",
+      "input_scope": "current_candidate_development_evidence_only",
+      "receives_from": [],
+      "produces": "failure_analysis",
+      "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+      "output_schema": "DetectorOutput",
+      "permitted_action": "analyse_tool_evidence",
+      "tools": [
+        "read_file",
+        "search_knowledge"
+      ],
+      "can_execute_code": false,
+      "can_modify_tests": false,
+      "can_approve_success": false,
+      "can_override_guards": false
+    },
+    "agent_contract_sha256": "3ab70fbb58a74bbfb1b4aca2d411143ae86aed05a136bf5ca9df020d682ac9dd",
+    "handoffs": [],
+    "messages_sha256": "b420f4957aab9c6ae79cfedd9ee5910289f9f63a57eb32c8a249fe10af18cd00",
+    "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "model_binding": {
+      "model_ref": "primary",
+      "binding": "approved_profile",
+      "profile_ref": "sf_account1_v32",
+      "mode": "test_stub",
+      "model": null
+    }
+  },
+  "step_id": "s-2fa17129250e443a899073b9e2884739",
+  "parent_step_id": "s-6213d3d89352437985681017af91fbc2",
+  "parsed_output": {
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "knowledge_citations": [],
+    "analysis": "offline analysis",
+    "failure_class": "assertion_failed",
+    "suggested_checks": []
+  }
+}
