@@ -171,5 +171,17 @@
     }
   },
   "real_run_scope": "Historical original manifests/case artifacts preserved; no new real run for this release commit.",
-  "publication_state": "candidate verified; main merge and remote push pending"
+  "publication_state": "main merge and delivery branch pushed; remote refs verified",
+  "published_at": "2026-11-12T19:22:46.024719+00:00",
+  "merge_commit": "cf4d76ff375f4ef812681acb52d6ff7c925001e9",
+  "delivery_branch": "codex/release-application-108",
+  "delivery_commit": "a494d9d60d833b44b65102c814edbb3c506fc9b1",
+  "remote_refs_verified": true,
+  "postmerge_integrity": {
+    "runtime_matches_tested_commit": true,
+    "original_evidence_files": 139,
+    "package_files": 305,
+    "tracked_worktree_clean_before_status_update": true
+  },
+  "publication_metadata_scope": "This subsequent status commit updates documentation and verification metadata only; no runtime changes."
 }
