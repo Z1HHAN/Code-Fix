@@ -1,0 +1,2038 @@
+{
+  "scope": "Cumulative per-project successes across iterations; NOT a single-version full batch or a controlled ablation",
+  "count": 40,
+  "rows": [
+    {
+      "project": "qb-bitcount",
+      "run_id": "run-cbc1e5f10a7e4205b65951fbc41536cc",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-bitcount",
+        "test_suite_version": "sha256:947ab031b976b57d6757ff12d2bf4b770715f59675652c3dd7b4478abf78bbde",
+        "code_version": "sha256:d1b44084ea8295c34668445ba361c1328f568abbd57014128fcd2ba387644a7d",
+        "code_path": "candidate-1/python_programs/bitcount.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.004956",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-breadth_first_search",
+      "run_id": "run-d73a160b258049f9b0e73783a086c24d",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-breadth_first_search",
+        "test_suite_version": "sha256:143df89761668031b2e8f54bac9758d2ea6773e0d71a93b8bc60397e73873a0e",
+        "code_version": "sha256:23986893e99fa294981656c9d9bd7b103f4a7dbed8f3fd093c4fa11fe226ebe1",
+        "code_path": "candidate-1/python_programs/breadth_first_search.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.003962",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-bucketsort",
+      "run_id": "run-8870ce4fcccd4e85b01c17547631bc67",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-bucketsort",
+        "test_suite_version": "sha256:8600dc220dd98803e4ffc9aaafaa6d144dd04a04008d15c3bfa8c0544b2b425a",
+        "code_version": "sha256:e89633d8caf82eaf01b5bb1f04430649e5fc89102064bff687920b42db984502",
+        "code_path": "candidate-1/python_programs/bucketsort.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.00247",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-depth_first_search",
+      "run_id": "run-f0f05adfb6204a9cb11c8d21ce1d952a",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-depth_first_search",
+        "test_suite_version": "sha256:5558145da26d016918d4a2aaf147ea4a1abeef63c787fd8e41ffc7dd2258c2a9",
+        "code_version": "sha256:d21987e441fe6fe7212164df035c2621c4f0b6b4334526c0bc21c3d6bc4e701d",
+        "code_path": "candidate-1/python_programs/depth_first_search.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.004028",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-detect_cycle",
+      "run_id": "run-d79cb5e4ec004cf2a320187c9ad39ae1",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-detect_cycle",
+        "test_suite_version": "sha256:2641c649e4fbd9efead532c66d47f7ca565b0736b6cb187598469779076fe51b",
+        "code_version": "sha256:73fc9a0a39b4e43205c28d43706a66d3f2fe596ff616932678bb66d361eaa7bf",
+        "code_path": "candidate-1/python_programs/detect_cycle.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.005391",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-find_first_in_sorted",
+      "run_id": "run-c74e499697c64f41afa63e66ce4fdc78",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-find_first_in_sorted",
+        "test_suite_version": "sha256:04a83e442ec2a6e129261eb0b79875171e795565a2299602852d5791e1ff6fc7",
+        "code_version": "sha256:4c6b043a81608a81604b7d2317718c7300bcb0087f1e65b12ef6c6aa61b9200e",
+        "code_path": "candidate-1/python_programs/find_first_in_sorted.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.006448",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-find_in_sorted",
+      "run_id": "run-b4b68b1db15d493e9dac15ee229b9473",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-find_in_sorted",
+        "test_suite_version": "sha256:26bf198c7771e2e95837dd7df3579787267aa45da39ba738d76da1c30541e420",
+        "code_version": "sha256:999e0c19aee0a586375db791b0aac18b90a0e9c625ae233215e62687704ffd92",
+        "code_path": "candidate-1/python_programs/find_in_sorted.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.004076",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-flatten",
+      "run_id": "run-41429d3ca52e423ab163ab1a94244012",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-flatten",
+        "test_suite_version": "sha256:c4f5b85ec79951876f241d2ab1c6f58098327e2eb5961ad746fdd1dfb6374365",
+        "code_version": "sha256:e7271e8b2f0ab8b88d09ce63bfbe9ccfc31872543264bd1376978e5f32eef155",
+        "code_path": "candidate-1/python_programs/flatten.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.003807",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-gcd",
+      "run_id": "run-a4de8fe6e1744f0c92ddca2ea554c905",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-gcd",
+        "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+        "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+        "code_path": "candidate-1/python_programs/gcd.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.003296",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-get_factors",
+      "run_id": "run-a432ebdfd9a443e3a155210e172094c9",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-get_factors",
+        "test_suite_version": "sha256:66eda806f5cbc19e9767e5a53b7ff873199a0f22ba1f8346cca43651f1245394",
+        "code_version": "sha256:448e7831fb4ea49cb69fc42426f3dbabf9b52429e3a49e0e137b3bb1fd0daae7",
+        "code_path": "candidate-1/python_programs/get_factors.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.003149",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-hanoi",
+      "run_id": "run-cfdd484de7b84ec8abd47e7f9269a46f",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-hanoi",
+        "test_suite_version": "sha256:c04c06bd68d785998e84a478b1e0fb9264319adc8b0b716478f2c00341ccccdd",
+        "code_version": "sha256:6ae4951c4f6abbfffb4ce8bc72298cb807155d59dc76ce512e844796b3cee97d",
+        "code_path": "candidate-1/python_programs/hanoi.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.00314",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-is_valid_parenthesization",
+      "run_id": "run-3e4be12d59be4e1e8743340f9170c202",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-is_valid_parenthesization",
+        "test_suite_version": "sha256:a1bcbcdb2d9e3c8b52851153e5335d6459adaf6a71dcac4ead52973c388183ab",
+        "code_version": "sha256:befc2a110a0758f4586d2d738c911230e8f9fb037e0c29756bbce609c186caf7",
+        "code_path": "candidate-1/python_programs/is_valid_parenthesization.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.00178",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-kheapsort",
+      "run_id": "run-41703ff18a5e4daf959eb343524e5936",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 2,
+        "model_calls": 2,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-kheapsort",
+        "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+        "code_version": "sha256:39ce4f2c00fa7b1e3adbdf56b02c42552c74cbe5c83ff3326378391045d36563",
+        "code_path": "candidate-2/python_programs/kheapsort.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.018214",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-knapsack",
+      "run_id": "run-e019d6a3c3654d8eb48f9849d4e012ce",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-knapsack",
+        "test_suite_version": "sha256:ae4aae507a84090281febd2d5b9ba62ee74a0b619e21229ace7de3a16fe96a3e",
+        "code_version": "sha256:7343358c96bc4c3ad4d7e27c36c32681852fa53f6a2c6c6673fc89752f342da4",
+        "code_path": "candidate-1/python_programs/knapsack.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.005158",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-kth",
+      "run_id": "run-4c95b76d9a1f4b7aafdf0e237a1ca99a",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-kth",
+        "test_suite_version": "sha256:7460b75f4a7804ca248d2928e45fc82958afeba74c67eab1a412c85e57850735",
+        "code_version": "sha256:b147771aa9088ffd80a264a3cd568facb233fa1403d58bf83067ed4f7a7d1a40",
+        "code_path": "candidate-1/python_programs/kth.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.003482",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-lcs_length",
+      "run_id": "run-1af45baa79b94cf7a6c484576146f893",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-lcs_length",
+        "test_suite_version": "sha256:534561dd0070547ec2d7799dc279c46a944e06ee1626fa8d1b7f822599a44aba",
+        "code_version": "sha256:ce93daf27a22fd3b6b0e395bde82c4fc1348307bf96ccb68582a835b36d4a9a0",
+        "code_path": "candidate-1/python_programs/lcs_length.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.004705",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-levenshtein",
+      "run_id": "run-07a62b9fe3f3493090b0fe450a33866e",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-levenshtein",
+        "test_suite_version": "sha256:167e8429e7ee4a2e7b85f230dddbe4937cb3fdc35c366643d4b726d8827dfe07",
+        "code_version": "sha256:c6abf6e9bbcecbd18493109ade4cd783abab6cbc82b04f13e4af900af3f9badc",
+        "code_path": "candidate-1/python_programs/levenshtein.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.005417",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-lis",
+      "run_id": "run-b9eb9e6a5a934220b3b0fc77d35a5bde",
+      "batch": "live-101",
+      "manifest": "evidence/repair-chain-review/live-101/manifest.json",
+      "manifest_sha256": "fd3119eb355a0fc6cdc9f4876ea75c842fda888925ef7c721853645308a6b762",
+      "backend_sha256": "e1079102762b973cdd8e9a84366a5618863cdbae0c17322255f8404f6c781985",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-lis",
+        "test_suite_version": "sha256:8a547a867d0e7f7573831e550a1dc14a6af732469b691f57661028354721dde3",
+        "code_version": "sha256:86f5a43c5552a6b4c2732445225a88b304030324e8049773bef1a18527504ae8",
+        "code_path": "candidate-1/python_programs/lis.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.015678",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-longest_common_subsequence",
+      "run_id": "run-06182936216945649c540649f0731766",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 2,
+        "model_calls": 2,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-longest_common_subsequence",
+        "test_suite_version": "sha256:90173aea907a27ec8a3552f9e0d7ade955823151a11af286b886240cf533272f",
+        "code_version": "sha256:bc90dd91030c27cec4cf090bedaacba467adc2734e8dfebbb035483b9c3a31bc",
+        "code_path": "candidate-2/python_programs/longest_common_subsequence.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.016066",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-max_sublist_sum",
+      "run_id": "run-0496df2504ff42c08158983cbc251a22",
+      "batch": "live-101-recovery",
+      "manifest": "evidence/repair-chain-review/live-101-recovery/manifest.json",
+      "manifest_sha256": "616e0d90c78a871ab703d241707fa3811d1d14464ef8ca13a4b9642d8c58c7b8",
+      "backend_sha256": "e1079102762b973cdd8e9a84366a5618863cdbae0c17322255f8404f6c781985",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-max_sublist_sum",
+        "test_suite_version": "sha256:5ef4f028924aa0ae998a18febe0c41839fbc64650814eee28ec895362370db43",
+        "code_version": "sha256:5dfbf3defc8bd9f9e1bf8ef337bde6fe8df756c2a5ec0831c6a5ca5b774001a7",
+        "code_path": "candidate-1/python_programs/max_sublist_sum.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.00909",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-mergesort",
+      "run_id": "run-e12fba42da4544c5a4fe1216e4d0075f",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 2,
+        "model_calls": 2,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-mergesort",
+        "test_suite_version": "sha256:7a33124570df0101b582338ac1815c1c1885da086b899ed9ad88b74b67d8f244",
+        "code_version": "sha256:73edc1910bcf206b593f6e5007e9b04ad469eaa459c6237c1fbdc5981996903d",
+        "code_path": "candidate-2/python_programs/mergesort.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.036296",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-minimum_spanning_tree",
+      "run_id": "run-a4c6255813044bb98bcc47dba319b64f",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 2,
+        "model_calls": 2,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-minimum_spanning_tree",
+        "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+        "code_version": "sha256:4fbcf6e5103fbd963f572d15af69a09f1466fdc659d4a12124feacb2196007ee",
+        "code_path": "candidate-2/python_programs/minimum_spanning_tree.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.037144",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-next_palindrome",
+      "run_id": "run-11f8bf3fc36c4352adcdb4b53bccf89f",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 3,
+        "model_calls": 3,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-next_palindrome",
+        "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91",
+        "code_version": "sha256:626323c8c61888029fdc57461dcd686f54e839b4b3ccd5528fedb27204af707c",
+        "code_path": "candidate-3/python_programs/next_palindrome.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 3,
+        "actual_model_requests": 3,
+        "cost": {
+          "calls": 3,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.054702",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-next_permutation",
+      "run_id": "run-83813a04592a49d4bfdffacc7ca3ae05",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-next_permutation",
+        "test_suite_version": "sha256:f45515ab82ebde0523d80b47a0a09602c49ec1e85fd0573a484a21635f04fc2b",
+        "code_version": "sha256:b7225a0a31d88768bdd3f156648b690fa8278cf793fadb9d112b1c20ff845834",
+        "code_path": "candidate-1/python_programs/next_permutation.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.010588",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-pascal",
+      "run_id": "run-c8bdf9cac0344f5e9087bfe6680eb588",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 2,
+        "model_calls": 2,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-pascal",
+        "test_suite_version": "sha256:69ef8dbb4aa810b392d22cc49062b494a249e6aa88f8d38ae90512cad0c14bed",
+        "code_version": "sha256:e5b97fac25a7e1881beceb8270248837babaf6cd46db2b934f404cdf3060d144",
+        "code_path": "candidate-2/python_programs/pascal.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.037696",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-possible_change",
+      "run_id": "run-8b3f1fbe5dca4475ba7dada882e0c31b",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 2,
+        "model_calls": 2,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-possible_change",
+        "test_suite_version": "sha256:7d5153fd7007e0e2c35c9b096a00b09f060e945badf24ef2af5e338079e9c07b",
+        "code_version": "sha256:c246982ceaae5fc66941e5062a47fe294149f2589a42883ad2f6d6a6d67ccc68",
+        "code_path": "candidate-2/python_programs/possible_change.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.035916",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-powerset",
+      "run_id": "run-cf56dd1acddf427c80d7c6031807c7b7",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-powerset",
+        "test_suite_version": "sha256:1c5207ea71941d0606decde982a50b78a5fbfa0ca4bed14ef9b8cbbdcf026d3e",
+        "code_version": "sha256:90ebfd7db53867a846657c9e6ede3177cb32fb77936ad9c64d6d09e246b405b9",
+        "code_path": "candidate-1/python_programs/powerset.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.007588",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-quicksort",
+      "run_id": "run-893397eba83d4b9797240c1686aa2bea",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-quicksort",
+        "test_suite_version": "sha256:996a4fb9909ddf5c4d62a89c09f66d6ed306d87047036b7c01272e2c59d5a7f7",
+        "code_version": "sha256:bd7b1ea0b43c5993e47317a7382de7f69ebcf80d023d275ca1af20ae0f631079",
+        "code_path": "candidate-1/python_programs/quicksort.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.007192",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-reverse_linked_list",
+      "run_id": "run-f83eea4ec73a48609f813f1504d81837",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 2,
+        "model_calls": 2,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-reverse_linked_list",
+        "test_suite_version": "sha256:8e2ce840654038f4188b14e3d8e4a63f4015f9418c91a621c63cc7d2854d4aeb",
+        "code_version": "sha256:9f21548c48e26afb8aa4650fbc2ca59951500eabe758f7440fe36ba2004e55b8",
+        "code_path": "candidate-2/python_programs/reverse_linked_list.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.031356",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-rpn_eval",
+      "run_id": "run-37ead2642ac8426faa04441f503dcb16",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 2,
+        "model_calls": 2,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-rpn_eval",
+        "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+        "code_version": "sha256:4cd796e8e18da5602f3aef6d4355acc9ea764bf5ecc0b247e7331f5849bcb776",
+        "code_path": "candidate-2/python_programs/rpn_eval.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.03378",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-shortest_path_length",
+      "run_id": "run-631410f7d5e545428c790a1b5fd812df",
+      "batch": "live-101-recovery",
+      "manifest": "evidence/repair-chain-review/live-101-recovery/manifest.json",
+      "manifest_sha256": "616e0d90c78a871ab703d241707fa3811d1d14464ef8ca13a4b9642d8c58c7b8",
+      "backend_sha256": "e1079102762b973cdd8e9a84366a5618863cdbae0c17322255f8404f6c781985",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 2,
+        "model_calls": 2,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-shortest_path_length",
+        "test_suite_version": "sha256:73f1d40b50834615483f9fc3208836d520064959c5366fb410a4d627e53d6026",
+        "code_version": "sha256:de7f535c19ec691d0dfcc3fe74865ef17d161bd1fe25efab2eb48bd87e0fa543",
+        "code_path": "candidate-2/python_programs/shortest_path_length.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.123342",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-shortest_path_lengths",
+      "run_id": "run-15d750d5f33b4c038ec5dfc8350d89fd",
+      "batch": "live-105",
+      "manifest": "evidence/repair-chain-review/live-105/manifest.json",
+      "manifest_sha256": "b027585f17704598999d81b5ab98752fdb5e528f81ea7cc24713681b20c17e1b",
+      "backend_sha256": "21046b0b9ced76265f7adc3c79ffedac19ef8599a370a2419f7ebe81744555b7",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-shortest_path_lengths",
+        "test_suite_version": "sha256:5f6f0db4c7fd33942dcb35064c9a106602679a9ee21869e974a7fa19c01b6a87",
+        "code_version": "sha256:fbf4016cb53ab5b71f6b69efd7fd9aad128a8a5394b299538ed12dea899d117c",
+        "code_path": "candidate-1/python_programs/shortest_path_lengths.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.004271",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-shortest_paths",
+      "run_id": "run-94ac2801ecf44c2cae9ced7a1b8fdb3b",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-shortest_paths",
+        "test_suite_version": "sha256:a08bc169b2e6b9bf0959cfc63f2ebf51850b6968a5f0d118afcfa685afba6bdd",
+        "code_version": "sha256:a5e04e989d223395a906447674e6316622ff3c80542815de33beb517201a2979",
+        "code_path": "candidate-1/python_programs/shortest_paths.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.017392",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-shunting_yard",
+      "run_id": "run-d4c1f1c9e76043e2a72f6b729bca6529",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-shunting_yard",
+        "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+        "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+        "code_path": "candidate-1/python_programs/shunting_yard.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.013494",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-sieve",
+      "run_id": "run-d55f32eba0a542699eb137e28212b565",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-sieve",
+        "test_suite_version": "sha256:daceccbb15635ed42d09241f620b9fac411a3bc15b0d08aff800d466cff63b8d",
+        "code_version": "sha256:76d30c3521c6c1e2dc140c4cc0457425560317e7e804e726b5cb30ce73a7de5f",
+        "code_path": "candidate-1/python_programs/sieve.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.00906",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-sqrt",
+      "run_id": "run-dd73a494113547759d8d7e6dc98775ae",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-sqrt",
+        "test_suite_version": "sha256:69b27e972d71adcad48adec9b581fc50d5f6c6bf6b98c6b88b88dbcf38a788e1",
+        "code_version": "sha256:84f2d7ecb54a0586187695c80f54568fe3176da5122fb074f044f4d777eb77a1",
+        "code_path": "candidate-1/python_programs/sqrt.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.013226",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-subsequences",
+      "run_id": "run-4c7f60ef53e842a9b2b5312e318de9fd",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-subsequences",
+        "test_suite_version": "sha256:6e8e63be4ed79b2a840bb7cb89acdfb0bb63afca49593b638c13c666cbab24e1",
+        "code_version": "sha256:f89b459778a3cca567948ef7c59468ec5caca6007beadae60d896d8eff635f80",
+        "code_path": "candidate-1/python_programs/subsequences.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.01859",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-to_base",
+      "run_id": "run-a861e5e7d0a34c8d9e61b0b4f2728ea7",
+      "batch": "all-100-combined",
+      "manifest": "evidence/repair-chain-review/all-100-combined/manifest.json",
+      "manifest_sha256": "95405a4f85d8c8d56aaa07350a06c00b80db6f6185c8d2937135d88ab7b7225f",
+      "backend_sha256": "ca0c9272b50d5661f58f3a9890634719de28f49293b0d55506952cb7891ff582",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-to_base",
+        "test_suite_version": "sha256:8a9df2000eafee321f4d2c994d90d6c8fc4da68d3a85be8d04c9ed95a4c806d9",
+        "code_version": "sha256:3b11fb56148c0701a34755995c1afac1348a4c15b2640003921974119d215c0a",
+        "code_path": "candidate-1/python_programs/to_base.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.007864",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-topological_ordering",
+      "run_id": "run-4803a5de42d246b68347a8d827e2c61d",
+      "batch": "live-101-recovery",
+      "manifest": "evidence/repair-chain-review/live-101-recovery/manifest.json",
+      "manifest_sha256": "616e0d90c78a871ab703d241707fa3811d1d14464ef8ca13a4b9642d8c58c7b8",
+      "backend_sha256": "e1079102762b973cdd8e9a84366a5618863cdbae0c17322255f8404f6c781985",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-topological_ordering",
+        "test_suite_version": "sha256:141fbb5f39eb31c499e9c31d9f8ec2905a138f1872e783115a6094523eb3ffcc",
+        "code_version": "sha256:fc853108977123a4b5f1d637ecf4f9199480c55efbdd1bcb3ccee15413989797",
+        "code_path": "candidate-1/python_programs/topological_ordering.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.018623",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    },
+    {
+      "project": "qb-wrap",
+      "run_id": "run-bfd7eff82c26423ca72fa7166fa5d01b",
+      "batch": "live-104",
+      "manifest": "evidence/repair-chain-review/live-104/manifest.json",
+      "manifest_sha256": "aec0b9aacce9f622007d0d49f6968029b94983c089f6ade7891b957ea55f6101",
+      "backend_sha256": "21046b0b9ced76265f7adc3c79ffedac19ef8599a370a2419f7ebe81744555b7",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 2,
+        "model_calls": 6,
+        "tool_calls": 4,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-wrap",
+        "test_suite_version": "sha256:7b43145680d614770b3b73619583cfda5865725dd96477defbb1a26154de348b",
+        "code_version": "sha256:e504bd2b4a9a207354451553cbe6f6618ce52acb5127add2289bcc4010ab13dc",
+        "code_path": "candidate-2/python_programs/wrap.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 6,
+        "actual_model_requests": 6,
+        "cost": {
+          "calls": 6,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.031973",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    }
+  ]
+}

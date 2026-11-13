@@ -125,3 +125,5 @@ evidence/presentation-brief/verification.json -text -whitespace
 docs/2026-11-03_项目持续维护/PPT完整制作提示词.md -text whitespace=cr-at-eol
 
 evidence/multi-agent-collaboration/109/** -text -whitespace
+evidence/presentation-handoff/110/** -text -whitespace
+docs/2026-11-03_项目持续维护/PPT参考资料/** -text -whitespace

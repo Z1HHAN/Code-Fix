@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="4" time="0.079" timestamp="2026-11-12T11:15:10.472218+00:00" hostname="4b65e0635822"><testcase classname="python_testcases.test_shortest_path_length" name="test1" time="0.004"><failure message="assert 1 == 4">def test1():
+        """Case 1: One path
+        Output: 4
+        """
+    
+        result = shortest_path_length(length_by_edge, node0, node1)
+&gt;       assert result == 4
+E       assert 1 == 4
+
+python_testcases/test_shortest_path_length.py:34: AssertionError</failure></testcase><testcase classname="python_testcases.test_shortest_path_length" name="test2" time="0.004"><failure message="assert 10 == 7">def test2():
+        """Case 2: Multiple path
+        Output: 7
+        """
+    
+        result = shortest_path_length(length_by_edge, node0, node5)
+&gt;       assert result == 7
+E       assert 10 == 7
+
+python_testcases/test_shortest_path_length.py:43: AssertionError</failure></testcase><testcase classname="python_testcases.test_shortest_path_length" name="test3" time="0.003" /><testcase classname="python_testcases.test_shortest_path_length" name="test4" time="0.004" /></testsuite></testsuites>

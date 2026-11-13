@@ -1,0 +1,66 @@
+{
+  "scope": "one natural qb-lis validation of approved role output budgets on101; not a formal strategy experiment; no repeated success fishing",
+  "started_at": "2026-11-12T11:11:25.659685+00:00",
+  "model": "deepseek-v4.1-flash-1017",
+  "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+  "backend_sha256": "e1079102762b973cdd8e9a84366a5618863cdbae0c17322255f8404f6c781985",
+  "limits": {
+    "max_rounds": 3,
+    "max_calls": 12,
+    "total_seconds": 300,
+    "cumulative_authorization_cny": "5"
+  },
+  "rows": [
+    {
+      "project": "qb-lis",
+      "status": "success",
+      "run_id": "run-b9eb9e6a5a934220b3b0fc77d35a5bde",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-lis",
+        "test_suite_version": "sha256:8a547a867d0e7f7573831e550a1dc14a6af732469b691f57661028354721dde3",
+        "code_version": "sha256:86f5a43c5552a6b4c2732445225a88b304030324e8049773bef1a18527504ae8",
+        "code_path": "candidate-1/python_programs/lis.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.015678",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    }
+  ],
+  "authorization": {
+    "requests": 110,
+    "estimated_cny": "1.141902",
+    "unknown_or_pending": 0
+  },
+  "finished_at": "2026-11-12T11:12:00.980967+00:00"
+}

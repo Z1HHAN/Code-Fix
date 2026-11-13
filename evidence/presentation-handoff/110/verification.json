@@ -1,0 +1,14 @@
+{
+  "scope": "PPT material portability and byte identity, no product retest or model execution",
+  "base_main": "f28318ad8bbdd456b3b78f5c86bfb69fa2a69b36",
+  "runtime_commit": "1d7e5da3ce46ec33eeff7b1d8ead38b84c5d025d",
+  "branch": "codex/ppt-materials-110",
+  "files": 516,
+  "original_new_files": 34,
+  "cumulative_success_projects": 40,
+  "reference_svgs": 12,
+  "reference_pngs": 12,
+  "all_zip_member_hashes_verified": true,
+  "new_originals_unchanged": true,
+  "model_requests": 0
+}
