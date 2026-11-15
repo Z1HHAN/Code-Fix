@@ -15,6 +15,14 @@ def execute(tmp_path, model, outcomes, **task):
     return status, result, runner, store, rid
 
 
+def test_fifth_candidate_can_still_reach_clean_final_check(tmp_path):
+    status,result,runner,*_=execute(tmp_path,ModelStub(),
+        ['assertion_failed']+['syntax_error']*4+['passed','passed'],
+        max_rounds=5,max_calls=20,total_seconds=600)
+    assert status=='success' and result['rounds_used']==5
+    assert len(runner.phases)==7 and runner.phases[-1]=='final_check'
+
+
 @pytest.mark.parametrize('strategy', ['fixed', 'dynamic'])
 def test_passing_candidate_requires_detector_skips_scheduler_and_finishes(tmp_path, strategy):
     model = ModelStub(scheduler='pause')

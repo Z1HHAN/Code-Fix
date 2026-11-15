@@ -37,7 +37,7 @@ def test_save_reload_deduplicates_and_task_parameters_are_frozen(tmp_path):
 
 @pytest.mark.parametrize('change', [
     {'strategy': 'unknown'}, {'bindings': {'repairer': 'sf_account1_v32'}},
-    {'parameters': {'max_rounds': 4, 'max_calls': 9, 'total_seconds': 120}},
+    {'parameters': {'max_rounds': 6, 'max_calls': 9, 'total_seconds': 120}},
     {'api_key': 'forbidden'}, {'parameters': {'max_rounds': True, 'max_calls': 9, 'total_seconds': 120}},
 ])
 def test_invalid_drafts_rejected(tmp_path, change):
