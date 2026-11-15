@@ -1,0 +1,159 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-5feb3a0bf6824b90a6a0ff634db6b488",
+  "step_id": "s-38fecf9ff3fc44ebbf974e0e3f15263a",
+  "parent_step_id": null,
+  "node_id": "isolation_preflight",
+  "round": 0,
+  "phase": "preflight",
+  "strategy": "dynamic",
+  "evidence_ids": [],
+  "status": "ok",
+  "evidence_path": "isolation",
+  "isolation_ready": true,
+  "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+  "reason": null,
+  "engine_id": "82a0558b-2dfa-48b6-86f2-de3c8937dc79",
+  "controls": {
+    "Binds": null,
+    "ContainerIDFile": "",
+    "LogConfig": {
+      "Type": "none",
+      "Config": {}
+    },
+    "NetworkMode": "none",
+    "PortBindings": {},
+    "RestartPolicy": {
+      "Name": "no",
+      "MaximumRetryCount": 0
+    },
+    "AutoRemove": false,
+    "VolumeDriver": "",
+    "VolumesFrom": null,
+    "ConsoleSize": [
+      0,
+      0
+    ],
+    "CapAdd": null,
+    "CapDrop": [
+      "ALL"
+    ],
+    "CgroupnsMode": "host",
+    "Dns": null,
+    "DnsOptions": [],
+    "DnsSearch": [],
+    "ExtraHosts": null,
+    "GroupAdd": null,
+    "IpcMode": "private",
+    "Cgroup": "",
+    "Links": null,
+    "OomScoreAdj": 0,
+    "PidMode": "",
+    "Privileged": false,
+    "PublishAllPorts": false,
+    "ReadonlyRootfs": true,
+    "SecurityOpt": [
+      "no-new-privileges"
+    ],
+    "Tmpfs": {
+      "/tmp": "rw,noexec,nosuid,size=67108864"
+    },
+    "UTSMode": "",
+    "UsernsMode": "",
+    "ShmSize": 67108864,
+    "Runtime": "runc",
+    "Isolation": "",
+    "CpuShares": 0,
+    "Memory": 268435456,
+    "NanoCpus": 1000000000,
+    "CgroupParent": "",
+    "BlkioWeight": 0,
+    "BlkioWeightDevice": [],
+    "BlkioDeviceReadBps": [],
+    "BlkioDeviceWriteBps": [],
+    "BlkioDeviceReadIOps": [],
+    "BlkioDeviceWriteIOps": [],
+    "CpuPeriod": 0,
+    "CpuQuota": 0,
+    "CpuRealtimePeriod": 0,
+    "CpuRealtimeRuntime": 0,
+    "CpusetCpus": "",
+    "CpusetMems": "",
+    "Devices": [],
+    "DeviceCgroupRules": null,
+    "DeviceRequests": null,
+    "MemoryReservation": 0,
+    "MemorySwap": 268435456,
+    "MemorySwappiness": null,
+    "OomKillDisable": false,
+    "PidsLimit": 64,
+    "Ulimits": [
+      {
+        "Name": "nofile",
+        "Hard": 128,
+        "Soft": 128
+      }
+    ],
+    "CpuCount": 0,
+    "CpuPercent": 0,
+    "IOMaximumIOps": 0,
+    "IOMaximumBandwidth": 0,
+    "Mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/codefix/docker/rpc_codec.py",
+        "Target": "/rpc_codec.py",
+        "ReadOnly": true
+      },
+      {
+        "Type": "volume",
+        "Source": "codefix-out-4d3c09b7972c4880a6c2a00055d03d95",
+        "Target": "/out"
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/codefix-data/jobs/job-95d1be2e2823416199a2c88d02bc7f46/isolation/probe-work",
+        "Target": "/w",
+        "ReadOnly": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/codefix/c_runner/pytest_entry.py",
+        "Target": "/entry.py",
+        "ReadOnly": true
+      },
+      {
+        "Type": "bind",
+        "Source": "/opt/codefix/docker/candidate_entry.py",
+        "Target": "/harness.py",
+        "ReadOnly": true
+      }
+    ],
+    "MaskedPaths": [
+      "/proc/asound",
+      "/proc/acpi",
+      "/proc/kcore",
+      "/proc/keys",
+      "/proc/latency_stats",
+      "/proc/timer_list",
+      "/proc/timer_stats",
+      "/proc/sched_debug",
+      "/proc/scsi",
+      "/sys/firmware",
+      "/sys/devices/virtual/powercap"
+    ],
+    "ReadonlyPaths": [
+      "/proc/bus",
+      "/proc/fs",
+      "/proc/irq",
+      "/proc/sys",
+      "/proc/sysrq-trigger"
+    ]
+  },
+  "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+  "execution_mode": "remote-docker",
+  "execution_endpoint": "https://8.148.85.237",
+  "remote_job_id": "job-95d1be2e2823416199a2c88d02bc7f46",
+  "transport_mode": "live",
+  "duration_ms": 4215
+}

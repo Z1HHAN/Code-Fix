@@ -1,0 +1,22 @@
+{
+  "project": "qb-rpn_eval",
+  "base_version": "sha256:a0db1277db965f7285c05c31812e06ec45184b39ab8646d4a89beee6d7ce2d71",
+  "candidate_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+  "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_rpn_eval.py": "5a605345d5d036f47b7eba0ae87c0abd854b4d88610bbb3e44b9f60744cd2e08",
+    "json_testcases/rpn_eval.json": "03fbb45a22f12fd6924331301b1afd8738e6dff1bc76e3fb0d185047c4678b67",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/rpn_eval.py",
+      "new_content": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    return stack.pop()\n\n\n\n\"\"\"\nReverse Polish Notation\n\nFour-function calculator with input given in Reverse Polish Notation (RPN).\n\nInput:\n    A list of values and operators encoded as floats and strings\n\nPrecondition:\n    all(\n        isinstance(token, float) or token in ('+', '-', '*', '/') for token in tokens\n    )\n\nExample:\n    >>> rpn_eval([3.0, 5.0, '+', 2.0, '/'])\n    4.0\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_rpn_eval.py": "5a605345d5d036f47b7eba0ae87c0abd854b4d88610bbb3e44b9f60744cd2e08"
+  }
+}

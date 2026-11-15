@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "collected_nodeids": [
+    "python_testcases/test_is_valid_parenthesization.py::test_is_valid_parenthesization[input_data0-True]",
+    "python_testcases/test_is_valid_parenthesization.py::test_is_valid_parenthesization[input_data1-False]",
+    "python_testcases/test_is_valid_parenthesization.py::test_is_valid_parenthesization[input_data2-False]"
+  ],
+  "collection_errors": [],
+  "reports": [
+    {
+      "nodeid": "python_testcases/test_is_valid_parenthesization.py::test_is_valid_parenthesization[input_data0-True]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_is_valid_parenthesization.py::test_is_valid_parenthesization[input_data0-True]",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_is_valid_parenthesization.py::test_is_valid_parenthesization[input_data0-True]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_is_valid_parenthesization.py::test_is_valid_parenthesization[input_data1-False]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_is_valid_parenthesization.py::test_is_valid_parenthesization[input_data1-False]",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_is_valid_parenthesization.py::test_is_valid_parenthesization[input_data1-False]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_is_valid_parenthesization.py::test_is_valid_parenthesization[input_data2-False]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_is_valid_parenthesization.py::test_is_valid_parenthesization[input_data2-False]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "AssertionError",
+      "exception_path": "/w/python_testcases/test_is_valid_parenthesization.py"
+    },
+    {
+      "nodeid": "python_testcases/test_is_valid_parenthesization.py::test_is_valid_parenthesization[input_data2-False]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    }
+  ],
+  "session_finished": true,
+  "exit_code": 1
+}

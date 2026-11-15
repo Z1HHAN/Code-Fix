@@ -1,0 +1,20 @@
+{
+  "project": "qb-shortest_paths",
+  "base_version": "sha256:0265270d0d718deef5cd594419da00f34c6ff6f7835906c1e0df662496f27933",
+  "candidate_version": "sha256:03dca8426699da83167c3c99d38752e5b48c1bc4ce2ebac47caba0b2a70cff71",
+  "test_suite_version": "sha256:a08bc169b2e6b9bf0959cfc63f2ebf51850b6968a5f0d118afcfa685afba6bdd",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_shortest_paths.py": "8ee521556000dc6bcf4ae71c6db0f91c387f96e055557ec1accdde824928b4f8"
+  },
+  "changes": [
+    {
+      "path": "python_programs/shortest_paths.py",
+      "new_content": "\ndef shortest_paths(source, weight_by_edge):\n    weight_by_node = {\n        v: float('inf') for u, v in weight_by_edge\n    }\n    weight_by_node[source] = 0\n\n    for i in range(len(weight_by_node) - 1):\n        for (u, v), weight in weight_by_edge.items():\n            weight_by_node[v] = min(\n                weight_by_node[u] + weight,\n                weight_by_node[v]\n            )\n\n    return weight_by_node\n\n\n\"\"\"\nMinimum-Weight Paths\nbellman-ford\n\nBellman-Ford algorithm implementation\n\nGiven a directed graph that may contain negative edges (as long as there are no negative-weight cycles), efficiently calculates the minimum path weights from a source node to every other node in the graph.\n\nInput:\n    source: A node id\n    weight_by_edge: A dict containing edge weights keyed by an ordered pair of node ids\n\nPrecondition:\n    The input graph contains no negative-weight cycles\n\nOutput:\n   A dict mapping each node id to the minimum weight of a path from the source node to that node\n\nExample:\n    >>> shortest_paths('A', {\n        ('A', 'B'): 3,\n        ('A', 'C'): 3,\n        ('A', 'F'): 5,\n        ('C', 'B'): -2,\n        ('C', 'D'): 7,\n        ('C', 'E'): 4,\n        ('D', 'E'): -5,\n        ('E', 'F'): -1\n    })\n    {'A': 0, 'C': 3, 'B': 1, 'E': 5, 'D': 10, 'F': 4}\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_shortest_paths.py": "8ee521556000dc6bcf4ae71c6db0f91c387f96e055557ec1accdde824928b4f8"
+  }
+}

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="0.068" timestamp="2026-11-15T15:32:17.961056+00:00" hostname="a2577ab7196e"><testcase classname="python_testcases.test_shortest_paths" name="test1" time="0.003"><failure message="AssertionError: assert {'A': 0, 'B':...'D': inf, ...} == {'A': 0, 'B':... 'D': 10, ...}&#10;  &#10;  Omitting 1 identical items, use -vv to show&#10;  Differing items:&#10;  {'B': inf} != {'B': 1}&#10;  {'C': inf} != {'C': 3}&#10;  {'E': inf} != {'E': 5}&#10;  {'D': inf} != {'D': 10}...&#10;  &#10;  ...Full output truncated (26 lines hidden), use '-vv' to show">def test1():
+        """Case 1: Graph with multiple paths
+        Output: {'A': 0, 'C': 3, 'B': 1, 'E': 5, 'D': 10, 'F': 4}
+        """
+    
+        graph = {
+            ("A", "B"): 3,
+            ("A", "C"): 3,
+            ("A", "F"): 5,
+            ("C", "B"): -2,
+            ("C", "D"): 7,
+            ("C", "E"): 4,
+            ("D", "E"): -5,
+            ("E", "F"): -1,
+        }
+        result = shortest_paths("A", graph)
+    
+        expected = {"A": 0, "C": 3, "B": 1, "E": 5, "D": 10, "F": 4}
+&gt;       assert result == expected
+E       AssertionError: assert {'A': 0, 'B':...'D': inf, ...} == {'A': 0, 'B':... 'D': 10, ...}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'B': inf} != {'B': 1}
+E         {'C': inf} != {'C': 3}
+E         {'E': inf} != {'E': 5}
+E         {'D': inf} != {'D': 10}...
+E         
+E         ...Full output truncated (26 lines hidden), use '-vv' to show
+
+python_testcases/test_shortest_paths.py:27: AssertionError</failure></testcase><testcase classname="python_testcases.test_shortest_paths" name="test2" time="0.003"><failure message="AssertionError: assert {'A': 0, 'B':...'D': inf, ...} == {'A': 0, 'B':..., 'D': 6, ...}&#10;  &#10;  Omitting 1 identical items, use -vv to show&#10;  Differing items:&#10;  {'B': inf} != {'B': 1}&#10;  {'C': inf} != {'C': 3}&#10;  {'E': inf} != {'E': 5}&#10;  {'D': inf} != {'D': 6}...&#10;  &#10;  ...Full output truncated (26 lines hidden), use '-vv' to show">def test2():
+        """Case 2: Graph with one path
+        Output: {'A': 0, 'C': 3, 'B': 1, 'E': 5, 'D': 6, 'F': 9}
+        """
+    
+        graph2 = {
+            ("A", "B"): 1,
+            ("B", "C"): 2,
+            ("C", "D"): 3,
+            ("D", "E"): -1,
+            ("E", "F"): 4,
+        }
+        result = shortest_paths("A", graph2)
+    
+        expected = {"A": 0, "C": 3, "B": 1, "E": 5, "D": 6, "F": 9}
+&gt;       assert result == expected
+E       AssertionError: assert {'A': 0, 'B':...'D': inf, ...} == {'A': 0, 'B':..., 'D': 6, ...}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'B': inf} != {'B': 1}
+E         {'C': inf} != {'C': 3}
+E         {'E': inf} != {'E': 5}
+E         {'D': inf} != {'D': 6}...
+E         
+E         ...Full output truncated (26 lines hidden), use '-vv' to show
+
+python_testcases/test_shortest_paths.py:45: AssertionError</failure></testcase><testcase classname="python_testcases.test_shortest_paths" name="test3" time="0.003"><failure message="AssertionError: assert {'A': 0, 'B':...'D': inf, ...} == {'A': 0, 'B':..., 'D': 6, ...}&#10;  &#10;  Omitting 1 identical items, use -vv to show&#10;  Differing items:&#10;  {'B': inf} != {'B': 1}&#10;  {'C': inf} != {'C': 3}&#10;  {'E': inf} != {'E': 5}&#10;  {'D': inf} != {'D': 6}...&#10;  &#10;  ...Full output truncated (26 lines hidden), use '-vv' to show">def test3():
+        """Case 3: Graph with cycle
+        Output: {'A': 0, 'C': 3, 'B': 1, 'E': 5, 'D': 6, 'F': 9}
+        """
+    
+        graph3 = {
+            ("A", "B"): 1,
+            ("B", "C"): 2,
+            ("C", "D"): 3,
+            ("D", "E"): -1,
+            ("E", "D"): 1,
+            ("E", "F"): 4,
+        }
+        result = shortest_paths("A", graph3)
+    
+        expected = {"A": 0, "C": 3, "B": 1, "E": 5, "D": 6, "F": 9}
+&gt;       assert result == expected
+E       AssertionError: assert {'A': 0, 'B':...'D': inf, ...} == {'A': 0, 'B':..., 'D': 6, ...}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'B': inf} != {'B': 1}
+E         {'C': inf} != {'C': 3}
+E         {'E': inf} != {'E': 5}
+E         {'D': inf} != {'D': 6}...
+E         
+E         ...Full output truncated (26 lines hidden), use '-vv' to show
+
+python_testcases/test_shortest_paths.py:64: AssertionError</failure></testcase></testsuite></testsuites>

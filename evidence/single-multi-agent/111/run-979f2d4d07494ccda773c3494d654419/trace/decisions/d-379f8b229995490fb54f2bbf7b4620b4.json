@@ -1,0 +1,69 @@
+{
+  "decision_id": "d-379f8b229995490fb54f2bbf7b4620b4",
+  "run_id": "run-979f2d4d07494ccda773c3494d654419",
+  "code_version": "sha256:28c33e9f66efe2c3e7ade87ec2f7d84e139c5a55347bb6d2cd6caca67ffaa1f9",
+  "evidence_ids": [
+    "test-final-check"
+  ],
+  "failure_class": "passed",
+  "action": "finish",
+  "target_agent": null,
+  "reason": "独立验收实际通过且证据对应最终代码版本。",
+  "retries_left": 2,
+  "rule_id": "R07",
+  "terminal_status": "success",
+  "trace_version": "1.0.0",
+  "step_id": "s-61d27d9d349c4099bf3190e59e227380",
+  "parent_step_id": "s-3d9c21832f5b45a28b42da16d76f0f7e",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "final_check",
+  "strategy": "single",
+  "program_decision": {
+    "decision_id": "d-379f8b229995490fb54f2bbf7b4620b4",
+    "run_id": "run-979f2d4d07494ccda773c3494d654419",
+    "code_version": "sha256:28c33e9f66efe2c3e7ade87ec2f7d84e139c5a55347bb6d2cd6caca67ffaa1f9",
+    "evidence_ids": [
+      "test-final-check"
+    ],
+    "failure_class": "passed",
+    "action": "finish",
+    "target_agent": null,
+    "reason": "独立验收实际通过且证据对应最终代码版本。",
+    "retries_left": 2,
+    "rule_id": "R07",
+    "terminal_status": "success"
+  },
+  "model_advice": null,
+  "effective_action": "finish",
+  "override_reason": null,
+  "test_suite_version": "sha256:167e8429e7ee4a2e7b85f230dddbe4937cb3fdc35c366643d4b726d8827dfe07",
+  "counters": {
+    "model_calls": 1,
+    "tool_calls": 3,
+    "rounds_used": 1,
+    "cost": {
+      "calls": 1,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.00319",
+      "reserved_cny": "0"
+    },
+    "remaining_seconds": 265.79484400000365,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}

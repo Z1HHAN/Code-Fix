@@ -1,0 +1,22 @@
+{
+  "project": "qb-is_valid_parenthesization",
+  "base_version": "sha256:a4944df2885a1598d96085f6c65a1651521f5468a9dbd4ef0da831a54561de68",
+  "candidate_version": "sha256:befc2a110a0758f4586d2d738c911230e8f9fb037e0c29756bbce609c186caf7",
+  "test_suite_version": "sha256:a1bcbcdb2d9e3c8b52851153e5335d6459adaf6a71dcac4ead52973c388183ab",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_is_valid_parenthesization.py": "484b2e67707900e6ef0cff1df83ef441d39fcc3f56afdd9180ff1363fc7d1f76",
+    "json_testcases/is_valid_parenthesization.json": "f1a1baef1f3c7709b7326abc5949eb73e1442756fb68e06b48a360151a13b771",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/is_valid_parenthesization.py",
+      "new_content": "\ndef is_valid_parenthesization(parens):\n    depth = 0\n    for paren in parens:\n        if paren == '(':\n            depth += 1\n        else:\n            depth -= 1\n            if depth < 0:\n                return False\n\n    return depth == 0\n\n\n\"\"\"\nNested Parens\nInput:\n    parens: A string of parentheses\n\nPrecondition:\n    all(paren in '()' for paren in parens)\n\nOutput:\n    Whether the parentheses are properly nested\n\nExamples:\n    >>> is_valid_parenthesization('((()()))()')\n    True\n    >>> is_valid_parenthesization(')()(')\n    False\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_is_valid_parenthesization.py": "484b2e67707900e6ef0cff1df83ef441d39fcc3f56afdd9180ff1363fc7d1f76"
+  }
+}

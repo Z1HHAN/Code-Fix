@@ -1,0 +1,12 @@
+--- a/python_programs/possible_change.py
++++ b/python_programs/possible_change.py
+@@ -3,6 +3,9 @@
+     if total == 0:
+         return 1
+     if total < 0:
++        return 0
++
++    if not coins:
+         return 0
+ 
+     first, *rest = coins

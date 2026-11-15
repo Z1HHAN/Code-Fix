@@ -1,0 +1,20 @@
+{
+  "project": "qb-shortest_path_lengths",
+  "base_version": "sha256:6591fed27195e0a37cb85dc4f853a528551dea3cd17d577976b474772d93ed9c",
+  "candidate_version": "sha256:fbf4016cb53ab5b71f6b69efd7fd9aad128a8a5394b299538ed12dea899d117c",
+  "test_suite_version": "sha256:5f6f0db4c7fd33942dcb35064c9a106602679a9ee21869e974a7fa19c01b6a87",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_shortest_path_lengths.py": "739c06b7341b481b57e72a8b81b4561d47f79e3c8030ddcbf6664850c6f86fa8"
+  },
+  "changes": [
+    {
+      "path": "python_programs/shortest_path_lengths.py",
+      "new_content": "from collections import defaultdict\n\ndef shortest_path_lengths(n, length_by_edge):\n    length_by_path = defaultdict(lambda: float('inf'))\n    length_by_path.update({(i, i): 0 for i in range(n)})\n    length_by_path.update(length_by_edge)\n\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                length_by_path[i, j] = min(\n                    length_by_path[i, j],\n                    length_by_path[i, k] + length_by_path[k, j]\n                )\n\n    return length_by_path\n\n\n\"\"\"\nAll Shortest Paths\nfloyd-warshall\n\nFloyd-Warshall algorithm implementation.\n\nCalculates the length of the shortest path connecting every ordered pair of nodes in a directed graph.\n\n\n\nInput:\n    n: The number of nodes in the graph. The nodes are assumed to have ids 0..n-1\n    length_by_edge: A dict containing edge length keyed by an ordered pair of node ids\n\nPrecondition:\n    There are no negative-length cycles in the input graph\n\nOutput:\n    A dict containing shortest path length keyed by an ordered pair of node ids\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_shortest_path_lengths.py": "739c06b7341b481b57e72a8b81b4561d47f79e3c8030ddcbf6664850c6f86fa8"
+  }
+}

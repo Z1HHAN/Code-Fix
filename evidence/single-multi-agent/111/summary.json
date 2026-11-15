@@ -1,46 +1,45 @@
 {
   "batch_complete": false,
-  "scope": "partial paired experiment; fee unknown stop; not full40 results",
   "planned_tasks_per_arm": 40,
-  "completed_runs": 15,
-  "remaining_runs": 65,
-  "matched_complete_pairs": 7,
+  "completed_runs": 67,
+  "remaining_runs": 13,
+  "matched_complete_pairs": 33,
   "paired": {
     "single": {
-      "paired_tasks": 7,
-      "success": 7,
-      "requests": 8,
-      "candidate_rounds": 8,
-      "estimated_cny": "0.031025",
-      "elapsed_seconds": 288.320683
+      "paired_tasks": 33,
+      "success": 32,
+      "requests": 39,
+      "candidate_rounds": 39,
+      "estimated_cny": "0.115612",
+      "elapsed_seconds": 1058.157976
     },
     "dynamic": {
-      "paired_tasks": 7,
-      "success": 7,
-      "requests": 14,
-      "candidate_rounds": 7,
-      "estimated_cny": "0.037411",
-      "elapsed_seconds": 295.887304
+      "paired_tasks": 33,
+      "success": 31,
+      "requests": 85,
+      "candidate_rounds": 37,
+      "estimated_cny": "0.254762",
+      "elapsed_seconds": 1268.887642
     }
   },
   "all_plan_summary": {
     "single": {
       "planned": 40,
-      "ran": 7,
-      "executed": 7,
-      "success": 7,
-      "failed": 0,
+      "ran": 33,
+      "executed": 33,
+      "success": 32,
+      "failed": 1,
       "blocked": 0,
-      "not_run": 33,
-      "success_rate_all": 0.175,
-      "success_rate_executed": 1.0,
-      "candidate_rounds": 8,
-      "requests": 8,
+      "not_run": 7,
+      "success_rate_all": 0.8,
+      "success_rate_executed": 0.9696969696969697,
+      "candidate_rounds": 39,
+      "requests": 39,
       "cost": {
         "cny": {
-          "known_subtotal": "0.031025",
+          "known_subtotal": "0.115612",
           "unknown_runs": 0,
-          "total": "0.031025"
+          "total": "0.115612"
         },
         "usd": {
           "known_subtotal": "0",
@@ -51,19 +50,19 @@
     },
     "dynamic": {
       "planned": 40,
-      "ran": 8,
-      "executed": 8,
-      "success": 7,
-      "failed": 1,
+      "ran": 34,
+      "executed": 34,
+      "success": 31,
+      "failed": 3,
       "blocked": 0,
-      "not_run": 32,
-      "success_rate_all": 0.175,
-      "success_rate_executed": 0.875,
-      "candidate_rounds": 8,
-      "requests": 16,
+      "not_run": 6,
+      "success_rate_all": 0.775,
+      "success_rate_executed": 0.9117647058823529,
+      "candidate_rounds": 37,
+      "requests": 86,
       "cost": {
         "cny": {
-          "known_subtotal": "0.037411",
+          "known_subtotal": "0.254762",
           "unknown_runs": 1,
           "total": null
         },
@@ -76,30 +75,46 @@
     }
   },
   "paired_outcomes": {
-    "both_success": 7,
-    "first_only": 0,
+    "both_success": 31,
+    "first_only": 1,
     "second_only": 0,
-    "neither_success": 0,
-    "incomplete": 33
+    "neither_success": 1,
+    "incomplete": 7
+  },
+  "observed_agent_calls": {
+    "single": {
+      "repairer": 39
+    },
+    "dynamic": {
+      "detector": 37,
+      "repairer": 39,
+      "scheduler": 5,
+      "locator": 5
+    }
+  },
+  "failure_classes": {
+    "single": {
+      "stopped": 1,
+      "not_run": 7
+    },
+    "dynamic": {
+      "model_transport_error": 2,
+      "invalid_model_output": 1,
+      "not_run": 6
+    }
   },
   "authorization": {
-    "requests": 181,
-    "estimated_cny": "1.883601",
+    "requests": 282,
+    "estimated_cny": "2.181837",
     "unknown_or_pending": 1
   },
-  "new_requests": 24,
-  "new_known_estimated_cny": "0.072138",
+  "new_requests": 125,
+  "new_known_estimated_cny": "0.370374",
   "source_commit": "5d720e325863622d3d7367321985ea2c79da1d2f",
   "stop_reason": "累计费用授权不足或费用未知",
-  "comparison_id": "cmp-60638bb7501f45cd82bb467cf486644b1695c2e9a6bb5d7b2236ccb38d10d66c",
+  "comparison_id": "cmp-dd56c8bc54afdc357293a98ae3bd011b36176c3f1b5fa1b9d817450c59a8e71b",
   "model": "deepseek-v4.1-flash-1017",
   "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
-  "observed_agent_calls": {
-    "repairer": 16,
-    "detector": 8
-  },
-  "unobserved_roles": [
-    "scheduler",
-    "locator"
-  ]
+  "batch_wall_seconds_including_operator_wait": 5680.813233,
+  "interpretation": "One run per arm/task. Do not claim superiority from implementation or coverage alone; include infrastructure exits and cost."
 }

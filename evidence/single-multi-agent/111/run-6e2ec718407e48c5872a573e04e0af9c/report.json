@@ -1,0 +1,2533 @@
+{
+  "schema_version": "v3",
+  "run": {
+    "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+    "task": {
+      "config_id": "cfg-a27c6a7bb63ac54c51f649cf38eb4acd17abda2a9694a13da0199c8ebdc4850a",
+      "description": "修复gcd缺陷，使预登记的原生测试通过；不修改测试。",
+      "max_calls": 12,
+      "max_rounds": 3,
+      "mode": "repair",
+      "project": "qb-gcd",
+      "strategy": "dynamic",
+      "total_seconds": 300
+    },
+    "status": "success",
+    "created_at": "2026-11-15T15:05:01.330986+00:00",
+    "updated_at": "2026-11-15T15:05:36.972076+00:00",
+    "result": {
+      "final_result": "passed",
+      "dev_result": "passed",
+      "rounds_used": 1,
+      "model_calls": 2,
+      "tool_calls": 3,
+      "model_api_called": true,
+      "mode": "live",
+      "isolation_ready": true,
+      "strategy": "dynamic",
+      "project": "qb-gcd",
+      "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "code_path": "candidate-1/python_programs/gcd.py",
+      "evidence_matches_current_version": true,
+      "baseline_failure_class": "code_runtime_error",
+      "failure_class": "passed",
+      "rule_id": "R07",
+      "reason": "开发测试及干净副本同套原生测试均实际通过",
+      "model_attempts": 2,
+      "actual_model_requests": 2,
+      "cost": {
+        "calls": 2,
+        "status": "estimated",
+        "basis": "versioned_model_rates; not_provider_invoice",
+        "models": [
+          {
+            "model": "deepseek-v4.1-flash-1017",
+            "currency": "CNY",
+            "status": "estimated",
+            "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+            "upper_estimate": false
+          },
+          {
+            "model": "deepseek-v4.1-flash-1017",
+            "currency": "CNY",
+            "status": "estimated",
+            "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+            "upper_estimate": false
+          }
+        ],
+        "currency": "CNY",
+        "amount_cny": "0.004824",
+        "reserved_cny": "0"
+      },
+      "trace_version": "1.0.0"
+    },
+    "control": null,
+    "archived_at": null
+  },
+  "events": [
+    {
+      "sequence": 3879,
+      "created_at": "2026-11-15T15:05:01.366596+00:00",
+      "event": "started"
+    },
+    {
+      "sequence": 3880,
+      "created_at": "2026-11-15T15:05:01.522999+00:00",
+      "event": "guard_check",
+      "step_id": "configuration-check",
+      "node_id": "configuration_check",
+      "status": "ok",
+      "reason": "角色配置、提示词和输出协议检查通过"
+    },
+    {
+      "sequence": 3881,
+      "created_at": "2026-11-15T15:05:02.472493+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-50c7aace148043f9bf09f82b5be3794a",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "dynamic",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 3882,
+      "created_at": "2026-11-15T15:05:07.045132+00:00",
+      "event": "isolation_checked",
+      "isolation_ready": true,
+      "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+      "reason": null,
+      "engine_id": "82a0558b-2dfa-48b6-86f2-de3c8937dc79",
+      "controls": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "none",
+          "Config": {}
+        },
+        "NetworkMode": "none",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "host",
+        "Dns": null,
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "Tmpfs": {
+          "/tmp": "rw,noexec,nosuid,size=67108864"
+        },
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 268435456,
+        "NanoCpus": 1000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 268435456,
+        "MemorySwappiness": null,
+        "OomKillDisable": false,
+        "PidsLimit": 64,
+        "Ulimits": [
+          {
+            "Name": "nofile",
+            "Hard": 128,
+            "Soft": 128
+          }
+        ],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/rpc_codec.py",
+            "Target": "/rpc_codec.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "volume",
+            "Source": "codefix-out-5e0e624baf5b4264a6cd2699f27e8d7f",
+            "Target": "/out"
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix-data/jobs/job-da4df6820b694b29b34cb50ec3b091e3/isolation/probe-work",
+            "Target": "/w",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/c_runner/pytest_entry.py",
+            "Target": "/entry.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/candidate_entry.py",
+            "Target": "/harness.py",
+            "ReadOnly": true
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+      "execution_mode": "remote-docker",
+      "execution_endpoint": "https://8.148.85.237",
+      "remote_job_id": "job-da4df6820b694b29b34cb50ec3b091e3",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 3883,
+      "created_at": "2026-11-15T15:05:07.066203+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-50c7aace148043f9bf09f82b5be3794a",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "status": "ok",
+      "evidence_path": "isolation",
+      "isolation_ready": true,
+      "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+      "reason": null,
+      "engine_id": "82a0558b-2dfa-48b6-86f2-de3c8937dc79",
+      "controls": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "none",
+          "Config": {}
+        },
+        "NetworkMode": "none",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "host",
+        "Dns": null,
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "Tmpfs": {
+          "/tmp": "rw,noexec,nosuid,size=67108864"
+        },
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 268435456,
+        "NanoCpus": 1000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 268435456,
+        "MemorySwappiness": null,
+        "OomKillDisable": false,
+        "PidsLimit": 64,
+        "Ulimits": [
+          {
+            "Name": "nofile",
+            "Hard": 128,
+            "Soft": 128
+          }
+        ],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/rpc_codec.py",
+            "Target": "/rpc_codec.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "volume",
+            "Source": "codefix-out-5e0e624baf5b4264a6cd2699f27e8d7f",
+            "Target": "/out"
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix-data/jobs/job-da4df6820b694b29b34cb50ec3b091e3/isolation/probe-work",
+            "Target": "/w",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/c_runner/pytest_entry.py",
+            "Target": "/entry.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/candidate_entry.py",
+            "Target": "/harness.py",
+            "ReadOnly": true
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+      "execution_mode": "remote-docker",
+      "execution_endpoint": "https://8.148.85.237",
+      "remote_job_id": "job-da4df6820b694b29b34cb50ec3b091e3",
+      "transport_mode": "live",
+      "duration_ms": 4598
+    },
+    {
+      "sequence": 3884,
+      "created_at": "2026-11-15T15:05:08.013703+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-dd5d5874e26444dbb740a2e3ee998830",
+      "parent_step_id": "s-50c7aace148043f9bf09f82b5be3794a",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 3885,
+      "created_at": "2026-11-15T15:05:13.224750+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-dd5d5874e26444dbb740a2e3ee998830",
+      "parent_step_id": "s-50c7aace148043f9bf09f82b5be3794a",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "evidence_id": "test-baseline",
+      "evidence_path": "baseline",
+      "call_id": "codefix-698b940b0d0d44da99068db9a0b00700",
+      "exit_code": 1,
+      "timed_out": false,
+      "duration_ms": 779,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-aff86ea348324e5ca0df3fd8ffab68f6,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-698b940b0d0d44da99068db9a0b00700",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-9408be9641444cbaa3b4f0bd6749aa24,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-9ac9b3a9b08c4c3a90baa14d497f9be9/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_gcd.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-9408be9641444cbaa3b4f0bd6749aa24",
+      "code_version": "sha256:ba3debc66394b61123fca12005012228914ac9f196ec12a1c2c26d3089d63428",
+      "project": "qb-gcd",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "expected_test_count": 6,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-0130b9c198924a62bbbe389af20d25ea",
+        "logs_captured": true,
+        "events": [
+          {
+            "event": "execution_error",
+            "detail": "RecursionError"
+          },
+          {
+            "event": "execution_error",
+            "detail": "RecursionError"
+          },
+          {
+            "event": "execution_error",
+            "detail": "RecursionError"
+          },
+          {
+            "event": "execution_error",
+            "detail": "RecursionError"
+          },
+          {
+            "event": "execution_error",
+            "detail": "RecursionError"
+          }
+        ],
+        "event_kinds": [
+          "execution_error"
+        ],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 6,
+        "passed": 1,
+        "failed": 5,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "failed",
+      "verification_status": "failed",
+      "failure_class": "code_runtime_error",
+      "reason": "Frozen native fixture tests completed with a recorded failure",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_gcd.py::test_gcd[input_data0-17]",
+          "python_testcases/test_gcd.py::test_gcd[input_data1-13]",
+          "python_testcases/test_gcd.py::test_gcd[input_data2-1]",
+          "python_testcases/test_gcd.py::test_gcd[input_data3-20]",
+          "python_testcases/test_gcd.py::test_gcd[input_data4-18913]",
+          "python_testcases/test_gcd.py::test_gcd[input_data5-3]"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_gcd.py::test_gcd[input_data0-17]",
+          "python_testcases/test_gcd.py::test_gcd[input_data1-13]",
+          "python_testcases/test_gcd.py::test_gcd[input_data2-1]",
+          "python_testcases/test_gcd.py::test_gcd[input_data3-20]",
+          "python_testcases/test_gcd.py::test_gcd[input_data4-18913]",
+          "python_testcases/test_gcd.py::test_gcd[input_data5-3]"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data0-17]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data1-13]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data2-1]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data3-20]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data4-18913]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data5-3]"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-9ac9b3a9b08c4c3a90baa14d497f9be9",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 3886,
+      "created_at": "2026-11-15T15:05:13.250599+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-dd5d5874e26444dbb740a2e3ee998830",
+      "parent_step_id": "s-50c7aace148043f9bf09f82b5be3794a",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "status": "ok",
+      "verification_status": "failed",
+      "evidence_id": "test-baseline",
+      "failure_class": "code_runtime_error",
+      "evidence_path": "baseline",
+      "code_version": "sha256:ba3debc66394b61123fca12005012228914ac9f196ec12a1c2c26d3089d63428",
+      "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "registered_test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "duration_ms": 5237
+    },
+    {
+      "sequence": 3887,
+      "created_at": "2026-11-15T15:05:13.326247+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-100e640ccf574e009ab82120e809bcf7",
+      "parent_step_id": "s-dd5d5874e26444dbb740a2e3ee998830",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 3888,
+      "created_at": "2026-11-15T15:05:16.921286+00:00",
+      "event": "guard_check",
+      "step_id": "m-eca0f21049134489b7151e19ebfbc585-budget",
+      "parent_step_id": "s-100e640ccf574e009ab82120e809bcf7",
+      "node_id": "budget_check",
+      "role": "repairer",
+      "round": 1,
+      "code_version": "sha256:ba3debc66394b61123fca12005012228914ac9f196ec12a1c2c26d3089d63428",
+      "status": "ok",
+      "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+    },
+    {
+      "sequence": 3889,
+      "created_at": "2026-11-15T15:05:16.954083+00:00",
+      "event": "guard_check",
+      "check": "patch_permission",
+      "step_id": "m-eca0f21049134489b7151e19ebfbc585-permission",
+      "parent_step_id": "s-100e640ccf574e009ab82120e809bcf7",
+      "node_id": "permission_check",
+      "round": 1,
+      "code_version": "sha256:ba3debc66394b61123fca12005012228914ac9f196ec12a1c2c26d3089d63428",
+      "status": "ok",
+      "reason": "补丁路径及结构检查通过"
+    },
+    {
+      "sequence": 3890,
+      "created_at": "2026-11-15T15:05:16.989964+00:00",
+      "event": "agent_call",
+      "role": "repairer",
+      "mode": "live",
+      "model_api_called": true,
+      "model": "deepseek-v4.1-flash-1017",
+      "call_id": "m-eca0f21049134489b7151e19ebfbc585",
+      "status": "ok",
+      "provider_id": "personal",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "usage": {
+        "prompt_tokens": 2983,
+        "total_tokens": 3200,
+        "completion_tokens": 217,
+        "prompt_tokens_details": {
+          "cached_tokens": 2048,
+          "image_tokens": 0,
+          "text_tokens": 2983
+        },
+        "completion_tokens_details": {
+          "text_tokens": 217
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount_cny": "0.002008",
+        "currency": "CNY",
+        "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+        "upper_estimate": false,
+        "basis": "versioned_model_rates; not_provider_invoice"
+      },
+      "attempts": 1,
+      "max_attempts": 1,
+      "transport_request_started": true,
+      "failure_class": null,
+      "budget_check": {
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      "provider_model": "deepseek-v4.1-flash-1017",
+      "provider_response_id": "chatcmpl-f825b685-beae-96d4-9978-8cd21f2f2c72",
+      "finish_reason": "stop",
+      "raw_text": "{\"changes\":[{\"path\":\"python_programs/gcd.py\",\"new_content\":\"def gcd(a, b):\\n    if b == 0:\\n        return a\\n    else:\\n        return gcd(b, a % b)\\n\\n\\n\\\"\\\"\\\"\\nInput:\\n    a: A nonnegative int\\n    b: A nonnegative int\\n\\n\\nGreatest Common Divisor\\n\\nPrecondition:\\n    isinstance(a, int) and isinstance(b, int)\\n\\nOutput:\\n    The greatest int that divides evenly into a and b\\n\\nExample:\\n    >>> gcd(35, 21)\\n    7\\n\\n\\\"\\\"\\\"\\n\"}],\"explanation\":\"原实现在递归时传入 (a % b, b)，参数顺序颠倒，导致后续计算错误（如 gcd(13,13) 期望13却失败）。欧几里得算法应递归 gcd(b, a % b)。\",\"evidence_ids\":[\"test-baseline\"],\"knowledge_citations\":[\"knowledge-public_tasks\"]}",
+      "duration_ms": 3535,
+      "code_version": "sha256:ba3debc66394b61123fca12005012228914ac9f196ec12a1c2c26d3089d63428",
+      "round": 1,
+      "provenance": {
+        "role_override": {
+          "task_instruction": "",
+          "generation": {
+            "max_output_tokens": 8192,
+            "enable_thinking": false
+          }
+        },
+        "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "locator": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "repairer": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "detector": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "scheduler": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "locator",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "repairer",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "detector",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "scheduler",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+        "prompt_ref": "prompts/repairer.md",
+        "prompt_sha256": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+        "system_prompt_sha256": "279bac1d22413b8ccf15b26d768a0f65fb210d7347fe57a0b0284e1427f95635",
+        "agent_instance_id": "run-6e2ec718407e48c5872a573e04e0af9c:repairer",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "repairer",
+          "title": "修复员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [
+            "detector",
+            "scheduler",
+            "locator"
+          ],
+          "produces": "candidate_changes",
+          "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+          "output_schema": "RepairOutput",
+          "permitted_action": "propose_source_patch",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "8fa1a2ef8fde348f27a5ce1862ed65bce4eea9d6207d4091083355cf3e8ae3ef",
+        "handoffs": [],
+        "messages_sha256": "f7829fe096e32abe57de124d67ee8b107a2ef5cbd412969047d3973e95c7c1fa",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "repairer",
+          "binding": "approved_profile",
+          "profile_ref": "personal_model",
+          "mode": "live",
+          "provider_id": "personal",
+          "model": "deepseek-v4.1-flash-1017",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+          "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+          "effective_parameters": {
+            "max_tokens": 8192,
+            "enable_thinking": false
+          },
+          "request_seconds": 60,
+          "daily_shared_usd": null,
+          "input_usd_per_million": null,
+          "output_usd_per_million": null,
+          "effective_parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481",
+          "currency": "CNY",
+          "personal_pricing": {
+            "provider": "qianwen-ai",
+            "model": "deepseek-v4.1-flash-1017",
+            "region": "platform-standard",
+            "mode": "thinking",
+            "currency": "CNY",
+            "unit": "per_million_tokens",
+            "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+            "verified_at": "2026-11-11",
+            "endpoint_host": "maas.qianwenaiapi.com",
+            "tiers": [
+              {
+                "max_input_tokens": 1000000,
+                "input": "2",
+                "output": "8",
+                "cached_input": "0.2"
+              }
+            ],
+            "offpeak_discount": "0.5",
+            "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+          },
+          "daily_limit": "5",
+          "monetary_budget_enabled": true
+        }
+      },
+      "step_id": "s-100e640ccf574e009ab82120e809bcf7",
+      "parent_step_id": "s-dd5d5874e26444dbb740a2e3ee998830",
+      "parsed_output": {
+        "changes": [
+          {
+            "path": "python_programs/gcd.py",
+            "new_content": "def gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n\n\n\"\"\"\nInput:\n    a: A nonnegative int\n    b: A nonnegative int\n\n\nGreatest Common Divisor\n\nPrecondition:\n    isinstance(a, int) and isinstance(b, int)\n\nOutput:\n    The greatest int that divides evenly into a and b\n\nExample:\n    >>> gcd(35, 21)\n    7\n\n\"\"\"\n"
+          }
+        ],
+        "explanation": "原实现在递归时传入 (a % b, b)，参数顺序颠倒，导致后续计算错误（如 gcd(13,13) 期望13却失败）。欧几里得算法应递归 gcd(b, a % b)。",
+        "evidence_ids": [
+          "test-baseline"
+        ],
+        "knowledge_citations": [
+          "knowledge-public_tasks"
+        ]
+      }
+    },
+    {
+      "sequence": 3891,
+      "created_at": "2026-11-15T15:05:17.032402+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-100e640ccf574e009ab82120e809bcf7",
+      "parent_step_id": "s-dd5d5874e26444dbb740a2e3ee998830",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "call_id": "m-eca0f21049134489b7151e19ebfbc585",
+      "artifact_path": "calls/m-eca0f21049134489b7151e19ebfbc585",
+      "code_version": "sha256:ba3debc66394b61123fca12005012228914ac9f196ec12a1c2c26d3089d63428",
+      "failure_class": null,
+      "agent_instance_id": "run-6e2ec718407e48c5872a573e04e0af9c:repairer",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "repairer",
+        "title": "修复员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [
+          "detector",
+          "scheduler",
+          "locator"
+        ],
+        "produces": "candidate_changes",
+        "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+        "output_schema": "RepairOutput",
+        "permitted_action": "propose_source_patch",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": null,
+      "duration_ms": 3694
+    },
+    {
+      "sequence": 3892,
+      "created_at": "2026-11-15T15:05:17.078129+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-f12c0cf360ea4810a457e3b14e03df14",
+      "parent_step_id": "s-100e640ccf574e009ab82120e809bcf7",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 3893,
+      "created_at": "2026-11-15T15:05:17.200017+00:00",
+      "event": "candidate_applied",
+      "round": 1,
+      "project": "qb-gcd",
+      "base_version": "sha256:ba3debc66394b61123fca12005012228914ac9f196ec12a1c2c26d3089d63428",
+      "candidate_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "frozen_file_sha256": {
+        "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+        "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+        "python_testcases/test_gcd.py": "1e0f36211d258a295ec11359495202ff8491736ffe3a9b56336c1a633a1af589",
+        "json_testcases/gcd.json": "7ffac859d1f4791fb5550c79f96f056ead93156fd122401f24ade11b5fa43525",
+        "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+      },
+      "changes": [
+        {
+          "path": "python_programs/gcd.py",
+          "new_content": "def gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n\n\n\"\"\"\nInput:\n    a: A nonnegative int\n    b: A nonnegative int\n\n\nGreatest Common Divisor\n\nPrecondition:\n    isinstance(a, int) and isinstance(b, int)\n\nOutput:\n    The greatest int that divides evenly into a and b\n\nExample:\n    >>> gcd(35, 21)\n    7\n\n\"\"\"\n"
+        }
+      ],
+      "test_sha256": {
+        "python_testcases/test_gcd.py": "1e0f36211d258a295ec11359495202ff8491736ffe3a9b56336c1a633a1af589"
+      }
+    },
+    {
+      "sequence": 3894,
+      "created_at": "2026-11-15T15:05:17.222736+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-f12c0cf360ea4810a457e3b14e03df14",
+      "parent_step_id": "s-100e640ccf574e009ab82120e809bcf7",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "artifact_path": "patch-1",
+      "duration_ms": 152
+    },
+    {
+      "sequence": 3895,
+      "created_at": "2026-11-15T15:05:17.246125+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-72697d9c84d84e01b3058e0edd96a8f1",
+      "parent_step_id": "s-f12c0cf360ea4810a457e3b14e03df14",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 3896,
+      "created_at": "2026-11-15T15:05:21.663340+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-72697d9c84d84e01b3058e0edd96a8f1",
+      "parent_step_id": "s-f12c0cf360ea4810a457e3b14e03df14",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "evidence_id": "test-development-1",
+      "evidence_path": "development-1",
+      "call_id": "codefix-04885a4531594b9baf0330fac9defe23",
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_ms": 886,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-e42d5de280ff4ce99782000c06d1068a,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-04885a4531594b9baf0330fac9defe23",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-50a76162379e4df19ef72e5d718f63d6,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-e42563531cf8438f89aecf18fcc74e3d/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_gcd.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-50a76162379e4df19ef72e5d718f63d6",
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "project": "qb-gcd",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "expected_test_count": 6,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-dd8c80517a3e468bbe9683d509d85ced",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 6,
+        "passed": 6,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "ok",
+      "verification_status": "passed",
+      "failure_class": "passed",
+      "reason": "Expected identities and complete lifecycle verified against JUnit",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_gcd.py::test_gcd[input_data0-17]",
+          "python_testcases/test_gcd.py::test_gcd[input_data1-13]",
+          "python_testcases/test_gcd.py::test_gcd[input_data2-1]",
+          "python_testcases/test_gcd.py::test_gcd[input_data3-20]",
+          "python_testcases/test_gcd.py::test_gcd[input_data4-18913]",
+          "python_testcases/test_gcd.py::test_gcd[input_data5-3]"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_gcd.py::test_gcd[input_data0-17]",
+          "python_testcases/test_gcd.py::test_gcd[input_data1-13]",
+          "python_testcases/test_gcd.py::test_gcd[input_data2-1]",
+          "python_testcases/test_gcd.py::test_gcd[input_data3-20]",
+          "python_testcases/test_gcd.py::test_gcd[input_data4-18913]",
+          "python_testcases/test_gcd.py::test_gcd[input_data5-3]"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data0-17]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data1-13]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data2-1]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data3-20]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data4-18913]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data5-3]"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-e42563531cf8438f89aecf18fcc74e3d",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 3897,
+      "created_at": "2026-11-15T15:05:21.697359+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-72697d9c84d84e01b3058e0edd96a8f1",
+      "parent_step_id": "s-f12c0cf360ea4810a457e3b14e03df14",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "verification_status": "passed",
+      "evidence_id": "test-development-1",
+      "failure_class": "passed",
+      "evidence_path": "development-1",
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "registered_test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "duration_ms": 4444
+    },
+    {
+      "sequence": 3898,
+      "created_at": "2026-11-15T15:05:21.748820+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-0528d2c6ed0047999bce82727326d27c",
+      "parent_step_id": "s-72697d9c84d84e01b3058e0edd96a8f1",
+      "node_id": "detector",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 3899,
+      "created_at": "2026-11-15T15:05:30.177411+00:00",
+      "event": "guard_check",
+      "step_id": "m-5b69e63aaa30461a88a349b0ce866482-budget",
+      "parent_step_id": "s-0528d2c6ed0047999bce82727326d27c",
+      "node_id": "budget_check",
+      "role": "detector",
+      "round": 1,
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "status": "ok",
+      "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+    },
+    {
+      "sequence": 3900,
+      "created_at": "2026-11-15T15:05:30.206173+00:00",
+      "event": "agent_call",
+      "role": "detector",
+      "mode": "live",
+      "model_api_called": true,
+      "model": "deepseek-v4.1-flash-1017",
+      "call_id": "m-5b69e63aaa30461a88a349b0ce866482",
+      "status": "ok",
+      "provider_id": "personal",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "usage": {
+        "prompt_tokens": 1352,
+        "total_tokens": 1718,
+        "completion_tokens": 366,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "image_tokens": 0,
+          "text_tokens": 1352
+        },
+        "completion_tokens_details": {
+          "text_tokens": 366
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount_cny": "0.002816",
+        "currency": "CNY",
+        "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+        "upper_estimate": false,
+        "basis": "versioned_model_rates; not_provider_invoice"
+      },
+      "attempts": 1,
+      "max_attempts": 1,
+      "transport_request_started": true,
+      "failure_class": null,
+      "budget_check": {
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      "provider_model": "deepseek-v4.1-flash-1017",
+      "provider_response_id": "chatcmpl-dbc1819f-9270-92fa-b0ed-e3a5dfe5036d",
+      "finish_reason": "stop",
+      "raw_text": "{\"analysis\":\"提供的唯一开发测试证据 test-development-1 显示：收集 6 项、通过 6、失败 0、错误 0、跳过 0，退出码 0，stdout 以 CODEFIX_READY 结束；其 failure_class 明确为 passed。因此当前候选 python_programs/gcd.py 的实现（经典欧几里得迭代/递归形式：b==0 返回 a，否则 gcd(b, a % b)）在登记的这 6 条原生测试上未出现失败，没有失败原因可归因。需要指出不确定性：该证据仅覆盖本轮开发阶段的 6 条测试，按 knowledge-public_tasks 与 knowledge-testing，开发通过不代表全部输入正确，也不构成独立复验或隐藏覆盖；证据中测试参数被 redacted，且未包含任何独立干净副本重跑结果，故不能宣称最终验收通过。此外当前日志 pytest 路径为 python_testcases/test_gcd.py 而知识文档示例命令为 tests/ 目录，两者不一致，但这不影响本次 passed 分类的判断，仅建议核实登记命令与目录口径。\",\"failure_class\":\"passed\",\"suggested_checks\":[\"核对本轮开发命令与登记命令/测试目录口径是否一致（证据中为 python_testcases/test_gcd.py，知识示例为 tests/）\",\"在干净起点应用候选后由评测端重跑同一套冻结原生测试，确认结果可复现\",\"确认修改仅限 python_programs/gcd.py，未触碰 tests、python_testcases、json_testcases、conftest.py 等禁改路径\"],\"evidence_ids\":[\"test-development-1\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+      "duration_ms": 8352,
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "round": 1,
+      "provenance": {
+        "role_override": {
+          "task_instruction": "",
+          "generation": {
+            "max_output_tokens": 2048,
+            "enable_thinking": false
+          }
+        },
+        "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "locator": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "repairer": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "detector": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "scheduler": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "locator",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "repairer",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "detector",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "scheduler",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+        "prompt_ref": "prompts/detector.md",
+        "prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+        "system_prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+        "agent_instance_id": "run-6e2ec718407e48c5872a573e04e0af9c:detector",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "detector",
+          "title": "检测员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [],
+          "produces": "failure_analysis",
+          "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+          "output_schema": "DetectorOutput",
+          "permitted_action": "analyse_tool_evidence",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "3ab70fbb58a74bbfb1b4aca2d411143ae86aed05a136bf5ca9df020d682ac9dd",
+        "handoffs": [],
+        "messages_sha256": "8ed4209f367a12da118be545ac2cd5b3194cede264efefbdde1a8cc3b48b6c3b",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "detector",
+          "binding": "approved_profile",
+          "profile_ref": "personal_model",
+          "mode": "live",
+          "provider_id": "personal",
+          "model": "deepseek-v4.1-flash-1017",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+          "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+          "effective_parameters": {
+            "max_tokens": 2048,
+            "enable_thinking": false
+          },
+          "request_seconds": 60,
+          "daily_shared_usd": null,
+          "input_usd_per_million": null,
+          "output_usd_per_million": null,
+          "effective_parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1",
+          "currency": "CNY",
+          "personal_pricing": {
+            "provider": "qianwen-ai",
+            "model": "deepseek-v4.1-flash-1017",
+            "region": "platform-standard",
+            "mode": "thinking",
+            "currency": "CNY",
+            "unit": "per_million_tokens",
+            "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+            "verified_at": "2026-11-11",
+            "endpoint_host": "maas.qianwenaiapi.com",
+            "tiers": [
+              {
+                "max_input_tokens": 1000000,
+                "input": "2",
+                "output": "8",
+                "cached_input": "0.2"
+              }
+            ],
+            "offpeak_discount": "0.5",
+            "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+          },
+          "daily_limit": "5",
+          "monetary_budget_enabled": true
+        }
+      },
+      "step_id": "s-0528d2c6ed0047999bce82727326d27c",
+      "parent_step_id": "s-72697d9c84d84e01b3058e0edd96a8f1",
+      "parsed_output": {
+        "analysis": "提供的唯一开发测试证据 test-development-1 显示：收集 6 项、通过 6、失败 0、错误 0、跳过 0，退出码 0，stdout 以 CODEFIX_READY 结束；其 failure_class 明确为 passed。因此当前候选 python_programs/gcd.py 的实现（经典欧几里得迭代/递归形式：b==0 返回 a，否则 gcd(b, a % b)）在登记的这 6 条原生测试上未出现失败，没有失败原因可归因。需要指出不确定性：该证据仅覆盖本轮开发阶段的 6 条测试，按 knowledge-public_tasks 与 knowledge-testing，开发通过不代表全部输入正确，也不构成独立复验或隐藏覆盖；证据中测试参数被 redacted，且未包含任何独立干净副本重跑结果，故不能宣称最终验收通过。此外当前日志 pytest 路径为 python_testcases/test_gcd.py 而知识文档示例命令为 tests/ 目录，两者不一致，但这不影响本次 passed 分类的判断，仅建议核实登记命令与目录口径。",
+        "failure_class": "passed",
+        "suggested_checks": [
+          "核对本轮开发命令与登记命令/测试目录口径是否一致（证据中为 python_testcases/test_gcd.py，知识示例为 tests/）",
+          "在干净起点应用候选后由评测端重跑同一套冻结原生测试，确认结果可复现",
+          "确认修改仅限 python_programs/gcd.py，未触碰 tests、python_testcases、json_testcases、conftest.py 等禁改路径"
+        ],
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "knowledge_citations": [
+          "knowledge-public_tasks",
+          "knowledge-testing"
+        ]
+      }
+    },
+    {
+      "sequence": 3901,
+      "created_at": "2026-11-15T15:05:30.234598+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-0528d2c6ed0047999bce82727326d27c",
+      "parent_step_id": "s-72697d9c84d84e01b3058e0edd96a8f1",
+      "node_id": "detector",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "call_id": "m-5b69e63aaa30461a88a349b0ce866482",
+      "artifact_path": "calls/m-5b69e63aaa30461a88a349b0ce866482",
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "failure_class": null,
+      "agent_instance_id": "run-6e2ec718407e48c5872a573e04e0af9c:detector",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "detector",
+        "title": "检测员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [],
+        "produces": "failure_analysis",
+        "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+        "output_schema": "DetectorOutput",
+        "permitted_action": "analyse_tool_evidence",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": null,
+      "duration_ms": 8478
+    },
+    {
+      "sequence": 3902,
+      "created_at": "2026-11-15T15:05:30.260605+00:00",
+      "event": "roles_skipped",
+      "roles": [
+        "scheduler"
+      ],
+      "round": 1,
+      "reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274"
+    },
+    {
+      "sequence": 3903,
+      "created_at": "2026-11-15T15:05:30.287970+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-2e08f10eccef4992a06c1c4a5ef38a21",
+      "parent_step_id": "s-0528d2c6ed0047999bce82727326d27c",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 3904,
+      "created_at": "2026-11-15T15:05:30.309079+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-1.json",
+      "decision_id": "d-1",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "failure_class": "passed",
+      "action": "final_check",
+      "target_agent": null,
+      "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+      "retries_left": 2,
+      "rule_id": "R16",
+      "terminal_status": null,
+      "trace_version": "1.0.0",
+      "step_id": "s-2e08f10eccef4992a06c1c4a5ef38a21",
+      "parent_step_id": "s-0528d2c6ed0047999bce82727326d27c",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "program_decision": {
+        "decision_id": "d-1",
+        "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+        "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "failure_class": "passed",
+        "action": "final_check",
+        "target_agent": null,
+        "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+        "retries_left": 2,
+        "rule_id": "R16",
+        "terminal_status": null
+      },
+      "model_advice": null,
+      "effective_action": "final_check",
+      "override_reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+      "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 2,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.004824",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 271.17949940000835,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 3905,
+      "created_at": "2026-11-15T15:05:30.337497+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-2e08f10eccef4992a06c1c4a5ef38a21",
+      "parent_step_id": "s-0528d2c6ed0047999bce82727326d27c",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "effective_action": "final_check",
+      "decision_id": "d-1",
+      "duration_ms": 42
+    },
+    {
+      "sequence": 3906,
+      "created_at": "2026-11-15T15:05:30.440188+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-f4bfcbde7d8f42efa972139a9675dfdb",
+      "parent_step_id": "s-2e08f10eccef4992a06c1c4a5ef38a21",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 3907,
+      "created_at": "2026-11-15T15:05:36.725791+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-f4bfcbde7d8f42efa972139a9675dfdb",
+      "parent_step_id": "s-2e08f10eccef4992a06c1c4a5ef38a21",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "evidence_id": "test-final-check",
+      "evidence_path": "final-check",
+      "call_id": "codefix-4ac880dcf90c4a619dda902acfeb38f1",
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_ms": 901,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-bee9166dbb304f199ffed70b270c7388,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-4ac880dcf90c4a619dda902acfeb38f1",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-28152a96609f4387bbd727493777e6b7,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-e77cbfe13f5f49deb81609cfb1c8452c/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_gcd.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-28152a96609f4387bbd727493777e6b7",
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "project": "qb-gcd",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "expected_test_count": 6,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-1fe13238b39b405c9b93ccc0c5a89984",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 6,
+        "passed": 6,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "ok",
+      "verification_status": "passed",
+      "failure_class": "passed",
+      "reason": "Expected identities and complete lifecycle verified against JUnit",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_gcd.py::test_gcd[input_data0-17]",
+          "python_testcases/test_gcd.py::test_gcd[input_data1-13]",
+          "python_testcases/test_gcd.py::test_gcd[input_data2-1]",
+          "python_testcases/test_gcd.py::test_gcd[input_data3-20]",
+          "python_testcases/test_gcd.py::test_gcd[input_data4-18913]",
+          "python_testcases/test_gcd.py::test_gcd[input_data5-3]"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_gcd.py::test_gcd[input_data0-17]",
+          "python_testcases/test_gcd.py::test_gcd[input_data1-13]",
+          "python_testcases/test_gcd.py::test_gcd[input_data2-1]",
+          "python_testcases/test_gcd.py::test_gcd[input_data3-20]",
+          "python_testcases/test_gcd.py::test_gcd[input_data4-18913]",
+          "python_testcases/test_gcd.py::test_gcd[input_data5-3]"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data0-17]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data1-13]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data2-1]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data3-20]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data4-18913]"
+          ],
+          [
+            "python_testcases.test_gcd",
+            "test_gcd[input_data5-3]"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-e77cbfe13f5f49deb81609cfb1c8452c",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 3908,
+      "created_at": "2026-11-15T15:05:36.753891+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-f4bfcbde7d8f42efa972139a9675dfdb",
+      "parent_step_id": "s-2e08f10eccef4992a06c1c4a5ef38a21",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "verification_status": "passed",
+      "evidence_id": "test-final-check",
+      "failure_class": "passed",
+      "evidence_path": "final-check",
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "registered_test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "duration_ms": 6311
+    },
+    {
+      "sequence": 3909,
+      "created_at": "2026-11-15T15:05:36.799664+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-e82f25031fbd4c1d8124316d5ceae091",
+      "parent_step_id": "s-f4bfcbde7d8f42efa972139a9675dfdb",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ]
+    },
+    {
+      "sequence": 3910,
+      "created_at": "2026-11-15T15:05:36.826299+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-7aa17e20f00443f2a14a618d25be4cd6.json",
+      "decision_id": "d-7aa17e20f00443f2a14a618d25be4cd6",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "failure_class": "passed",
+      "action": "finish",
+      "target_agent": null,
+      "reason": "独立验收实际通过且证据对应最终代码版本。",
+      "retries_left": 2,
+      "rule_id": "R07",
+      "terminal_status": "success",
+      "trace_version": "1.0.0",
+      "step_id": "s-e82f25031fbd4c1d8124316d5ceae091",
+      "parent_step_id": "s-f4bfcbde7d8f42efa972139a9675dfdb",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "program_decision": {
+        "decision_id": "d-7aa17e20f00443f2a14a618d25be4cd6",
+        "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+        "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+        "evidence_ids": [
+          "test-final-check"
+        ],
+        "failure_class": "passed",
+        "action": "finish",
+        "target_agent": null,
+        "reason": "独立验收实际通过且证据对应最终代码版本。",
+        "retries_left": 2,
+        "rule_id": "R07",
+        "terminal_status": "success"
+      },
+      "model_advice": null,
+      "effective_action": "finish",
+      "override_reason": null,
+      "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 3,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.004824",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 264.66824910001014,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 3911,
+      "created_at": "2026-11-15T15:05:36.851312+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-e82f25031fbd4c1d8124316d5ceae091",
+      "parent_step_id": "s-f4bfcbde7d8f42efa972139a9675dfdb",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "status": "ok",
+      "effective_action": "finish",
+      "decision_id": "d-7aa17e20f00443f2a14a618d25be4cd6",
+      "duration_ms": 47
+    },
+    {
+      "sequence": 3912,
+      "created_at": "2026-11-15T15:05:36.895200+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-08a3fe84bd6447f7be0c4cb413f34333",
+      "parent_step_id": "s-e82f25031fbd4c1d8124316d5ceae091",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ]
+    },
+    {
+      "sequence": 3913,
+      "created_at": "2026-11-15T15:05:36.924680+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-e100655579c04a32bad9adb58ac9ff7e.json",
+      "action": "finish",
+      "rule_id": "R07",
+      "reason": "开发测试及干净副本同套原生测试均实际通过",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-08a3fe84bd6447f7be0c4cb413f34333",
+      "parent_step_id": "s-e82f25031fbd4c1d8124316d5ceae091",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "decision_id": "d-e100655579c04a32bad9adb58ac9ff7e",
+      "program_decision": {
+        "action": "finish",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过"
+      },
+      "model_advice": null,
+      "effective_action": "finish",
+      "target_agent": null,
+      "override_reason": null,
+      "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+      "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 3,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.004824",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 264.57421580000664,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 3914,
+      "created_at": "2026-11-15T15:05:36.948101+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+      "step_id": "s-08a3fe84bd6447f7be0c4cb413f34333",
+      "parent_step_id": "s-e82f25031fbd4c1d8124316d5ceae091",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "status": "ok",
+      "effective_action": "finish",
+      "decision_id": "d-e100655579c04a32bad9adb58ac9ff7e",
+      "duration_ms": 52
+    },
+    {
+      "sequence": 3915,
+      "created_at": "2026-11-15T15:05:36.972294+00:00",
+      "event": "finished",
+      "status": "success",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 2,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-gcd",
+        "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49",
+        "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+        "code_path": "candidate-1/python_programs/gcd.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.004824",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    }
+  ],
+  "result_summary": {
+    "schema_version": 1,
+    "run_id": "run-6e2ec718407e48c5872a573e04e0af9c",
+    "status": "success",
+    "success": true,
+    "reason": "开发测试及干净副本同套原生测试均实际通过",
+    "rounds_used": 1,
+    "max_rounds": 3,
+    "model_attempts": 2,
+    "actual_model_requests": 2,
+    "tests": [
+      {
+        "stage": "baseline",
+        "round": 0,
+        "verification_status": "failed",
+        "failure_class": "code_runtime_error",
+        "counts": {
+          "collected": 6,
+          "passed": 1,
+          "failed": 5,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "缺陷已复现，可以开始修复",
+        "evidence_path": "baseline",
+        "step_id": "s-dd5d5874e26444dbb740a2e3ee998830",
+        "code_version": "sha256:ba3debc66394b61123fca12005012228914ac9f196ec12a1c2c26d3089d63428",
+        "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49"
+      },
+      {
+        "stage": "candidate",
+        "round": 1,
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "counts": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选通过，待最终复验",
+        "evidence_path": "development-1",
+        "step_id": "s-72697d9c84d84e01b3058e0edd96a8f1",
+        "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+        "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49"
+      },
+      {
+        "stage": "final",
+        "round": 1,
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "counts": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "最终复验通过",
+        "evidence_path": "final-check",
+        "step_id": "s-f4bfcbde7d8f42efa972139a9675dfdb",
+        "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+        "test_suite_version": "sha256:211b352718da3e84f16f2818967598be8d447092453eb2394ecd935cd2aaaf49"
+      }
+    ],
+    "cost": {
+      "calls": 2,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.004824",
+      "reserved_cny": "0"
+    },
+    "model_output_issues": [],
+    "started_at": "2026-11-15T15:05:01.366596+00:00",
+    "finished_at": "2026-11-15T15:05:36.972294+00:00",
+    "duration_ms": 35606,
+    "before": {
+      "path": "base/python_programs/gcd.py",
+      "content": "def gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(a % b, b)\n\n\n\"\"\"\nInput:\n    a: A nonnegative int\n    b: A nonnegative int\n\n\nGreatest Common Divisor\n\nPrecondition:\n    isinstance(a, int) and isinstance(b, int)\n\nOutput:\n    The greatest int that divides evenly into a and b\n\nExample:\n    >>> gcd(35, 21)\n    7\n\n\"\"\"\n"
+    },
+    "after": {
+      "path": "candidate-1/python_programs/gcd.py",
+      "content": "def gcd(a, b):\n    if b == 0:\n        return a\n    else:\n        return gcd(b, a % b)\n\n\n\"\"\"\nInput:\n    a: A nonnegative int\n    b: A nonnegative int\n\n\nGreatest Common Divisor\n\nPrecondition:\n    isinstance(a, int) and isinstance(b, int)\n\nOutput:\n    The greatest int that divides evenly into a and b\n\nExample:\n    >>> gcd(35, 21)\n    7\n\n\"\"\"\n"
+    },
+    "combined_diff": "--- original/python_programs/gcd.py\n+++ candidate/python_programs/gcd.py\n@@ -2,7 +2,7 @@\n     if b == 0:\n         return a\n     else:\n-        return gcd(a % b, b)\n+        return gcd(b, a % b)\n \n \n \"\"\"\n",
+    "diff": {
+      "path": "patch-1/patch.diff",
+      "content": "--- a/python_programs/gcd.py\n+++ b/python_programs/gcd.py\n@@ -2,7 +2,7 @@\n     if b == 0:\n         return a\n     else:\n-        return gcd(a % b, b)\n+        return gcd(b, a % b)\n \n \n \"\"\"\n"
+    },
+    "explanations": [
+      {
+        "round": 1,
+        "explanation": "原实现在递归时传入 (a % b, b)，参数顺序颠倒，导致后续计算错误（如 gcd(13,13) 期望13却失败）。欧几里得算法应递归 gcd(b, a % b)。"
+      }
+    ],
+    "checks": [
+      {
+        "sequence": 3880,
+        "created_at": "2026-11-15T15:05:01.522999+00:00",
+        "event": "guard_check",
+        "step_id": "configuration-check",
+        "node_id": "configuration_check",
+        "status": "ok",
+        "reason": "角色配置、提示词和输出协议检查通过"
+      },
+      {
+        "sequence": 3888,
+        "created_at": "2026-11-15T15:05:16.921286+00:00",
+        "event": "guard_check",
+        "step_id": "m-eca0f21049134489b7151e19ebfbc585-budget",
+        "parent_step_id": "s-100e640ccf574e009ab82120e809bcf7",
+        "node_id": "budget_check",
+        "role": "repairer",
+        "round": 1,
+        "code_version": "sha256:ba3debc66394b61123fca12005012228914ac9f196ec12a1c2c26d3089d63428",
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      {
+        "sequence": 3889,
+        "created_at": "2026-11-15T15:05:16.954083+00:00",
+        "event": "guard_check",
+        "check": "patch_permission",
+        "step_id": "m-eca0f21049134489b7151e19ebfbc585-permission",
+        "parent_step_id": "s-100e640ccf574e009ab82120e809bcf7",
+        "node_id": "permission_check",
+        "round": 1,
+        "code_version": "sha256:ba3debc66394b61123fca12005012228914ac9f196ec12a1c2c26d3089d63428",
+        "status": "ok",
+        "reason": "补丁路径及结构检查通过"
+      },
+      {
+        "sequence": 3899,
+        "created_at": "2026-11-15T15:05:30.177411+00:00",
+        "event": "guard_check",
+        "step_id": "m-5b69e63aaa30461a88a349b0ce866482-budget",
+        "parent_step_id": "s-0528d2c6ed0047999bce82727326d27c",
+        "node_id": "budget_check",
+        "role": "detector",
+        "round": 1,
+        "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274",
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      }
+    ],
+    "skips": [
+      {
+        "sequence": 3902,
+        "created_at": "2026-11-15T15:05:30.260605+00:00",
+        "event": "roles_skipped",
+        "roles": [
+          "scheduler"
+        ],
+        "round": 1,
+        "reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+        "code_version": "sha256:258981f58574bad75115c78648525895bf2d56504d77edb373016f579eb7c274"
+      }
+    ]
+  },
+  "configuration_snapshot": {
+    "bindings": {
+      "repairer": "personal_model",
+      "detector": "personal_model",
+      "scheduler": "personal_model",
+      "locator": "personal_model"
+    },
+    "parameters": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    },
+    "strategy": "dynamic",
+    "roles": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+    "prompts_sha256": {
+      "locator": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+      "repairer": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+      "detector": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+      "scheduler": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6"
+    },
+    "note": "结构校验通过；不代表模型请求、费用预留或隔离资格通过",
+    "personal_price_snapshots": {
+      "personal_model": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      }
+    },
+    "schema_version": 2,
+    "role_overrides": {
+      "repairer": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 8192,
+          "enable_thinking": false
+        }
+      },
+      "detector": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "scheduler": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "locator": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      }
+    },
+    "capabilities_sha256": "62ad69daf4539956ad609d5ed4c470c2826ce834a873c1c1600ec6ef6863a416",
+    "effective_roles": {
+      "repairer": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 8192,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481"
+      },
+      "detector": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      },
+      "scheduler": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      },
+      "locator": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      }
+    },
+    "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+    "effective_roles_sha256": "cbc8c805bc834d22d9cb4f0ead5a8d2c457297ac313c13fc32a64e2c7d4a9444",
+    "config_id": "cfg-a27c6a7bb63ac54c51f649cf38eb4acd17abda2a9694a13da0199c8ebdc4850a",
+    "created_at": "2026-11-15T13:58:41.923622+00:00"
+  }
+}

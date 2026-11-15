@@ -1,0 +1,156 @@
+{
+  "call_id": "codefix-e4364b4fd550433888fd26dfe43a7bf6",
+  "exit_code": 1,
+  "timed_out": false,
+  "duration_ms": 935,
+  "stdout_path": "trusted-run/stdout.txt",
+  "stderr_path": "trusted-run/stderr.txt",
+  "command": [
+    "/usr/local/bin/docker",
+    "run",
+    "--mount",
+    "type=volume,source=codefix-rpc-311f69a8081449d49acbdb8bb69f40e2,target=/rpc,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+    "-i",
+    "--name",
+    "codefix-e4364b4fd550433888fd26dfe43a7bf6",
+    "--pull=never",
+    "--network=none",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--pids-limit=64",
+    "--memory=256m",
+    "--memory-swap=256m",
+    "--cpus=1",
+    "--user=65534:65534",
+    "--ulimit=nofile=128:128",
+    "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+    "--log-driver=none",
+    "--mount",
+    "type=volume,source=codefix-out-13e2cda3b64e4569ba008c7ae67354e1,target=/out",
+    "--mount",
+    "type=bind,source=/opt/codefix-data/jobs/job-338e21ae591c4387991bc38fa35fb480/test/trusted-tests,target=/w,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+    "--workdir=/w",
+    "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+    "--env=PYTHONDONTWRITEBYTECODE=1",
+    "--entrypoint=python",
+    "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "/harness.py",
+    "python_testcases/test_next_permutation.py"
+  ],
+  "artifact_channel": "docker-cp",
+  "artifact_error": null,
+  "artifact_detail": null,
+  "cleanup_passed": true,
+  "output_volume": "codefix-out-13e2cda3b64e4569ba008c7ae67354e1",
+  "phase": "development",
+  "code_version": "sha256:da53e66792bac1e8c9fbcd3703fb8c4075ff857f66e4c821a0b5af0fb0ba7b73",
+  "project": "qb-next_permutation",
+  "execution_mode": "remote-docker",
+  "isolation_ready": true,
+  "test_suite_version": "sha256:f45515ab82ebde0523d80b47a0a09602c49ec1e85fd0573a484a21635f04fc2b",
+  "expected_test_count": 8,
+  "junit_path": "trusted-run/output/junit.xml",
+  "structured_path": "trusted-run/output/pytest_events.json",
+  "evidence_matches_current_version": true,
+  "trust_boundary": "separate_candidate_and_test_containers",
+  "candidate_audit": {
+    "container": "codefix-candidate-6277a17fae514d608046c68a5335f957",
+    "logs_captured": true,
+    "events": [],
+    "event_kinds": [],
+    "fake_report_output": false,
+    "violation": null,
+    "reason": null,
+    "output_limit_exceeded": false
+  },
+  "runner_classification": {
+    "status": null,
+    "verification_status": null,
+    "failure_class": null,
+    "reason": null
+  },
+  "counts": {
+    "collected": 8,
+    "passed": 0,
+    "failed": 8,
+    "errors": 0,
+    "skipped": 0
+  },
+  "status": "failed",
+  "verification_status": "failed",
+  "failure_class": "assertion_failed",
+  "reason": "Frozen native fixture tests completed with a recorded failure",
+  "coverage": {
+    "expected_nodeids": [
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data0-expected0]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data1-expected1]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data2-expected2]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data3-expected3]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data4-expected4]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data5-expected5]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data6-expected6]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data7-expected7]"
+    ],
+    "collected_nodeids": [
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data0-expected0]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data1-expected1]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data2-expected2]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data3-expected3]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data4-expected4]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data5-expected5]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data6-expected6]",
+      "python_testcases/test_next_permutation.py::test_next_permutation[input_data7-expected7]"
+    ],
+    "expected_collected_match": true,
+    "junit_identities": [
+      [
+        "python_testcases.test_next_permutation",
+        "test_next_permutation[input_data0-expected0]"
+      ],
+      [
+        "python_testcases.test_next_permutation",
+        "test_next_permutation[input_data1-expected1]"
+      ],
+      [
+        "python_testcases.test_next_permutation",
+        "test_next_permutation[input_data2-expected2]"
+      ],
+      [
+        "python_testcases.test_next_permutation",
+        "test_next_permutation[input_data3-expected3]"
+      ],
+      [
+        "python_testcases.test_next_permutation",
+        "test_next_permutation[input_data4-expected4]"
+      ],
+      [
+        "python_testcases.test_next_permutation",
+        "test_next_permutation[input_data5-expected5]"
+      ],
+      [
+        "python_testcases.test_next_permutation",
+        "test_next_permutation[input_data6-expected6]"
+      ],
+      [
+        "python_testcases.test_next_permutation",
+        "test_next_permutation[input_data7-expected7]"
+      ]
+    ],
+    "junit_expected_match": true,
+    "session_finished": true
+  },
+  "remote_job_id": "job-338e21ae591c4387991bc38fa35fb480",
+  "execution_endpoint": "https://8.148.85.237",
+  "transport_mode": "live"
+}

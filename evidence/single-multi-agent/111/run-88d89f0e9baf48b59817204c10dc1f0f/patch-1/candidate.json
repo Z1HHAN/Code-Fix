@@ -1,0 +1,22 @@
+{
+  "project": "qb-longest_common_subsequence",
+  "base_version": "sha256:333047ee355b58acbd9013ada081f2a259a5999397a5170b312f8798ae86da7f",
+  "candidate_version": "sha256:bc90dd91030c27cec4cf090bedaacba467adc2734e8dfebbb035483b9c3a31bc",
+  "test_suite_version": "sha256:90173aea907a27ec8a3552f9e0d7ade955823151a11af286b886240cf533272f",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_longest_common_subsequence.py": "68776892aaab10564899a4193035455f955eec78df9f11c764cf9920aff95dc8",
+    "json_testcases/longest_common_subsequence.json": "d7a82e4de3916653fd8c04d644f35ec147bc8000d68a7023c8aac2e93cc66acc",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/longest_common_subsequence.py",
+      "new_content": "def longest_common_subsequence(a, b):\n    if not a or not b:\n        return ''\n\n    elif a[0] == b[0]:\n        return a[0] + longest_common_subsequence(a[1:], b[1:])\n\n    else:\n        return max(\n            longest_common_subsequence(a, b[1:]),\n            longest_common_subsequence(a[1:], b),\n            key=len\n        )\n\n\n\n\"\"\"\nLongest Common Subsequence\n\n\nCalculates the longest subsequence common to the two input strings. (A subsequence is any sequence of letters in the same order\nthey appear in the string, possibly skipping letters in between.)\n\nInput:\n    a: The first string to consider.\n    b: The second string to consider.\n\nOutput:\n    The longest string which is a subsequence of both strings. (If multiple subsequences of equal length exist, either is OK.)\n\nExample:\n    >>> longest_common_subsequence('headache', 'pentadactyl')\n    'eadac'\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_longest_common_subsequence.py": "68776892aaab10564899a4193035455f955eec78df9f11c764cf9920aff95dc8"
+  }
+}

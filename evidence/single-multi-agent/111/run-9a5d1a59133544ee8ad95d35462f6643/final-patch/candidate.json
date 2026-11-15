@@ -1,0 +1,22 @@
+{
+  "project": "qb-lcs_length",
+  "base_version": "sha256:2b6e6c012b52858b9c432b000f4bf60e41b3f991d664cec4001d7192e6003b6b",
+  "candidate_version": "sha256:bb6c67b0bb1644d54fe7334dfaa91d1a0259d58249cc7b298c0aa36f1077a028",
+  "test_suite_version": "sha256:534561dd0070547ec2d7799dc279c46a944e06ee1626fa8d1b7f822599a44aba",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_lcs_length.py": "8e5fa445c5eed173b8978a0ed0773fef8b322e17e8a5813e28d9b83970b6b2b2",
+    "json_testcases/lcs_length.json": "8ba0cd7ff227281d8435c3b37f0222e13c571b309e1965a33a4ff25684f2e9fc",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/lcs_length.py",
+      "new_content": "def lcs_length(s, t):\n    from collections import Counter\n\n    dp = Counter()\n\n    for i in range(len(s)):\n        for j in range(len(t)):\n            if s[i] == t[j]:\n                dp[i, j] = dp[i - 1, j - 1] + 1\n\n    return max(dp.values()) if dp else 0\n\n\n\n\"\"\"\nLongest Common Substring\nlongest-common-substring\n\nInput:\n    s: a string\n    t: a string\n\nOutput:\n    Length of the longest substring common to s and t\n\nExample:\n    >>> lcs_length('witch', 'sandwich')\n    2\n    >>> lcs_length('meow', 'homeowner')\n    4\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_lcs_length.py": "8e5fa445c5eed173b8978a0ed0773fef8b322e17e8a5813e28d9b83970b6b2b2"
+  }
+}

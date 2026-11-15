@@ -1,0 +1,126 @@
+{
+  "call_id": "codefix-dacf6eed07774ba5b2837a06bf15ed04",
+  "exit_code": 0,
+  "timed_out": false,
+  "duration_ms": 826,
+  "stdout_path": "trusted-run/stdout.txt",
+  "stderr_path": "trusted-run/stderr.txt",
+  "command": [
+    "/usr/local/bin/docker",
+    "run",
+    "--mount",
+    "type=volume,source=codefix-rpc-5ffc13603e1a4a1b81fe950d62522e4c,target=/rpc,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+    "-i",
+    "--name",
+    "codefix-dacf6eed07774ba5b2837a06bf15ed04",
+    "--pull=never",
+    "--network=none",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--pids-limit=64",
+    "--memory=256m",
+    "--memory-swap=256m",
+    "--cpus=1",
+    "--user=65534:65534",
+    "--ulimit=nofile=128:128",
+    "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+    "--log-driver=none",
+    "--mount",
+    "type=volume,source=codefix-out-c7c901e49a4f4a089d6b477a676c2916,target=/out",
+    "--mount",
+    "type=bind,source=/opt/codefix-data/jobs/job-20404a844aec48519460914b55a667e4/test/trusted-tests,target=/w,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+    "--workdir=/w",
+    "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+    "--env=PYTHONDONTWRITEBYTECODE=1",
+    "--entrypoint=python",
+    "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "/harness.py",
+    "python_testcases/test_minimum_spanning_tree.py"
+  ],
+  "artifact_channel": "docker-cp",
+  "artifact_error": null,
+  "artifact_detail": null,
+  "cleanup_passed": true,
+  "output_volume": "codefix-out-c7c901e49a4f4a089d6b477a676c2916",
+  "phase": "development",
+  "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+  "project": "qb-minimum_spanning_tree",
+  "execution_mode": "remote-docker",
+  "isolation_ready": true,
+  "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+  "expected_test_count": 3,
+  "junit_path": "trusted-run/output/junit.xml",
+  "structured_path": "trusted-run/output/pytest_events.json",
+  "evidence_matches_current_version": true,
+  "trust_boundary": "separate_candidate_and_test_containers",
+  "candidate_audit": {
+    "container": "codefix-candidate-b5ea38ec1b6540a594edbee3a8c053f1",
+    "logs_captured": true,
+    "events": [],
+    "event_kinds": [],
+    "fake_report_output": false,
+    "violation": null,
+    "reason": null,
+    "output_limit_exceeded": false
+  },
+  "runner_classification": {
+    "status": null,
+    "verification_status": null,
+    "failure_class": null,
+    "reason": null
+  },
+  "counts": {
+    "collected": 3,
+    "passed": 3,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "status": "ok",
+  "verification_status": "passed",
+  "failure_class": "passed",
+  "reason": "Expected identities and complete lifecycle verified against JUnit",
+  "coverage": {
+    "expected_nodeids": [
+      "python_testcases/test_minimum_spanning_tree.py::test1",
+      "python_testcases/test_minimum_spanning_tree.py::test2",
+      "python_testcases/test_minimum_spanning_tree.py::test3"
+    ],
+    "collected_nodeids": [
+      "python_testcases/test_minimum_spanning_tree.py::test1",
+      "python_testcases/test_minimum_spanning_tree.py::test2",
+      "python_testcases/test_minimum_spanning_tree.py::test3"
+    ],
+    "expected_collected_match": true,
+    "junit_identities": [
+      [
+        "python_testcases.test_minimum_spanning_tree",
+        "test1"
+      ],
+      [
+        "python_testcases.test_minimum_spanning_tree",
+        "test2"
+      ],
+      [
+        "python_testcases.test_minimum_spanning_tree",
+        "test3"
+      ]
+    ],
+    "junit_expected_match": true,
+    "session_finished": true
+  },
+  "remote_job_id": "job-20404a844aec48519460914b55a667e4",
+  "execution_endpoint": "https://8.148.85.237",
+  "transport_mode": "live"
+}

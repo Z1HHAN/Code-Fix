@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "strategy": "dynamic",
+  "execution_kind": "real",
+  "identity": {
+    "code": {
+      "commit": "5d720e325863622d3d7367321985ea2c79da1d2f",
+      "source_sha256": "7312dd11218e81f2d052e494d9dc469b9370779fecb59b32ed3169284b7730b2",
+      "dirty": null,
+      "verified_bundle": true
+    },
+    "project": "qb-shortest_paths",
+    "description": "修复shortest_paths缺陷，使预登记的原生测试通过；不修改测试。",
+    "task_limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    },
+    "approved_files": {
+      "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+      "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+      "python_programs/shortest_paths.py": "e99679a54634bc940a78c1f211e6126f5119a7654a089d1f56f264a1deaa0ce2",
+      "python_testcases/test_shortest_paths.py": "8ee521556000dc6bcf4ae71c6db0f91c387f96e055557ec1accdde824928b4f8"
+    },
+    "test_suite_version": "sha256:a08bc169b2e6b9bf0959cfc63f2ebf51850b6968a5f0d118afcfa685afba6bdd",
+    "roles": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "role_overrides": {
+      "repairer": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 8192,
+          "enable_thinking": false
+        }
+      },
+      "detector": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "scheduler": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "locator": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      }
+    },
+    "prompts_sha256": {
+      "locator": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+      "repairer": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+      "detector": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+      "scheduler": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6"
+    },
+    "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+    "bindings": {
+      "locator": {
+        "profile_ref": "personal_model",
+        "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+        "currency": "CNY",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "input_price": null,
+        "output_price": null,
+        "request_seconds": "60",
+        "personal_pricing": {
+          "provider": "qianwen-ai",
+          "model": "deepseek-v4.1-flash-1017",
+          "region": "platform-standard",
+          "mode": "thinking",
+          "currency": "CNY",
+          "unit": "per_million_tokens",
+          "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+          "verified_at": "2026-11-11",
+          "endpoint_host": "maas.qianwenaiapi.com",
+          "tiers": [
+            {
+              "max_input_tokens": 1000000,
+              "input": "2",
+              "output": "8",
+              "cached_input": "0.2"
+            }
+          ],
+          "offpeak_discount": "0.5",
+          "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+        }
+      },
+      "repairer": {
+        "profile_ref": "personal_model",
+        "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+        "currency": "CNY",
+        "parameters": {
+          "max_tokens": 8192,
+          "enable_thinking": false
+        },
+        "input_price": null,
+        "output_price": null,
+        "request_seconds": "60",
+        "personal_pricing": {
+          "provider": "qianwen-ai",
+          "model": "deepseek-v4.1-flash-1017",
+          "region": "platform-standard",
+          "mode": "thinking",
+          "currency": "CNY",
+          "unit": "per_million_tokens",
+          "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+          "verified_at": "2026-11-11",
+          "endpoint_host": "maas.qianwenaiapi.com",
+          "tiers": [
+            {
+              "max_input_tokens": 1000000,
+              "input": "2",
+              "output": "8",
+              "cached_input": "0.2"
+            }
+          ],
+          "offpeak_discount": "0.5",
+          "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+        }
+      },
+      "detector": {
+        "profile_ref": "personal_model",
+        "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+        "currency": "CNY",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "input_price": null,
+        "output_price": null,
+        "request_seconds": "60",
+        "personal_pricing": {
+          "provider": "qianwen-ai",
+          "model": "deepseek-v4.1-flash-1017",
+          "region": "platform-standard",
+          "mode": "thinking",
+          "currency": "CNY",
+          "unit": "per_million_tokens",
+          "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+          "verified_at": "2026-11-11",
+          "endpoint_host": "maas.qianwenaiapi.com",
+          "tiers": [
+            {
+              "max_input_tokens": 1000000,
+              "input": "2",
+              "output": "8",
+              "cached_input": "0.2"
+            }
+          ],
+          "offpeak_discount": "0.5",
+          "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+        }
+      },
+      "scheduler": {
+        "profile_ref": "personal_model",
+        "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+        "currency": "CNY",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "input_price": null,
+        "output_price": null,
+        "request_seconds": "60",
+        "personal_pricing": {
+          "provider": "qianwen-ai",
+          "model": "deepseek-v4.1-flash-1017",
+          "region": "platform-standard",
+          "mode": "thinking",
+          "currency": "CNY",
+          "unit": "per_million_tokens",
+          "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+          "verified_at": "2026-11-11",
+          "endpoint_host": "maas.qianwenaiapi.com",
+          "tiers": [
+            {
+              "max_input_tokens": 1000000,
+              "input": "2",
+              "output": "8",
+              "cached_input": "0.2"
+            }
+          ],
+          "offpeak_discount": "0.5",
+          "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+        }
+      }
+    },
+    "image": null,
+    "execution_endpoint": "https://8.148.85.237",
+    "execution_server_build_sha256": null
+  },
+  "identity_sha256": "576ca7d10217daf80427ac8983ed2b420a9fb725882548bc243f21d5950b0378"
+}

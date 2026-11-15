@@ -1,0 +1,14 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.10, pytest-8.3.5, pluggy-1.7.0 -- /usr/local/bin/python
+rootdir: /w
+configfile: ../out/pytest.ini
+collecting ... collected 4 items
+
+python_testcases/test_shortest_path_lengths.py::test1 PASSED
+python_testcases/test_shortest_path_lengths.py::test2 PASSED
+python_testcases/test_shortest_path_lengths.py::test3 PASSED
+python_testcases/test_shortest_path_lengths.py::test4 PASSED
+
+---------------------- generated xml file: /out/junit.xml ----------------------
+============================== 4 passed in 0.05s ===============================
+CODEFIX_READY

@@ -1,0 +1,25 @@
+{
+  "call_id": "m-7b02a4c6232a42d4a167bbddd2cf8507",
+  "currency": "CNY",
+  "actual_amount": "0",
+  "operator": "assistant executing A-confirmed aggregate reconciliation",
+  "reason": "A确认日期、模型、同一API账号/Key及两张原截图有效；两组Token与已知返回用量汇总逐项一致，未观察到失败连接的增量。以0元人工核销本条ConnectError，非供应商逐笔零扣费证明；原始unknown调用/usage和本条before均保留。",
+  "evidence_sha256": "9efb2864680edeabed15a705c30e275be0e28cd7fab272c56f74cb11843ae657",
+  "confirmed_no_inflight": true,
+  "before": {
+    "call_id": "m-7b02a4c6232a42d4a167bbddd2cf8507",
+    "run_id": "run-529e672e62a040e4a803b3bf89c78e0b",
+    "day": "2026-11-15",
+    "created_at": "2026-11-15T14:08:50.780975+00:00",
+    "currency": "CNY",
+    "model": "deepseek-v4.1-flash-1017",
+    "price_json": "{\"provider\": \"qianwen-ai\", \"model\": \"deepseek-v4.1-flash-1017\", \"region\": \"platform-standard\", \"mode\": \"thinking\", \"currency\": \"CNY\", \"unit\": \"per_million_tokens\", \"source_url\": \"https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash\", \"verified_at\": \"2026-11-11\", \"endpoint_host\": \"maas.qianwenaiapi.com\", \"tiers\": [{\"max_input_tokens\": 1000000, \"input\": \"2\", \"output\": \"8\", \"cached_input\": \"0.2\"}], \"offpeak_discount\": \"0.5\", \"version\": \"price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc\"}",
+    "reserved": 27462,
+    "actual": null,
+    "status": "unknown",
+    "usage_json": "null",
+    "upper_estimate": 0,
+    "authorization_id": "A-097-CNY5-20261111"
+  },
+  "created_at": "2026-11-15T15:03:24.461575+00:00"
+}

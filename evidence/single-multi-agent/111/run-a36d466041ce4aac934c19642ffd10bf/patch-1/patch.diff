@@ -1,0 +1,12 @@
+--- a/python_programs/mergesort.py
++++ b/python_programs/mergesort.py
+@@ -11,7 +11,8 @@
+             else:
+                 result.append(right[j])
+                 j += 1
+-        result.extend(left[i:] or right[j:])
++        result.extend(left[i:])
++        result.extend(right[j:])
+         return result
+ 
+     if len(arr) == 0:

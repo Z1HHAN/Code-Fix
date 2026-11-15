@@ -1,0 +1,249 @@
+{
+  "role": "scheduler",
+  "mode": "live",
+  "model_api_called": true,
+  "model": "deepseek-v4.1-flash-1017",
+  "call_id": "m-93c8dac1db854f48ad85594b26575718",
+  "status": "ok",
+  "provider_id": "personal",
+  "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+  "usage": {
+    "prompt_tokens": 2966,
+    "total_tokens": 3058,
+    "completion_tokens": 92,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "image_tokens": 0,
+      "text_tokens": 2966
+    },
+    "completion_tokens_details": {
+      "text_tokens": 92
+    }
+  },
+  "cost": {
+    "status": "estimated",
+    "amount_cny": "0.003334",
+    "currency": "CNY",
+    "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+    "upper_estimate": false,
+    "basis": "versioned_model_rates; not_provider_invoice"
+  },
+  "attempts": 1,
+  "max_attempts": 1,
+  "transport_request_started": true,
+  "failure_class": null,
+  "budget_check": {
+    "status": "ok",
+    "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+  },
+  "provider_model": "deepseek-v4.1-flash-1017",
+  "provider_response_id": "chatcmpl-f098d55b-01d8-998d-a66a-f9161ec37f08",
+  "finish_reason": "stop",
+  "raw_text": "{\"action\":\"repair\",\"reason\":\"开发证据显示5/5断言失败，当前代码首行因两个边界条件均为0而生成[0]而非[1]，后续行由此错误递推。定位明确，只需在允许路径python_programs/pascal.py内修正首行/边界取值逻辑。\",\"evidence_ids\":[\"test-development-1\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+  "duration_ms": 3495,
+  "code_version": "sha256:10a9053f74cc5517712ae294e27ba0dfe451106e2064dc362c5444644041353a",
+  "round": 1,
+  "provenance": {
+    "role_override": {
+      "task_instruction": "",
+      "generation": {
+        "max_output_tokens": 2048,
+        "enable_thinking": false
+      }
+    },
+    "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+    "protocol": "codefix-json-v1",
+    "parser_version": "1.0.0",
+    "config_version": "1.1.0",
+    "effective_config": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+    "prompt_ref": "prompts/scheduler.md",
+    "prompt_sha256": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6",
+    "system_prompt_sha256": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6",
+    "agent_instance_id": "run-f98cdcffebb34d628c042bb68dff3fa1:scheduler",
+    "agent_contract": {
+      "contract_version": "1.0.0",
+      "agent_id": "scheduler",
+      "title": "模型调度员",
+      "input_scope": "current_candidate_development_evidence_only",
+      "receives_from": [
+        "detector"
+      ],
+      "produces": "action_advice",
+      "collaboration_task": "依据当前检测员分析和工具证据提出动作与理由；程序裁决才有执行权。",
+      "output_schema": "SchedulerOutput",
+      "permitted_action": "advise_only",
+      "tools": [
+        "read_file",
+        "search_knowledge"
+      ],
+      "can_execute_code": false,
+      "can_modify_tests": false,
+      "can_approve_success": false,
+      "can_override_guards": false
+    },
+    "agent_contract_sha256": "abfe63c455296be2091383d191b5c7aeb4b378baafacd7b0338150ac029a5055",
+    "handoffs": [
+      {
+        "agent_id": "detector",
+        "call_id": "m-51b4863e339f40a6970d9e129692d0d2",
+        "step_id": "s-5c1b9d0bcebe410da68d22c7aac4279c",
+        "artifact_path": "calls/m-51b4863e339f40a6970d9e129692d0d2",
+        "code_version": "sha256:10a9053f74cc5517712ae294e27ba0dfe451106e2064dc362c5444644041353a",
+        "evidence_id": "test-development-1",
+        "output_sha256": "aea240f64ffa92f267b181132c5a0e5abf8685f1e7d6310bc81f903462d8ba76"
+      }
+    ],
+    "messages_sha256": "8991d80257f9c534df897b189f7509bf0546cb0613bc86366cacf719d1e84c8d",
+    "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "model_binding": {
+      "model_ref": "scheduler",
+      "binding": "approved_profile",
+      "profile_ref": "personal_model",
+      "mode": "live",
+      "provider_id": "personal",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+      "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+      "effective_parameters": {
+        "max_tokens": 2048,
+        "enable_thinking": false
+      },
+      "request_seconds": 60,
+      "daily_shared_usd": null,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "effective_parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1",
+      "currency": "CNY",
+      "personal_pricing": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      },
+      "daily_limit": "5",
+      "monetary_budget_enabled": true
+    }
+  },
+  "step_id": "s-2f20fb10524e433ebd5d4eae523d1fc1",
+  "parent_step_id": "s-5c1b9d0bcebe410da68d22c7aac4279c",
+  "parsed_output": {
+    "action": "repair",
+    "reason": "开发证据显示5/5断言失败，当前代码首行因两个边界条件均为0而生成[0]而非[1]，后续行由此错误递推。定位明确，只需在允许路径python_programs/pascal.py内修正首行/边界取值逻辑。",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "knowledge_citations": [
+      "knowledge-public_tasks",
+      "knowledge-testing"
+    ]
+  }
+}

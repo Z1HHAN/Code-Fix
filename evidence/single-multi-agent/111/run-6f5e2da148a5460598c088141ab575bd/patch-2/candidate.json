@@ -1,0 +1,20 @@
+{
+  "project": "qb-minimum_spanning_tree",
+  "base_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+  "candidate_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+  "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_minimum_spanning_tree.py": "45b23edf3513e1f1a6e7ecf5f17eb85d1a32845d70869c7190b16b10cd61d811"
+  },
+  "changes": [
+    {
+      "path": "python_programs/minimum_spanning_tree.py",
+      "new_content": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        group_by_node.setdefault(u, {u})\n        group_by_node.setdefault(v, {v})\n        if group_by_node[u] != group_by_node[v]:\n            mst_edges.add(edge)\n            group_u = group_by_node[u]\n            group_v = group_by_node[v]\n            merged = group_u | group_v\n            for node in merged:\n                group_by_node[node] = merged\n\n    return mst_edges\n\n\n\n\n\"\"\"\nMinimum Spanning Tree\n\n\nKruskal's algorithm implementation.\n\nInput:\n    weight_by_edge: A dict of the form {(u, v): weight} for every undirected graph edge {u, v}\n\nPrecondition:\n    The input graph is connected\n\nOutput:\n    A set of edges that connects all the vertices of the input graph and has the least possible total weight.\n\nExample:\n    >>> minimum_spanning_tree({\n    ...     (1, 2): 10,\n    ...     (2, 3): 15,\n    ...     (3, 4): 10,\n    ...     (1, 4): 10\n    ... })\n    {(1, 2), (3, 4), (1, 4)}\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_minimum_spanning_tree.py": "45b23edf3513e1f1a6e7ecf5f17eb85d1a32845d70869c7190b16b10cd61d811"
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "collected_nodeids": [
+    "python_testcases/test_possible_change.py::test_possible_change[input_data0-0]",
+    "python_testcases/test_possible_change.py::test_possible_change[input_data1-4]",
+    "python_testcases/test_possible_change.py::test_possible_change[input_data2-121]",
+    "python_testcases/test_possible_change.py::test_possible_change[input_data3-18]",
+    "python_testcases/test_possible_change.py::test_possible_change[input_data4-16]",
+    "python_testcases/test_possible_change.py::test_possible_change[input_data5-568]",
+    "python_testcases/test_possible_change.py::test_possible_change[input_data6-786]",
+    "python_testcases/test_possible_change.py::test_possible_change[input_data7-817]",
+    "python_testcases/test_possible_change.py::test_possible_change[input_data8-981]",
+    "python_testcases/test_possible_change.py::test_possible_change[input_data9-20]"
+  ],
+  "collection_errors": [],
+  "reports": [
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data0-0]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data0-0]",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data0-0]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data1-4]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data1-4]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/possible_change.py"
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data1-4]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data2-121]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data2-121]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/possible_change.py"
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data2-121]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data3-18]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data3-18]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/possible_change.py"
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data3-18]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data4-16]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data4-16]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/possible_change.py"
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data4-16]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data5-568]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data5-568]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/possible_change.py"
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data5-568]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data6-786]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data6-786]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/possible_change.py"
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data6-786]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data7-817]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data7-817]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/possible_change.py"
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data7-817]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data8-981]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data8-981]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/possible_change.py"
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data8-981]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data9-20]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data9-20]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "RuntimeError",
+      "exception_path": "/w/python_programs/possible_change.py"
+    },
+    {
+      "nodeid": "python_testcases/test_possible_change.py::test_possible_change[input_data9-20]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    }
+  ],
+  "session_finished": true,
+  "exit_code": 1
+}
