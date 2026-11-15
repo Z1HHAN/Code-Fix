@@ -1,7 +1,8 @@
 """Explicitly enabled HTTPS model calls with a durable conservative cost ledger.
 
-No SDK retries or proxy inheritance. Uncertain charges retain the reservation
-and block further paid calls until an operator reconciles the ledger.
+No SDK retries or proxy inheritance. Only proven unsent connections may retry.
+Priced personal CNY calls may retain an uncertain reservation within the same
+budget; unsupported or historical unknowns remain blocking until reviewed.
 """
 from dataclasses import dataclass
 import asyncio

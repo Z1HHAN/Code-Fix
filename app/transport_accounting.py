@@ -34,6 +34,12 @@ class TransportTrace:
 
     def proof(self, error=None):
         connect = isinstance(error, (httpx.ConnectError, httpx.ConnectTimeout, httpx.PoolTimeout))
+        # asyncio's outer deadline may cancel TCP/TLS before httpx maps its
+        # timeout. Require an observed failed connection phase, not absence of
+        # arbitrary trace events, before calling such a cancellation unsent.
+        if isinstance(error, TimeoutError) and self.events:
+            connect = connect or self.events[-1] in {
+                'connection.connect_tcp.failed', 'connection.start_tls.failed'}
         trusted = self.standard_transport or any(n.startswith('connection.') for n in self.events)
         not_sent = bool(connect and trusted and not self.send_started and not self.response_received)
         return {'version': 'transport-v1', 'outcome': 'not_sent' if not_sent else 'possibly_sent',

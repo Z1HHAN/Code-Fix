@@ -166,6 +166,22 @@ def test_legacy_cannot_ignore_personal_held_cost(tmp_path):
     with pytest.raises(ModelBlocked):ledger.reserve('two','two',legacy,3,100)
 
 
+def test_outer_deadline_during_observed_connection_phase_is_unsent(tmp_path):
+    async def handle(req):
+        await event(req,'connection.connect_tcp.started')
+        await event(req,'connection.connect_tcp.failed')
+        raise TimeoutError('outer deadline')
+    v=call(LiveModel(settings(),Ledger(tmp_path),transport=httpx.MockTransport(handle)))
+    assert v['attempts']==2 and v['cost']['status']=='not_sent'
+    assert not v['transport_request_started']
+
+
+def test_outer_deadline_without_phase_evidence_cannot_release_money(tmp_path):
+    async def handle(req):raise TimeoutError('no reliable phase')
+    v=call(LiveModel(settings(),Ledger(tmp_path),transport=httpx.MockTransport(handle)))
+    assert v['attempts']==1 and v['cost']['status']=='reserved_unknown'
+
+
 def test_explicit_historical_carry_preserves_unknown_receipt_and_never_sets_zero(tmp_path):
     from app.transport_accounting import carry_unknown_reservation
     s=settings();ledger=Ledger(tmp_path);ledger.reserve('old','old',s,3,100);ledger.settle('old',None,s)
