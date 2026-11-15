@@ -42,7 +42,7 @@ def main() -> int:
     parse.add_argument('path')
     create = sub.add_parser('create-task', help='保存任务参数，不自动启动')
     create.add_argument('--mode', choices=['baseline', 'repair'], default='baseline')
-    create.add_argument('--strategy', choices=['fixed', 'dynamic'], help='修复编排策略，默认dynamic；保存配置优先')
+    create.add_argument('--strategy', choices=['fixed', 'dynamic', 'single'], help='dynamic多Agent、single单修复员实验、fixed固定对照；保存配置优先')
     create.add_argument('--config-id', help='引用已保存的不可变配置')
     create.add_argument('--description')
     create.add_argument('--project', default='leap')

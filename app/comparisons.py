@@ -12,6 +12,19 @@ from .run_store import now
 from .tasks_v3 import get_task
 
 STRATEGIES = ('fixed', 'dynamic')
+KINDS = {'strategies': STRATEGIES, 'agents': ('single', 'dynamic')}
+
+
+def paired_outcomes(rows, strategies):
+    counts = dict(both_success=0, first_only=0, second_only=0, neither_success=0, incomplete=0)
+    for row in rows:
+        a, b = (row[s] for s in strategies)
+        if not a['executed'] or not b['executed']:
+            counts['incomplete'] += 1
+            continue
+        left, right = a['status'] == 'success', b['status'] == 'success'
+        counts['both_success' if left and right else 'first_only' if left else 'second_only' if right else 'neither_success'] += 1
+    return counts
 # A-approved QuixBugs-Python scope. New registrations need explicit admission;
 # collecting a plan does not qualify adapters or dispatch any of these tasks.
 FORMAL_PROJECTS = frozenset({
@@ -37,9 +50,9 @@ def amount(value):
         return None
 
 
-def summarize(rows):
+def summarize(rows, strategies=STRATEGIES):
     result = {}
-    for strategy in STRATEGIES:
+    for strategy in strategies:
         group = [row[strategy] for row in rows]
         planned = len(group)
         executed = sum(r['executed'] for r in group)
@@ -89,7 +102,7 @@ class ComparisonStore:
             raise InputValidationError('冻结条件不一致或身份格式无效')
         if digest(identity) != frozen['identity_sha256'] or frozen['strategy'] != strategy:
             raise InputValidationError('冻结身份校验失败')
-        if scope != 'offline' and (frozen['execution_kind'] != 'real' or identity['code']['dirty'] is not False
+        if scope != 'offline' and (frozen['execution_kind'] != 'real' or (identity['code']['dirty'] is not False and identity['code'].get('verified_bundle') is not True)
                                    or not identity['code']['commit']):
             raise InputValidationError('真实对照须使用干净冻结提交和真实执行器；离线夹具须单列')
         if scope != 'offline' and any(not b.get('profile_ref') for b in identity['bindings'].values()):
@@ -131,8 +144,12 @@ class ComparisonStore:
                 'events_url': f'/api/v3/tasks/{rid}/events'}
 
     def create(self, value):
-        if not isinstance(value, dict) or set(value) != {'title', 'scope', 'pairs'}:
+        if not isinstance(value, dict) or not {'title', 'scope', 'pairs'} <= set(value) or set(value) - {'title', 'scope', 'pairs', 'kind'}:
             raise InputValidationError('需要title、scope和显式pairs清单')
+        kind = value.get('kind', 'strategies')
+        if not isinstance(kind, str) or kind not in KINDS:
+            raise InputValidationError('kind须为strategies/agents')
+        strategies = KINDS[kind]
         if not isinstance(value['title'], str) or not 1 <= len(value['title'].strip()) <= 120:
             raise InputValidationError('对照标题须为1至120字符')
         if not isinstance(value['scope'], str) or value['scope'] not in {'formal', 'controlled', 'offline'}:
@@ -141,8 +158,8 @@ class ComparisonStore:
             raise InputValidationError('pairs须为1至40项计划清单')
         rows, seen_projects, seen_runs = [], set(), set()
         for pair in value['pairs']:
-            if not isinstance(pair, dict) or set(pair) != {'project', 'fixed', 'dynamic', 'not_run_reason'}:
-                raise InputValidationError('每项需project、fixed、dynamic和not_run_reason')
+            if not isinstance(pair, dict) or set(pair) != {'project', 'not_run_reason', *strategies}:
+                raise InputValidationError('每项需project、两组运行及not_run_reason')
             project = get_task(pair['project']).project
             if project in seen_projects:
                 raise InputValidationError('同一清单题目不能重复；不接受挑选最佳重跑')
@@ -150,10 +167,10 @@ class ComparisonStore:
                 raise InputValidationError('正式计划仅包含已批准的40道QuixBugs-Python题目')
             seen_projects.add(project)
             reasons = pair['not_run_reason']
-            if not isinstance(reasons, dict) or set(reasons) - set(STRATEGIES):
-                raise InputValidationError('未运行原因只能引用fixed/dynamic')
+            if not isinstance(reasons, dict) or set(reasons) - set(strategies):
+                raise InputValidationError('未运行原因只能引用本对照的两组')
             row = {'project': project}
-            for strategy in STRATEGIES:
+            for strategy in strategies:
                 rid = pair[strategy]
                 if rid is None:
                     reason = reasons.get(strategy)
@@ -167,15 +184,19 @@ class ComparisonStore:
                         raise InputValidationError('运行编号必须为不重复字符串')
                     seen_runs.add(rid)
                     row[strategy] = self._run(rid, project, strategy, value['scope'])
-            if all(row[s]['run_id'] for s in STRATEGIES):
-                if row['fixed']['identity_sha256'] != row['dynamic']['identity_sha256']:
+            if all(row[s]['run_id'] for s in strategies):
+                if row[strategies[0]]['identity_sha256'] != row[strategies[1]]['identity_sha256']:
                     raise InputValidationError('两组冻结条件不一致：须核对提交、模型、指令、参数、价格、测试及上限')
-            row['paired'] = all(row[s]['run_id'] for s in STRATEGIES)
+            row['paired'] = all(row[s]['run_id'] for s in strategies)
             rows.append(row)
         data = {'schema_version': 1, 'title': value['title'], 'scope': value['scope'],
-                'plan': value['pairs'], 'pairs': rows, 'summary': summarize(rows),
+                'plan': value['pairs'], 'pairs': rows, 'summary': summarize(rows, strategies),
                 'basis': 'explicit_manifest; immutable_evidence_snapshot; no_task_dispatch',
                 'review_status': 'pending_B_C_review'}
+        if 'kind' in value:
+            data.update(kind=kind, arms=list(strategies))
+        if kind == 'agents':
+            data['paired_outcomes'] = paired_outcomes(rows, strategies)
         identifier = 'cmp-' + digest(data)
         data.update(comparison_id=identifier, created_at=now())
         with self.store.connect() as db:
@@ -207,7 +228,7 @@ def export_csv(data):
     writer.writerow(['project', 'strategy', 'run_id', 'status', 'executed', 'candidate_rounds',
                      'requests', 'amount_cny', 'amount_usd', 'cost_status', 'elapsed_seconds', 'reason', 'report_url'])
     for pair in data['pairs']:
-        for strategy in STRATEGIES:
+        for strategy in data.get('arms', STRATEGIES):
             r = pair[strategy]
             values = [pair['project'], strategy, r['run_id'], r['status'], r['executed'], r['candidate_rounds'],
                       r['requests'], r['cost']['amount_cny'], r['cost']['amount_usd'], r['cost']['status'],

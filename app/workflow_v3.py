@@ -394,6 +394,7 @@ class WorkflowRun:
         self.gateway = AgentGateway(self.model, self.store, config)
         self.trace.write('trace/agent-team.json', {'schema_version': '1.0.0',
             'run_id': self.run_id, 'strategy': self.strategy,
+            'active_agents': ['repairer'] if self.strategy == 'single' else list(self.gateway.agents),
             'agents': {role: {**agent.contract(config), 'agent_instance_id': f'{self.run_id}:{role}'}
                        for role, agent in self.gateway.agents.items()},
             'execution_authority': 'program_rules_and_verified_tool_evidence',
@@ -448,7 +449,7 @@ class WorkflowRun:
         # Only usable tool results enter model analysis. Environment, version
         # and permission failures retain their immediate protective exits.
         detector = (self.call('detector', ev, round_number)
-                    if result['failure_class'] in {'passed', 'assertion_failed', 'syntax_error', 'code_runtime_error'}
+                    if self.strategy != 'single' and result['failure_class'] in {'passed', 'assertion_failed', 'syntax_error', 'code_runtime_error'}
                     else None)
         # Terminal safety branches take precedence over all model advice.
         context = dict(phase='development', failure_class=result['failure_class'], isolation_ready=self.final['isolation_ready'],
@@ -470,13 +471,15 @@ class WorkflowRun:
         # Advisory model calls must not consume the last chance to
         # validate an already passing candidate with the tool executor.
         advice, skipped = None, None
-        if decision['action'] == 'final_check':
+        if self.strategy == 'single':
+            skipped = '单Agent对照：仅修复员，依据相同隔离测试反馈有界重试；权限、预算及干净复验保持'
+        elif decision['action'] == 'final_check':
             skipped = '隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验'
         elif self.strategy == 'dynamic' and result['failure_class'] == 'syntax_error':
             skipped = '动态策略：检测确认语法失败，直接重修，跳过模型调度建议与定位'
         else:
             advice = self.call('scheduler', ev, round_number, detector)
-        planned = 'repair' if self.strategy == 'fixed' and decision['action'] == 'locate' else decision['action']
+        planned = 'repair' if self.strategy in {'fixed', 'single'} and decision['action'] == 'locate' else decision['action']
         effective = advice['action'] if advice and advice['action'] in {'pause', 'stop'} else planned
         reason = advice['reason'] if advice and effective in {'pause', 'stop'} else decision['reason']
         overrides = []
@@ -484,10 +487,10 @@ class WorkflowRun:
             overrides.append('模型要求保守停止，程序允许停止；不采纳推进动作'
                              if effective in {'pause', 'stop'} else '模型建议不能覆盖工具证据与强制规则')
         if planned != decision['action']:
-            overrides.append('固定策略不追加定位员；保留共同保护，失败时下一轮按固定顺序重修')
+            overrides.append('单Agent对照仅允许修复员重试' if self.strategy == 'single' else '固定策略不追加定位员；保留共同保护，失败时下一轮按固定顺序重修')
         if skipped:
             overrides.append(skipped)
-            self.store.event(self.run_id, {'event': 'roles_skipped', 'roles': ['scheduler'],
+            self.store.event(self.run_id, {'event': 'roles_skipped', 'roles': ['detector', 'scheduler', 'locator'] if self.strategy == 'single' else ['scheduler'],
                 'round': round_number, 'reason': skipped, 'code_version': self.version})
         override = '；'.join(overrides) or None
         if effective == 'locate' and self.model_calls >= self.task['max_calls']:

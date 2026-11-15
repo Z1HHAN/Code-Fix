@@ -2,6 +2,8 @@
 import hashlib
 import os
 import subprocess
+import json
+from pathlib import Path
 
 from .model_profiles import load_profiles, resolved_base_url
 from .config import ConfigError
@@ -15,6 +17,20 @@ SOURCE_PATHS = ('app', 'c_runner', 'docker', 'configs', 'prompts', 'knowledge', 
 
 
 def code_identity(root, *, read_git=True):
+    manifest = root / 'codefix-runtime-source.json'
+    if read_git and manifest.is_file():
+        frozen = json.loads(manifest.read_text(encoding='utf-8'))
+        files = frozen.get('files', {})
+        if not files or digest(files) != frozen.get('source_sha256') or not frozen.get('commit'):
+            raise ConfigError('运行源码清单身份无效')
+        for name, expected in files.items():
+            path = root / name
+            if (Path(name).is_absolute() or '..' in Path(name).parts
+                    or not path.resolve().is_relative_to(root.resolve()) or path.is_symlink()
+                    or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected):
+                raise ConfigError('运行源码与冻结清单不一致：' + name)
+        return {'commit': frozen['commit'], 'source_sha256': digest(files),
+                'dirty': None, 'verified_bundle': True}
     if not read_git:
         # Offline doubles must remain usable under the independent gate's
         # strict no-process boundary. They never acquire a claimed Git commit.
@@ -71,7 +87,7 @@ def freeze(root, task, definition, config, runner, model):
                          'request_seconds': numeric_env(p['request_seconds_env']) if p else None}
         if p and p.get('personal_pricing'):
             bindings[role]['personal_pricing'] = p['personal_pricing']
-    identity = {'code': code_identity(root, read_git=real and not remote), 'project': task['project'], 'description': task['description'],
+    identity = {'code': code_identity(root, read_git=real), 'project': task['project'], 'description': task['description'],
                 'task_limits': {k: task[k] for k in ('max_rounds', 'max_calls', 'total_seconds')},
                 'approved_files': definition.profile['approved_files'],
                 'test_suite_version': definition.summary()['test_suite_version'],

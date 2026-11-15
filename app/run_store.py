@@ -27,8 +27,8 @@ def validate_task(value):
     task = dict(description='修复闰年判断', project='leap', mode='baseline',
                 max_rounds=3, max_calls=12, total_seconds=300)
     task.update(value)
-    if not isinstance(task.get('strategy', 'dynamic'), str) or task.get('strategy', 'dynamic') not in {'fixed', 'dynamic'}:
-        raise InputValidationError('策略须为fixed/dynamic')
+    if not isinstance(task.get('strategy', 'dynamic'), str) or task.get('strategy', 'dynamic') not in {'fixed', 'dynamic', 'single'}:
+        raise InputValidationError('策略须为fixed/dynamic/single')
     if task['mode'] == 'baseline' and task.get('strategy', 'dynamic') != 'dynamic':
         raise InputValidationError('baseline不使用固定修复策略')
     if 'config_id' in task and (not isinstance(task['config_id'], str) or not re.fullmatch(r'cfg-[a-f0-9]{64}', task['config_id'])):
