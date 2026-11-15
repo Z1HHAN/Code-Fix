@@ -14,10 +14,13 @@ window.CodeFixComparisons=(()=>{
   }
   function show(data){
     names=CodeFixComparisonMetrics.names(data);
+    const groups=Object.keys(names).map(a=>data.summary[a]),ran=groups.reduce((n,s)=>n+s.ran,0),planned=groups.reduce((n,s)=>n+s.planned,0);
+    byId('comparison-progress').hidden=ran===planned;
+    display('comparison-progress',`批次未完成：${ran} / ${planned} 条运行已记录，${planned-ran} 条未运行。当前不能作为完整40题效果结论；请以配对记录核对。`);
     const cards=byId('comparison-scorecards');cards.replaceChildren();
     for(const arm of Object.keys(names)){
       const s=data.summary[arm],totals=CodeFixComparisonMetrics.totals(data,arm),card=element('article',null,'comparison-scorecard');
-      card.append(element('h4',names[arm]),element('div',percent(s.success_rate_all),'comparison-rate'),element('p',`${s.success} / ${s.planned} 通过 · 已执行 ${s.executed} · 未运行 ${s.not_run}`));
+      card.append(element('h4',names[arm]),element('small','全计划通过率（包含未运行分母）'),element('div',percent(s.success_rate_all),'comparison-rate'),element('p',`${s.success} / ${s.planned} 通过 · 已执行 ${s.executed} · 未运行 ${s.not_run}`));
       const stats=element('div',null,'comparison-stats');
       for(const [label,n]of [['候选轮次',s.candidate_rounds],['实际HTTP请求',s.requests],['估算费用（CNY）',totals.cost==null?'未知':'¥ '+totals.cost],['耗时合计',totals.elapsed==null?'未知':totals.elapsed.toFixed(2)+' 秒']]){
         const item=element('div');item.append(element('small',label),element('strong',value(n)));stats.append(item);
