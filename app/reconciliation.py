@@ -48,7 +48,7 @@ def reconcile(ledger, *, call_id, currency, amount, evidence, operator, reason, 
         if row is None:
             raise ValueError('请求不存在')
         before = dict(zip(columns,row))
-        if before['status'] not in {'unknown','pending'}:
+        if before['status'] not in {'unknown','pending','reserved_unknown'}:
             raise ValueError('只允许对账未结请求；已结算记录不能覆盖')
         receipt = {'call_id':call_id,'currency':currency,'actual_amount':str(value),
                    'operator':operator,'reason':reason,'evidence_sha256':digest,

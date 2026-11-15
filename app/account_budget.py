@@ -149,7 +149,7 @@ class AccountBudget:
             self._register(db, settings)
             if (db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
                     or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()
-                    or db.execute("SELECT 1 FROM personal_calls WHERE status IN ('pending','unknown')").fetchone()):
+                    or db.execute("SELECT 1 FROM personal_calls WHERE status IN ('pending','unknown','reserved_unknown')").fetchone()):
                 unknown = (db.execute("SELECT 1 FROM calls WHERE status='unknown'").fetchone()
                            or db.execute("SELECT 1 FROM cny_calls WHERE status='unknown'").fetchone()
                            or db.execute("SELECT 1 FROM personal_calls WHERE status='unknown'").fetchone())
@@ -220,8 +220,8 @@ class AccountBudget:
             for aid, provider, cap, warning, team in db.execute('SELECT * FROM account_limits ORDER BY account_id'):
                 used, reserved, unknown = db.execute('''SELECT
                     coalesce(sum(actual_microcny),0),
-                    coalesce(sum(CASE WHEN status<>'known' THEN reserved_microcny ELSE 0 END),0),
-                    coalesce(sum(CASE WHEN status<>'known' THEN 1 ELSE 0 END),0)
+                    coalesce(sum(CASE WHEN status NOT IN ('known','not_sent') THEN reserved_microcny ELSE 0 END),0),
+                    coalesce(sum(CASE WHEN status NOT IN ('known','not_sent') THEN 1 ELSE 0 END),0)
                     FROM cny_calls WHERE account_id=?''', (aid,)).fetchone()
                 remaining = cap - used - reserved
                 accounts.append({'account_id': aid, 'provider_id': provider, 'currency': 'CNY',
@@ -238,14 +238,14 @@ class AccountBudget:
                                          'status': row[3], 'resolved_at': row[4]})
             blocked = bool(db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()
                            or db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
-                           or db.execute("SELECT 1 FROM personal_calls WHERE status IN ('pending','unknown')").fetchone())
+                           or db.execute("SELECT 1 FROM personal_calls WHERE status IN ('pending','unknown','reserved_unknown')").fetchone())
         return {'currency': 'CNY', 'basis': 'project_ledger_estimate_not_platform_balance',
                 'accounts': accounts, 'alerts': alerts, 'paid_calls_blocked': blocked}
 
     def summary(self, run_id):
         with sqlite3.connect(self.path) as db:
             count, unknown, amount = db.execute('''SELECT count(*),
-                coalesce(sum(CASE WHEN status<>'known' THEN 1 ELSE 0 END),0),
+                coalesce(sum(CASE WHEN status NOT IN ('known','not_sent') THEN 1 ELSE 0 END),0),
                 coalesce(sum(actual_microcny),0) FROM cny_calls WHERE run_id=?''', (run_id,)).fetchone()
         return {'calls': count, 'status': 'unknown' if unknown else 'estimated' if count else 'not_called',
                 'currency': 'CNY', 'amount_cny': None if unknown else yuan(amount),

@@ -102,6 +102,8 @@
     if (!cost) return '费用：未记录／未知';
     if (cost.status === 'not_called') return '费用：未调用模型';
     if (cost.status === 'not_applicable') return '费用：离线模拟，无真实账单';
+    if (cost.status === 'not_sent') return '费用：请求未发送，预留已释放（本地传输证据）';
+    if (cost.budget_handling === 'reserved_upper_bound' || cost.status === 'reserved_unknown') return `费用待核对：按上限预留 ${cost.currency || 'CNY'} ${cost.reserved_cny ?? cost.reserved_usd ?? '未记录'}，未计作实际扣费`;
     if (['unknown','pending'].includes(cost.status)) return '费用：未知／预留，尚未结算';
     const currency=cost.currency||(cost.amount_cny!=null?'CNY':'USD');
     const amount = currency === 'CNY' ? cost.amount_cny : cost.amount_usd;

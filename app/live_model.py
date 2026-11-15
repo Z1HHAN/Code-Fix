@@ -120,7 +120,7 @@ class Ledger:
             db.execute('BEGIN IMMEDIATE')
             if (db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
                     or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()
-                    or db.execute("SELECT 1 FROM personal_calls WHERE status IN ('pending','unknown')").fetchone()):
+                    or db.execute("SELECT 1 FROM personal_calls WHERE status IN ('pending','unknown','reserved_unknown')").fetchone()):
                 unknown = (db.execute("SELECT 1 FROM calls WHERE status='unknown'").fetchone()
                            or db.execute("SELECT 1 FROM cny_calls WHERE status='unknown'").fetchone()
                            or db.execute("SELECT 1 FROM personal_calls WHERE status='unknown'").fetchone())
@@ -211,6 +211,8 @@ class LiveModel:
         self.mode = 'live' if transport is None else 'test_transport'
 
     async def _request(self, messages, seconds):
+        from .transport_accounting import ACTIVE_TRACE
+        trace = ACTIVE_TRACE.get()
         # The outer deadline cancels headers AND the entire body stream. A peer
         # sending one byte per read timeout cannot keep this request alive.
         async with asyncio.timeout(seconds):
@@ -218,9 +220,12 @@ class LiveModel:
                                         follow_redirects=False, timeout=seconds) as client:
                 async with client.stream('POST', self.settings.base_url + '/chat/completions',
                         headers={'Authorization': 'Bearer ' + self.settings.api_key},
+                        extensions={'trace': trace.callback} if trace else {},
                         json={'model': self.settings.model, 'messages': messages,
                               self.settings.token_limit_parameter: self.settings.max_output_tokens,
                               **(self.settings.request_parameters or {})}) as response:
+                    if trace:
+                        trace.response_received = True
                     response.raise_for_status()
                     payload = bytearray()
                     async for chunk in response.aiter_bytes():
@@ -254,29 +259,55 @@ class LiveModel:
                   'model': self.settings.model, 'call_id': call_id, 'status': 'failed',
                   'provider_id': self.settings.provider_id, 'price_version': self.settings.price_version,
                   'usage': None, 'cost': {'status': 'unknown', 'amount_usd': None},
-                  'attempts': 1, 'max_attempts': 1, 'transport_request_started': False,
+                  'attempts': 0, 'max_attempts': 2, 'transport_request_started': False,
                   'failure_class': 'model_transport_error'}
         record['budget_check'] = {'status': 'ok', 'reason': '调用次数、未结算请求及适用费用上限检查通过，已预留'}
         started = time.monotonic()
         settled = False
+        from .transport_accounting import ACTIVE_TRACE, TransportTrace, settle_failure
+        trace = TransportTrace(standard_transport=self.transport is None)
+        record['transport_attempts'] = []
         try:
-            remaining = min(deadline - time.monotonic(), self.settings.timeout)
-            if remaining <= 0:
-                raise TimeoutError()
-            record['model_api_called'] = self.transport is None
+            request_deadline = min(deadline, started + self.settings.timeout)
+            for attempt in (1, 2):
+                remaining = request_deadline - time.monotonic()
+                if remaining <= 0:
+                    raise TimeoutError()
+                trace = TransportTrace(standard_transport=self.transport is None)
+                token = ACTIVE_TRACE.set(trace)
+                record['attempts'] = attempt
+                try:
+                    value = asyncio.run(self._request(messages, remaining))
+                    record['transport_attempts'].append(trace.proof())
+                    break
+                except Exception as error:
+                    proof = trace.proof(error)
+                    record['transport_attempts'].append(proof)
+                    if proof['outcome'] == 'not_sent' and attempt == 1 and request_deadline > time.monotonic():
+                        continue
+                    raise
+                finally:
+                    ACTIVE_TRACE.reset(token)
             record['transport_request_started'] = True
-            value = asyncio.run(self._request(messages, remaining))
+            record['model_api_called'] = self.transport is None
             if not isinstance(value, dict):
                 raise ValueError('响应根节点必须是对象')
             record['usage'] = value.get('usage')
-            record['cost'] = self.ledger.settle(call_id, record['usage'], self.settings)
+            if record['usage'] is None:
+                proof = trace.proof()
+                proof['outcome'] = 'response_missing_usage'
+                record['cost'] = settle_failure(self.ledger, call_id, self.settings, proof)
+            else:
+                record['cost'] = self.ledger.settle(call_id, record['usage'], self.settings)
             settled = True
             record.update(provider_model=value.get('model'), provider_response_id=value.get('id'))
             # Unknown usage has priority over content validation: it must never
             # become a format failure that automatically sends another request.
-            if record['cost']['status'] == 'unknown':
+            if record['cost']['status'] in {'unknown', 'reserved_unknown'}:
                 record.update(status='blocked', failure_class='cost_unknown',
-                              reason='服务商用量或费用未知，须先核对，停止后续调用')
+                              reason=('服务商用量缺失，本请求已停止；保留费用上限预留，其他任务可在原金额预算内继续'
+                                      if record['cost']['status'] == 'reserved_unknown' else
+                                      '服务商用量或费用未知，须先核对，停止后续调用'))
             else:
                 choice = value['choices'][0]
                 finish = choice.get('finish_reason')
@@ -308,8 +339,17 @@ class LiveModel:
                     record.update(raw_text=content, status='ok', failure_class=None)
         except Exception as exc:
             if not settled:
-                usage = None if record['transport_request_started'] else {'prompt_tokens': 0, 'completion_tokens': 0}
-                record['cost'] = self.ledger.settle(call_id, usage, self.settings)
+                proof = trace.proof(exc)
+                if record['attempts'] == 0 or (isinstance(exc, TimeoutError)
+                        and record['transport_attempts'] and all(p['outcome'] == 'not_sent' for p in record['transport_attempts'])):
+                    proof['outcome'] = 'not_sent'
+                record['transport_request_started'] = proof['outcome'] != 'not_sent'
+                record['model_api_called'] = self.transport is None and record['transport_request_started']
+                # Invalid/over-limit returned usage is never covered by a hold.
+                if isinstance(exc, (httpx.NetworkError, httpx.TimeoutException, TimeoutError)):
+                    record['cost'] = settle_failure(self.ledger, call_id, self.settings, proof)
+                else:
+                    record['cost'] = self.ledger.settle(call_id, None, self.settings)
             record['error_type'] = type(exc).__name__
             if isinstance(exc, httpx.HTTPStatusError):
                 record['http_status'] = exc.response.status_code
@@ -321,6 +361,10 @@ class LiveModel:
                 record['failure_class'] = ('model_request_timeout' if record['transport_request_started'] else 'model_deadline_before_send')
             elif isinstance(exc, (ValueError, KeyError, IndexError, TypeError)):
                 record['failure_class'] = 'invalid_model_response'
+            if record['cost'].get('status') == 'not_sent':
+                record['reason'] = '连接未建立，请求未发送；已自动释放费用预留。有限重连未成功，请检查连接后重试，无需账单截图。'
+            elif record['cost'].get('status') == 'reserved_unknown':
+                record['reason'] = '请求发送状态不确定，未重复发送；费用待核对，已按预留上限占用累计预算，其他任务可在原金额预算剩余额度内继续。'
         finally:
             record['duration_ms'] = round((time.monotonic() - started) * 1000)
         return self.redact(record)
