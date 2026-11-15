@@ -1,0 +1,22 @@
+{
+  "project": "qb-bitcount",
+  "base_version": "sha256:f0e50f916c5865c8f1ef5192157ddc66db85afd8b6a7f314d84ed79f4621c150",
+  "candidate_version": "sha256:d1b44084ea8295c34668445ba361c1328f568abbd57014128fcd2ba387644a7d",
+  "test_suite_version": "sha256:947ab031b976b57d6757ff12d2bf4b770715f59675652c3dd7b4478abf78bbde",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_bitcount.py": "24cdf73b1e1f6b9e947493e1714c0f9dbfac868589fb5ea4c7dd9fc5bbd44c95",
+    "json_testcases/bitcount.json": "dad1e3a2f8de7767be29b5e44cb11809b4e5ae2943ad9337419a038362e33e2d",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/bitcount.py",
+      "new_content": "\ndef bitcount(n):\n    count = 0\n    while n:\n        n &= n - 1\n        count += 1\n    return count\n\n\n\"\"\"\nBitcount\nbitcount\n\n\nInput:\n    n: a nonnegative int\n\nOutput:\n    The number of 1-bits in the binary encoding of n\n\nExamples:\n    >>> bitcount(127)\n    7\n    >>> bitcount(128)\n    1\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_bitcount.py": "24cdf73b1e1f6b9e947493e1714c0f9dbfac868589fb5ea4c7dd9fc5bbd44c95"
+  }
+}

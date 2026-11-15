@@ -1,0 +1,177 @@
+{
+  "call_id": "codefix-22764ab53dd847578fca8d7a29140132",
+  "exit_code": 1,
+  "timed_out": false,
+  "duration_ms": 946,
+  "stdout_path": "trusted-run/stdout.txt",
+  "stderr_path": "trusted-run/stderr.txt",
+  "command": [
+    "/usr/local/bin/docker",
+    "run",
+    "--mount",
+    "type=volume,source=codefix-rpc-74f2446ca68c48da952f1cd50cf95249,target=/rpc,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+    "-i",
+    "--name",
+    "codefix-22764ab53dd847578fca8d7a29140132",
+    "--pull=never",
+    "--network=none",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--pids-limit=64",
+    "--memory=256m",
+    "--memory-swap=256m",
+    "--cpus=1",
+    "--user=65534:65534",
+    "--ulimit=nofile=128:128",
+    "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+    "--log-driver=none",
+    "--mount",
+    "type=volume,source=codefix-out-f16728ce747b40b3b7523f949637c07a,target=/out",
+    "--mount",
+    "type=bind,source=/opt/codefix-data/jobs/job-088f91e9482b4a538cc6cc8772e21a9b/test/trusted-tests,target=/w,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+    "--workdir=/w",
+    "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+    "--env=PYTHONDONTWRITEBYTECODE=1",
+    "--entrypoint=python",
+    "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "/harness.py",
+    "python_testcases/test_flatten.py"
+  ],
+  "artifact_channel": "docker-cp",
+  "artifact_error": null,
+  "artifact_detail": null,
+  "cleanup_passed": true,
+  "output_volume": "codefix-out-f16728ce747b40b3b7523f949637c07a",
+  "phase": "development",
+  "code_version": "sha256:bae160b755aaa503b1697670c3daa04ed0837b778805c03d8a5953ddd2c7a96e",
+  "project": "qb-flatten",
+  "execution_mode": "remote-docker",
+  "isolation_ready": true,
+  "test_suite_version": "sha256:c4f5b85ec79951876f241d2ab1c6f58098327e2eb5961ad746fdd1dfb6374365",
+  "expected_test_count": 7,
+  "junit_path": "trusted-run/output/junit.xml",
+  "structured_path": "trusted-run/output/pytest_events.json",
+  "evidence_matches_current_version": true,
+  "trust_boundary": "separate_candidate_and_test_containers",
+  "candidate_audit": {
+    "container": "codefix-candidate-4d2105d7106344d7a1d53a852696f2d0",
+    "logs_captured": true,
+    "events": [
+      {
+        "event": "execution_error",
+        "detail": "TypeError"
+      },
+      {
+        "event": "execution_error",
+        "detail": "TypeError"
+      },
+      {
+        "event": "execution_error",
+        "detail": "TypeError"
+      },
+      {
+        "event": "execution_error",
+        "detail": "TypeError"
+      },
+      {
+        "event": "execution_error",
+        "detail": "TypeError"
+      },
+      {
+        "event": "execution_error",
+        "detail": "TypeError"
+      }
+    ],
+    "event_kinds": [
+      "execution_error"
+    ],
+    "fake_report_output": false,
+    "violation": null,
+    "reason": null,
+    "output_limit_exceeded": false
+  },
+  "runner_classification": {
+    "status": null,
+    "verification_status": null,
+    "failure_class": null,
+    "reason": null
+  },
+  "counts": {
+    "collected": 7,
+    "passed": 1,
+    "failed": 6,
+    "errors": 0,
+    "skipped": 0
+  },
+  "status": "failed",
+  "verification_status": "failed",
+  "failure_class": "code_runtime_error",
+  "reason": "Frozen native fixture tests completed with a recorded failure",
+  "coverage": {
+    "expected_nodeids": [
+      "python_testcases/test_flatten.py::test_flatten[input_data0-expected0]",
+      "python_testcases/test_flatten.py::test_flatten[input_data1-expected1]",
+      "python_testcases/test_flatten.py::test_flatten[input_data2-expected2]",
+      "python_testcases/test_flatten.py::test_flatten[input_data3-expected3]",
+      "python_testcases/test_flatten.py::test_flatten[input_data4-expected4]",
+      "python_testcases/test_flatten.py::test_flatten[input_data5-expected5]",
+      "python_testcases/test_flatten.py::test_flatten[input_data6-expected6]"
+    ],
+    "collected_nodeids": [
+      "python_testcases/test_flatten.py::test_flatten[input_data0-expected0]",
+      "python_testcases/test_flatten.py::test_flatten[input_data1-expected1]",
+      "python_testcases/test_flatten.py::test_flatten[input_data2-expected2]",
+      "python_testcases/test_flatten.py::test_flatten[input_data3-expected3]",
+      "python_testcases/test_flatten.py::test_flatten[input_data4-expected4]",
+      "python_testcases/test_flatten.py::test_flatten[input_data5-expected5]",
+      "python_testcases/test_flatten.py::test_flatten[input_data6-expected6]"
+    ],
+    "expected_collected_match": true,
+    "junit_identities": [
+      [
+        "python_testcases.test_flatten",
+        "test_flatten[input_data0-expected0]"
+      ],
+      [
+        "python_testcases.test_flatten",
+        "test_flatten[input_data1-expected1]"
+      ],
+      [
+        "python_testcases.test_flatten",
+        "test_flatten[input_data2-expected2]"
+      ],
+      [
+        "python_testcases.test_flatten",
+        "test_flatten[input_data3-expected3]"
+      ],
+      [
+        "python_testcases.test_flatten",
+        "test_flatten[input_data4-expected4]"
+      ],
+      [
+        "python_testcases.test_flatten",
+        "test_flatten[input_data5-expected5]"
+      ],
+      [
+        "python_testcases.test_flatten",
+        "test_flatten[input_data6-expected6]"
+      ]
+    ],
+    "junit_expected_match": true,
+    "session_finished": true
+  },
+  "remote_job_id": "job-088f91e9482b4a538cc6cc8772e21a9b",
+  "execution_endpoint": "https://8.148.85.237",
+  "transport_mode": "live"
+}

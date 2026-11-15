@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="5" time="0.073" timestamp="2026-11-15T14:01:20.066450+00:00" hostname="028ef177be87"><testcase classname="python_testcases.test_breadth_first_search" name="test1" time="0.003" /><testcase classname="python_testcases.test_breadth_first_search" name="test2" time="0.002" /><testcase classname="python_testcases.test_breadth_first_search" name="test3" time="0.001"><failure message="RuntimeError: candidate typed RPC failed">def test3():
+        """Case 3: Two unconnected nodes in graph
+        Output: Path not found
+        """
+    
+        nodef = Node("F")
+        nodee = Node("E")
+    
+&gt;       path_found = breadth_first_search(nodef, nodee)
+
+python_testcases/test_breadth_first_search.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/breadth_first_search.py:53: in breadth_first_search
+    return invoke('breadth_first_search', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'breadth_first_search'
+args = (&lt;node.Node object at 0x7fe31c098e50&gt;, &lt;node.Node object at 0x7fe31c098ed0&gt;)
+kwargs = {}
+
+    def invoke(function, args, kwargs):
+        packet = objects = node_type = None
+        if function in codec.TYPED_FUNCTIONS:
+            if function in codec.NODE_FUNCTIONS:
+                # Only the hash-bound helper prepared with the trusted native tests.
+                from node import Node
+                node_type = Node
+            packet, objects = codec.pack([list(args), kwargs], node_type)
+            request = codec.dumps({'function': function, 'payload': packet})
+        else:
+            request = codec.dumps({'function': function, 'args': args, 'kwargs': kwargs})
+        if len(request) &gt; 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+                    client.connect('/rpc/channel.sock')
+                    break
+                except (FileNotFoundError, ConnectionRefusedError):
+                    if attempt == 99:
+                        raise
+                    time.sleep(.02)
+            client.sendall(request)
+            with client.makefile('rb') as stream:
+                raw = stream.readline(65537)
+            if len(raw) &gt; 65536 or not raw.endswith(b'\n'):
+                raise ValueError('RPC response exceeds bound or is incomplete')
+            result = codec.loads(raw)
+            if packet is not None:
+                if type(result) is not dict or set(result) != {'payload'}:
+&gt;                   raise RuntimeError('candidate typed RPC failed')
+E                   RuntimeError: candidate typed RPC failed
+
+python_programs/breadth_first_search.py:45: RuntimeError</failure></testcase><testcase classname="python_testcases.test_breadth_first_search" name="test4" time="0.002" /><testcase classname="python_testcases.test_breadth_first_search" name="test5" time="0.002" /></testsuite></testsuites>

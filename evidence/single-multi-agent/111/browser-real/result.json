@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "real historical batch replay; browser caused no model requests",
+  "rows": 40,
+  "cards": 2,
+  "errors": [],
+  "writes": []
+}

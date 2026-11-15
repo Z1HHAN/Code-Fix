@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "offline layout; no task/model execution by browser",
+  "rows": 40,
+  "cards": 2,
+  "errors": [],
+  "writes": []
+}

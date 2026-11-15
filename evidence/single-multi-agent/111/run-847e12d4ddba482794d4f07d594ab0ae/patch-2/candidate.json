@@ -1,0 +1,22 @@
+{
+  "project": "qb-find_first_in_sorted",
+  "base_version": "sha256:7e0c18980757fe6e87e924efbf92fb3a0bf5d117f0db458184190826c771aa64",
+  "candidate_version": "sha256:eed9165c7dddde1c601293aa4fa4b519c9aeacdca2d5db2fb96700ee736c85db",
+  "test_suite_version": "sha256:04a83e442ec2a6e129261eb0b79875171e795565a2299602852d5791e1ff6fc7",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_find_first_in_sorted.py": "006fc9b2b1c5192f710aeae78ea3aba935b5eaa62ba98df5f51ec0e7274b7301",
+    "json_testcases/find_first_in_sorted.json": "4cfba9e31bc0b81dbf0f20861ad79a06d48365aa8710c2f57da965fba4982d89",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/find_first_in_sorted.py",
+      "new_content": "def find_first_in_sorted(arr, x):\n    lo = 0\n    hi = len(arr) - 1\n\n    while lo <= hi:\n        mid = (lo + hi) // 2\n\n        if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):\n            return mid\n\n        elif x < arr[mid]:\n            hi = mid - 1\n        elif x == arr[mid]:\n            hi = mid - 1\n\n        else:\n            lo = mid + 1\n\n    return -1\n\n\n\"\"\"\nFancy Binary Search\nfancy-binsearch\n\n\nInput:\n    arr: A sorted list of ints\n    x: A value to find\n\nOutput:\n    The lowest index i such that arr[i] == x, or -1 if x not in arr\n\nExample:\n    >>> find_first_in_sorted([3, 4, 5, 5, 5, 5, 6], 5)\n    2\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_find_first_in_sorted.py": "006fc9b2b1c5192f710aeae78ea3aba935b5eaa62ba98df5f51ec0e7274b7301"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "model": "deepseek-v4.1-flash-1017",
+  "endpoint_host": "maas.qianwenaiapi.com",
+  "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+  "balance": {
+    "requests": 157,
+    "estimated_cny": "1.811463",
+    "unknown_or_pending": 0
+  },
+  "execution": {
+    "ready": true,
+    "checks": [
+      {
+        "id": "execution",
+        "title": "执行服务与访问码",
+        "status": "pass",
+        "detail": "已连接云端，访问码有效",
+        "action": ""
+      },
+      {
+        "id": "isolation",
+        "title": "云端隔离环境",
+        "status": "pass",
+        "detail": "真实隔离探针通过；任务启动时仍会重新验证",
+        "action": ""
+      }
+    ],
+    "checked_at": "2026-11-15T13:58:41.778798+00:00",
+    "isolation_verified": true,
+    "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860"
+  },
+  "model_requests": 0
+}

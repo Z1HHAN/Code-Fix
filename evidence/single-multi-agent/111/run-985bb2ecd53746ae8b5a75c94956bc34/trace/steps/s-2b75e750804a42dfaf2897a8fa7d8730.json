@@ -1,0 +1,17 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-985bb2ecd53746ae8b5a75c94956bc34",
+  "step_id": "s-2b75e750804a42dfaf2897a8fa7d8730",
+  "parent_step_id": "s-1887fdeb0ad347d6b3812880233f6dfa",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "final_check",
+  "strategy": "dynamic",
+  "evidence_ids": [
+    "test-final-check"
+  ],
+  "status": "ok",
+  "effective_action": "finish",
+  "decision_id": "d-cc14cf09eca64e9787c5639b0081ba53",
+  "duration_ms": 36
+}

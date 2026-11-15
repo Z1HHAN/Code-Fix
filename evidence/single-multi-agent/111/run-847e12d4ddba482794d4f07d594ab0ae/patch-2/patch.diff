@@ -1,0 +1,15 @@
+--- a/python_programs/find_first_in_sorted.py
++++ b/python_programs/find_first_in_sorted.py
+@@ -8,8 +8,10 @@
+         if x == arr[mid] and (mid == 0 or x != arr[mid - 1]):
+             return mid
+ 
+-        elif x <= arr[mid]:
+-            hi = mid
++        elif x < arr[mid]:
++            hi = mid - 1
++        elif x == arr[mid]:
++            hi = mid - 1
+ 
+         else:
+             lo = mid + 1

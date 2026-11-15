@@ -1,0 +1,20 @@
+{
+  "run_id": "run-529e672e62a040e4a803b3bf89c78e0b",
+  "call_id": "m-7b02a4c6232a42d4a167bbddd2cf8507",
+  "project": "qb-flatten",
+  "role": "detector",
+  "error_type": "ConnectError",
+  "provider_usage": null,
+  "provider_request_id": null,
+  "amount_cny": null,
+  "status": "awaiting_provider_verification",
+  "candidate_development_test": "passed",
+  "final_check": "not_run",
+  "new_paid_requests_allowed": false,
+  "created_at": "2026-11-15T14:08:50.780975+00:00",
+  "currency": "CNY",
+  "model": "deepseek-v4.1-flash-1017",
+  "reserved_cny": "0.027462",
+  "ledger_status": "unknown",
+  "created_at_shanghai": "2026-11-15T22:08:50.780975+08:00"
+}

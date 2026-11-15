@@ -1,0 +1,21 @@
+{
+  "project": "qb-depth_first_search",
+  "base_version": "sha256:8836df95ee977d97ecd926398f0f99c6a2877544e2807717d42496671422e78b",
+  "candidate_version": "sha256:2b9e4c5eb381a5098c121602654b9ee5d83d7fb24700ada226cef11c64b823a1",
+  "test_suite_version": "sha256:5558145da26d016918d4a2aaf147ea4a1abeef63c787fd8e41ffc7dd2258c2a9",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_depth_first_search.py": "9c5d8af061cd9b84df545aa1208f7aab8165ab314f7be395ad1d034e028fbc01",
+    "python_testcases/node.py": "d4d89f9bdccb7d8354c159304759b0d64a1828e29ee47e624b9eac678b158fa3"
+  },
+  "changes": [
+    {
+      "path": "python_programs/depth_first_search.py",
+      "new_content": "def depth_first_search(startnode, goalnode):\n    nodesvisited = set()\n\n    def search_from(node):\n        if node is goalnode:\n            return True\n        if node in nodesvisited:\n            return False\n        nodesvisited.add(node)\n        return any(\n            search_from(nextnode) for nextnode in node.successors\n        )\n\n    return search_from(startnode)\n\n\n\n\"\"\"\nDepth-first Search\n\n\nInput:\n    startnode: A digraph node\n    goalnode: A digraph node\n\nOutput:\n    Whether goalnode is reachable from startnode\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_depth_first_search.py": "9c5d8af061cd9b84df545aa1208f7aab8165ab314f7be395ad1d034e028fbc01"
+  }
+}

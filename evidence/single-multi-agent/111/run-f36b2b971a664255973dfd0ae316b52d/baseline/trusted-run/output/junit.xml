@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="9" skipped="0" tests="9" time="45.292" timestamp="2026-11-15T13:58:50.317142+00:00" hostname="2d67ddbfc73e"><testcase classname="python_testcases.test_bitcount" name="test_bitcount[input_data0-7]" time="5.006"><failure message="TimeoutError: timed out">input_data = [127], expected = 7
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_bitcount(input_data, expected):
+&gt;       assert bitcount(*input_data) == expected
+
+python_testcases/test_bitcount.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/bitcount.py:53: in bitcount
+    return invoke('bitcount', args, kwargs)
+python_programs/bitcount.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fc506d5fdc0&gt;
+b = &lt;memory at 0x7fc505db5780&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_bitcount" name="test_bitcount[input_data1-1]" time="5.006"><failure message="TimeoutError: timed out">input_data = [128], expected = 1
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_bitcount(input_data, expected):
+&gt;       assert bitcount(*input_data) == expected
+
+python_testcases/test_bitcount.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/bitcount.py:53: in bitcount
+    return invoke('bitcount', args, kwargs)
+python_programs/bitcount.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fc505ed5900&gt;
+b = &lt;memory at 0x7fc505db5180&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_bitcount" name="test_bitcount[input_data2-9]" time="5.006"><failure message="TimeoutError: timed out">input_data = [3005], expected = 9
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_bitcount(input_data, expected):
+&gt;       assert bitcount(*input_data) == expected
+
+python_testcases/test_bitcount.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/bitcount.py:53: in bitcount
+    return invoke('bitcount', args, kwargs)
+python_programs/bitcount.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fc505d6a2c0&gt;
+b = &lt;memory at 0x7fc505db5d80&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_bitcount" name="test_bitcount[input_data3-3]" time="5.005"><failure message="TimeoutError: timed out">input_data = [13], expected = 3
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_bitcount(input_data, expected):
+&gt;       assert bitcount(*input_data) == expected
+
+python_testcases/test_bitcount.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/bitcount.py:53: in bitcount
+    return invoke('bitcount', args, kwargs)
+python_programs/bitcount.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fc505d6a9e0&gt;
+b = &lt;memory at 0x7fc505db5fc0&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_bitcount" name="test_bitcount[input_data4-3]" time="5.004"><failure message="TimeoutError: timed out">input_data = [14], expected = 3
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_bitcount(input_data, expected):
+&gt;       assert bitcount(*input_data) == expected
+
+python_testcases/test_bitcount.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/bitcount.py:53: in bitcount
+    return invoke('bitcount', args, kwargs)
+python_programs/bitcount.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fc505d6b1c0&gt;
+b = &lt;memory at 0x7fc505db6740&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_bitcount" name="test_bitcount[input_data5-4]" time="5.005"><failure message="TimeoutError: timed out">input_data = [27], expected = 4
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_bitcount(input_data, expected):
+&gt;       assert bitcount(*input_data) == expected
+
+python_testcases/test_bitcount.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/bitcount.py:53: in bitcount
+    return invoke('bitcount', args, kwargs)
+python_programs/bitcount.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fc505d6bac0&gt;
+b = &lt;memory at 0x7fc505db6d40&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_bitcount" name="test_bitcount[input_data6-4]" time="5.005"><failure message="TimeoutError: timed out">input_data = [834], expected = 4
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_bitcount(input_data, expected):
+&gt;       assert bitcount(*input_data) == expected
+
+python_testcases/test_bitcount.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/bitcount.py:53: in bitcount
+    return invoke('bitcount', args, kwargs)
+python_programs/bitcount.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fc505d6a680&gt;
+b = &lt;memory at 0x7fc505db7100&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_bitcount" name="test_bitcount[input_data7-7]" time="5.005"><failure message="TimeoutError: timed out">input_data = [254], expected = 7
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_bitcount(input_data, expected):
+&gt;       assert bitcount(*input_data) == expected
+
+python_testcases/test_bitcount.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/bitcount.py:53: in bitcount
+    return invoke('bitcount', args, kwargs)
+python_programs/bitcount.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fc505d6a890&gt;
+b = &lt;memory at 0x7fc505db7580&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_bitcount" name="test_bitcount[input_data8-1]" time="5.005"><failure message="TimeoutError: timed out">input_data = [256], expected = 1
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_bitcount(input_data, expected):
+&gt;       assert bitcount(*input_data) == expected
+
+python_testcases/test_bitcount.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/bitcount.py:53: in bitcount
+    return invoke('bitcount', args, kwargs)
+python_programs/bitcount.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fc505d6b820&gt;
+b = &lt;memory at 0x7fc505db7b80&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase></testsuite></testsuites>

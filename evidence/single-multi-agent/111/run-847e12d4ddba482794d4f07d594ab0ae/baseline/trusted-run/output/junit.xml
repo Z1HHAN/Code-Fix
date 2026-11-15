@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="6" skipped="0" tests="7" time="25.201" timestamp="2026-11-15T14:06:06.684745+00:00" hostname="2bc58ea0e6dc"><testcase classname="python_testcases.test_find_first_in_sorted" name="test_find_first_in_sorted[input_data0-2]" time="0.002" /><testcase classname="python_testcases.test_find_first_in_sorted" name="test_find_first_in_sorted[input_data1--1]" time="0.002"><failure message="RuntimeError: candidate RPC failed">input_data = [[3, 4, 5, 5, 5, 5, ...], 7], expected = -1
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_find_first_in_sorted(input_data, expected):
+&gt;       assert find_first_in_sorted(*input_data) == expected
+
+python_testcases/test_find_first_in_sorted.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/find_first_in_sorted.py:53: in find_first_in_sorted
+    return invoke('find_first_in_sorted', args, kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+function = 'find_first_in_sorted', args = ([3, 4, 5, 5, 5, 5, ...], 7)
+kwargs = {}
+
+    def invoke(function, args, kwargs):
+        packet = objects = node_type = None
+        if function in codec.TYPED_FUNCTIONS:
+            if function in codec.NODE_FUNCTIONS:
+                # Only the hash-bound helper prepared with the trusted native tests.
+                from node import Node
+                node_type = Node
+            packet, objects = codec.pack([list(args), kwargs], node_type)
+            request = codec.dumps({'function': function, 'payload': packet})
+        else:
+            request = codec.dumps({'function': function, 'args': args, 'kwargs': kwargs})
+        if len(request) &gt; 65536:
+            raise ValueError('RPC input exceeds bound')
+        with socket.socket(socket.AF_UNIX) as client:
+            client.settimeout(5)
+            for attempt in range(100):
+                try:
+                    client.connect('/rpc/channel.sock')
+                    break
+                except (FileNotFoundError, ConnectionRefusedError):
+                    if attempt == 99:
+                        raise
+                    time.sleep(.02)
+            client.sendall(request)
+            with client.makefile('rb') as stream:
+                raw = stream.readline(65537)
+            if len(raw) &gt; 65536 or not raw.endswith(b'\n'):
+                raise ValueError('RPC response exceeds bound or is incomplete')
+            result = codec.loads(raw)
+            if packet is not None:
+                if type(result) is not dict or set(result) != {'payload'}:
+                    raise RuntimeError('candidate typed RPC failed')
+                return codec.unpack(result['payload'], node_type, existing=objects, original=packet,
+                                    allow_defaultdict=function == 'shortest_path_lengths')[0]
+            if not isinstance(result, dict) or set(result) != {'value'}:
+&gt;               raise RuntimeError('candidate RPC failed')
+E               RuntimeError: candidate RPC failed
+
+python_programs/find_first_in_sorted.py:49: RuntimeError</failure></testcase><testcase classname="python_testcases.test_find_first_in_sorted" name="test_find_first_in_sorted[input_data2--1]" time="5.005"><failure message="TimeoutError: timed out">input_data = [[3, 4, 5, 5, 5, 5, ...], 2], expected = -1
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_find_first_in_sorted(input_data, expected):
+&gt;       assert find_first_in_sorted(*input_data) == expected
+
+python_testcases/test_find_first_in_sorted.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/find_first_in_sorted.py:53: in find_first_in_sorted
+    return invoke('find_first_in_sorted', args, kwargs)
+python_programs/find_first_in_sorted.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fb4222fbe80&gt;
+b = &lt;memory at 0x7fb4221e9540&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_find_first_in_sorted" name="test_find_first_in_sorted[input_data3-6]" time="5.006"><failure message="TimeoutError: timed out">input_data = [[3, 6, 7, 9, 9, 10, ...], 14], expected = 6
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_find_first_in_sorted(input_data, expected):
+&gt;       assert find_first_in_sorted(*input_data) == expected
+
+python_testcases/test_find_first_in_sorted.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/find_first_in_sorted.py:53: in find_first_in_sorted
+    return invoke('find_first_in_sorted', args, kwargs)
+python_programs/find_first_in_sorted.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fb422191bd0&gt;
+b = &lt;memory at 0x7fb4221e9a80&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_find_first_in_sorted" name="test_find_first_in_sorted[input_data4--1]" time="5.005"><failure message="TimeoutError: timed out">input_data = [[0, 1, 6, 8, 13, 14, ...], 80], expected = -1
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_find_first_in_sorted(input_data, expected):
+&gt;       assert find_first_in_sorted(*input_data) == expected
+
+python_testcases/test_find_first_in_sorted.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/find_first_in_sorted.py:53: in find_first_in_sorted
+    return invoke('find_first_in_sorted', args, kwargs)
+python_programs/find_first_in_sorted.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fb422192ce0&gt;
+b = &lt;memory at 0x7fb4221ea140&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_find_first_in_sorted" name="test_find_first_in_sorted[input_data5-6]" time="5.005"><failure message="TimeoutError: timed out">input_data = [[0, 1, 6, 8, 13, 14, ...], 67], expected = 6
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_find_first_in_sorted(input_data, expected):
+&gt;       assert find_first_in_sorted(*input_data) == expected
+
+python_testcases/test_find_first_in_sorted.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/find_first_in_sorted.py:53: in find_first_in_sorted
+    return invoke('find_first_in_sorted', args, kwargs)
+python_programs/find_first_in_sorted.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fb422193430&gt;
+b = &lt;memory at 0x7fb4221ea5c0&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase><testcase classname="python_testcases.test_find_first_in_sorted" name="test_find_first_in_sorted[input_data6-7]" time="5.004"><failure message="TimeoutError: timed out">input_data = [[0, 1, 6, 8, 13, 14, ...], 128], expected = 7
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_find_first_in_sorted(input_data, expected):
+&gt;       assert find_first_in_sorted(*input_data) == expected
+
+python_testcases/test_find_first_in_sorted.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+python_programs/find_first_in_sorted.py:53: in find_first_in_sorted
+    return invoke('find_first_in_sorted', args, kwargs)
+python_programs/find_first_in_sorted.py:39: in invoke
+    raw = stream.readline(65537)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;socket.SocketIO object at 0x7fb422193df0&gt;
+b = &lt;memory at 0x7fb4221eac80&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        try:
+&gt;           return self._sock.recv_into(b)
+E           TimeoutError: timed out
+
+/usr/local/lib/python3.14/socket.py:729: TimeoutError</failure></testcase></testsuite></testsuites>

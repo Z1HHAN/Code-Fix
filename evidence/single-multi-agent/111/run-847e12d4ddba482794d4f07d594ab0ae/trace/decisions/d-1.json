@@ -1,0 +1,81 @@
+{
+  "decision_id": "d-1",
+  "run_id": "run-847e12d4ddba482794d4f07d594ab0ae",
+  "code_version": "sha256:7e0c18980757fe6e87e924efbf92fb3a0bf5d117f0db458184190826c771aa64",
+  "evidence_ids": [
+    "test-development-1"
+  ],
+  "failure_class": "code_runtime_error",
+  "action": "repair",
+  "target_agent": "repairer",
+  "reason": "待修代码运行异常，回到定位；先确认不是依赖或测试收集问题。",
+  "retries_left": 2,
+  "rule_id": "R14",
+  "terminal_status": null,
+  "trace_version": "1.0.0",
+  "step_id": "s-a1e500158bce4d46a8482f2393134de0",
+  "parent_step_id": "s-4680edb516624267a29706334f86dcd9",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "development",
+  "strategy": "single",
+  "program_decision": {
+    "decision_id": "d-1",
+    "run_id": "run-847e12d4ddba482794d4f07d594ab0ae",
+    "code_version": "sha256:7e0c18980757fe6e87e924efbf92fb3a0bf5d117f0db458184190826c771aa64",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "failure_class": "code_runtime_error",
+    "action": "locate",
+    "target_agent": "locator",
+    "reason": "待修代码运行异常，回到定位；先确认不是依赖或测试收集问题。",
+    "retries_left": 2,
+    "rule_id": "R14",
+    "terminal_status": null
+  },
+  "model_advice": null,
+  "effective_action": "repair",
+  "override_reason": "单Agent对照仅允许修复员重试；单Agent对照：仅修复员，依据相同隔离测试反馈有界重试；权限、预算及干净复验保持",
+  "test_suite_version": "sha256:04a83e442ec2a6e129261eb0b79875171e795565a2299602852d5791e1ff6fc7",
+  "counters": {
+    "model_calls": 1,
+    "tool_calls": 2,
+    "rounds_used": 1,
+    "cost": {
+      "calls": 1,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.003675",
+      "reserved_cny": "0"
+    },
+    "remaining_seconds": 226.4900362000044,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  },
+  "self_loop": {
+    "status": "planned",
+    "from_round": 1,
+    "to_round": 2,
+    "failure_class": "code_runtime_error",
+    "via": [
+      "repairer"
+    ],
+    "evidence_id": "test-development-1",
+    "code_version": "sha256:7e0c18980757fe6e87e924efbf92fb3a0bf5d117f0db458184190826c771aa64",
+    "remaining_rounds": 2
+  }
+}

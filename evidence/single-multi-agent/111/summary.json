@@ -1,0 +1,105 @@
+{
+  "batch_complete": false,
+  "scope": "partial paired experiment; fee unknown stop; not full40 results",
+  "planned_tasks_per_arm": 40,
+  "completed_runs": 15,
+  "remaining_runs": 65,
+  "matched_complete_pairs": 7,
+  "paired": {
+    "single": {
+      "paired_tasks": 7,
+      "success": 7,
+      "requests": 8,
+      "candidate_rounds": 8,
+      "estimated_cny": "0.031025",
+      "elapsed_seconds": 288.320683
+    },
+    "dynamic": {
+      "paired_tasks": 7,
+      "success": 7,
+      "requests": 14,
+      "candidate_rounds": 7,
+      "estimated_cny": "0.037411",
+      "elapsed_seconds": 295.887304
+    }
+  },
+  "all_plan_summary": {
+    "single": {
+      "planned": 40,
+      "ran": 7,
+      "executed": 7,
+      "success": 7,
+      "failed": 0,
+      "blocked": 0,
+      "not_run": 33,
+      "success_rate_all": 0.175,
+      "success_rate_executed": 1.0,
+      "candidate_rounds": 8,
+      "requests": 8,
+      "cost": {
+        "cny": {
+          "known_subtotal": "0.031025",
+          "unknown_runs": 0,
+          "total": "0.031025"
+        },
+        "usd": {
+          "known_subtotal": "0",
+          "unknown_runs": 0,
+          "total": null
+        }
+      }
+    },
+    "dynamic": {
+      "planned": 40,
+      "ran": 8,
+      "executed": 8,
+      "success": 7,
+      "failed": 1,
+      "blocked": 0,
+      "not_run": 32,
+      "success_rate_all": 0.175,
+      "success_rate_executed": 0.875,
+      "candidate_rounds": 8,
+      "requests": 16,
+      "cost": {
+        "cny": {
+          "known_subtotal": "0.037411",
+          "unknown_runs": 1,
+          "total": null
+        },
+        "usd": {
+          "known_subtotal": "0",
+          "unknown_runs": 0,
+          "total": null
+        }
+      }
+    }
+  },
+  "paired_outcomes": {
+    "both_success": 7,
+    "first_only": 0,
+    "second_only": 0,
+    "neither_success": 0,
+    "incomplete": 33
+  },
+  "authorization": {
+    "requests": 181,
+    "estimated_cny": "1.883601",
+    "unknown_or_pending": 1
+  },
+  "new_requests": 24,
+  "new_known_estimated_cny": "0.072138",
+  "source_commit": "5d720e325863622d3d7367321985ea2c79da1d2f",
+  "stop_reason": "累计费用授权不足或费用未知",
+  "comparison_id": "cmp-60638bb7501f45cd82bb467cf486644b1695c2e9a6bb5d7b2236ccb38d10d66c",
+  "model": "deepseek-v4.1-flash-1017",
+  "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+  "observed_agent_calls": {
+    "repairer": 16,
+    "detector": 8
+  },
+  "unobserved_roles": [
+    "scheduler",
+    "locator"
+  ]
+}
