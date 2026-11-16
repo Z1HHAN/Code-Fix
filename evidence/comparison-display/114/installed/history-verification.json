@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "all_run_rows_unchanged": 183,
+  "all_comparison_rows_unchanged": 5,
+  "configuration": "Encrypted settings preserved by installer; ordinary existing-config save required by current startup flow re-encrypts settings before workbench launch. No fields edited, no model test."
+}

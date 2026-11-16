@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "scope": "actual updated installed app using original user profile",
+  "auto_selected": true,
+  "left": "single",
+  "right": "dynamic",
+  "paired_rows": 40,
+  "difference_rows": 7,
+  "errors": [],
+  "post_requests": [],
+  "model_requests": 0
+}

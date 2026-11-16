@@ -129,3 +129,5 @@ evidence/multi-agent-collaboration/109/** -text -whitespace
 evidence/single-multi-agent/111/** -text -whitespace
 evidence/transport-budget/112/** -text -whitespace
 evidence/recovery/113/** -text -whitespace
+
+evidence/comparison-display/114/** -text -whitespace
