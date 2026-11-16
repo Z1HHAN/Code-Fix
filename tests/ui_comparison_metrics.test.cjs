@@ -41,3 +41,11 @@ test('latest means count original plus followup time over original sample count'
  const data={view:'latest_cumulative',summary:{dynamic:{ran:2,requests:8,elapsed_seconds:50,cost:{cny:{total:null}}}},pairs:[{paired:true,dynamic:{run_id:'new',elapsed_seconds:10}}]};
  const s=metrics.statistics(data,'dynamic',null);assert.equal(s.averageCalls,4);assert.equal(s.averageSeconds,25);
 });
+
+test('latest unresolved tasks are separate from historical handoff packages',()=>{
+ const data={comparison_id:'id',view:'latest_cumulative',summary:{dynamic:{planned:40,success:40,ran:40,requests:112,elapsed_seconds:1760.583729,cost:{cny:{total:null}}}},pairs:[]};
+ const s=metrics.statistics(data,'dynamic',{comparison_id:'id',groups:{dynamic:{handoff_rate:.075,handoff_packages:3}}});
+ assert.equal(s.unresolved,0);assert.equal(s.unresolvedRate,0);assert.equal(s.handoffs,3);assert.equal(s.handoffRate,.075);
+ assert.match(metrics.names({kind:'agents'}).single,/有界迭代基线/);
+ data.summary.dynamic.success=37;assert.equal(metrics.statistics(data,'dynamic',null).unresolved,3);
+});
