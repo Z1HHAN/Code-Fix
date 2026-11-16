@@ -137,3 +137,5 @@ evidence/comparison-display/115/** -text -whitespace
 evidence/comparison-display/116/** -text -whitespace
 
 evidence/github-integration/117/** -text -whitespace
+
+evidence/github-release/118/** -text -whitespace

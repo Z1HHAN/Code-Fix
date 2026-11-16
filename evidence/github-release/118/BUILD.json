@@ -1,0 +1,20 @@
+{
+  "version": "0.3.5-dev",
+  "platform": "win32-x64",
+  "release_target_commit": "940bc94c8a049598fa2a4d63d489f0ee05db8549",
+  "binary_source_commit": "48a39a5bf880bae76f629bb33c8b7cf7ecc47428",
+  "binary_runtime_source_sha256": "656856e539ec83948ad36c7d223b9514a61ada9f029bde39809842233494a1b4",
+  "installer_filename": "CodeFix-Setup-0.3.5-dev-x64.exe",
+  "installer_sha256": "3131f4bd98bd522e43d81b5036620b71f5dee9a6a5aa9e1e263d424a3316226d",
+  "application_code_matches_release_target": true,
+  "difference": "release target adds documentation/evidence; binary not rebuilt from that later docs commit",
+  "tested_source_commit": "ac66b325f4d0d1897a0d1669f0fec858004e2abb",
+  "python_passed": 836,
+  "python_permission_skipped": 1,
+  "node_passed": 86,
+  "digitally_signed": false,
+  "prerelease": true,
+  "model_requests_this_release": 0,
+  "bundled_private_settings": false,
+  "bundled_user_database": false
+}

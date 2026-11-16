@@ -1,0 +1,38 @@
+Uploading APP-EXPERIMENTS.png (93335 bytes)
+Verified uploaded APP-EXPERIMENTS.png sha256:10f6edfe49da2eb44f2eac71b59ea3fd7002f4e645b78ff87d8d20e76c2b9080
+Uploading BUILD.json (934 bytes)
+Verified uploaded BUILD.json sha256:7e5203aab0884659c178bbdb3fae3bf5fadc7d5b8fd2d9b10e3cbac03c1a8449
+Uploading EXPERIMENT-LATEST.png (865821 bytes)
+Verified uploaded EXPERIMENT-LATEST.png sha256:2af19cc28301b07839339706e00402eb9bf2d70fde553428b649d006d5aa6c11
+Uploading FIRST-RUN-GUIDE.md (12129 bytes)
+Verified uploaded FIRST-RUN-GUIDE.md sha256:82cabdf925d9dab3fdc92f081ef4ace1673f7cb3bd3802c68d7c59592754bc20
+Uploading FIRST-RUN-GUIDE.txt (12132 bytes)
+Verified uploaded FIRST-RUN-GUIDE.txt sha256:0026469ce3745a14f5bac3ee227994ee1b200e6cccda5bf26928d92526aa6138
+Uploading latest-metrics.csv (495 bytes)
+Verified uploaded latest-metrics.csv sha256:bfd71d23473cf95d2ad5b9fbcf7edbe8ee1e0587b7878bb2c47a9f7dde8da58a
+Uploading latest-metrics.json (4252 bytes)
+Verified uploaded latest-metrics.json sha256:13ed24b666ff4532874128c6aa633ecc3d009e895bf9fafb69e3ecaf377fdeca
+Uploading RELEASE-NOTES.md (2832 bytes)
+Verified uploaded RELEASE-NOTES.md sha256:a4861bfd54fd5b4676607ff8a92a5e0ed039d386c454db9fea33b245534b4afa
+Uploading SHA256SUMS (783 bytes)
+Verified uploaded SHA256SUMS sha256:01f11244dd15a6abb4ba2509283bc043a899c47b5c865606e0fd5beb2ce5d3d2
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe (137784502 bytes)
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 8 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 16 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 24 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 32 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 40 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 48 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 56 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 64 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 72 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 80 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 88 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 96 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 104 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 112 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 120 / 131 MiB
+Uploading CodeFix-Setup-0.3.5-dev-x64.exe: 128 / 131 MiB
+Verified uploaded CodeFix-Setup-0.3.5-dev-x64.exe sha256:3131f4bd98bd522e43d81b5036620b71f5dee9a6a5aa9e1e263d424a3316226d
+Retrying read-only GitHub request after transport failure
+{"id":446568174,"tag":"v0.3.5-dev","draft":true,"prerelease":true,"url":"https://github.com/Z1HHAN/Code-Fix/releases/tag/untagged-bf250d0c10c6b98ea67e","verified_assets":10}

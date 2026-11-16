@@ -1,6 +1,6 @@
 # 验链 Windows 个人桌面应用（开发版）
 
-普通用户先看[首次使用与常见问题](../docs/2026-11-03_项目持续维护/首次使用与常见问题.md)。0.3.5-dev开发预发行的上传状态和下载入口以[固定台账118](../docs/2026-11-03_项目持续维护/当前开发任务台账.md)为准；安装包不带开发者密钥、执行访问码或历史数据库。下述Actions是可选构建途径，不是普通使用前置条件。
+普通用户先看[首次使用与常见问题](../docs/2026-11-03_项目持续维护/首次使用与常见问题.md)。0.3.5-dev开发预发行已发布：[安装包](https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/CodeFix-Setup-0.3.5-dev-x64.exe)、[首次使用TXT](https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/FIRST-RUN-GUIDE.txt)、[发行页面](https://github.com/Z1HHAN/Code-Fix/releases/tag/v0.3.5-dev)；准确来源与验证见[固定台账118](../docs/2026-11-03_项目持续维护/当前开发任务台账.md)；安装包不带开发者密钥、执行访问码或历史数据库。下述Actions是可选构建途径，不是普通使用前置条件。
 
 GitHub Actions → **Build Windows desktop app** → Run workflow → main。成功后下载`windows-desktop-<commit>`，保留3天；包含安装版`CodeFix-Setup-*.exe`、免安装版`CodeFix-Portable-*.exe`、SHA256SUMS、准确构建身份和首次启动截图。二选一使用，不需要另装Python或Docker。尚未签名，构建成功不等于老师电脑的真实验收通过。
 

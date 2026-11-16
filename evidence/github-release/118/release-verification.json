@@ -1,0 +1,93 @@
+{
+  "id": 446568174,
+  "tag": "v0.3.5-dev",
+  "target": "940bc94c8a049598fa2a4d63d489f0ee05db8549",
+  "tag_sha": "940bc94c8a049598fa2a4d63d489f0ee05db8549",
+  "draft": false,
+  "prerelease": true,
+  "url": "https://github.com/Z1HHAN/Code-Fix/releases/tag/v0.3.5-dev",
+  "assets": [
+    {
+      "id": 753267863,
+      "name": "APP-EXPERIMENTS.png",
+      "size": 93335,
+      "sha256": "10f6edfe49da2eb44f2eac71b59ea3fd7002f4e645b78ff87d8d20e76c2b9080",
+      "server_digest": "sha256:10f6edfe49da2eb44f2eac71b59ea3fd7002f4e645b78ff87d8d20e76c2b9080",
+      "url": "https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/APP-EXPERIMENTS.png"
+    },
+    {
+      "id": 753267906,
+      "name": "BUILD.json",
+      "size": 934,
+      "sha256": "7e5203aab0884659c178bbdb3fae3bf5fadc7d5b8fd2d9b10e3cbac03c1a8449",
+      "server_digest": "sha256:7e5203aab0884659c178bbdb3fae3bf5fadc7d5b8fd2d9b10e3cbac03c1a8449",
+      "url": "https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/BUILD.json"
+    },
+    {
+      "id": 753267946,
+      "name": "EXPERIMENT-LATEST.png",
+      "size": 865821,
+      "sha256": "2af19cc28301b07839339706e00402eb9bf2d70fde553428b649d006d5aa6c11",
+      "server_digest": "sha256:2af19cc28301b07839339706e00402eb9bf2d70fde553428b649d006d5aa6c11",
+      "url": "https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/EXPERIMENT-LATEST.png"
+    },
+    {
+      "id": 753267988,
+      "name": "FIRST-RUN-GUIDE.md",
+      "size": 12129,
+      "sha256": "82cabdf925d9dab3fdc92f081ef4ace1673f7cb3bd3802c68d7c59592754bc20",
+      "server_digest": "sha256:82cabdf925d9dab3fdc92f081ef4ace1673f7cb3bd3802c68d7c59592754bc20",
+      "url": "https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/FIRST-RUN-GUIDE.md"
+    },
+    {
+      "id": 753268015,
+      "name": "FIRST-RUN-GUIDE.txt",
+      "size": 12132,
+      "sha256": "0026469ce3745a14f5bac3ee227994ee1b200e6cccda5bf26928d92526aa6138",
+      "server_digest": "sha256:0026469ce3745a14f5bac3ee227994ee1b200e6cccda5bf26928d92526aa6138",
+      "url": "https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/FIRST-RUN-GUIDE.txt"
+    },
+    {
+      "id": 753268047,
+      "name": "latest-metrics.csv",
+      "size": 495,
+      "sha256": "bfd71d23473cf95d2ad5b9fbcf7edbe8ee1e0587b7878bb2c47a9f7dde8da58a",
+      "server_digest": "sha256:bfd71d23473cf95d2ad5b9fbcf7edbe8ee1e0587b7878bb2c47a9f7dde8da58a",
+      "url": "https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/latest-metrics.csv"
+    },
+    {
+      "id": 753268071,
+      "name": "latest-metrics.json",
+      "size": 4252,
+      "sha256": "13ed24b666ff4532874128c6aa633ecc3d009e895bf9fafb69e3ecaf377fdeca",
+      "server_digest": "sha256:13ed24b666ff4532874128c6aa633ecc3d009e895bf9fafb69e3ecaf377fdeca",
+      "url": "https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/latest-metrics.json"
+    },
+    {
+      "id": 753268115,
+      "name": "RELEASE-NOTES.md",
+      "size": 2832,
+      "sha256": "a4861bfd54fd5b4676607ff8a92a5e0ed039d386c454db9fea33b245534b4afa",
+      "server_digest": "sha256:a4861bfd54fd5b4676607ff8a92a5e0ed039d386c454db9fea33b245534b4afa",
+      "url": "https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/RELEASE-NOTES.md"
+    },
+    {
+      "id": 753268138,
+      "name": "SHA256SUMS",
+      "size": 783,
+      "sha256": "01f11244dd15a6abb4ba2509283bc043a899c47b5c865606e0fd5beb2ce5d3d2",
+      "server_digest": "sha256:01f11244dd15a6abb4ba2509283bc043a899c47b5c865606e0fd5beb2ce5d3d2",
+      "url": "https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/SHA256SUMS"
+    },
+    {
+      "id": 753268181,
+      "name": "CodeFix-Setup-0.3.5-dev-x64.exe",
+      "size": 137784502,
+      "sha256": "3131f4bd98bd522e43d81b5036620b71f5dee9a6a5aa9e1e263d424a3316226d",
+      "server_digest": "sha256:3131f4bd98bd522e43d81b5036620b71f5dee9a6a5aa9e1e263d424a3316226d",
+      "url": "https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/CodeFix-Setup-0.3.5-dev-x64.exe"
+    }
+  ],
+  "verified_at_utc": "2026-11-16T03:19:56.203618+00:00",
+  "model_requests": 0
+}
