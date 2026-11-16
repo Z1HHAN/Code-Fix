@@ -1,0 +1,42 @@
+--- a/python_programs/next_palindrome.py
++++ b/python_programs/next_palindrome.py
+@@ -1,18 +1,25 @@
+ def next_palindrome(digit_list):
+-    high_mid = len(digit_list) // 2
+-    low_mid = (len(digit_list) - 1) // 2
+-    while high_mid < len(digit_list) and low_mid >= 0:
+-        if digit_list[high_mid] == 9:
+-            digit_list[high_mid] = 0
+-            digit_list[low_mid] = 0
+-            high_mid += 1
+-            low_mid -= 1
+-        else:
+-            digit_list[high_mid] += 1
+-            if low_mid != high_mid:
+-                digit_list[low_mid] += 1
+-            return digit_list
+-    return [1] + (len(digit_list)) * [0] + [1]
++    n = len(digit_list)
++    # Find the next palindrome strictly greater than the current one.
++    # Compare the mirrored (left half reflected) value against the original.
++    left = digit_list[:(n + 1) // 2]
++    mirrored = left + left[:n // 2][::-1]
++    if mirrored > digit_list:
++        # Mirroring the left half already yields a strictly larger palindrome.
++        digit_list[:] = mirrored
++        return digit_list
++    # Otherwise increment the left half (with carry) and mirror it.
++    i = (n + 1) // 2 - 1
++    while i >= 0 and left[i] == 9:
++        left[i] = 0
++        i -= 1
++    if i < 0:
++        # All digits were 9 -> number grows by one digit: 1 0...0 1
++        return [1] + [0] * (n - 1) + [1]
++    left[i] += 1
++    mirrored = left + left[:n // 2][::-1]
++    digit_list[:] = mirrored
++    return digit_list
+ 
+ """
+ Finds the next palindromic integer when given the current integer

@@ -1,0 +1,108 @@
+{
+  "validation_kind": "real localhost HTTPX/httpcore, synthetic server; no provider or paid model",
+  "closed_port": {
+    "role": null,
+    "mode": "live",
+    "model_api_called": false,
+    "model": "qwen-plus",
+    "call_id": "closed-port",
+    "status": "failed",
+    "provider_id": "primary",
+    "price_version": "operator-environment",
+    "usage": null,
+    "cost": {
+      "status": "not_sent",
+      "currency": "CNY",
+      "amount_cny": "0",
+      "reserved_cny": "0",
+      "budget_handling": "released_not_sent",
+      "budget_scope": "cumulative_authorization",
+      "basis": "local_transport_proof",
+      "price_version": "price-42e2e0fcab23d95dee7b3e7e9b49804f1116305303e00630fa76322fcea5d45b"
+    },
+    "attempts": 1,
+    "max_attempts": 2,
+    "transport_request_started": false,
+    "failure_class": "model_deadline_before_send",
+    "budget_check": {
+      "status": "ok",
+      "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+    },
+    "transport_attempts": [
+      {
+        "version": "transport-v1",
+        "outcome": "not_sent",
+        "error_type": "TimeoutError",
+        "send_started": false,
+        "response_received": false,
+        "events": [
+          "connection.connect_tcp.started",
+          "connection.connect_tcp.failed"
+        ],
+        "standard_transport": true
+      }
+    ],
+    "error_type": "TimeoutError",
+    "reason": "连接未建立，请求未发送；已自动释放费用预留。有限重连未成功，请检查连接后重试，无需账单截图。",
+    "duration_ms": 2035
+  },
+  "missing_usage": {
+    "role": null,
+    "mode": "live",
+    "model_api_called": true,
+    "model": "qwen-plus",
+    "call_id": "missing-usage",
+    "status": "blocked",
+    "provider_id": "primary",
+    "price_version": "operator-environment",
+    "usage": null,
+    "cost": {
+      "status": "reserved_unknown",
+      "currency": "CNY",
+      "amount_cny": null,
+      "reserved_cny": "0.004267",
+      "budget_handling": "reserved_upper_bound",
+      "budget_scope": "cumulative_authorization",
+      "basis": "reservation_retained_not_provider_invoice",
+      "price_version": "price-42e2e0fcab23d95dee7b3e7e9b49804f1116305303e00630fa76322fcea5d45b"
+    },
+    "attempts": 1,
+    "max_attempts": 2,
+    "transport_request_started": true,
+    "failure_class": "cost_unknown",
+    "budget_check": {
+      "status": "ok",
+      "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+    },
+    "transport_attempts": [
+      {
+        "version": "transport-v1",
+        "outcome": "possibly_sent",
+        "error_type": null,
+        "send_started": true,
+        "response_received": true,
+        "events": [
+          "connection.connect_tcp.started",
+          "connection.connect_tcp.complete",
+          "http11.send_request_headers.started",
+          "http11.send_request_headers.complete",
+          "http11.send_request_body.started",
+          "http11.send_request_body.complete",
+          "http11.receive_response_headers.started",
+          "http11.receive_response_headers.complete",
+          "http11.receive_response_body.started",
+          "http11.receive_response_body.complete",
+          "http11.response_closed.started",
+          "http11.response_closed.complete"
+        ],
+        "standard_transport": true
+      }
+    ],
+    "provider_model": null,
+    "provider_response_id": null,
+    "reason": "服务商用量缺失，本请求已停止；保留费用上限预留，其他任务可在原金额预算内继续",
+    "duration_ms": 29
+  },
+  "provider_model_requests": 0,
+  "passed": true
+}

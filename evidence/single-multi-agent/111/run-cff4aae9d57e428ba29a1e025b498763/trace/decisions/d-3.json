@@ -1,0 +1,83 @@
+{
+  "decision_id": "d-3",
+  "run_id": "run-cff4aae9d57e428ba29a1e025b498763",
+  "code_version": "sha256:e83ab6d659b7c43a5ec4f769fd2535fdf9fa4636bb592b066bc21fd745b90e95",
+  "evidence_ids": [
+    "test-development-3"
+  ],
+  "failure_class": "code_runtime_error",
+  "action": "stop",
+  "target_agent": null,
+  "reason": "修复候选达到上限，不发第4轮请求。",
+  "retries_left": 0,
+  "rule_id": "R10",
+  "terminal_status": "stopped",
+  "trace_version": "1.0.0",
+  "step_id": "s-d9cae8e55fa148579ef1dcff37b00365",
+  "parent_step_id": "s-8d5ccedfcb0a4d718fcc010e13c2cd5c",
+  "node_id": "program_dispatch",
+  "round": 3,
+  "phase": "development",
+  "strategy": "single",
+  "program_decision": {
+    "decision_id": "d-3",
+    "run_id": "run-cff4aae9d57e428ba29a1e025b498763",
+    "code_version": "sha256:e83ab6d659b7c43a5ec4f769fd2535fdf9fa4636bb592b066bc21fd745b90e95",
+    "evidence_ids": [
+      "test-development-3"
+    ],
+    "failure_class": "code_runtime_error",
+    "action": "stop",
+    "target_agent": null,
+    "reason": "修复候选达到上限，不发第4轮请求。",
+    "retries_left": 0,
+    "rule_id": "R10",
+    "terminal_status": "stopped"
+  },
+  "model_advice": null,
+  "effective_action": "stop",
+  "override_reason": null,
+  "test_suite_version": "sha256:6e8e63be4ed79b2a840bb7cb89acdfb0bb63afca49593b638c13c666cbab24e1",
+  "counters": {
+    "model_calls": 3,
+    "tool_calls": 3,
+    "rounds_used": 3,
+    "cost": {
+      "calls": 3,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.010763",
+      "reserved_cny": "0"
+    },
+    "remaining_seconds": 254.76033050000842,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}

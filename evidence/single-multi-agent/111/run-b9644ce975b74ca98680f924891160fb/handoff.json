@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run-b9644ce975b74ca98680f924891160fb",
+  "handling_status": "pending_human",
+  "automation_stopped": true,
+  "run_status": "paused",
+  "reason": "API鉴权或有限网络重试耗尽，保留调用记录，交B诊断。",
+  "model_recovery": null,
+  "project": "qb-shunting_yard",
+  "mode": "live",
+  "model_api_called": true,
+  "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+  "code_path": "base/python_programs/shunting_yard.py",
+  "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+  "dev_result": "failed",
+  "final_result": "not_run",
+  "evidence_ids": [
+    "test-baseline"
+  ],
+  "decision_paths": [
+    "trace/decisions/d-453aaa3f0830451aa8c6e8af11f79a2f.json",
+    "trace/decisions/d-7f1a5e6404954534b4b026299e782d2e.json"
+  ],
+  "consumption": {
+    "rounds_used": 1,
+    "model_calls": 1,
+    "tool_calls": 1,
+    "cost": {
+      "calls": 1,
+      "status": "unknown",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "unknown",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": null,
+      "reserved_cny": "0.084076"
+    }
+  },
+  "limits": {
+    "max_rounds": 3,
+    "max_calls": 12,
+    "total_seconds": 300
+  },
+  "next_steps": [
+    "核对停止原因及关联证据",
+    "B/C对明确代码与测试版本复核",
+    "可在模型与配置中选择代码模型或调整思考模式，保存新配置后创建新任务；本运行不自动恢复"
+  ],
+  "accepted_by": null
+}

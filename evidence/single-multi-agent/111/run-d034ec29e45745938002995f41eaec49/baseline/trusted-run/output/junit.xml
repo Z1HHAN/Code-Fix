@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="10" time="0.082" timestamp="2026-11-15T16:54:26.842198+00:00" hostname="0e6955702a15"><testcase classname="python_testcases.test_to_base" name="test_to_base[input_data0-1771]" time="0.002" /><testcase classname="python_testcases.test_to_base" name="test_to_base[input_data1-111]" time="0.001" /><testcase classname="python_testcases.test_to_base" name="test_to_base[input_data2-G]" time="0.001" /><testcase classname="python_testcases.test_to_base" name="test_to_base[input_data3-1F]" time="0.001"><failure message="AssertionError: assert 'F1' == '1F'&#10;  &#10;  - 1F&#10;  + F1">input_data = [31, 16], expected = '1F'
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_to_base(input_data, expected):
+&gt;       assert to_base(*input_data) == expected
+E       AssertionError: assert 'F1' == '1F'
+E         
+E         - 1F
+E         + F1
+
+python_testcases/test_to_base.py:15: AssertionError</failure></testcase><testcase classname="python_testcases.test_to_base" name="test_to_base[input_data4-101001]" time="0.001"><failure message="AssertionError: assert '100101' == '101001'&#10;  &#10;  - 101001&#10;  + 100101">input_data = [41, 2], expected = '101001'
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_to_base(input_data, expected):
+&gt;       assert to_base(*input_data) == expected
+E       AssertionError: assert '100101' == '101001'
+E         
+E         - 101001
+E         + 100101
+
+python_testcases/test_to_base.py:15: AssertionError</failure></testcase><testcase classname="python_testcases.test_to_base" name="test_to_base[input_data5-134]" time="0.002"><failure message="AssertionError: assert '431' == '134'&#10;  &#10;  - 134&#10;  + 431">input_data = [44, 5], expected = '134'
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_to_base(input_data, expected):
+&gt;       assert to_base(*input_data) == expected
+E       AssertionError: assert '431' == '134'
+E         
+E         - 134
+E         + 431
+
+python_testcases/test_to_base.py:15: AssertionError</failure></testcase><testcase classname="python_testcases.test_to_base" name="test_to_base[input_data6-14]" time="0.001"><failure message="AssertionError: assert '41' == '14'&#10;  &#10;  - 14&#10;  + 41">input_data = [27, 23], expected = '14'
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_to_base(input_data, expected):
+&gt;       assert to_base(*input_data) == expected
+E       AssertionError: assert '41' == '14'
+E         
+E         - 14
+E         + 41
+
+python_testcases/test_to_base.py:15: AssertionError</failure></testcase><testcase classname="python_testcases.test_to_base" name="test_to_base[input_data7-2A]" time="0.001"><failure message="AssertionError: assert 'A2' == '2A'&#10;  &#10;  - 2A&#10;  + A2">input_data = [56, 23], expected = '2A'
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_to_base(input_data, expected):
+&gt;       assert to_base(*input_data) == expected
+E       AssertionError: assert 'A2' == '2A'
+E         
+E         - 2A
+E         + A2
+
+python_testcases/test_to_base.py:15: AssertionError</failure></testcase><testcase classname="python_testcases.test_to_base" name="test_to_base[input_data8-E75]" time="0.001"><failure message="AssertionError: assert '57E' == 'E75'&#10;  &#10;  - E75&#10;  + 57E">input_data = [8237, 24], expected = 'E75'
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_to_base(input_data, expected):
+&gt;       assert to_base(*input_data) == expected
+E       AssertionError: assert '57E' == 'E75'
+E         
+E         - E75
+E         + 57E
+
+python_testcases/test_to_base.py:15: AssertionError</failure></testcase><testcase classname="python_testcases.test_to_base" name="test_to_base[input_data9-749]" time="0.001"><failure message="AssertionError: assert '947' == '749'&#10;  &#10;  - 749&#10;  + 947">input_data = [8237, 34], expected = '749'
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_to_base(input_data, expected):
+&gt;       assert to_base(*input_data) == expected
+E       AssertionError: assert '947' == '749'
+E         
+E         - 749
+E         + 947
+
+python_testcases/test_to_base.py:15: AssertionError</failure></testcase></testsuite></testsuites>

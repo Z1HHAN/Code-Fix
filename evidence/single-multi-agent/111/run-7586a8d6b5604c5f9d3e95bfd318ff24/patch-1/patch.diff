@@ -1,0 +1,17 @@
+--- a/python_programs/wrap.py
++++ b/python_programs/wrap.py
+@@ -4,8 +4,13 @@
+         end = text.rfind(' ', 0, cols + 1)
+         if end == -1:
+             end = cols
+-        line, text = text[:end], text[end:]
++            line, text = text[:end], text[end:]
++        else:
++            line, text = text[:end], text[end:]
+         lines.append(line)
++
++    if text:
++        lines.append(text)
+ 
+     return lines
+ 

@@ -1,60 +1,9 @@
 {
   "requires_fee_reconciliation": true,
+  "blocking_unknown": 0,
+  "held_unknown": 1,
   "may_resume_now": false,
-  "batch_complete": false,
+  "batch_complete": true,
   "preserve_completed_runs": true,
-  "remaining": [
-    {
-      "project": "qb-shunting_yard",
-      "arm": "single"
-    },
-    {
-      "project": "qb-sieve",
-      "arm": "single"
-    },
-    {
-      "project": "qb-sieve",
-      "arm": "dynamic"
-    },
-    {
-      "project": "qb-sqrt",
-      "arm": "single"
-    },
-    {
-      "project": "qb-sqrt",
-      "arm": "dynamic"
-    },
-    {
-      "project": "qb-subsequences",
-      "arm": "single"
-    },
-    {
-      "project": "qb-subsequences",
-      "arm": "dynamic"
-    },
-    {
-      "project": "qb-to_base",
-      "arm": "single"
-    },
-    {
-      "project": "qb-to_base",
-      "arm": "dynamic"
-    },
-    {
-      "project": "qb-topological_ordering",
-      "arm": "single"
-    },
-    {
-      "project": "qb-topological_ordering",
-      "arm": "dynamic"
-    },
-    {
-      "project": "qb-wrap",
-      "arm": "single"
-    },
-    {
-      "project": "qb-wrap",
-      "arm": "dynamic"
-    }
-  ]
+  "remaining": []
 }

@@ -1,0 +1,119 @@
+{
+  "action": "finish",
+  "rule_id": "R07",
+  "reason": "开发测试及干净副本同套原生测试均实际通过",
+  "trace_version": "1.0.0",
+  "run_id": "run-17496b4c92ce4911a42be3b8d03c0c81",
+  "step_id": "s-e09d73933a8345eab731368436626b5d",
+  "parent_step_id": "s-d6b674b3491b4cd6bcad51be2a6f8abe",
+  "node_id": "program_dispatch",
+  "round": 3,
+  "phase": "final_check",
+  "strategy": "dynamic",
+  "evidence_ids": [
+    "test-final-check"
+  ],
+  "decision_id": "d-d030a839e43045b880ee94cd4601f070",
+  "program_decision": {
+    "action": "finish",
+    "rule_id": "R07",
+    "reason": "开发测试及干净副本同套原生测试均实际通过"
+  },
+  "model_advice": null,
+  "effective_action": "finish",
+  "target_agent": null,
+  "override_reason": null,
+  "code_version": "sha256:0eadc911534777e751e861ea35a0b37399bcd77441818646c24a8e2114c43fd8",
+  "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91",
+  "counters": {
+    "model_calls": 10,
+    "tool_calls": 5,
+    "rounds_used": 3,
+    "cost": {
+      "calls": 10,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.045808",
+      "reserved_cny": "0"
+    },
+    "remaining_seconds": 491.8421456000069,
+    "limits": {
+      "max_rounds": 5,
+      "max_calls": 20,
+      "total_seconds": 600
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-17496b4c92ce4911a42be3b8d03c0c81",
+  "step_id": "s-5e4b10f5ce0e4f538de05d80e2df9cdf",
+  "parent_step_id": "s-8f55645eccd64108987280f18027c8ac",
+  "node_id": "locator",
+  "round": 1,
+  "phase": "development",
+  "strategy": "dynamic",
+  "evidence_ids": [
+    "test-development-1"
+  ],
+  "status": "ok",
+  "call_id": "m-8be459c366564ec8b4c121218c3fd2b3",
+  "artifact_path": "calls/m-8be459c366564ec8b4c121218c3fd2b3",
+  "code_version": "sha256:0127d628dce8047c3e2b3e58fa312685a00215c64c29c0dd4ab977304ce4eaf3",
+  "failure_class": null,
+  "agent_instance_id": "run-17496b4c92ce4911a42be3b8d03c0c81:locator",
+  "agent_contract": {
+    "contract_version": "1.0.0",
+    "agent_id": "locator",
+    "title": "定位员",
+    "input_scope": "current_candidate_development_evidence_only",
+    "receives_from": [
+      "detector",
+      "scheduler"
+    ],
+    "produces": "source_location",
+    "collaboration_task": "同时依据检测员失败分析与dispatch_instruction定位；不修改代码或宣布通过。",
+    "output_schema": "LocatorOutput",
+    "permitted_action": "locate_only",
+    "tools": [
+      "read_file",
+      "search_knowledge"
+    ],
+    "can_execute_code": false,
+    "can_modify_tests": false,
+    "can_approve_success": false,
+    "can_override_guards": false
+  },
+  "handoffs": [
+    {
+      "agent_id": "detector",
+      "call_id": "m-15c9c6a7bd4e4e74832d5baf17f2af9a",
+      "step_id": "s-d0248873536d4023bcb2b495a4ecff7d",
+      "artifact_path": "calls/m-15c9c6a7bd4e4e74832d5baf17f2af9a",
+      "code_version": "sha256:0127d628dce8047c3e2b3e58fa312685a00215c64c29c0dd4ab977304ce4eaf3",
+      "evidence_id": "test-development-1",
+      "output_sha256": "0632db7d659dde2d3b99e5fbcb12551a3cf852d29fc50ddd319833162f3823d1"
+    },
+    {
+      "agent_id": "scheduler",
+      "call_id": "m-bc79f58877bf45ba92c62306e0220edb",
+      "step_id": "s-d7117adddd1d44a5b407efdebb019d82",
+      "artifact_path": "calls/m-bc79f58877bf45ba92c62306e0220edb",
+      "code_version": "sha256:0127d628dce8047c3e2b3e58fa312685a00215c64c29c0dd4ab977304ce4eaf3",
+      "evidence_id": "test-development-1",
+      "output_sha256": "9739c423739ffcab731001a44bbc4fc265147943274e6d6415e3986cd48a37dd",
+      "dispatch_instruction": {
+        "effective_action": "locate",
+        "target_agent": "locator",
+        "rule_id": "R13",
+        "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+        "decision_id": "d-1",
+        "artifact_path": "trace/decisions/d-1.json",
+        "code_version": "sha256:0127d628dce8047c3e2b3e58fa312685a00215c64c29c0dd4ab977304ce4eaf3",
+        "evidence_id": "test-development-1"
+      }
+    }
+  ],
+  "resumed_loop": null,
+  "duration_ms": 4647
+}

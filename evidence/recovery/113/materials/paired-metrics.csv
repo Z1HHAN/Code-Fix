@@ -1,0 +1,3 @@
+﻿arm,planned,success,success_percent,requests,average_requests,total_seconds,average_seconds,handoff_packages,handoff_percent,human_accepted_recorded,estimated_cny,known_cny_subtotal
+single,40,38,95.0,49,1.225,1366.431745,34.160793625000004,2,5.0,0,0.147057,0.147057
+dynamic,40,37,92.5,98,2.45,1577.472031,39.436800775,3,7.5,0,,0.286201

@@ -9,7 +9,7 @@ app.whenReady().then(()=>{
     const child=spawn('C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/v3-venv/Scripts/python.exe',
       ['-B','-X','utf8',path.join(__dirname,'run.py'),mode],
       {cwd:path.resolve(__dirname,'../..'),windowsHide:true,stdio:['pipe','pipe','pipe']});
-    child.stdout.on('data',v=>{log.write(v);process.stdout.write(v);});
+    child.stdout.on('data',v=>{log.write(v);});
     child.stderr.on('data',()=>{});
     child.stdin.on('error',()=>{});
     child.stdin.end(JSON.stringify({settings,run_root:path.join(app.getPath('appData'),'codefix-desktop/runs')}));

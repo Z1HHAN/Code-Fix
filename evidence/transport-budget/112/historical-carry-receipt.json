@@ -1,0 +1,24 @@
+{
+  "call_id": "m-92f654e0ab7d41d3a11c9e05f3740f72",
+  "operator": "assistant executing user-approved conservative reservation handling",
+  "reason": "用户于2026-11-16明确要求改进反复人工核账；原网络异常无usage，不判为零，保留原预留全额占用原累计5元授权；原始调用与暂停结果不改写。",
+  "before": {
+    "call_id": "m-92f654e0ab7d41d3a11c9e05f3740f72",
+    "run_id": "run-b9644ce975b74ca98680f924891160fb",
+    "day": "2026-11-15",
+    "created_at": "2026-11-15T15:33:22.036139+00:00",
+    "currency": "CNY",
+    "model": "deepseek-v4.1-flash-1017",
+    "price_json": "{\"provider\": \"qianwen-ai\", \"model\": \"deepseek-v4.1-flash-1017\", \"region\": \"platform-standard\", \"mode\": \"thinking\", \"currency\": \"CNY\", \"unit\": \"per_million_tokens\", \"source_url\": \"https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash\", \"verified_at\": \"2026-11-11\", \"endpoint_host\": \"maas.qianwenaiapi.com\", \"tiers\": [{\"max_input_tokens\": 1000000, \"input\": \"2\", \"output\": \"8\", \"cached_input\": \"0.2\"}], \"offpeak_discount\": \"0.5\", \"version\": \"price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc\"}",
+    "reserved": 84076,
+    "actual": null,
+    "status": "unknown",
+    "usage_json": "null",
+    "upper_estimate": 0,
+    "authorization_id": "A-097-CNY5-20261111"
+  },
+  "after_status": "reserved_unknown",
+  "evidence_sha256": "f968147580f9ec006b7700ce2cf45d5fa7f0492ce9c08075b77d01e8d231ac61",
+  "basis": "historical_reservation_carried_not_zero_not_provider_invoice",
+  "created_at": "2026-11-15T16:46:34.121088+00:00"
+}

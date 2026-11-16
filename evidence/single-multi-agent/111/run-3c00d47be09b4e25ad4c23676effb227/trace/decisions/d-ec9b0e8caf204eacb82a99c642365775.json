@@ -1,0 +1,63 @@
+{
+  "action": "finish",
+  "rule_id": "R07",
+  "reason": "开发测试及干净副本同套原生测试均实际通过",
+  "trace_version": "1.0.0",
+  "run_id": "run-3c00d47be09b4e25ad4c23676effb227",
+  "step_id": "s-ce74f861d4e0490bbf8d39c6b4502f88",
+  "parent_step_id": "s-c8422baf430a4f54a437edc4dda61877",
+  "node_id": "program_dispatch",
+  "round": 2,
+  "phase": "final_check",
+  "strategy": "single",
+  "evidence_ids": [
+    "test-final-check"
+  ],
+  "decision_id": "d-ec9b0e8caf204eacb82a99c642365775",
+  "program_decision": {
+    "action": "finish",
+    "rule_id": "R07",
+    "reason": "开发测试及干净副本同套原生测试均实际通过"
+  },
+  "model_advice": null,
+  "effective_action": "finish",
+  "target_agent": null,
+  "override_reason": null,
+  "code_version": "sha256:4aeafded012582cb3b74028d1fe949b1666df33cb2888e0d2871fee99a601f4e",
+  "test_suite_version": "sha256:7b43145680d614770b3b73619583cfda5865725dd96477defbb1a26154de348b",
+  "counters": {
+    "model_calls": 2,
+    "tool_calls": 4,
+    "rounds_used": 2,
+    "cost": {
+      "calls": 2,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.005906",
+      "reserved_cny": "0"
+    },
+    "remaining_seconds": 251.32489590000478,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}

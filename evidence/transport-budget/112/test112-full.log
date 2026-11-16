@@ -1,0 +1,56 @@
+.......................F....FF.......................................... [  8%]
+.............................................................s.......... [ 17%]
+........................................................................ [ 26%]
+.............................................................F.......... [ 34%]
+........................................................................ [ 43%]
+........................................................................ [ 52%]
+........................................................................ [ 61%]
+....................................................................F... [ 69%]
+........................................................................ [ 78%]
+........................................................................ [ 87%]
+........................................................................ [ 96%]
+.................................                                        [100%]
+================================== FAILURES ===================================
+_____________ test_real_baseline_http_status_evidence_and_export ______________
+tests\test_api_v3.py:33: in test_real_baseline_http_status_evidence_and_export
+    assert run['status'] == 'stopped'
+E   AssertionError: assert 'blocked' == 'stopped'
+E     
+E     - stopped
+E     + blocked
+___ test_control_while_real_baseline_runs_preserves_evidence[pause-paused] ____
+tests\test_api_v3.py:126: in test_control_while_real_baseline_runs_preserves_evidence
+    assert report['run']['result']['tool_result']['counts']['passed'] == 3
+E   assert None == 3
+___ test_control_while_real_baseline_runs_preserves_evidence[stop-stopped] ____
+tests\test_api_v3.py:126: in test_control_while_real_baseline_runs_preserves_evidence
+    assert report['run']['result']['tool_result']['counts']['passed'] == 3
+E   assert None == 3
+__________________ test_unsent_deadline_releases_reservation __________________
+tests\test_remaining_review.py:69: in test_unsent_deadline_releases_reservation
+    assert db.execute('SELECT status,actual_microusd FROM calls').fetchone() == ('known', 0)
+E   AssertionError: assert ('not_sent', 0) == ('known', 0)
+E     
+E     At index 0 diff: 'not_sent' != 'known'
+E     Use -v to get more diff
+___________ test_real_baseline_survives_new_service_and_has_report ____________
+tests\test_run_store.py:40: in test_real_baseline_survives_new_service_and_has_report
+    assert run['status'] == 'stopped'
+E   AssertionError: assert 'blocked' == 'stopped'
+E     
+E     - stopped
+E     + blocked
+============================== warnings summary ===============================
+..\..\..\..\..\..\Documents\ChatGPT\Code Fix\runs\v3-venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\v3-venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\lenovo\.codex\worktrees\8525\Code Fix\runs\experiment111\runs\test112-full.xml -
+=========================== short test summary info ===========================
+FAILED tests/test_api_v3.py::test_real_baseline_http_status_evidence_and_export
+FAILED tests/test_api_v3.py::test_control_while_real_baseline_runs_preserves_evidence[pause-paused]
+FAILED tests/test_api_v3.py::test_control_while_real_baseline_runs_preserves_evidence[stop-stopped]
+FAILED tests/test_remaining_review.py::test_unsent_deadline_releases_reservation
+FAILED tests/test_run_store.py::test_real_baseline_survives_new_service_and_has_report
+5 failed, 819 passed, 1 skipped, 1 warning in 248.05s (0:04:08)

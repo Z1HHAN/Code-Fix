@@ -1,0 +1,22 @@
+{
+  "project": "qb-wrap",
+  "base_version": "sha256:8ad805d571a46deae59b8b7d286b59df9c0703c5d114b78d92cb95ce0cac17e8",
+  "candidate_version": "sha256:4aeafded012582cb3b74028d1fe949b1666df33cb2888e0d2871fee99a601f4e",
+  "test_suite_version": "sha256:7b43145680d614770b3b73619583cfda5865725dd96477defbb1a26154de348b",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_wrap.py": "c23a0d457eeec036cedb3296a935231d0d92a5e6334d93172fc8dd79f9abe5e9",
+    "json_testcases/wrap.json": "f00a3304de78155d46f44634f5435d229a8a220f03b2eeade38495af9b587549",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/wrap.py",
+      "new_content": "def wrap(text, cols):\n    lines = []\n    while len(text) > cols:\n        end = text.rfind(' ', 0, cols + 1)\n        if end == -1:\n            line = text[:cols]\n            text = text[cols:]\n        else:\n            line = text[:end]\n            text = text[end:]\n        lines.append(line)\n\n    lines.append(text)\n    return lines\n\n\"\"\"\nWrap Text\n\nGiven a long string and a column width, break the string on spaces into a list of lines such that each line is no longer than the column width.\n\nInput:\n    text: The starting text.\n    cols: The target column width, i.e. the maximum length of any single line after wrapping.\n\nPrecondition:\n    cols > 0.\n\nOutput:\n    An ordered list of strings, each no longer than the column width, such that the concatenation of the strings returns the original text,\nand such that no word in the original text is broken into two parts unless necessary.  The original amount of spaces are preserved (e.g. spaces\nat the start or end of each line aren't trimmed.),Wrapping Text\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_wrap.py": "c23a0d457eeec036cedb3296a935231d0d92a5e6334d93172fc8dd79f9abe5e9"
+  }
+}

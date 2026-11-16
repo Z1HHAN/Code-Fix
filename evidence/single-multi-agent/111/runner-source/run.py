@@ -31,7 +31,10 @@ def balance():
  with sqlite3.connect(ledger.path) as db:
   rows=db.execute('SELECT status,actual,reserved FROM personal_calls WHERE authorization_id=?',('A-097-CNY5-20261111',)).fetchall()
  return {'requests':len(rows),'estimated_cny':str(Decimal(sum(r[1] or 0 for r in rows))/1000000),
-         'unknown_or_pending':sum(r[0] in {'pending','unknown'} for r in rows)}
+         'unknown_or_pending':sum(r[0] in {'pending','unknown'} for r in rows),
+         'held_unknown':sum(r[0]=='reserved_unknown' for r in rows),
+         'held_upper_cny':str(Decimal(sum(r[2] for r in rows if r[0]=='reserved_unknown'))/1000000),
+         'budget_committed_upper_cny':str(Decimal(sum(r[1] if r[1] is not None else r[2] for r in rows))/1000000)}
 probe_folder=root/'runs/paired111'/('probe-'+datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S'))
 probe_folder.mkdir()
 proof=check_execution(settings,probe_folder)

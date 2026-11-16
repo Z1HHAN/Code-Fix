@@ -1,0 +1,76 @@
+{
+  "decision_id": "d-28ede7ff12c845fea36ad2a5bab89710",
+  "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+  "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+  "evidence_ids": [
+    "test-final-check"
+  ],
+  "failure_class": "passed",
+  "action": "finish",
+  "target_agent": null,
+  "reason": "独立验收实际通过且证据对应最终代码版本。",
+  "retries_left": 4,
+  "rule_id": "R07",
+  "terminal_status": "success",
+  "trace_version": "1.0.0",
+  "step_id": "s-43f8e4f9ed064e7bb4c8e64af46669b2",
+  "parent_step_id": "s-d686b383ec2e44159f29dfae99f487a8",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "final_check",
+  "strategy": "dynamic",
+  "program_decision": {
+    "decision_id": "d-28ede7ff12c845fea36ad2a5bab89710",
+    "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+    "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+    "evidence_ids": [
+      "test-final-check"
+    ],
+    "failure_class": "passed",
+    "action": "finish",
+    "target_agent": null,
+    "reason": "独立验收实际通过且证据对应最终代码版本。",
+    "retries_left": 4,
+    "rule_id": "R07",
+    "terminal_status": "success"
+  },
+  "model_advice": null,
+  "effective_action": "finish",
+  "override_reason": null,
+  "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+  "counters": {
+    "model_calls": 2,
+    "tool_calls": 3,
+    "rounds_used": 1,
+    "cost": {
+      "calls": 2,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.00573",
+      "reserved_cny": "0"
+    },
+    "remaining_seconds": 563.5787689999997,
+    "limits": {
+      "max_rounds": 5,
+      "max_calls": 20,
+      "total_seconds": 600
+    }
+  }
+}

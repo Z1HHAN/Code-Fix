@@ -1,0 +1,118 @@
+{
+  "comparison_id": "cmp-e9de35fdb1220caf3f6eee7bfc1c200940f8065f5e31c9ac28064394dd90be63",
+  "source_commit": "5d720e325863622d3d7367321985ea2c79da1d2f",
+  "denominator": "all 40 planned runs per arm; failed and paused included",
+  "rows": [
+    {
+      "arm": "single",
+      "planned": 40,
+      "success": 38,
+      "success_percent": 95.0,
+      "requests": 49,
+      "average_requests": 1.225,
+      "total_seconds": 1366.431745,
+      "average_seconds": 34.160793625000004,
+      "handoff_packages": 2,
+      "handoff_percent": 5.0,
+      "human_accepted_recorded": 0,
+      "estimated_cny": "0.147057",
+      "known_cny_subtotal": "0.147057"
+    },
+    {
+      "arm": "dynamic",
+      "planned": 40,
+      "success": 37,
+      "success_percent": 92.5,
+      "requests": 98,
+      "average_requests": 2.45,
+      "total_seconds": 1577.472031,
+      "average_seconds": 39.436800775,
+      "handoff_packages": 3,
+      "handoff_percent": 7.5,
+      "human_accepted_recorded": 0,
+      "estimated_cny": null,
+      "known_cny_subtotal": "0.286201"
+    }
+  ],
+  "handoffs": [
+    {
+      "arm": "single",
+      "project": "qb-next_palindrome",
+      "run_id": "run-5a7314b7d6ee49648bcd95dff8e86648",
+      "handling_status": "pending_human",
+      "accepted_by": null,
+      "sha256": "d3a1f3d8a07398eb117ccd88b06e95dcd1aff5cb41942c320df35daec331907b"
+    },
+    {
+      "arm": "single",
+      "project": "qb-subsequences",
+      "run_id": "run-cff4aae9d57e428ba29a1e025b498763",
+      "handling_status": "pending_human",
+      "accepted_by": null,
+      "sha256": "e816e702bfcea33f32efdd4a29f9f608b665123293aef0ba1c7d9cd7e7962d78"
+    },
+    {
+      "arm": "dynamic",
+      "project": "qb-flatten",
+      "run_id": "run-529e672e62a040e4a803b3bf89c78e0b",
+      "handling_status": "pending_human",
+      "accepted_by": null,
+      "sha256": "8c3ff4686035a52f039ef574b2aa8f256bd562f25150094c21476d411ef08173"
+    },
+    {
+      "arm": "dynamic",
+      "project": "qb-next_palindrome",
+      "run_id": "run-ab4b130887334208bcc51dee6fd39262",
+      "handling_status": "pending_human",
+      "accepted_by": null,
+      "sha256": "c7bfc168108b7e7151268ed931ef7f2f773cd9d96f297aabcd0a16ad87e3e2c7"
+    },
+    {
+      "arm": "dynamic",
+      "project": "qb-shunting_yard",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "handling_status": "pending_human",
+      "accepted_by": null,
+      "sha256": "e0a1bf3d711981ecd2ab4211d756c9ec1bfeb7a7b0102f54d93bf067087cd3dd"
+    }
+  ],
+  "tokens": {
+    "single": {
+      "with_usage": 49,
+      "missing_usage": 0,
+      "prompt_tokens": 130005,
+      "completion_tokens": 12596
+    },
+    "dynamic": {
+      "with_usage": 96,
+      "missing_usage": 2,
+      "prompt_tokens": 224131,
+      "completion_tokens": 25651
+    }
+  },
+  "recovery_source": "9b3662565af903df38a3c0a89c1aff2f77374fe2",
+  "recovery_scope": "separate 5-round recovery, no replacement of paired results",
+  "recovery_results": [
+    {
+      "project": "qb-flatten",
+      "run_id": "run-ade9661288014e968785c02418ef4721",
+      "status": "success",
+      "rounds": 1,
+      "requests": 2
+    },
+    {
+      "project": "qb-shunting_yard",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "status": "success",
+      "rounds": 1,
+      "requests": 2
+    },
+    {
+      "project": "qb-next_palindrome",
+      "run_id": "run-17496b4c92ce4911a42be3b8d03c0c81",
+      "status": "success",
+      "rounds": 3,
+      "requests": 10
+    }
+  ]
+}

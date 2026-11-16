@@ -1,0 +1,12 @@
+--- a/python_programs/next_palindrome.py
++++ b/python_programs/next_palindrome.py
+@@ -11,6 +11,9 @@
+             digit_list[high_mid] += 1
+             if low_mid != high_mid:
+                 digit_list[low_mid] += 1
++            # reset the inner digits that were previously 9 to 0
++            for i in range(low_mid + 1, high_mid):
++                digit_list[i] = 0
+             return digit_list
+     return [1] + (len(digit_list)) * [0] + [1]
+ 

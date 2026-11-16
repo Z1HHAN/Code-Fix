@@ -1,0 +1,20 @@
+--- a/python_programs/wrap.py
++++ b/python_programs/wrap.py
+@@ -3,13 +3,11 @@
+     while len(text) > cols:
+         end = text.rfind(' ', 0, cols + 1)
+         if end == -1:
+-            end = cols
+-            line, text = text[:end], text[end:]
++            line = text[:cols]
++            text = text[cols:]
+         else:
+-            line, text = text[:end], text[end:]
+-            while text.startswith(' '):
+-                line += ' '
+-                text = text[1:]
++            line = text[:end]
++            text = text[end:]
+         lines.append(line)
+ 
+     lines.append(text)

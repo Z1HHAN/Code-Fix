@@ -10,8 +10,8 @@
   "error_type": "ConnectError",
   "provider_usage": null,
   "amount_cny": null,
-  "status": "awaiting_provider_verification",
-  "new_paid_requests_allowed": false,
+  "status": "reserved_unknown",
+  "new_paid_requests_allowed": true,
   "previous_case": "pending-fee-resolved-001.json",
   "original_output": "run-b9644ce975b74ca98680f924891160fb/calls/m-92f654e0ab7d41d3a11c9e05f3740f72/output.json",
   "cost": {
@@ -22,5 +22,9 @@
     "upper_estimate": false,
     "basis": "versioned_model_rates; not_provider_invoice"
   },
-  "scope": "new unknown request; prior screenshots and reconciliation do not apply"
+  "scope": "new unknown request; prior screenshots and reconciliation do not apply",
+  "budget_handling": "reserved_upper_bound",
+  "reserved_cny": "0.084076",
+  "previous_status_archive": "../../transport-budget/112/pending111-before-carry.json",
+  "receipt": "../../transport-budget/112/historical-carry-receipt.json"
 }
