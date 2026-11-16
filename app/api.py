@@ -112,6 +112,10 @@ def create_app(root=None):
     def comparison_get(comparison_id: str):
         return comparisons.get(comparison_id)
 
+    @app.get('/api/v3/comparisons/{comparison_id}/metrics')
+    def comparison_metrics(comparison_id: str):
+        return comparisons.metrics(comparison_id)
+
     @app.get('/api/v3/comparisons/{comparison_id}/export')
     def comparison_export(comparison_id: str, format: str = 'json'):
         import json

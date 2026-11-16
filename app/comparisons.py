@@ -217,9 +217,41 @@ class ComparisonStore:
 
     def list(self):
         with self.store.connect() as db:
-            return [dict(comparison_id=d['comparison_id'], title=d['title'], scope=d['scope'], created_at=d['created_at'])
+            return [dict(comparison_id=d['comparison_id'], title=d['title'], scope=d['scope'], created_at=d['created_at'],
+                         kind=d.get('kind','strategies'),
+                         planned=sum(s.get('planned',len(d['pairs'])) for s in d['summary'].values()),
+                         ran=sum(s.get('ran',sum(bool(p[a]['run_id']) for p in d['pairs'])) for a,s in d['summary'].items()))
                     for row in db.execute('SELECT payload FROM comparisons ORDER BY rowid DESC LIMIT 100')
                     for d in [json.loads(row[0])]]
+
+    def metrics(self, identifier):
+        """Read-only presentation metrics; never alter or re-sign a snapshot."""
+        data = self.get(identifier)
+        groups = {}
+        for arm in data.get('arms', STRATEGIES):
+            rows = [p[arm] for p in data['pairs'] if p[arm]['run_id']]
+            handoffs, accepted, missing = 0, 0, 0
+            for row in rows:
+                path = self.store.directory(row['run_id']) / 'handoff.json'
+                if not path.is_symlink() and path.is_file() and path.stat().st_size <= 262144:
+                    try:
+                        proof = json.loads(path.read_text(encoding='utf-8'))
+                        if proof.get('run_id') != row['run_id'] or proof.get('handling_status') != 'pending_human':
+                            raise ValueError('移交证据不匹配')
+                        handoffs += 1
+                        accepted += int(proof.get('accepted_by') is not None)
+                        continue
+                    except (ValueError, OSError):
+                        pass
+                if row['status'] != 'success':
+                    missing += 1
+            groups[arm] = {'handoff_packages': handoffs if not missing else None,
+                           'handoff_rate': handoffs / len(rows) if rows and not missing else None,
+                           'handoff_missing_evidence': missing,
+                           'human_acceptance_records': accepted,
+                           'denominator': len(rows)}
+        return {'comparison_id': identifier, 'groups': groups,
+                'definition': '人工移交包生成比例，不表示人工实际介入或处理完成；均值按已运行任务计算'}
 
 
 def export_csv(data):
