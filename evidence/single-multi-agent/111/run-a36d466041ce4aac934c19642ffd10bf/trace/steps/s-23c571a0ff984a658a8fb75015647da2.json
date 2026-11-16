@@ -1,0 +1,45 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-a36d466041ce4aac934c19642ffd10bf",
+  "step_id": "s-23c571a0ff984a658a8fb75015647da2",
+  "parent_step_id": "s-c98553c4f3064365a4a7196f3f0263af",
+  "node_id": "repairer",
+  "round": 1,
+  "phase": "development",
+  "strategy": "single",
+  "evidence_ids": [
+    "test-baseline"
+  ],
+  "status": "ok",
+  "call_id": "m-da4ecc142a1a46c8b0fd2beb071b8f2a",
+  "artifact_path": "calls/m-da4ecc142a1a46c8b0fd2beb071b8f2a",
+  "code_version": "sha256:4a3ef48259174843e7689db6b1630135ab7becc11c665f0b43b9c75c375054e9",
+  "failure_class": null,
+  "agent_instance_id": "run-a36d466041ce4aac934c19642ffd10bf:repairer",
+  "agent_contract": {
+    "contract_version": "1.0.0",
+    "agent_id": "repairer",
+    "title": "修复员",
+    "input_scope": "current_candidate_development_evidence_only",
+    "receives_from": [
+      "detector",
+      "scheduler",
+      "locator"
+    ],
+    "produces": "candidate_changes",
+    "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+    "output_schema": "RepairOutput",
+    "permitted_action": "propose_source_patch",
+    "tools": [
+      "read_file",
+      "search_knowledge"
+    ],
+    "can_execute_code": false,
+    "can_modify_tests": false,
+    "can_approve_success": false,
+    "can_override_guards": false
+  },
+  "handoffs": [],
+  "resumed_loop": null,
+  "duration_ms": 5401
+}

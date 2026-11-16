@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run-15432bf76bff49bb9368cfc18aec78e4",
+  "strategy": "dynamic",
+  "active_agents": [
+    "repairer",
+    "detector",
+    "scheduler",
+    "locator"
+  ],
+  "agents": {
+    "repairer": {
+      "contract_version": "1.0.0",
+      "agent_id": "repairer",
+      "title": "修复员",
+      "input_scope": "current_candidate_development_evidence_only",
+      "receives_from": [
+        "detector",
+        "scheduler",
+        "locator"
+      ],
+      "produces": "candidate_changes",
+      "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+      "output_schema": "RepairOutput",
+      "permitted_action": "propose_source_patch",
+      "tools": [
+        "read_file",
+        "search_knowledge"
+      ],
+      "can_execute_code": false,
+      "can_modify_tests": false,
+      "can_approve_success": false,
+      "can_override_guards": false,
+      "agent_instance_id": "run-15432bf76bff49bb9368cfc18aec78e4:repairer"
+    },
+    "detector": {
+      "contract_version": "1.0.0",
+      "agent_id": "detector",
+      "title": "检测员",
+      "input_scope": "current_candidate_development_evidence_only",
+      "receives_from": [],
+      "produces": "failure_analysis",
+      "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+      "output_schema": "DetectorOutput",
+      "permitted_action": "analyse_tool_evidence",
+      "tools": [
+        "read_file",
+        "search_knowledge"
+      ],
+      "can_execute_code": false,
+      "can_modify_tests": false,
+      "can_approve_success": false,
+      "can_override_guards": false,
+      "agent_instance_id": "run-15432bf76bff49bb9368cfc18aec78e4:detector"
+    },
+    "scheduler": {
+      "contract_version": "1.0.0",
+      "agent_id": "scheduler",
+      "title": "模型调度员",
+      "input_scope": "current_candidate_development_evidence_only",
+      "receives_from": [
+        "detector"
+      ],
+      "produces": "action_advice",
+      "collaboration_task": "依据当前检测员分析和工具证据提出动作与理由；程序裁决才有执行权。",
+      "output_schema": "SchedulerOutput",
+      "permitted_action": "advise_only",
+      "tools": [
+        "read_file",
+        "search_knowledge"
+      ],
+      "can_execute_code": false,
+      "can_modify_tests": false,
+      "can_approve_success": false,
+      "can_override_guards": false,
+      "agent_instance_id": "run-15432bf76bff49bb9368cfc18aec78e4:scheduler"
+    },
+    "locator": {
+      "contract_version": "1.0.0",
+      "agent_id": "locator",
+      "title": "定位员",
+      "input_scope": "current_candidate_development_evidence_only",
+      "receives_from": [
+        "detector",
+        "scheduler"
+      ],
+      "produces": "source_location",
+      "collaboration_task": "同时依据检测员失败分析与dispatch_instruction定位；不修改代码或宣布通过。",
+      "output_schema": "LocatorOutput",
+      "permitted_action": "locate_only",
+      "tools": [
+        "read_file",
+        "search_knowledge"
+      ],
+      "can_execute_code": false,
+      "can_modify_tests": false,
+      "can_approve_success": false,
+      "can_override_guards": false,
+      "agent_instance_id": "run-15432bf76bff49bb9368cfc18aec78e4:locator"
+    }
+  },
+  "execution_authority": "program_rules_and_verified_tool_evidence",
+  "loop_limits": {
+    "max_rounds": 3,
+    "max_calls": 12,
+    "total_seconds": 300
+  },
+  "shared_cost_guard": true,
+  "final_feedback_to_agents": false
+}

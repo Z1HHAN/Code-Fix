@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run-cff4aae9d57e428ba29a1e025b498763",
+  "handling_status": "pending_human",
+  "automation_stopped": true,
+  "run_status": "stopped",
+  "reason": "修复候选达到上限，不发第4轮请求。",
+  "model_recovery": null,
+  "project": "qb-subsequences",
+  "mode": "live",
+  "model_api_called": true,
+  "code_version": "sha256:e83ab6d659b7c43a5ec4f769fd2535fdf9fa4636bb592b066bc21fd745b90e95",
+  "code_path": "candidate-3/python_programs/subsequences.py",
+  "test_suite_version": "sha256:6e8e63be4ed79b2a840bb7cb89acdfb0bb63afca49593b638c13c666cbab24e1",
+  "dev_result": "failed",
+  "final_result": "not_run",
+  "evidence_ids": [
+    "test-baseline",
+    "test-development-1",
+    "test-development-3"
+  ],
+  "decision_paths": [
+    "trace/decisions/d-1.json",
+    "trace/decisions/d-3.json",
+    "trace/decisions/d-1b9b29bf62544787bdc7a593c461f86e.json"
+  ],
+  "consumption": {
+    "rounds_used": 3,
+    "model_calls": 3,
+    "tool_calls": 3,
+    "cost": {
+      "calls": 3,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.010763",
+      "reserved_cny": "0"
+    }
+  },
+  "limits": {
+    "max_rounds": 3,
+    "max_calls": 12,
+    "total_seconds": 300
+  },
+  "next_steps": [
+    "核对停止原因及关联证据",
+    "B/C对明确代码与测试版本复核",
+    "可在模型与配置中选择代码模型或调整思考模式，保存新配置后创建新任务；本运行不自动恢复"
+  ],
+  "accepted_by": null
+}

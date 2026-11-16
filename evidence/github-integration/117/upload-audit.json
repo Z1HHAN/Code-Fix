@@ -1,0 +1,11 @@
+{
+  "head": "ac66b325f4d0d1897a0d1669f0fec858004e2abb",
+  "base": "f28318ad8bbdd456b3b78f5c86bfb69fa2a69b36",
+  "changed_files": 5477,
+  "new_history_blobs": 3146,
+  "bytes_scanned": 43114327,
+  "forbidden_new_paths": [],
+  "oversized_blobs": [],
+  "potential_secret_findings": [],
+  "scope": "all new reachable blobs, not only final tree; heuristic patterns are not a guarantee"
+}

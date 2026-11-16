@@ -1,0 +1,1 @@
+Local HTTPX proof passed: bounded pre-send failures release; one POST with missing usage retains reservation; zero provider calls.

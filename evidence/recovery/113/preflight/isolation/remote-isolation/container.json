@@ -1,0 +1,302 @@
+[
+    {
+        "Id": "2ed0727d929fe4e072213ded0fbb6dbfde7955fd3d6f5c85eff51c0e23166d15",
+        "Created": "2026-11-15T17:20:53.525263585Z",
+        "Path": "python",
+        "Args": [
+            "-I",
+            "-B",
+            "-X",
+            "utf8",
+            "-c",
+            "import json,os,socket; denied=False\ntry:\n open('/w/should-not-write','w')\nexcept OSError:\n denied=True\nprint(json.dumps({'uid':os.getuid(),'readonly':denied,'interfaces':[x[1] for x in socket.if_nameindex()]}))"
+        ],
+        "State": {
+            "Status": "exited",
+            "Running": false,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 0,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-11-15T17:20:53.733202219Z",
+            "FinishedAt": "2026-11-15T17:20:53.754846687Z"
+        },
+        "Image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "ResolvConfPath": "/var/lib/docker/containers/2ed0727d929fe4e072213ded0fbb6dbfde7955fd3d6f5c85eff51c0e23166d15/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/2ed0727d929fe4e072213ded0fbb6dbfde7955fd3d6f5c85eff51c0e23166d15/hostname",
+        "HostsPath": "/var/lib/docker/containers/2ed0727d929fe4e072213ded0fbb6dbfde7955fd3d6f5c85eff51c0e23166d15/hosts",
+        "LogPath": "",
+        "Name": "/codefix-c8d7cd0201d54db499043007a0feddd1",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "none",
+                "Config": {}
+            },
+            "NetworkMode": "none",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": [
+                "ALL"
+            ],
+            "CgroupnsMode": "host",
+            "Dns": null,
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": true,
+            "SecurityOpt": [
+                "no-new-privileges"
+            ],
+            "Tmpfs": {
+                "/tmp": "rw,noexec,nosuid,size=67108864"
+            },
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 268435456,
+            "NanoCpus": 1000000000,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 268435456,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": 64,
+            "Ulimits": [
+                {
+                    "Name": "nofile",
+                    "Hard": 128,
+                    "Soft": 128
+                }
+            ],
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "Mounts": [
+                {
+                    "Type": "bind",
+                    "Source": "/opt/codefix/docker/rpc_codec.py",
+                    "Target": "/rpc_codec.py",
+                    "ReadOnly": true
+                },
+                {
+                    "Type": "volume",
+                    "Source": "codefix-out-ed48d4772fec450c99e842806bc7916c",
+                    "Target": "/out"
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/opt/codefix-data/jobs/job-4e00c60f040a4a3bb8a59bf52f5663c0/isolation/probe-work",
+                    "Target": "/w",
+                    "ReadOnly": true
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/opt/codefix/c_runner/pytest_entry.py",
+                    "Target": "/entry.py",
+                    "ReadOnly": true
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/opt/codefix/docker/candidate_entry.py",
+                    "Target": "/harness.py",
+                    "ReadOnly": true
+                }
+            ],
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware",
+                "/sys/devices/virtual/powercap"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/131dae1210508304583de8cc906d39ae6fda3a55001f54bdcbbffb22ff20b8d9-init/diff:/var/lib/docker/overlay2/fa7373b46fdd9ae5f3651b30e17edaba650cefb49ad704b8674b1bd493aa4cf6/diff:/var/lib/docker/overlay2/57e3f033e532b1f3883666f628e5610a7eed1f0e420ec3c1738c859781f7dad7/diff:/var/lib/docker/overlay2/eb405312020b5697e39e3a5c40895facfb62ff0fe0aa12fc686670265b2726d0/diff:/var/lib/docker/overlay2/4e98531dae8e554fc7d78a5739e135cbbceeb29d39887ecc8226073f0c569d69/diff:/var/lib/docker/overlay2/9392c8ea5c1977961a7b13c0040d59d20d0bb21c9e33d1a28f76cbe1acee7842/diff:/var/lib/docker/overlay2/841a0aa57f6ce87c6d9d1205f2133c36cacbe4a44fb7647563c1b2a3f3c6a3e9/diff",
+                "MergedDir": "/var/lib/docker/overlay2/131dae1210508304583de8cc906d39ae6fda3a55001f54bdcbbffb22ff20b8d9/merged",
+                "UpperDir": "/var/lib/docker/overlay2/131dae1210508304583de8cc906d39ae6fda3a55001f54bdcbbffb22ff20b8d9/diff",
+                "WorkDir": "/var/lib/docker/overlay2/131dae1210508304583de8cc906d39ae6fda3a55001f54bdcbbffb22ff20b8d9/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "codefix-out-ed48d4772fec450c99e842806bc7916c",
+                "Source": "/var/lib/docker/volumes/codefix-out-ed48d4772fec450c99e842806bc7916c/_data",
+                "Destination": "/out",
+                "Driver": "local",
+                "Mode": "z",
+                "RW": true,
+                "Propagation": ""
+            },
+            {
+                "Type": "bind",
+                "Source": "/opt/codefix-data/jobs/job-4e00c60f040a4a3bb8a59bf52f5663c0/isolation/probe-work",
+                "Destination": "/w",
+                "Mode": "",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/opt/codefix/c_runner/pytest_entry.py",
+                "Destination": "/entry.py",
+                "Mode": "",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/opt/codefix/docker/candidate_entry.py",
+                "Destination": "/harness.py",
+                "Mode": "",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/opt/codefix/docker/rpc_codec.py",
+                "Destination": "/rpc_codec.py",
+                "Mode": "",
+                "RW": false,
+                "Propagation": "rprivate"
+            }
+        ],
+        "Config": {
+            "Hostname": "2ed0727d929f",
+            "Domainname": "",
+            "User": "65534:65534",
+            "AttachStdin": true,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "Tty": false,
+            "OpenStdin": true,
+            "StdinOnce": true,
+            "Env": [
+                "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+                "PYTHONDONTWRITEBYTECODE=1",
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "PYTHON_VERSION=3.14.10",
+                "PYTHON_SHA256=de414a57119abef52784d8993e341d53aed635fc2b05c2607d9f98a2c5b72032"
+            ],
+            "Cmd": [
+                "-I",
+                "-B",
+                "-X",
+                "utf8",
+                "-c",
+                "import json,os,socket; denied=False\ntry:\n open('/w/should-not-write','w')\nexcept OSError:\n denied=True\nprint(json.dumps({'uid':os.getuid(),'readonly':denied,'interfaces':[x[1] for x in socket.if_nameindex()]}))"
+            ],
+            "Image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+            "Volumes": null,
+            "WorkingDir": "/w",
+            "Entrypoint": [
+                "python"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "ad3d1ad4e09638479720a71751a9384a9f10eff4c7d4810142a9c30f939360fe",
+            "SandboxKey": "/var/run/docker/netns/ad3d1ad4e096",
+            "Ports": {},
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "none": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "MacAddress": "",
+                    "NetworkID": "a8767476620ffeb6ac27d2b55b454a9c1e637ab0870036a93d132cc2000d03e0",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DriverOpts": null,
+                    "DNSNames": null
+                }
+            }
+        }
+    }
+]

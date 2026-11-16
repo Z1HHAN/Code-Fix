@@ -1,0 +1,22 @@
+{
+  "project": "qb-shunting_yard",
+  "base_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+  "candidate_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+  "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_shunting_yard.py": "6573899a42a8fa12a7b868b863abad256fda5bddc1c07f147c9818fbf3c6cef1",
+    "json_testcases/shunting_yard.json": "cc4d78a776f17f473d0dfc575574e14f08ca92ca08bcc50d3229fc54252d05ff",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/shunting_yard.py",
+      "new_content": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n\n\n\"\"\"\nInfix to RPN Conversion\nshunting-yard\n\n\nUses Dijkstra's shunting-yard algorithm to transform infix notation into equivalent Reverse Polish Notation.\n\nInput:\n    tokens: A list of tokens in infix notation\n\nPrecondition:\n    all(isinstance(token, int) or token in '+-*/' for token in tokens)\n\nOutput:\n    The input tokens reordered into Reverse Polish Notation\n\nExamples:\n    >>> shunting_yard([10, '-', 5, '-', 2])\n    [10, 5, '-', 2, '-']\n    >>> shunting_yard([34, '-', 12, '/', 5])\n    [34, 12, 5, '/' ,'-']\n    >>> shunting_yard([4, '+', 9, '*', 9, '-', 10, '+', 13])\n    [4, 9, 9, '*', '+', 10, '-', 13, '+']\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_shunting_yard.py": "6573899a42a8fa12a7b868b863abad256fda5bddc1c07f147c9818fbf3c6cef1"
+  }
+}

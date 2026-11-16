@@ -1,0 +1,8 @@
+{
+  "version": "0.3.3-dev",
+  "commit": "d24cb5a440b74fa1960ee295e1f82fad71ee6bcb",
+  "installer": "desktop\\dist-comparison-114\\CodeFix-Setup-0.3.3-dev-x64.exe",
+  "sha256": "8c77279651420595baf6e20dea4b3685b2c25c83b19ac4d689d4a5756609d72e",
+  "actual_install": "C:/Users/lenovo/AppData/Local/Programs/CodeFix",
+  "paid_requests": 0
+}

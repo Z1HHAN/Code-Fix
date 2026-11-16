@@ -1,0 +1,22 @@
+{
+  "project": "qb-levenshtein",
+  "base_version": "sha256:a2e24092e31ba630841d877fcfe1fa6ac44164b35fe7ea266450edb648d781de",
+  "candidate_version": "sha256:28c33e9f66efe2c3e7ade87ec2f7d84e139c5a55347bb6d2cd6caca67ffaa1f9",
+  "test_suite_version": "sha256:167e8429e7ee4a2e7b85f230dddbe4937cb3fdc35c366643d4b726d8827dfe07",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_levenshtein.py": "c12e8f8cb13577e526ae9cc0e6d7187a2e9c05af91de25c9a73bd671682a979b",
+    "json_testcases/levenshtein.json": "d96caa3f6b4ebbd17a45ac43b8d4a93b5d3b9b9d4378765e727fd5145e52f7df",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/levenshtein.py",
+      "new_content": "def levenshtein(source, target):\n    if source == '' or target == '':\n        return len(source) or len(target)\n\n    elif source[0] == target[0]:\n        return levenshtein(source[1:], target[1:])\n\n    else:\n        return 1 + min(\n            levenshtein(source,     target[1:]),\n            levenshtein(source[1:], target[1:]),\n            levenshtein(source[1:], target)\n        )\n\n\"\"\"\nLevenshtein Distance\n\n\nCalculates the Levenshtein distance between two strings.  The Levenshtein distance is defined as the minimum amount of single-character edits (either removing a character, adding a character, or changing a character) necessary to transform a source string into a target string.\n\nInput:\n    source: The string you begin with.\n    target: The string to transform into.\n\nOutput:\n    The Levenshtein distance between the source and target.\n\nExample:\n    electron can be transformed into neutron by removing the e, turning the l into n, and turning the c into u.\n    >>> levenshtein(electron, neutron)\n    3\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_levenshtein.py": "c12e8f8cb13577e526ae9cc0e6d7187a2e9c05af91de25c9a73bd671682a979b"
+  }
+}

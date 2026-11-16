@@ -1,0 +1,17 @@
+  • electron-builder  version=26.18.0 os=10.0.26100
+  • loaded configuration  file=package.json ("build" field)
+  • building        target=nsis file=desktop\dist-agent-109\CodeFix-Setup-0.3.0-dev-x64.exe archs=x64 oneClick=false perMachine=false
+  • default Electron icon is used  reason=application icon is not set
+  • resolved ELECTRON_BUILDER_7ZIP_PATH from environment variable  ELECTRON_BUILDER_7ZIP_PATH=C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\runs\nsis-tools\7zip\bin\7za.exe
+  • resolved ELECTRON_BUILDER_NSIS_DIR from environment variable  ELECTRON_BUILDER_NSIS_DIR=C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\runs\nsis-tools\nsis
+  • resolved ELECTRON_BUILDER_NSIS_RESOURCES_DIR from environment variable  ELECTRON_BUILDER_NSIS_RESOURCES_DIR=C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\runs\nsis-tools\resources
+  • resolved ELECTRON_BUILDER_NSIS_DIR from environment variable  ELECTRON_BUILDER_NSIS_DIR=C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\runs\nsis-tools\nsis
+  • no code signing certificate configured, signing is skipped  path=desktop\dist-agent-109\CodeFix-Setup-0.3.0-dev-x64.__uninstaller.exe
+  • resolved ELECTRON_BUILDER_NSIS_DIR from environment variable  ELECTRON_BUILDER_NSIS_DIR=C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\runs\nsis-tools\nsis
+  • no code signing certificate configured, signing is skipped  path=desktop\dist-agent-109\CodeFix-Setup-0.3.0-dev-x64.exe
+  • building block map  blockMapFile=desktop\dist-agent-109\CodeFix-Setup-0.3.0-dev-x64.exe.blockmap
+  • building        target=portable file=desktop\dist-agent-109\CodeFix-Portable-0.3.0-dev-x64.exe archs=x64
+  • resolved ELECTRON_BUILDER_NSIS_RESOURCES_DIR from environment variable  ELECTRON_BUILDER_NSIS_RESOURCES_DIR=C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\runs\nsis-tools\resources
+  • resolved ELECTRON_BUILDER_NSIS_DIR from environment variable  ELECTRON_BUILDER_NSIS_DIR=C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\runs\nsis-tools\nsis
+  • no code signing certificate configured, signing is skipped  path=desktop\dist-agent-109\CodeFix-Portable-0.3.0-dev-x64.exe
+109 installer and portable build passed using cached local tools

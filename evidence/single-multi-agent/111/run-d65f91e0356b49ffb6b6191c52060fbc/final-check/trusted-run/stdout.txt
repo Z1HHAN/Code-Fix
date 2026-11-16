@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.10, pytest-8.3.5, pluggy-1.7.0 -- /usr/local/bin/python
+rootdir: /w
+configfile: ../out/pytest.ini
+collecting ... collected 5 items
+
+python_testcases/test_depth_first_search.py::test1 PASSED
+python_testcases/test_depth_first_search.py::test2 PASSED
+python_testcases/test_depth_first_search.py::test3 PASSED
+python_testcases/test_depth_first_search.py::test4 PASSED
+python_testcases/test_depth_first_search.py::test5 PASSED
+
+---------------------- generated xml file: /out/junit.xml ----------------------
+============================== 5 passed in 0.05s ===============================
+CODEFIX_READY

@@ -1,0 +1,339 @@
+[
+  {
+    "project": "qb-flatten",
+    "arm": "dynamic",
+    "run_id": "run-529e672e62a040e4a803b3bf89c78e0b",
+    "status": "paused",
+    "reason": "API鉴权或有限网络重试耗尽，保留调用记录，交B诊断。",
+    "tests": [
+      {
+        "stage": "baseline",
+        "round": 0,
+        "verification_status": "failed",
+        "failure_class": "code_runtime_error",
+        "counts": {
+          "collected": 7,
+          "passed": 1,
+          "failed": 6,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "缺陷已复现，可以开始修复",
+        "evidence_path": "baseline",
+        "step_id": "s-a2d78c5c1bb24c7f88c93ae96cb1b29e",
+        "code_version": "sha256:bae160b755aaa503b1697670c3daa04ed0837b778805c03d8a5953ddd2c7a96e",
+        "test_suite_version": "sha256:c4f5b85ec79951876f241d2ab1c6f58098327e2eb5961ad746fdd1dfb6374365"
+      },
+      {
+        "stage": "candidate",
+        "round": 1,
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "counts": {
+          "collected": 7,
+          "passed": 7,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选通过，待最终复验",
+        "evidence_path": "development-1",
+        "step_id": "s-b4a83b99d5084c738eda78d244bd3c49",
+        "code_version": "sha256:e7271e8b2f0ab8b88d09ce63bfbe9ccfc31872543264bd1376978e5f32eef155",
+        "test_suite_version": "sha256:c4f5b85ec79951876f241d2ab1c6f58098327e2eb5961ad746fdd1dfb6374365"
+      }
+    ],
+    "failed_calls": [
+      {
+        "call_id": "m-7b02a4c6232a42d4a167bbddd2cf8507",
+        "role": "detector",
+        "round": 1,
+        "error_type": "ConnectError",
+        "reason": null,
+        "output_diagnostics": null,
+        "artifact": "run-529e672e62a040e4a803b3bf89c78e0b/calls/m-7b02a4c6232a42d4a167bbddd2cf8507/output.json"
+      }
+    ],
+    "scope": "observed evidence only; no new code changes or paid retries; infrastructure and algorithmic exits remain separate"
+  },
+  {
+    "project": "qb-next_palindrome",
+    "arm": "single",
+    "run_id": "run-5a7314b7d6ee49648bcd95dff8e86648",
+    "status": "stopped",
+    "reason": "修复候选达到上限，不发第4轮请求。",
+    "tests": [
+      {
+        "stage": "baseline",
+        "round": 0,
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "counts": {
+          "collected": 5,
+          "passed": 4,
+          "failed": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "缺陷已复现，可以开始修复",
+        "evidence_path": "baseline",
+        "step_id": "s-29671f477024433dbbd0d04b41c1d09a",
+        "code_version": "sha256:ee459e5dde20163d63aaf40fd7325c961e3cb2b6c90590035e1c5ec2936bf125",
+        "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91"
+      },
+      {
+        "stage": "candidate",
+        "round": 1,
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "counts": {
+          "collected": 5,
+          "passed": 4,
+          "failed": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选仍未修好",
+        "evidence_path": "development-1",
+        "step_id": "s-65314aaa87f940919dfb2a4019341348",
+        "code_version": "sha256:392c55658715d1d8e4ea28ca317f624fda4305692c834746722773f138a5e964",
+        "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91"
+      },
+      {
+        "stage": "candidate",
+        "round": 2,
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "counts": {
+          "collected": 5,
+          "passed": 4,
+          "failed": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选仍未修好",
+        "evidence_path": "development-2",
+        "step_id": "s-d82be69d70d24b018ca5ced9cca6bc90",
+        "code_version": "sha256:cc3bfc89dd04555b5152a9c0ccd6cdfd241416ed5a3bd7b8863b13a89b1e8333",
+        "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91"
+      },
+      {
+        "stage": "candidate",
+        "round": 3,
+        "verification_status": "failed",
+        "failure_class": "code_runtime_error",
+        "counts": {
+          "collected": 5,
+          "passed": 0,
+          "failed": 5,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选仍未修好",
+        "evidence_path": "development-3",
+        "step_id": "s-1051c194a8a24bc98c53b34145a277a2",
+        "code_version": "sha256:b59b47e41f467cf1437ddfa6a1b999ee5d2cc127106e2e8e2c335db161170342",
+        "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91"
+      }
+    ],
+    "failed_calls": [],
+    "scope": "observed evidence only; no new code changes or paid retries; infrastructure and algorithmic exits remain separate"
+  },
+  {
+    "project": "qb-next_palindrome",
+    "arm": "dynamic",
+    "run_id": "run-ab4b130887334208bcc51dee6fd39262",
+    "status": "stopped",
+    "reason": "达到最大修复轮次",
+    "tests": [
+      {
+        "stage": "baseline",
+        "round": 0,
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "counts": {
+          "collected": 5,
+          "passed": 4,
+          "failed": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "缺陷已复现，可以开始修复",
+        "evidence_path": "baseline",
+        "step_id": "s-40487d7610254879b1449fb69542b198",
+        "code_version": "sha256:ee459e5dde20163d63aaf40fd7325c961e3cb2b6c90590035e1c5ec2936bf125",
+        "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91"
+      },
+      {
+        "stage": "candidate",
+        "round": 1,
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "counts": {
+          "collected": 5,
+          "passed": 4,
+          "failed": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选仍未修好",
+        "evidence_path": "development-1",
+        "step_id": "s-070e69c7af81404d954860387fa385b0",
+        "code_version": "sha256:2efa0483dad0f39709acf42fa1cdee236844d90e8bc0a3053e2c52a3881ef7b5",
+        "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91"
+      },
+      {
+        "stage": "candidate",
+        "round": 2,
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "counts": {
+          "collected": 5,
+          "passed": 4,
+          "failed": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选仍未修好",
+        "evidence_path": "development-2",
+        "step_id": "s-b7ab082c71934ebea52a294666afd7ad",
+        "code_version": "sha256:2efa0483dad0f39709acf42fa1cdee236844d90e8bc0a3053e2c52a3881ef7b5",
+        "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91"
+      }
+    ],
+    "failed_calls": [
+      {
+        "call_id": "m-7f18e65c57e34797a01a5628cda32b2c",
+        "role": "repairer",
+        "round": 3,
+        "error_type": "InvalidModelOutput",
+        "reason": "changes 路径不能重复",
+        "output_diagnostics": {
+          "kind": "invalid_format",
+          "validation_error": "changes 路径不能重复",
+          "suggested_action": "按校验错误纠正JSON字段和路径；系统仅在剩余轮次、调用及费用内重试。"
+        },
+        "artifact": "run-ab4b130887334208bcc51dee6fd39262/calls/m-7f18e65c57e34797a01a5628cda32b2c/output.json"
+      }
+    ],
+    "scope": "observed evidence only; no new code changes or paid retries; infrastructure and algorithmic exits remain separate"
+  },
+  {
+    "project": "qb-shunting_yard",
+    "arm": "dynamic",
+    "run_id": "run-b9644ce975b74ca98680f924891160fb",
+    "status": "paused",
+    "reason": "API鉴权或有限网络重试耗尽，保留调用记录，交B诊断。",
+    "tests": [
+      {
+        "stage": "baseline",
+        "round": 0,
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "counts": {
+          "collected": 6,
+          "passed": 2,
+          "failed": 4,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "缺陷已复现，可以开始修复",
+        "evidence_path": "baseline",
+        "step_id": "s-da3073a381e349d6840e96cb405beed2",
+        "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+        "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943"
+      }
+    ],
+    "failed_calls": [
+      {
+        "call_id": "m-92f654e0ab7d41d3a11c9e05f3740f72",
+        "role": "repairer",
+        "round": 1,
+        "error_type": "ConnectError",
+        "reason": null,
+        "output_diagnostics": null,
+        "artifact": "run-b9644ce975b74ca98680f924891160fb/calls/m-92f654e0ab7d41d3a11c9e05f3740f72/output.json"
+      }
+    ],
+    "scope": "observed evidence only; no new code changes or paid retries; infrastructure and algorithmic exits remain separate"
+  },
+  {
+    "project": "qb-subsequences",
+    "arm": "single",
+    "run_id": "run-cff4aae9d57e428ba29a1e025b498763",
+    "status": "stopped",
+    "reason": "修复候选达到上限，不发第4轮请求。",
+    "tests": [
+      {
+        "stage": "baseline",
+        "round": 0,
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "counts": {
+          "collected": 12,
+          "passed": 2,
+          "failed": 10,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "缺陷已复现，可以开始修复",
+        "evidence_path": "baseline",
+        "step_id": "s-6265135eb4764a08999c0243dfb18a55",
+        "code_version": "sha256:01ab03e8b2aa65887356d92067d07acef8fdfd15ba2e9aafb553e2ebd50664e9",
+        "test_suite_version": "sha256:6e8e63be4ed79b2a840bb7cb89acdfb0bb63afca49593b638c13c666cbab24e1"
+      },
+      {
+        "stage": "candidate",
+        "round": 1,
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "counts": {
+          "collected": 12,
+          "passed": 4,
+          "failed": 8,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选仍未修好",
+        "evidence_path": "development-1",
+        "step_id": "s-8d1c8631507740a281ccaf4dc7f360dd",
+        "code_version": "sha256:0df9f032f2d7bee71d96c8fb0ec472a6010ca882d2a72aae9381cf4c0f1f74cf",
+        "test_suite_version": "sha256:6e8e63be4ed79b2a840bb7cb89acdfb0bb63afca49593b638c13c666cbab24e1"
+      },
+      {
+        "stage": "candidate",
+        "round": 3,
+        "verification_status": "failed",
+        "failure_class": "code_runtime_error",
+        "counts": {
+          "collected": 12,
+          "passed": 4,
+          "failed": 8,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选仍未修好",
+        "evidence_path": "development-3",
+        "step_id": "s-8d5ccedfcb0a4d718fcc010e13c2cd5c",
+        "code_version": "sha256:e83ab6d659b7c43a5ec4f769fd2535fdf9fa4636bb592b066bc21fd745b90e95",
+        "test_suite_version": "sha256:6e8e63be4ed79b2a840bb7cb89acdfb0bb63afca49593b638c13c666cbab24e1"
+      }
+    ],
+    "failed_calls": [
+      {
+        "call_id": "m-71a85d68f9464a5ba8bf6221807781e3",
+        "role": "repairer",
+        "round": 2,
+        "error_type": "InvalidModelOutput",
+        "reason": "模型输出不是有效 JSON",
+        "output_diagnostics": {
+          "kind": "invalid_format",
+          "validation_error": "模型输出不是有效 JSON",
+          "suggested_action": "按校验错误纠正JSON字段和路径；系统仅在剩余轮次、调用及费用内重试。"
+        },
+        "artifact": "run-cff4aae9d57e428ba29a1e025b498763/calls/m-71a85d68f9464a5ba8bf6221807781e3/output.json"
+      }
+    ],
+    "scope": "observed evidence only; no new code changes or paid retries; infrastructure and algorithmic exits remain separate"
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "run_id": "run-b9644ce975b74ca98680f924891160fb",
+  "call_id": "m-92f654e0ab7d41d3a11c9e05f3740f72",
+  "project": "qb-shunting_yard",
+  "role": "repairer",
+  "model": "deepseek-v4.1-flash-1017",
+  "provider_host": "maas.qianwenaiapi.com",
+  "request_time_beijing_approx": "2026-11-15T23:33:22+08:00",
+  "time_basis": "report budget guard recorded at 23:33:22.148203+08:00; provider receipt unavailable",
+  "error_type": "ConnectError",
+  "provider_usage": null,
+  "amount_cny": null,
+  "status": "reserved_unknown",
+  "new_paid_requests_allowed": true,
+  "previous_case": "pending-fee-resolved-001.json",
+  "original_output": "run-b9644ce975b74ca98680f924891160fb/calls/m-92f654e0ab7d41d3a11c9e05f3740f72/output.json",
+  "cost": {
+    "status": "unknown",
+    "amount_cny": null,
+    "currency": "CNY",
+    "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+    "upper_estimate": false,
+    "basis": "versioned_model_rates; not_provider_invoice"
+  },
+  "scope": "new unknown request; prior screenshots and reconciliation do not apply",
+  "budget_handling": "reserved_upper_bound",
+  "reserved_cny": "0.084076",
+  "previous_status_archive": "../../transport-budget/112/pending111-before-carry.json",
+  "receipt": "../../transport-budget/112/historical-carry-receipt.json"
+}

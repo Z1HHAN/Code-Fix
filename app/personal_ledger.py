@@ -26,11 +26,15 @@ def reserve(path, call_id, run_id, settings, max_calls, upper_input):
         for table in ('calls', 'cny_calls', 'personal_calls'):
             if db.execute(f"SELECT 1 FROM {table} WHERE status IN ('pending','unknown') LIMIT 1").fetchone():
                 raise ModelBlocked('存在进行中或费用未知请求，需先结算或核对')
+        held = db.execute("SELECT currency,authorization_id FROM personal_calls WHERE status='reserved_unknown'").fetchall()
+        if any(currency != settings.currency or auth != settings.authorization_id
+               for currency, auth in held):
+            raise ModelBlocked('其他币种或累计授权存在费用预留待核对，不能跨授权绕过')
         count = sum(db.execute(f'SELECT count(*) FROM {table} WHERE run_id=?', (run_id,)).fetchone()[0]
                     for table in ('calls', 'cny_calls', 'personal_calls'))
         if count >= max_calls:
             raise ModelBlocked('达到本任务模型调用上限')
-        used = db.execute('SELECT coalesce(sum(coalesce(actual,reserved)),0) FROM personal_calls WHERE day=? AND currency=?',
+        used = db.execute("SELECT coalesce(sum(coalesce(actual,reserved)),0) FROM personal_calls WHERE (day=? OR status='reserved_unknown') AND currency=?",
                           (day, settings.currency)).fetchone()[0]
         if used + amount > int(settings.daily_limit * 1000000):
             raise ModelBlocked('达到个人人民币/美元每日费用上限')
@@ -71,9 +75,13 @@ def summary(path, run_id):
     result = {'calls': len(rows), 'status': 'not_called', 'basis': 'versioned_model_rates; not_provider_invoice', 'models': []}
     if not rows:
         return result
-    unknown = any(row[1] in {'pending', 'unknown'} for row in rows)
+    unknown = any(row[1] in {'pending', 'unknown', 'reserved_unknown'} for row in rows)
     reconciled = all(row[1] == 'reconciled' for row in rows)
     result['status'] = 'unknown' if unknown else 'reconciled' if reconciled else 'estimated'
+    if all(row[1] == 'not_sent' for row in rows):
+        result.update(status='not_sent', basis='local_transport_proof; no_model_request_sent')
+    if any(row[1] == 'reserved_unknown' for row in rows):
+        result['budget_handling'] = 'reserved_upper_bound'
     if reconciled:
         result['basis'] = 'operator_reconciled_with_evidence_receipts'
     currencies = {r[0] for r in rows}
@@ -82,7 +90,7 @@ def summary(path, run_id):
     for currency in currencies:
         matching = [r for r in rows if r[0] == currency]
         result['amount_' + currency.lower()] = None if any(r[2] is None for r in matching) else str(Decimal(sum(r[2] for r in matching)) / 1000000)
-        result['reserved_' + currency.lower()] = str(Decimal(sum(r[3] for r in matching if r[1] in {'pending','unknown'})) / 1000000)
+        result['reserved_' + currency.lower()] = str(Decimal(sum(r[3] for r in matching if r[1] in {'pending','unknown','reserved_unknown'})) / 1000000)
     for row in rows:
         result['models'].append({'model': row[4], 'currency': row[0], 'status': row[1],
                                 'price_version': json.loads(row[5])['version'], 'upper_estimate': bool(row[6])})

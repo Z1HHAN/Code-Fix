@@ -1,0 +1,53 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-f98cdcffebb34d628c042bb68dff3fa1",
+  "step_id": "s-2f20fb10524e433ebd5d4eae523d1fc1",
+  "parent_step_id": "s-5c1b9d0bcebe410da68d22c7aac4279c",
+  "node_id": "scheduler",
+  "round": 1,
+  "phase": "development",
+  "strategy": "dynamic",
+  "evidence_ids": [
+    "test-development-1"
+  ],
+  "status": "ok",
+  "call_id": "m-93c8dac1db854f48ad85594b26575718",
+  "artifact_path": "calls/m-93c8dac1db854f48ad85594b26575718",
+  "code_version": "sha256:10a9053f74cc5517712ae294e27ba0dfe451106e2064dc362c5444644041353a",
+  "failure_class": null,
+  "agent_instance_id": "run-f98cdcffebb34d628c042bb68dff3fa1:scheduler",
+  "agent_contract": {
+    "contract_version": "1.0.0",
+    "agent_id": "scheduler",
+    "title": "模型调度员",
+    "input_scope": "current_candidate_development_evidence_only",
+    "receives_from": [
+      "detector"
+    ],
+    "produces": "action_advice",
+    "collaboration_task": "依据当前检测员分析和工具证据提出动作与理由；程序裁决才有执行权。",
+    "output_schema": "SchedulerOutput",
+    "permitted_action": "advise_only",
+    "tools": [
+      "read_file",
+      "search_knowledge"
+    ],
+    "can_execute_code": false,
+    "can_modify_tests": false,
+    "can_approve_success": false,
+    "can_override_guards": false
+  },
+  "handoffs": [
+    {
+      "agent_id": "detector",
+      "call_id": "m-51b4863e339f40a6970d9e129692d0d2",
+      "step_id": "s-5c1b9d0bcebe410da68d22c7aac4279c",
+      "artifact_path": "calls/m-51b4863e339f40a6970d9e129692d0d2",
+      "code_version": "sha256:10a9053f74cc5517712ae294e27ba0dfe451106e2064dc362c5444644041353a",
+      "evidence_id": "test-development-1",
+      "output_sha256": "aea240f64ffa92f267b181132c5a0e5abf8685f1e7d6310bc81f903462d8ba76"
+    }
+  ],
+  "resumed_loop": null,
+  "duration_ms": 3597
+}

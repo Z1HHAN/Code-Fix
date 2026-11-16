@@ -1,0 +1,22 @@
+{
+  "project": "qb-lis",
+  "base_version": "sha256:e3a9d0a07c8c834b459f84bfd3d9e90dcfd6348fcb70a1d8c2ea7f05e05d46a5",
+  "candidate_version": "sha256:45ff4a9b8773d1c40787dffa0ca6200bdb73b4e0754ea7f9b489cb7f0f1935b0",
+  "test_suite_version": "sha256:8a547a867d0e7f7573831e550a1dc14a6af732469b691f57661028354721dde3",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_lis.py": "69763e61b7426521ca6adb5072d2a10527061838534765ab367ea6508bea6ca9",
+    "json_testcases/lis.json": "f611c35d10ec78f9a6e9d7f5ac7c6a9074c652f142b3a2302588c912b8617974",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/lis.py",
+      "new_content": "\ndef lis(arr):\n    ends = {}\n    longest = 0\n\n    for i, val in enumerate(arr):\n\n        prefix_lengths = [j for j in range(1, longest + 1) if arr[ends[j]] < val]\n\n        length = max(prefix_lengths) if prefix_lengths else 0\n\n        if length == longest or val < arr[ends[length + 1]]:\n            ends[length + 1] = i\n\n        if length + 1 > longest:\n            longest = length + 1\n\n    return longest\n\n\n\n\"\"\"\nLongest Increasing Subsequence\nlongest-increasing-subsequence\n\n\nInput:\n    arr: A sequence of ints\n\nPrecondition:\n    The ints in arr are unique\n\nOutput:\n    The length of the longest monotonically increasing subsequence of arr\n\nExample:\n    >>> lis([4, 1, 5, 3, 7, 6, 2])\n    3\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_lis.py": "69763e61b7426521ca6adb5072d2a10527061838534765ab367ea6508bea6ca9"
+  }
+}

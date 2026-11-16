@@ -1,0 +1,58 @@
+[
+  {
+    "path": "C:\\Users\\lenovo\\AppData\\Roaming\\codefix-desktop\\runs\\tasks.sqlite3",
+    "runs": 183,
+    "active": 0,
+    "comparisons": [
+      {
+        "id": "cmp-e9de35fdb1220caf3f6eee7bfc1c200940f8065f5e31c9ac28064394dd90be63",
+        "title": "全量40题×2组｜单Agent与多Agent｜冻结5d720e3",
+        "ran": {
+          "single": 40,
+          "dynamic": 40
+        }
+      },
+      {
+        "id": "cmp-1ad4c2e4a859ae04beadcec93d914adb20e02c72eb4ae00a4feeaf0c312c72f0",
+        "title": "QuixBugs-Python 40题：单Agent与多Agent同条件配对111",
+        "ran": {
+          "single": 40,
+          "dynamic": 40
+        }
+      },
+      {
+        "id": "cmp-dd56c8bc54afdc357293a98ae3bd011b36176c3f1b5fa1b9d817450c59a8e71b",
+        "title": "部分67/80条｜单Agent与多Agent｜冻结5d720e3",
+        "ran": {
+          "single": 33,
+          "dynamic": 34
+        }
+      },
+      {
+        "id": "cmp-6e1a5289cc36097a3b69c05e898cc90f3f2ce91ebef899f555f9427a59a54480",
+        "title": "QuixBugs-Python 40题：单Agent与多Agent同条件配对111",
+        "ran": {
+          "single": 33,
+          "dynamic": 34
+        }
+      },
+      {
+        "id": "cmp-60638bb7501f45cd82bb467cf486644b1695c2e9a6bb5d7b2236ccb38d10d66c",
+        "title": "QuixBugs-Python 40题：单Agent与多Agent同条件配对111",
+        "ran": {
+          "single": 7,
+          "dynamic": 8
+        }
+      }
+    ]
+  },
+  {
+    "installed_backend": "C:\\Users\\lenovo\\AppData\\Local\\Programs\\CodeFix\\resources\\backend",
+    "desktop-build.json": {
+      "commit": null,
+      "source_sha256": "21046b0b9ced76265f7adc3c79ffedac19ef8599a370a2419f7ebe81744555b7"
+    },
+    "installed_has_agents_kind": false,
+    "installed_has_auto_select": true
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "collected_nodeids": [
+    "python_testcases/test_shortest_paths.py::test1",
+    "python_testcases/test_shortest_paths.py::test2",
+    "python_testcases/test_shortest_paths.py::test3"
+  ],
+  "collection_errors": [],
+  "reports": [
+    {
+      "nodeid": "python_testcases/test_shortest_paths.py::test1",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_shortest_paths.py::test1",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "AssertionError",
+      "exception_path": "/w/python_testcases/test_shortest_paths.py"
+    },
+    {
+      "nodeid": "python_testcases/test_shortest_paths.py::test1",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_shortest_paths.py::test2",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_shortest_paths.py::test2",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "AssertionError",
+      "exception_path": "/w/python_testcases/test_shortest_paths.py"
+    },
+    {
+      "nodeid": "python_testcases/test_shortest_paths.py::test2",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_shortest_paths.py::test3",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_shortest_paths.py::test3",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "AssertionError",
+      "exception_path": "/w/python_testcases/test_shortest_paths.py"
+    },
+    {
+      "nodeid": "python_testcases/test_shortest_paths.py::test3",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    }
+  ],
+  "session_finished": true,
+  "exit_code": 1
+}

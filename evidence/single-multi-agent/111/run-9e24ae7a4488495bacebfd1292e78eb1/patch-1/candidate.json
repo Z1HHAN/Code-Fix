@@ -1,0 +1,22 @@
+{
+  "project": "qb-sqrt",
+  "base_version": "sha256:e942cb42f67a3ca5a19ade50df5d65a45bd74c1a9be69eecc50f04c495118cbc",
+  "candidate_version": "sha256:fe2c5829490c8a6c71b630d71b7db3b00b6df949c490869e96cfeeb6b34b586e",
+  "test_suite_version": "sha256:69b27e972d71adcad48adec9b581fc50d5f6c6bf6b98c6b88b88dbcf38a788e1",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_sqrt.py": "a8374bfa1ef4d2900e0c12d83c29bf22d34c3b0495a70262bdede53e77e90631",
+    "json_testcases/sqrt.json": "167ac8e11e9e7480b2dbf14a8cccaed8032e8e3409c45062dc3074143aaf3d54",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/sqrt.py",
+      "new_content": "\ndef sqrt(x, epsilon):\n    approx = x / 2\n    while abs(x - approx ** 2) > epsilon:\n        approx = 0.5 * (approx + x / approx)\n    return approx\n\n\"\"\"\nSquare Root\n\nNewton-Raphson method implementation.\n\n\nInput:\n    x: A float\n    epsilon: A float\n\nPrecondition:\n    x >= 1 and epsilon > 0\n\nOutput:\n    A float in the interval [sqrt(x) - epsilon, sqrt(x) + epsilon]\n\nExample:\n    >>> sqrt(2, 0.01)\n    1.4166666666666665\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_sqrt.py": "a8374bfa1ef4d2900e0c12d83c29bf22d34c3b0495a70262bdede53e77e90631"
+  }
+}

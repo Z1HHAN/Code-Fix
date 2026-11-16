@@ -1,0 +1,49 @@
+{
+  "scope": "development verification and synthetic application smoke; no paid requests or independent C acceptance",
+  "runtime_commit": "1d7e5da3ce46ec33eeff7b1d8ead38b84c5d025d",
+  "verified_at": "2026-11-13T15:39:39.996367+00:00",
+  "python": {
+    "tests": 805,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 804
+  },
+  "node_passed": 76,
+  "repair_gates_passed": 26,
+  "controls": "12 automatic controls; not C human sign-off",
+  "bundled_backend": "passed",
+  "packaged_desktop": "passed",
+  "portable_executable": {
+    "direct_launch_screenshot": true,
+    "launcher_exit": 0,
+    "stdout_marker_forwarded": false,
+    "direct_controller_exit": 1,
+    "extracted_actual_payload_full_smoke": "passed",
+    "backend_matches_unpacked": true
+  },
+  "backend_files": 328,
+  "backend_source_sha256": "a74bd79d9210bbc7168da710d7a1380c0b1c6d9453f6000ade832d3c5835b609",
+  "packages": {
+    "CodeFix-Portable-0.3.0-dev-x64.exe": {
+      "bytes": 123731682,
+      "sha256": "a211d8b8561cc5ab6d278d457e11a31c55fdf6357b340667b45c38de47a52c08",
+      "local_path": "C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/main108/desktop/dist-agent-109/CodeFix-Portable-0.3.0-dev-x64.exe"
+    },
+    "CodeFix-Setup-0.3.0-dev-x64.exe": {
+      "bytes": 137761071,
+      "sha256": "9f1137e899965cf5a45e65f338217b88443b0ec8529ce6a159f77066c4e4c182",
+      "local_path": "C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/main108/desktop/dist-agent-109/CodeFix-Setup-0.3.0-dev-x64.exe"
+    }
+  },
+  "real_model_run": "not performed for runtime 109",
+  "PPT_prompt": "untouched",
+  "publication": "local branch only; not pushed or merged to main",
+  "initial_failures": [
+    "initial digest import ordering fixed before final source commit",
+    "first full run 802 passed, 2 obsolete fixture/count expectations failed, 1 Windows skip; originals retained locally",
+    "gate CODE04 updated for mandatory detector and added budget refusal case; no historical evidence rewritten",
+    "packaging network timeout resolved using cached local NSIS and 7zip",
+    "portable launcher exited zero and generated screenshot but did not forward stdout marker; inspected actual extracted payload and reran full smoke successfully"
+  ]
+}

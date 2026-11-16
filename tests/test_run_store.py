@@ -27,7 +27,7 @@ def test_atomic_idempotency_and_claim_across_connections(tmp_path):
 
 
 @pytest.mark.parametrize('task', [{'mode': 'shell'}, {'project': '../reference'}, {'max_rounds': True},
-                                 {'max_rounds': 4}, {'command': 'pytest'}, {'description': ''}])
+                                 {'max_rounds': 6}, {'command': 'pytest'}, {'description': ''}])
 def test_task_rejects_unregistered_inputs(task):
     with pytest.raises(ValueError):
         validate_task(task)

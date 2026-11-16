@@ -1,0 +1,76 @@
+{
+  "decision_id": "d-1",
+  "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+  "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+  "evidence_ids": [
+    "test-development-1"
+  ],
+  "failure_class": "assertion_failed",
+  "action": "locate",
+  "target_agent": "locator",
+  "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+  "retries_left": 2,
+  "rule_id": "R13",
+  "terminal_status": null,
+  "trace_version": "1.0.0",
+  "step_id": "s-478e3fb40cc54349865d86c5ae1f3968",
+  "parent_step_id": "s-291e8919a37247528af80345d02b3399",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "development",
+  "strategy": "dynamic",
+  "program_decision": {
+    "decision_id": "d-1",
+    "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+    "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "failure_class": "assertion_failed",
+    "action": "locate",
+    "target_agent": "locator",
+    "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+    "retries_left": 2,
+    "rule_id": "R13",
+    "terminal_status": null
+  },
+  "model_advice": {
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "knowledge_citations": [],
+    "action": "repair",
+    "reason": "offline advice"
+  },
+  "effective_action": "locate",
+  "override_reason": "模型建议不能覆盖工具证据与强制规则",
+  "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+  "counters": {
+    "model_calls": 3,
+    "tool_calls": 2,
+    "rounds_used": 1,
+    "cost": {
+      "status": "not_applicable",
+      "amount_usd": null
+    },
+    "remaining_seconds": 298.0400525999721,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  },
+  "self_loop": {
+    "status": "planned",
+    "from_round": 1,
+    "to_round": 2,
+    "failure_class": "assertion_failed",
+    "via": [
+      "locator",
+      "repairer"
+    ],
+    "evidence_id": "test-development-1",
+    "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+    "remaining_rounds": 2
+  }
+}

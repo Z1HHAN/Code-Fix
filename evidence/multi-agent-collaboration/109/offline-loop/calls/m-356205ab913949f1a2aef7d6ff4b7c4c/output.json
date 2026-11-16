@@ -1,0 +1,155 @@
+{
+  "status": "ok",
+  "mode": "test_stub",
+  "model_api_called": false,
+  "raw_text": "{\"evidence_ids\": [\"test-development-1\"], \"knowledge_citations\": [], \"action\": \"repair\", \"reason\": \"offline advice\"}",
+  "role": "scheduler",
+  "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+  "call_id": "m-356205ab913949f1a2aef7d6ff4b7c4c",
+  "round": 1,
+  "provenance": {
+    "role_override": {},
+    "role_overrides_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "protocol": "codefix-json-v1",
+    "parser_version": "1.0.0",
+    "config_version": "1.1.0",
+    "effective_config": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "primary": {
+          "binding": "approved_profile",
+          "profile_ref": "sf_account1_v32"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "config_sha256": "b3472a143047be416465bd12b883494daab38dc1dce1b9522c99992eb7d455ba",
+    "prompt_ref": "prompts/scheduler.md",
+    "prompt_sha256": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6",
+    "system_prompt_sha256": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6",
+    "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:scheduler",
+    "agent_contract": {
+      "contract_version": "1.0.0",
+      "agent_id": "scheduler",
+      "title": "模型调度员",
+      "input_scope": "current_candidate_development_evidence_only",
+      "receives_from": [
+        "detector"
+      ],
+      "produces": "action_advice",
+      "collaboration_task": "依据当前检测员分析和工具证据提出动作与理由；程序裁决才有执行权。",
+      "output_schema": "SchedulerOutput",
+      "permitted_action": "advise_only",
+      "tools": [
+        "read_file",
+        "search_knowledge"
+      ],
+      "can_execute_code": false,
+      "can_modify_tests": false,
+      "can_approve_success": false,
+      "can_override_guards": false
+    },
+    "agent_contract_sha256": "abfe63c455296be2091383d191b5c7aeb4b378baafacd7b0338150ac029a5055",
+    "handoffs": [
+      {
+        "agent_id": "detector",
+        "call_id": "m-d1e8d60c229544d7b0b15e8f3c9319f4",
+        "step_id": "s-2fa17129250e443a899073b9e2884739",
+        "artifact_path": "calls/m-d1e8d60c229544d7b0b15e8f3c9319f4",
+        "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+        "evidence_id": "test-development-1",
+        "output_sha256": "465d0273e54c4a9db088848cba3bc3edb6af8b75425b5f24562c3949cdd0073c"
+      }
+    ],
+    "messages_sha256": "bd671765e7960313c284285d4fb179444c27601c1d30f9297fdaab12f26b00c0",
+    "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "model_binding": {
+      "model_ref": "primary",
+      "binding": "approved_profile",
+      "profile_ref": "sf_account1_v32",
+      "mode": "test_stub",
+      "model": null
+    }
+  },
+  "step_id": "s-291e8919a37247528af80345d02b3399",
+  "parent_step_id": "s-2fa17129250e443a899073b9e2884739",
+  "parsed_output": {
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "knowledge_citations": [],
+    "action": "repair",
+    "reason": "offline advice"
+  }
+}

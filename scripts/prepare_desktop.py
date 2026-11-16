@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import shutil
 import sys
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -39,6 +40,23 @@ def prepare_backend(destination):
         'from app.connection_checks import main\nmain()\n', encoding='utf-8')
     manifest = {p.relative_to(destination).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in sorted(destination.rglob('*')) if p.is_file()}
+    # Personal configuration is generated after installation. Bind immutable
+    # application bytes separately so remote experiments can verify this build.
+    from app.role_config import digest
+    try:
+        git = ['git', '-c', 'safe.directory=' + str(ROOT), '-C', str(ROOT)]
+        commit = subprocess.run(git + ['rev-parse', 'HEAD'], capture_output=True, check=True, timeout=15).stdout.decode().strip()
+        from app.experiment_identity import SOURCE_PATHS
+        dirty = subprocess.run(git + ['status', '--porcelain', '--untracked-files=all', '--', *SOURCE_PATHS],
+                               capture_output=True, check=True, timeout=15).stdout.strip()
+        if not dirty:
+            identity = {'commit': commit, 'files': dict(manifest), 'source_sha256': digest(manifest),
+                        'generated_configs': 'roles, model profiles and prices frozen per run'}
+            raw = json.dumps(identity, ensure_ascii=False, indent=2).encode('utf-8')
+            (destination / 'codefix-runtime-source.json').write_bytes(raw)
+            manifest['codefix-runtime-source.json'] = hashlib.sha256(raw).hexdigest()
+    except (OSError, subprocess.SubprocessError, UnicodeError):
+        pass  # Unversioned developer bundles remain usable, but not formal evidence.
     fingerprint = hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest()
     (destination / 'desktop-build.json').write_text(json.dumps({'source_sha256': fingerprint, 'files': manifest}), encoding='utf-8')
     print('Personal backend files:', len(manifest), 'source:', fingerprint)

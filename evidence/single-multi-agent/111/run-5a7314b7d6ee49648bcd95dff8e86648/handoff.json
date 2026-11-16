@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "run-5a7314b7d6ee49648bcd95dff8e86648",
+  "handling_status": "pending_human",
+  "automation_stopped": true,
+  "run_status": "stopped",
+  "reason": "修复候选达到上限，不发第4轮请求。",
+  "model_recovery": null,
+  "project": "qb-next_palindrome",
+  "mode": "live",
+  "model_api_called": true,
+  "code_version": "sha256:b59b47e41f467cf1437ddfa6a1b999ee5d2cc127106e2e8e2c335db161170342",
+  "code_path": "candidate-3/python_programs/next_palindrome.py",
+  "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91",
+  "dev_result": "failed",
+  "final_result": "not_run",
+  "evidence_ids": [
+    "test-baseline",
+    "test-development-1",
+    "test-development-2",
+    "test-development-3"
+  ],
+  "decision_paths": [
+    "trace/decisions/d-1.json",
+    "trace/decisions/d-2.json",
+    "trace/decisions/d-3.json",
+    "trace/decisions/d-3d9a193a2fe84927b5a17b30db70ea55.json"
+  ],
+  "consumption": {
+    "rounds_used": 3,
+    "model_calls": 3,
+    "tool_calls": 4,
+    "cost": {
+      "calls": 3,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.010535",
+      "reserved_cny": "0"
+    }
+  },
+  "limits": {
+    "max_rounds": 3,
+    "max_calls": 12,
+    "total_seconds": 300
+  },
+  "next_steps": [
+    "核对停止原因及关联证据",
+    "B/C对明确代码与测试版本复核",
+    "可在模型与配置中选择代码模型或调整思考模式，保存新配置后创建新任务；本运行不自动恢复"
+  ],
+  "accepted_by": null
+}

@@ -12,6 +12,19 @@ from .run_store import now
 from .tasks_v3 import get_task
 
 STRATEGIES = ('fixed', 'dynamic')
+KINDS = {'strategies': STRATEGIES, 'agents': ('single', 'dynamic')}
+
+
+def paired_outcomes(rows, strategies):
+    counts = dict(both_success=0, first_only=0, second_only=0, neither_success=0, incomplete=0)
+    for row in rows:
+        a, b = (row[s] for s in strategies)
+        if not a['executed'] or not b['executed']:
+            counts['incomplete'] += 1
+            continue
+        left, right = a['status'] == 'success', b['status'] == 'success'
+        counts['both_success' if left and right else 'first_only' if left else 'second_only' if right else 'neither_success'] += 1
+    return counts
 # A-approved QuixBugs-Python scope. New registrations need explicit admission;
 # collecting a plan does not qualify adapters or dispatch any of these tasks.
 FORMAL_PROJECTS = frozenset({
@@ -37,9 +50,9 @@ def amount(value):
         return None
 
 
-def summarize(rows):
+def summarize(rows, strategies=STRATEGIES):
     result = {}
-    for strategy in STRATEGIES:
+    for strategy in strategies:
         group = [row[strategy] for row in rows]
         planned = len(group)
         executed = sum(r['executed'] for r in group)
@@ -69,6 +82,7 @@ class ComparisonStore:
         self.store = store
         with store.connect() as db:
             db.execute('CREATE TABLE IF NOT EXISTS comparisons (comparison_id TEXT PRIMARY KEY, payload TEXT NOT NULL)')
+            db.execute('CREATE TABLE IF NOT EXISTS comparison_followups (comparison_id TEXT NOT NULL, run_id TEXT NOT NULL, project TEXT NOT NULL, arm TEXT NOT NULL, payload TEXT NOT NULL, PRIMARY KEY(comparison_id,run_id))')
 
     def _run(self, rid, project, strategy, scope):
         run = self.store.snapshot(rid)
@@ -89,7 +103,7 @@ class ComparisonStore:
             raise InputValidationError('冻结条件不一致或身份格式无效')
         if digest(identity) != frozen['identity_sha256'] or frozen['strategy'] != strategy:
             raise InputValidationError('冻结身份校验失败')
-        if scope != 'offline' and (frozen['execution_kind'] != 'real' or identity['code']['dirty'] is not False
+        if scope != 'offline' and (frozen['execution_kind'] != 'real' or (identity['code']['dirty'] is not False and identity['code'].get('verified_bundle') is not True)
                                    or not identity['code']['commit']):
             raise InputValidationError('真实对照须使用干净冻结提交和真实执行器；离线夹具须单列')
         if scope != 'offline' and any(not b.get('profile_ref') for b in identity['bindings'].values()):
@@ -131,8 +145,12 @@ class ComparisonStore:
                 'events_url': f'/api/v3/tasks/{rid}/events'}
 
     def create(self, value):
-        if not isinstance(value, dict) or set(value) != {'title', 'scope', 'pairs'}:
+        if not isinstance(value, dict) or not {'title', 'scope', 'pairs'} <= set(value) or set(value) - {'title', 'scope', 'pairs', 'kind'}:
             raise InputValidationError('需要title、scope和显式pairs清单')
+        kind = value.get('kind', 'strategies')
+        if not isinstance(kind, str) or kind not in KINDS:
+            raise InputValidationError('kind须为strategies/agents')
+        strategies = KINDS[kind]
         if not isinstance(value['title'], str) or not 1 <= len(value['title'].strip()) <= 120:
             raise InputValidationError('对照标题须为1至120字符')
         if not isinstance(value['scope'], str) or value['scope'] not in {'formal', 'controlled', 'offline'}:
@@ -141,8 +159,8 @@ class ComparisonStore:
             raise InputValidationError('pairs须为1至40项计划清单')
         rows, seen_projects, seen_runs = [], set(), set()
         for pair in value['pairs']:
-            if not isinstance(pair, dict) or set(pair) != {'project', 'fixed', 'dynamic', 'not_run_reason'}:
-                raise InputValidationError('每项需project、fixed、dynamic和not_run_reason')
+            if not isinstance(pair, dict) or set(pair) != {'project', 'not_run_reason', *strategies}:
+                raise InputValidationError('每项需project、两组运行及not_run_reason')
             project = get_task(pair['project']).project
             if project in seen_projects:
                 raise InputValidationError('同一清单题目不能重复；不接受挑选最佳重跑')
@@ -150,10 +168,10 @@ class ComparisonStore:
                 raise InputValidationError('正式计划仅包含已批准的40道QuixBugs-Python题目')
             seen_projects.add(project)
             reasons = pair['not_run_reason']
-            if not isinstance(reasons, dict) or set(reasons) - set(STRATEGIES):
-                raise InputValidationError('未运行原因只能引用fixed/dynamic')
+            if not isinstance(reasons, dict) or set(reasons) - set(strategies):
+                raise InputValidationError('未运行原因只能引用本对照的两组')
             row = {'project': project}
-            for strategy in STRATEGIES:
+            for strategy in strategies:
                 rid = pair[strategy]
                 if rid is None:
                     reason = reasons.get(strategy)
@@ -167,15 +185,19 @@ class ComparisonStore:
                         raise InputValidationError('运行编号必须为不重复字符串')
                     seen_runs.add(rid)
                     row[strategy] = self._run(rid, project, strategy, value['scope'])
-            if all(row[s]['run_id'] for s in STRATEGIES):
-                if row['fixed']['identity_sha256'] != row['dynamic']['identity_sha256']:
+            if all(row[s]['run_id'] for s in strategies):
+                if row[strategies[0]]['identity_sha256'] != row[strategies[1]]['identity_sha256']:
                     raise InputValidationError('两组冻结条件不一致：须核对提交、模型、指令、参数、价格、测试及上限')
-            row['paired'] = all(row[s]['run_id'] for s in STRATEGIES)
+            row['paired'] = all(row[s]['run_id'] for s in strategies)
             rows.append(row)
         data = {'schema_version': 1, 'title': value['title'], 'scope': value['scope'],
-                'plan': value['pairs'], 'pairs': rows, 'summary': summarize(rows),
+                'plan': value['pairs'], 'pairs': rows, 'summary': summarize(rows, strategies),
                 'basis': 'explicit_manifest; immutable_evidence_snapshot; no_task_dispatch',
                 'review_status': 'pending_B_C_review'}
+        if 'kind' in value:
+            data.update(kind=kind, arms=list(strategies))
+        if kind == 'agents':
+            data['paired_outcomes'] = paired_outcomes(rows, strategies)
         identifier = 'cmp-' + digest(data)
         data.update(comparison_id=identifier, created_at=now())
         with self.store.connect() as db:
@@ -196,9 +218,44 @@ class ComparisonStore:
 
     def list(self):
         with self.store.connect() as db:
-            return [dict(comparison_id=d['comparison_id'], title=d['title'], scope=d['scope'], created_at=d['created_at'])
+            return [dict(comparison_id=d['comparison_id'], title=d['title'], scope=d['scope'], created_at=d['created_at'],
+                         kind=d.get('kind','strategies'),
+                         planned=sum(s.get('planned',len(d['pairs'])) for s in d['summary'].values()),
+                         ran=sum(s.get('ran',sum(bool(p[a]['run_id']) for p in d['pairs'])) for a,s in d['summary'].items()))
                     for row in db.execute('SELECT payload FROM comparisons ORDER BY rowid DESC LIMIT 100')
                     for d in [json.loads(row[0])]]
+
+    def metrics(self, identifier):
+        """Read-only presentation metrics; never alter or re-sign a snapshot."""
+        data = self.get(identifier)
+        groups = {}
+        for arm in data.get('arms', STRATEGIES):
+            rows = [p[arm] for p in data['pairs'] if p[arm]['run_id']]
+            handoffs, accepted, missing = 0, 0, 0
+            for row in rows:
+                path = self.store.directory(row['run_id']) / 'handoff.json'
+                if not path.is_symlink() and path.is_file() and path.stat().st_size <= 262144:
+                    try:
+                        proof = json.loads(path.read_text(encoding='utf-8'))
+                        if proof.get('run_id') != row['run_id'] or proof.get('handling_status') != 'pending_human':
+                            raise ValueError('移交证据不匹配')
+                        handoffs += 1
+                        accepted += int(proof.get('accepted_by') is not None)
+                        continue
+                    except (ValueError, OSError):
+                        pass
+                if row['status'] != 'success':
+                    missing += 1
+            groups[arm] = {'handoff_packages': handoffs if not missing else None,
+                           'handoff_rate': handoffs / len(rows) if rows and not missing else None,
+                           'handoff_missing_evidence': missing,
+                           'human_acceptance_records': accepted,
+                           'denominator': len(rows)}
+        from .comparison_updates import latest, costs
+        return {'comparison_id': identifier, 'groups': groups,
+                'latest': latest(self, identifier),
+                'cost_details': {arm: costs(self.store, [p[arm] for p in data['pairs'] if p[arm]['run_id']]) for arm in data.get('arms', STRATEGIES)},
+                'definition': '人工移交包生成比例，不表示人工实际介入或处理完成；均值按已运行任务计算'}
 
 
 def export_csv(data):
@@ -207,7 +264,7 @@ def export_csv(data):
     writer.writerow(['project', 'strategy', 'run_id', 'status', 'executed', 'candidate_rounds',
                      'requests', 'amount_cny', 'amount_usd', 'cost_status', 'elapsed_seconds', 'reason', 'report_url'])
     for pair in data['pairs']:
-        for strategy in STRATEGIES:
+        for strategy in data.get('arms', STRATEGIES):
             r = pair[strategy]
             values = [pair['project'], strategy, r['run_id'], r['status'], r['executed'], r['candidate_rounds'],
                       r['requests'], r['cost']['amount_cny'], r['cost']['amount_usd'], r['cost']['status'],

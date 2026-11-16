@@ -1,6 +1,6 @@
 'use strict';
 function budgetText(data) {
-  if(data.personal)return (data.monetary_budget_enabled?'个人模型：已启用自填价格的美元金额预算。':'个人模型：未启用金额预算，费用未知。')+(data.paid_calls_blocked?' 存在进行中或用量未知请求，暂停新调用。':'')+'\n'+data.note;
+  if(data.personal)return (data.monetary_budget_enabled?'个人模型：已启用逐模型金额预算。':'个人模型：未启用金额预算，费用未知。')+(data.paid_calls_blocked?' 存在进行中或用量未知请求，暂停新调用。':'')+(data.held_unknown_calls?`\n${data.held_unknown_calls}条费用待核对，按上限预留 ¥${data.held_upper_cny}；仅限原金额预算与适用累计授权内继续。`:'')+'\n'+data.note;
   const lines = ['人民币账号额度（本项目估算，不是平台实时余额）'];
   for (const account of data.accounts || []) {
     const remaining = account.estimated_remaining_cny;

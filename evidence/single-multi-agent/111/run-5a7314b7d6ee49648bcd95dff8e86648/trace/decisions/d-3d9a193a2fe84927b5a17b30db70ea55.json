@@ -1,0 +1,70 @@
+{
+  "action": "stop",
+  "rule_id": "terminal_stopped",
+  "reason": "修复候选达到上限，不发第4轮请求。",
+  "trace_version": "1.0.0",
+  "run_id": "run-5a7314b7d6ee49648bcd95dff8e86648",
+  "step_id": "s-29850d3d751e48c9ab3d1e11f298e0a5",
+  "parent_step_id": "s-95587588a20143d49f651925be73aace",
+  "node_id": "program_dispatch",
+  "round": 3,
+  "phase": "development",
+  "strategy": "single",
+  "evidence_ids": [
+    "test-development-3"
+  ],
+  "decision_id": "d-3d9a193a2fe84927b5a17b30db70ea55",
+  "program_decision": {
+    "action": "stop",
+    "rule_id": "terminal_stopped",
+    "reason": "修复候选达到上限，不发第4轮请求。"
+  },
+  "model_advice": null,
+  "effective_action": "stop",
+  "target_agent": null,
+  "override_reason": null,
+  "code_version": "sha256:b59b47e41f467cf1437ddfa6a1b999ee5d2cc127106e2e8e2c335db161170342",
+  "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91",
+  "counters": {
+    "model_calls": 3,
+    "tool_calls": 4,
+    "rounds_used": 3,
+    "cost": {
+      "calls": 3,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.010535",
+      "reserved_cny": "0"
+    },
+    "remaining_seconds": 258.70700860000215,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  }
+}

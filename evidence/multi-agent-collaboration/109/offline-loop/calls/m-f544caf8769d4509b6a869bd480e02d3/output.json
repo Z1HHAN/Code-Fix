@@ -1,0 +1,152 @@
+{
+  "status": "ok",
+  "mode": "test_stub",
+  "model_api_called": false,
+  "raw_text": "{\"evidence_ids\": [\"test-baseline\"], \"knowledge_citations\": [], \"explanation\": \"synthetic candidate\", \"changes\": [{\"path\": \"code/leap_year.py\", \"new_content\": \"def is_leap(year):\\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\\n\"}]}",
+  "role": "repairer",
+  "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+  "call_id": "m-f544caf8769d4509b6a869bd480e02d3",
+  "round": 1,
+  "provenance": {
+    "role_override": {},
+    "role_overrides_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "protocol": "codefix-json-v1",
+    "parser_version": "1.0.0",
+    "config_version": "1.1.0",
+    "effective_config": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "primary": {
+          "binding": "approved_profile",
+          "profile_ref": "sf_account1_v32"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "primary",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "config_sha256": "b3472a143047be416465bd12b883494daab38dc1dce1b9522c99992eb7d455ba",
+    "prompt_ref": "prompts/repairer.md",
+    "prompt_sha256": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+    "system_prompt_sha256": "279bac1d22413b8ccf15b26d768a0f65fb210d7347fe57a0b0284e1427f95635",
+    "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:repairer",
+    "agent_contract": {
+      "contract_version": "1.0.0",
+      "agent_id": "repairer",
+      "title": "修复员",
+      "input_scope": "current_candidate_development_evidence_only",
+      "receives_from": [
+        "detector",
+        "scheduler",
+        "locator"
+      ],
+      "produces": "candidate_changes",
+      "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+      "output_schema": "RepairOutput",
+      "permitted_action": "propose_source_patch",
+      "tools": [
+        "read_file",
+        "search_knowledge"
+      ],
+      "can_execute_code": false,
+      "can_modify_tests": false,
+      "can_approve_success": false,
+      "can_override_guards": false
+    },
+    "agent_contract_sha256": "8fa1a2ef8fde348f27a5ce1862ed65bce4eea9d6207d4091083355cf3e8ae3ef",
+    "handoffs": [],
+    "messages_sha256": "f0b27cb03c086755e9fdfb92706cd5d95d04fdae2a522496b8192bf22997741d",
+    "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "model_binding": {
+      "model_ref": "primary",
+      "binding": "approved_profile",
+      "profile_ref": "sf_account1_v32",
+      "mode": "test_stub",
+      "model": null
+    }
+  },
+  "step_id": "s-898f070073a54db4b31dda3f635c41bb",
+  "parent_step_id": "s-106d5698f9974830907ad456747fc754",
+  "parsed_output": {
+    "evidence_ids": [
+      "test-baseline"
+    ],
+    "knowledge_citations": [],
+    "explanation": "synthetic candidate",
+    "changes": [
+      {
+        "path": "code/leap_year.py",
+        "new_content": "def is_leap(year):\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\n"
+      }
+    ]
+  }
+}

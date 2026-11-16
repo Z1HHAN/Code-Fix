@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "collected_nodeids": [
+    "python_testcases/test_lis.py::test_lis[input_data0-0]",
+    "python_testcases/test_lis.py::test_lis[input_data1-1]",
+    "python_testcases/test_lis.py::test_lis[input_data2-4]",
+    "python_testcases/test_lis.py::test_lis[input_data3-1]",
+    "python_testcases/test_lis.py::test_lis[input_data4-4]",
+    "python_testcases/test_lis.py::test_lis[input_data5-1]",
+    "python_testcases/test_lis.py::test_lis[input_data6-3]",
+    "python_testcases/test_lis.py::test_lis[input_data7-2]",
+    "python_testcases/test_lis.py::test_lis[input_data8-3]",
+    "python_testcases/test_lis.py::test_lis[input_data9-6]",
+    "python_testcases/test_lis.py::test_lis[input_data10-3]",
+    "python_testcases/test_lis.py::test_lis[input_data11-4]"
+  ],
+  "collection_errors": [],
+  "reports": [
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data0-0]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data0-0]",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data0-0]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data1-1]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data1-1]",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data1-1]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data2-4]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data2-4]",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data2-4]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data3-1]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data3-1]",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data3-1]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data4-4]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data4-4]",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data4-4]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data5-1]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data5-1]",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data5-1]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data6-3]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data6-3]",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data6-3]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data7-2]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data7-2]",
+      "when": "call",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data7-2]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data8-3]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data8-3]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "AssertionError",
+      "exception_path": "/w/python_testcases/test_lis.py"
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data8-3]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data9-6]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data9-6]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "AssertionError",
+      "exception_path": "/w/python_testcases/test_lis.py"
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data9-6]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data10-3]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data10-3]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "AssertionError",
+      "exception_path": "/w/python_testcases/test_lis.py"
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data10-3]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data11-4]",
+      "when": "setup",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data11-4]",
+      "when": "call",
+      "outcome": "failed",
+      "exception_type": "AssertionError",
+      "exception_path": "/w/python_testcases/test_lis.py"
+    },
+    {
+      "nodeid": "python_testcases/test_lis.py::test_lis[input_data11-4]",
+      "when": "teardown",
+      "outcome": "passed",
+      "exception_type": null,
+      "exception_path": null
+    }
+  ],
+  "session_finished": true,
+  "exit_code": 1
+}

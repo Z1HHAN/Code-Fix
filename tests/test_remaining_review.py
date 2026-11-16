@@ -203,7 +203,7 @@ def test_runtime_tool_limit_blocks_before_dispatch(tmp_path):
     ctx.source = 'source.py'
     (tmp_path / ctx.source).write_text('pass\n')
     ctx.version = code_version(tmp_path, (ctx.source,))
-    ctx.tool_calls = 5
+    ctx.tool_calls = 7
     with pytest.raises(ModelBlocked, match='工具调用次数'):
         ctx.test(tmp_path, 'final_check', 'never-created')
     assert not (tmp_path / 'never-created').exists()

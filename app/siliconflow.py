@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import time
 import uuid
+from decimal import Decimal
 
 import httpx
 
@@ -27,10 +28,12 @@ def budget_status(run_root, root=ROOT):
             blocked = bool(db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
                            or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()
                            or db.execute("SELECT 1 FROM personal_calls WHERE status IN ('pending','unknown')").fetchone())
+            held, reserved = db.execute("SELECT count(*),coalesce(sum(reserved),0) FROM personal_calls WHERE status='reserved_unknown'").fetchone()
         return {'personal': True, 'accounts': [], 'paid_calls_blocked': blocked,
+                'held_unknown_calls': held, 'held_upper_cny': str(Decimal(reserved)/1000000),
                 'monetary_budget_enabled': os.environ.get('CODE_FIX_PERSONAL_BUDGET') != 'usage',
                 'platform_balance_verified': False,
-                'note': '个人模型配置；金额未设置时费用未知。逐次用量和估算见运行记录，不是服务商实时余额。'}
+                'note': '个人模型配置；费用待核对按预留上限占用累计预算，不能跨授权绕过；未定价或历史未知仍阻断。逐次用量和估算见运行记录，不是服务商实时余额。'}
     result = AccountBudget(ledger.path).snapshot()
     actual = {a['account_id']: a for a in result['accounts']}
     for aid, account in registry.get('accounts', {}).items():

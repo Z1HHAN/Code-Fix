@@ -1,0 +1,134 @@
+{
+  "decision_id": "d-2",
+  "run_id": "run-5feb3a0bf6824b90a6a0ff634db6b488",
+  "code_version": "sha256:cd2305e586b5ee59d20ee430bf296c7e7d3447c1947446cc60fadc062ab4dd6a",
+  "evidence_ids": [
+    "test-development-2"
+  ],
+  "failure_class": "code_runtime_error",
+  "action": "locate",
+  "target_agent": "locator",
+  "reason": "待修代码运行异常，回到定位；先确认不是依赖或测试收集问题。",
+  "retries_left": 1,
+  "rule_id": "R14",
+  "terminal_status": null,
+  "trace_version": "1.0.0",
+  "step_id": "s-f5026d858eb340ee993dffc70ffc3a65",
+  "parent_step_id": "s-2b3043e0ef4d4c45b7cf008ac62139fb",
+  "node_id": "program_dispatch",
+  "round": 2,
+  "phase": "development",
+  "strategy": "dynamic",
+  "program_decision": {
+    "decision_id": "d-2",
+    "run_id": "run-5feb3a0bf6824b90a6a0ff634db6b488",
+    "code_version": "sha256:cd2305e586b5ee59d20ee430bf296c7e7d3447c1947446cc60fadc062ab4dd6a",
+    "evidence_ids": [
+      "test-development-2"
+    ],
+    "failure_class": "code_runtime_error",
+    "action": "locate",
+    "target_agent": "locator",
+    "reason": "待修代码运行异常，回到定位；先确认不是依赖或测试收集问题。",
+    "retries_left": 1,
+    "rule_id": "R14",
+    "terminal_status": null
+  },
+  "model_advice": {
+    "action": "repair",
+    "reason": "开发测试证据显示13/14失败，异常为RuntimeError且发生在测试加载器/执行封装的RPC响应校验处（期望{'value':...}结构），而非排序断言不匹配；当前候选代码与堆栈行号不一致，仍需在允许路径 python_programs/mergesort.py 内修复使原生测试通过。仅1项通过、且未做独立复验，不能宣布成功，故建议继续repair并在修复后定位核对实际执行代码版本。",
+    "evidence_ids": [
+      "test-development-2"
+    ],
+    "knowledge_citations": [
+      "knowledge-public_tasks",
+      "knowledge-testing"
+    ]
+  },
+  "effective_action": "locate",
+  "override_reason": "模型建议不能覆盖工具证据与强制规则",
+  "test_suite_version": "sha256:7a33124570df0101b582338ac1815c1c1885da086b899ed9ad88b74b67d8f244",
+  "counters": {
+    "model_calls": 7,
+    "tool_calls": 3,
+    "rounds_used": 2,
+    "cost": {
+      "calls": 7,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.02698",
+      "reserved_cny": "0"
+    },
+    "remaining_seconds": 244.7947819999972,
+    "limits": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  },
+  "self_loop": {
+    "status": "planned",
+    "from_round": 2,
+    "to_round": 3,
+    "failure_class": "code_runtime_error",
+    "via": [
+      "locator",
+      "repairer"
+    ],
+    "evidence_id": "test-development-2",
+    "code_version": "sha256:cd2305e586b5ee59d20ee430bf296c7e7d3447c1947446cc60fadc062ab4dd6a",
+    "remaining_rounds": 1
+  }
+}

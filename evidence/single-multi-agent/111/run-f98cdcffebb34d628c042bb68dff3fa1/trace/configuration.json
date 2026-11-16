@@ -1,0 +1,1092 @@
+{
+  "roles": {
+    "config_version": "1.1.0",
+    "protocol": "codefix-json-v1",
+    "models": {
+      "locator": {
+        "binding": "approved_profile",
+        "profile_ref": "personal_model"
+      },
+      "repairer": {
+        "binding": "approved_profile",
+        "profile_ref": "personal_model"
+      },
+      "detector": {
+        "binding": "approved_profile",
+        "profile_ref": "personal_model"
+      },
+      "scheduler": {
+        "binding": "approved_profile",
+        "profile_ref": "personal_model"
+      }
+    },
+    "agents": [
+      {
+        "agent_id": "locator",
+        "enabled": true,
+        "role_type": "llm",
+        "model_ref": "locator",
+        "prompt_ref": "prompts/locator.md",
+        "tool_allowlist": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "knowledge_ids": [
+          "project_structure",
+          "business_rules",
+          "testing",
+          "public_tasks"
+        ],
+        "output_schema": "LocatorOutput"
+      },
+      {
+        "agent_id": "repairer",
+        "enabled": true,
+        "role_type": "llm",
+        "model_ref": "repairer",
+        "prompt_ref": "prompts/repairer.md",
+        "tool_allowlist": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "knowledge_ids": [
+          "business_rules",
+          "testing",
+          "public_tasks"
+        ],
+        "output_schema": "RepairOutput"
+      },
+      {
+        "agent_id": "detector",
+        "enabled": true,
+        "role_type": "llm",
+        "model_ref": "detector",
+        "prompt_ref": "prompts/detector.md",
+        "tool_allowlist": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "knowledge_ids": [
+          "business_rules",
+          "testing",
+          "public_tasks"
+        ],
+        "output_schema": "DetectorOutput"
+      },
+      {
+        "agent_id": "scheduler",
+        "enabled": true,
+        "role_type": "llm",
+        "model_ref": "scheduler",
+        "prompt_ref": "prompts/scheduler.md",
+        "tool_allowlist": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "knowledge_ids": [
+          "business_rules",
+          "testing",
+          "public_tasks"
+        ],
+        "output_schema": "SchedulerOutput"
+      }
+    ]
+  },
+  "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+  "strategy": "dynamic",
+  "role_overrides": {
+    "repairer": {
+      "task_instruction": "",
+      "generation": {
+        "max_output_tokens": 8192,
+        "enable_thinking": false
+      }
+    },
+    "detector": {
+      "task_instruction": "",
+      "generation": {
+        "max_output_tokens": 2048,
+        "enable_thinking": false
+      }
+    },
+    "scheduler": {
+      "task_instruction": "",
+      "generation": {
+        "max_output_tokens": 2048,
+        "enable_thinking": false
+      }
+    },
+    "locator": {
+      "task_instruction": "",
+      "generation": {
+        "max_output_tokens": 2048,
+        "enable_thinking": false
+      }
+    }
+  },
+  "runtime_limits": {
+    "schema_version": 1,
+    "basis": "Existing API engineering caps; not paid-call authorization. Legacy v0.2 limits remain historical.",
+    "max_rounds": 3,
+    "max_calls": 30,
+    "max_tool_calls": 5,
+    "total_seconds": 1800,
+    "defaults": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    }
+  },
+  "bindings": {
+    "locator": {
+      "model_ref": "locator",
+      "binding": "approved_profile",
+      "profile_ref": "personal_model",
+      "mode": "live",
+      "provider_id": "personal",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+      "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+      "effective_parameters": {
+        "max_tokens": 2048,
+        "enable_thinking": false
+      },
+      "request_seconds": 60,
+      "daily_shared_usd": null,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "effective_parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1",
+      "currency": "CNY",
+      "personal_pricing": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      },
+      "daily_limit": "5",
+      "monetary_budget_enabled": true
+    },
+    "repairer": {
+      "model_ref": "repairer",
+      "binding": "approved_profile",
+      "profile_ref": "personal_model",
+      "mode": "live",
+      "provider_id": "personal",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+      "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+      "effective_parameters": {
+        "max_tokens": 8192,
+        "enable_thinking": false
+      },
+      "request_seconds": 60,
+      "daily_shared_usd": null,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "effective_parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481",
+      "currency": "CNY",
+      "personal_pricing": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      },
+      "daily_limit": "5",
+      "monetary_budget_enabled": true
+    },
+    "detector": {
+      "model_ref": "detector",
+      "binding": "approved_profile",
+      "profile_ref": "personal_model",
+      "mode": "live",
+      "provider_id": "personal",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+      "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+      "effective_parameters": {
+        "max_tokens": 2048,
+        "enable_thinking": false
+      },
+      "request_seconds": 60,
+      "daily_shared_usd": null,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "effective_parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1",
+      "currency": "CNY",
+      "personal_pricing": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      },
+      "daily_limit": "5",
+      "monetary_budget_enabled": true
+    },
+    "scheduler": {
+      "model_ref": "scheduler",
+      "binding": "approved_profile",
+      "profile_ref": "personal_model",
+      "mode": "live",
+      "provider_id": "personal",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+      "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+      "effective_parameters": {
+        "max_tokens": 2048,
+        "enable_thinking": false
+      },
+      "request_seconds": 60,
+      "daily_shared_usd": null,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "effective_parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1",
+      "currency": "CNY",
+      "personal_pricing": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      },
+      "daily_limit": "5",
+      "monetary_budget_enabled": true
+    }
+  },
+  "rules": {
+    "config_version": "iteration-0.2-20261101-draft",
+    "interface_version": "0.2-20261101-draft",
+    "status": "pending_BC_confirmation",
+    "matching": "按数组顺序，when中的字段全部相等则命中第一条；B实现解释器及证据分类后才生效。此文件不是执行器。",
+    "preconditions": {
+      "required_context_fields": [
+        "phase",
+        "failure_class",
+        "isolation_ready",
+        "user_pause_requested",
+        "evidence_matches_current_version",
+        "repair_budget_available",
+        "execution_budget_available",
+        "needs_new_repair",
+        "next_action_requires_execution_budget",
+        "output_agent"
+      ],
+      "missing_or_invalid_context": "拒绝推进并记录配置或上下文错误；isolation_ready未知时不得执行模型代码。",
+      "unconfirmed_limits": "拒绝启动本草案的自动运行；由A/B/C填写并确认后才启用。",
+      "output_agent": "当前证据不是模型输出时为null；模型输出验证时为locator/repairer/reviewer，来源由程序设置。",
+      "repair_budget_semantics": "needs_new_repair只根据当前有效开发证据计算。代码改变且尚未测试时必须为false；最后一轮候选仍允许在执行预算内完成开发测试和独立验收。",
+      "budget_semantics": "max_tool_calls为单次运行上限，包含模型请求、网络重试和执行工具调用；daily_cost_limit为整个队伍当天共享费用上限，各run与重试累计。费用或额度不可可靠跟踪时暂停确认，不将未知当成0。"
+    },
+    "safety_policy": {
+      "automatic_generated_code_requires": "verified_container_or_disposable_vm",
+      "heldout_feedback_to_repair_loop": false,
+      "final_check_feedback_to_repair_loop": false,
+      "validation_scope": "native_tests_clean_rerun"
+    },
+    "limits": {
+      "max_repair_rounds": 3,
+      "test_timeout_seconds": 60,
+      "total_run_seconds": null,
+      "max_tool_calls": null,
+      "daily_cost_limit": null,
+      "model_request_timeout_seconds": null,
+      "max_transport_retries": null
+    },
+    "limit_status": "3轮为现有政策；测试60秒仍待B/C确认，其他运行上限与费用未批准。建议值仅在11月1日手册讨论，不得将null解释为无限或自动批准；未确认不开放自动付费运行。",
+    "round_definition": "每次请求修复员生成候选修改时计1轮，哪怕输出无效或补丁被拒绝也计入；定位与网络重试另计工具/模型调用预算，网络重试还须独立有限上限。",
+    "input_policy": "failure_class与各布尔条件由程序根据真实结果计算，模型文字不能直接赋值。每次Decision绑定evidence_ids、run_id和code_version。",
+    "rules": [
+      {
+        "rule_id": "R00",
+        "when": {
+          "isolation_ready": false
+        },
+        "action": "stop",
+        "target_agent": null,
+        "terminal_status": "infra_error",
+        "reason": "隔离未就绪；不自动执行模型生成的代码。"
+      },
+      {
+        "rule_id": "R01",
+        "when": {
+          "failure_class": "permission_violation"
+        },
+        "action": "stop",
+        "target_agent": null,
+        "terminal_status": "stopped",
+        "reason": "越权路径、修改测试或非法工具请求，拒绝应用并保留证据。"
+      },
+      {
+        "rule_id": "R04",
+        "when": {
+          "failure_class": "timeout"
+        },
+        "action": "stop",
+        "target_agent": null,
+        "terminal_status": "stopped",
+        "reason": "先清理完整执行任务，再记录超时，不能标通过。"
+      },
+      {
+        "rule_id": "R07",
+        "when": {
+          "phase": "final_check",
+          "failure_class": "passed",
+          "evidence_matches_current_version": true
+        },
+        "action": "finish",
+        "target_agent": null,
+        "terminal_status": "success",
+        "reason": "独立验收实际通过且证据对应最终代码版本。"
+      },
+      {
+        "rule_id": "R08N",
+        "when": {
+          "phase": "final_check",
+          "failure_class": "final_check_failed",
+          "evidence_matches_current_version": true
+        },
+        "action": "finish",
+        "target_agent": null,
+        "terminal_status": "failed",
+        "reason": "干净副本独立复验实际失败且对应当前代码，结束本次运行；不把最终结果回流本轮修复。"
+      },
+      {
+        "rule_id": "R08",
+        "when": {
+          "phase": "final_check",
+          "failure_class": "heldout_failed",
+          "evidence_matches_current_version": true
+        },
+        "action": "finish",
+        "target_agent": null,
+        "terminal_status": "failed",
+        "reason": "兼容历史heldout_failed的独立验收失败；结束且不回流Agent。旧记录保留其原验证范围，新原生复验不宣称隐藏覆盖。"
+      },
+      {
+        "rule_id": "R02",
+        "when": {
+          "user_pause_requested": true
+        },
+        "action": "pause",
+        "target_agent": null,
+        "terminal_status": null,
+        "reason": "在步骤边界暂停；约束更新后重新检查尚未应用的候选修改。"
+      },
+      {
+        "rule_id": "R03",
+        "when": {
+          "failure_class": "environment_error"
+        },
+        "action": "pause",
+        "target_agent": null,
+        "terminal_status": null,
+        "reason": "依赖、测试收集、命令或执行环境异常，交C诊断；不让修复员改业务代码凑通过。"
+      },
+      {
+        "rule_id": "R05",
+        "when": {
+          "failure_class": "model_transport_error"
+        },
+        "action": "pause",
+        "target_agent": null,
+        "terminal_status": null,
+        "reason": "API鉴权或有限网络重试耗尽，保留调用记录，交B诊断。"
+      },
+      {
+        "rule_id": "R06",
+        "when": {
+          "failure_class": "not_reproduced"
+        },
+        "action": "pause",
+        "target_agent": null,
+        "terminal_status": null,
+        "reason": "起点没有复现预期缺陷，交C核查，不算模型修复成功。"
+      },
+      {
+        "rule_id": "R09",
+        "when": {
+          "next_action_requires_execution_budget": true,
+          "execution_budget_available": false
+        },
+        "action": "stop",
+        "target_agent": null,
+        "terminal_status": "stopped",
+        "reason": "总时间、工具/模型调用或已配置费用上限到达，不再发新请求。"
+      },
+      {
+        "rule_id": "R10",
+        "when": {
+          "needs_new_repair": true,
+          "repair_budget_available": false,
+          "phase": "development"
+        },
+        "action": "stop",
+        "target_agent": null,
+        "terminal_status": "stopped",
+        "reason": "修复候选达到上限，不发第4轮请求。"
+      },
+      {
+        "rule_id": "R11",
+        "when": {
+          "evidence_matches_current_version": false,
+          "execution_budget_available": true
+        },
+        "action": "run_current_tests",
+        "target_agent": null,
+        "terminal_status": null,
+        "reason": "旧证据不能验证当前代码；在剩余执行预算内重跑当前阶段测试，独立验收证据不得送给角色。"
+      },
+      {
+        "rule_id": "R17",
+        "when": {
+          "phase": "final_check"
+        },
+        "action": "pause",
+        "target_agent": null,
+        "terminal_status": null,
+        "reason": "独立复验异常或未识别结果交C核查，不调用Agent；已执行失败按提案规范为final_check_failed，兼容旧heldout_failed；未运行不得通过。"
+      },
+      {
+        "rule_id": "R18",
+        "when": {
+          "phase": "development",
+          "failure_class": "invalid_model_output",
+          "output_agent": "locator"
+        },
+        "action": "pause",
+        "target_agent": null,
+        "terminal_status": null,
+        "reason": "定位输出无效，暂停交B检查解析与协议，不在缺少有效定位结论时直接调用修复员。"
+      },
+      {
+        "rule_id": "R12",
+        "when": {
+          "failure_class": "syntax_error",
+          "repair_budget_available": true,
+          "execution_budget_available": true,
+          "phase": "development"
+        },
+        "action": "repair",
+        "target_agent": "repairer",
+        "terminal_status": null,
+        "reason": "待修文件语法错误，携带当前开发证据局部重修。"
+      },
+      {
+        "rule_id": "R13",
+        "when": {
+          "failure_class": "assertion_failed",
+          "repair_budget_available": true,
+          "execution_budget_available": true,
+          "phase": "development"
+        },
+        "action": "locate",
+        "target_agent": "locator",
+        "terminal_status": null,
+        "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。"
+      },
+      {
+        "rule_id": "R14",
+        "when": {
+          "failure_class": "code_runtime_error",
+          "repair_budget_available": true,
+          "execution_budget_available": true,
+          "phase": "development"
+        },
+        "action": "locate",
+        "target_agent": "locator",
+        "terminal_status": null,
+        "reason": "待修代码运行异常，回到定位；先确认不是依赖或测试收集问题。"
+      },
+      {
+        "rule_id": "R15",
+        "when": {
+          "failure_class": "invalid_model_output",
+          "repair_budget_available": true,
+          "execution_budget_available": true,
+          "phase": "development",
+          "output_agent": "repairer"
+        },
+        "action": "repair",
+        "target_agent": "repairer",
+        "terminal_status": null,
+        "reason": "修复员输出不符合协议，不写文件；在剩余修复预算内携带解析错误重修。"
+      },
+      {
+        "rule_id": "R16",
+        "when": {
+          "phase": "development",
+          "failure_class": "passed",
+          "evidence_matches_current_version": true
+        },
+        "action": "final_check",
+        "target_agent": null,
+        "terminal_status": null,
+        "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。"
+      }
+    ],
+    "unmatched": {
+      "action": "pause",
+      "reason": "状态未知、缺少证据、测试未运行、独立验收不可用或分类不确定，留给负责人检查；绝不默认通过。"
+    },
+    "failure_class_migration": {
+      "status": "proposal_pending_BC_confirmation",
+      "canonical_final_failure": "final_check_failed",
+      "legacy_final_failure": "heldout_failed",
+      "policy": "本草案为两者提供相同的final_check阶段及当前版本保护。新原生复验失败建议采用final_check_failed；历史heldout_failed原文保留，不重新解释为新增隐藏测试。B/C须共同确认生产、消费与版本适配后才能冻结。"
+    }
+  },
+  "production_guards": {
+    "version": "1.2.0",
+    "invalid_model_output": "bounded_retry",
+    "advisory_format_retries": 1,
+    "candidate_detector_required": true,
+    "locator_requires_detector_and_dispatch": true,
+    "transport_attempts": 1,
+    "final_feedback_to_agents": false
+  },
+  "model_profiles": {
+    "schema_version": "1.0.0",
+    "profiles": {
+      "personal_model": {
+        "provider_id": "personal",
+        "model": "deepseek-v4.1-flash-1017",
+        "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+        "api_key_env": "CODE_FIX_PERSONAL_KEY",
+        "approval_env": "CODE_FIX_PERSONAL_APPROVED",
+        "input_price_env": "CODE_FIX_PERSONAL_INPUT_PRICE",
+        "output_price_env": "CODE_FIX_PERSONAL_OUTPUT_PRICE",
+        "request_seconds_env": "CODE_FIX_PERSONAL_TIMEOUT",
+        "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+        "max_input_tokens": 64000,
+        "max_output_tokens": 8192,
+        "token_limit_parameter": "max_tokens",
+        "personal_pricing": {
+          "provider": "qianwen-ai",
+          "model": "deepseek-v4.1-flash-1017",
+          "region": "platform-standard",
+          "mode": "thinking",
+          "currency": "CNY",
+          "unit": "per_million_tokens",
+          "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+          "verified_at": "2026-11-11",
+          "endpoint_host": "maas.qianwenaiapi.com",
+          "tiers": [
+            {
+              "max_input_tokens": 1000000,
+              "input": "2",
+              "output": "8",
+              "cached_input": "0.2"
+            }
+          ],
+          "offpeak_discount": "0.5",
+          "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+        },
+        "currency": "CNY"
+      }
+    }
+  },
+  "provenance": {
+    "locator": {
+      "role_override": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+      "protocol": "codefix-json-v1",
+      "parser_version": "1.0.0",
+      "config_version": "1.1.0",
+      "effective_config": {
+        "config_version": "1.1.0",
+        "protocol": "codefix-json-v1",
+        "models": {
+          "locator": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          },
+          "repairer": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          },
+          "detector": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          },
+          "scheduler": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          }
+        },
+        "agents": [
+          {
+            "agent_id": "locator",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "locator",
+            "prompt_ref": "prompts/locator.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "project_structure",
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "LocatorOutput"
+          },
+          {
+            "agent_id": "repairer",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "repairer",
+            "prompt_ref": "prompts/repairer.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "RepairOutput"
+          },
+          {
+            "agent_id": "detector",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "detector",
+            "prompt_ref": "prompts/detector.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "DetectorOutput"
+          },
+          {
+            "agent_id": "scheduler",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "scheduler",
+            "prompt_ref": "prompts/scheduler.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "SchedulerOutput"
+          }
+        ]
+      },
+      "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+      "prompt_ref": "prompts/locator.md",
+      "prompt_sha256": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+      "system_prompt_sha256": "4dfdec9630855fc4dca2512cc61d36def3d6aaf60934d75d12250d7619ed77de"
+    },
+    "repairer": {
+      "role_override": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 8192,
+          "enable_thinking": false
+        }
+      },
+      "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+      "protocol": "codefix-json-v1",
+      "parser_version": "1.0.0",
+      "config_version": "1.1.0",
+      "effective_config": {
+        "config_version": "1.1.0",
+        "protocol": "codefix-json-v1",
+        "models": {
+          "locator": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          },
+          "repairer": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          },
+          "detector": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          },
+          "scheduler": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          }
+        },
+        "agents": [
+          {
+            "agent_id": "locator",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "locator",
+            "prompt_ref": "prompts/locator.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "project_structure",
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "LocatorOutput"
+          },
+          {
+            "agent_id": "repairer",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "repairer",
+            "prompt_ref": "prompts/repairer.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "RepairOutput"
+          },
+          {
+            "agent_id": "detector",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "detector",
+            "prompt_ref": "prompts/detector.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "DetectorOutput"
+          },
+          {
+            "agent_id": "scheduler",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "scheduler",
+            "prompt_ref": "prompts/scheduler.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "SchedulerOutput"
+          }
+        ]
+      },
+      "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+      "prompt_ref": "prompts/repairer.md",
+      "prompt_sha256": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+      "system_prompt_sha256": "279bac1d22413b8ccf15b26d768a0f65fb210d7347fe57a0b0284e1427f95635"
+    },
+    "detector": {
+      "role_override": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+      "protocol": "codefix-json-v1",
+      "parser_version": "1.0.0",
+      "config_version": "1.1.0",
+      "effective_config": {
+        "config_version": "1.1.0",
+        "protocol": "codefix-json-v1",
+        "models": {
+          "locator": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          },
+          "repairer": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          },
+          "detector": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          },
+          "scheduler": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          }
+        },
+        "agents": [
+          {
+            "agent_id": "locator",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "locator",
+            "prompt_ref": "prompts/locator.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "project_structure",
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "LocatorOutput"
+          },
+          {
+            "agent_id": "repairer",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "repairer",
+            "prompt_ref": "prompts/repairer.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "RepairOutput"
+          },
+          {
+            "agent_id": "detector",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "detector",
+            "prompt_ref": "prompts/detector.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "DetectorOutput"
+          },
+          {
+            "agent_id": "scheduler",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "scheduler",
+            "prompt_ref": "prompts/scheduler.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "SchedulerOutput"
+          }
+        ]
+      },
+      "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+      "prompt_ref": "prompts/detector.md",
+      "prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+      "system_prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc"
+    },
+    "scheduler": {
+      "role_override": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+      "protocol": "codefix-json-v1",
+      "parser_version": "1.0.0",
+      "config_version": "1.1.0",
+      "effective_config": {
+        "config_version": "1.1.0",
+        "protocol": "codefix-json-v1",
+        "models": {
+          "locator": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          },
+          "repairer": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          },
+          "detector": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          },
+          "scheduler": {
+            "binding": "approved_profile",
+            "profile_ref": "personal_model"
+          }
+        },
+        "agents": [
+          {
+            "agent_id": "locator",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "locator",
+            "prompt_ref": "prompts/locator.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "project_structure",
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "LocatorOutput"
+          },
+          {
+            "agent_id": "repairer",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "repairer",
+            "prompt_ref": "prompts/repairer.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "RepairOutput"
+          },
+          {
+            "agent_id": "detector",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "detector",
+            "prompt_ref": "prompts/detector.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "DetectorOutput"
+          },
+          {
+            "agent_id": "scheduler",
+            "enabled": true,
+            "role_type": "llm",
+            "model_ref": "scheduler",
+            "prompt_ref": "prompts/scheduler.md",
+            "tool_allowlist": [
+              "read_file",
+              "search_knowledge"
+            ],
+            "knowledge_ids": [
+              "business_rules",
+              "testing",
+              "public_tasks"
+            ],
+            "output_schema": "SchedulerOutput"
+          }
+        ]
+      },
+      "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+      "prompt_ref": "prompts/scheduler.md",
+      "prompt_sha256": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6",
+      "system_prompt_sha256": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6"
+    }
+  }
+}

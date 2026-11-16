@@ -1,0 +1,21 @@
+{
+  "project": "qb-breadth_first_search",
+  "base_version": "sha256:452208cdaec3a1a94f3be2e6acc79adefad9cb24088290d7d3284dc1801b6320",
+  "candidate_version": "sha256:87f11a57518ae486050a680c66d9f393efaa868193180669c3273e84de4bc8cd",
+  "test_suite_version": "sha256:143df89761668031b2e8f54bac9758d2ea6773e0d71a93b8bc60397e73873a0e",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_breadth_first_search.py": "e20b957060c2a39fd2dfd40399e3ed5080f4a98f86f8360edebf81da98454024",
+    "python_testcases/node.py": "d4d89f9bdccb7d8354c159304759b0d64a1828e29ee47e624b9eac678b158fa3"
+  },
+  "changes": [
+    {
+      "path": "python_programs/breadth_first_search.py",
+      "new_content": "\nfrom collections import deque as Queue\n\ndef breadth_first_search(startnode, goalnode):\n    queue = Queue()\n    queue.append(startnode)\n\n    nodesseen = set()\n    nodesseen.add(startnode)\n\n    while queue:\n        node = queue.popleft()\n\n        if node is goalnode:\n            return True\n        else:\n            queue.extend(successor for successor in node.successors if successor not in nodesseen)\n            nodesseen.update(node.successors)\n\n    return False\n\n\n\n\"\"\"\nBreadth-First Search\n\n\nInput:\n    startnode: A digraph node\n    goalnode: A digraph node\n\nOutput:\n    Whether goalnode is reachable from startnode\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_breadth_first_search.py": "e20b957060c2a39fd2dfd40399e3ed5080f4a98f86f8360edebf81da98454024"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "scope": "actual updated installed app using original user profile",
+  "auto_selected": true,
+  "left": "single",
+  "right": "dynamic",
+  "paired_rows": 40,
+  "difference_rows": 7,
+  "followups": 3,
+  "latest_multi_passed": 40,
+  "original_multi_passed": 37,
+  "known_cny": "0.343609",
+  "reserved_cny": "0.084076",
+  "view_switch_passed": true,
+  "export_passed": true,
+  "baseline_definition_visible": true,
+  "current_unresolved": [
+    2,
+    0
+  ],
+  "historical_handoffs": [
+    2,
+    3
+  ],
+  "historical_section_collapsed": true,
+  "errors": [],
+  "post_requests": [],
+  "model_requests": 0
+}

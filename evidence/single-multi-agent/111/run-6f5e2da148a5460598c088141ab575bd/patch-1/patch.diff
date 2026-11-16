@@ -1,0 +1,13 @@
+--- a/python_programs/minimum_spanning_tree.py
++++ b/python_programs/minimum_spanning_tree.py
+@@ -5,7 +5,9 @@
+ 
+     for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):
+         u, v = edge
+-        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):
++        group_by_node.setdefault(u, {u})
++        group_by_node.setdefault(v, {v})
++        if group_by_node.get(u, {u}) != group_by_node.get(v, {v}):
+             mst_edges.add(edge)
+             group_by_node[u].update(group_by_node[v])
+             for node in group_by_node[v]:

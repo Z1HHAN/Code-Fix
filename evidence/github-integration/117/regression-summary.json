@@ -1,0 +1,17 @@
+{
+  "tested_commit": "ac66b325f4d0d1897a0d1669f0fec858004e2abb",
+  "base": "f28318ad8bbdd456b3b78f5c86bfb69fa2a69b36",
+  "python_commands": [
+    "python -B -X utf8 -m pytest tests --basetemp runs/t117 --junitxml=runs/test117.xml -q",
+    "python -B -X utf8 -m pytest c_tests --basetemp runs/c117 --junitxml=runs/ctest117.xml -q"
+  ],
+  "python_passed": 836,
+  "python_skipped": 1,
+  "python_failures": 0,
+  "node_command": "node --test tests/*.test.cjs desktop/settings.test.cjs",
+  "node_passed": 86,
+  "skip": "Windows host does not permit creating symlinks; prior Linux security evidence is separate",
+  "merge_code_equals_tested_commit": true,
+  "paid_requests": 0,
+  "not_independent_C_acceptance": true
+}

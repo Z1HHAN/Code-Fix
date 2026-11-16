@@ -1,0 +1,106 @@
+{
+  "decision_id": "d-1",
+  "run_id": "run-17496b4c92ce4911a42be3b8d03c0c81",
+  "code_version": "sha256:0127d628dce8047c3e2b3e58fa312685a00215c64c29c0dd4ab977304ce4eaf3",
+  "evidence_ids": [
+    "test-development-1"
+  ],
+  "failure_class": "assertion_failed",
+  "action": "locate",
+  "target_agent": "locator",
+  "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+  "retries_left": 4,
+  "rule_id": "R13",
+  "terminal_status": null,
+  "trace_version": "1.0.0",
+  "step_id": "s-8f55645eccd64108987280f18027c8ac",
+  "parent_step_id": "s-d7117adddd1d44a5b407efdebb019d82",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "development",
+  "strategy": "dynamic",
+  "program_decision": {
+    "decision_id": "d-1",
+    "run_id": "run-17496b4c92ce4911a42be3b8d03c0c81",
+    "code_version": "sha256:0127d628dce8047c3e2b3e58fa312685a00215c64c29c0dd4ab977304ce4eaf3",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "failure_class": "assertion_failed",
+    "action": "locate",
+    "target_agent": "locator",
+    "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+    "retries_left": 4,
+    "rule_id": "R13",
+    "terminal_status": null
+  },
+  "model_advice": {
+    "action": "repair",
+    "reason": "开发证据显示 5 条收集、4 通过、1 条 AssertionError 失败，failure_class 为 assertion_failed，仍处于 round 1（max_rounds 5），环境与导入正常；检测分析指出进位清零区间基于已更新的 low_mid/high_mid 可能导致错误，需在允许路径内继续修复候选后重跑同一原生测试。",
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "knowledge_citations": [
+      "knowledge-public_tasks",
+      "knowledge-testing"
+    ]
+  },
+  "effective_action": "locate",
+  "override_reason": "模型建议不能覆盖工具证据与强制规则",
+  "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91",
+  "counters": {
+    "model_calls": 3,
+    "tool_calls": 2,
+    "rounds_used": 1,
+    "cost": {
+      "calls": 3,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.013551",
+      "reserved_cny": "0"
+    },
+    "remaining_seconds": 561.0214438000112,
+    "limits": {
+      "max_rounds": 5,
+      "max_calls": 20,
+      "total_seconds": 600
+    }
+  },
+  "self_loop": {
+    "status": "planned",
+    "from_round": 1,
+    "to_round": 2,
+    "failure_class": "assertion_failed",
+    "via": [
+      "locator",
+      "repairer"
+    ],
+    "evidence_id": "test-development-1",
+    "code_version": "sha256:0127d628dce8047c3e2b3e58fa312685a00215c64c29c0dd4ab977304ce4eaf3",
+    "remaining_rounds": 4
+  }
+}

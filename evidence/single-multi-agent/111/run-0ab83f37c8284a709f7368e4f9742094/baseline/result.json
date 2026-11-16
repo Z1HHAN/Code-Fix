@@ -1,0 +1,144 @@
+{
+  "call_id": "codefix-4b971daaf2374ea5b8ec9a687edad52c",
+  "exit_code": 1,
+  "timed_out": false,
+  "duration_ms": 865,
+  "stdout_path": "trusted-run/stdout.txt",
+  "stderr_path": "trusted-run/stderr.txt",
+  "command": [
+    "/usr/local/bin/docker",
+    "run",
+    "--mount",
+    "type=volume,source=codefix-rpc-0eb0b001eb874e479078427eed529fff,target=/rpc,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+    "-i",
+    "--name",
+    "codefix-4b971daaf2374ea5b8ec9a687edad52c",
+    "--pull=never",
+    "--network=none",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--pids-limit=64",
+    "--memory=256m",
+    "--memory-swap=256m",
+    "--cpus=1",
+    "--user=65534:65534",
+    "--ulimit=nofile=128:128",
+    "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+    "--log-driver=none",
+    "--mount",
+    "type=volume,source=codefix-out-81151304483e4161a4823aa834f532a4,target=/out",
+    "--mount",
+    "type=bind,source=/opt/codefix-data/jobs/job-698b7aea0955481a986c105bab32eec6/test/trusted-tests,target=/w,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+    "--workdir=/w",
+    "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+    "--env=PYTHONDONTWRITEBYTECODE=1",
+    "--entrypoint=python",
+    "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "/harness.py",
+    "python_testcases/test_rpn_eval.py"
+  ],
+  "artifact_channel": "docker-cp",
+  "artifact_error": null,
+  "artifact_detail": null,
+  "cleanup_passed": true,
+  "output_volume": "codefix-out-81151304483e4161a4823aa834f532a4",
+  "phase": "development",
+  "code_version": "sha256:a0db1277db965f7285c05c31812e06ec45184b39ab8646d4a89beee6d7ce2d71",
+  "project": "qb-rpn_eval",
+  "execution_mode": "remote-docker",
+  "isolation_ready": true,
+  "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+  "expected_test_count": 6,
+  "junit_path": "trusted-run/output/junit.xml",
+  "structured_path": "trusted-run/output/pytest_events.json",
+  "evidence_matches_current_version": true,
+  "trust_boundary": "separate_candidate_and_test_containers",
+  "candidate_audit": {
+    "container": "codefix-candidate-2211a369c5324caaa640a33e1937730d",
+    "logs_captured": true,
+    "events": [],
+    "event_kinds": [],
+    "fake_report_output": false,
+    "violation": null,
+    "reason": null,
+    "output_limit_exceeded": false
+  },
+  "runner_classification": {
+    "status": null,
+    "verification_status": null,
+    "failure_class": null,
+    "reason": null
+  },
+  "counts": {
+    "collected": 6,
+    "passed": 3,
+    "failed": 3,
+    "errors": 0,
+    "skipped": 0
+  },
+  "status": "failed",
+  "verification_status": "failed",
+  "failure_class": "assertion_failed",
+  "reason": "Frozen native fixture tests completed with a recorded failure",
+  "coverage": {
+    "expected_nodeids": [
+      "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data0-4.0]",
+      "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data1-4.0]",
+      "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data2-8.0]",
+      "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data3-14.0]",
+      "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data4-23.0]",
+      "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data5-14.0]"
+    ],
+    "collected_nodeids": [
+      "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data0-4.0]",
+      "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data1-4.0]",
+      "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data2-8.0]",
+      "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data3-14.0]",
+      "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data4-23.0]",
+      "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data5-14.0]"
+    ],
+    "expected_collected_match": true,
+    "junit_identities": [
+      [
+        "python_testcases.test_rpn_eval",
+        "test_rpn_eval[input_data0-4.0]"
+      ],
+      [
+        "python_testcases.test_rpn_eval",
+        "test_rpn_eval[input_data1-4.0]"
+      ],
+      [
+        "python_testcases.test_rpn_eval",
+        "test_rpn_eval[input_data2-8.0]"
+      ],
+      [
+        "python_testcases.test_rpn_eval",
+        "test_rpn_eval[input_data3-14.0]"
+      ],
+      [
+        "python_testcases.test_rpn_eval",
+        "test_rpn_eval[input_data4-23.0]"
+      ],
+      [
+        "python_testcases.test_rpn_eval",
+        "test_rpn_eval[input_data5-14.0]"
+      ]
+    ],
+    "junit_expected_match": true,
+    "session_finished": true
+  },
+  "remote_job_id": "job-698b7aea0955481a986c105bab32eec6",
+  "execution_endpoint": "https://8.148.85.237",
+  "transport_mode": "live"
+}

@@ -26,7 +26,7 @@ def test_fixed_repeats_analysis_without_locator(tmp_path, failure):
     status, result, runner, model, store, rid = execute(
         tmp_path, ['assertion_failed', failure, 'passed', 'passed'], {'strategy': 'fixed'})
     assert status == 'success'
-    assert model.roles == ['repairer', 'detector', 'scheduler', 'repairer']
+    assert model.roles == ['repairer', 'detector', 'scheduler', 'repairer', 'detector']
     events = store.snapshot(rid)['events']
     assert all(e['strategy'] == 'fixed' for e in events if e['event'] == 'decision')
     if failure == 'assertion_failed':
@@ -48,8 +48,8 @@ def test_both_strategies_accept_conservative_advice(tmp_path, strategy, advice, 
 @pytest.mark.parametrize('strategy', ['fixed', 'dynamic'])
 def test_both_strategies_prioritize_final_without_fabricating_advice(tmp_path, strategy):
     status, _, _, model, store, rid = execute(tmp_path, ['assertion_failed', 'passed', 'passed'],
-                                              {'strategy': strategy, 'max_calls': 1})
-    assert status == 'success' and model.roles == ['repairer']
+                                              {'strategy': strategy, 'max_calls': 2})
+    assert status == 'success' and model.roles == ['repairer', 'detector']
     decisions = [e for e in store.snapshot(rid)['events'] if e['event'] == 'decision' and e['phase'] == 'development']
     assert decisions[0]['model_advice'] is None and '跳过' in decisions[0]['override_reason']
 
@@ -134,11 +134,19 @@ def test_saved_config_wire_request_and_call_evidence_match_per_role(tmp_path, mo
     version = code_version(base, (definition.source,))
     ev = {'evidence_id': 'dev', 'phase': 'development', 'code_version': version,
           'failure_class': 'assertion_failed', 'summary': 'offline'}
-    for role in value['bindings']:
-        record = AgentGateway(router, store, runtime).invoke(role, run_id=rid, round_number=1,
+    gateway, outputs = AgentGateway(router, store, runtime), {}
+    for role in ('repairer', 'detector', 'scheduler', 'locator'):
+        if role == 'locator':
+            outputs['scheduler']['dispatch_instruction'] = {'effective_action': 'locate',
+                'code_version': version, 'evidence_id': 'dev'}
+        record = gateway.invoke(role, run_id=rid, round_number=1,
             code=(base / definition.source).read_text(encoding='utf-8'), evidence=ev, version=version,
-            work=base, task=store.get(rid)['task'], deadline=time.monotonic() + 5)
+            work=base, task=store.get(rid)['task'], deadline=time.monotonic() + 5,
+            handoffs=[outputs[r] for r in gateway.agents[role].receives_from if r in outputs])
         assert record['status'] == 'ok' and not record['model_api_called']
+        outputs[role] = {'agent_id': role, 'call_id': record['call_id'], 'step_id': 'step-' + role,
+            'artifact_path': 'calls/' + record['call_id'], 'code_version': version, 'evidence_id': 'dev',
+            'output': record['parsed_output'], 'output_sha256': digest(record['parsed_output'])}
         expected = preview['effective_roles'][role]
         wire = captures[-1]
         assert {k: v for k, v in wire.items() if k not in {'model', 'messages'}} == expected['parameters']

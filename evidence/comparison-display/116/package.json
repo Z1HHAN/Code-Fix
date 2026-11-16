@@ -1,0 +1,8 @@
+{
+  "version": "0.3.5-dev",
+  "commit": "48a39a5bf880bae76f629bb33c8b7cf7ecc47428",
+  "source_sha256": "656856e539ec83948ad36c7d223b9514a61ada9f029bde39809842233494a1b4",
+  "installer": "desktop/dist-comparison-116/CodeFix-Setup-0.3.5-dev-x64.exe",
+  "sha256": "3131f4bd98bd522e43d81b5036620b71f5dee9a6a5aa9e1e263d424a3316226d",
+  "paid_requests": 0
+}

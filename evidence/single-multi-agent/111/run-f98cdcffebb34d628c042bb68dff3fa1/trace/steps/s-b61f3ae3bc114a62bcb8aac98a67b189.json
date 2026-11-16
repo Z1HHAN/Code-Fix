@@ -1,0 +1,41 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-f98cdcffebb34d628c042bb68dff3fa1",
+  "step_id": "s-b61f3ae3bc114a62bcb8aac98a67b189",
+  "parent_step_id": "s-12e976d8b85a4e2086e517a7b02d3b5d",
+  "node_id": "detector",
+  "round": 2,
+  "phase": "development",
+  "strategy": "dynamic",
+  "evidence_ids": [
+    "test-development-2"
+  ],
+  "status": "ok",
+  "call_id": "m-673043c85546403f823179f2331345b9",
+  "artifact_path": "calls/m-673043c85546403f823179f2331345b9",
+  "code_version": "sha256:5955cb8a41716ccc5778ca24a1e1983ec10575ef89837b8d8d381faf11b5de38",
+  "failure_class": null,
+  "agent_instance_id": "run-f98cdcffebb34d628c042bb68dff3fa1:detector",
+  "agent_contract": {
+    "contract_version": "1.0.0",
+    "agent_id": "detector",
+    "title": "检测员",
+    "input_scope": "current_candidate_development_evidence_only",
+    "receives_from": [],
+    "produces": "failure_analysis",
+    "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+    "output_schema": "DetectorOutput",
+    "permitted_action": "analyse_tool_evidence",
+    "tools": [
+      "read_file",
+      "search_knowledge"
+    ],
+    "can_execute_code": false,
+    "can_modify_tests": false,
+    "can_approve_success": false,
+    "can_override_guards": false
+  },
+  "handoffs": [],
+  "resumed_loop": null,
+  "duration_ms": 6286
+}

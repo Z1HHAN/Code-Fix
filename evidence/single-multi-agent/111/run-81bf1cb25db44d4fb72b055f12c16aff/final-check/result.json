@@ -1,0 +1,150 @@
+{
+  "call_id": "codefix-16f7d376884b43fe8d70da6a93ea303b",
+  "exit_code": 0,
+  "timed_out": false,
+  "duration_ms": 795,
+  "stdout_path": "trusted-run/stdout.txt",
+  "stderr_path": "trusted-run/stderr.txt",
+  "command": [
+    "/usr/local/bin/docker",
+    "run",
+    "--mount",
+    "type=volume,source=codefix-rpc-e4dad5d655ec4c3a8e84b270a658f017,target=/rpc,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+    "-i",
+    "--name",
+    "codefix-16f7d376884b43fe8d70da6a93ea303b",
+    "--pull=never",
+    "--network=none",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--pids-limit=64",
+    "--memory=256m",
+    "--memory-swap=256m",
+    "--cpus=1",
+    "--user=65534:65534",
+    "--ulimit=nofile=128:128",
+    "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+    "--log-driver=none",
+    "--mount",
+    "type=volume,source=codefix-out-fce1c70d846a45558ee24a21e6726e61,target=/out",
+    "--mount",
+    "type=bind,source=/opt/codefix-data/jobs/job-55e6221c7168450ba2ce4f4f0983af46/test/trusted-tests,target=/w,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+    "--workdir=/w",
+    "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+    "--env=PYTHONDONTWRITEBYTECODE=1",
+    "--entrypoint=python",
+    "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "/harness.py",
+    "python_testcases/test_kth.py"
+  ],
+  "artifact_channel": "docker-cp",
+  "artifact_error": null,
+  "artifact_detail": null,
+  "cleanup_passed": true,
+  "output_volume": "codefix-out-fce1c70d846a45558ee24a21e6726e61",
+  "phase": "final_check",
+  "code_version": "sha256:b147771aa9088ffd80a264a3cd568facb233fa1403d58bf83067ed4f7a7d1a40",
+  "project": "qb-kth",
+  "execution_mode": "remote-docker",
+  "isolation_ready": true,
+  "test_suite_version": "sha256:7460b75f4a7804ca248d2928e45fc82958afeba74c67eab1a412c85e57850735",
+  "expected_test_count": 7,
+  "junit_path": "trusted-run/output/junit.xml",
+  "structured_path": "trusted-run/output/pytest_events.json",
+  "evidence_matches_current_version": true,
+  "trust_boundary": "separate_candidate_and_test_containers",
+  "candidate_audit": {
+    "container": "codefix-candidate-d85b7c9385d3439b81d520fa119c6697",
+    "logs_captured": true,
+    "events": [],
+    "event_kinds": [],
+    "fake_report_output": false,
+    "violation": null,
+    "reason": null,
+    "output_limit_exceeded": false
+  },
+  "runner_classification": {
+    "status": null,
+    "verification_status": null,
+    "failure_class": null,
+    "reason": null
+  },
+  "counts": {
+    "collected": 7,
+    "passed": 7,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "status": "ok",
+  "verification_status": "passed",
+  "failure_class": "passed",
+  "reason": "Expected identities and complete lifecycle verified against JUnit",
+  "coverage": {
+    "expected_nodeids": [
+      "python_testcases/test_kth.py::test_kth[input_data0-5]",
+      "python_testcases/test_kth.py::test_kth[input_data1-7]",
+      "python_testcases/test_kth.py::test_kth[input_data2-3]",
+      "python_testcases/test_kth.py::test_kth[input_data3-2]",
+      "python_testcases/test_kth.py::test_kth[input_data4-34]",
+      "python_testcases/test_kth.py::test_kth[input_data5-6]",
+      "python_testcases/test_kth.py::test_kth[input_data6-322]"
+    ],
+    "collected_nodeids": [
+      "python_testcases/test_kth.py::test_kth[input_data0-5]",
+      "python_testcases/test_kth.py::test_kth[input_data1-7]",
+      "python_testcases/test_kth.py::test_kth[input_data2-3]",
+      "python_testcases/test_kth.py::test_kth[input_data3-2]",
+      "python_testcases/test_kth.py::test_kth[input_data4-34]",
+      "python_testcases/test_kth.py::test_kth[input_data5-6]",
+      "python_testcases/test_kth.py::test_kth[input_data6-322]"
+    ],
+    "expected_collected_match": true,
+    "junit_identities": [
+      [
+        "python_testcases.test_kth",
+        "test_kth[input_data0-5]"
+      ],
+      [
+        "python_testcases.test_kth",
+        "test_kth[input_data1-7]"
+      ],
+      [
+        "python_testcases.test_kth",
+        "test_kth[input_data2-3]"
+      ],
+      [
+        "python_testcases.test_kth",
+        "test_kth[input_data3-2]"
+      ],
+      [
+        "python_testcases.test_kth",
+        "test_kth[input_data4-34]"
+      ],
+      [
+        "python_testcases.test_kth",
+        "test_kth[input_data5-6]"
+      ],
+      [
+        "python_testcases.test_kth",
+        "test_kth[input_data6-322]"
+      ]
+    ],
+    "junit_expected_match": true,
+    "session_finished": true
+  },
+  "remote_job_id": "job-55e6221c7168450ba2ce4f4f0983af46",
+  "execution_endpoint": "https://8.148.85.237",
+  "transport_mode": "live"
+}

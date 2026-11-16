@@ -1,0 +1,29 @@
+  • electron-builder  version=26.18.0 os=10.0.26100
+  • loaded configuration  file=package.json ("build" field)
+  • skipped dependencies rebuild  reason=npmRebuild is set to false
+  • packaging       platform=win32 arch=x64 electron=45.2.3 appOutDir=desktop\dist-comparison-115\win-unpacked
+  • using custom unpacked Electron distribution  electronDist=C:/Users/lenovo/Documents/ChatGPT/Code Fix/runs/main-review-integration/desktop/node_modules/electron/dist
+  • copying unpacked Electron  source=C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\desktop\node_modules\electron\dist destination=C:\Users\lenovo\.codex\worktrees\8525\Code Fix\runs\experiment111\desktop\dist-comparison-115\win-unpacked
+  • searching for node modules  pm=npm searchDir=C:\Users\lenovo\.codex\worktrees\8525\Code Fix\runs\experiment111\desktop
+  • no node modules found in collection, trying next search directory  pm=npm searchDir=C:\Users\lenovo\.codex\worktrees\8525\Code Fix\runs\experiment111\desktop
+  • searching for node modules  pm=traversal searchDir=C:\Users\lenovo\.codex\worktrees\8525\Code Fix\runs\experiment111\desktop
+  • using manual traversal of node_modules to build dependency tree
+  • no node modules found in collection, trying next search directory  pm=traversal searchDir=C:\Users\lenovo\.codex\worktrees\8525\Code Fix\runs\experiment111\desktop
+  • no node modules returned while searching directories  searchDirectories=["desktop"]
+  • file source doesn't exist  from=C:\Users\lenovo\.codex\worktrees\8525\Code Fix\runs\experiment111\desktop\build\backend
+  • file source doesn't exist  from=C:\Users\lenovo\.codex\worktrees\8525\Code Fix\runs\experiment111\desktop\build\python
+  • updating asar integrity executable resource  executablePath=desktop\dist-comparison-115\win-unpacked\CodeFix.exe
+  • file source doesn't exist  from=C:\Users\lenovo\.codex\worktrees\8525\Code Fix\runs\experiment111\desktop\build\backend
+  • file source doesn't exist  from=C:\Users\lenovo\.codex\worktrees\8525\Code Fix\runs\experiment111\desktop\build\python
+  • executable resource editing and code signing skipped — signAndEditExecutable is false. To skip only code signing while keeping icon and metadata applied, use signExecutable: false instead.  exe=desktop\dist-comparison-115\win-unpacked\CodeFix.exe
+  • building        target=nsis file=desktop\dist-comparison-115\CodeFix-Setup-0.3.4-dev-x64.exe archs=x64 oneClick=false perMachine=false
+  • default Electron icon is used  reason=application icon is not set
+  • resolved ELECTRON_BUILDER_7ZIP_PATH from environment variable  ELECTRON_BUILDER_7ZIP_PATH=C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\runs\nsis-tools\7zip\bin\7za.exe
+  • resolved ELECTRON_BUILDER_NSIS_DIR from environment variable  ELECTRON_BUILDER_NSIS_DIR=C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\runs\nsis-tools\nsis
+  • resolved ELECTRON_BUILDER_NSIS_RESOURCES_DIR from environment variable  ELECTRON_BUILDER_NSIS_RESOURCES_DIR=C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\runs\nsis-tools\resources
+  • resolved ELECTRON_BUILDER_NSIS_DIR from environment variable  ELECTRON_BUILDER_NSIS_DIR=C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\runs\nsis-tools\nsis
+  • no code signing certificate configured, signing is skipped  path=desktop\dist-comparison-115\CodeFix-Setup-0.3.4-dev-x64.__uninstaller.exe
+  • resolved ELECTRON_BUILDER_NSIS_DIR from environment variable  ELECTRON_BUILDER_NSIS_DIR=C:\Users\lenovo\Documents\ChatGPT\Code Fix\runs\main-review-integration\runs\nsis-tools\nsis
+  • no code signing certificate configured, signing is skipped  path=desktop\dist-comparison-115\CodeFix-Setup-0.3.4-dev-x64.exe
+  • building block map  blockMapFile=desktop\dist-comparison-115\CodeFix-Setup-0.3.4-dev-x64.exe.blockmap
+115 application build passed

@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "scope": "real original80 replay plus controlled empty-plan selection fixture; no model requests",
+  "auto_selected": true,
+  "reload_passed": true,
+  "rows": 40,
+  "cards": 2,
+  "errors": [],
+  "writes": []
+}

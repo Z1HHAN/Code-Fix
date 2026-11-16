@@ -1,0 +1,63 @@
+{
+  "source_commit": "9b3662565af903df38a3c0a89c1aff2f77374fe2",
+  "source_112_commit": "38a67bb",
+  "112_full": {
+    "passed": 830,
+    "skipped": 1,
+    "failed": 0
+  },
+  "113_full": {
+    "passed": 830,
+    "skipped": 1,
+    "failed": 1,
+    "failed_test": "test_windows_job_reaps_real_children_and_grandchildren[False]",
+    "targeted_rerun": "both variants passed; intermittent failure remains recorded, not fixed"
+  },
+  "node_passed": 81,
+  "five_round_targeted_passed": 44,
+  "112_gates": 26,
+  "112_automatic_controls": 12,
+  "bundle_and_unpacked_desktop": "passed; synthetic settings; no provider calls",
+  "portable": "built; screenshot captured in112; stdout completion marker unavailable; full portable smoke not passed",
+  "paid_recovery": {
+    "tasks": 3,
+    "passed": 3,
+    "rounds": [
+      1,
+      1,
+      3
+    ],
+    "requests": 14,
+    "new_estimated_cny": "0.057408",
+    "authorization": {
+      "requests": 318,
+      "estimated_cny": "2.302129",
+      "unknown_or_pending": 0,
+      "held_unknown": 1,
+      "held_upper_cny": "0.084076",
+      "budget_committed_upper_cny": "2.386205"
+    }
+  },
+  "original_pairing": {
+    "runs": 80,
+    "single_success": 38,
+    "multi_success": 37,
+    "unchanged_by_recovery": true
+  },
+  "human_handoff": "package generation 2/40 and3/40; accepted_by null; no human completion claim",
+  "custom_sample": "proposal only; no implementation authorized this turn",
+  "packages": {
+    "CodeFix-Setup-0.3.2-dev-x64.exe": {
+      "bytes": 137779302,
+      "sha256": "378f6d295af1ac7c14e00329c07d3524f0be1543abad9db4b91b9447a36c31e7",
+      "local_path": "C:\\Users\\lenovo\\.codex\\worktrees\\8525\\Code Fix\\runs\\experiment111\\desktop\\dist-recovery-113\\CodeFix-Setup-0.3.2-dev-x64.exe"
+    },
+    "CodeFix-Portable-0.3.2-dev-x64.exe": {
+      "bytes": 123737232,
+      "sha256": "31f42663a41c0e90a3f4e92b96946b3e5194be9171e9c6e558c0ba51f336276e",
+      "local_path": "C:\\Users\\lenovo\\.codex\\worktrees\\8525\\Code Fix\\runs\\experiment111\\desktop\\dist-recovery-113\\CodeFix-Portable-0.3.2-dev-x64.exe"
+    }
+  },
+  "C_human_acceptance": false,
+  "main_published": false
+}

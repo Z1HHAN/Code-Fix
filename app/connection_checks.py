@@ -163,8 +163,13 @@ def test_model(value, root, *, transport=None):
         detail, action = http_hint(model.http_status, model=True)
         check = item('model_call', '真实模型调用', 'blocked', detail, action)
     elif record.get('failure_class') == 'cost_unknown':
-        check = item('model_call', '真实模型调用', 'blocked', '收到回复但服务商未返回可核对用量，已暂停继续调用',
-                     '先核对服务商用量，不自动重试')
+        held = record.get('cost', {}).get('budget_handling') == 'reserved_upper_bound'
+        check = item('model_call', '真实模型调用', 'blocked',
+                     '服务商未返回用量，当前请求停止，费用按上限预留' if held else '收到回复但服务商未返回可核对用量，已暂停继续调用',
+                     '不重复发送本请求；其他任务可在原金额预算剩余额度内继续' if held else '先核对服务商用量，不自动重试')
+    elif record.get('cost', {}).get('status') == 'not_sent':
+        check = item('model_call', '真实模型调用', 'blocked', '连接失败，请求未发送，已释放费用预留',
+                     '已有限重连一次；检查API地址或网络后重试，无需账单截图')
     else:
         check = item('model_call', '真实模型调用', 'blocked', '请求超时、响应不兼容或连接失败',
                      '核对API地址、模型ID和输出参数；不自动重试，未知用量须先核对')
@@ -178,9 +183,12 @@ def check_ledger(root):
         pending = db.execute("SELECT count(*) FROM calls WHERE status IN ('pending','unknown')").fetchone()[0]
         pending += db.execute("SELECT count(*) FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()[0]
         pending += db.execute("SELECT count(*) FROM personal_calls WHERE status IN ('pending','unknown')").fetchone()[0]
+        held = db.execute("SELECT count(*) FROM personal_calls WHERE status='reserved_unknown'").fetchone()[0]
     return item('usage', '调用账本', 'blocked' if pending else 'pass',
-                f'有{pending}条请求仍进行中或用量未知' if pending else '没有进行中或用量未知的请求',
-                '等待请求结算；未知用量需核对服务商账单后处理，不会自动重试' if pending else '')
+                f'有{pending}条请求仍进行中或用量未知' if pending else
+                f'有{held}条费用待核对，已按上限保留预算' if held else '没有进行中或用量未知的请求',
+                '等待请求结算；历史未知需核对后处理，不会自动重试' if pending else
+                '仅可在原金额预算与适用累计授权内继续；真实费用不记作零' if held else '')
 
 
 def _main():

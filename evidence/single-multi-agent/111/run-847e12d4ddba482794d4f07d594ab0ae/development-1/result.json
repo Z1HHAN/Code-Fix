@@ -1,0 +1,150 @@
+{
+  "call_id": "codefix-b86eee7fc90b496e884045ab59576570",
+  "exit_code": 1,
+  "timed_out": false,
+  "duration_ms": 25976,
+  "stdout_path": "trusted-run/stdout.txt",
+  "stderr_path": "trusted-run/stderr.txt",
+  "command": [
+    "/usr/local/bin/docker",
+    "run",
+    "--mount",
+    "type=volume,source=codefix-rpc-64aca779ddfa48f7aa9ab30c91c69967,target=/rpc,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+    "-i",
+    "--name",
+    "codefix-b86eee7fc90b496e884045ab59576570",
+    "--pull=never",
+    "--network=none",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--pids-limit=64",
+    "--memory=256m",
+    "--memory-swap=256m",
+    "--cpus=1",
+    "--user=65534:65534",
+    "--ulimit=nofile=128:128",
+    "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+    "--log-driver=none",
+    "--mount",
+    "type=volume,source=codefix-out-986bc06b28dc4110a5f83f68f06fa58b,target=/out",
+    "--mount",
+    "type=bind,source=/opt/codefix-data/jobs/job-dd24498a8f2547e086af4deca4bb96d3/test/trusted-tests,target=/w,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+    "--workdir=/w",
+    "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+    "--env=PYTHONDONTWRITEBYTECODE=1",
+    "--entrypoint=python",
+    "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "/harness.py",
+    "python_testcases/test_find_first_in_sorted.py"
+  ],
+  "artifact_channel": "docker-cp",
+  "artifact_error": null,
+  "artifact_detail": null,
+  "cleanup_passed": true,
+  "output_volume": "codefix-out-986bc06b28dc4110a5f83f68f06fa58b",
+  "phase": "development",
+  "code_version": "sha256:7e0c18980757fe6e87e924efbf92fb3a0bf5d117f0db458184190826c771aa64",
+  "project": "qb-find_first_in_sorted",
+  "execution_mode": "remote-docker",
+  "isolation_ready": true,
+  "test_suite_version": "sha256:04a83e442ec2a6e129261eb0b79875171e795565a2299602852d5791e1ff6fc7",
+  "expected_test_count": 7,
+  "junit_path": "trusted-run/output/junit.xml",
+  "structured_path": "trusted-run/output/pytest_events.json",
+  "evidence_matches_current_version": true,
+  "trust_boundary": "separate_candidate_and_test_containers",
+  "candidate_audit": {
+    "container": "codefix-candidate-cab7331de9d940de99b7db2987827723",
+    "logs_captured": true,
+    "events": [],
+    "event_kinds": [],
+    "fake_report_output": false,
+    "violation": null,
+    "reason": null,
+    "output_limit_exceeded": false
+  },
+  "runner_classification": {
+    "status": null,
+    "verification_status": null,
+    "failure_class": null,
+    "reason": null
+  },
+  "counts": {
+    "collected": 7,
+    "passed": 2,
+    "failed": 5,
+    "errors": 0,
+    "skipped": 0
+  },
+  "status": "failed",
+  "verification_status": "failed",
+  "failure_class": "code_runtime_error",
+  "reason": "Frozen native fixture tests completed with a recorded failure",
+  "coverage": {
+    "expected_nodeids": [
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data0-2]",
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data1--1]",
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data2--1]",
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data3-6]",
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data4--1]",
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data5-6]",
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data6-7]"
+    ],
+    "collected_nodeids": [
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data0-2]",
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data1--1]",
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data2--1]",
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data3-6]",
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data4--1]",
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data5-6]",
+      "python_testcases/test_find_first_in_sorted.py::test_find_first_in_sorted[input_data6-7]"
+    ],
+    "expected_collected_match": true,
+    "junit_identities": [
+      [
+        "python_testcases.test_find_first_in_sorted",
+        "test_find_first_in_sorted[input_data0-2]"
+      ],
+      [
+        "python_testcases.test_find_first_in_sorted",
+        "test_find_first_in_sorted[input_data1--1]"
+      ],
+      [
+        "python_testcases.test_find_first_in_sorted",
+        "test_find_first_in_sorted[input_data2--1]"
+      ],
+      [
+        "python_testcases.test_find_first_in_sorted",
+        "test_find_first_in_sorted[input_data3-6]"
+      ],
+      [
+        "python_testcases.test_find_first_in_sorted",
+        "test_find_first_in_sorted[input_data4--1]"
+      ],
+      [
+        "python_testcases.test_find_first_in_sorted",
+        "test_find_first_in_sorted[input_data5-6]"
+      ],
+      [
+        "python_testcases.test_find_first_in_sorted",
+        "test_find_first_in_sorted[input_data6-7]"
+      ]
+    ],
+    "junit_expected_match": true,
+    "session_finished": true
+  },
+  "remote_job_id": "job-dd24498a8f2547e086af4deca4bb96d3",
+  "execution_endpoint": "https://8.148.85.237",
+  "transport_mode": "live"
+}

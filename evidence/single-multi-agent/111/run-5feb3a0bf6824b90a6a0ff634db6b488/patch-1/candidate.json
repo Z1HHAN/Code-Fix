@@ -1,0 +1,22 @@
+{
+  "project": "qb-mergesort",
+  "base_version": "sha256:4a3ef48259174843e7689db6b1630135ab7becc11c665f0b43b9c75c375054e9",
+  "candidate_version": "sha256:cd2305e586b5ee59d20ee430bf296c7e7d3447c1947446cc60fadc062ab4dd6a",
+  "test_suite_version": "sha256:7a33124570df0101b582338ac1815c1c1885da086b899ed9ad88b74b67d8f244",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_mergesort.py": "0955518178cd1b1402159311552f710ffec69b161e95397e76eed46e3d97d8bf",
+    "json_testcases/mergesort.json": "439d825c1341a4fd21f3d7d0315347c77b56bc6c64cad01ce2f52e773ed466cd",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/mergesort.py",
+      "new_content": "\ndef mergesort(arr):\n    def merge(left, right):\n        result = []\n        i = 0\n        j = 0\n        while i < len(left) and j < len(right):\n            if left[i] <= right[j]:\n                result.append(left[i])\n                i += 1\n            else:\n                result.append(right[j])\n                j += 1\n        result.extend(left[i:])\n        result.extend(right[j:])\n        return result\n\n    if len(arr) == 0:\n        return arr\n    else:\n        middle = len(arr) // 2\n        left = mergesort(arr[:middle])\n        right = mergesort(arr[middle:])\n        return merge(left, right)\n\n\n\n\"\"\"\nMerge Sort\n\n\nInput:\n    arr: A list of ints\n\nOutput:\n    The elements of arr in sorted order\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_mergesort.py": "0955518178cd1b1402159311552f710ffec69b161e95397e76eed46e3d97d8bf"
+  }
+}

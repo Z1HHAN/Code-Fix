@@ -1,0 +1,2349 @@
+{
+  "scope": "offline model and executor doubles; not real repair or Docker acceptance",
+  "model_api_called": false,
+  "status": "success",
+  "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+  "roles": [
+    "repairer",
+    "detector",
+    "scheduler",
+    "locator",
+    "repairer",
+    "detector"
+  ],
+  "tool_phases": [
+    "development",
+    "development",
+    "development",
+    "final_check"
+  ],
+  "result": {
+    "final_result": "passed",
+    "dev_result": "passed",
+    "rounds_used": 2,
+    "model_calls": 6,
+    "tool_calls": 4,
+    "model_api_called": false,
+    "mode": "test_stub",
+    "isolation_ready": true,
+    "strategy": "dynamic",
+    "project": "leap",
+    "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+    "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+    "code_path": "candidate-2/code/leap_year.py",
+    "evidence_matches_current_version": true,
+    "baseline_failure_class": "assertion_failed",
+    "failure_class": "passed",
+    "rule_id": "R07",
+    "reason": "开发测试及干净副本同套原生测试均实际通过",
+    "model_attempts": 6,
+    "actual_model_requests": 0,
+    "cost": {
+      "status": "not_applicable",
+      "amount_usd": null
+    },
+    "trace_version": "1.0.0"
+  },
+  "events": [
+    {
+      "sequence": 1,
+      "created_at": "2026-11-13T15:27:02.421736+00:00",
+      "event": "started"
+    },
+    {
+      "sequence": 2,
+      "created_at": "2026-11-13T15:27:02.479411+00:00",
+      "event": "guard_check",
+      "step_id": "configuration-check",
+      "node_id": "configuration_check",
+      "status": "ok",
+      "reason": "角色配置、提示词和输出协议检查通过"
+    },
+    {
+      "sequence": 3,
+      "created_at": "2026-11-13T15:27:03.462692+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-1918aaa6ae5547f188e9ebb71e821ef6",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "dynamic",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 4,
+      "created_at": "2026-11-13T15:27:03.487367+00:00",
+      "event": "isolation_checked",
+      "isolation_ready": true,
+      "scope": "test stub only"
+    },
+    {
+      "sequence": 5,
+      "created_at": "2026-11-13T15:27:03.514545+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-1918aaa6ae5547f188e9ebb71e821ef6",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "status": "ok",
+      "evidence_path": "isolation",
+      "isolation_ready": true,
+      "scope": "test stub only",
+      "duration_ms": 49
+    },
+    {
+      "sequence": 6,
+      "created_at": "2026-11-13T15:27:03.724212+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-106d5698f9974830907ad456747fc754",
+      "parent_step_id": "s-1918aaa6ae5547f188e9ebb71e821ef6",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 7,
+      "created_at": "2026-11-13T15:27:03.755358+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-106d5698f9974830907ad456747fc754",
+      "parent_step_id": "s-1918aaa6ae5547f188e9ebb71e821ef6",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "evidence_id": "test-baseline",
+      "evidence_path": "baseline",
+      "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "failure_class": "assertion_failed",
+      "verification_status": "failed",
+      "evidence_matches_current_version": true,
+      "stdout_path": "stdout.txt",
+      "stderr_path": "stderr.txt",
+      "exit_code": 1
+    },
+    {
+      "sequence": 8,
+      "created_at": "2026-11-13T15:27:03.785018+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-106d5698f9974830907ad456747fc754",
+      "parent_step_id": "s-1918aaa6ae5547f188e9ebb71e821ef6",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "status": "ok",
+      "verification_status": "failed",
+      "evidence_id": "test-baseline",
+      "failure_class": "assertion_failed",
+      "evidence_path": "baseline",
+      "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "test_suite_version": null,
+      "registered_test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "duration_ms": 57
+    },
+    {
+      "sequence": 9,
+      "created_at": "2026-11-13T15:27:03.828048+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-898f070073a54db4b31dda3f635c41bb",
+      "parent_step_id": "s-106d5698f9974830907ad456747fc754",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 10,
+      "created_at": "2026-11-13T15:27:03.869775+00:00",
+      "event": "guard_check",
+      "check": "patch_permission",
+      "step_id": "m-f544caf8769d4509b6a869bd480e02d3-permission",
+      "parent_step_id": "s-898f070073a54db4b31dda3f635c41bb",
+      "node_id": "permission_check",
+      "round": 1,
+      "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "status": "ok",
+      "reason": "补丁路径及结构检查通过"
+    },
+    {
+      "sequence": 11,
+      "created_at": "2026-11-13T15:27:03.896838+00:00",
+      "event": "agent_call",
+      "status": "ok",
+      "mode": "test_stub",
+      "model_api_called": false,
+      "role": "repairer",
+      "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "call_id": "m-f544caf8769d4509b6a869bd480e02d3",
+      "round": 1,
+      "provenance": {
+        "role_override": {},
+        "role_overrides_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "primary": {
+              "binding": "approved_profile",
+              "profile_ref": "sf_account1_v32"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "b3472a143047be416465bd12b883494daab38dc1dce1b9522c99992eb7d455ba",
+        "prompt_ref": "prompts/repairer.md",
+        "prompt_sha256": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+        "system_prompt_sha256": "279bac1d22413b8ccf15b26d768a0f65fb210d7347fe57a0b0284e1427f95635",
+        "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:repairer",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "repairer",
+          "title": "修复员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [
+            "detector",
+            "scheduler",
+            "locator"
+          ],
+          "produces": "candidate_changes",
+          "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+          "output_schema": "RepairOutput",
+          "permitted_action": "propose_source_patch",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "8fa1a2ef8fde348f27a5ce1862ed65bce4eea9d6207d4091083355cf3e8ae3ef",
+        "handoffs": [],
+        "messages_sha256": "f0b27cb03c086755e9fdfb92706cd5d95d04fdae2a522496b8192bf22997741d",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "primary",
+          "binding": "approved_profile",
+          "profile_ref": "sf_account1_v32",
+          "mode": "test_stub",
+          "model": null
+        }
+      },
+      "step_id": "s-898f070073a54db4b31dda3f635c41bb",
+      "parent_step_id": "s-106d5698f9974830907ad456747fc754",
+      "parsed_output": {
+        "evidence_ids": [
+          "test-baseline"
+        ],
+        "knowledge_citations": [],
+        "explanation": "synthetic candidate",
+        "changes": [
+          {
+            "path": "code/leap_year.py",
+            "new_content": "def is_leap(year):\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\n"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 12,
+      "created_at": "2026-11-13T15:27:03.924658+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-898f070073a54db4b31dda3f635c41bb",
+      "parent_step_id": "s-106d5698f9974830907ad456747fc754",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "call_id": "m-f544caf8769d4509b6a869bd480e02d3",
+      "artifact_path": "calls/m-f544caf8769d4509b6a869bd480e02d3",
+      "code_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "failure_class": null,
+      "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:repairer",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "repairer",
+        "title": "修复员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [
+          "detector",
+          "scheduler",
+          "locator"
+        ],
+        "produces": "candidate_changes",
+        "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+        "output_schema": "RepairOutput",
+        "permitted_action": "propose_source_patch",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": null,
+      "duration_ms": 91
+    },
+    {
+      "sequence": 13,
+      "created_at": "2026-11-13T15:27:03.959748+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-f585b3b7640e4627b81218dcdeba5706",
+      "parent_step_id": "s-898f070073a54db4b31dda3f635c41bb",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 14,
+      "created_at": "2026-11-13T15:27:04.026974+00:00",
+      "event": "candidate_applied",
+      "round": 1,
+      "project": "leap",
+      "base_version": "sha256:1d9f571f47ca784c4b5487a38072b4649bce34106a8c3ea437150de15860f53a",
+      "candidate_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "frozen_file_sha256": {
+        "tests/test_leap.py": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+      },
+      "changes": [
+        {
+          "path": "code/leap_year.py",
+          "new_content": "def is_leap(year):\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\n"
+        }
+      ],
+      "test_sha256": {
+        "tests/test_leap.py": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+      }
+    },
+    {
+      "sequence": 15,
+      "created_at": "2026-11-13T15:27:04.054564+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-f585b3b7640e4627b81218dcdeba5706",
+      "parent_step_id": "s-898f070073a54db4b31dda3f635c41bb",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "artifact_path": "patch-1",
+      "duration_ms": 91
+    },
+    {
+      "sequence": 16,
+      "created_at": "2026-11-13T15:27:04.089924+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-6213d3d89352437985681017af91fbc2",
+      "parent_step_id": "s-f585b3b7640e4627b81218dcdeba5706",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 17,
+      "created_at": "2026-11-13T15:27:04.114110+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-6213d3d89352437985681017af91fbc2",
+      "parent_step_id": "s-f585b3b7640e4627b81218dcdeba5706",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "evidence_id": "test-development-1",
+      "evidence_path": "development-1",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "failure_class": "assertion_failed",
+      "verification_status": "failed",
+      "evidence_matches_current_version": true,
+      "stdout_path": "stdout.txt",
+      "stderr_path": "stderr.txt",
+      "exit_code": 1
+    },
+    {
+      "sequence": 18,
+      "created_at": "2026-11-13T15:27:04.145803+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-6213d3d89352437985681017af91fbc2",
+      "parent_step_id": "s-f585b3b7640e4627b81218dcdeba5706",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "verification_status": "failed",
+      "evidence_id": "test-development-1",
+      "failure_class": "assertion_failed",
+      "evidence_path": "development-1",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": null,
+      "registered_test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "duration_ms": 55
+    },
+    {
+      "sequence": 19,
+      "created_at": "2026-11-13T15:27:04.190718+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-2fa17129250e443a899073b9e2884739",
+      "parent_step_id": "s-6213d3d89352437985681017af91fbc2",
+      "node_id": "detector",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 20,
+      "created_at": "2026-11-13T15:27:04.221671+00:00",
+      "event": "agent_call",
+      "status": "ok",
+      "mode": "test_stub",
+      "model_api_called": false,
+      "role": "detector",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "call_id": "m-d1e8d60c229544d7b0b15e8f3c9319f4",
+      "round": 1,
+      "provenance": {
+        "role_override": {},
+        "role_overrides_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "primary": {
+              "binding": "approved_profile",
+              "profile_ref": "sf_account1_v32"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "b3472a143047be416465bd12b883494daab38dc1dce1b9522c99992eb7d455ba",
+        "prompt_ref": "prompts/detector.md",
+        "prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+        "system_prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+        "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:detector",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "detector",
+          "title": "检测员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [],
+          "produces": "failure_analysis",
+          "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+          "output_schema": "DetectorOutput",
+          "permitted_action": "analyse_tool_evidence",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "3ab70fbb58a74bbfb1b4aca2d411143ae86aed05a136bf5ca9df020d682ac9dd",
+        "handoffs": [],
+        "messages_sha256": "b420f4957aab9c6ae79cfedd9ee5910289f9f63a57eb32c8a249fe10af18cd00",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "primary",
+          "binding": "approved_profile",
+          "profile_ref": "sf_account1_v32",
+          "mode": "test_stub",
+          "model": null
+        }
+      },
+      "step_id": "s-2fa17129250e443a899073b9e2884739",
+      "parent_step_id": "s-6213d3d89352437985681017af91fbc2",
+      "parsed_output": {
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "knowledge_citations": [],
+        "analysis": "offline analysis",
+        "failure_class": "assertion_failed",
+        "suggested_checks": []
+      }
+    },
+    {
+      "sequence": 21,
+      "created_at": "2026-11-13T15:27:04.249666+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-2fa17129250e443a899073b9e2884739",
+      "parent_step_id": "s-6213d3d89352437985681017af91fbc2",
+      "node_id": "detector",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "call_id": "m-d1e8d60c229544d7b0b15e8f3c9319f4",
+      "artifact_path": "calls/m-d1e8d60c229544d7b0b15e8f3c9319f4",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "failure_class": null,
+      "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:detector",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "detector",
+        "title": "检测员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [],
+        "produces": "failure_analysis",
+        "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+        "output_schema": "DetectorOutput",
+        "permitted_action": "analyse_tool_evidence",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": null,
+      "duration_ms": 54
+    },
+    {
+      "sequence": 22,
+      "created_at": "2026-11-13T15:27:04.306299+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-291e8919a37247528af80345d02b3399",
+      "parent_step_id": "s-2fa17129250e443a899073b9e2884739",
+      "node_id": "scheduler",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 23,
+      "created_at": "2026-11-13T15:27:04.347720+00:00",
+      "event": "agent_call",
+      "status": "ok",
+      "mode": "test_stub",
+      "model_api_called": false,
+      "role": "scheduler",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "call_id": "m-356205ab913949f1a2aef7d6ff4b7c4c",
+      "round": 1,
+      "provenance": {
+        "role_override": {},
+        "role_overrides_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "primary": {
+              "binding": "approved_profile",
+              "profile_ref": "sf_account1_v32"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "b3472a143047be416465bd12b883494daab38dc1dce1b9522c99992eb7d455ba",
+        "prompt_ref": "prompts/scheduler.md",
+        "prompt_sha256": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6",
+        "system_prompt_sha256": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6",
+        "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:scheduler",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "scheduler",
+          "title": "模型调度员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [
+            "detector"
+          ],
+          "produces": "action_advice",
+          "collaboration_task": "依据当前检测员分析和工具证据提出动作与理由；程序裁决才有执行权。",
+          "output_schema": "SchedulerOutput",
+          "permitted_action": "advise_only",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "abfe63c455296be2091383d191b5c7aeb4b378baafacd7b0338150ac029a5055",
+        "handoffs": [
+          {
+            "agent_id": "detector",
+            "call_id": "m-d1e8d60c229544d7b0b15e8f3c9319f4",
+            "step_id": "s-2fa17129250e443a899073b9e2884739",
+            "artifact_path": "calls/m-d1e8d60c229544d7b0b15e8f3c9319f4",
+            "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+            "evidence_id": "test-development-1",
+            "output_sha256": "465d0273e54c4a9db088848cba3bc3edb6af8b75425b5f24562c3949cdd0073c"
+          }
+        ],
+        "messages_sha256": "bd671765e7960313c284285d4fb179444c27601c1d30f9297fdaab12f26b00c0",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "primary",
+          "binding": "approved_profile",
+          "profile_ref": "sf_account1_v32",
+          "mode": "test_stub",
+          "model": null
+        }
+      },
+      "step_id": "s-291e8919a37247528af80345d02b3399",
+      "parent_step_id": "s-2fa17129250e443a899073b9e2884739",
+      "parsed_output": {
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "knowledge_citations": [],
+        "action": "repair",
+        "reason": "offline advice"
+      }
+    },
+    {
+      "sequence": 24,
+      "created_at": "2026-11-13T15:27:04.382532+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-291e8919a37247528af80345d02b3399",
+      "parent_step_id": "s-2fa17129250e443a899073b9e2884739",
+      "node_id": "scheduler",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "call_id": "m-356205ab913949f1a2aef7d6ff4b7c4c",
+      "artifact_path": "calls/m-356205ab913949f1a2aef7d6ff4b7c4c",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "failure_class": null,
+      "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:scheduler",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "scheduler",
+        "title": "模型调度员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [
+          "detector"
+        ],
+        "produces": "action_advice",
+        "collaboration_task": "依据当前检测员分析和工具证据提出动作与理由；程序裁决才有执行权。",
+        "output_schema": "SchedulerOutput",
+        "permitted_action": "advise_only",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [
+        {
+          "agent_id": "detector",
+          "call_id": "m-d1e8d60c229544d7b0b15e8f3c9319f4",
+          "step_id": "s-2fa17129250e443a899073b9e2884739",
+          "artifact_path": "calls/m-d1e8d60c229544d7b0b15e8f3c9319f4",
+          "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+          "evidence_id": "test-development-1",
+          "output_sha256": "465d0273e54c4a9db088848cba3bc3edb6af8b75425b5f24562c3949cdd0073c"
+        }
+      ],
+      "resumed_loop": null,
+      "duration_ms": 71
+    },
+    {
+      "sequence": 25,
+      "created_at": "2026-11-13T15:27:04.420986+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-478e3fb40cc54349865d86c5ae1f3968",
+      "parent_step_id": "s-291e8919a37247528af80345d02b3399",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 26,
+      "created_at": "2026-11-13T15:27:04.446562+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-1.json",
+      "decision_id": "d-1",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "failure_class": "assertion_failed",
+      "action": "locate",
+      "target_agent": "locator",
+      "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+      "retries_left": 2,
+      "rule_id": "R13",
+      "terminal_status": null,
+      "trace_version": "1.0.0",
+      "step_id": "s-478e3fb40cc54349865d86c5ae1f3968",
+      "parent_step_id": "s-291e8919a37247528af80345d02b3399",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "program_decision": {
+        "decision_id": "d-1",
+        "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+        "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "failure_class": "assertion_failed",
+        "action": "locate",
+        "target_agent": "locator",
+        "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+        "retries_left": 2,
+        "rule_id": "R13",
+        "terminal_status": null
+      },
+      "model_advice": {
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "knowledge_citations": [],
+        "action": "repair",
+        "reason": "offline advice"
+      },
+      "effective_action": "locate",
+      "override_reason": "模型建议不能覆盖工具证据与强制规则",
+      "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "counters": {
+        "model_calls": 3,
+        "tool_calls": 2,
+        "rounds_used": 1,
+        "cost": {
+          "status": "not_applicable",
+          "amount_usd": null
+        },
+        "remaining_seconds": 298.0400525999721,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      },
+      "self_loop": {
+        "status": "planned",
+        "from_round": 1,
+        "to_round": 2,
+        "failure_class": "assertion_failed",
+        "via": [
+          "locator",
+          "repairer"
+        ],
+        "evidence_id": "test-development-1",
+        "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+        "remaining_rounds": 2
+      }
+    },
+    {
+      "sequence": 27,
+      "created_at": "2026-11-13T15:27:04.474762+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-478e3fb40cc54349865d86c5ae1f3968",
+      "parent_step_id": "s-291e8919a37247528af80345d02b3399",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "effective_action": "locate",
+      "decision_id": "d-1",
+      "duration_ms": 48
+    },
+    {
+      "sequence": 28,
+      "created_at": "2026-11-13T15:27:04.512913+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-769351f501d644c7b870dd96b356d9f2",
+      "parent_step_id": "s-478e3fb40cc54349865d86c5ae1f3968",
+      "node_id": "locator",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 29,
+      "created_at": "2026-11-13T15:27:04.545524+00:00",
+      "event": "agent_call",
+      "status": "ok",
+      "mode": "test_stub",
+      "model_api_called": false,
+      "role": "locator",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "call_id": "m-fa09201c56994065bc917fb143f95085",
+      "round": 1,
+      "provenance": {
+        "role_override": {},
+        "role_overrides_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "primary": {
+              "binding": "approved_profile",
+              "profile_ref": "sf_account1_v32"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "b3472a143047be416465bd12b883494daab38dc1dce1b9522c99992eb7d455ba",
+        "prompt_ref": "prompts/locator.md",
+        "prompt_sha256": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+        "system_prompt_sha256": "4dfdec9630855fc4dca2512cc61d36def3d6aaf60934d75d12250d7619ed77de",
+        "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:locator",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "locator",
+          "title": "定位员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [
+            "detector",
+            "scheduler"
+          ],
+          "produces": "source_location",
+          "collaboration_task": "同时依据检测员失败分析与dispatch_instruction定位；不修改代码或宣布通过。",
+          "output_schema": "LocatorOutput",
+          "permitted_action": "locate_only",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "634db1e8e194a98a2a673611fe965e3cf17df3e884f67a2c1115c57a3c818e28",
+        "handoffs": [
+          {
+            "agent_id": "detector",
+            "call_id": "m-d1e8d60c229544d7b0b15e8f3c9319f4",
+            "step_id": "s-2fa17129250e443a899073b9e2884739",
+            "artifact_path": "calls/m-d1e8d60c229544d7b0b15e8f3c9319f4",
+            "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+            "evidence_id": "test-development-1",
+            "output_sha256": "465d0273e54c4a9db088848cba3bc3edb6af8b75425b5f24562c3949cdd0073c"
+          },
+          {
+            "agent_id": "scheduler",
+            "call_id": "m-356205ab913949f1a2aef7d6ff4b7c4c",
+            "step_id": "s-291e8919a37247528af80345d02b3399",
+            "artifact_path": "calls/m-356205ab913949f1a2aef7d6ff4b7c4c",
+            "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+            "evidence_id": "test-development-1",
+            "output_sha256": "1ef475a1d6bd9ab6ef97a57ea729ce747ac5481827668d42338076ef13d10dba",
+            "dispatch_instruction": {
+              "effective_action": "locate",
+              "target_agent": "locator",
+              "rule_id": "R13",
+              "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+              "decision_id": "d-1",
+              "artifact_path": "trace/decisions/d-1.json",
+              "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+              "evidence_id": "test-development-1"
+            }
+          }
+        ],
+        "messages_sha256": "1f82475c109033cd385b791405ba400a5d8c0e6901680258858ba13b5b6371fc",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "primary",
+          "binding": "approved_profile",
+          "profile_ref": "sf_account1_v32",
+          "mode": "test_stub",
+          "model": null
+        }
+      },
+      "step_id": "s-769351f501d644c7b870dd96b356d9f2",
+      "parent_step_id": "s-478e3fb40cc54349865d86c5ae1f3968",
+      "parsed_output": {
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "knowledge_citations": [],
+        "file": "code/leap_year.py",
+        "function": "leap_year",
+        "hypothesis": "offline hypothesis"
+      }
+    },
+    {
+      "sequence": 30,
+      "created_at": "2026-11-13T15:27:04.573919+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-769351f501d644c7b870dd96b356d9f2",
+      "parent_step_id": "s-478e3fb40cc54349865d86c5ae1f3968",
+      "node_id": "locator",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "call_id": "m-fa09201c56994065bc917fb143f95085",
+      "artifact_path": "calls/m-fa09201c56994065bc917fb143f95085",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "failure_class": null,
+      "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:locator",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "locator",
+        "title": "定位员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [
+          "detector",
+          "scheduler"
+        ],
+        "produces": "source_location",
+        "collaboration_task": "同时依据检测员失败分析与dispatch_instruction定位；不修改代码或宣布通过。",
+        "output_schema": "LocatorOutput",
+        "permitted_action": "locate_only",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [
+        {
+          "agent_id": "detector",
+          "call_id": "m-d1e8d60c229544d7b0b15e8f3c9319f4",
+          "step_id": "s-2fa17129250e443a899073b9e2884739",
+          "artifact_path": "calls/m-d1e8d60c229544d7b0b15e8f3c9319f4",
+          "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+          "evidence_id": "test-development-1",
+          "output_sha256": "465d0273e54c4a9db088848cba3bc3edb6af8b75425b5f24562c3949cdd0073c"
+        },
+        {
+          "agent_id": "scheduler",
+          "call_id": "m-356205ab913949f1a2aef7d6ff4b7c4c",
+          "step_id": "s-291e8919a37247528af80345d02b3399",
+          "artifact_path": "calls/m-356205ab913949f1a2aef7d6ff4b7c4c",
+          "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+          "evidence_id": "test-development-1",
+          "output_sha256": "1ef475a1d6bd9ab6ef97a57ea729ce747ac5481827668d42338076ef13d10dba",
+          "dispatch_instruction": {
+            "effective_action": "locate",
+            "target_agent": "locator",
+            "rule_id": "R13",
+            "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+            "decision_id": "d-1",
+            "artifact_path": "trace/decisions/d-1.json",
+            "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+            "evidence_id": "test-development-1"
+          }
+        }
+      ],
+      "resumed_loop": null,
+      "duration_ms": 57
+    },
+    {
+      "sequence": 31,
+      "created_at": "2026-11-13T15:27:04.617163+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-a495941d8ab74c19a4bf0c529de8b09d",
+      "parent_step_id": "s-769351f501d644c7b870dd96b356d9f2",
+      "node_id": "repairer",
+      "round": 2,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 32,
+      "created_at": "2026-11-13T15:27:04.648697+00:00",
+      "event": "self_loop_resumed",
+      "step_id": "s-a495941d8ab74c19a4bf0c529de8b09d",
+      "role": "repairer",
+      "round": 2,
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "from_round": 1,
+      "to_round": 2,
+      "trigger_evidence_id": "test-development-1",
+      "trigger_code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a"
+    },
+    {
+      "sequence": 33,
+      "created_at": "2026-11-13T15:27:04.680713+00:00",
+      "event": "guard_check",
+      "check": "patch_permission",
+      "step_id": "m-ac93f4ae33fa4e589f2b064fb76111bc-permission",
+      "parent_step_id": "s-a495941d8ab74c19a4bf0c529de8b09d",
+      "node_id": "permission_check",
+      "round": 2,
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "status": "ok",
+      "reason": "补丁路径及结构检查通过"
+    },
+    {
+      "sequence": 34,
+      "created_at": "2026-11-13T15:27:04.713281+00:00",
+      "event": "agent_call",
+      "status": "ok",
+      "mode": "test_stub",
+      "model_api_called": false,
+      "role": "repairer",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "call_id": "m-ac93f4ae33fa4e589f2b064fb76111bc",
+      "round": 2,
+      "provenance": {
+        "role_override": {},
+        "role_overrides_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "primary": {
+              "binding": "approved_profile",
+              "profile_ref": "sf_account1_v32"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "b3472a143047be416465bd12b883494daab38dc1dce1b9522c99992eb7d455ba",
+        "prompt_ref": "prompts/repairer.md",
+        "prompt_sha256": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+        "system_prompt_sha256": "279bac1d22413b8ccf15b26d768a0f65fb210d7347fe57a0b0284e1427f95635",
+        "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:repairer",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "repairer",
+          "title": "修复员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [
+            "detector",
+            "scheduler",
+            "locator"
+          ],
+          "produces": "candidate_changes",
+          "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+          "output_schema": "RepairOutput",
+          "permitted_action": "propose_source_patch",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "8fa1a2ef8fde348f27a5ce1862ed65bce4eea9d6207d4091083355cf3e8ae3ef",
+        "handoffs": [
+          {
+            "agent_id": "detector",
+            "call_id": "m-d1e8d60c229544d7b0b15e8f3c9319f4",
+            "step_id": "s-2fa17129250e443a899073b9e2884739",
+            "artifact_path": "calls/m-d1e8d60c229544d7b0b15e8f3c9319f4",
+            "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+            "evidence_id": "test-development-1",
+            "output_sha256": "465d0273e54c4a9db088848cba3bc3edb6af8b75425b5f24562c3949cdd0073c"
+          },
+          {
+            "agent_id": "scheduler",
+            "call_id": "m-356205ab913949f1a2aef7d6ff4b7c4c",
+            "step_id": "s-291e8919a37247528af80345d02b3399",
+            "artifact_path": "calls/m-356205ab913949f1a2aef7d6ff4b7c4c",
+            "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+            "evidence_id": "test-development-1",
+            "output_sha256": "1ef475a1d6bd9ab6ef97a57ea729ce747ac5481827668d42338076ef13d10dba",
+            "dispatch_instruction": {
+              "effective_action": "locate",
+              "target_agent": "locator",
+              "rule_id": "R13",
+              "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+              "decision_id": "d-1",
+              "artifact_path": "trace/decisions/d-1.json",
+              "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+              "evidence_id": "test-development-1"
+            }
+          },
+          {
+            "agent_id": "locator",
+            "call_id": "m-fa09201c56994065bc917fb143f95085",
+            "step_id": "s-769351f501d644c7b870dd96b356d9f2",
+            "artifact_path": "calls/m-fa09201c56994065bc917fb143f95085",
+            "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+            "evidence_id": "test-development-1",
+            "output_sha256": "2e05cebde3b1649ef902b14268fe7b323bcb492b448e044023db2552145418a0"
+          }
+        ],
+        "messages_sha256": "c0bdd249e93190ccec19624d808ff2f545d00042b8ad842fe20bcba8b370a5b1",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "primary",
+          "binding": "approved_profile",
+          "profile_ref": "sf_account1_v32",
+          "mode": "test_stub",
+          "model": null
+        }
+      },
+      "step_id": "s-a495941d8ab74c19a4bf0c529de8b09d",
+      "parent_step_id": "s-769351f501d644c7b870dd96b356d9f2",
+      "parsed_output": {
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "knowledge_citations": [],
+        "explanation": "synthetic candidate",
+        "changes": [
+          {
+            "path": "code/leap_year.py",
+            "new_content": "def is_leap(year):\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\n"
+          }
+        ]
+      }
+    },
+    {
+      "sequence": 35,
+      "created_at": "2026-11-13T15:27:04.749276+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-a495941d8ab74c19a4bf0c529de8b09d",
+      "parent_step_id": "s-769351f501d644c7b870dd96b356d9f2",
+      "node_id": "repairer",
+      "round": 2,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "call_id": "m-ac93f4ae33fa4e589f2b064fb76111bc",
+      "artifact_path": "calls/m-ac93f4ae33fa4e589f2b064fb76111bc",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "failure_class": null,
+      "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:repairer",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "repairer",
+        "title": "修复员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [
+          "detector",
+          "scheduler",
+          "locator"
+        ],
+        "produces": "candidate_changes",
+        "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+        "output_schema": "RepairOutput",
+        "permitted_action": "propose_source_patch",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [
+        {
+          "agent_id": "detector",
+          "call_id": "m-d1e8d60c229544d7b0b15e8f3c9319f4",
+          "step_id": "s-2fa17129250e443a899073b9e2884739",
+          "artifact_path": "calls/m-d1e8d60c229544d7b0b15e8f3c9319f4",
+          "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+          "evidence_id": "test-development-1",
+          "output_sha256": "465d0273e54c4a9db088848cba3bc3edb6af8b75425b5f24562c3949cdd0073c"
+        },
+        {
+          "agent_id": "scheduler",
+          "call_id": "m-356205ab913949f1a2aef7d6ff4b7c4c",
+          "step_id": "s-291e8919a37247528af80345d02b3399",
+          "artifact_path": "calls/m-356205ab913949f1a2aef7d6ff4b7c4c",
+          "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+          "evidence_id": "test-development-1",
+          "output_sha256": "1ef475a1d6bd9ab6ef97a57ea729ce747ac5481827668d42338076ef13d10dba",
+          "dispatch_instruction": {
+            "effective_action": "locate",
+            "target_agent": "locator",
+            "rule_id": "R13",
+            "reason": "开发断言失败，重新定位后再修；不能所有失败都盲目重试。",
+            "decision_id": "d-1",
+            "artifact_path": "trace/decisions/d-1.json",
+            "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+            "evidence_id": "test-development-1"
+          }
+        },
+        {
+          "agent_id": "locator",
+          "call_id": "m-fa09201c56994065bc917fb143f95085",
+          "step_id": "s-769351f501d644c7b870dd96b356d9f2",
+          "artifact_path": "calls/m-fa09201c56994065bc917fb143f95085",
+          "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+          "evidence_id": "test-development-1",
+          "output_sha256": "2e05cebde3b1649ef902b14268fe7b323bcb492b448e044023db2552145418a0"
+        }
+      ],
+      "resumed_loop": {
+        "from_round": 1,
+        "to_round": 2,
+        "trigger_evidence_id": "test-development-1",
+        "trigger_code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a"
+      },
+      "duration_ms": 126
+    },
+    {
+      "sequence": 36,
+      "created_at": "2026-11-13T15:27:04.790800+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-52b240eca1ae44119fd95b9f47a19c4c",
+      "parent_step_id": "s-a495941d8ab74c19a4bf0c529de8b09d",
+      "node_id": "apply_candidate",
+      "round": 2,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 37,
+      "created_at": "2026-11-13T15:27:04.871907+00:00",
+      "event": "candidate_applied",
+      "round": 2,
+      "project": "leap",
+      "base_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "candidate_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "frozen_file_sha256": {
+        "tests/test_leap.py": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+      },
+      "changes": [
+        {
+          "path": "code/leap_year.py",
+          "new_content": "def is_leap(year):\n    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)\n"
+        }
+      ],
+      "test_sha256": {
+        "tests/test_leap.py": "aa3a6c09a1cdfe4d0ecf1313e6048f56fa19c3120d088ee71e55356d669bb271"
+      }
+    },
+    {
+      "sequence": 38,
+      "created_at": "2026-11-13T15:27:04.903490+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-52b240eca1ae44119fd95b9f47a19c4c",
+      "parent_step_id": "s-a495941d8ab74c19a4bf0c529de8b09d",
+      "node_id": "apply_candidate",
+      "round": 2,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "artifact_path": "patch-2",
+      "duration_ms": 108
+    },
+    {
+      "sequence": 39,
+      "created_at": "2026-11-13T15:27:04.941460+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-1009801a62f240818031de18f15d4b1c",
+      "parent_step_id": "s-52b240eca1ae44119fd95b9f47a19c4c",
+      "node_id": "pytest",
+      "round": 2,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 40,
+      "created_at": "2026-11-13T15:27:04.973937+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-1009801a62f240818031de18f15d4b1c",
+      "parent_step_id": "s-52b240eca1ae44119fd95b9f47a19c4c",
+      "node_id": "pytest",
+      "round": 2,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "evidence_id": "test-development-2",
+      "evidence_path": "development-2",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "failure_class": "passed",
+      "verification_status": "passed",
+      "evidence_matches_current_version": true,
+      "stdout_path": "stdout.txt",
+      "stderr_path": "stderr.txt",
+      "exit_code": 0
+    },
+    {
+      "sequence": 41,
+      "created_at": "2026-11-13T15:27:05.005234+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-1009801a62f240818031de18f15d4b1c",
+      "parent_step_id": "s-52b240eca1ae44119fd95b9f47a19c4c",
+      "node_id": "pytest",
+      "round": 2,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "verification_status": "passed",
+      "evidence_id": "test-development-2",
+      "failure_class": "passed",
+      "evidence_path": "development-2",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": null,
+      "registered_test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "duration_ms": 60
+    },
+    {
+      "sequence": 42,
+      "created_at": "2026-11-13T15:27:05.067401+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-00a7c229b2b24998aa9a4797c2ad0c57",
+      "parent_step_id": "s-1009801a62f240818031de18f15d4b1c",
+      "node_id": "detector",
+      "round": 2,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-2"
+      ]
+    },
+    {
+      "sequence": 43,
+      "created_at": "2026-11-13T15:27:05.102211+00:00",
+      "event": "agent_call",
+      "status": "ok",
+      "mode": "test_stub",
+      "model_api_called": false,
+      "role": "detector",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "call_id": "m-13296424ddb8420e98114170702e6140",
+      "round": 2,
+      "provenance": {
+        "role_override": {},
+        "role_overrides_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "primary": {
+              "binding": "approved_profile",
+              "profile_ref": "sf_account1_v32"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "primary",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "b3472a143047be416465bd12b883494daab38dc1dce1b9522c99992eb7d455ba",
+        "prompt_ref": "prompts/detector.md",
+        "prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+        "system_prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+        "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:detector",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "detector",
+          "title": "检测员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [],
+          "produces": "failure_analysis",
+          "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+          "output_schema": "DetectorOutput",
+          "permitted_action": "analyse_tool_evidence",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "3ab70fbb58a74bbfb1b4aca2d411143ae86aed05a136bf5ca9df020d682ac9dd",
+        "handoffs": [],
+        "messages_sha256": "06f0334fc0164c1060815f2a38bb31214f75dc2630860f6f0579e9cfc7abbbc9",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "primary",
+          "binding": "approved_profile",
+          "profile_ref": "sf_account1_v32",
+          "mode": "test_stub",
+          "model": null
+        }
+      },
+      "step_id": "s-00a7c229b2b24998aa9a4797c2ad0c57",
+      "parent_step_id": "s-1009801a62f240818031de18f15d4b1c",
+      "parsed_output": {
+        "evidence_ids": [
+          "test-development-2"
+        ],
+        "knowledge_citations": [],
+        "analysis": "offline analysis",
+        "failure_class": "passed",
+        "suggested_checks": []
+      }
+    },
+    {
+      "sequence": 44,
+      "created_at": "2026-11-13T15:27:05.132204+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-00a7c229b2b24998aa9a4797c2ad0c57",
+      "parent_step_id": "s-1009801a62f240818031de18f15d4b1c",
+      "node_id": "detector",
+      "round": 2,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-2"
+      ],
+      "status": "ok",
+      "call_id": "m-13296424ddb8420e98114170702e6140",
+      "artifact_path": "calls/m-13296424ddb8420e98114170702e6140",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "failure_class": null,
+      "agent_instance_id": "run-27af7e12162d445fac5f67b6a38f41c1:detector",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "detector",
+        "title": "检测员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [],
+        "produces": "failure_analysis",
+        "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+        "output_schema": "DetectorOutput",
+        "permitted_action": "analyse_tool_evidence",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": null,
+      "duration_ms": 59
+    },
+    {
+      "sequence": 45,
+      "created_at": "2026-11-13T15:27:05.171851+00:00",
+      "event": "roles_skipped",
+      "roles": [
+        "scheduler"
+      ],
+      "round": 2,
+      "reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a"
+    },
+    {
+      "sequence": 46,
+      "created_at": "2026-11-13T15:27:05.195986+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-b3974e1ada404924bd7519fc5e4b047c",
+      "parent_step_id": "s-00a7c229b2b24998aa9a4797c2ad0c57",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-2"
+      ]
+    },
+    {
+      "sequence": 47,
+      "created_at": "2026-11-13T15:27:05.224237+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-2.json",
+      "decision_id": "d-2",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "evidence_ids": [
+        "test-development-2"
+      ],
+      "failure_class": "passed",
+      "action": "final_check",
+      "target_agent": null,
+      "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+      "retries_left": 1,
+      "rule_id": "R16",
+      "terminal_status": null,
+      "trace_version": "1.0.0",
+      "step_id": "s-b3974e1ada404924bd7519fc5e4b047c",
+      "parent_step_id": "s-00a7c229b2b24998aa9a4797c2ad0c57",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "development",
+      "strategy": "dynamic",
+      "program_decision": {
+        "decision_id": "d-2",
+        "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+        "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+        "evidence_ids": [
+          "test-development-2"
+        ],
+        "failure_class": "passed",
+        "action": "final_check",
+        "target_agent": null,
+        "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+        "retries_left": 1,
+        "rule_id": "R16",
+        "terminal_status": null
+      },
+      "model_advice": null,
+      "effective_action": "final_check",
+      "override_reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+      "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "counters": {
+        "model_calls": 6,
+        "tool_calls": 3,
+        "rounds_used": 2,
+        "cost": {
+          "status": "not_applicable",
+          "amount_usd": null
+        },
+        "remaining_seconds": 297.26774279994424,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 48,
+      "created_at": "2026-11-13T15:27:05.256073+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-b3974e1ada404924bd7519fc5e4b047c",
+      "parent_step_id": "s-00a7c229b2b24998aa9a4797c2ad0c57",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-2"
+      ],
+      "status": "ok",
+      "effective_action": "final_check",
+      "decision_id": "d-2",
+      "duration_ms": 60
+    },
+    {
+      "sequence": 49,
+      "created_at": "2026-11-13T15:27:05.347695+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-d7ff6a2f1c65459ea14ab989561b1717",
+      "parent_step_id": "s-b3974e1ada404924bd7519fc5e4b047c",
+      "node_id": "pytest",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-2"
+      ]
+    },
+    {
+      "sequence": 50,
+      "created_at": "2026-11-13T15:27:05.379571+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-d7ff6a2f1c65459ea14ab989561b1717",
+      "parent_step_id": "s-b3974e1ada404924bd7519fc5e4b047c",
+      "node_id": "pytest",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-2"
+      ],
+      "evidence_id": "test-final-check",
+      "evidence_path": "final-check",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "failure_class": "passed",
+      "verification_status": "passed",
+      "evidence_matches_current_version": true,
+      "stdout_path": "stdout.txt",
+      "stderr_path": "stderr.txt",
+      "exit_code": 0
+    },
+    {
+      "sequence": 51,
+      "created_at": "2026-11-13T15:27:05.411314+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-d7ff6a2f1c65459ea14ab989561b1717",
+      "parent_step_id": "s-b3974e1ada404924bd7519fc5e4b047c",
+      "node_id": "pytest",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-2"
+      ],
+      "status": "ok",
+      "verification_status": "passed",
+      "evidence_id": "test-final-check",
+      "failure_class": "passed",
+      "evidence_path": "final-check",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": null,
+      "registered_test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "duration_ms": 59
+    },
+    {
+      "sequence": 52,
+      "created_at": "2026-11-13T15:27:05.444701+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-daae520e9dcd40988a0b280203316824",
+      "parent_step_id": "s-d7ff6a2f1c65459ea14ab989561b1717",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ]
+    },
+    {
+      "sequence": 53,
+      "created_at": "2026-11-13T15:27:05.470704+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-db6945f8439c4cf48d93ebd28848ee16.json",
+      "decision_id": "d-db6945f8439c4cf48d93ebd28848ee16",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "failure_class": "passed",
+      "action": "finish",
+      "target_agent": null,
+      "reason": "独立验收实际通过且证据对应最终代码版本。",
+      "retries_left": 1,
+      "rule_id": "R07",
+      "terminal_status": "success",
+      "trace_version": "1.0.0",
+      "step_id": "s-daae520e9dcd40988a0b280203316824",
+      "parent_step_id": "s-d7ff6a2f1c65459ea14ab989561b1717",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "program_decision": {
+        "decision_id": "d-db6945f8439c4cf48d93ebd28848ee16",
+        "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+        "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+        "evidence_ids": [
+          "test-final-check"
+        ],
+        "failure_class": "passed",
+        "action": "finish",
+        "target_agent": null,
+        "reason": "独立验收实际通过且证据对应最终代码版本。",
+        "retries_left": 1,
+        "rule_id": "R07",
+        "terminal_status": "success"
+      },
+      "model_advice": null,
+      "effective_action": "finish",
+      "override_reason": null,
+      "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "counters": {
+        "model_calls": 6,
+        "tool_calls": 4,
+        "rounds_used": 2,
+        "cost": {
+          "status": "not_applicable",
+          "amount_usd": null
+        },
+        "remaining_seconds": 297.0142167999875,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 54,
+      "created_at": "2026-11-13T15:27:05.495558+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-daae520e9dcd40988a0b280203316824",
+      "parent_step_id": "s-d7ff6a2f1c65459ea14ab989561b1717",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "status": "ok",
+      "effective_action": "finish",
+      "decision_id": "d-db6945f8439c4cf48d93ebd28848ee16",
+      "duration_ms": 49
+    },
+    {
+      "sequence": 55,
+      "created_at": "2026-11-13T15:27:05.518203+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-3efd7b8f87e34d46b600bb48c96decdd",
+      "parent_step_id": "s-daae520e9dcd40988a0b280203316824",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ]
+    },
+    {
+      "sequence": 56,
+      "created_at": "2026-11-13T15:27:05.546693+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-a110e31cd7f14b4888fe92e4ddd2a81d.json",
+      "action": "finish",
+      "rule_id": "R07",
+      "reason": "开发测试及干净副本同套原生测试均实际通过",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-3efd7b8f87e34d46b600bb48c96decdd",
+      "parent_step_id": "s-daae520e9dcd40988a0b280203316824",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "decision_id": "d-a110e31cd7f14b4888fe92e4ddd2a81d",
+      "program_decision": {
+        "action": "finish",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过"
+      },
+      "model_advice": null,
+      "effective_action": "finish",
+      "target_agent": null,
+      "override_reason": null,
+      "code_version": "sha256:ee812b9353455c40a2c6c0a5d410385e20a8abae5d70c45f830d27b0e9599b3a",
+      "test_suite_version": "sha256:a1dcc0fff598ab29b0d7840ed57512eed9495c9013da03dc6ba1ba8b5f497d7f",
+      "counters": {
+        "model_calls": 6,
+        "tool_calls": 4,
+        "rounds_used": 2,
+        "cost": {
+          "status": "not_applicable",
+          "amount_usd": null
+        },
+        "remaining_seconds": 296.94308829994407,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 57,
+      "created_at": "2026-11-13T15:27:05.569333+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-27af7e12162d445fac5f67b6a38f41c1",
+      "step_id": "s-3efd7b8f87e34d46b600bb48c96decdd",
+      "parent_step_id": "s-daae520e9dcd40988a0b280203316824",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "status": "ok",
+      "effective_action": "finish",
+      "decision_id": "d-a110e31cd7f14b4888fe92e4ddd2a81d",
+      "duration_ms": 50
+    }
+  ]
+}

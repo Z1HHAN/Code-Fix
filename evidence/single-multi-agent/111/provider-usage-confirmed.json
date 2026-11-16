@@ -1,0 +1,32 @@
+{
+  "basis": "operator reconciliation against provider aggregates; not a per-request supplier invoice",
+  "source_proof_sha256": "8467b33f4229df63e8b87db35b8339cac291023d2934e78ac89001e22f7e84b1",
+  "screenshots": [
+    {
+      "path": "evidence/single-multi-agent/111/provider-usage/codex-clipboard-7f132408-f6d1-412b-b57c-d062ba7ba700.png",
+      "sha256": "4deb96ae2d77e8035bc841ed3ea53c9c084ab0caf6adad8c6616032b1d55206c"
+    },
+    {
+      "path": "evidence/single-multi-agent/111/provider-usage/codex-clipboard-4a6dcec4-f2cd-4171-a162-903084ed16b1.png",
+      "sha256": "8808c2a6e2c5b6229ddb8a50f555dccb25659f289384ab308ac5f288532f5837"
+    }
+  ],
+  "user_confirmed_same_date_model_and_key": true,
+  "user_reaffirmation": "是一个账号 我弄错了 发给你的两张图是对的",
+  "known_input_output": [
+    {
+      "tooltip": "22:04:00~22:05:00",
+      "input_tokens": 30298,
+      "output_tokens": 3205
+    },
+    {
+      "tooltip": "22:09:00~22:10:00",
+      "input_tokens": 22111,
+      "output_tokens": 1869
+    }
+  ],
+  "additional_reported_tokens_observed": false,
+  "operator_reconciliation_cny": "0",
+  "supplier_per_request_zero_charge_confirmed": false,
+  "confirmed_at": "2026-11-15T15:03:24.319547+00:00"
+}

@@ -1,0 +1,1480 @@
+{
+  "schema_version": "v3",
+  "run": {
+    "run_id": "run-b9644ce975b74ca98680f924891160fb",
+    "task": {
+      "config_id": "cfg-a27c6a7bb63ac54c51f649cf38eb4acd17abda2a9694a13da0199c8ebdc4850a",
+      "description": "修复shunting_yard缺陷，使预登记的原生测试通过；不修改测试。",
+      "max_calls": 12,
+      "max_rounds": 3,
+      "mode": "repair",
+      "project": "qb-shunting_yard",
+      "strategy": "dynamic",
+      "total_seconds": 300
+    },
+    "status": "paused",
+    "created_at": "2026-11-15T15:33:07.634414+00:00",
+    "updated_at": "2026-11-15T15:33:22.532430+00:00",
+    "result": {
+      "final_result": "not_run",
+      "dev_result": "failed",
+      "rounds_used": 1,
+      "model_calls": 1,
+      "tool_calls": 1,
+      "model_api_called": true,
+      "mode": "live",
+      "isolation_ready": true,
+      "strategy": "dynamic",
+      "project": "qb-shunting_yard",
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "code_path": "base/python_programs/shunting_yard.py",
+      "evidence_matches_current_version": true,
+      "baseline_failure_class": "assertion_failed",
+      "failure_class": "model_transport_error",
+      "guard_id": "V3_MODEL_TRANSPORT_ERROR",
+      "rule_id": "R05",
+      "reason": "API鉴权或有限网络重试耗尽，保留调用记录，交B诊断。",
+      "model_attempts": 1,
+      "actual_model_requests": 1,
+      "cost": {
+        "calls": 1,
+        "status": "unknown",
+        "basis": "versioned_model_rates; not_provider_invoice",
+        "models": [
+          {
+            "model": "deepseek-v4.1-flash-1017",
+            "currency": "CNY",
+            "status": "unknown",
+            "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+            "upper_estimate": false
+          }
+        ],
+        "currency": "CNY",
+        "amount_cny": null,
+        "reserved_cny": "0.084076"
+      },
+      "trace_version": "1.0.0",
+      "handoff_path": "handoff.json",
+      "handling_status": "pending_human"
+    },
+    "control": null,
+    "archived_at": null
+  },
+  "events": [
+    {
+      "sequence": 5786,
+      "created_at": "2026-11-15T15:33:07.686335+00:00",
+      "event": "started"
+    },
+    {
+      "sequence": 5787,
+      "created_at": "2026-11-15T15:33:07.814935+00:00",
+      "event": "guard_check",
+      "step_id": "configuration-check",
+      "node_id": "configuration_check",
+      "status": "ok",
+      "reason": "角色配置、提示词和输出协议检查通过"
+    },
+    {
+      "sequence": 5788,
+      "created_at": "2026-11-15T15:33:08.609176+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "step_id": "s-2205c898c0914f25b125a0b40a88148a",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "dynamic",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 5789,
+      "created_at": "2026-11-15T15:33:13.770461+00:00",
+      "event": "isolation_checked",
+      "isolation_ready": true,
+      "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+      "reason": null,
+      "engine_id": "82a0558b-2dfa-48b6-86f2-de3c8937dc79",
+      "controls": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "none",
+          "Config": {}
+        },
+        "NetworkMode": "none",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "host",
+        "Dns": null,
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "Tmpfs": {
+          "/tmp": "rw,noexec,nosuid,size=67108864"
+        },
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 268435456,
+        "NanoCpus": 1000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 268435456,
+        "MemorySwappiness": null,
+        "OomKillDisable": false,
+        "PidsLimit": 64,
+        "Ulimits": [
+          {
+            "Name": "nofile",
+            "Hard": 128,
+            "Soft": 128
+          }
+        ],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/rpc_codec.py",
+            "Target": "/rpc_codec.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "volume",
+            "Source": "codefix-out-205d83979d974deeae69fb9f06910f4f",
+            "Target": "/out"
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix-data/jobs/job-1fba639b1ab84de7948336a2a49de364/isolation/probe-work",
+            "Target": "/w",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/c_runner/pytest_entry.py",
+            "Target": "/entry.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/candidate_entry.py",
+            "Target": "/harness.py",
+            "ReadOnly": true
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+      "execution_mode": "remote-docker",
+      "execution_endpoint": "https://8.148.85.237",
+      "remote_job_id": "job-1fba639b1ab84de7948336a2a49de364",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 5790,
+      "created_at": "2026-11-15T15:33:13.797185+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "step_id": "s-2205c898c0914f25b125a0b40a88148a",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "status": "ok",
+      "evidence_path": "isolation",
+      "isolation_ready": true,
+      "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+      "reason": null,
+      "engine_id": "82a0558b-2dfa-48b6-86f2-de3c8937dc79",
+      "controls": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "none",
+          "Config": {}
+        },
+        "NetworkMode": "none",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "host",
+        "Dns": null,
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "Tmpfs": {
+          "/tmp": "rw,noexec,nosuid,size=67108864"
+        },
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 268435456,
+        "NanoCpus": 1000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 268435456,
+        "MemorySwappiness": null,
+        "OomKillDisable": false,
+        "PidsLimit": 64,
+        "Ulimits": [
+          {
+            "Name": "nofile",
+            "Hard": 128,
+            "Soft": 128
+          }
+        ],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/rpc_codec.py",
+            "Target": "/rpc_codec.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "volume",
+            "Source": "codefix-out-205d83979d974deeae69fb9f06910f4f",
+            "Target": "/out"
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix-data/jobs/job-1fba639b1ab84de7948336a2a49de364/isolation/probe-work",
+            "Target": "/w",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/c_runner/pytest_entry.py",
+            "Target": "/entry.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/candidate_entry.py",
+            "Target": "/harness.py",
+            "ReadOnly": true
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+      "execution_mode": "remote-docker",
+      "execution_endpoint": "https://8.148.85.237",
+      "remote_job_id": "job-1fba639b1ab84de7948336a2a49de364",
+      "transport_mode": "live",
+      "duration_ms": 5201
+    },
+    {
+      "sequence": 5791,
+      "created_at": "2026-11-15T15:33:14.731918+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "step_id": "s-da3073a381e349d6840e96cb405beed2",
+      "parent_step_id": "s-2205c898c0914f25b125a0b40a88148a",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 5792,
+      "created_at": "2026-11-15T15:33:21.912748+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "step_id": "s-da3073a381e349d6840e96cb405beed2",
+      "parent_step_id": "s-2205c898c0914f25b125a0b40a88148a",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "evidence_id": "test-baseline",
+      "evidence_path": "baseline",
+      "call_id": "codefix-8d8a31edf31646b5a80760974195227f",
+      "exit_code": 1,
+      "timed_out": false,
+      "duration_ms": 858,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-dc5daea84c2840e29243f1fdfd475900,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-8d8a31edf31646b5a80760974195227f",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-9ced7aa7948c4fcabad0f251acd2d35c,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-c8291e58a99345dc8f70a73e91bc417d/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_shunting_yard.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-9ced7aa7948c4fcabad0f251acd2d35c",
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "project": "qb-shunting_yard",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "expected_test_count": 6,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-c4d9232a9d75476f88684e101fc78b13",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 6,
+        "passed": 2,
+        "failed": 4,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "failed",
+      "verification_status": "failed",
+      "failure_class": "assertion_failed",
+      "reason": "Frozen native fixture tests completed with a recorded failure",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data0-expected0]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data1-expected1]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data2-expected2]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data3-expected3]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data4-expected4]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data5-expected5]"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data0-expected0]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data1-expected1]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data2-expected2]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data3-expected3]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data4-expected4]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data5-expected5]"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data0-expected0]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data1-expected1]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data2-expected2]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data3-expected3]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data4-expected4]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data5-expected5]"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-c8291e58a99345dc8f70a73e91bc417d",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 5793,
+      "created_at": "2026-11-15T15:33:21.947240+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "step_id": "s-da3073a381e349d6840e96cb405beed2",
+      "parent_step_id": "s-2205c898c0914f25b125a0b40a88148a",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "status": "ok",
+      "verification_status": "failed",
+      "evidence_id": "test-baseline",
+      "failure_class": "assertion_failed",
+      "evidence_path": "baseline",
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "registered_test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "duration_ms": 7212
+    },
+    {
+      "sequence": 5794,
+      "created_at": "2026-11-15T15:33:22.005460+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "step_id": "s-8e8b9140aaf3422f8b997b7d8af39bdc",
+      "parent_step_id": "s-da3073a381e349d6840e96cb405beed2",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 5795,
+      "created_at": "2026-11-15T15:33:22.148203+00:00",
+      "event": "guard_check",
+      "step_id": "m-92f654e0ab7d41d3a11c9e05f3740f72-budget",
+      "parent_step_id": "s-8e8b9140aaf3422f8b997b7d8af39bdc",
+      "node_id": "budget_check",
+      "role": "repairer",
+      "round": 1,
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "status": "ok",
+      "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+    },
+    {
+      "sequence": 5796,
+      "created_at": "2026-11-15T15:33:22.175491+00:00",
+      "event": "guard_check",
+      "check": "patch_permission",
+      "step_id": "m-92f654e0ab7d41d3a11c9e05f3740f72-permission",
+      "parent_step_id": "s-8e8b9140aaf3422f8b997b7d8af39bdc",
+      "node_id": "permission_check",
+      "round": 1,
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "status": "not_run",
+      "reason": "未取得有效候选，未检查补丁权限"
+    },
+    {
+      "sequence": 5797,
+      "created_at": "2026-11-15T15:33:22.205830+00:00",
+      "event": "agent_call",
+      "role": "repairer",
+      "mode": "live",
+      "model_api_called": true,
+      "model": "deepseek-v4.1-flash-1017",
+      "call_id": "m-92f654e0ab7d41d3a11c9e05f3740f72",
+      "status": "failed",
+      "provider_id": "personal",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "usage": null,
+      "cost": {
+        "status": "unknown",
+        "amount_cny": null,
+        "currency": "CNY",
+        "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+        "upper_estimate": false,
+        "basis": "versioned_model_rates; not_provider_invoice"
+      },
+      "attempts": 1,
+      "max_attempts": 1,
+      "transport_request_started": true,
+      "failure_class": "model_transport_error",
+      "budget_check": {
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      "error_type": "ConnectError",
+      "duration_ms": 86,
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "round": 1,
+      "provenance": {
+        "role_override": {
+          "task_instruction": "",
+          "generation": {
+            "max_output_tokens": 8192,
+            "enable_thinking": false
+          }
+        },
+        "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "locator": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "repairer": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "detector": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "scheduler": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "locator",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "repairer",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "detector",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "scheduler",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+        "prompt_ref": "prompts/repairer.md",
+        "prompt_sha256": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+        "system_prompt_sha256": "279bac1d22413b8ccf15b26d768a0f65fb210d7347fe57a0b0284e1427f95635",
+        "agent_instance_id": "run-b9644ce975b74ca98680f924891160fb:repairer",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "repairer",
+          "title": "修复员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [
+            "detector",
+            "scheduler",
+            "locator"
+          ],
+          "produces": "candidate_changes",
+          "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+          "output_schema": "RepairOutput",
+          "permitted_action": "propose_source_patch",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "8fa1a2ef8fde348f27a5ce1862ed65bce4eea9d6207d4091083355cf3e8ae3ef",
+        "handoffs": [],
+        "messages_sha256": "66eff1a7307c1d852732217b04eb34f3cbeb7a60990e931da58dabdcc47b3554",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "repairer",
+          "binding": "approved_profile",
+          "profile_ref": "personal_model",
+          "mode": "live",
+          "provider_id": "personal",
+          "model": "deepseek-v4.1-flash-1017",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+          "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+          "effective_parameters": {
+            "max_tokens": 8192,
+            "enable_thinking": false
+          },
+          "request_seconds": 60,
+          "daily_shared_usd": null,
+          "input_usd_per_million": null,
+          "output_usd_per_million": null,
+          "effective_parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481",
+          "currency": "CNY",
+          "personal_pricing": {
+            "provider": "qianwen-ai",
+            "model": "deepseek-v4.1-flash-1017",
+            "region": "platform-standard",
+            "mode": "thinking",
+            "currency": "CNY",
+            "unit": "per_million_tokens",
+            "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+            "verified_at": "2026-11-11",
+            "endpoint_host": "maas.qianwenaiapi.com",
+            "tiers": [
+              {
+                "max_input_tokens": 1000000,
+                "input": "2",
+                "output": "8",
+                "cached_input": "0.2"
+              }
+            ],
+            "offpeak_discount": "0.5",
+            "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+          },
+          "daily_limit": "5",
+          "monetary_budget_enabled": true
+        }
+      },
+      "step_id": "s-8e8b9140aaf3422f8b997b7d8af39bdc",
+      "parent_step_id": "s-da3073a381e349d6840e96cb405beed2"
+    },
+    {
+      "sequence": 5798,
+      "created_at": "2026-11-15T15:33:22.243184+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "step_id": "s-8e8b9140aaf3422f8b997b7d8af39bdc",
+      "parent_step_id": "s-da3073a381e349d6840e96cb405beed2",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "failed",
+      "call_id": "m-92f654e0ab7d41d3a11c9e05f3740f72",
+      "artifact_path": "calls/m-92f654e0ab7d41d3a11c9e05f3740f72",
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "failure_class": "model_transport_error",
+      "agent_instance_id": "run-b9644ce975b74ca98680f924891160fb:repairer",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "repairer",
+        "title": "修复员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [
+          "detector",
+          "scheduler",
+          "locator"
+        ],
+        "produces": "candidate_changes",
+        "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+        "output_schema": "RepairOutput",
+        "permitted_action": "propose_source_patch",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": null,
+      "duration_ms": 227
+    },
+    {
+      "sequence": 5799,
+      "created_at": "2026-11-15T15:33:22.317156+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "step_id": "s-64baa57561b343b99f43a5b2e2bca441",
+      "parent_step_id": "s-8e8b9140aaf3422f8b997b7d8af39bdc",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 5800,
+      "created_at": "2026-11-15T15:33:22.343409+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-453aaa3f0830451aa8c6e8af11f79a2f.json",
+      "decision_id": "d-453aaa3f0830451aa8c6e8af11f79a2f",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "failure_class": "model_transport_error",
+      "action": "pause",
+      "target_agent": null,
+      "reason": "API鉴权或有限网络重试耗尽，保留调用记录，交B诊断。",
+      "retries_left": 2,
+      "rule_id": "R05",
+      "terminal_status": null,
+      "trace_version": "1.0.0",
+      "step_id": "s-64baa57561b343b99f43a5b2e2bca441",
+      "parent_step_id": "s-8e8b9140aaf3422f8b997b7d8af39bdc",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "program_decision": {
+        "decision_id": "d-453aaa3f0830451aa8c6e8af11f79a2f",
+        "run_id": "run-b9644ce975b74ca98680f924891160fb",
+        "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+        "evidence_ids": [
+          "test-baseline"
+        ],
+        "failure_class": "model_transport_error",
+        "action": "pause",
+        "target_agent": null,
+        "reason": "API鉴权或有限网络重试耗尽，保留调用记录，交B诊断。",
+        "retries_left": 2,
+        "rule_id": "R05",
+        "terminal_status": null
+      },
+      "model_advice": null,
+      "effective_action": "pause",
+      "override_reason": null,
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "counters": {
+        "model_calls": 1,
+        "tool_calls": 1,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 1,
+          "status": "unknown",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "unknown",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": null,
+          "reserved_cny": "0.084076"
+        },
+        "remaining_seconds": 285.4529168000008,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 5801,
+      "created_at": "2026-11-15T15:33:22.370039+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "step_id": "s-64baa57561b343b99f43a5b2e2bca441",
+      "parent_step_id": "s-8e8b9140aaf3422f8b997b7d8af39bdc",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "effective_action": "pause",
+      "decision_id": "d-453aaa3f0830451aa8c6e8af11f79a2f",
+      "duration_ms": 50
+    },
+    {
+      "sequence": 5802,
+      "created_at": "2026-11-15T15:33:22.427467+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "step_id": "s-29dfa202d6f843f08be45525c1cf8883",
+      "parent_step_id": "s-64baa57561b343b99f43a5b2e2bca441",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 5803,
+      "created_at": "2026-11-15T15:33:22.455141+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-7f1a5e6404954534b4b026299e782d2e.json",
+      "action": "pause",
+      "rule_id": "R05",
+      "reason": "API鉴权或有限网络重试耗尽，保留调用记录，交B诊断。",
+      "trace_version": "1.0.0",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "step_id": "s-29dfa202d6f843f08be45525c1cf8883",
+      "parent_step_id": "s-64baa57561b343b99f43a5b2e2bca441",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "decision_id": "d-7f1a5e6404954534b4b026299e782d2e",
+      "program_decision": {
+        "action": "pause",
+        "rule_id": "R05",
+        "reason": "API鉴权或有限网络重试耗尽，保留调用记录，交B诊断。"
+      },
+      "model_advice": null,
+      "effective_action": "pause",
+      "target_agent": null,
+      "override_reason": null,
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "counters": {
+        "model_calls": 1,
+        "tool_calls": 1,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 1,
+          "status": "unknown",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "unknown",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": null,
+          "reserved_cny": "0.084076"
+        },
+        "remaining_seconds": 285.3444409999938,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 5804,
+      "created_at": "2026-11-15T15:33:22.482112+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-b9644ce975b74ca98680f924891160fb",
+      "step_id": "s-29dfa202d6f843f08be45525c1cf8883",
+      "parent_step_id": "s-64baa57561b343b99f43a5b2e2bca441",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "effective_action": "pause",
+      "decision_id": "d-7f1a5e6404954534b4b026299e782d2e",
+      "duration_ms": 53
+    },
+    {
+      "sequence": 5805,
+      "created_at": "2026-11-15T15:33:22.508505+00:00",
+      "event": "handoff_created",
+      "handling_status": "pending_human",
+      "artifact_path": "handoff.json",
+      "reason": "API鉴权或有限网络重试耗尽，保留调用记录，交B诊断。"
+    },
+    {
+      "sequence": 5806,
+      "created_at": "2026-11-15T15:33:22.532657+00:00",
+      "event": "finished",
+      "status": "paused",
+      "result": {
+        "final_result": "not_run",
+        "dev_result": "failed",
+        "rounds_used": 1,
+        "model_calls": 1,
+        "tool_calls": 1,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-shunting_yard",
+        "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+        "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+        "code_path": "base/python_programs/shunting_yard.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "model_transport_error",
+        "guard_id": "V3_MODEL_TRANSPORT_ERROR",
+        "rule_id": "R05",
+        "reason": "API鉴权或有限网络重试耗尽，保留调用记录，交B诊断。",
+        "model_attempts": 1,
+        "actual_model_requests": 1,
+        "cost": {
+          "calls": 1,
+          "status": "unknown",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "unknown",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": null,
+          "reserved_cny": "0.084076"
+        },
+        "trace_version": "1.0.0",
+        "handoff_path": "handoff.json",
+        "handling_status": "pending_human"
+      }
+    }
+  ],
+  "result_summary": {
+    "schema_version": 1,
+    "run_id": "run-b9644ce975b74ca98680f924891160fb",
+    "status": "paused",
+    "success": false,
+    "reason": "API鉴权或有限网络重试耗尽，保留调用记录，交B诊断。",
+    "rounds_used": 1,
+    "max_rounds": 3,
+    "model_attempts": 1,
+    "actual_model_requests": 1,
+    "tests": [
+      {
+        "stage": "baseline",
+        "round": 0,
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "counts": {
+          "collected": 6,
+          "passed": 2,
+          "failed": 4,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "缺陷已复现，可以开始修复",
+        "evidence_path": "baseline",
+        "step_id": "s-da3073a381e349d6840e96cb405beed2",
+        "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+        "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943"
+      }
+    ],
+    "cost": {
+      "calls": 1,
+      "status": "unknown",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "unknown",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": null,
+      "reserved_cny": "0.084076"
+    },
+    "model_output_issues": [],
+    "started_at": "2026-11-15T15:33:07.686335+00:00",
+    "finished_at": "2026-11-15T15:33:22.532657+00:00",
+    "duration_ms": 14846,
+    "before": {
+      "path": "base/python_programs/shunting_yard.py",
+      "content": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n\n\n\"\"\"\nInfix to RPN Conversion\nshunting-yard\n\n\nUses Dijkstra's shunting-yard algorithm to transform infix notation into equivalent Reverse Polish Notation.\n\nInput:\n    tokens: A list of tokens in infix notation\n\nPrecondition:\n    all(isinstance(token, int) or token in '+-*/' for token in tokens)\n\nOutput:\n    The input tokens reordered into Reverse Polish Notation\n\nExamples:\n    >>> shunting_yard([10, '-', 5, '-', 2])\n    [10, 5, '-', 2, '-']\n    >>> shunting_yard([34, '-', 12, '/', 5])\n    [34, 12, 5, '/' ,'-']\n    >>> shunting_yard([4, '+', 9, '*', 9, '-', 10, '+', 13])\n    [4, 9, 9, '*', '+', 10, '-', 13, '+']\n\"\"\"\n"
+    },
+    "after": null,
+    "combined_diff": null,
+    "diff": null,
+    "explanations": [],
+    "checks": [
+      {
+        "sequence": 5787,
+        "created_at": "2026-11-15T15:33:07.814935+00:00",
+        "event": "guard_check",
+        "step_id": "configuration-check",
+        "node_id": "configuration_check",
+        "status": "ok",
+        "reason": "角色配置、提示词和输出协议检查通过"
+      },
+      {
+        "sequence": 5795,
+        "created_at": "2026-11-15T15:33:22.148203+00:00",
+        "event": "guard_check",
+        "step_id": "m-92f654e0ab7d41d3a11c9e05f3740f72-budget",
+        "parent_step_id": "s-8e8b9140aaf3422f8b997b7d8af39bdc",
+        "node_id": "budget_check",
+        "role": "repairer",
+        "round": 1,
+        "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      {
+        "sequence": 5796,
+        "created_at": "2026-11-15T15:33:22.175491+00:00",
+        "event": "guard_check",
+        "check": "patch_permission",
+        "step_id": "m-92f654e0ab7d41d3a11c9e05f3740f72-permission",
+        "parent_step_id": "s-8e8b9140aaf3422f8b997b7d8af39bdc",
+        "node_id": "permission_check",
+        "round": 1,
+        "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+        "status": "not_run",
+        "reason": "未取得有效候选，未检查补丁权限"
+      }
+    ],
+    "skips": []
+  },
+  "configuration_snapshot": {
+    "bindings": {
+      "repairer": "personal_model",
+      "detector": "personal_model",
+      "scheduler": "personal_model",
+      "locator": "personal_model"
+    },
+    "parameters": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    },
+    "strategy": "dynamic",
+    "roles": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+    "prompts_sha256": {
+      "locator": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+      "repairer": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+      "detector": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+      "scheduler": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6"
+    },
+    "note": "结构校验通过；不代表模型请求、费用预留或隔离资格通过",
+    "personal_price_snapshots": {
+      "personal_model": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      }
+    },
+    "schema_version": 2,
+    "role_overrides": {
+      "repairer": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 8192,
+          "enable_thinking": false
+        }
+      },
+      "detector": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "scheduler": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "locator": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      }
+    },
+    "capabilities_sha256": "62ad69daf4539956ad609d5ed4c470c2826ce834a873c1c1600ec6ef6863a416",
+    "effective_roles": {
+      "repairer": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 8192,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481"
+      },
+      "detector": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      },
+      "scheduler": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      },
+      "locator": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      }
+    },
+    "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+    "effective_roles_sha256": "cbc8c805bc834d22d9cb4f0ead5a8d2c457297ac313c13fc32a64e2c7d4a9444",
+    "config_id": "cfg-a27c6a7bb63ac54c51f649cf38eb4acd17abda2a9694a13da0199c8ebdc4850a",
+    "created_at": "2026-11-15T13:58:41.923622+00:00"
+  }
+}

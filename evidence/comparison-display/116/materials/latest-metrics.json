@@ -1,0 +1,136 @@
+{
+  "comparison_id": "cmp-e9de35fdb1220caf3f6eee7bfc1c200940f8065f5e31c9ac28064394dd90be63",
+  "original_source": "5d720e325863622d3d7367321985ea2c79da1d2f",
+  "recovery_source": "9b3662565af903df38a3c0a89c1aff2f77374fe2",
+  "installed_source": "48a39a5bf880bae76f629bb33c8b7cf7ecc47428",
+  "scope": "每组独立运行相同题集；最新累计包含显式关联补跑。版本或资源上限可能变化，不作为同条件首试因果对照。调用、耗时与费用包含原运行及关联补跑；移交包为历史生成记录。",
+  "rows": [
+    {
+      "arm": "single",
+      "planned": 40,
+      "success": 38,
+      "success_percent": 95,
+      "original_success": 38,
+      "followup_runs": 0,
+      "requests": 49,
+      "average_requests": 1.225,
+      "total_seconds": 1366.431745,
+      "average_seconds": 34.160793625000004,
+      "latest_unresolved": 2,
+      "latest_unresolved_percent": 5,
+      "human_actual_intervention_rate": null,
+      "historical_handoff_packages": 2,
+      "historical_handoff_percent": 5,
+      "known_subtotal": "0.147057",
+      "unknown_requests_or_runs": 0,
+      "reserved_cny": "0",
+      "total": "0.147057"
+    },
+    {
+      "arm": "dynamic",
+      "planned": 40,
+      "success": 40,
+      "success_percent": 100,
+      "original_success": 37,
+      "followup_runs": 3,
+      "requests": 112,
+      "average_requests": 2.8,
+      "total_seconds": 1760.583729,
+      "average_seconds": 44.014593225,
+      "latest_unresolved": 0,
+      "latest_unresolved_percent": 0,
+      "human_actual_intervention_rate": null,
+      "historical_handoff_packages": 3,
+      "historical_handoff_percent": 7.5,
+      "known_subtotal": "0.343609",
+      "unknown_requests_or_runs": 1,
+      "reserved_cny": "0.084076",
+      "total": null
+    }
+  ],
+  "followups": [
+    {
+      "project": "qb-flatten",
+      "run_id": "run-ade9661288014e968785c02418ef4721",
+      "status": "success",
+      "requests": 2,
+      "elapsed_seconds": 38.210342,
+      "report_url": "/api/v3/tasks/run-ade9661288014e968785c02418ef4721/report",
+      "source": "9b3662565af903df38a3c0a89c1aff2f77374fe2",
+      "test_suite_version": "sha256:c4f5b85ec79951876f241d2ab1c6f58098327e2eb5961ad746fdd1dfb6374365"
+    },
+    {
+      "project": "qb-shunting_yard",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "status": "success",
+      "requests": 2,
+      "elapsed_seconds": 36.619193,
+      "report_url": "/api/v3/tasks/run-4d1c4575e3d343db832af2057fdb2a41/report",
+      "source": "9b3662565af903df38a3c0a89c1aff2f77374fe2",
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943"
+    },
+    {
+      "project": "qb-next_palindrome",
+      "run_id": "run-17496b4c92ce4911a42be3b8d03c0c81",
+      "status": "success",
+      "requests": 10,
+      "elapsed_seconds": 108.282163,
+      "report_url": "/api/v3/tasks/run-17496b4c92ce4911a42be3b8d03c0c81/report",
+      "source": "9b3662565af903df38a3c0a89c1aff2f77374fe2",
+      "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91"
+    }
+  ],
+  "original_summary": {
+    "single": {
+      "planned": 40,
+      "ran": 40,
+      "executed": 40,
+      "success": 38,
+      "failed": 2,
+      "blocked": 0,
+      "not_run": 0,
+      "success_rate_all": 0.95,
+      "success_rate_executed": 0.95,
+      "candidate_rounds": 48,
+      "requests": 49,
+      "cost": {
+        "cny": {
+          "known_subtotal": "0.147057",
+          "unknown_runs": 0,
+          "total": "0.147057"
+        },
+        "usd": {
+          "known_subtotal": "0",
+          "unknown_runs": 0,
+          "total": null
+        }
+      }
+    },
+    "dynamic": {
+      "planned": 40,
+      "ran": 40,
+      "executed": 40,
+      "success": 37,
+      "failed": 3,
+      "blocked": 0,
+      "not_run": 0,
+      "success_rate_all": 0.925,
+      "success_rate_executed": 0.925,
+      "candidate_rounds": 43,
+      "requests": 98,
+      "cost": {
+        "cny": {
+          "known_subtotal": "0.286201",
+          "unknown_runs": 1,
+          "total": null
+        },
+        "usd": {
+          "known_subtotal": "0",
+          "unknown_runs": 0,
+          "total": null
+        }
+      }
+    }
+  },
+  "paid_requests": 0
+}

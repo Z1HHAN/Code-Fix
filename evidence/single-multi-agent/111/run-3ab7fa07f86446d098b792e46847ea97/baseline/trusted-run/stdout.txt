@@ -1,0 +1,117 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.10, pytest-8.3.5, pluggy-1.7.0 -- /usr/local/bin/python
+rootdir: /w
+configfile: ../out/pytest.ini
+collecting ... collected 6 items
+
+python_testcases/test_sieve.py::test_sieve[input_data0-expected0] PASSED
+python_testcases/test_sieve.py::test_sieve[input_data1-expected1] FAILED
+python_testcases/test_sieve.py::test_sieve[input_data2-expected2] FAILED
+python_testcases/test_sieve.py::test_sieve[input_data3-expected3] FAILED
+python_testcases/test_sieve.py::test_sieve[input_data4-expected4] FAILED
+python_testcases/test_sieve.py::test_sieve[input_data5-expected5] FAILED
+
+=================================== FAILURES ===================================
+______________________ test_sieve[input_data1-expected1] _______________________
+
+input_data = [2], expected = [2]
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_sieve(input_data, expected):
+>       assert sieve(*input_data) == expected
+E       assert [] == [2]
+E         
+E         Right contains one more item: 2
+E         
+E         Full diff:
+E         + []
+E         - [
+E         -     2,
+E         - ]
+
+python_testcases/test_sieve.py:15: AssertionError
+______________________ test_sieve[input_data2-expected2] _______________________
+
+input_data = [4], expected = [2, 3]
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_sieve(input_data, expected):
+>       assert sieve(*input_data) == expected
+E       assert [] == [2, 3]
+E         
+E         Right contains 2 more items, first extra item: 2
+E         
+E         Full diff:
+E         + []
+E         - [
+E         -     2,
+E         -     3,
+E         - ]
+
+python_testcases/test_sieve.py:15: AssertionError
+______________________ test_sieve[input_data3-expected3] _______________________
+
+input_data = [7], expected = [2, 3, 5, 7]
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_sieve(input_data, expected):
+>       assert sieve(*input_data) == expected
+E       AssertionError: assert [] == [2, 3, 5, 7]
+E         
+E         Right contains 4 more items, first extra item: 2
+E         
+E         Full diff:
+E         + []
+E         - [
+E         -     2,...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+python_testcases/test_sieve.py:15: AssertionError
+______________________ test_sieve[input_data4-expected4] _______________________
+
+input_data = [20], expected = [2, 3, 5, 7, 11, 13, ...]
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_sieve(input_data, expected):
+>       assert sieve(*input_data) == expected
+E       AssertionError: assert [] == [2, 3, 5, 7, 11, 13, ...]
+E         
+E         Right contains 8 more items, first extra item: 2
+E         
+E         Full diff:
+E         + []
+E         - [
+E         -     2,...
+E         
+E         ...Full output truncated (8 lines hidden), use '-vv' to show
+
+python_testcases/test_sieve.py:15: AssertionError
+______________________ test_sieve[input_data5-expected5] _______________________
+
+input_data = [50], expected = [2, 3, 5, 7, 11, 13, ...]
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_sieve(input_data, expected):
+>       assert sieve(*input_data) == expected
+E       AssertionError: assert [] == [2, 3, 5, 7, 11, 13, ...]
+E         
+E         Right contains 15 more items, first extra item: 2
+E         
+E         Full diff:
+E         + []
+E         - [
+E         -     2,...
+E         
+E         ...Full output truncated (15 lines hidden), use '-vv' to show
+
+python_testcases/test_sieve.py:15: AssertionError
+---------------------- generated xml file: /out/junit.xml ----------------------
+=========================== short test summary info ============================
+FAILED python_testcases/test_sieve.py::test_sieve[input_data1-expected1] - as...
+FAILED python_testcases/test_sieve.py::test_sieve[input_data2-expected2] - as...
+FAILED python_testcases/test_sieve.py::test_sieve[input_data3-expected3] - As...
+FAILED python_testcases/test_sieve.py::test_sieve[input_data4-expected4] - As...
+FAILED python_testcases/test_sieve.py::test_sieve[input_data5-expected5] - As...
+========================= 5 failed, 1 passed in 0.09s ==========================
+CODEFIX_READY

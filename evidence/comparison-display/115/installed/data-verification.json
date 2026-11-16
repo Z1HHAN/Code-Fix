@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "commit": "c5022910782db0581e2d67e9f11127c15881e19e",
+  "source_sha256": "5dba1b8661cee92b1913c68303fbb8470b675a149cccff50975170af8f310a61",
+  "unchanged_original_runs": 183,
+  "unchanged_comparisons": 5,
+  "unchanged_events": true,
+  "explicit_followup_links": 6,
+  "settings_preserved_by_installer": true,
+  "paid_requests": 0
+}

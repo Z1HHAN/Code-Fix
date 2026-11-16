@@ -1,0 +1,49 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.10, pytest-8.3.5, pluggy-1.7.0 -- /usr/local/bin/python
+rootdir: /w
+configfile: ../out/pytest.ini
+collecting ... collected 3 items
+
+python_testcases/test_reverse_linked_list.py::test1 FAILED
+python_testcases/test_reverse_linked_list.py::test2 FAILED
+python_testcases/test_reverse_linked_list.py::test3 PASSED
+
+=================================== FAILURES ===================================
+____________________________________ test1 _____________________________________
+
+    def test1():
+        """Case 1: 5-node list input
+        Expected Output: 1 2 3 4 5
+        """
+    
+        node1 = Node(1)
+        node2 = Node(2, node1)
+        node3 = Node(3, node2)
+        node4 = Node(4, node3)
+        node5 = Node(5, node4)
+    
+        result = reverse_linked_list(node5)
+>       assert result == node1
+E       assert None == <node.Node object at 0x7f0694d66660>
+
+python_testcases/test_reverse_linked_list.py:22: AssertionError
+____________________________________ test2 _____________________________________
+
+    def test2():
+        """Case 2: 1-node list input
+        Expected Output: 0
+        """
+    
+        node = Node(0)
+    
+        result = reverse_linked_list(node)
+>       assert result == node
+E       assert None == <node.Node object at 0x7f0694b2c410>
+
+python_testcases/test_reverse_linked_list.py:39: AssertionError
+---------------------- generated xml file: /out/junit.xml ----------------------
+=========================== short test summary info ============================
+FAILED python_testcases/test_reverse_linked_list.py::test1 - assert None == <...
+FAILED python_testcases/test_reverse_linked_list.py::test2 - assert None == <...
+========================= 2 failed, 1 passed in 0.08s ==========================
+CODEFIX_READY

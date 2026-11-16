@@ -1,0 +1,22 @@
+{
+  "project": "qb-next_palindrome",
+  "base_version": "sha256:ee459e5dde20163d63aaf40fd7325c961e3cb2b6c90590035e1c5ec2936bf125",
+  "candidate_version": "sha256:0eadc911534777e751e861ea35a0b37399bcd77441818646c24a8e2114c43fd8",
+  "test_suite_version": "sha256:7871c0f1dfe7791ec99d8915cfd7807350c613549c0666c4c60a38f7ac10cf91",
+  "frozen_file_sha256": {
+    "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+    "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+    "python_testcases/test_next_palindrome.py": "276dfb1e01b412528965d670f3e6f632f8a4f0f6a02316417511b94ae24139b3",
+    "json_testcases/next_palindrome.json": "711823beedd2b22a35c45aeb0fe451e63173deebb2efdd0a14c59a591217f538",
+    "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+  },
+  "changes": [
+    {
+      "path": "python_programs/next_palindrome.py",
+      "new_content": "def next_palindrome(digit_list):\n    n = len(digit_list)\n    # Find the next palindrome strictly greater than the current one.\n    # Compare the mirrored (left half reflected) value against the original.\n    left = digit_list[:(n + 1) // 2]\n    mirrored = left + left[:n // 2][::-1]\n    if mirrored > digit_list:\n        # Mirroring the left half already yields a strictly larger palindrome.\n        digit_list[:] = mirrored\n        return digit_list\n    # Otherwise increment the left half (with carry) and mirror it.\n    i = (n + 1) // 2 - 1\n    while i >= 0 and left[i] == 9:\n        left[i] = 0\n        i -= 1\n    if i < 0:\n        # All digits were 9 -> number grows by one digit: 1 0...0 1\n        return [1] + [0] * (n - 1) + [1]\n    left[i] += 1\n    mirrored = left + left[:n // 2][::-1]\n    digit_list[:] = mirrored\n    return digit_list\n\n\"\"\"\nFinds the next palindromic integer when given the current integer\nIntegers are stored as arrays of base 10 digits from most significant to least significant\n\nInput:\n    digit_list: An array representing the current palindrome\n\nOutput:\n    An array which represents the next palindrome\n\nPreconditions:\n    The initial input array represents a palindrome\n\nExample\n    >>> next_palindrome([1,4,9,4,1])\n    [1,5,0,5,1]\n\"\"\"\n"
+    }
+  ],
+  "test_sha256": {
+    "python_testcases/test_next_palindrome.py": "276dfb1e01b412528965d670f3e6f632f8a4f0f6a02316417511b94ae24139b3"
+  }
+}

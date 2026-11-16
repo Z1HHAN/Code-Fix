@@ -1,0 +1,298 @@
+[
+  {
+    "project": "qb-mergesort",
+    "run_id": "run-5feb3a0bf6824b90a6a0ff634db6b488",
+    "status": "success",
+    "rounds": 3,
+    "role_counts": {
+      "scheduler": 2,
+      "detector": 3,
+      "repairer": 3,
+      "locator": 2
+    },
+    "calls": [
+      {
+        "call_id": "m-02deee6529df48719db82e9a83c67a46",
+        "role": "scheduler",
+        "status": "ok",
+        "evidence_path": "run-5feb3a0bf6824b90a6a0ff634db6b488/calls/m-02deee6529df48719db82e9a83c67a46/output.json"
+      },
+      {
+        "call_id": "m-5739af3329ff4eaebd375dc9ca2644b4",
+        "role": "detector",
+        "status": "ok",
+        "evidence_path": "run-5feb3a0bf6824b90a6a0ff634db6b488/calls/m-5739af3329ff4eaebd375dc9ca2644b4/output.json"
+      },
+      {
+        "call_id": "m-7075b5019eb646bebb4fb0f1441f618a",
+        "role": "repairer",
+        "status": "ok",
+        "evidence_path": "run-5feb3a0bf6824b90a6a0ff634db6b488/calls/m-7075b5019eb646bebb4fb0f1441f618a/output.json"
+      },
+      {
+        "call_id": "m-87e29217e17b47ce91f95bec98bd651b",
+        "role": "locator",
+        "status": "ok",
+        "evidence_path": "run-5feb3a0bf6824b90a6a0ff634db6b488/calls/m-87e29217e17b47ce91f95bec98bd651b/output.json"
+      },
+      {
+        "call_id": "m-ada52f69825d48e882f41a33f6d78d80",
+        "role": "detector",
+        "status": "ok",
+        "evidence_path": "run-5feb3a0bf6824b90a6a0ff634db6b488/calls/m-ada52f69825d48e882f41a33f6d78d80/output.json"
+      },
+      {
+        "call_id": "m-b358840f0ff4409cbf3bcc254833b4c2",
+        "role": "scheduler",
+        "status": "ok",
+        "evidence_path": "run-5feb3a0bf6824b90a6a0ff634db6b488/calls/m-b358840f0ff4409cbf3bcc254833b4c2/output.json"
+      },
+      {
+        "call_id": "m-ba152f2ce5fc4e14b2449c20168efb69",
+        "role": "repairer",
+        "status": "ok",
+        "evidence_path": "run-5feb3a0bf6824b90a6a0ff634db6b488/calls/m-ba152f2ce5fc4e14b2449c20168efb69/output.json"
+      },
+      {
+        "call_id": "m-c9b8fa66ba8741ff9026c3e7de8e719c",
+        "role": "detector",
+        "status": "ok",
+        "evidence_path": "run-5feb3a0bf6824b90a6a0ff634db6b488/calls/m-c9b8fa66ba8741ff9026c3e7de8e719c/output.json"
+      },
+      {
+        "call_id": "m-d031b5f6a37141f1b515e59439f88da0",
+        "role": "locator",
+        "status": "ok",
+        "evidence_path": "run-5feb3a0bf6824b90a6a0ff634db6b488/calls/m-d031b5f6a37141f1b515e59439f88da0/output.json"
+      },
+      {
+        "call_id": "m-f63c9a20056f4ac38b6e678da14fe68f",
+        "role": "repairer",
+        "status": "ok",
+        "evidence_path": "run-5feb3a0bf6824b90a6a0ff634db6b488/calls/m-f63c9a20056f4ac38b6e678da14fe68f/output.json"
+      }
+    ],
+    "loops": [
+      {
+        "round": 1,
+        "failure_class": "code_runtime_error",
+        "action": "locate",
+        "self_loop": {
+          "status": "planned",
+          "from_round": 1,
+          "to_round": 2,
+          "failure_class": "code_runtime_error",
+          "via": [
+            "locator",
+            "repairer"
+          ],
+          "evidence_id": "test-development-1",
+          "code_version": "sha256:cd2305e586b5ee59d20ee430bf296c7e7d3447c1947446cc60fadc062ab4dd6a",
+          "remaining_rounds": 2
+        },
+        "path": "run-5feb3a0bf6824b90a6a0ff634db6b488/trace/decisions/d-1.json"
+      },
+      {
+        "round": 2,
+        "failure_class": "code_runtime_error",
+        "action": "locate",
+        "self_loop": {
+          "status": "planned",
+          "from_round": 2,
+          "to_round": 3,
+          "failure_class": "code_runtime_error",
+          "via": [
+            "locator",
+            "repairer"
+          ],
+          "evidence_id": "test-development-2",
+          "code_version": "sha256:cd2305e586b5ee59d20ee430bf296c7e7d3447c1947446cc60fadc062ab4dd6a",
+          "remaining_rounds": 1
+        },
+        "path": "run-5feb3a0bf6824b90a6a0ff634db6b488/trace/decisions/d-2.json"
+      }
+    ],
+    "report_path": "run-5feb3a0bf6824b90a6a0ff634db6b488/report.json"
+  },
+  {
+    "project": "qb-next_palindrome",
+    "run_id": "run-ab4b130887334208bcc51dee6fd39262",
+    "status": "stopped",
+    "rounds": 3,
+    "role_counts": {
+      "locator": 2,
+      "detector": 2,
+      "scheduler": 2,
+      "repairer": 3
+    },
+    "calls": [
+      {
+        "call_id": "m-00c7c5520fab4aa592aefcc35863b609",
+        "role": "locator",
+        "status": "ok",
+        "evidence_path": "run-ab4b130887334208bcc51dee6fd39262/calls/m-00c7c5520fab4aa592aefcc35863b609/output.json"
+      },
+      {
+        "call_id": "m-094987469dc24a82b07df0dde65d4dad",
+        "role": "detector",
+        "status": "ok",
+        "evidence_path": "run-ab4b130887334208bcc51dee6fd39262/calls/m-094987469dc24a82b07df0dde65d4dad/output.json"
+      },
+      {
+        "call_id": "m-0b460ed04abf43848a8767f204051572",
+        "role": "locator",
+        "status": "ok",
+        "evidence_path": "run-ab4b130887334208bcc51dee6fd39262/calls/m-0b460ed04abf43848a8767f204051572/output.json"
+      },
+      {
+        "call_id": "m-6ec5f0acaa4d4c48a6458e6a0f0b75d4",
+        "role": "scheduler",
+        "status": "ok",
+        "evidence_path": "run-ab4b130887334208bcc51dee6fd39262/calls/m-6ec5f0acaa4d4c48a6458e6a0f0b75d4/output.json"
+      },
+      {
+        "call_id": "m-79dc027f8ec641b087d5a53ee80dd298",
+        "role": "repairer",
+        "status": "ok",
+        "evidence_path": "run-ab4b130887334208bcc51dee6fd39262/calls/m-79dc027f8ec641b087d5a53ee80dd298/output.json"
+      },
+      {
+        "call_id": "m-7f18e65c57e34797a01a5628cda32b2c",
+        "role": "repairer",
+        "status": "failed",
+        "evidence_path": "run-ab4b130887334208bcc51dee6fd39262/calls/m-7f18e65c57e34797a01a5628cda32b2c/output.json"
+      },
+      {
+        "call_id": "m-c5207b78c21b4c83a3d48b94a4e975d8",
+        "role": "repairer",
+        "status": "ok",
+        "evidence_path": "run-ab4b130887334208bcc51dee6fd39262/calls/m-c5207b78c21b4c83a3d48b94a4e975d8/output.json"
+      },
+      {
+        "call_id": "m-e32103caf7bf4b50aba194f3a0aadb65",
+        "role": "detector",
+        "status": "ok",
+        "evidence_path": "run-ab4b130887334208bcc51dee6fd39262/calls/m-e32103caf7bf4b50aba194f3a0aadb65/output.json"
+      },
+      {
+        "call_id": "m-f9179eec19784d5eadc67f0fbd93cfae",
+        "role": "scheduler",
+        "status": "ok",
+        "evidence_path": "run-ab4b130887334208bcc51dee6fd39262/calls/m-f9179eec19784d5eadc67f0fbd93cfae/output.json"
+      }
+    ],
+    "loops": [
+      {
+        "round": 1,
+        "failure_class": "assertion_failed",
+        "action": "locate",
+        "self_loop": {
+          "status": "planned",
+          "from_round": 1,
+          "to_round": 2,
+          "failure_class": "assertion_failed",
+          "via": [
+            "locator",
+            "repairer"
+          ],
+          "evidence_id": "test-development-1",
+          "code_version": "sha256:2efa0483dad0f39709acf42fa1cdee236844d90e8bc0a3053e2c52a3881ef7b5",
+          "remaining_rounds": 2
+        },
+        "path": "run-ab4b130887334208bcc51dee6fd39262/trace/decisions/d-1.json"
+      },
+      {
+        "round": 2,
+        "failure_class": "assertion_failed",
+        "action": "locate",
+        "self_loop": {
+          "status": "planned",
+          "from_round": 2,
+          "to_round": 3,
+          "failure_class": "assertion_failed",
+          "via": [
+            "locator",
+            "repairer"
+          ],
+          "evidence_id": "test-development-2",
+          "code_version": "sha256:2efa0483dad0f39709acf42fa1cdee236844d90e8bc0a3053e2c52a3881ef7b5",
+          "remaining_rounds": 1
+        },
+        "path": "run-ab4b130887334208bcc51dee6fd39262/trace/decisions/d-2.json"
+      }
+    ],
+    "report_path": "run-ab4b130887334208bcc51dee6fd39262/report.json"
+  },
+  {
+    "project": "qb-pascal",
+    "run_id": "run-f98cdcffebb34d628c042bb68dff3fa1",
+    "status": "success",
+    "rounds": 2,
+    "role_counts": {
+      "detector": 2,
+      "locator": 1,
+      "scheduler": 1,
+      "repairer": 2
+    },
+    "calls": [
+      {
+        "call_id": "m-51b4863e339f40a6970d9e129692d0d2",
+        "role": "detector",
+        "status": "ok",
+        "evidence_path": "run-f98cdcffebb34d628c042bb68dff3fa1/calls/m-51b4863e339f40a6970d9e129692d0d2/output.json"
+      },
+      {
+        "call_id": "m-673043c85546403f823179f2331345b9",
+        "role": "detector",
+        "status": "ok",
+        "evidence_path": "run-f98cdcffebb34d628c042bb68dff3fa1/calls/m-673043c85546403f823179f2331345b9/output.json"
+      },
+      {
+        "call_id": "m-765cb972d7974ae8b5382bb6693c9d9e",
+        "role": "locator",
+        "status": "ok",
+        "evidence_path": "run-f98cdcffebb34d628c042bb68dff3fa1/calls/m-765cb972d7974ae8b5382bb6693c9d9e/output.json"
+      },
+      {
+        "call_id": "m-93c8dac1db854f48ad85594b26575718",
+        "role": "scheduler",
+        "status": "ok",
+        "evidence_path": "run-f98cdcffebb34d628c042bb68dff3fa1/calls/m-93c8dac1db854f48ad85594b26575718/output.json"
+      },
+      {
+        "call_id": "m-95694c7d567442c08a76bb0faf5ca18a",
+        "role": "repairer",
+        "status": "ok",
+        "evidence_path": "run-f98cdcffebb34d628c042bb68dff3fa1/calls/m-95694c7d567442c08a76bb0faf5ca18a/output.json"
+      },
+      {
+        "call_id": "m-f18284dfc612417da2570997aef610c4",
+        "role": "repairer",
+        "status": "ok",
+        "evidence_path": "run-f98cdcffebb34d628c042bb68dff3fa1/calls/m-f18284dfc612417da2570997aef610c4/output.json"
+      }
+    ],
+    "loops": [
+      {
+        "round": 1,
+        "failure_class": "assertion_failed",
+        "action": "locate",
+        "self_loop": {
+          "status": "planned",
+          "from_round": 1,
+          "to_round": 2,
+          "failure_class": "assertion_failed",
+          "via": [
+            "locator",
+            "repairer"
+          ],
+          "evidence_id": "test-development-1",
+          "code_version": "sha256:10a9053f74cc5517712ae294e27ba0dfe451106e2064dc362c5444644041353a",
+          "remaining_rounds": 2
+        },
+        "path": "run-f98cdcffebb34d628c042bb68dff3fa1/trace/decisions/d-1.json"
+      }
+    ],
+    "report_path": "run-f98cdcffebb34d628c042bb68dff3fa1/report.json"
+  }
+]

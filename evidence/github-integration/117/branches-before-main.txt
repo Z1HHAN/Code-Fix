@@ -1,0 +1,5 @@
+Local tracking refs after successful pushes and preceding remote ls-remote verification:
+155ce3b27fe486791d9281af3d967c435797e61d refs/remotes/origin/codex/multi-agent-contracts-109
+94ae20f8a50173eb20359fdb459c7958b64a8413 refs/remotes/origin/codex/single-multi-experiment-111
+ac66b325f4d0d1897a0d1669f0fec858004e2abb refs/remotes/origin/codex/transport-budget-112
+f28318ad8bbdd456b3b78f5c86bfb69fa2a69b36 refs/remotes/origin/main

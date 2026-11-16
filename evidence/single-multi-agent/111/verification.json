@@ -1,0 +1,155 @@
+{
+  "scope": "complete original80 paired runs, five non-successes preserved; separate recovery113",
+  "experiment_commit": "5d720e325863622d3d7367321985ea2c79da1d2f",
+  "application_commit": "6d191a3",
+  "python": {
+    "passed": 810,
+    "skipped": 1,
+    "failed": 0
+  },
+  "node_passed": 78,
+  "gates_passed": 26,
+  "automatic_controls": 12,
+  "offline_browser": "40 rows, two cards, wide/narrow, no writes or JS errors",
+  "real_replay_browser": "same checks plus actual report read and PNG export; no model calls",
+  "packaged_desktop": "startup, IPC save, encrypted reload, bundled backend and zero tasks passed",
+  "backend_files": 331,
+  "backend_source_sha256": "b878b6a20cc30b58ec5bdd200d2f2ad8bcbb09b6811623f2016c20647739f85d",
+  "packages": {
+    "CodeFix-Portable-0.3.0-dev-x64.exe": {
+      "bytes": 123738557,
+      "sha256": "082b9e26dbb04aa85842f393c24d10fa69bab430ad6afd7f5eccd9ad74c4b3dc",
+      "local_path": "C:/Users/lenovo/.codex/worktrees/8525/Code Fix/runs/experiment111/desktop/dist-experiment-111-final/CodeFix-Portable-0.3.0-dev-x64.exe"
+    },
+    "CodeFix-Setup-0.3.0-dev-x64.exe": {
+      "bytes": 137775007,
+      "sha256": "b468d48dcf0a03ceb8de8acc9d6f6c70a0fcc5fa75855f77ebfdad208f206f25",
+      "local_path": "C:/Users/lenovo/.codex/worktrees/8525/Code Fix/runs/experiment111/desktop/dist-experiment-111-final/CodeFix-Setup-0.3.0-dev-x64.exe"
+    }
+  },
+  "real_batch": {
+    "batch_complete": true,
+    "planned_tasks_per_arm": 40,
+    "completed_runs": 80,
+    "remaining_runs": 0,
+    "matched_complete_pairs": 40,
+    "paired": {
+      "single": {
+        "paired_tasks": 40,
+        "success": 38,
+        "requests": 49,
+        "candidate_rounds": 48,
+        "estimated_cny": "0.147057",
+        "elapsed_seconds": 1366.431745
+      },
+      "dynamic": {
+        "paired_tasks": 40,
+        "success": 37,
+        "requests": 98,
+        "candidate_rounds": 43,
+        "estimated_cny": null,
+        "elapsed_seconds": 1577.472031
+      }
+    },
+    "all_plan_summary": {
+      "single": {
+        "planned": 40,
+        "ran": 40,
+        "executed": 40,
+        "success": 38,
+        "failed": 2,
+        "blocked": 0,
+        "not_run": 0,
+        "success_rate_all": 0.95,
+        "success_rate_executed": 0.95,
+        "candidate_rounds": 48,
+        "requests": 49,
+        "cost": {
+          "cny": {
+            "known_subtotal": "0.147057",
+            "unknown_runs": 0,
+            "total": "0.147057"
+          },
+          "usd": {
+            "known_subtotal": "0",
+            "unknown_runs": 0,
+            "total": null
+          }
+        }
+      },
+      "dynamic": {
+        "planned": 40,
+        "ran": 40,
+        "executed": 40,
+        "success": 37,
+        "failed": 3,
+        "blocked": 0,
+        "not_run": 0,
+        "success_rate_all": 0.925,
+        "success_rate_executed": 0.925,
+        "candidate_rounds": 43,
+        "requests": 98,
+        "cost": {
+          "cny": {
+            "known_subtotal": "0.286201",
+            "unknown_runs": 1,
+            "total": null
+          },
+          "usd": {
+            "known_subtotal": "0",
+            "unknown_runs": 0,
+            "total": null
+          }
+        }
+      }
+    },
+    "paired_outcomes": {
+      "both_success": 36,
+      "first_only": 2,
+      "second_only": 1,
+      "neither_success": 1,
+      "incomplete": 0
+    },
+    "observed_agent_calls": {
+      "single": {
+        "repairer": 49
+      },
+      "dynamic": {
+        "detector": 43,
+        "repairer": 45,
+        "scheduler": 5,
+        "locator": 5
+      }
+    },
+    "failure_classes": {
+      "single": {
+        "stopped": 1,
+        "invalid_model_output": 1
+      },
+      "dynamic": {
+        "model_transport_error": 2,
+        "invalid_model_output": 1
+      }
+    },
+    "authorization": {
+      "requests": 304,
+      "estimated_cny": "2.244721",
+      "unknown_or_pending": 0,
+      "held_unknown": 1,
+      "held_upper_cny": "0.084076",
+      "budget_committed_upper_cny": "2.328797"
+    },
+    "new_requests": 147,
+    "new_known_estimated_cny": "0.433258",
+    "source_commit": "5d720e325863622d3d7367321985ea2c79da1d2f",
+    "stop_reason": null,
+    "comparison_id": "cmp-e9de35fdb1220caf3f6eee7bfc1c200940f8065f5e31c9ac28064394dd90be63",
+    "model": "deepseek-v4.1-flash-1017",
+    "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+    "batch_wall_seconds_including_operator_wait": 10729.140487,
+    "interpretation": "One run per arm/task. Do not claim superiority from implementation or coverage alone; include infrastructure exits and cost."
+  },
+  "budget_state": "unknown fee; no further requests until user verifies supplier usage",
+  "publication": "local branch only; not pushed or merged into main",
+  "verified_at": "2026-11-15T14:27:02.804549+00:00"
+}

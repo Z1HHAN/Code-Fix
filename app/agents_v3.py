@@ -78,14 +78,19 @@ class AgentGateway:
     def __init__(self, model, store, config=None):
         self.model, self.store = model, store
         self.config = config or RoleConfig(ROOT)
+        from .agent_team import create_team
+        self.agents = create_team()
 
-    def invoke(self, role, *, run_id, round_number, code, evidence, version, work, task, deadline, extra=None, trace=None):
+    def invoke(self, role, *, run_id, round_number, code, evidence, version, work, task, deadline, extra=None, trace=None, handoffs=()):
         if role not in ROLES or evidence['phase'] != 'development' or evidence['code_version'] != version:
             raise InvalidModelOutput('角色或当前开发证据不匹配')
         allowed_evidence = {'evidence_id', 'phase', 'code_version', 'failure_class', 'summary'}
         if set(evidence) - allowed_evidence:
             raise InvalidModelOutput('开发证据包含未批准字段')
         agent = self.config.require(role)
+        runtime_agent = self.agents[role]
+        contract = runtime_agent.contract(self.config)
+        upstream = runtime_agent.inputs(handoffs, evidence, version)
         definition = get_task(task.get('project', 'leap'))
         source = definition.source
         ids = tuple(k for k in definition.data['knowledge_ids'] if k in agent['knowledge_ids'])
@@ -99,6 +104,8 @@ class AgentGateway:
                     'current_code': {source: shown_code}, 'source_context': context_info, 'dev_evidence': [evidence],
                     'knowledge_context': knowledge, 'location_json': extra if role == 'repairer' else None,
                     'previous_analysis': extra if role != 'repairer' else None}
+        material['agent_contract'] = contract
+        material['upstream_results'] = upstream
         if definition.data.get('registered_contract'):
             material['task']['registered_contract'] = definition.data['registered_contract']
         # Only explicitly registered interface helpers, never reference answers,
@@ -118,6 +125,14 @@ class AgentGateway:
         safe = getattr(self.model, 'redact', lambda x: x)
         provenance = self.config.provenance(role)
         from .role_config import digest
+        provenance['agent_instance_id'] = f'{run_id}:{role}'
+        provenance['agent_contract'] = contract
+        provenance['agent_contract_sha256'] = digest(contract)
+        provenance['handoffs'] = [{k: item[k] for k in ('agent_id', 'call_id', 'step_id',
+            'artifact_path', 'code_version', 'evidence_id', 'output_sha256')} for item in upstream]
+        for reference, item in zip(provenance['handoffs'], upstream):
+            if 'dispatch_instruction' in item:
+                reference['dispatch_instruction'] = item['dispatch_instruction']
         provenance['messages_sha256'] = digest(messages)
         provenance['task_instruction_sha256'] = digest(override.get('task_instruction', ''))
         provenance['model_binding'] = {'model_ref': agent['model_ref'], **self.config.snapshot['models'][agent['model_ref']],

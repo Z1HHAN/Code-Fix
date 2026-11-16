@@ -1,0 +1,2475 @@
+{
+  "schema_version": "v3",
+  "run": {
+    "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+    "task": {
+      "config_id": "cfg-a27c6a7bb63ac54c51f649cf38eb4acd17abda2a9694a13da0199c8ebdc4850a",
+      "description": "修复kheapsort缺陷，使预登记的原生测试通过；不修改测试。",
+      "max_calls": 12,
+      "max_rounds": 3,
+      "mode": "repair",
+      "project": "qb-kheapsort",
+      "strategy": "dynamic",
+      "total_seconds": 300
+    },
+    "status": "success",
+    "created_at": "2026-11-15T15:09:04.940815+00:00",
+    "updated_at": "2026-11-15T15:09:38.245300+00:00",
+    "result": {
+      "final_result": "passed",
+      "dev_result": "passed",
+      "rounds_used": 1,
+      "model_calls": 2,
+      "tool_calls": 3,
+      "model_api_called": true,
+      "mode": "live",
+      "isolation_ready": true,
+      "strategy": "dynamic",
+      "project": "qb-kheapsort",
+      "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+      "code_path": "candidate-1/python_programs/kheapsort.py",
+      "evidence_matches_current_version": true,
+      "baseline_failure_class": "assertion_failed",
+      "failure_class": "passed",
+      "rule_id": "R07",
+      "reason": "开发测试及干净副本同套原生测试均实际通过",
+      "model_attempts": 2,
+      "actual_model_requests": 2,
+      "cost": {
+        "calls": 2,
+        "status": "estimated",
+        "basis": "versioned_model_rates; not_provider_invoice",
+        "models": [
+          {
+            "model": "deepseek-v4.1-flash-1017",
+            "currency": "CNY",
+            "status": "estimated",
+            "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+            "upper_estimate": false
+          },
+          {
+            "model": "deepseek-v4.1-flash-1017",
+            "currency": "CNY",
+            "status": "estimated",
+            "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+            "upper_estimate": false
+          }
+        ],
+        "currency": "CNY",
+        "amount_cny": "0.004421",
+        "reserved_cny": "0"
+      },
+      "trace_version": "1.0.0"
+    },
+    "control": null,
+    "archived_at": null
+  },
+  "events": [
+    {
+      "sequence": 4159,
+      "created_at": "2026-11-15T15:09:05.020364+00:00",
+      "event": "started"
+    },
+    {
+      "sequence": 4160,
+      "created_at": "2026-11-15T15:09:05.175627+00:00",
+      "event": "guard_check",
+      "step_id": "configuration-check",
+      "node_id": "configuration_check",
+      "status": "ok",
+      "reason": "角色配置、提示词和输出协议检查通过"
+    },
+    {
+      "sequence": 4161,
+      "created_at": "2026-11-15T15:09:05.950988+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-0d5c69f0006047f6a6c90ccd05ee7156",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "dynamic",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 4162,
+      "created_at": "2026-11-15T15:09:11.197813+00:00",
+      "event": "isolation_checked",
+      "isolation_ready": true,
+      "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+      "reason": null,
+      "engine_id": "82a0558b-2dfa-48b6-86f2-de3c8937dc79",
+      "controls": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "none",
+          "Config": {}
+        },
+        "NetworkMode": "none",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "host",
+        "Dns": null,
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "Tmpfs": {
+          "/tmp": "rw,noexec,nosuid,size=67108864"
+        },
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 268435456,
+        "NanoCpus": 1000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 268435456,
+        "MemorySwappiness": null,
+        "OomKillDisable": false,
+        "PidsLimit": 64,
+        "Ulimits": [
+          {
+            "Name": "nofile",
+            "Hard": 128,
+            "Soft": 128
+          }
+        ],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/rpc_codec.py",
+            "Target": "/rpc_codec.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "volume",
+            "Source": "codefix-out-c1c7ebde9bfb4d29bfc20bd293a9700d",
+            "Target": "/out"
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix-data/jobs/job-6bec5abf49a246e8b27bc490d6252fda/isolation/probe-work",
+            "Target": "/w",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/c_runner/pytest_entry.py",
+            "Target": "/entry.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/candidate_entry.py",
+            "Target": "/harness.py",
+            "ReadOnly": true
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+      "execution_mode": "remote-docker",
+      "execution_endpoint": "https://8.148.85.237",
+      "remote_job_id": "job-6bec5abf49a246e8b27bc490d6252fda",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 4163,
+      "created_at": "2026-11-15T15:09:11.228638+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-0d5c69f0006047f6a6c90ccd05ee7156",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "status": "ok",
+      "evidence_path": "isolation",
+      "isolation_ready": true,
+      "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+      "reason": null,
+      "engine_id": "82a0558b-2dfa-48b6-86f2-de3c8937dc79",
+      "controls": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "none",
+          "Config": {}
+        },
+        "NetworkMode": "none",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "host",
+        "Dns": null,
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "Tmpfs": {
+          "/tmp": "rw,noexec,nosuid,size=67108864"
+        },
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 268435456,
+        "NanoCpus": 1000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 268435456,
+        "MemorySwappiness": null,
+        "OomKillDisable": false,
+        "PidsLimit": 64,
+        "Ulimits": [
+          {
+            "Name": "nofile",
+            "Hard": 128,
+            "Soft": 128
+          }
+        ],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/rpc_codec.py",
+            "Target": "/rpc_codec.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "volume",
+            "Source": "codefix-out-c1c7ebde9bfb4d29bfc20bd293a9700d",
+            "Target": "/out"
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix-data/jobs/job-6bec5abf49a246e8b27bc490d6252fda/isolation/probe-work",
+            "Target": "/w",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/c_runner/pytest_entry.py",
+            "Target": "/entry.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/candidate_entry.py",
+            "Target": "/harness.py",
+            "ReadOnly": true
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+      "execution_mode": "remote-docker",
+      "execution_endpoint": "https://8.148.85.237",
+      "remote_job_id": "job-6bec5abf49a246e8b27bc490d6252fda",
+      "transport_mode": "live",
+      "duration_ms": 5270
+    },
+    {
+      "sequence": 4164,
+      "created_at": "2026-11-15T15:09:12.110290+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-29a68076aee2425f8e993055f6d7c6db",
+      "parent_step_id": "s-0d5c69f0006047f6a6c90ccd05ee7156",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 4165,
+      "created_at": "2026-11-15T15:09:18.211164+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-29a68076aee2425f8e993055f6d7c6db",
+      "parent_step_id": "s-0d5c69f0006047f6a6c90ccd05ee7156",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "evidence_id": "test-baseline",
+      "evidence_path": "baseline",
+      "call_id": "codefix-1ac3137c88954b4d8bb0bebb20af378b",
+      "exit_code": 1,
+      "timed_out": false,
+      "duration_ms": 769,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-059531ccd226461eaf889143e5bc9e31,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-1ac3137c88954b4d8bb0bebb20af378b",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-e6f750b7cfe944d4af60777e19c38c8b,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-7fee8abd5a78428ea76b64d321e66dbf/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_kheapsort.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-e6f750b7cfe944d4af60777e19c38c8b",
+      "code_version": "sha256:fd639bfe45eba96a5a72e5edb4b4cfff7d6e693f68dfacb90510553ba8f8ba93",
+      "project": "qb-kheapsort",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "expected_test_count": 4,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-9ba491e5c72640a398df09de94b186bc",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 4,
+        "passed": 1,
+        "failed": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "failed",
+      "verification_status": "failed",
+      "failure_class": "assertion_failed",
+      "reason": "Frozen native fixture tests completed with a recorded failure",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data0-expected0]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data1-expected1]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data2-expected2]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data3-expected3]"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data0-expected0]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data1-expected1]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data2-expected2]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data3-expected3]"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_kheapsort",
+            "test_kheapsort[input_data0-expected0]"
+          ],
+          [
+            "python_testcases.test_kheapsort",
+            "test_kheapsort[input_data1-expected1]"
+          ],
+          [
+            "python_testcases.test_kheapsort",
+            "test_kheapsort[input_data2-expected2]"
+          ],
+          [
+            "python_testcases.test_kheapsort",
+            "test_kheapsort[input_data3-expected3]"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-7fee8abd5a78428ea76b64d321e66dbf",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 4166,
+      "created_at": "2026-11-15T15:09:18.256232+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-29a68076aee2425f8e993055f6d7c6db",
+      "parent_step_id": "s-0d5c69f0006047f6a6c90ccd05ee7156",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "status": "ok",
+      "verification_status": "failed",
+      "evidence_id": "test-baseline",
+      "failure_class": "assertion_failed",
+      "evidence_path": "baseline",
+      "code_version": "sha256:fd639bfe45eba96a5a72e5edb4b4cfff7d6e693f68dfacb90510553ba8f8ba93",
+      "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "registered_test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "duration_ms": 6141
+    },
+    {
+      "sequence": 4167,
+      "created_at": "2026-11-15T15:09:18.327662+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-9f68e5981e794ac8a0f31f0e962f2c02",
+      "parent_step_id": "s-29a68076aee2425f8e993055f6d7c6db",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 4168,
+      "created_at": "2026-11-15T15:09:21.545624+00:00",
+      "event": "guard_check",
+      "step_id": "m-f11c6212c67d4ea38e09da17e92a90b5-budget",
+      "parent_step_id": "s-9f68e5981e794ac8a0f31f0e962f2c02",
+      "node_id": "budget_check",
+      "role": "repairer",
+      "round": 1,
+      "code_version": "sha256:fd639bfe45eba96a5a72e5edb4b4cfff7d6e693f68dfacb90510553ba8f8ba93",
+      "status": "ok",
+      "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+    },
+    {
+      "sequence": 4169,
+      "created_at": "2026-11-15T15:09:21.575921+00:00",
+      "event": "guard_check",
+      "check": "patch_permission",
+      "step_id": "m-f11c6212c67d4ea38e09da17e92a90b5-permission",
+      "parent_step_id": "s-9f68e5981e794ac8a0f31f0e962f2c02",
+      "node_id": "permission_check",
+      "round": 1,
+      "code_version": "sha256:fd639bfe45eba96a5a72e5edb4b4cfff7d6e693f68dfacb90510553ba8f8ba93",
+      "status": "ok",
+      "reason": "补丁路径及结构检查通过"
+    },
+    {
+      "sequence": 4170,
+      "created_at": "2026-11-15T15:09:21.702833+00:00",
+      "event": "agent_call",
+      "role": "repairer",
+      "mode": "live",
+      "model_api_called": true,
+      "model": "deepseek-v4.1-flash-1017",
+      "call_id": "m-f11c6212c67d4ea38e09da17e92a90b5",
+      "status": "ok",
+      "provider_id": "personal",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "usage": {
+        "prompt_tokens": 2214,
+        "total_tokens": 2426,
+        "completion_tokens": 212,
+        "prompt_tokens_details": {
+          "cached_tokens": 1536,
+          "image_tokens": 0,
+          "text_tokens": 2214
+        },
+        "completion_tokens_details": {
+          "text_tokens": 212
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount_cny": "0.00168",
+        "currency": "CNY",
+        "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+        "upper_estimate": false,
+        "basis": "versioned_model_rates; not_provider_invoice"
+      },
+      "attempts": 1,
+      "max_attempts": 1,
+      "transport_request_started": true,
+      "failure_class": null,
+      "budget_check": {
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      "provider_model": "deepseek-v4.1-flash-1017",
+      "provider_response_id": "chatcmpl-2b70f233-98e5-9a5a-af6e-d91b759763ab",
+      "finish_reason": "stop",
+      "raw_text": "{\"changes\":[{\"path\":\"python_programs/kheapsort.py\",\"edits\":[{\"old\":\"    heap = arr[:k]\\n    heapq.heapify(heap)\\n\\n    for x in arr:\\n        yield heapq.heappushpop(heap, x)\\n\",\"new\":\"    heap = arr[:k]\\n    heapq.heapify(heap)\\n\\n    for x in arr[k:]:\\n        yield heapq.heappushpop(heap, x)\\n\"}]}],\"explanation\":\"原实现对整个 arr（含前 k 个已在堆中的元素）再次 heappushpop，导致这些元素被重复处理并提前弹出错误元素。修复为只遍历 arr[k:]，前 k 个元素已在堆中，之后用 heappushpop 逐个加入并产出最小元素，最后弹出剩余堆元素，得到完整有序序列。\",\"evidence_ids\":[\"test-baseline\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+      "duration_ms": 3150,
+      "code_version": "sha256:fd639bfe45eba96a5a72e5edb4b4cfff7d6e693f68dfacb90510553ba8f8ba93",
+      "round": 1,
+      "provenance": {
+        "role_override": {
+          "task_instruction": "",
+          "generation": {
+            "max_output_tokens": 8192,
+            "enable_thinking": false
+          }
+        },
+        "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "locator": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "repairer": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "detector": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "scheduler": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "locator",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "repairer",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "detector",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "scheduler",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+        "prompt_ref": "prompts/repairer.md",
+        "prompt_sha256": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+        "system_prompt_sha256": "279bac1d22413b8ccf15b26d768a0f65fb210d7347fe57a0b0284e1427f95635",
+        "agent_instance_id": "run-057fe512f8734bf5904e76fee3685b38:repairer",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "repairer",
+          "title": "修复员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [
+            "detector",
+            "scheduler",
+            "locator"
+          ],
+          "produces": "candidate_changes",
+          "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+          "output_schema": "RepairOutput",
+          "permitted_action": "propose_source_patch",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "8fa1a2ef8fde348f27a5ce1862ed65bce4eea9d6207d4091083355cf3e8ae3ef",
+        "handoffs": [],
+        "messages_sha256": "009c518da4117eed9f27c3169792a198767a718bbd87e48f23f4b347af40a01c",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "repairer",
+          "binding": "approved_profile",
+          "profile_ref": "personal_model",
+          "mode": "live",
+          "provider_id": "personal",
+          "model": "deepseek-v4.1-flash-1017",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+          "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+          "effective_parameters": {
+            "max_tokens": 8192,
+            "enable_thinking": false
+          },
+          "request_seconds": 60,
+          "daily_shared_usd": null,
+          "input_usd_per_million": null,
+          "output_usd_per_million": null,
+          "effective_parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481",
+          "currency": "CNY",
+          "personal_pricing": {
+            "provider": "qianwen-ai",
+            "model": "deepseek-v4.1-flash-1017",
+            "region": "platform-standard",
+            "mode": "thinking",
+            "currency": "CNY",
+            "unit": "per_million_tokens",
+            "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+            "verified_at": "2026-11-11",
+            "endpoint_host": "maas.qianwenaiapi.com",
+            "tiers": [
+              {
+                "max_input_tokens": 1000000,
+                "input": "2",
+                "output": "8",
+                "cached_input": "0.2"
+              }
+            ],
+            "offpeak_discount": "0.5",
+            "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+          },
+          "daily_limit": "5",
+          "monetary_budget_enabled": true
+        }
+      },
+      "step_id": "s-9f68e5981e794ac8a0f31f0e962f2c02",
+      "parent_step_id": "s-29a68076aee2425f8e993055f6d7c6db",
+      "parsed_output": {
+        "changes": [
+          {
+            "path": "python_programs/kheapsort.py",
+            "new_content": "def kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n\n\n\"\"\"\nK-Heapsort\nk-heapsort\n\nSorts an almost-sorted array, wherein every element is no more than k units from its sorted position, in O(n log k) time.\n\nInput:\n    arr: A list of ints\n    k: an int indicating the maximum displacement of an element in arr from its final sorted location\n\nPreconditions:\n    The elements of arr are unique.\n    Each element in arr is at most k places from its sorted position.\n\nOutput:\n    A generator that yields the elements of arr in sorted order\n\nExample:\n    >>> list(kheapsort([3, 2, 1, 5, 4], 2))\n    [1, 2, 3, 4, 5]\n    >>> list(kheapsort([5, 4, 3, 2, 1], 4))\n    [1, 2, 3, 4, 5]\n    >>> list(kheapsort([1, 2, 3, 4, 5], 0))\n    [1, 2, 3, 4, 5]\n\"\"\"\n"
+          }
+        ],
+        "explanation": "原实现对整个 arr（含前 k 个已在堆中的元素）再次 heappushpop，导致这些元素被重复处理并提前弹出错误元素。修复为只遍历 arr[k:]，前 k 个元素已在堆中，之后用 heappushpop 逐个加入并产出最小元素，最后弹出剩余堆元素，得到完整有序序列。",
+        "evidence_ids": [
+          "test-baseline"
+        ],
+        "knowledge_citations": [
+          "knowledge-public_tasks",
+          "knowledge-testing"
+        ]
+      }
+    },
+    {
+      "sequence": 4171,
+      "created_at": "2026-11-15T15:09:21.734976+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-9f68e5981e794ac8a0f31f0e962f2c02",
+      "parent_step_id": "s-29a68076aee2425f8e993055f6d7c6db",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "call_id": "m-f11c6212c67d4ea38e09da17e92a90b5",
+      "artifact_path": "calls/m-f11c6212c67d4ea38e09da17e92a90b5",
+      "code_version": "sha256:fd639bfe45eba96a5a72e5edb4b4cfff7d6e693f68dfacb90510553ba8f8ba93",
+      "failure_class": null,
+      "agent_instance_id": "run-057fe512f8734bf5904e76fee3685b38:repairer",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "repairer",
+        "title": "修复员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [
+          "detector",
+          "scheduler",
+          "locator"
+        ],
+        "produces": "candidate_changes",
+        "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+        "output_schema": "RepairOutput",
+        "permitted_action": "propose_source_patch",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": null,
+      "duration_ms": 3403
+    },
+    {
+      "sequence": 4172,
+      "created_at": "2026-11-15T15:09:21.757507+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-f2c698239ffb40cfbd8a9c7cb46376d6",
+      "parent_step_id": "s-9f68e5981e794ac8a0f31f0e962f2c02",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 4173,
+      "created_at": "2026-11-15T15:09:21.830772+00:00",
+      "event": "candidate_applied",
+      "round": 1,
+      "project": "qb-kheapsort",
+      "base_version": "sha256:fd639bfe45eba96a5a72e5edb4b4cfff7d6e693f68dfacb90510553ba8f8ba93",
+      "candidate_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+      "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "frozen_file_sha256": {
+        "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+        "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+        "python_testcases/test_kheapsort.py": "7751ea3a7611406695c84ed254eddc2afdc17eb3e5962bb9a494b3a307953d7a",
+        "json_testcases/kheapsort.json": "5eba97aecaf8a73fbdddce4f45f96bb8bd1bee151582ac18d79504f49eb22de0",
+        "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+      },
+      "changes": [
+        {
+          "path": "python_programs/kheapsort.py",
+          "new_content": "def kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n\n\n\"\"\"\nK-Heapsort\nk-heapsort\n\nSorts an almost-sorted array, wherein every element is no more than k units from its sorted position, in O(n log k) time.\n\nInput:\n    arr: A list of ints\n    k: an int indicating the maximum displacement of an element in arr from its final sorted location\n\nPreconditions:\n    The elements of arr are unique.\n    Each element in arr is at most k places from its sorted position.\n\nOutput:\n    A generator that yields the elements of arr in sorted order\n\nExample:\n    >>> list(kheapsort([3, 2, 1, 5, 4], 2))\n    [1, 2, 3, 4, 5]\n    >>> list(kheapsort([5, 4, 3, 2, 1], 4))\n    [1, 2, 3, 4, 5]\n    >>> list(kheapsort([1, 2, 3, 4, 5], 0))\n    [1, 2, 3, 4, 5]\n\"\"\"\n"
+        }
+      ],
+      "test_sha256": {
+        "python_testcases/test_kheapsort.py": "7751ea3a7611406695c84ed254eddc2afdc17eb3e5962bb9a494b3a307953d7a"
+      }
+    },
+    {
+      "sequence": 4174,
+      "created_at": "2026-11-15T15:09:21.848565+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-f2c698239ffb40cfbd8a9c7cb46376d6",
+      "parent_step_id": "s-9f68e5981e794ac8a0f31f0e962f2c02",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+      "artifact_path": "patch-1",
+      "duration_ms": 88
+    },
+    {
+      "sequence": 4175,
+      "created_at": "2026-11-15T15:09:21.871114+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-0d4904c285994b309439b376622e3608",
+      "parent_step_id": "s-f2c698239ffb40cfbd8a9c7cb46376d6",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 4176,
+      "created_at": "2026-11-15T15:09:26.550572+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-0d4904c285994b309439b376622e3608",
+      "parent_step_id": "s-f2c698239ffb40cfbd8a9c7cb46376d6",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "evidence_id": "test-development-1",
+      "evidence_path": "development-1",
+      "call_id": "codefix-d78d8663388342eb83a269ba2938e4a7",
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_ms": 854,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-124a0d578da04788810f47dde84461e7,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-d78d8663388342eb83a269ba2938e4a7",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-82cc90ad0b5c4782b03c7018dc5ed20c,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-4b2f6b730d5a4048be34dbd14f885b25/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_kheapsort.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-82cc90ad0b5c4782b03c7018dc5ed20c",
+      "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+      "project": "qb-kheapsort",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "expected_test_count": 4,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-78c5fa9691434787b1a934175ba3996b",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 4,
+        "passed": 4,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "ok",
+      "verification_status": "passed",
+      "failure_class": "passed",
+      "reason": "Expected identities and complete lifecycle verified against JUnit",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data0-expected0]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data1-expected1]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data2-expected2]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data3-expected3]"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data0-expected0]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data1-expected1]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data2-expected2]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data3-expected3]"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_kheapsort",
+            "test_kheapsort[input_data0-expected0]"
+          ],
+          [
+            "python_testcases.test_kheapsort",
+            "test_kheapsort[input_data1-expected1]"
+          ],
+          [
+            "python_testcases.test_kheapsort",
+            "test_kheapsort[input_data2-expected2]"
+          ],
+          [
+            "python_testcases.test_kheapsort",
+            "test_kheapsort[input_data3-expected3]"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-4b2f6b730d5a4048be34dbd14f885b25",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 4177,
+      "created_at": "2026-11-15T15:09:26.590844+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-0d4904c285994b309439b376622e3608",
+      "parent_step_id": "s-f2c698239ffb40cfbd8a9c7cb46376d6",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "verification_status": "passed",
+      "evidence_id": "test-development-1",
+      "failure_class": "passed",
+      "evidence_path": "development-1",
+      "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+      "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "registered_test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "duration_ms": 4710
+    },
+    {
+      "sequence": 4178,
+      "created_at": "2026-11-15T15:09:26.660357+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-55d4bab077824e38a138e0e37f07ab49",
+      "parent_step_id": "s-0d4904c285994b309439b376622e3608",
+      "node_id": "detector",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 4179,
+      "created_at": "2026-11-15T15:09:31.742988+00:00",
+      "event": "guard_check",
+      "step_id": "m-90f22b915d154327b3837d9264b670d8-budget",
+      "parent_step_id": "s-55d4bab077824e38a138e0e37f07ab49",
+      "node_id": "budget_check",
+      "role": "detector",
+      "round": 1,
+      "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+      "status": "ok",
+      "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+    },
+    {
+      "sequence": 4180,
+      "created_at": "2026-11-15T15:09:31.778960+00:00",
+      "event": "agent_call",
+      "role": "detector",
+      "mode": "live",
+      "model_api_called": true,
+      "model": "deepseek-v4.1-flash-1017",
+      "call_id": "m-90f22b915d154327b3837d9264b670d8",
+      "status": "ok",
+      "provider_id": "personal",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "usage": {
+        "prompt_tokens": 1553,
+        "total_tokens": 1850,
+        "completion_tokens": 297,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "image_tokens": 0,
+          "text_tokens": 1553
+        },
+        "completion_tokens_details": {
+          "text_tokens": 297
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount_cny": "0.002741",
+        "currency": "CNY",
+        "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+        "upper_estimate": false,
+        "basis": "versioned_model_rates; not_provider_invoice"
+      },
+      "attempts": 1,
+      "max_attempts": 1,
+      "transport_request_started": true,
+      "failure_class": null,
+      "budget_check": {
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      "provider_model": "deepseek-v4.1-flash-1017",
+      "provider_response_id": "chatcmpl-5ea9a3b7-f471-95a2-ba79-06e95cc7153e",
+      "finish_reason": "stop",
+      "raw_text": "{\"analysis\":\"提供的唯一开发证据显示当前候选代码（sha256:b033cb...）在4条原生kheapsort测试上全部通过：collected=4、passed=4、failed=0、errors=0，退出码0，日志出现CODEFIX_READY。因此本候选不存在可归因的失败原因，失败分类应为passed。无法进一步验证代码正确性细节：测试参数与断言被脱敏，证据只表明这4条公开开发用例通过。注意代码分析显示当前实现按文档需要arr[:k]作为初始堆，而非arr[:k+1]，对k位移保证是否在所有输入下充分存在潜在疑虑，但没有任何失败证据支持修改，且我不能读取参考实现或隐藏测试。按知识规则，开发测试通过不能宣称对所有输入都正确，也不能代替干净副本的独立复验。\",\"failure_class\":\"passed\",\"suggested_checks\":[\"由执行器在干净起点应用本候选后重跑同一组冻结的原生测试，确认可复现4/4通过\",\"如需增强信心，可在允许的开发反馈范围内补充与k位移边界相关的原生测试（由测试方决定，模型不得修改测试）\",\"核对证据中code_version与当前候选文件哈希是否一致，以排除证据错配\"],\"evidence_ids\":[\"test-development-1\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+      "duration_ms": 5016,
+      "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+      "round": 1,
+      "provenance": {
+        "role_override": {
+          "task_instruction": "",
+          "generation": {
+            "max_output_tokens": 2048,
+            "enable_thinking": false
+          }
+        },
+        "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "locator": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "repairer": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "detector": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "scheduler": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "locator",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "repairer",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "detector",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "scheduler",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+        "prompt_ref": "prompts/detector.md",
+        "prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+        "system_prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+        "agent_instance_id": "run-057fe512f8734bf5904e76fee3685b38:detector",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "detector",
+          "title": "检测员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [],
+          "produces": "failure_analysis",
+          "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+          "output_schema": "DetectorOutput",
+          "permitted_action": "analyse_tool_evidence",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "3ab70fbb58a74bbfb1b4aca2d411143ae86aed05a136bf5ca9df020d682ac9dd",
+        "handoffs": [],
+        "messages_sha256": "40b9f788c311eba2acf656b671a38accec2826c083e154a4bf9fd169f13da127",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "detector",
+          "binding": "approved_profile",
+          "profile_ref": "personal_model",
+          "mode": "live",
+          "provider_id": "personal",
+          "model": "deepseek-v4.1-flash-1017",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+          "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+          "effective_parameters": {
+            "max_tokens": 2048,
+            "enable_thinking": false
+          },
+          "request_seconds": 60,
+          "daily_shared_usd": null,
+          "input_usd_per_million": null,
+          "output_usd_per_million": null,
+          "effective_parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1",
+          "currency": "CNY",
+          "personal_pricing": {
+            "provider": "qianwen-ai",
+            "model": "deepseek-v4.1-flash-1017",
+            "region": "platform-standard",
+            "mode": "thinking",
+            "currency": "CNY",
+            "unit": "per_million_tokens",
+            "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+            "verified_at": "2026-11-11",
+            "endpoint_host": "maas.qianwenaiapi.com",
+            "tiers": [
+              {
+                "max_input_tokens": 1000000,
+                "input": "2",
+                "output": "8",
+                "cached_input": "0.2"
+              }
+            ],
+            "offpeak_discount": "0.5",
+            "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+          },
+          "daily_limit": "5",
+          "monetary_budget_enabled": true
+        }
+      },
+      "step_id": "s-55d4bab077824e38a138e0e37f07ab49",
+      "parent_step_id": "s-0d4904c285994b309439b376622e3608",
+      "parsed_output": {
+        "analysis": "提供的唯一开发证据显示当前候选代码（sha256:b033cb...）在4条原生kheapsort测试上全部通过：collected=4、passed=4、failed=0、errors=0，退出码0，日志出现CODEFIX_READY。因此本候选不存在可归因的失败原因，失败分类应为passed。无法进一步验证代码正确性细节：测试参数与断言被脱敏，证据只表明这4条公开开发用例通过。注意代码分析显示当前实现按文档需要arr[:k]作为初始堆，而非arr[:k+1]，对k位移保证是否在所有输入下充分存在潜在疑虑，但没有任何失败证据支持修改，且我不能读取参考实现或隐藏测试。按知识规则，开发测试通过不能宣称对所有输入都正确，也不能代替干净副本的独立复验。",
+        "failure_class": "passed",
+        "suggested_checks": [
+          "由执行器在干净起点应用本候选后重跑同一组冻结的原生测试，确认可复现4/4通过",
+          "如需增强信心，可在允许的开发反馈范围内补充与k位移边界相关的原生测试（由测试方决定，模型不得修改测试）",
+          "核对证据中code_version与当前候选文件哈希是否一致，以排除证据错配"
+        ],
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "knowledge_citations": [
+          "knowledge-public_tasks",
+          "knowledge-testing"
+        ]
+      }
+    },
+    {
+      "sequence": 4181,
+      "created_at": "2026-11-15T15:09:31.806450+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-55d4bab077824e38a138e0e37f07ab49",
+      "parent_step_id": "s-0d4904c285994b309439b376622e3608",
+      "node_id": "detector",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "call_id": "m-90f22b915d154327b3837d9264b670d8",
+      "artifact_path": "calls/m-90f22b915d154327b3837d9264b670d8",
+      "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+      "failure_class": null,
+      "agent_instance_id": "run-057fe512f8734bf5904e76fee3685b38:detector",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "detector",
+        "title": "检测员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [],
+        "produces": "failure_analysis",
+        "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+        "output_schema": "DetectorOutput",
+        "permitted_action": "analyse_tool_evidence",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": null,
+      "duration_ms": 5140
+    },
+    {
+      "sequence": 4182,
+      "created_at": "2026-11-15T15:09:31.840027+00:00",
+      "event": "roles_skipped",
+      "roles": [
+        "scheduler"
+      ],
+      "round": 1,
+      "reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+      "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864"
+    },
+    {
+      "sequence": 4183,
+      "created_at": "2026-11-15T15:09:31.882049+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-8deab9db0e6744f7a4dd2d33dd494891",
+      "parent_step_id": "s-55d4bab077824e38a138e0e37f07ab49",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 4184,
+      "created_at": "2026-11-15T15:09:31.920169+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-1.json",
+      "decision_id": "d-1",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "failure_class": "passed",
+      "action": "final_check",
+      "target_agent": null,
+      "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+      "retries_left": 2,
+      "rule_id": "R16",
+      "terminal_status": null,
+      "trace_version": "1.0.0",
+      "step_id": "s-8deab9db0e6744f7a4dd2d33dd494891",
+      "parent_step_id": "s-55d4bab077824e38a138e0e37f07ab49",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "program_decision": {
+        "decision_id": "d-1",
+        "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+        "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "failure_class": "passed",
+        "action": "final_check",
+        "target_agent": null,
+        "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+        "retries_left": 2,
+        "rule_id": "R16",
+        "terminal_status": null
+      },
+      "model_advice": null,
+      "effective_action": "final_check",
+      "override_reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+      "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 2,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.004421",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 273.23444420000305,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 4185,
+      "created_at": "2026-11-15T15:09:31.949581+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-8deab9db0e6744f7a4dd2d33dd494891",
+      "parent_step_id": "s-55d4bab077824e38a138e0e37f07ab49",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "effective_action": "final_check",
+      "decision_id": "d-1",
+      "duration_ms": 65
+    },
+    {
+      "sequence": 4186,
+      "created_at": "2026-11-15T15:09:32.107260+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-ff80de4b8c1c4237ae2ed4d205468175",
+      "parent_step_id": "s-8deab9db0e6744f7a4dd2d33dd494891",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 4187,
+      "created_at": "2026-11-15T15:09:38.007129+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-ff80de4b8c1c4237ae2ed4d205468175",
+      "parent_step_id": "s-8deab9db0e6744f7a4dd2d33dd494891",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "evidence_id": "test-final-check",
+      "evidence_path": "final-check",
+      "call_id": "codefix-eab9e5d6ee104eb996c5dbbb24a66dbe",
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_ms": 891,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-bc31e5798bd3468f89c45a24ccc791b4,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-eab9e5d6ee104eb996c5dbbb24a66dbe",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-85d7a79df4fd40149d58006bb19de86c,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-aa47c8ca330f49ee819d782ba23d68e5/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_kheapsort.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-85d7a79df4fd40149d58006bb19de86c",
+      "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+      "project": "qb-kheapsort",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "expected_test_count": 4,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-c50b7720615c4a12bf952fa652d4baf7",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 4,
+        "passed": 4,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "ok",
+      "verification_status": "passed",
+      "failure_class": "passed",
+      "reason": "Expected identities and complete lifecycle verified against JUnit",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data0-expected0]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data1-expected1]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data2-expected2]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data3-expected3]"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data0-expected0]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data1-expected1]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data2-expected2]",
+          "python_testcases/test_kheapsort.py::test_kheapsort[input_data3-expected3]"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_kheapsort",
+            "test_kheapsort[input_data0-expected0]"
+          ],
+          [
+            "python_testcases.test_kheapsort",
+            "test_kheapsort[input_data1-expected1]"
+          ],
+          [
+            "python_testcases.test_kheapsort",
+            "test_kheapsort[input_data2-expected2]"
+          ],
+          [
+            "python_testcases.test_kheapsort",
+            "test_kheapsort[input_data3-expected3]"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-aa47c8ca330f49ee819d782ba23d68e5",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 4188,
+      "created_at": "2026-11-15T15:09:38.038562+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-ff80de4b8c1c4237ae2ed4d205468175",
+      "parent_step_id": "s-8deab9db0e6744f7a4dd2d33dd494891",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "verification_status": "passed",
+      "evidence_id": "test-final-check",
+      "failure_class": "passed",
+      "evidence_path": "final-check",
+      "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+      "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "registered_test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "duration_ms": 5930
+    },
+    {
+      "sequence": 4189,
+      "created_at": "2026-11-15T15:09:38.082427+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-78a3e633dad54942a44eb38c1847e1fc",
+      "parent_step_id": "s-ff80de4b8c1c4237ae2ed4d205468175",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ]
+    },
+    {
+      "sequence": 4190,
+      "created_at": "2026-11-15T15:09:38.107364+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-87cf884c54d34511bffd5d7ec10041f1.json",
+      "decision_id": "d-87cf884c54d34511bffd5d7ec10041f1",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "failure_class": "passed",
+      "action": "finish",
+      "target_agent": null,
+      "reason": "独立验收实际通过且证据对应最终代码版本。",
+      "retries_left": 2,
+      "rule_id": "R07",
+      "terminal_status": "success",
+      "trace_version": "1.0.0",
+      "step_id": "s-78a3e633dad54942a44eb38c1847e1fc",
+      "parent_step_id": "s-ff80de4b8c1c4237ae2ed4d205468175",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "program_decision": {
+        "decision_id": "d-87cf884c54d34511bffd5d7ec10041f1",
+        "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+        "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+        "evidence_ids": [
+          "test-final-check"
+        ],
+        "failure_class": "passed",
+        "action": "finish",
+        "target_agent": null,
+        "reason": "独立验收实际通过且证据对应最终代码版本。",
+        "retries_left": 2,
+        "rule_id": "R07",
+        "terminal_status": "success"
+      },
+      "model_advice": null,
+      "effective_action": "finish",
+      "override_reason": null,
+      "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 3,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.004421",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 267.0316321999999,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 4191,
+      "created_at": "2026-11-15T15:09:38.135418+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-78a3e633dad54942a44eb38c1847e1fc",
+      "parent_step_id": "s-ff80de4b8c1c4237ae2ed4d205468175",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "status": "ok",
+      "effective_action": "finish",
+      "decision_id": "d-87cf884c54d34511bffd5d7ec10041f1",
+      "duration_ms": 49
+    },
+    {
+      "sequence": 4192,
+      "created_at": "2026-11-15T15:09:38.182112+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-eecebead5e424034b18eed5c20040aa3",
+      "parent_step_id": "s-78a3e633dad54942a44eb38c1847e1fc",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ]
+    },
+    {
+      "sequence": 4193,
+      "created_at": "2026-11-15T15:09:38.207919+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-3935242b377544b28f850cfe9d93e6d7.json",
+      "action": "finish",
+      "rule_id": "R07",
+      "reason": "开发测试及干净副本同套原生测试均实际通过",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-eecebead5e424034b18eed5c20040aa3",
+      "parent_step_id": "s-78a3e633dad54942a44eb38c1847e1fc",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "decision_id": "d-3935242b377544b28f850cfe9d93e6d7",
+      "program_decision": {
+        "action": "finish",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过"
+      },
+      "model_advice": null,
+      "effective_action": "finish",
+      "target_agent": null,
+      "override_reason": null,
+      "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+      "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 3,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.004421",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 266.93562190000375,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 4194,
+      "created_at": "2026-11-15T15:09:38.227020+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+      "step_id": "s-eecebead5e424034b18eed5c20040aa3",
+      "parent_step_id": "s-78a3e633dad54942a44eb38c1847e1fc",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "status": "ok",
+      "effective_action": "finish",
+      "decision_id": "d-3935242b377544b28f850cfe9d93e6d7",
+      "duration_ms": 47
+    },
+    {
+      "sequence": 4195,
+      "created_at": "2026-11-15T15:09:38.245438+00:00",
+      "event": "finished",
+      "status": "success",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 2,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-kheapsort",
+        "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a",
+        "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+        "code_path": "candidate-1/python_programs/kheapsort.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.004421",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    }
+  ],
+  "result_summary": {
+    "schema_version": 1,
+    "run_id": "run-057fe512f8734bf5904e76fee3685b38",
+    "status": "success",
+    "success": true,
+    "reason": "开发测试及干净副本同套原生测试均实际通过",
+    "rounds_used": 1,
+    "max_rounds": 3,
+    "model_attempts": 2,
+    "actual_model_requests": 2,
+    "tests": [
+      {
+        "stage": "baseline",
+        "round": 0,
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "counts": {
+          "collected": 4,
+          "passed": 1,
+          "failed": 3,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "缺陷已复现，可以开始修复",
+        "evidence_path": "baseline",
+        "step_id": "s-29a68076aee2425f8e993055f6d7c6db",
+        "code_version": "sha256:fd639bfe45eba96a5a72e5edb4b4cfff7d6e693f68dfacb90510553ba8f8ba93",
+        "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a"
+      },
+      {
+        "stage": "candidate",
+        "round": 1,
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "counts": {
+          "collected": 4,
+          "passed": 4,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选通过，待最终复验",
+        "evidence_path": "development-1",
+        "step_id": "s-0d4904c285994b309439b376622e3608",
+        "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+        "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a"
+      },
+      {
+        "stage": "final",
+        "round": 1,
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "counts": {
+          "collected": 4,
+          "passed": 4,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "最终复验通过",
+        "evidence_path": "final-check",
+        "step_id": "s-ff80de4b8c1c4237ae2ed4d205468175",
+        "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+        "test_suite_version": "sha256:353c26ff4c35f1d447b184509df363592d8a90453ecbd81847fcaf11c8fbbb8a"
+      }
+    ],
+    "cost": {
+      "calls": 2,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.004421",
+      "reserved_cny": "0"
+    },
+    "model_output_issues": [],
+    "started_at": "2026-11-15T15:09:05.020364+00:00",
+    "finished_at": "2026-11-15T15:09:38.245438+00:00",
+    "duration_ms": 33225,
+    "before": {
+      "path": "base/python_programs/kheapsort.py",
+      "content": "def kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n\n\n\"\"\"\nK-Heapsort\nk-heapsort\n\nSorts an almost-sorted array, wherein every element is no more than k units from its sorted position, in O(n log k) time.\n\nInput:\n    arr: A list of ints\n    k: an int indicating the maximum displacement of an element in arr from its final sorted location\n\nPreconditions:\n    The elements of arr are unique.\n    Each element in arr is at most k places from its sorted position.\n\nOutput:\n    A generator that yields the elements of arr in sorted order\n\nExample:\n    >>> list(kheapsort([3, 2, 1, 5, 4], 2))\n    [1, 2, 3, 4, 5]\n    >>> list(kheapsort([5, 4, 3, 2, 1], 4))\n    [1, 2, 3, 4, 5]\n    >>> list(kheapsort([1, 2, 3, 4, 5], 0))\n    [1, 2, 3, 4, 5]\n\"\"\"\n"
+    },
+    "after": {
+      "path": "candidate-1/python_programs/kheapsort.py",
+      "content": "def kheapsort(arr, k):\n    import heapq\n\n    heap = arr[:k]\n    heapq.heapify(heap)\n\n    for x in arr[k:]:\n        yield heapq.heappushpop(heap, x)\n\n    while heap:\n        yield heapq.heappop(heap)\n\n\n\"\"\"\nK-Heapsort\nk-heapsort\n\nSorts an almost-sorted array, wherein every element is no more than k units from its sorted position, in O(n log k) time.\n\nInput:\n    arr: A list of ints\n    k: an int indicating the maximum displacement of an element in arr from its final sorted location\n\nPreconditions:\n    The elements of arr are unique.\n    Each element in arr is at most k places from its sorted position.\n\nOutput:\n    A generator that yields the elements of arr in sorted order\n\nExample:\n    >>> list(kheapsort([3, 2, 1, 5, 4], 2))\n    [1, 2, 3, 4, 5]\n    >>> list(kheapsort([5, 4, 3, 2, 1], 4))\n    [1, 2, 3, 4, 5]\n    >>> list(kheapsort([1, 2, 3, 4, 5], 0))\n    [1, 2, 3, 4, 5]\n\"\"\"\n"
+    },
+    "combined_diff": "--- original/python_programs/kheapsort.py\n+++ candidate/python_programs/kheapsort.py\n@@ -4,7 +4,7 @@\n     heap = arr[:k]\n     heapq.heapify(heap)\n \n-    for x in arr:\n+    for x in arr[k:]:\n         yield heapq.heappushpop(heap, x)\n \n     while heap:\n",
+    "diff": {
+      "path": "patch-1/patch.diff",
+      "content": "--- a/python_programs/kheapsort.py\n+++ b/python_programs/kheapsort.py\n@@ -4,7 +4,7 @@\n     heap = arr[:k]\n     heapq.heapify(heap)\n \n-    for x in arr:\n+    for x in arr[k:]:\n         yield heapq.heappushpop(heap, x)\n \n     while heap:\n"
+    },
+    "explanations": [
+      {
+        "round": 1,
+        "explanation": "原实现对整个 arr（含前 k 个已在堆中的元素）再次 heappushpop，导致这些元素被重复处理并提前弹出错误元素。修复为只遍历 arr[k:]，前 k 个元素已在堆中，之后用 heappushpop 逐个加入并产出最小元素，最后弹出剩余堆元素，得到完整有序序列。"
+      }
+    ],
+    "checks": [
+      {
+        "sequence": 4160,
+        "created_at": "2026-11-15T15:09:05.175627+00:00",
+        "event": "guard_check",
+        "step_id": "configuration-check",
+        "node_id": "configuration_check",
+        "status": "ok",
+        "reason": "角色配置、提示词和输出协议检查通过"
+      },
+      {
+        "sequence": 4168,
+        "created_at": "2026-11-15T15:09:21.545624+00:00",
+        "event": "guard_check",
+        "step_id": "m-f11c6212c67d4ea38e09da17e92a90b5-budget",
+        "parent_step_id": "s-9f68e5981e794ac8a0f31f0e962f2c02",
+        "node_id": "budget_check",
+        "role": "repairer",
+        "round": 1,
+        "code_version": "sha256:fd639bfe45eba96a5a72e5edb4b4cfff7d6e693f68dfacb90510553ba8f8ba93",
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      {
+        "sequence": 4169,
+        "created_at": "2026-11-15T15:09:21.575921+00:00",
+        "event": "guard_check",
+        "check": "patch_permission",
+        "step_id": "m-f11c6212c67d4ea38e09da17e92a90b5-permission",
+        "parent_step_id": "s-9f68e5981e794ac8a0f31f0e962f2c02",
+        "node_id": "permission_check",
+        "round": 1,
+        "code_version": "sha256:fd639bfe45eba96a5a72e5edb4b4cfff7d6e693f68dfacb90510553ba8f8ba93",
+        "status": "ok",
+        "reason": "补丁路径及结构检查通过"
+      },
+      {
+        "sequence": 4179,
+        "created_at": "2026-11-15T15:09:31.742988+00:00",
+        "event": "guard_check",
+        "step_id": "m-90f22b915d154327b3837d9264b670d8-budget",
+        "parent_step_id": "s-55d4bab077824e38a138e0e37f07ab49",
+        "node_id": "budget_check",
+        "role": "detector",
+        "round": 1,
+        "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864",
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      }
+    ],
+    "skips": [
+      {
+        "sequence": 4182,
+        "created_at": "2026-11-15T15:09:31.840027+00:00",
+        "event": "roles_skipped",
+        "roles": [
+          "scheduler"
+        ],
+        "round": 1,
+        "reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+        "code_version": "sha256:b033cb455fe04714742f4d5d246590713fee7c4074da136bbb3cb247d315a864"
+      }
+    ]
+  },
+  "configuration_snapshot": {
+    "bindings": {
+      "repairer": "personal_model",
+      "detector": "personal_model",
+      "scheduler": "personal_model",
+      "locator": "personal_model"
+    },
+    "parameters": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    },
+    "strategy": "dynamic",
+    "roles": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+    "prompts_sha256": {
+      "locator": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+      "repairer": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+      "detector": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+      "scheduler": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6"
+    },
+    "note": "结构校验通过；不代表模型请求、费用预留或隔离资格通过",
+    "personal_price_snapshots": {
+      "personal_model": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      }
+    },
+    "schema_version": 2,
+    "role_overrides": {
+      "repairer": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 8192,
+          "enable_thinking": false
+        }
+      },
+      "detector": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "scheduler": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "locator": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      }
+    },
+    "capabilities_sha256": "62ad69daf4539956ad609d5ed4c470c2826ce834a873c1c1600ec6ef6863a416",
+    "effective_roles": {
+      "repairer": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 8192,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481"
+      },
+      "detector": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      },
+      "scheduler": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      },
+      "locator": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      }
+    },
+    "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+    "effective_roles_sha256": "cbc8c805bc834d22d9cb4f0ead5a8d2c457297ac313c13fc32a64e2c7d4a9444",
+    "config_id": "cfg-a27c6a7bb63ac54c51f649cf38eb4acd17abda2a9694a13da0199c8ebdc4850a",
+    "created_at": "2026-11-15T13:58:41.923622+00:00"
+  }
+}

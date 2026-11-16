@@ -1,0 +1,17 @@
+{
+  "trace_version": "1.0.0",
+  "run_id": "run-3c00d47be09b4e25ad4c23676effb227",
+  "step_id": "s-2ab0dfe9ef194e238555e4428b225904",
+  "parent_step_id": "s-d2e935e4b46b4fd391d63aae8cf46918",
+  "node_id": "program_dispatch",
+  "round": 1,
+  "phase": "development",
+  "strategy": "single",
+  "evidence_ids": [
+    "test-development-1"
+  ],
+  "status": "ok",
+  "effective_action": "repair",
+  "decision_id": "d-1",
+  "duration_ms": 38
+}

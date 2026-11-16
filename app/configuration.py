@@ -99,8 +99,8 @@ class ConfigurationStore:
         if (not isinstance(value, dict) or not {'bindings', 'parameters', 'strategy'} <= set(value)
                 or set(value) - {'bindings', 'parameters', 'strategy', 'role_overrides'}):
             raise InputValidationError('仅接受角色绑定、任务参数和策略')
-        if not isinstance(value['strategy'], str) or value['strategy'] not in {'dynamic', 'fixed'}:
-            raise InputValidationError('策略须为fixed/dynamic')
+        if not isinstance(value['strategy'], str) or value['strategy'] not in {'dynamic', 'fixed', 'single'}:
+            raise InputValidationError('策略须为fixed/dynamic/single')
         if not isinstance(value['bindings'], dict) or set(value['bindings']) != set(SCHEMAS):
             raise InputValidationError('必须保留四个角色的模型绑定')
         params = value['parameters']

@@ -16,7 +16,7 @@ def test_result_summary_references_actual_tests_and_original_final_code(tmp_path
     assert summary['success'] is True
     assert [t['stage'] for t in summary['tests']] == ['baseline', 'candidate', 'final']
     assert '缺陷已复现' in summary['tests'][0]['meaning']
-    assert summary['actual_model_requests'] == 0 and summary['model_attempts'] == 1
+    assert summary['actual_model_requests'] == 0 and summary['model_attempts'] == 2
     assert summary['before']['content'] != summary['after']['content']
     assert 'original/code/leap_year.py' in summary['combined_diff']
     assert summary['checks'] and summary['skips']

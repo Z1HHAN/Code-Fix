@@ -1,0 +1,2955 @@
+{
+  "schema_version": "v3",
+  "run": {
+    "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+    "task": {
+      "config_id": "cfg-7539a16e0a0fd313d948a674cccea45da780d8ea22fb06a439483edfa4bb2ade",
+      "description": "修复minimum_spanning_tree缺陷，使预登记的原生测试通过；不修改测试。",
+      "max_calls": 12,
+      "max_rounds": 3,
+      "mode": "repair",
+      "project": "qb-minimum_spanning_tree",
+      "strategy": "single",
+      "total_seconds": 300
+    },
+    "status": "success",
+    "created_at": "2026-11-15T15:19:54.365473+00:00",
+    "updated_at": "2026-11-15T15:20:30.912765+00:00",
+    "result": {
+      "final_result": "passed",
+      "dev_result": "passed",
+      "rounds_used": 2,
+      "model_calls": 2,
+      "tool_calls": 4,
+      "model_api_called": true,
+      "mode": "live",
+      "isolation_ready": true,
+      "strategy": "single",
+      "project": "qb-minimum_spanning_tree",
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+      "code_path": "candidate-2/python_programs/minimum_spanning_tree.py",
+      "evidence_matches_current_version": true,
+      "baseline_failure_class": "code_runtime_error",
+      "failure_class": "passed",
+      "rule_id": "R07",
+      "reason": "开发测试及干净副本同套原生测试均实际通过",
+      "model_attempts": 2,
+      "actual_model_requests": 2,
+      "cost": {
+        "calls": 2,
+        "status": "estimated",
+        "basis": "versioned_model_rates; not_provider_invoice",
+        "models": [
+          {
+            "model": "deepseek-v4.1-flash-1017",
+            "currency": "CNY",
+            "status": "estimated",
+            "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+            "upper_estimate": false
+          },
+          {
+            "model": "deepseek-v4.1-flash-1017",
+            "currency": "CNY",
+            "status": "estimated",
+            "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+            "upper_estimate": false
+          }
+        ],
+        "currency": "CNY",
+        "amount_cny": "0.006754",
+        "reserved_cny": "0"
+      },
+      "trace_version": "1.0.0"
+    },
+    "control": null,
+    "archived_at": null
+  },
+  "events": [
+    {
+      "sequence": 4879,
+      "created_at": "2026-11-15T15:19:54.423086+00:00",
+      "event": "started"
+    },
+    {
+      "sequence": 4880,
+      "created_at": "2026-11-15T15:19:54.552417+00:00",
+      "event": "guard_check",
+      "step_id": "configuration-check",
+      "node_id": "configuration_check",
+      "status": "ok",
+      "reason": "角色配置、提示词和输出协议检查通过"
+    },
+    {
+      "sequence": 4881,
+      "created_at": "2026-11-15T15:19:55.347003+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-46fd393a572444d49ac33adbf4e9938e",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "single",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 4882,
+      "created_at": "2026-11-15T15:19:59.882947+00:00",
+      "event": "isolation_checked",
+      "isolation_ready": true,
+      "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+      "reason": null,
+      "engine_id": "82a0558b-2dfa-48b6-86f2-de3c8937dc79",
+      "controls": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "none",
+          "Config": {}
+        },
+        "NetworkMode": "none",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "host",
+        "Dns": null,
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "Tmpfs": {
+          "/tmp": "rw,noexec,nosuid,size=67108864"
+        },
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 268435456,
+        "NanoCpus": 1000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 268435456,
+        "MemorySwappiness": null,
+        "OomKillDisable": false,
+        "PidsLimit": 64,
+        "Ulimits": [
+          {
+            "Name": "nofile",
+            "Hard": 128,
+            "Soft": 128
+          }
+        ],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/rpc_codec.py",
+            "Target": "/rpc_codec.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "volume",
+            "Source": "codefix-out-08ffdde8ce9d4880af6718d9b8fe8895",
+            "Target": "/out"
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix-data/jobs/job-ce82b28a378d4520956b65ea15df9223/isolation/probe-work",
+            "Target": "/w",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/c_runner/pytest_entry.py",
+            "Target": "/entry.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/candidate_entry.py",
+            "Target": "/harness.py",
+            "ReadOnly": true
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+      "execution_mode": "remote-docker",
+      "execution_endpoint": "https://8.148.85.237",
+      "remote_job_id": "job-ce82b28a378d4520956b65ea15df9223",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 4883,
+      "created_at": "2026-11-15T15:19:59.911302+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-46fd393a572444d49ac33adbf4e9938e",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "single",
+      "evidence_ids": [],
+      "status": "ok",
+      "evidence_path": "isolation",
+      "isolation_ready": true,
+      "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+      "reason": null,
+      "engine_id": "82a0558b-2dfa-48b6-86f2-de3c8937dc79",
+      "controls": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "none",
+          "Config": {}
+        },
+        "NetworkMode": "none",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "host",
+        "Dns": null,
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "Tmpfs": {
+          "/tmp": "rw,noexec,nosuid,size=67108864"
+        },
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 268435456,
+        "NanoCpus": 1000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 268435456,
+        "MemorySwappiness": null,
+        "OomKillDisable": false,
+        "PidsLimit": 64,
+        "Ulimits": [
+          {
+            "Name": "nofile",
+            "Hard": 128,
+            "Soft": 128
+          }
+        ],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/rpc_codec.py",
+            "Target": "/rpc_codec.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "volume",
+            "Source": "codefix-out-08ffdde8ce9d4880af6718d9b8fe8895",
+            "Target": "/out"
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix-data/jobs/job-ce82b28a378d4520956b65ea15df9223/isolation/probe-work",
+            "Target": "/w",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/c_runner/pytest_entry.py",
+            "Target": "/entry.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/candidate_entry.py",
+            "Target": "/harness.py",
+            "ReadOnly": true
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+      "execution_mode": "remote-docker",
+      "execution_endpoint": "https://8.148.85.237",
+      "remote_job_id": "job-ce82b28a378d4520956b65ea15df9223",
+      "transport_mode": "live",
+      "duration_ms": 4564
+    },
+    {
+      "sequence": 4884,
+      "created_at": "2026-11-15T15:20:00.742798+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-ead39391316f4731b168bb59064cd603",
+      "parent_step_id": "s-46fd393a572444d49ac33adbf4e9938e",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 4885,
+      "created_at": "2026-11-15T15:20:06.066554+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-ead39391316f4731b168bb59064cd603",
+      "parent_step_id": "s-46fd393a572444d49ac33adbf4e9938e",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [],
+      "evidence_id": "test-baseline",
+      "evidence_path": "baseline",
+      "call_id": "codefix-b7dd241e89a14c08a2dde721fd6b4dbb",
+      "exit_code": 1,
+      "timed_out": false,
+      "duration_ms": 871,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-54873ab8b39343d39b09be4e8f911d7e,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-b7dd241e89a14c08a2dde721fd6b4dbb",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-56a07a5009b14fb091651ac7f6083bc0,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-f1b048a4899741fca24a118958fc80f3/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_minimum_spanning_tree.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-56a07a5009b14fb091651ac7f6083bc0",
+      "code_version": "sha256:e3f4eb23b1358aa309be9b022734481424f8abe0f0f6f9c8fa6a1a7decb4f09c",
+      "project": "qb-minimum_spanning_tree",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "expected_test_count": 3,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-394887be4f564cf2a9e72a961e47c42c",
+        "logs_captured": true,
+        "events": [
+          {
+            "event": "execution_error",
+            "detail": "RuntimeError"
+          },
+          {
+            "event": "execution_error",
+            "detail": "RuntimeError"
+          },
+          {
+            "event": "execution_error",
+            "detail": "RuntimeError"
+          }
+        ],
+        "event_kinds": [
+          "execution_error"
+        ],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 3,
+        "passed": 0,
+        "failed": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "failed",
+      "verification_status": "failed",
+      "failure_class": "code_runtime_error",
+      "reason": "Frozen native fixture tests completed with a recorded failure",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_minimum_spanning_tree.py::test1",
+          "python_testcases/test_minimum_spanning_tree.py::test2",
+          "python_testcases/test_minimum_spanning_tree.py::test3"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_minimum_spanning_tree.py::test1",
+          "python_testcases/test_minimum_spanning_tree.py::test2",
+          "python_testcases/test_minimum_spanning_tree.py::test3"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_minimum_spanning_tree",
+            "test1"
+          ],
+          [
+            "python_testcases.test_minimum_spanning_tree",
+            "test2"
+          ],
+          [
+            "python_testcases.test_minimum_spanning_tree",
+            "test3"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-f1b048a4899741fca24a118958fc80f3",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 4886,
+      "created_at": "2026-11-15T15:20:06.101616+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-ead39391316f4731b168bb59064cd603",
+      "parent_step_id": "s-46fd393a572444d49ac33adbf4e9938e",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [],
+      "status": "ok",
+      "verification_status": "failed",
+      "evidence_id": "test-baseline",
+      "failure_class": "code_runtime_error",
+      "evidence_path": "baseline",
+      "code_version": "sha256:e3f4eb23b1358aa309be9b022734481424f8abe0f0f6f9c8fa6a1a7decb4f09c",
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "registered_test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "duration_ms": 5353
+    },
+    {
+      "sequence": 4887,
+      "created_at": "2026-11-15T15:20:06.159441+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-5dbf793c0dd44be78c15498219b9dc9c",
+      "parent_step_id": "s-ead39391316f4731b168bb59064cd603",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 4888,
+      "created_at": "2026-11-15T15:20:10.254135+00:00",
+      "event": "guard_check",
+      "step_id": "m-ac38e80fa74a42a4a0184cde9b463ce8-budget",
+      "parent_step_id": "s-5dbf793c0dd44be78c15498219b9dc9c",
+      "node_id": "budget_check",
+      "role": "repairer",
+      "round": 1,
+      "code_version": "sha256:e3f4eb23b1358aa309be9b022734481424f8abe0f0f6f9c8fa6a1a7decb4f09c",
+      "status": "ok",
+      "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+    },
+    {
+      "sequence": 4889,
+      "created_at": "2026-11-15T15:20:10.277722+00:00",
+      "event": "guard_check",
+      "check": "patch_permission",
+      "step_id": "m-ac38e80fa74a42a4a0184cde9b463ce8-permission",
+      "parent_step_id": "s-5dbf793c0dd44be78c15498219b9dc9c",
+      "node_id": "permission_check",
+      "round": 1,
+      "code_version": "sha256:e3f4eb23b1358aa309be9b022734481424f8abe0f0f6f9c8fa6a1a7decb4f09c",
+      "status": "ok",
+      "reason": "补丁路径及结构检查通过"
+    },
+    {
+      "sequence": 4890,
+      "created_at": "2026-11-15T15:20:10.297687+00:00",
+      "event": "agent_call",
+      "role": "repairer",
+      "mode": "live",
+      "model_api_called": true,
+      "model": "deepseek-v4.1-flash-1017",
+      "call_id": "m-ac38e80fa74a42a4a0184cde9b463ce8",
+      "status": "ok",
+      "provider_id": "personal",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "usage": {
+        "prompt_tokens": 3344,
+        "total_tokens": 3726,
+        "completion_tokens": 382,
+        "prompt_tokens_details": {
+          "cached_tokens": 3328,
+          "image_tokens": 0,
+          "text_tokens": 3344
+        },
+        "completion_tokens_details": {
+          "text_tokens": 382
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount_cny": "0.001877",
+        "currency": "CNY",
+        "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+        "upper_estimate": false,
+        "basis": "versioned_model_rates; not_provider_invoice"
+      },
+      "attempts": 1,
+      "max_attempts": 1,
+      "transport_request_started": true,
+      "failure_class": null,
+      "budget_check": {
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      "provider_model": "deepseek-v4.1-flash-1017",
+      "provider_response_id": "chatcmpl-9aff85b8-e7a8-9658-afb1-c37f824a7cd5",
+      "finish_reason": "stop",
+      "raw_text": "{\"changes\":[{\"path\":\"python_programs/minimum_spanning_tree.py\",\"edits\":[{\"old\":\"    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\\n        u, v = edge\\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\\n            mst_edges.add(edge)\\n            group_by_node[u].update(group_by_node[v])\\n            for node in group_by_node[v]:\\n                group_by_node[node].update(group_by_node[u])\\n\\n    return mst_edges\",\"new\":\"    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\\n        u, v = edge\\n        group_by_node.setdefault(u, {u})\\n        group_by_node.setdefault(v, {v})\\n        if group_by_node.get(u, {u}) != group_by_node.get(v, {v}):\\n            mst_edges.add(edge)\\n            group_by_node[u].update(group_by_node[v])\\n            for node in group_by_node[v]:\\n                group_by_node[node].update(group_by_node[u])\\n\\n    return mst_edges\"}]}],\"explanation\":\"原实现在 if 条件里用 setdefault 作比较值，每次都会触发默认集合的构建，且两个不同节点比较的是不同的临时 set 对象，导致同一连通分量节点的归属集合无法正确合并，从而产生错误边集合。改为先确保每个节点存在于 group_by_node，再比较各自的集合归属，进行 Kruskal 合并，修复缺陷。\",\"evidence_ids\":[\"test-baseline\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+      "duration_ms": 4044,
+      "code_version": "sha256:e3f4eb23b1358aa309be9b022734481424f8abe0f0f6f9c8fa6a1a7decb4f09c",
+      "round": 1,
+      "provenance": {
+        "role_override": {
+          "task_instruction": "",
+          "generation": {
+            "max_output_tokens": 8192,
+            "enable_thinking": false
+          }
+        },
+        "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "locator": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "repairer": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "detector": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "scheduler": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "locator",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "repairer",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "detector",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "scheduler",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+        "prompt_ref": "prompts/repairer.md",
+        "prompt_sha256": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+        "system_prompt_sha256": "279bac1d22413b8ccf15b26d768a0f65fb210d7347fe57a0b0284e1427f95635",
+        "agent_instance_id": "run-6f5e2da148a5460598c088141ab575bd:repairer",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "repairer",
+          "title": "修复员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [
+            "detector",
+            "scheduler",
+            "locator"
+          ],
+          "produces": "candidate_changes",
+          "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+          "output_schema": "RepairOutput",
+          "permitted_action": "propose_source_patch",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "8fa1a2ef8fde348f27a5ce1862ed65bce4eea9d6207d4091083355cf3e8ae3ef",
+        "handoffs": [],
+        "messages_sha256": "69e93fd94b2ac7cf1bb23c0a2c73d5d2b0b022c0e91beefd6924dba9134fcdc7",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "repairer",
+          "binding": "approved_profile",
+          "profile_ref": "personal_model",
+          "mode": "live",
+          "provider_id": "personal",
+          "model": "deepseek-v4.1-flash-1017",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+          "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+          "effective_parameters": {
+            "max_tokens": 8192,
+            "enable_thinking": false
+          },
+          "request_seconds": 60,
+          "daily_shared_usd": null,
+          "input_usd_per_million": null,
+          "output_usd_per_million": null,
+          "effective_parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481",
+          "currency": "CNY",
+          "personal_pricing": {
+            "provider": "qianwen-ai",
+            "model": "deepseek-v4.1-flash-1017",
+            "region": "platform-standard",
+            "mode": "thinking",
+            "currency": "CNY",
+            "unit": "per_million_tokens",
+            "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+            "verified_at": "2026-11-11",
+            "endpoint_host": "maas.qianwenaiapi.com",
+            "tiers": [
+              {
+                "max_input_tokens": 1000000,
+                "input": "2",
+                "output": "8",
+                "cached_input": "0.2"
+              }
+            ],
+            "offpeak_discount": "0.5",
+            "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+          },
+          "daily_limit": "5",
+          "monetary_budget_enabled": true
+        }
+      },
+      "step_id": "s-5dbf793c0dd44be78c15498219b9dc9c",
+      "parent_step_id": "s-ead39391316f4731b168bb59064cd603",
+      "parsed_output": {
+        "changes": [
+          {
+            "path": "python_programs/minimum_spanning_tree.py",
+            "new_content": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        group_by_node.setdefault(u, {u})\n        group_by_node.setdefault(v, {v})\n        if group_by_node.get(u, {u}) != group_by_node.get(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n\n\n\n\n\"\"\"\nMinimum Spanning Tree\n\n\nKruskal's algorithm implementation.\n\nInput:\n    weight_by_edge: A dict of the form {(u, v): weight} for every undirected graph edge {u, v}\n\nPrecondition:\n    The input graph is connected\n\nOutput:\n    A set of edges that connects all the vertices of the input graph and has the least possible total weight.\n\nExample:\n    >>> minimum_spanning_tree({\n    ...     (1, 2): 10,\n    ...     (2, 3): 15,\n    ...     (3, 4): 10,\n    ...     (1, 4): 10\n    ... })\n    {(1, 2), (3, 4), (1, 4)}\n\"\"\"\n"
+          }
+        ],
+        "explanation": "原实现在 if 条件里用 setdefault 作比较值，每次都会触发默认集合的构建，且两个不同节点比较的是不同的临时 set 对象，导致同一连通分量节点的归属集合无法正确合并，从而产生错误边集合。改为先确保每个节点存在于 group_by_node，再比较各自的集合归属，进行 Kruskal 合并，修复缺陷。",
+        "evidence_ids": [
+          "test-baseline"
+        ],
+        "knowledge_citations": [
+          "knowledge-public_tasks",
+          "knowledge-testing"
+        ]
+      }
+    },
+    {
+      "sequence": 4891,
+      "created_at": "2026-11-15T15:20:10.318580+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-5dbf793c0dd44be78c15498219b9dc9c",
+      "parent_step_id": "s-ead39391316f4731b168bb59064cd603",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "call_id": "m-ac38e80fa74a42a4a0184cde9b463ce8",
+      "artifact_path": "calls/m-ac38e80fa74a42a4a0184cde9b463ce8",
+      "code_version": "sha256:e3f4eb23b1358aa309be9b022734481424f8abe0f0f6f9c8fa6a1a7decb4f09c",
+      "failure_class": null,
+      "agent_instance_id": "run-6f5e2da148a5460598c088141ab575bd:repairer",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "repairer",
+        "title": "修复员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [
+          "detector",
+          "scheduler",
+          "locator"
+        ],
+        "produces": "candidate_changes",
+        "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+        "output_schema": "RepairOutput",
+        "permitted_action": "propose_source_patch",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": null,
+      "duration_ms": 4156
+    },
+    {
+      "sequence": 4892,
+      "created_at": "2026-11-15T15:20:10.344788+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-1425e04ea1a84eff9a12ed1733b30923",
+      "parent_step_id": "s-5dbf793c0dd44be78c15498219b9dc9c",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 4893,
+      "created_at": "2026-11-15T15:20:10.465701+00:00",
+      "event": "candidate_applied",
+      "round": 1,
+      "project": "qb-minimum_spanning_tree",
+      "base_version": "sha256:e3f4eb23b1358aa309be9b022734481424f8abe0f0f6f9c8fa6a1a7decb4f09c",
+      "candidate_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "frozen_file_sha256": {
+        "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+        "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+        "python_testcases/test_minimum_spanning_tree.py": "45b23edf3513e1f1a6e7ecf5f17eb85d1a32845d70869c7190b16b10cd61d811"
+      },
+      "changes": [
+        {
+          "path": "python_programs/minimum_spanning_tree.py",
+          "new_content": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        group_by_node.setdefault(u, {u})\n        group_by_node.setdefault(v, {v})\n        if group_by_node.get(u, {u}) != group_by_node.get(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n\n\n\n\n\"\"\"\nMinimum Spanning Tree\n\n\nKruskal's algorithm implementation.\n\nInput:\n    weight_by_edge: A dict of the form {(u, v): weight} for every undirected graph edge {u, v}\n\nPrecondition:\n    The input graph is connected\n\nOutput:\n    A set of edges that connects all the vertices of the input graph and has the least possible total weight.\n\nExample:\n    >>> minimum_spanning_tree({\n    ...     (1, 2): 10,\n    ...     (2, 3): 15,\n    ...     (3, 4): 10,\n    ...     (1, 4): 10\n    ... })\n    {(1, 2), (3, 4), (1, 4)}\n\"\"\"\n"
+        }
+      ],
+      "test_sha256": {
+        "python_testcases/test_minimum_spanning_tree.py": "45b23edf3513e1f1a6e7ecf5f17eb85d1a32845d70869c7190b16b10cd61d811"
+      }
+    },
+    {
+      "sequence": 4894,
+      "created_at": "2026-11-15T15:20:10.488865+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-1425e04ea1a84eff9a12ed1733b30923",
+      "parent_step_id": "s-5dbf793c0dd44be78c15498219b9dc9c",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+      "artifact_path": "patch-1",
+      "duration_ms": 139
+    },
+    {
+      "sequence": 4895,
+      "created_at": "2026-11-15T15:20:10.520562+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-bd0547ad586c4cf3801fc1a7ffd7ace7",
+      "parent_step_id": "s-1425e04ea1a84eff9a12ed1733b30923",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 4896,
+      "created_at": "2026-11-15T15:20:15.951411+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-bd0547ad586c4cf3801fc1a7ffd7ace7",
+      "parent_step_id": "s-1425e04ea1a84eff9a12ed1733b30923",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "evidence_id": "test-development-1",
+      "evidence_path": "development-1",
+      "call_id": "codefix-93adcc5f6f454bf19226817fc4533edd",
+      "exit_code": 1,
+      "timed_out": false,
+      "duration_ms": 918,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-f432b2c5bcf64f86b0564be04959a91f,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-93adcc5f6f454bf19226817fc4533edd",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-75b811c2eea243fb8534056f5fa39aa1,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-75da9970b64c46ac923e7e749f5885ae/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_minimum_spanning_tree.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-75b811c2eea243fb8534056f5fa39aa1",
+      "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+      "project": "qb-minimum_spanning_tree",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "expected_test_count": 3,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-9d4b8505452d463e9978eae0fe0a2273",
+        "logs_captured": true,
+        "events": [
+          {
+            "event": "execution_error",
+            "detail": "RuntimeError"
+          },
+          {
+            "event": "execution_error",
+            "detail": "RuntimeError"
+          },
+          {
+            "event": "execution_error",
+            "detail": "RuntimeError"
+          }
+        ],
+        "event_kinds": [
+          "execution_error"
+        ],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 3,
+        "passed": 0,
+        "failed": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "failed",
+      "verification_status": "failed",
+      "failure_class": "code_runtime_error",
+      "reason": "Frozen native fixture tests completed with a recorded failure",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_minimum_spanning_tree.py::test1",
+          "python_testcases/test_minimum_spanning_tree.py::test2",
+          "python_testcases/test_minimum_spanning_tree.py::test3"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_minimum_spanning_tree.py::test1",
+          "python_testcases/test_minimum_spanning_tree.py::test2",
+          "python_testcases/test_minimum_spanning_tree.py::test3"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_minimum_spanning_tree",
+            "test1"
+          ],
+          [
+            "python_testcases.test_minimum_spanning_tree",
+            "test2"
+          ],
+          [
+            "python_testcases.test_minimum_spanning_tree",
+            "test3"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-75da9970b64c46ac923e7e749f5885ae",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 4897,
+      "created_at": "2026-11-15T15:20:15.972146+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-bd0547ad586c4cf3801fc1a7ffd7ace7",
+      "parent_step_id": "s-1425e04ea1a84eff9a12ed1733b30923",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "verification_status": "failed",
+      "evidence_id": "test-development-1",
+      "failure_class": "code_runtime_error",
+      "evidence_path": "development-1",
+      "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "registered_test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "duration_ms": 5451
+    },
+    {
+      "sequence": 4898,
+      "created_at": "2026-11-15T15:20:16.014777+00:00",
+      "event": "roles_skipped",
+      "roles": [
+        "detector",
+        "scheduler",
+        "locator"
+      ],
+      "round": 1,
+      "reason": "单Agent对照：仅修复员，依据相同隔离测试反馈有界重试；权限、预算及干净复验保持",
+      "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0"
+    },
+    {
+      "sequence": 4899,
+      "created_at": "2026-11-15T15:20:16.047968+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-d119daf25a984254a39af8473dcee4b9",
+      "parent_step_id": "s-bd0547ad586c4cf3801fc1a7ffd7ace7",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 4900,
+      "created_at": "2026-11-15T15:20:16.075213+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-1.json",
+      "decision_id": "d-1",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "failure_class": "code_runtime_error",
+      "action": "repair",
+      "target_agent": "repairer",
+      "reason": "待修代码运行异常，回到定位；先确认不是依赖或测试收集问题。",
+      "retries_left": 2,
+      "rule_id": "R14",
+      "terminal_status": null,
+      "trace_version": "1.0.0",
+      "step_id": "s-d119daf25a984254a39af8473dcee4b9",
+      "parent_step_id": "s-bd0547ad586c4cf3801fc1a7ffd7ace7",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "single",
+      "program_decision": {
+        "decision_id": "d-1",
+        "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+        "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "failure_class": "code_runtime_error",
+        "action": "locate",
+        "target_agent": "locator",
+        "reason": "待修代码运行异常，回到定位；先确认不是依赖或测试收集问题。",
+        "retries_left": 2,
+        "rule_id": "R14",
+        "terminal_status": null
+      },
+      "model_advice": null,
+      "effective_action": "repair",
+      "override_reason": "单Agent对照仅允许修复员重试；单Agent对照：仅修复员，依据相同隔离测试反馈有界重试；权限、预算及干净复验保持",
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "counters": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 1,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.001877",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 278.456992899999,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      },
+      "self_loop": {
+        "status": "planned",
+        "from_round": 1,
+        "to_round": 2,
+        "failure_class": "code_runtime_error",
+        "via": [
+          "repairer"
+        ],
+        "evidence_id": "test-development-1",
+        "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+        "remaining_rounds": 2
+      }
+    },
+    {
+      "sequence": 4901,
+      "created_at": "2026-11-15T15:20:16.101340+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-d119daf25a984254a39af8473dcee4b9",
+      "parent_step_id": "s-bd0547ad586c4cf3801fc1a7ffd7ace7",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "effective_action": "repair",
+      "decision_id": "d-1",
+      "duration_ms": 52
+    },
+    {
+      "sequence": 4902,
+      "created_at": "2026-11-15T15:20:16.137809+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-2badb0f8e67c4cc39983b4d21200a737",
+      "parent_step_id": "s-d119daf25a984254a39af8473dcee4b9",
+      "node_id": "repairer",
+      "round": 2,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 4903,
+      "created_at": "2026-11-15T15:20:16.164367+00:00",
+      "event": "self_loop_resumed",
+      "step_id": "s-2badb0f8e67c4cc39983b4d21200a737",
+      "role": "repairer",
+      "round": 2,
+      "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "from_round": 1,
+      "to_round": 2,
+      "trigger_evidence_id": "test-development-1",
+      "trigger_code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0"
+    },
+    {
+      "sequence": 4904,
+      "created_at": "2026-11-15T15:20:20.441513+00:00",
+      "event": "guard_check",
+      "step_id": "m-9833871dcfbc44119a7c2dc8784434a2-budget",
+      "parent_step_id": "s-2badb0f8e67c4cc39983b4d21200a737",
+      "node_id": "budget_check",
+      "role": "repairer",
+      "round": 2,
+      "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+      "status": "ok",
+      "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+    },
+    {
+      "sequence": 4905,
+      "created_at": "2026-11-15T15:20:20.461771+00:00",
+      "event": "guard_check",
+      "check": "patch_permission",
+      "step_id": "m-9833871dcfbc44119a7c2dc8784434a2-permission",
+      "parent_step_id": "s-2badb0f8e67c4cc39983b4d21200a737",
+      "node_id": "permission_check",
+      "round": 2,
+      "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+      "status": "ok",
+      "reason": "补丁路径及结构检查通过"
+    },
+    {
+      "sequence": 4906,
+      "created_at": "2026-11-15T15:20:20.484951+00:00",
+      "event": "agent_call",
+      "role": "repairer",
+      "mode": "live",
+      "model_api_called": true,
+      "model": "deepseek-v4.1-flash-1017",
+      "call_id": "m-9833871dcfbc44119a7c2dc8784434a2",
+      "status": "ok",
+      "provider_id": "personal",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "usage": {
+        "prompt_tokens": 3359,
+        "total_tokens": 3796,
+        "completion_tokens": 437,
+        "prompt_tokens_details": {
+          "cached_tokens": 256,
+          "image_tokens": 0,
+          "text_tokens": 3359
+        },
+        "completion_tokens_details": {
+          "text_tokens": 437
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount_cny": "0.004877",
+        "currency": "CNY",
+        "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+        "upper_estimate": false,
+        "basis": "versioned_model_rates; not_provider_invoice"
+      },
+      "attempts": 1,
+      "max_attempts": 1,
+      "transport_request_started": true,
+      "failure_class": null,
+      "budget_check": {
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      "provider_model": "deepseek-v4.1-flash-1017",
+      "provider_response_id": "chatcmpl-a1900795-5cde-9117-b596-9ed7147b59c6",
+      "finish_reason": "stop",
+      "raw_text": "{\"changes\":[{\"path\":\"python_programs/minimum_spanning_tree.py\",\"edits\":[{\"old\":\"    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\\n        u, v = edge\\n        group_by_node.setdefault(u, {u})\\n        group_by_node.setdefault(v, {v})\\n        if group_by_node.get(u, {u}) != group_by_node.get(v, {v}):\\n            mst_edges.add(edge)\\n            group_by_node[u].update(group_by_node[v])\\n            for node in group_by_node[v]:\\n                group_by_node[node].update(group_by_node[u])\\n\\n    return mst_edges\",\"new\":\"    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\\n        u, v = edge\\n        group_by_node.setdefault(u, {u})\\n        group_by_node.setdefault(v, {v})\\n        if group_by_node[u] != group_by_node[v]:\\n            mst_edges.add(edge)\\n            group_u = group_by_node[u]\\n            group_v = group_by_node[v]\\n            merged = group_u | group_v\\n            for node in merged:\\n                group_by_node[node] = merged\\n\\n    return mst_edges\"}]}],\"explanation\":\"原实现使用并查集/分组算法，但合并两个分组时存在缺陷：group_by_node[u].update(group_by_node[v]) 后遍历 group_by_node[v] 更新其节点，但 group_by_node[v] 的集合本身未被加入 u 的新合并集合（且遍历过程中可能被修改导致集合大小变更运行时错误）。改为先将两个分组取并集得到 merged，再把 merged 中的每个节点都指向同一合并集合，保证已连通节点共享同一分组，从而正确实现 Kruskal 的最小生成树。\",\"evidence_ids\":[\"test-development-1\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+      "duration_ms": 4235,
+      "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+      "round": 2,
+      "provenance": {
+        "role_override": {
+          "task_instruction": "",
+          "generation": {
+            "max_output_tokens": 8192,
+            "enable_thinking": false
+          }
+        },
+        "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "locator": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "repairer": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "detector": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "scheduler": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "locator",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "repairer",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "detector",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "scheduler",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+        "prompt_ref": "prompts/repairer.md",
+        "prompt_sha256": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+        "system_prompt_sha256": "279bac1d22413b8ccf15b26d768a0f65fb210d7347fe57a0b0284e1427f95635",
+        "agent_instance_id": "run-6f5e2da148a5460598c088141ab575bd:repairer",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "repairer",
+          "title": "修复员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [
+            "detector",
+            "scheduler",
+            "locator"
+          ],
+          "produces": "candidate_changes",
+          "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+          "output_schema": "RepairOutput",
+          "permitted_action": "propose_source_patch",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "8fa1a2ef8fde348f27a5ce1862ed65bce4eea9d6207d4091083355cf3e8ae3ef",
+        "handoffs": [],
+        "messages_sha256": "5b24e6afcaefefb971b46d4f3fc59eccad588fcbaa7f8c0f05af52d8cca6a89e",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "repairer",
+          "binding": "approved_profile",
+          "profile_ref": "personal_model",
+          "mode": "live",
+          "provider_id": "personal",
+          "model": "deepseek-v4.1-flash-1017",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+          "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+          "effective_parameters": {
+            "max_tokens": 8192,
+            "enable_thinking": false
+          },
+          "request_seconds": 60,
+          "daily_shared_usd": null,
+          "input_usd_per_million": null,
+          "output_usd_per_million": null,
+          "effective_parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481",
+          "currency": "CNY",
+          "personal_pricing": {
+            "provider": "qianwen-ai",
+            "model": "deepseek-v4.1-flash-1017",
+            "region": "platform-standard",
+            "mode": "thinking",
+            "currency": "CNY",
+            "unit": "per_million_tokens",
+            "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+            "verified_at": "2026-11-11",
+            "endpoint_host": "maas.qianwenaiapi.com",
+            "tiers": [
+              {
+                "max_input_tokens": 1000000,
+                "input": "2",
+                "output": "8",
+                "cached_input": "0.2"
+              }
+            ],
+            "offpeak_discount": "0.5",
+            "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+          },
+          "daily_limit": "5",
+          "monetary_budget_enabled": true
+        }
+      },
+      "step_id": "s-2badb0f8e67c4cc39983b4d21200a737",
+      "parent_step_id": "s-d119daf25a984254a39af8473dcee4b9",
+      "parsed_output": {
+        "changes": [
+          {
+            "path": "python_programs/minimum_spanning_tree.py",
+            "new_content": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        group_by_node.setdefault(u, {u})\n        group_by_node.setdefault(v, {v})\n        if group_by_node[u] != group_by_node[v]:\n            mst_edges.add(edge)\n            group_u = group_by_node[u]\n            group_v = group_by_node[v]\n            merged = group_u | group_v\n            for node in merged:\n                group_by_node[node] = merged\n\n    return mst_edges\n\n\n\n\n\"\"\"\nMinimum Spanning Tree\n\n\nKruskal's algorithm implementation.\n\nInput:\n    weight_by_edge: A dict of the form {(u, v): weight} for every undirected graph edge {u, v}\n\nPrecondition:\n    The input graph is connected\n\nOutput:\n    A set of edges that connects all the vertices of the input graph and has the least possible total weight.\n\nExample:\n    >>> minimum_spanning_tree({\n    ...     (1, 2): 10,\n    ...     (2, 3): 15,\n    ...     (3, 4): 10,\n    ...     (1, 4): 10\n    ... })\n    {(1, 2), (3, 4), (1, 4)}\n\"\"\"\n"
+          }
+        ],
+        "explanation": "原实现使用并查集/分组算法，但合并两个分组时存在缺陷：group_by_node[u].update(group_by_node[v]) 后遍历 group_by_node[v] 更新其节点，但 group_by_node[v] 的集合本身未被加入 u 的新合并集合（且遍历过程中可能被修改导致集合大小变更运行时错误）。改为先将两个分组取并集得到 merged，再把 merged 中的每个节点都指向同一合并集合，保证已连通节点共享同一分组，从而正确实现 Kruskal 的最小生成树。",
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "knowledge_citations": [
+          "knowledge-public_tasks",
+          "knowledge-testing"
+        ]
+      }
+    },
+    {
+      "sequence": 4907,
+      "created_at": "2026-11-15T15:20:20.517093+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-2badb0f8e67c4cc39983b4d21200a737",
+      "parent_step_id": "s-d119daf25a984254a39af8473dcee4b9",
+      "node_id": "repairer",
+      "round": 2,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "call_id": "m-9833871dcfbc44119a7c2dc8784434a2",
+      "artifact_path": "calls/m-9833871dcfbc44119a7c2dc8784434a2",
+      "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+      "failure_class": null,
+      "agent_instance_id": "run-6f5e2da148a5460598c088141ab575bd:repairer",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "repairer",
+        "title": "修复员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [
+          "detector",
+          "scheduler",
+          "locator"
+        ],
+        "produces": "candidate_changes",
+        "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+        "output_schema": "RepairOutput",
+        "permitted_action": "propose_source_patch",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": {
+        "from_round": 1,
+        "to_round": 2,
+        "trigger_evidence_id": "test-development-1",
+        "trigger_code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0"
+      },
+      "duration_ms": 4368
+    },
+    {
+      "sequence": 4908,
+      "created_at": "2026-11-15T15:20:20.554946+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-988478c1df4742e99c54621789f3af0e",
+      "parent_step_id": "s-2badb0f8e67c4cc39983b4d21200a737",
+      "node_id": "apply_candidate",
+      "round": 2,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 4909,
+      "created_at": "2026-11-15T15:20:20.662968+00:00",
+      "event": "candidate_applied",
+      "round": 2,
+      "project": "qb-minimum_spanning_tree",
+      "base_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+      "candidate_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "frozen_file_sha256": {
+        "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+        "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+        "python_testcases/test_minimum_spanning_tree.py": "45b23edf3513e1f1a6e7ecf5f17eb85d1a32845d70869c7190b16b10cd61d811"
+      },
+      "changes": [
+        {
+          "path": "python_programs/minimum_spanning_tree.py",
+          "new_content": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        group_by_node.setdefault(u, {u})\n        group_by_node.setdefault(v, {v})\n        if group_by_node[u] != group_by_node[v]:\n            mst_edges.add(edge)\n            group_u = group_by_node[u]\n            group_v = group_by_node[v]\n            merged = group_u | group_v\n            for node in merged:\n                group_by_node[node] = merged\n\n    return mst_edges\n\n\n\n\n\"\"\"\nMinimum Spanning Tree\n\n\nKruskal's algorithm implementation.\n\nInput:\n    weight_by_edge: A dict of the form {(u, v): weight} for every undirected graph edge {u, v}\n\nPrecondition:\n    The input graph is connected\n\nOutput:\n    A set of edges that connects all the vertices of the input graph and has the least possible total weight.\n\nExample:\n    >>> minimum_spanning_tree({\n    ...     (1, 2): 10,\n    ...     (2, 3): 15,\n    ...     (3, 4): 10,\n    ...     (1, 4): 10\n    ... })\n    {(1, 2), (3, 4), (1, 4)}\n\"\"\"\n"
+        }
+      ],
+      "test_sha256": {
+        "python_testcases/test_minimum_spanning_tree.py": "45b23edf3513e1f1a6e7ecf5f17eb85d1a32845d70869c7190b16b10cd61d811"
+      }
+    },
+    {
+      "sequence": 4910,
+      "created_at": "2026-11-15T15:20:20.686288+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-988478c1df4742e99c54621789f3af0e",
+      "parent_step_id": "s-2badb0f8e67c4cc39983b4d21200a737",
+      "node_id": "apply_candidate",
+      "round": 2,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+      "artifact_path": "patch-2",
+      "duration_ms": 130
+    },
+    {
+      "sequence": 4911,
+      "created_at": "2026-11-15T15:20:20.711541+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-fc5ff7428c4b40ec9ff209fabb7d70b8",
+      "parent_step_id": "s-988478c1df4742e99c54621789f3af0e",
+      "node_id": "pytest",
+      "round": 2,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 4912,
+      "created_at": "2026-11-15T15:20:25.834564+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-fc5ff7428c4b40ec9ff209fabb7d70b8",
+      "parent_step_id": "s-988478c1df4742e99c54621789f3af0e",
+      "node_id": "pytest",
+      "round": 2,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "evidence_id": "test-development-2",
+      "evidence_path": "development-2",
+      "call_id": "codefix-dacf6eed07774ba5b2837a06bf15ed04",
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_ms": 826,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-5ffc13603e1a4a1b81fe950d62522e4c,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-dacf6eed07774ba5b2837a06bf15ed04",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-c7c901e49a4f4a089d6b477a676c2916,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-20404a844aec48519460914b55a667e4/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_minimum_spanning_tree.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-c7c901e49a4f4a089d6b477a676c2916",
+      "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+      "project": "qb-minimum_spanning_tree",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "expected_test_count": 3,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-b5ea38ec1b6540a594edbee3a8c053f1",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 3,
+        "passed": 3,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "ok",
+      "verification_status": "passed",
+      "failure_class": "passed",
+      "reason": "Expected identities and complete lifecycle verified against JUnit",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_minimum_spanning_tree.py::test1",
+          "python_testcases/test_minimum_spanning_tree.py::test2",
+          "python_testcases/test_minimum_spanning_tree.py::test3"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_minimum_spanning_tree.py::test1",
+          "python_testcases/test_minimum_spanning_tree.py::test2",
+          "python_testcases/test_minimum_spanning_tree.py::test3"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_minimum_spanning_tree",
+            "test1"
+          ],
+          [
+            "python_testcases.test_minimum_spanning_tree",
+            "test2"
+          ],
+          [
+            "python_testcases.test_minimum_spanning_tree",
+            "test3"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-20404a844aec48519460914b55a667e4",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 4913,
+      "created_at": "2026-11-15T15:20:25.857008+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-fc5ff7428c4b40ec9ff209fabb7d70b8",
+      "parent_step_id": "s-988478c1df4742e99c54621789f3af0e",
+      "node_id": "pytest",
+      "round": 2,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "verification_status": "passed",
+      "evidence_id": "test-development-2",
+      "failure_class": "passed",
+      "evidence_path": "development-2",
+      "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "registered_test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "duration_ms": 5143
+    },
+    {
+      "sequence": 4914,
+      "created_at": "2026-11-15T15:20:25.881970+00:00",
+      "event": "roles_skipped",
+      "roles": [
+        "detector",
+        "scheduler",
+        "locator"
+      ],
+      "round": 2,
+      "reason": "单Agent对照：仅修复员，依据相同隔离测试反馈有界重试；权限、预算及干净复验保持",
+      "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316"
+    },
+    {
+      "sequence": 4915,
+      "created_at": "2026-11-15T15:20:25.910277+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-a1d7423f7d374df9b452b8706ec7b7b5",
+      "parent_step_id": "s-fc5ff7428c4b40ec9ff209fabb7d70b8",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-2"
+      ]
+    },
+    {
+      "sequence": 4916,
+      "created_at": "2026-11-15T15:20:25.929315+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-2.json",
+      "decision_id": "d-2",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+      "evidence_ids": [
+        "test-development-2"
+      ],
+      "failure_class": "passed",
+      "action": "final_check",
+      "target_agent": null,
+      "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+      "retries_left": 1,
+      "rule_id": "R16",
+      "terminal_status": null,
+      "trace_version": "1.0.0",
+      "step_id": "s-a1d7423f7d374df9b452b8706ec7b7b5",
+      "parent_step_id": "s-fc5ff7428c4b40ec9ff209fabb7d70b8",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "development",
+      "strategy": "single",
+      "program_decision": {
+        "decision_id": "d-2",
+        "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+        "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+        "evidence_ids": [
+          "test-development-2"
+        ],
+        "failure_class": "passed",
+        "action": "final_check",
+        "target_agent": null,
+        "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+        "retries_left": 1,
+        "rule_id": "R16",
+        "terminal_status": null
+      },
+      "model_advice": null,
+      "effective_action": "final_check",
+      "override_reason": "单Agent对照：仅修复员，依据相同隔离测试反馈有界重试；权限、预算及干净复验保持",
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 3,
+        "rounds_used": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.006754",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 268.5914347999933,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 4917,
+      "created_at": "2026-11-15T15:20:25.948148+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-a1d7423f7d374df9b452b8706ec7b7b5",
+      "parent_step_id": "s-fc5ff7428c4b40ec9ff209fabb7d70b8",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "development",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-2"
+      ],
+      "status": "ok",
+      "effective_action": "final_check",
+      "decision_id": "d-2",
+      "duration_ms": 37
+    },
+    {
+      "sequence": 4918,
+      "created_at": "2026-11-15T15:20:26.027457+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-fe6c38e1d3d54712b1bc2c244aafb96e",
+      "parent_step_id": "s-a1d7423f7d374df9b452b8706ec7b7b5",
+      "node_id": "pytest",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-2"
+      ]
+    },
+    {
+      "sequence": 4919,
+      "created_at": "2026-11-15T15:20:30.703675+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-fe6c38e1d3d54712b1bc2c244aafb96e",
+      "parent_step_id": "s-a1d7423f7d374df9b452b8706ec7b7b5",
+      "node_id": "pytest",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-2"
+      ],
+      "evidence_id": "test-final-check",
+      "evidence_path": "final-check",
+      "call_id": "codefix-b564a2a0926e4ab2aa0b917ee1b5f416",
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_ms": 836,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-88d117ade16a4b379daffdd3d3cce002,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-b564a2a0926e4ab2aa0b917ee1b5f416",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-cc00dbcdd8a243d680b0bbd14840fdbe,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-3f5f83c5835e43adb02ea213afc2eca5/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_minimum_spanning_tree.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-cc00dbcdd8a243d680b0bbd14840fdbe",
+      "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+      "project": "qb-minimum_spanning_tree",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "expected_test_count": 3,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-b539d496e124412990f3530608c3075a",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 3,
+        "passed": 3,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "ok",
+      "verification_status": "passed",
+      "failure_class": "passed",
+      "reason": "Expected identities and complete lifecycle verified against JUnit",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_minimum_spanning_tree.py::test1",
+          "python_testcases/test_minimum_spanning_tree.py::test2",
+          "python_testcases/test_minimum_spanning_tree.py::test3"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_minimum_spanning_tree.py::test1",
+          "python_testcases/test_minimum_spanning_tree.py::test2",
+          "python_testcases/test_minimum_spanning_tree.py::test3"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_minimum_spanning_tree",
+            "test1"
+          ],
+          [
+            "python_testcases.test_minimum_spanning_tree",
+            "test2"
+          ],
+          [
+            "python_testcases.test_minimum_spanning_tree",
+            "test3"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-3f5f83c5835e43adb02ea213afc2eca5",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 4920,
+      "created_at": "2026-11-15T15:20:30.733418+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-fe6c38e1d3d54712b1bc2c244aafb96e",
+      "parent_step_id": "s-a1d7423f7d374df9b452b8706ec7b7b5",
+      "node_id": "pytest",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-development-2"
+      ],
+      "status": "ok",
+      "verification_status": "passed",
+      "evidence_id": "test-final-check",
+      "failure_class": "passed",
+      "evidence_path": "final-check",
+      "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "registered_test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "duration_ms": 4703
+    },
+    {
+      "sequence": 4921,
+      "created_at": "2026-11-15T15:20:30.769956+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-00872ec8091d4c2abb7493e95e54bcc0",
+      "parent_step_id": "s-fe6c38e1d3d54712b1bc2c244aafb96e",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-final-check"
+      ]
+    },
+    {
+      "sequence": 4922,
+      "created_at": "2026-11-15T15:20:30.794151+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-a4301afbdd514a7e816f9d09f7a4b5e9.json",
+      "decision_id": "d-a4301afbdd514a7e816f9d09f7a4b5e9",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "failure_class": "passed",
+      "action": "finish",
+      "target_agent": null,
+      "reason": "独立验收实际通过且证据对应最终代码版本。",
+      "retries_left": 1,
+      "rule_id": "R07",
+      "terminal_status": "success",
+      "trace_version": "1.0.0",
+      "step_id": "s-00872ec8091d4c2abb7493e95e54bcc0",
+      "parent_step_id": "s-fe6c38e1d3d54712b1bc2c244aafb96e",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "single",
+      "program_decision": {
+        "decision_id": "d-a4301afbdd514a7e816f9d09f7a4b5e9",
+        "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+        "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+        "evidence_ids": [
+          "test-final-check"
+        ],
+        "failure_class": "passed",
+        "action": "finish",
+        "target_agent": null,
+        "reason": "独立验收实际通过且证据对应最终代码版本。",
+        "retries_left": 1,
+        "rule_id": "R07",
+        "terminal_status": "success"
+      },
+      "model_advice": null,
+      "effective_action": "finish",
+      "override_reason": null,
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 4,
+        "rounds_used": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.006754",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 263.7308723000024,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 4923,
+      "created_at": "2026-11-15T15:20:30.815975+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-00872ec8091d4c2abb7493e95e54bcc0",
+      "parent_step_id": "s-fe6c38e1d3d54712b1bc2c244aafb96e",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "status": "ok",
+      "effective_action": "finish",
+      "decision_id": "d-a4301afbdd514a7e816f9d09f7a4b5e9",
+      "duration_ms": 41
+    },
+    {
+      "sequence": 4924,
+      "created_at": "2026-11-15T15:20:30.849570+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-a23359ce1561440b8ff497ff0b6451b6",
+      "parent_step_id": "s-00872ec8091d4c2abb7493e95e54bcc0",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-final-check"
+      ]
+    },
+    {
+      "sequence": 4925,
+      "created_at": "2026-11-15T15:20:30.873499+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-ac8f27e777964417a099081fb6a20bc4.json",
+      "action": "finish",
+      "rule_id": "R07",
+      "reason": "开发测试及干净副本同套原生测试均实际通过",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-a23359ce1561440b8ff497ff0b6451b6",
+      "parent_step_id": "s-00872ec8091d4c2abb7493e95e54bcc0",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "decision_id": "d-ac8f27e777964417a099081fb6a20bc4",
+      "program_decision": {
+        "action": "finish",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过"
+      },
+      "model_advice": null,
+      "effective_action": "finish",
+      "target_agent": null,
+      "override_reason": null,
+      "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+      "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 4,
+        "rounds_used": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.006754",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 263.6543376000045,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 4926,
+      "created_at": "2026-11-15T15:20:30.894960+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+      "step_id": "s-a23359ce1561440b8ff497ff0b6451b6",
+      "parent_step_id": "s-00872ec8091d4c2abb7493e95e54bcc0",
+      "node_id": "program_dispatch",
+      "round": 2,
+      "phase": "final_check",
+      "strategy": "single",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "status": "ok",
+      "effective_action": "finish",
+      "decision_id": "d-ac8f27e777964417a099081fb6a20bc4",
+      "duration_ms": 42
+    },
+    {
+      "sequence": 4927,
+      "created_at": "2026-11-15T15:20:30.913112+00:00",
+      "event": "finished",
+      "status": "success",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 2,
+        "model_calls": 2,
+        "tool_calls": 4,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "single",
+        "project": "qb-minimum_spanning_tree",
+        "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa",
+        "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+        "code_path": "candidate-2/python_programs/minimum_spanning_tree.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "code_runtime_error",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.006754",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    }
+  ],
+  "result_summary": {
+    "schema_version": 1,
+    "run_id": "run-6f5e2da148a5460598c088141ab575bd",
+    "status": "success",
+    "success": true,
+    "reason": "开发测试及干净副本同套原生测试均实际通过",
+    "rounds_used": 2,
+    "max_rounds": 3,
+    "model_attempts": 2,
+    "actual_model_requests": 2,
+    "tests": [
+      {
+        "stage": "baseline",
+        "round": 0,
+        "verification_status": "failed",
+        "failure_class": "code_runtime_error",
+        "counts": {
+          "collected": 3,
+          "passed": 0,
+          "failed": 3,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "缺陷已复现，可以开始修复",
+        "evidence_path": "baseline",
+        "step_id": "s-ead39391316f4731b168bb59064cd603",
+        "code_version": "sha256:e3f4eb23b1358aa309be9b022734481424f8abe0f0f6f9c8fa6a1a7decb4f09c",
+        "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa"
+      },
+      {
+        "stage": "candidate",
+        "round": 1,
+        "verification_status": "failed",
+        "failure_class": "code_runtime_error",
+        "counts": {
+          "collected": 3,
+          "passed": 0,
+          "failed": 3,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选仍未修好",
+        "evidence_path": "development-1",
+        "step_id": "s-bd0547ad586c4cf3801fc1a7ffd7ace7",
+        "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+        "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa"
+      },
+      {
+        "stage": "candidate",
+        "round": 2,
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "counts": {
+          "collected": 3,
+          "passed": 3,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选通过，待最终复验",
+        "evidence_path": "development-2",
+        "step_id": "s-fc5ff7428c4b40ec9ff209fabb7d70b8",
+        "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+        "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa"
+      },
+      {
+        "stage": "final",
+        "round": 2,
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "counts": {
+          "collected": 3,
+          "passed": 3,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "最终复验通过",
+        "evidence_path": "final-check",
+        "step_id": "s-fe6c38e1d3d54712b1bc2c244aafb96e",
+        "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316",
+        "test_suite_version": "sha256:0120b5a36d757e6be000cfd681fd37533df1054b60dfa1d4519f83b5910f9afa"
+      }
+    ],
+    "cost": {
+      "calls": 2,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.006754",
+      "reserved_cny": "0"
+    },
+    "model_output_issues": [],
+    "started_at": "2026-11-15T15:19:54.423086+00:00",
+    "finished_at": "2026-11-15T15:20:30.913112+00:00",
+    "duration_ms": 36490,
+    "before": {
+      "path": "base/python_programs/minimum_spanning_tree.py",
+      "content": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n            mst_edges.add(edge)\n            group_by_node[u].update(group_by_node[v])\n            for node in group_by_node[v]:\n                group_by_node[node].update(group_by_node[u])\n\n    return mst_edges\n\n\n\n\n\"\"\"\nMinimum Spanning Tree\n\n\nKruskal's algorithm implementation.\n\nInput:\n    weight_by_edge: A dict of the form {(u, v): weight} for every undirected graph edge {u, v}\n\nPrecondition:\n    The input graph is connected\n\nOutput:\n    A set of edges that connects all the vertices of the input graph and has the least possible total weight.\n\nExample:\n    >>> minimum_spanning_tree({\n    ...     (1, 2): 10,\n    ...     (2, 3): 15,\n    ...     (3, 4): 10,\n    ...     (1, 4): 10\n    ... })\n    {(1, 2), (3, 4), (1, 4)}\n\"\"\"\n"
+    },
+    "after": {
+      "path": "candidate-2/python_programs/minimum_spanning_tree.py",
+      "content": "\ndef minimum_spanning_tree(weight_by_edge):\n    group_by_node = {}\n    mst_edges = set()\n\n    for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n        u, v = edge\n        group_by_node.setdefault(u, {u})\n        group_by_node.setdefault(v, {v})\n        if group_by_node[u] != group_by_node[v]:\n            mst_edges.add(edge)\n            group_u = group_by_node[u]\n            group_v = group_by_node[v]\n            merged = group_u | group_v\n            for node in merged:\n                group_by_node[node] = merged\n\n    return mst_edges\n\n\n\n\n\"\"\"\nMinimum Spanning Tree\n\n\nKruskal's algorithm implementation.\n\nInput:\n    weight_by_edge: A dict of the form {(u, v): weight} for every undirected graph edge {u, v}\n\nPrecondition:\n    The input graph is connected\n\nOutput:\n    A set of edges that connects all the vertices of the input graph and has the least possible total weight.\n\nExample:\n    >>> minimum_spanning_tree({\n    ...     (1, 2): 10,\n    ...     (2, 3): 15,\n    ...     (3, 4): 10,\n    ...     (1, 4): 10\n    ... })\n    {(1, 2), (3, 4), (1, 4)}\n\"\"\"\n"
+    },
+    "combined_diff": "--- original/python_programs/minimum_spanning_tree.py\n+++ candidate/python_programs/minimum_spanning_tree.py\n@@ -5,11 +5,15 @@\n \n     for edge in sorted(weight_by_edge, key=weight_by_edge.__getitem__):\n         u, v = edge\n-        if group_by_node.setdefault(u, {u}) != group_by_node.setdefault(v, {v}):\n+        group_by_node.setdefault(u, {u})\n+        group_by_node.setdefault(v, {v})\n+        if group_by_node[u] != group_by_node[v]:\n             mst_edges.add(edge)\n-            group_by_node[u].update(group_by_node[v])\n-            for node in group_by_node[v]:\n-                group_by_node[node].update(group_by_node[u])\n+            group_u = group_by_node[u]\n+            group_v = group_by_node[v]\n+            merged = group_u | group_v\n+            for node in merged:\n+                group_by_node[node] = merged\n \n     return mst_edges\n \n",
+    "diff": {
+      "path": "patch-2/patch.diff",
+      "content": "--- a/python_programs/minimum_spanning_tree.py\n+++ b/python_programs/minimum_spanning_tree.py\n@@ -7,11 +7,13 @@\n         u, v = edge\n         group_by_node.setdefault(u, {u})\n         group_by_node.setdefault(v, {v})\n-        if group_by_node.get(u, {u}) != group_by_node.get(v, {v}):\n+        if group_by_node[u] != group_by_node[v]:\n             mst_edges.add(edge)\n-            group_by_node[u].update(group_by_node[v])\n-            for node in group_by_node[v]:\n-                group_by_node[node].update(group_by_node[u])\n+            group_u = group_by_node[u]\n+            group_v = group_by_node[v]\n+            merged = group_u | group_v\n+            for node in merged:\n+                group_by_node[node] = merged\n \n     return mst_edges\n \n"
+    },
+    "explanations": [
+      {
+        "round": 1,
+        "explanation": "原实现在 if 条件里用 setdefault 作比较值，每次都会触发默认集合的构建，且两个不同节点比较的是不同的临时 set 对象，导致同一连通分量节点的归属集合无法正确合并，从而产生错误边集合。改为先确保每个节点存在于 group_by_node，再比较各自的集合归属，进行 Kruskal 合并，修复缺陷。"
+      },
+      {
+        "round": 2,
+        "explanation": "原实现使用并查集/分组算法，但合并两个分组时存在缺陷：group_by_node[u].update(group_by_node[v]) 后遍历 group_by_node[v] 更新其节点，但 group_by_node[v] 的集合本身未被加入 u 的新合并集合（且遍历过程中可能被修改导致集合大小变更运行时错误）。改为先将两个分组取并集得到 merged，再把 merged 中的每个节点都指向同一合并集合，保证已连通节点共享同一分组，从而正确实现 Kruskal 的最小生成树。"
+      }
+    ],
+    "checks": [
+      {
+        "sequence": 4880,
+        "created_at": "2026-11-15T15:19:54.552417+00:00",
+        "event": "guard_check",
+        "step_id": "configuration-check",
+        "node_id": "configuration_check",
+        "status": "ok",
+        "reason": "角色配置、提示词和输出协议检查通过"
+      },
+      {
+        "sequence": 4888,
+        "created_at": "2026-11-15T15:20:10.254135+00:00",
+        "event": "guard_check",
+        "step_id": "m-ac38e80fa74a42a4a0184cde9b463ce8-budget",
+        "parent_step_id": "s-5dbf793c0dd44be78c15498219b9dc9c",
+        "node_id": "budget_check",
+        "role": "repairer",
+        "round": 1,
+        "code_version": "sha256:e3f4eb23b1358aa309be9b022734481424f8abe0f0f6f9c8fa6a1a7decb4f09c",
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      {
+        "sequence": 4889,
+        "created_at": "2026-11-15T15:20:10.277722+00:00",
+        "event": "guard_check",
+        "check": "patch_permission",
+        "step_id": "m-ac38e80fa74a42a4a0184cde9b463ce8-permission",
+        "parent_step_id": "s-5dbf793c0dd44be78c15498219b9dc9c",
+        "node_id": "permission_check",
+        "round": 1,
+        "code_version": "sha256:e3f4eb23b1358aa309be9b022734481424f8abe0f0f6f9c8fa6a1a7decb4f09c",
+        "status": "ok",
+        "reason": "补丁路径及结构检查通过"
+      },
+      {
+        "sequence": 4904,
+        "created_at": "2026-11-15T15:20:20.441513+00:00",
+        "event": "guard_check",
+        "step_id": "m-9833871dcfbc44119a7c2dc8784434a2-budget",
+        "parent_step_id": "s-2badb0f8e67c4cc39983b4d21200a737",
+        "node_id": "budget_check",
+        "role": "repairer",
+        "round": 2,
+        "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      {
+        "sequence": 4905,
+        "created_at": "2026-11-15T15:20:20.461771+00:00",
+        "event": "guard_check",
+        "check": "patch_permission",
+        "step_id": "m-9833871dcfbc44119a7c2dc8784434a2-permission",
+        "parent_step_id": "s-2badb0f8e67c4cc39983b4d21200a737",
+        "node_id": "permission_check",
+        "round": 2,
+        "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0",
+        "status": "ok",
+        "reason": "补丁路径及结构检查通过"
+      }
+    ],
+    "skips": [
+      {
+        "sequence": 4898,
+        "created_at": "2026-11-15T15:20:16.014777+00:00",
+        "event": "roles_skipped",
+        "roles": [
+          "detector",
+          "scheduler",
+          "locator"
+        ],
+        "round": 1,
+        "reason": "单Agent对照：仅修复员，依据相同隔离测试反馈有界重试；权限、预算及干净复验保持",
+        "code_version": "sha256:02a450161e4588f90d383a43abbcdcaa33eb48dcfd529fa052a92797a8fd15c0"
+      },
+      {
+        "sequence": 4914,
+        "created_at": "2026-11-15T15:20:25.881970+00:00",
+        "event": "roles_skipped",
+        "roles": [
+          "detector",
+          "scheduler",
+          "locator"
+        ],
+        "round": 2,
+        "reason": "单Agent对照：仅修复员，依据相同隔离测试反馈有界重试；权限、预算及干净复验保持",
+        "code_version": "sha256:9874ca732330b36c992f25d390c7dca1e6081e89a08adea31ae0087373dcf316"
+      }
+    ]
+  },
+  "configuration_snapshot": {
+    "bindings": {
+      "repairer": "personal_model",
+      "detector": "personal_model",
+      "scheduler": "personal_model",
+      "locator": "personal_model"
+    },
+    "parameters": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    },
+    "strategy": "single",
+    "roles": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+    "prompts_sha256": {
+      "locator": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+      "repairer": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+      "detector": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+      "scheduler": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6"
+    },
+    "note": "结构校验通过；不代表模型请求、费用预留或隔离资格通过",
+    "personal_price_snapshots": {
+      "personal_model": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      }
+    },
+    "schema_version": 2,
+    "role_overrides": {
+      "repairer": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 8192,
+          "enable_thinking": false
+        }
+      },
+      "detector": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "scheduler": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "locator": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      }
+    },
+    "capabilities_sha256": "62ad69daf4539956ad609d5ed4c470c2826ce834a873c1c1600ec6ef6863a416",
+    "effective_roles": {
+      "repairer": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 8192,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481"
+      },
+      "detector": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      },
+      "scheduler": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      },
+      "locator": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      }
+    },
+    "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+    "effective_roles_sha256": "cbc8c805bc834d22d9cb4f0ead5a8d2c457297ac313c13fc32a64e2c7d4a9444",
+    "config_id": "cfg-7539a16e0a0fd313d948a674cccea45da780d8ea22fb06a439483edfa4bb2ade",
+    "created_at": "2026-11-15T13:58:41.885846+00:00"
+  }
+}

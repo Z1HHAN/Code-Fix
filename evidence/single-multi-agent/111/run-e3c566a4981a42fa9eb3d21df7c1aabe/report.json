@@ -1,0 +1,2511 @@
+{
+  "schema_version": "v3",
+  "run": {
+    "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+    "task": {
+      "config_id": "cfg-a27c6a7bb63ac54c51f649cf38eb4acd17abda2a9694a13da0199c8ebdc4850a",
+      "description": "修复rpn_eval缺陷，使预登记的原生测试通过；不修改测试。",
+      "max_calls": 12,
+      "max_rounds": 3,
+      "mode": "repair",
+      "project": "qb-rpn_eval",
+      "strategy": "dynamic",
+      "total_seconds": 300
+    },
+    "status": "success",
+    "created_at": "2026-11-15T15:29:16.367328+00:00",
+    "updated_at": "2026-11-15T15:29:46.315642+00:00",
+    "result": {
+      "final_result": "passed",
+      "dev_result": "passed",
+      "rounds_used": 1,
+      "model_calls": 2,
+      "tool_calls": 3,
+      "model_api_called": true,
+      "mode": "live",
+      "isolation_ready": true,
+      "strategy": "dynamic",
+      "project": "qb-rpn_eval",
+      "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+      "code_path": "candidate-1/python_programs/rpn_eval.py",
+      "evidence_matches_current_version": true,
+      "baseline_failure_class": "assertion_failed",
+      "failure_class": "passed",
+      "rule_id": "R07",
+      "reason": "开发测试及干净副本同套原生测试均实际通过",
+      "model_attempts": 2,
+      "actual_model_requests": 2,
+      "cost": {
+        "calls": 2,
+        "status": "estimated",
+        "basis": "versioned_model_rates; not_provider_invoice",
+        "models": [
+          {
+            "model": "deepseek-v4.1-flash-1017",
+            "currency": "CNY",
+            "status": "estimated",
+            "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+            "upper_estimate": false
+          },
+          {
+            "model": "deepseek-v4.1-flash-1017",
+            "currency": "CNY",
+            "status": "estimated",
+            "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+            "upper_estimate": false
+          }
+        ],
+        "currency": "CNY",
+        "amount_cny": "0.005342",
+        "reserved_cny": "0"
+      },
+      "trace_version": "1.0.0"
+    },
+    "control": null,
+    "archived_at": null
+  },
+  "events": [
+    {
+      "sequence": 5506,
+      "created_at": "2026-11-15T15:29:16.396511+00:00",
+      "event": "started"
+    },
+    {
+      "sequence": 5507,
+      "created_at": "2026-11-15T15:29:16.470407+00:00",
+      "event": "guard_check",
+      "step_id": "configuration-check",
+      "node_id": "configuration_check",
+      "status": "ok",
+      "reason": "角色配置、提示词和输出协议检查通过"
+    },
+    {
+      "sequence": 5508,
+      "created_at": "2026-11-15T15:29:17.053432+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-d4350e0ce12940898692940b373efad2",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "dynamic",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 5509,
+      "created_at": "2026-11-15T15:29:21.747847+00:00",
+      "event": "isolation_checked",
+      "isolation_ready": true,
+      "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+      "reason": null,
+      "engine_id": "82a0558b-2dfa-48b6-86f2-de3c8937dc79",
+      "controls": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "none",
+          "Config": {}
+        },
+        "NetworkMode": "none",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "host",
+        "Dns": null,
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "Tmpfs": {
+          "/tmp": "rw,noexec,nosuid,size=67108864"
+        },
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 268435456,
+        "NanoCpus": 1000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 268435456,
+        "MemorySwappiness": null,
+        "OomKillDisable": false,
+        "PidsLimit": 64,
+        "Ulimits": [
+          {
+            "Name": "nofile",
+            "Hard": 128,
+            "Soft": 128
+          }
+        ],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/rpc_codec.py",
+            "Target": "/rpc_codec.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "volume",
+            "Source": "codefix-out-f77af17086614e0e9f6f9e6f1e332b97",
+            "Target": "/out"
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix-data/jobs/job-2f9c1a5b37da4b5498bfcd673d4a0523/isolation/probe-work",
+            "Target": "/w",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/c_runner/pytest_entry.py",
+            "Target": "/entry.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/candidate_entry.py",
+            "Target": "/harness.py",
+            "ReadOnly": true
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+      "execution_mode": "remote-docker",
+      "execution_endpoint": "https://8.148.85.237",
+      "remote_job_id": "job-2f9c1a5b37da4b5498bfcd673d4a0523",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 5510,
+      "created_at": "2026-11-15T15:29:21.774605+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-d4350e0ce12940898692940b373efad2",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "status": "ok",
+      "evidence_path": "isolation",
+      "isolation_ready": true,
+      "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+      "reason": null,
+      "engine_id": "82a0558b-2dfa-48b6-86f2-de3c8937dc79",
+      "controls": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "none",
+          "Config": {}
+        },
+        "NetworkMode": "none",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "host",
+        "Dns": null,
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "Tmpfs": {
+          "/tmp": "rw,noexec,nosuid,size=67108864"
+        },
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 268435456,
+        "NanoCpus": 1000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 268435456,
+        "MemorySwappiness": null,
+        "OomKillDisable": false,
+        "PidsLimit": 64,
+        "Ulimits": [
+          {
+            "Name": "nofile",
+            "Hard": 128,
+            "Soft": 128
+          }
+        ],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/rpc_codec.py",
+            "Target": "/rpc_codec.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "volume",
+            "Source": "codefix-out-f77af17086614e0e9f6f9e6f1e332b97",
+            "Target": "/out"
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix-data/jobs/job-2f9c1a5b37da4b5498bfcd673d4a0523/isolation/probe-work",
+            "Target": "/w",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/c_runner/pytest_entry.py",
+            "Target": "/entry.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/candidate_entry.py",
+            "Target": "/harness.py",
+            "ReadOnly": true
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+      "execution_mode": "remote-docker",
+      "execution_endpoint": "https://8.148.85.237",
+      "remote_job_id": "job-2f9c1a5b37da4b5498bfcd673d4a0523",
+      "transport_mode": "live",
+      "duration_ms": 4720
+    },
+    {
+      "sequence": 5511,
+      "created_at": "2026-11-15T15:29:22.670576+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-9544b8ebc36146aaad3cf63806433a85",
+      "parent_step_id": "s-d4350e0ce12940898692940b373efad2",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 5512,
+      "created_at": "2026-11-15T15:29:28.153238+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-9544b8ebc36146aaad3cf63806433a85",
+      "parent_step_id": "s-d4350e0ce12940898692940b373efad2",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "evidence_id": "test-baseline",
+      "evidence_path": "baseline",
+      "call_id": "codefix-a20c6524222d4e74aad12834b99b453d",
+      "exit_code": 1,
+      "timed_out": false,
+      "duration_ms": 843,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-fdc2026116f24b06a428eea5e5f346f4,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-a20c6524222d4e74aad12834b99b453d",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-bb3f1cce7c524a37b7cb5c2fd4087325,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-6c4428204a1642479e2026e4b1f5f7f7/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_rpn_eval.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-bb3f1cce7c524a37b7cb5c2fd4087325",
+      "code_version": "sha256:a0db1277db965f7285c05c31812e06ec45184b39ab8646d4a89beee6d7ce2d71",
+      "project": "qb-rpn_eval",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "expected_test_count": 6,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-00d4f25d829d4ba48b2f169aa49f6968",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 6,
+        "passed": 3,
+        "failed": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "failed",
+      "verification_status": "failed",
+      "failure_class": "assertion_failed",
+      "reason": "Frozen native fixture tests completed with a recorded failure",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data0-4.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data1-4.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data2-8.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data3-14.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data4-23.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data5-14.0]"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data0-4.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data1-4.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data2-8.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data3-14.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data4-23.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data5-14.0]"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data0-4.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data1-4.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data2-8.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data3-14.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data4-23.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data5-14.0]"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-6c4428204a1642479e2026e4b1f5f7f7",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 5513,
+      "created_at": "2026-11-15T15:29:28.176919+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-9544b8ebc36146aaad3cf63806433a85",
+      "parent_step_id": "s-d4350e0ce12940898692940b373efad2",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "status": "ok",
+      "verification_status": "failed",
+      "evidence_id": "test-baseline",
+      "failure_class": "assertion_failed",
+      "evidence_path": "baseline",
+      "code_version": "sha256:a0db1277db965f7285c05c31812e06ec45184b39ab8646d4a89beee6d7ce2d71",
+      "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "registered_test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "duration_ms": 5504
+    },
+    {
+      "sequence": 5514,
+      "created_at": "2026-11-15T15:29:28.227195+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-92b919c5d1c443d99c5027cfca4583fe",
+      "parent_step_id": "s-9544b8ebc36146aaad3cf63806433a85",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 5515,
+      "created_at": "2026-11-15T15:29:31.606105+00:00",
+      "event": "guard_check",
+      "step_id": "m-1b716e9c462c438db1120198159c8fb0-budget",
+      "parent_step_id": "s-92b919c5d1c443d99c5027cfca4583fe",
+      "node_id": "budget_check",
+      "role": "repairer",
+      "round": 1,
+      "code_version": "sha256:a0db1277db965f7285c05c31812e06ec45184b39ab8646d4a89beee6d7ce2d71",
+      "status": "ok",
+      "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+    },
+    {
+      "sequence": 5516,
+      "created_at": "2026-11-15T15:29:31.627722+00:00",
+      "event": "guard_check",
+      "check": "patch_permission",
+      "step_id": "m-1b716e9c462c438db1120198159c8fb0-permission",
+      "parent_step_id": "s-92b919c5d1c443d99c5027cfca4583fe",
+      "node_id": "permission_check",
+      "round": 1,
+      "code_version": "sha256:a0db1277db965f7285c05c31812e06ec45184b39ab8646d4a89beee6d7ce2d71",
+      "status": "ok",
+      "reason": "补丁路径及结构检查通过"
+    },
+    {
+      "sequence": 5517,
+      "created_at": "2026-11-15T15:29:31.646814+00:00",
+      "event": "agent_call",
+      "role": "repairer",
+      "mode": "live",
+      "model_api_called": true,
+      "model": "deepseek-v4.1-flash-1017",
+      "call_id": "m-1b716e9c462c438db1120198159c8fb0",
+      "status": "ok",
+      "provider_id": "personal",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "usage": {
+        "prompt_tokens": 2215,
+        "total_tokens": 2351,
+        "completion_tokens": 136,
+        "prompt_tokens_details": {
+          "cached_tokens": 256,
+          "image_tokens": 0,
+          "text_tokens": 2215
+        },
+        "completion_tokens_details": {
+          "text_tokens": 136
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount_cny": "0.002529",
+        "currency": "CNY",
+        "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+        "upper_estimate": false,
+        "basis": "versioned_model_rates; not_provider_invoice"
+      },
+      "attempts": 1,
+      "max_attempts": 1,
+      "transport_request_started": true,
+      "failure_class": null,
+      "budget_check": {
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      "provider_model": "deepseek-v4.1-flash-1017",
+      "provider_response_id": "chatcmpl-77938945-2d60-9f5e-b8f0-c25794f4eeff",
+      "finish_reason": "stop",
+      "raw_text": "{\"changes\":[{\"path\":\"python_programs/rpn_eval.py\",\"edits\":[{\"old\":\"            a = stack.pop()\\n            b = stack.pop()\",\"new\":\"            b = stack.pop()\\n            a = stack.pop()\"}]}],\"explanation\":\"RPN 计算中操作数顺序取反了。对于 [+, -, *, /] 这类非交换运算，应先弹出右操作数 b，再弹出左操作数 a，否则减法与除法结果错误，导致断言失败。\",\"evidence_ids\":[\"test-baseline\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+      "duration_ms": 3329,
+      "code_version": "sha256:a0db1277db965f7285c05c31812e06ec45184b39ab8646d4a89beee6d7ce2d71",
+      "round": 1,
+      "provenance": {
+        "role_override": {
+          "task_instruction": "",
+          "generation": {
+            "max_output_tokens": 8192,
+            "enable_thinking": false
+          }
+        },
+        "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "locator": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "repairer": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "detector": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "scheduler": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "locator",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "repairer",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "detector",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "scheduler",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+        "prompt_ref": "prompts/repairer.md",
+        "prompt_sha256": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+        "system_prompt_sha256": "279bac1d22413b8ccf15b26d768a0f65fb210d7347fe57a0b0284e1427f95635",
+        "agent_instance_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe:repairer",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "repairer",
+          "title": "修复员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [
+            "detector",
+            "scheduler",
+            "locator"
+          ],
+          "produces": "candidate_changes",
+          "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+          "output_schema": "RepairOutput",
+          "permitted_action": "propose_source_patch",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "8fa1a2ef8fde348f27a5ce1862ed65bce4eea9d6207d4091083355cf3e8ae3ef",
+        "handoffs": [],
+        "messages_sha256": "aceb0e56c43a068683eec6db65fae6715bdd1df5c5996f26a12524a327e1ab4c",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "repairer",
+          "binding": "approved_profile",
+          "profile_ref": "personal_model",
+          "mode": "live",
+          "provider_id": "personal",
+          "model": "deepseek-v4.1-flash-1017",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+          "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+          "effective_parameters": {
+            "max_tokens": 8192,
+            "enable_thinking": false
+          },
+          "request_seconds": 60,
+          "daily_shared_usd": null,
+          "input_usd_per_million": null,
+          "output_usd_per_million": null,
+          "effective_parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481",
+          "currency": "CNY",
+          "personal_pricing": {
+            "provider": "qianwen-ai",
+            "model": "deepseek-v4.1-flash-1017",
+            "region": "platform-standard",
+            "mode": "thinking",
+            "currency": "CNY",
+            "unit": "per_million_tokens",
+            "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+            "verified_at": "2026-11-11",
+            "endpoint_host": "maas.qianwenaiapi.com",
+            "tiers": [
+              {
+                "max_input_tokens": 1000000,
+                "input": "2",
+                "output": "8",
+                "cached_input": "0.2"
+              }
+            ],
+            "offpeak_discount": "0.5",
+            "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+          },
+          "daily_limit": "5",
+          "monetary_budget_enabled": true
+        }
+      },
+      "step_id": "s-92b919c5d1c443d99c5027cfca4583fe",
+      "parent_step_id": "s-9544b8ebc36146aaad3cf63806433a85",
+      "parsed_output": {
+        "changes": [
+          {
+            "path": "python_programs/rpn_eval.py",
+            "new_content": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    return stack.pop()\n\n\n\n\"\"\"\nReverse Polish Notation\n\nFour-function calculator with input given in Reverse Polish Notation (RPN).\n\nInput:\n    A list of values and operators encoded as floats and strings\n\nPrecondition:\n    all(\n        isinstance(token, float) or token in ('+', '-', '*', '/') for token in tokens\n    )\n\nExample:\n    >>> rpn_eval([3.0, 5.0, '+', 2.0, '/'])\n    4.0\n\"\"\"\n"
+          }
+        ],
+        "explanation": "RPN 计算中操作数顺序取反了。对于 [+, -, *, /] 这类非交换运算，应先弹出右操作数 b，再弹出左操作数 a，否则减法与除法结果错误，导致断言失败。",
+        "evidence_ids": [
+          "test-baseline"
+        ],
+        "knowledge_citations": [
+          "knowledge-public_tasks",
+          "knowledge-testing"
+        ]
+      }
+    },
+    {
+      "sequence": 5518,
+      "created_at": "2026-11-15T15:29:31.670701+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-92b919c5d1c443d99c5027cfca4583fe",
+      "parent_step_id": "s-9544b8ebc36146aaad3cf63806433a85",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "call_id": "m-1b716e9c462c438db1120198159c8fb0",
+      "artifact_path": "calls/m-1b716e9c462c438db1120198159c8fb0",
+      "code_version": "sha256:a0db1277db965f7285c05c31812e06ec45184b39ab8646d4a89beee6d7ce2d71",
+      "failure_class": null,
+      "agent_instance_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe:repairer",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "repairer",
+        "title": "修复员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [
+          "detector",
+          "scheduler",
+          "locator"
+        ],
+        "produces": "candidate_changes",
+        "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+        "output_schema": "RepairOutput",
+        "permitted_action": "propose_source_patch",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": null,
+      "duration_ms": 3438
+    },
+    {
+      "sequence": 5519,
+      "created_at": "2026-11-15T15:29:31.705756+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-6cc176c56bd14ae6b12991c76d7e2b14",
+      "parent_step_id": "s-92b919c5d1c443d99c5027cfca4583fe",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 5520,
+      "created_at": "2026-11-15T15:29:31.786943+00:00",
+      "event": "candidate_applied",
+      "round": 1,
+      "project": "qb-rpn_eval",
+      "base_version": "sha256:a0db1277db965f7285c05c31812e06ec45184b39ab8646d4a89beee6d7ce2d71",
+      "candidate_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+      "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "frozen_file_sha256": {
+        "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+        "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+        "python_testcases/test_rpn_eval.py": "5a605345d5d036f47b7eba0ae87c0abd854b4d88610bbb3e44b9f60744cd2e08",
+        "json_testcases/rpn_eval.json": "03fbb45a22f12fd6924331301b1afd8738e6dff1bc76e3fb0d185047c4678b67",
+        "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+      },
+      "changes": [
+        {
+          "path": "python_programs/rpn_eval.py",
+          "new_content": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    return stack.pop()\n\n\n\n\"\"\"\nReverse Polish Notation\n\nFour-function calculator with input given in Reverse Polish Notation (RPN).\n\nInput:\n    A list of values and operators encoded as floats and strings\n\nPrecondition:\n    all(\n        isinstance(token, float) or token in ('+', '-', '*', '/') for token in tokens\n    )\n\nExample:\n    >>> rpn_eval([3.0, 5.0, '+', 2.0, '/'])\n    4.0\n\"\"\"\n"
+        }
+      ],
+      "test_sha256": {
+        "python_testcases/test_rpn_eval.py": "5a605345d5d036f47b7eba0ae87c0abd854b4d88610bbb3e44b9f60744cd2e08"
+      }
+    },
+    {
+      "sequence": 5521,
+      "created_at": "2026-11-15T15:29:31.806890+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-6cc176c56bd14ae6b12991c76d7e2b14",
+      "parent_step_id": "s-92b919c5d1c443d99c5027cfca4583fe",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+      "artifact_path": "patch-1",
+      "duration_ms": 101
+    },
+    {
+      "sequence": 5522,
+      "created_at": "2026-11-15T15:29:31.830822+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-444b8da46a43414e81f1acb9073e6db7",
+      "parent_step_id": "s-6cc176c56bd14ae6b12991c76d7e2b14",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 5523,
+      "created_at": "2026-11-15T15:29:36.502996+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-444b8da46a43414e81f1acb9073e6db7",
+      "parent_step_id": "s-6cc176c56bd14ae6b12991c76d7e2b14",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "evidence_id": "test-development-1",
+      "evidence_path": "development-1",
+      "call_id": "codefix-e1e6f924a1b54614a9136de478dc9e10",
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_ms": 862,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-abd0c669342c4b00837b7000017299ff,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-e1e6f924a1b54614a9136de478dc9e10",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-435c2c0de65840d1a4f11f1f6c5daebd,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-93decca480024241a9279dcbfb92dc43/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_rpn_eval.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-435c2c0de65840d1a4f11f1f6c5daebd",
+      "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+      "project": "qb-rpn_eval",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "expected_test_count": 6,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-0ef1a436cee4409b90aa918af9b24b7e",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 6,
+        "passed": 6,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "ok",
+      "verification_status": "passed",
+      "failure_class": "passed",
+      "reason": "Expected identities and complete lifecycle verified against JUnit",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data0-4.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data1-4.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data2-8.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data3-14.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data4-23.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data5-14.0]"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data0-4.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data1-4.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data2-8.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data3-14.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data4-23.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data5-14.0]"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data0-4.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data1-4.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data2-8.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data3-14.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data4-23.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data5-14.0]"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-93decca480024241a9279dcbfb92dc43",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 5524,
+      "created_at": "2026-11-15T15:29:36.526306+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-444b8da46a43414e81f1acb9073e6db7",
+      "parent_step_id": "s-6cc176c56bd14ae6b12991c76d7e2b14",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "verification_status": "passed",
+      "evidence_id": "test-development-1",
+      "failure_class": "passed",
+      "evidence_path": "development-1",
+      "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+      "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "registered_test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "duration_ms": 4693
+    },
+    {
+      "sequence": 5525,
+      "created_at": "2026-11-15T15:29:36.588842+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-195f11141a344276a2f8ad8a93d9243d",
+      "parent_step_id": "s-444b8da46a43414e81f1acb9073e6db7",
+      "node_id": "detector",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 5526,
+      "created_at": "2026-11-15T15:29:40.390402+00:00",
+      "event": "guard_check",
+      "step_id": "m-ddcc6875b13c4ec8b4cc5d8c656e8f97-budget",
+      "parent_step_id": "s-195f11141a344276a2f8ad8a93d9243d",
+      "node_id": "budget_check",
+      "role": "detector",
+      "round": 1,
+      "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+      "status": "ok",
+      "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+    },
+    {
+      "sequence": 5527,
+      "created_at": "2026-11-15T15:29:40.414046+00:00",
+      "event": "agent_call",
+      "role": "detector",
+      "mode": "live",
+      "model_api_called": true,
+      "model": "deepseek-v4.1-flash-1017",
+      "call_id": "m-ddcc6875b13c4ec8b4cc5d8c656e8f97",
+      "status": "ok",
+      "provider_id": "personal",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "usage": {
+        "prompt_tokens": 1557,
+        "total_tokens": 1871,
+        "completion_tokens": 314,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "image_tokens": 0,
+          "text_tokens": 1557
+        },
+        "completion_tokens_details": {
+          "text_tokens": 314
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount_cny": "0.002813",
+        "currency": "CNY",
+        "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+        "upper_estimate": false,
+        "basis": "versioned_model_rates; not_provider_invoice"
+      },
+      "attempts": 1,
+      "max_attempts": 1,
+      "transport_request_started": true,
+      "failure_class": null,
+      "budget_check": {
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      "provider_model": "deepseek-v4.1-flash-1017",
+      "provider_response_id": "chatcmpl-c5701452-1d9c-93ec-93eb-ceb2cd089fec",
+      "finish_reason": "stop",
+      "raw_text": "{\"analysis\":\"提供的开发测试证据仅含一条记录，失败分类为 passed：同一代码版本 sha256:4cadb3c6... 上收集 6 个原生测试且 6 个全部通过，退出码 0，无失败或错误，因此不存在可归因的失败原因。当前代码按 RPN 顺序处理 float 操作数与 '+'、'-'、'*'、'/' 运算符，弹栈顺序为 b 后 a，符合非交换运算 '-' 与 '/' 的操作数语义。不确定性：证据为 1 轮开发反馈，仅覆盖该次收集的 6 条测试；按公开规则，这不代表隐藏或全部输入正确，也尚未在干净副本独立重跑，不能据此宣称独立验收通过。\",\"failure_class\":\"passed\",\"suggested_checks\":[\"确认本轮证据对应的代码版本与当前候选一致（sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec）\",\"由评测端在干净起点应用候选后重跑同一组冻结原生测试，并保留退出码与计数\",\"如需扩展置信度，仅可在允许路径内补充人工等价类分析（例如多运算符嵌套、负数中间结果），不修改测试\"],\"evidence_ids\":[\"test-development-1\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+      "duration_ms": 3749,
+      "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+      "round": 1,
+      "provenance": {
+        "role_override": {
+          "task_instruction": "",
+          "generation": {
+            "max_output_tokens": 2048,
+            "enable_thinking": false
+          }
+        },
+        "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "locator": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "repairer": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "detector": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "scheduler": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "locator",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "repairer",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "detector",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "scheduler",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+        "prompt_ref": "prompts/detector.md",
+        "prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+        "system_prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+        "agent_instance_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe:detector",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "detector",
+          "title": "检测员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [],
+          "produces": "failure_analysis",
+          "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+          "output_schema": "DetectorOutput",
+          "permitted_action": "analyse_tool_evidence",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "3ab70fbb58a74bbfb1b4aca2d411143ae86aed05a136bf5ca9df020d682ac9dd",
+        "handoffs": [],
+        "messages_sha256": "74f2c4bfdf487bedacbd9189951f487decfbd79d3f6c230bb32d8d6ab8ff6e12",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "detector",
+          "binding": "approved_profile",
+          "profile_ref": "personal_model",
+          "mode": "live",
+          "provider_id": "personal",
+          "model": "deepseek-v4.1-flash-1017",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+          "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+          "effective_parameters": {
+            "max_tokens": 2048,
+            "enable_thinking": false
+          },
+          "request_seconds": 60,
+          "daily_shared_usd": null,
+          "input_usd_per_million": null,
+          "output_usd_per_million": null,
+          "effective_parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1",
+          "currency": "CNY",
+          "personal_pricing": {
+            "provider": "qianwen-ai",
+            "model": "deepseek-v4.1-flash-1017",
+            "region": "platform-standard",
+            "mode": "thinking",
+            "currency": "CNY",
+            "unit": "per_million_tokens",
+            "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+            "verified_at": "2026-11-11",
+            "endpoint_host": "maas.qianwenaiapi.com",
+            "tiers": [
+              {
+                "max_input_tokens": 1000000,
+                "input": "2",
+                "output": "8",
+                "cached_input": "0.2"
+              }
+            ],
+            "offpeak_discount": "0.5",
+            "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+          },
+          "daily_limit": "5",
+          "monetary_budget_enabled": true
+        }
+      },
+      "step_id": "s-195f11141a344276a2f8ad8a93d9243d",
+      "parent_step_id": "s-444b8da46a43414e81f1acb9073e6db7",
+      "parsed_output": {
+        "analysis": "提供的开发测试证据仅含一条记录，失败分类为 passed：同一代码版本 sha256:4cadb3c6... 上收集 6 个原生测试且 6 个全部通过，退出码 0，无失败或错误，因此不存在可归因的失败原因。当前代码按 RPN 顺序处理 float 操作数与 '+'、'-'、'*'、'/' 运算符，弹栈顺序为 b 后 a，符合非交换运算 '-' 与 '/' 的操作数语义。不确定性：证据为 1 轮开发反馈，仅覆盖该次收集的 6 条测试；按公开规则，这不代表隐藏或全部输入正确，也尚未在干净副本独立重跑，不能据此宣称独立验收通过。",
+        "failure_class": "passed",
+        "suggested_checks": [
+          "确认本轮证据对应的代码版本与当前候选一致（sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec）",
+          "由评测端在干净起点应用候选后重跑同一组冻结原生测试，并保留退出码与计数",
+          "如需扩展置信度，仅可在允许路径内补充人工等价类分析（例如多运算符嵌套、负数中间结果），不修改测试"
+        ],
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "knowledge_citations": [
+          "knowledge-public_tasks",
+          "knowledge-testing"
+        ]
+      }
+    },
+    {
+      "sequence": 5528,
+      "created_at": "2026-11-15T15:29:40.434335+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-195f11141a344276a2f8ad8a93d9243d",
+      "parent_step_id": "s-444b8da46a43414e81f1acb9073e6db7",
+      "node_id": "detector",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "call_id": "m-ddcc6875b13c4ec8b4cc5d8c656e8f97",
+      "artifact_path": "calls/m-ddcc6875b13c4ec8b4cc5d8c656e8f97",
+      "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+      "failure_class": null,
+      "agent_instance_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe:detector",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "detector",
+        "title": "检测员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [],
+        "produces": "failure_analysis",
+        "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+        "output_schema": "DetectorOutput",
+        "permitted_action": "analyse_tool_evidence",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": null,
+      "duration_ms": 3846
+    },
+    {
+      "sequence": 5529,
+      "created_at": "2026-11-15T15:29:40.454531+00:00",
+      "event": "roles_skipped",
+      "roles": [
+        "scheduler"
+      ],
+      "round": 1,
+      "reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+      "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec"
+    },
+    {
+      "sequence": 5530,
+      "created_at": "2026-11-15T15:29:40.481255+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-f71d0550bebc4af3b703ffd4d046d681",
+      "parent_step_id": "s-195f11141a344276a2f8ad8a93d9243d",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 5531,
+      "created_at": "2026-11-15T15:29:40.501078+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-1.json",
+      "decision_id": "d-1",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "failure_class": "passed",
+      "action": "final_check",
+      "target_agent": null,
+      "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+      "retries_left": 2,
+      "rule_id": "R16",
+      "terminal_status": null,
+      "trace_version": "1.0.0",
+      "step_id": "s-f71d0550bebc4af3b703ffd4d046d681",
+      "parent_step_id": "s-195f11141a344276a2f8ad8a93d9243d",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "program_decision": {
+        "decision_id": "d-1",
+        "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+        "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "failure_class": "passed",
+        "action": "final_check",
+        "target_agent": null,
+        "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+        "retries_left": 2,
+        "rule_id": "R16",
+        "terminal_status": null
+      },
+      "model_advice": null,
+      "effective_action": "final_check",
+      "override_reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+      "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 2,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.005342",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 275.9650522000011,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 5532,
+      "created_at": "2026-11-15T15:29:40.527041+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-f71d0550bebc4af3b703ffd4d046d681",
+      "parent_step_id": "s-195f11141a344276a2f8ad8a93d9243d",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "effective_action": "final_check",
+      "decision_id": "d-1",
+      "duration_ms": 43
+    },
+    {
+      "sequence": 5533,
+      "created_at": "2026-11-15T15:29:40.618366+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-fe3acf393c2c4482b9651f21d15e9717",
+      "parent_step_id": "s-f71d0550bebc4af3b703ffd4d046d681",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 5534,
+      "created_at": "2026-11-15T15:29:46.054328+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-fe3acf393c2c4482b9651f21d15e9717",
+      "parent_step_id": "s-f71d0550bebc4af3b703ffd4d046d681",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "evidence_id": "test-final-check",
+      "evidence_path": "final-check",
+      "call_id": "codefix-69a55c89ebc445ccb404648ab82a45d1",
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_ms": 781,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-b43c02eca5f24b878c2932d1db3a4280,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-69a55c89ebc445ccb404648ab82a45d1",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-7c53b4cf1b324715a2f9f572f345fb83,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-c6a07255e45444178f1c095233105b52/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_rpn_eval.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-7c53b4cf1b324715a2f9f572f345fb83",
+      "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+      "project": "qb-rpn_eval",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "expected_test_count": 6,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-adcd467e08ad49c0b58c693ecf48c421",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 6,
+        "passed": 6,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "ok",
+      "verification_status": "passed",
+      "failure_class": "passed",
+      "reason": "Expected identities and complete lifecycle verified against JUnit",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data0-4.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data1-4.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data2-8.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data3-14.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data4-23.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data5-14.0]"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data0-4.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data1-4.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data2-8.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data3-14.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data4-23.0]",
+          "python_testcases/test_rpn_eval.py::test_rpn_eval[input_data5-14.0]"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data0-4.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data1-4.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data2-8.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data3-14.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data4-23.0]"
+          ],
+          [
+            "python_testcases.test_rpn_eval",
+            "test_rpn_eval[input_data5-14.0]"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-c6a07255e45444178f1c095233105b52",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 5535,
+      "created_at": "2026-11-15T15:29:46.088040+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-fe3acf393c2c4482b9651f21d15e9717",
+      "parent_step_id": "s-f71d0550bebc4af3b703ffd4d046d681",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "verification_status": "passed",
+      "evidence_id": "test-final-check",
+      "failure_class": "passed",
+      "evidence_path": "final-check",
+      "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+      "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "registered_test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "duration_ms": 5466
+    },
+    {
+      "sequence": 5536,
+      "created_at": "2026-11-15T15:29:46.130504+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-583560e554324e7d9537ebf2dda139ac",
+      "parent_step_id": "s-fe3acf393c2c4482b9651f21d15e9717",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ]
+    },
+    {
+      "sequence": 5537,
+      "created_at": "2026-11-15T15:29:46.156414+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-9876359660264b0ba46bb4e77ba62741.json",
+      "decision_id": "d-9876359660264b0ba46bb4e77ba62741",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "failure_class": "passed",
+      "action": "finish",
+      "target_agent": null,
+      "reason": "独立验收实际通过且证据对应最终代码版本。",
+      "retries_left": 2,
+      "rule_id": "R07",
+      "terminal_status": "success",
+      "trace_version": "1.0.0",
+      "step_id": "s-583560e554324e7d9537ebf2dda139ac",
+      "parent_step_id": "s-fe3acf393c2c4482b9651f21d15e9717",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "program_decision": {
+        "decision_id": "d-9876359660264b0ba46bb4e77ba62741",
+        "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+        "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+        "evidence_ids": [
+          "test-final-check"
+        ],
+        "failure_class": "passed",
+        "action": "finish",
+        "target_agent": null,
+        "reason": "独立验收实际通过且证据对应最终代码版本。",
+        "retries_left": 2,
+        "rule_id": "R07",
+        "terminal_status": "success"
+      },
+      "model_advice": null,
+      "effective_action": "finish",
+      "override_reason": null,
+      "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 3,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.005342",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 270.3154218999989,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 5538,
+      "created_at": "2026-11-15T15:29:46.183570+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-583560e554324e7d9537ebf2dda139ac",
+      "parent_step_id": "s-fe3acf393c2c4482b9651f21d15e9717",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "status": "ok",
+      "effective_action": "finish",
+      "decision_id": "d-9876359660264b0ba46bb4e77ba62741",
+      "duration_ms": 48
+    },
+    {
+      "sequence": 5539,
+      "created_at": "2026-11-15T15:29:46.233985+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-48248309e07f4aa9844409b1edcdbdad",
+      "parent_step_id": "s-583560e554324e7d9537ebf2dda139ac",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ]
+    },
+    {
+      "sequence": 5540,
+      "created_at": "2026-11-15T15:29:46.258348+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-de2fa705044c457b8b5b03ef65b284cc.json",
+      "action": "finish",
+      "rule_id": "R07",
+      "reason": "开发测试及干净副本同套原生测试均实际通过",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-48248309e07f4aa9844409b1edcdbdad",
+      "parent_step_id": "s-583560e554324e7d9537ebf2dda139ac",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "decision_id": "d-de2fa705044c457b8b5b03ef65b284cc",
+      "program_decision": {
+        "action": "finish",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过"
+      },
+      "model_advice": null,
+      "effective_action": "finish",
+      "target_agent": null,
+      "override_reason": null,
+      "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+      "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 3,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.005342",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 270.21498099999735,
+        "limits": {
+          "max_rounds": 3,
+          "max_calls": 12,
+          "total_seconds": 300
+        }
+      }
+    },
+    {
+      "sequence": 5541,
+      "created_at": "2026-11-15T15:29:46.284960+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+      "step_id": "s-48248309e07f4aa9844409b1edcdbdad",
+      "parent_step_id": "s-583560e554324e7d9537ebf2dda139ac",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "status": "ok",
+      "effective_action": "finish",
+      "decision_id": "d-de2fa705044c457b8b5b03ef65b284cc",
+      "duration_ms": 46
+    },
+    {
+      "sequence": 5542,
+      "created_at": "2026-11-15T15:29:46.315886+00:00",
+      "event": "finished",
+      "status": "success",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 2,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-rpn_eval",
+        "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05",
+        "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+        "code_path": "candidate-1/python_programs/rpn_eval.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.005342",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    }
+  ],
+  "result_summary": {
+    "schema_version": 1,
+    "run_id": "run-e3c566a4981a42fa9eb3d21df7c1aabe",
+    "status": "success",
+    "success": true,
+    "reason": "开发测试及干净副本同套原生测试均实际通过",
+    "rounds_used": 1,
+    "max_rounds": 3,
+    "model_attempts": 2,
+    "actual_model_requests": 2,
+    "tests": [
+      {
+        "stage": "baseline",
+        "round": 0,
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "counts": {
+          "collected": 6,
+          "passed": 3,
+          "failed": 3,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "缺陷已复现，可以开始修复",
+        "evidence_path": "baseline",
+        "step_id": "s-9544b8ebc36146aaad3cf63806433a85",
+        "code_version": "sha256:a0db1277db965f7285c05c31812e06ec45184b39ab8646d4a89beee6d7ce2d71",
+        "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05"
+      },
+      {
+        "stage": "candidate",
+        "round": 1,
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "counts": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选通过，待最终复验",
+        "evidence_path": "development-1",
+        "step_id": "s-444b8da46a43414e81f1acb9073e6db7",
+        "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+        "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05"
+      },
+      {
+        "stage": "final",
+        "round": 1,
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "counts": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "最终复验通过",
+        "evidence_path": "final-check",
+        "step_id": "s-fe3acf393c2c4482b9651f21d15e9717",
+        "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+        "test_suite_version": "sha256:f85a74e98413c8baabc2523d08e604611fc784903468ba57534ee76714ed2c05"
+      }
+    ],
+    "cost": {
+      "calls": 2,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.005342",
+      "reserved_cny": "0"
+    },
+    "model_output_issues": [],
+    "started_at": "2026-11-15T15:29:16.396511+00:00",
+    "finished_at": "2026-11-15T15:29:46.315886+00:00",
+    "duration_ms": 29919,
+    "before": {
+      "path": "base/python_programs/rpn_eval.py",
+      "content": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            a = stack.pop()\n            b = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    return stack.pop()\n\n\n\n\"\"\"\nReverse Polish Notation\n\nFour-function calculator with input given in Reverse Polish Notation (RPN).\n\nInput:\n    A list of values and operators encoded as floats and strings\n\nPrecondition:\n    all(\n        isinstance(token, float) or token in ('+', '-', '*', '/') for token in tokens\n    )\n\nExample:\n    >>> rpn_eval([3.0, 5.0, '+', 2.0, '/'])\n    4.0\n\"\"\"\n"
+    },
+    "after": {
+      "path": "candidate-1/python_programs/rpn_eval.py",
+      "content": "\ndef rpn_eval(tokens):\n    def op(symbol, a, b):\n        return {\n            '+': lambda a, b: a + b,\n            '-': lambda a, b: a - b,\n            '*': lambda a, b: a * b,\n            '/': lambda a, b: a / b\n        }[symbol](a, b)\n\n    stack = []\n\n    for token in tokens:\n        if isinstance(token, float):\n            stack.append(token)\n        else:\n            b = stack.pop()\n            a = stack.pop()\n            stack.append(\n                op(token, a, b)\n            )\n\n    return stack.pop()\n\n\n\n\"\"\"\nReverse Polish Notation\n\nFour-function calculator with input given in Reverse Polish Notation (RPN).\n\nInput:\n    A list of values and operators encoded as floats and strings\n\nPrecondition:\n    all(\n        isinstance(token, float) or token in ('+', '-', '*', '/') for token in tokens\n    )\n\nExample:\n    >>> rpn_eval([3.0, 5.0, '+', 2.0, '/'])\n    4.0\n\"\"\"\n"
+    },
+    "combined_diff": "--- original/python_programs/rpn_eval.py\n+++ candidate/python_programs/rpn_eval.py\n@@ -14,8 +14,8 @@\n         if isinstance(token, float):\n             stack.append(token)\n         else:\n+            b = stack.pop()\n             a = stack.pop()\n-            b = stack.pop()\n             stack.append(\n                 op(token, a, b)\n             )\n",
+    "diff": {
+      "path": "patch-1/patch.diff",
+      "content": "--- a/python_programs/rpn_eval.py\n+++ b/python_programs/rpn_eval.py\n@@ -14,8 +14,8 @@\n         if isinstance(token, float):\n             stack.append(token)\n         else:\n+            b = stack.pop()\n             a = stack.pop()\n-            b = stack.pop()\n             stack.append(\n                 op(token, a, b)\n             )\n"
+    },
+    "explanations": [
+      {
+        "round": 1,
+        "explanation": "RPN 计算中操作数顺序取反了。对于 [+, -, *, /] 这类非交换运算，应先弹出右操作数 b，再弹出左操作数 a，否则减法与除法结果错误，导致断言失败。"
+      }
+    ],
+    "checks": [
+      {
+        "sequence": 5507,
+        "created_at": "2026-11-15T15:29:16.470407+00:00",
+        "event": "guard_check",
+        "step_id": "configuration-check",
+        "node_id": "configuration_check",
+        "status": "ok",
+        "reason": "角色配置、提示词和输出协议检查通过"
+      },
+      {
+        "sequence": 5515,
+        "created_at": "2026-11-15T15:29:31.606105+00:00",
+        "event": "guard_check",
+        "step_id": "m-1b716e9c462c438db1120198159c8fb0-budget",
+        "parent_step_id": "s-92b919c5d1c443d99c5027cfca4583fe",
+        "node_id": "budget_check",
+        "role": "repairer",
+        "round": 1,
+        "code_version": "sha256:a0db1277db965f7285c05c31812e06ec45184b39ab8646d4a89beee6d7ce2d71",
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      {
+        "sequence": 5516,
+        "created_at": "2026-11-15T15:29:31.627722+00:00",
+        "event": "guard_check",
+        "check": "patch_permission",
+        "step_id": "m-1b716e9c462c438db1120198159c8fb0-permission",
+        "parent_step_id": "s-92b919c5d1c443d99c5027cfca4583fe",
+        "node_id": "permission_check",
+        "round": 1,
+        "code_version": "sha256:a0db1277db965f7285c05c31812e06ec45184b39ab8646d4a89beee6d7ce2d71",
+        "status": "ok",
+        "reason": "补丁路径及结构检查通过"
+      },
+      {
+        "sequence": 5526,
+        "created_at": "2026-11-15T15:29:40.390402+00:00",
+        "event": "guard_check",
+        "step_id": "m-ddcc6875b13c4ec8b4cc5d8c656e8f97-budget",
+        "parent_step_id": "s-195f11141a344276a2f8ad8a93d9243d",
+        "node_id": "budget_check",
+        "role": "detector",
+        "round": 1,
+        "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec",
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      }
+    ],
+    "skips": [
+      {
+        "sequence": 5529,
+        "created_at": "2026-11-15T15:29:40.454531+00:00",
+        "event": "roles_skipped",
+        "roles": [
+          "scheduler"
+        ],
+        "round": 1,
+        "reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+        "code_version": "sha256:4cadb3c647a8e6ebdb605c88d616a1f4d9ce6b42ebcec0ef7ee89800f03303ec"
+      }
+    ]
+  },
+  "configuration_snapshot": {
+    "bindings": {
+      "repairer": "personal_model",
+      "detector": "personal_model",
+      "scheduler": "personal_model",
+      "locator": "personal_model"
+    },
+    "parameters": {
+      "max_rounds": 3,
+      "max_calls": 12,
+      "total_seconds": 300
+    },
+    "strategy": "dynamic",
+    "roles": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+    "prompts_sha256": {
+      "locator": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+      "repairer": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+      "detector": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+      "scheduler": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6"
+    },
+    "note": "结构校验通过；不代表模型请求、费用预留或隔离资格通过",
+    "personal_price_snapshots": {
+      "personal_model": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      }
+    },
+    "schema_version": 2,
+    "role_overrides": {
+      "repairer": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 8192,
+          "enable_thinking": false
+        }
+      },
+      "detector": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "scheduler": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "locator": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      }
+    },
+    "capabilities_sha256": "62ad69daf4539956ad609d5ed4c470c2826ce834a873c1c1600ec6ef6863a416",
+    "effective_roles": {
+      "repairer": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 8192,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481"
+      },
+      "detector": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      },
+      "scheduler": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      },
+      "locator": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      }
+    },
+    "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+    "effective_roles_sha256": "cbc8c805bc834d22d9cb4f0ead5a8d2c457297ac313c13fc32a64e2c7d4a9444",
+    "config_id": "cfg-a27c6a7bb63ac54c51f649cf38eb4acd17abda2a9694a13da0199c8ebdc4850a",
+    "created_at": "2026-11-15T13:58:41.923622+00:00"
+  }
+}

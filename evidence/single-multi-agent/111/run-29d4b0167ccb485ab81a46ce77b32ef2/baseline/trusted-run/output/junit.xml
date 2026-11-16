@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="3" time="0.072" timestamp="2026-11-15T15:28:24.906369+00:00" hostname="b1d757c6d378"><testcase classname="python_testcases.test_reverse_linked_list" name="test1" time="0.003"><failure message="assert None == &lt;node.Node object at 0x7f844d42a660&gt;">def test1():
+        """Case 1: 5-node list input
+        Expected Output: 1 2 3 4 5
+        """
+    
+        node1 = Node(1)
+        node2 = Node(2, node1)
+        node3 = Node(3, node2)
+        node4 = Node(4, node3)
+        node5 = Node(5, node4)
+    
+        result = reverse_linked_list(node5)
+&gt;       assert result == node1
+E       assert None == &lt;node.Node object at 0x7f844d42a660&gt;
+
+python_testcases/test_reverse_linked_list.py:22: AssertionError</failure></testcase><testcase classname="python_testcases.test_reverse_linked_list" name="test2" time="0.003"><failure message="assert None == &lt;node.Node object at 0x7f844d1f4410&gt;">def test2():
+        """Case 2: 1-node list input
+        Expected Output: 0
+        """
+    
+        node = Node(0)
+    
+        result = reverse_linked_list(node)
+&gt;       assert result == node
+E       assert None == &lt;node.Node object at 0x7f844d1f4410&gt;
+
+python_testcases/test_reverse_linked_list.py:39: AssertionError</failure></testcase><testcase classname="python_testcases.test_reverse_linked_list" name="test3" time="0.002" /></testsuite></testsuites>

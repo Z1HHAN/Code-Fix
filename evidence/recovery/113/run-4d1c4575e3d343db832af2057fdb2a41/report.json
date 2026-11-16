@@ -1,0 +1,2563 @@
+{
+  "schema_version": "v3",
+  "run": {
+    "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+    "task": {
+      "config_id": "cfg-5acefd312a1d8fe9a6f122a79bfd8815d07588c0c0863e1a9ec138e90931d78b",
+      "description": "修复shunting_yard缺陷，使预登记的原生测试通过；不修改测试。",
+      "max_calls": 20,
+      "max_rounds": 5,
+      "mode": "repair",
+      "project": "qb-shunting_yard",
+      "strategy": "dynamic",
+      "total_seconds": 600
+    },
+    "status": "success",
+    "created_at": "2026-11-15T17:21:34.591082+00:00",
+    "updated_at": "2026-11-15T17:22:11.235769+00:00",
+    "result": {
+      "final_result": "passed",
+      "dev_result": "passed",
+      "rounds_used": 1,
+      "model_calls": 2,
+      "tool_calls": 3,
+      "model_api_called": true,
+      "mode": "live",
+      "isolation_ready": true,
+      "strategy": "dynamic",
+      "project": "qb-shunting_yard",
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+      "code_path": "candidate-1/python_programs/shunting_yard.py",
+      "evidence_matches_current_version": true,
+      "baseline_failure_class": "assertion_failed",
+      "failure_class": "passed",
+      "rule_id": "R07",
+      "reason": "开发测试及干净副本同套原生测试均实际通过",
+      "model_attempts": 2,
+      "actual_model_requests": 2,
+      "cost": {
+        "calls": 2,
+        "status": "estimated",
+        "basis": "versioned_model_rates; not_provider_invoice",
+        "models": [
+          {
+            "model": "deepseek-v4.1-flash-1017",
+            "currency": "CNY",
+            "status": "estimated",
+            "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+            "upper_estimate": false
+          },
+          {
+            "model": "deepseek-v4.1-flash-1017",
+            "currency": "CNY",
+            "status": "estimated",
+            "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+            "upper_estimate": false
+          }
+        ],
+        "currency": "CNY",
+        "amount_cny": "0.00573",
+        "reserved_cny": "0"
+      },
+      "trace_version": "1.0.0"
+    },
+    "control": null,
+    "archived_at": null
+  },
+  "events": [
+    {
+      "sequence": 6328,
+      "created_at": "2026-11-15T17:21:34.616745+00:00",
+      "event": "started"
+    },
+    {
+      "sequence": 6329,
+      "created_at": "2026-11-15T17:21:34.704016+00:00",
+      "event": "guard_check",
+      "step_id": "configuration-check",
+      "node_id": "configuration_check",
+      "status": "ok",
+      "reason": "角色配置、提示词和输出协议检查通过"
+    },
+    {
+      "sequence": 6330,
+      "created_at": "2026-11-15T17:21:35.174985+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-444d19cc2bd14425ba0fe5526af7e261",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "dynamic",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 6331,
+      "created_at": "2026-11-15T17:21:41.892130+00:00",
+      "event": "isolation_checked",
+      "isolation_ready": true,
+      "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+      "reason": null,
+      "engine_id": "82a0558b-2dfa-48b6-86f2-de3c8937dc79",
+      "controls": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "none",
+          "Config": {}
+        },
+        "NetworkMode": "none",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "host",
+        "Dns": null,
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "Tmpfs": {
+          "/tmp": "rw,noexec,nosuid,size=67108864"
+        },
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 268435456,
+        "NanoCpus": 1000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 268435456,
+        "MemorySwappiness": null,
+        "OomKillDisable": false,
+        "PidsLimit": 64,
+        "Ulimits": [
+          {
+            "Name": "nofile",
+            "Hard": 128,
+            "Soft": 128
+          }
+        ],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/rpc_codec.py",
+            "Target": "/rpc_codec.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "volume",
+            "Source": "codefix-out-0388bfe7007445f7997a7fafa6a651fa",
+            "Target": "/out"
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix-data/jobs/job-16d2da73c6a74d89aa5ec6fe98d76040/isolation/probe-work",
+            "Target": "/w",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/c_runner/pytest_entry.py",
+            "Target": "/entry.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/candidate_entry.py",
+            "Target": "/harness.py",
+            "ReadOnly": true
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+      "execution_mode": "remote-docker",
+      "execution_endpoint": "https://8.148.85.237",
+      "remote_job_id": "job-16d2da73c6a74d89aa5ec6fe98d76040",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 6332,
+      "created_at": "2026-11-15T17:21:41.912133+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-444d19cc2bd14425ba0fe5526af7e261",
+      "parent_step_id": null,
+      "node_id": "isolation_preflight",
+      "round": 0,
+      "phase": "preflight",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "status": "ok",
+      "evidence_path": "isolation",
+      "isolation_ready": true,
+      "image": "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+      "reason": null,
+      "engine_id": "82a0558b-2dfa-48b6-86f2-de3c8937dc79",
+      "controls": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "LogConfig": {
+          "Type": "none",
+          "Config": {}
+        },
+        "NetworkMode": "none",
+        "PortBindings": {},
+        "RestartPolicy": {
+          "Name": "no",
+          "MaximumRetryCount": 0
+        },
+        "AutoRemove": false,
+        "VolumeDriver": "",
+        "VolumesFrom": null,
+        "ConsoleSize": [
+          0,
+          0
+        ],
+        "CapAdd": null,
+        "CapDrop": [
+          "ALL"
+        ],
+        "CgroupnsMode": "host",
+        "Dns": null,
+        "DnsOptions": [],
+        "DnsSearch": [],
+        "ExtraHosts": null,
+        "GroupAdd": null,
+        "IpcMode": "private",
+        "Cgroup": "",
+        "Links": null,
+        "OomScoreAdj": 0,
+        "PidMode": "",
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": true,
+        "SecurityOpt": [
+          "no-new-privileges"
+        ],
+        "Tmpfs": {
+          "/tmp": "rw,noexec,nosuid,size=67108864"
+        },
+        "UTSMode": "",
+        "UsernsMode": "",
+        "ShmSize": 67108864,
+        "Runtime": "runc",
+        "Isolation": "",
+        "CpuShares": 0,
+        "Memory": 268435456,
+        "NanoCpus": 1000000000,
+        "CgroupParent": "",
+        "BlkioWeight": 0,
+        "BlkioWeightDevice": [],
+        "BlkioDeviceReadBps": [],
+        "BlkioDeviceWriteBps": [],
+        "BlkioDeviceReadIOps": [],
+        "BlkioDeviceWriteIOps": [],
+        "CpuPeriod": 0,
+        "CpuQuota": 0,
+        "CpuRealtimePeriod": 0,
+        "CpuRealtimeRuntime": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "Devices": [],
+        "DeviceCgroupRules": null,
+        "DeviceRequests": null,
+        "MemoryReservation": 0,
+        "MemorySwap": 268435456,
+        "MemorySwappiness": null,
+        "OomKillDisable": false,
+        "PidsLimit": 64,
+        "Ulimits": [
+          {
+            "Name": "nofile",
+            "Hard": 128,
+            "Soft": 128
+          }
+        ],
+        "CpuCount": 0,
+        "CpuPercent": 0,
+        "IOMaximumIOps": 0,
+        "IOMaximumBandwidth": 0,
+        "Mounts": [
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/rpc_codec.py",
+            "Target": "/rpc_codec.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "volume",
+            "Source": "codefix-out-0388bfe7007445f7997a7fafa6a651fa",
+            "Target": "/out"
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix-data/jobs/job-16d2da73c6a74d89aa5ec6fe98d76040/isolation/probe-work",
+            "Target": "/w",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/c_runner/pytest_entry.py",
+            "Target": "/entry.py",
+            "ReadOnly": true
+          },
+          {
+            "Type": "bind",
+            "Source": "/opt/codefix/docker/candidate_entry.py",
+            "Target": "/harness.py",
+            "ReadOnly": true
+          }
+        ],
+        "MaskedPaths": [
+          "/proc/asound",
+          "/proc/acpi",
+          "/proc/kcore",
+          "/proc/keys",
+          "/proc/latency_stats",
+          "/proc/timer_list",
+          "/proc/timer_stats",
+          "/proc/sched_debug",
+          "/proc/scsi",
+          "/sys/firmware",
+          "/sys/devices/virtual/powercap"
+        ],
+        "ReadonlyPaths": [
+          "/proc/bus",
+          "/proc/fs",
+          "/proc/irq",
+          "/proc/sys",
+          "/proc/sysrq-trigger"
+        ]
+      },
+      "scope": "Linux Docker probe; not VM-equivalent isolation certification",
+      "execution_mode": "remote-docker",
+      "execution_endpoint": "https://8.148.85.237",
+      "remote_job_id": "job-16d2da73c6a74d89aa5ec6fe98d76040",
+      "transport_mode": "live",
+      "duration_ms": 6742
+    },
+    {
+      "sequence": 6333,
+      "created_at": "2026-11-15T17:21:42.344126+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-c291ba06113a4d2380d3aaf2056018d5",
+      "parent_step_id": "s-444d19cc2bd14425ba0fe5526af7e261",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": []
+    },
+    {
+      "sequence": 6334,
+      "created_at": "2026-11-15T17:21:47.895278+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-c291ba06113a4d2380d3aaf2056018d5",
+      "parent_step_id": "s-444d19cc2bd14425ba0fe5526af7e261",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "evidence_id": "test-baseline",
+      "evidence_path": "baseline",
+      "call_id": "codefix-00e20a31d8664600ac216ea48cb7cc7f",
+      "exit_code": 1,
+      "timed_out": false,
+      "duration_ms": 786,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-6f09f85249644cb1acee59bc47081882,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-00e20a31d8664600ac216ea48cb7cc7f",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-9771428a11944242b7b15c151c96b8c3,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-e462651d90774a0ea81a138e8e8a1454/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_shunting_yard.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-9771428a11944242b7b15c151c96b8c3",
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "project": "qb-shunting_yard",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "expected_test_count": 6,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-f250af6799964875869249134a5e3d05",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 6,
+        "passed": 2,
+        "failed": 4,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "failed",
+      "verification_status": "failed",
+      "failure_class": "assertion_failed",
+      "reason": "Frozen native fixture tests completed with a recorded failure",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data0-expected0]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data1-expected1]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data2-expected2]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data3-expected3]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data4-expected4]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data5-expected5]"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data0-expected0]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data1-expected1]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data2-expected2]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data3-expected3]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data4-expected4]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data5-expected5]"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data0-expected0]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data1-expected1]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data2-expected2]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data3-expected3]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data4-expected4]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data5-expected5]"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-e462651d90774a0ea81a138e8e8a1454",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 6335,
+      "created_at": "2026-11-15T17:21:47.917646+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-c291ba06113a4d2380d3aaf2056018d5",
+      "parent_step_id": "s-444d19cc2bd14425ba0fe5526af7e261",
+      "node_id": "pytest",
+      "round": 0,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [],
+      "status": "ok",
+      "verification_status": "failed",
+      "evidence_id": "test-baseline",
+      "failure_class": "assertion_failed",
+      "evidence_path": "baseline",
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "registered_test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "duration_ms": 5572
+    },
+    {
+      "sequence": 6336,
+      "created_at": "2026-11-15T17:21:47.953676+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-3fcb6aa411c34623b7add0e9e058fd5b",
+      "parent_step_id": "s-c291ba06113a4d2380d3aaf2056018d5",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 6337,
+      "created_at": "2026-11-15T17:21:51.625138+00:00",
+      "event": "guard_check",
+      "step_id": "m-2f88ecea1a354029b06f7ef1c707b6bc-budget",
+      "parent_step_id": "s-3fcb6aa411c34623b7add0e9e058fd5b",
+      "node_id": "budget_check",
+      "role": "repairer",
+      "round": 1,
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "status": "ok",
+      "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+    },
+    {
+      "sequence": 6338,
+      "created_at": "2026-11-15T17:21:51.648013+00:00",
+      "event": "guard_check",
+      "check": "patch_permission",
+      "step_id": "m-2f88ecea1a354029b06f7ef1c707b6bc-permission",
+      "parent_step_id": "s-3fcb6aa411c34623b7add0e9e058fd5b",
+      "node_id": "permission_check",
+      "round": 1,
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "status": "ok",
+      "reason": "补丁路径及结构检查通过"
+    },
+    {
+      "sequence": 6339,
+      "created_at": "2026-11-15T17:21:51.672282+00:00",
+      "event": "agent_call",
+      "role": "repairer",
+      "mode": "live",
+      "model_api_called": true,
+      "model": "deepseek-v4.1-flash-1017",
+      "call_id": "m-2f88ecea1a354029b06f7ef1c707b6bc",
+      "status": "ok",
+      "provider_id": "personal",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "usage": {
+        "prompt_tokens": 2417,
+        "total_tokens": 2603,
+        "completion_tokens": 186,
+        "prompt_tokens_details": {
+          "cached_tokens": 256,
+          "image_tokens": 0,
+          "text_tokens": 2417
+        },
+        "completion_tokens_details": {
+          "text_tokens": 186
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount_cny": "0.002931",
+        "currency": "CNY",
+        "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+        "upper_estimate": false,
+        "basis": "versioned_model_rates; not_provider_invoice"
+      },
+      "attempts": 1,
+      "max_attempts": 2,
+      "transport_request_started": true,
+      "failure_class": null,
+      "budget_check": {
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      "transport_attempts": [
+        {
+          "version": "transport-v1",
+          "outcome": "possibly_sent",
+          "error_type": null,
+          "send_started": true,
+          "response_received": true,
+          "events": [
+            "connection.connect_tcp.started",
+            "connection.connect_tcp.complete",
+            "connection.start_tls.started",
+            "connection.start_tls.complete",
+            "http11.send_request_headers.started",
+            "http11.send_request_headers.complete",
+            "http11.send_request_body.started",
+            "http11.send_request_body.complete",
+            "http11.receive_response_headers.started",
+            "http11.receive_response_headers.complete",
+            "http11.receive_response_body.started",
+            "http11.receive_response_body.complete",
+            "http11.response_closed.started",
+            "http11.response_closed.complete"
+          ],
+          "standard_transport": true
+        }
+      ],
+      "provider_model": "deepseek-v4.1-flash-1017",
+      "provider_response_id": "chatcmpl-67e94b80-2c8e-989a-a580-9913f5bb0ed2",
+      "finish_reason": "stop",
+      "raw_text": "{\"changes\":[{\"path\":\"python_programs/shunting_yard.py\",\"edits\":[{\"old\":\"            while opstack and precedence[token] <= precedence[opstack[-1]]:\\n                rpntokens.append(opstack.pop())\\n\\n    while opstack:\",\"new\":\"            while opstack and precedence[token] <= precedence[opstack[-1]]:\\n                rpntokens.append(opstack.pop())\\n            opstack.append(token)\\n\\n    while opstack:\"}]}],\"explanation\":\"原实现弹出栈中优先级不低于当前的运算符后，没有把当前运算符压入opstack，导致运算符丢失并产生错误的RPN序列。补充opstack.append(token)即可按标准shunting-yard算法正确处理所有运算符配置。\",\"evidence_ids\":[\"test-baseline\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+      "duration_ms": 3634,
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "round": 1,
+      "provenance": {
+        "role_override": {
+          "task_instruction": "",
+          "generation": {
+            "max_output_tokens": 8192,
+            "enable_thinking": false
+          }
+        },
+        "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "locator": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "repairer": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "detector": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "scheduler": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "locator",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "repairer",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "detector",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "scheduler",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+        "prompt_ref": "prompts/repairer.md",
+        "prompt_sha256": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+        "system_prompt_sha256": "279bac1d22413b8ccf15b26d768a0f65fb210d7347fe57a0b0284e1427f95635",
+        "agent_instance_id": "run-4d1c4575e3d343db832af2057fdb2a41:repairer",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "repairer",
+          "title": "修复员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [
+            "detector",
+            "scheduler",
+            "locator"
+          ],
+          "produces": "candidate_changes",
+          "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+          "output_schema": "RepairOutput",
+          "permitted_action": "propose_source_patch",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "8fa1a2ef8fde348f27a5ce1862ed65bce4eea9d6207d4091083355cf3e8ae3ef",
+        "handoffs": [],
+        "messages_sha256": "f20acd17013d28a5bc5fdbc4ec4a40b00ecaa0ade23287b1b57c34a8985541c5",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "repairer",
+          "binding": "approved_profile",
+          "profile_ref": "personal_model",
+          "mode": "live",
+          "provider_id": "personal",
+          "model": "deepseek-v4.1-flash-1017",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+          "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+          "effective_parameters": {
+            "max_tokens": 8192,
+            "enable_thinking": false
+          },
+          "request_seconds": 60,
+          "daily_shared_usd": null,
+          "input_usd_per_million": null,
+          "output_usd_per_million": null,
+          "effective_parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481",
+          "currency": "CNY",
+          "personal_pricing": {
+            "provider": "qianwen-ai",
+            "model": "deepseek-v4.1-flash-1017",
+            "region": "platform-standard",
+            "mode": "thinking",
+            "currency": "CNY",
+            "unit": "per_million_tokens",
+            "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+            "verified_at": "2026-11-11",
+            "endpoint_host": "maas.qianwenaiapi.com",
+            "tiers": [
+              {
+                "max_input_tokens": 1000000,
+                "input": "2",
+                "output": "8",
+                "cached_input": "0.2"
+              }
+            ],
+            "offpeak_discount": "0.5",
+            "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+          },
+          "daily_limit": "5",
+          "monetary_budget_enabled": true
+        }
+      },
+      "step_id": "s-3fcb6aa411c34623b7add0e9e058fd5b",
+      "parent_step_id": "s-c291ba06113a4d2380d3aaf2056018d5",
+      "parsed_output": {
+        "changes": [
+          {
+            "path": "python_programs/shunting_yard.py",
+            "new_content": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n\n\n\"\"\"\nInfix to RPN Conversion\nshunting-yard\n\n\nUses Dijkstra's shunting-yard algorithm to transform infix notation into equivalent Reverse Polish Notation.\n\nInput:\n    tokens: A list of tokens in infix notation\n\nPrecondition:\n    all(isinstance(token, int) or token in '+-*/' for token in tokens)\n\nOutput:\n    The input tokens reordered into Reverse Polish Notation\n\nExamples:\n    >>> shunting_yard([10, '-', 5, '-', 2])\n    [10, 5, '-', 2, '-']\n    >>> shunting_yard([34, '-', 12, '/', 5])\n    [34, 12, 5, '/' ,'-']\n    >>> shunting_yard([4, '+', 9, '*', 9, '-', 10, '+', 13])\n    [4, 9, 9, '*', '+', 10, '-', 13, '+']\n\"\"\"\n"
+          }
+        ],
+        "explanation": "原实现弹出栈中优先级不低于当前的运算符后，没有把当前运算符压入opstack，导致运算符丢失并产生错误的RPN序列。补充opstack.append(token)即可按标准shunting-yard算法正确处理所有运算符配置。",
+        "evidence_ids": [
+          "test-baseline"
+        ],
+        "knowledge_citations": [
+          "knowledge-public_tasks",
+          "knowledge-testing"
+        ]
+      }
+    },
+    {
+      "sequence": 6340,
+      "created_at": "2026-11-15T17:21:51.695875+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-3fcb6aa411c34623b7add0e9e058fd5b",
+      "parent_step_id": "s-c291ba06113a4d2380d3aaf2056018d5",
+      "node_id": "repairer",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "call_id": "m-2f88ecea1a354029b06f7ef1c707b6bc",
+      "artifact_path": "calls/m-2f88ecea1a354029b06f7ef1c707b6bc",
+      "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "failure_class": null,
+      "agent_instance_id": "run-4d1c4575e3d343db832af2057fdb2a41:repairer",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "repairer",
+        "title": "修复员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [
+          "detector",
+          "scheduler",
+          "locator"
+        ],
+        "produces": "candidate_changes",
+        "collaboration_task": "根据当前工具证据与已交接的分析、调度、定位结果提出源文件补丁；不执行代码。",
+        "output_schema": "RepairOutput",
+        "permitted_action": "propose_source_patch",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": null,
+      "duration_ms": 3738
+    },
+    {
+      "sequence": 6341,
+      "created_at": "2026-11-15T17:21:51.718968+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-e0e517b4a15d4153b0da8f58af13bb70",
+      "parent_step_id": "s-3fcb6aa411c34623b7add0e9e058fd5b",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 6342,
+      "created_at": "2026-11-15T17:21:51.805980+00:00",
+      "event": "candidate_applied",
+      "round": 1,
+      "project": "qb-shunting_yard",
+      "base_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+      "candidate_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "frozen_file_sha256": {
+        "LICENSE": "3bb03003929be645f6557a66fcb9820f527df7ce2b51b491405d233cb191d517",
+        "conftest.py": "e8325790da8f5d06af1251e724838c7c8f3c8a18d90c31ddc9d24d9f3aa57ce8",
+        "python_testcases/test_shunting_yard.py": "6573899a42a8fa12a7b868b863abad256fda5bddc1c07f147c9818fbf3c6cef1",
+        "json_testcases/shunting_yard.json": "cc4d78a776f17f473d0dfc575574e14f08ca92ca08bcc50d3229fc54252d05ff",
+        "python_testcases/load_testdata.py": "17a9d2b14f6df66d0827d3949474ecb1ff132bf124f51b2bd458f035c1dc4060"
+      },
+      "changes": [
+        {
+          "path": "python_programs/shunting_yard.py",
+          "new_content": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n\n\n\"\"\"\nInfix to RPN Conversion\nshunting-yard\n\n\nUses Dijkstra's shunting-yard algorithm to transform infix notation into equivalent Reverse Polish Notation.\n\nInput:\n    tokens: A list of tokens in infix notation\n\nPrecondition:\n    all(isinstance(token, int) or token in '+-*/' for token in tokens)\n\nOutput:\n    The input tokens reordered into Reverse Polish Notation\n\nExamples:\n    >>> shunting_yard([10, '-', 5, '-', 2])\n    [10, 5, '-', 2, '-']\n    >>> shunting_yard([34, '-', 12, '/', 5])\n    [34, 12, 5, '/' ,'-']\n    >>> shunting_yard([4, '+', 9, '*', 9, '-', 10, '+', 13])\n    [4, 9, 9, '*', '+', 10, '-', 13, '+']\n\"\"\"\n"
+        }
+      ],
+      "test_sha256": {
+        "python_testcases/test_shunting_yard.py": "6573899a42a8fa12a7b868b863abad256fda5bddc1c07f147c9818fbf3c6cef1"
+      }
+    },
+    {
+      "sequence": 6343,
+      "created_at": "2026-11-15T17:21:51.827408+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-e0e517b4a15d4153b0da8f58af13bb70",
+      "parent_step_id": "s-3fcb6aa411c34623b7add0e9e058fd5b",
+      "node_id": "apply_candidate",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+      "artifact_path": "patch-1",
+      "duration_ms": 104
+    },
+    {
+      "sequence": 6344,
+      "created_at": "2026-11-15T17:21:51.854947+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-f8ca43066fdb4194a936737656874fd5",
+      "parent_step_id": "s-e0e517b4a15d4153b0da8f58af13bb70",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ]
+    },
+    {
+      "sequence": 6345,
+      "created_at": "2026-11-15T17:21:57.235787+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-f8ca43066fdb4194a936737656874fd5",
+      "parent_step_id": "s-e0e517b4a15d4153b0da8f58af13bb70",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "evidence_id": "test-development-1",
+      "evidence_path": "development-1",
+      "call_id": "codefix-22ed06e2894b40c7b97cbd25342bf3bf",
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_ms": 827,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-fe63e069a0cb456e991c805e74d39267,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-22ed06e2894b40c7b97cbd25342bf3bf",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-50f8ebb5d0c344e3875d418997e8dad5,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-cef36e49c8854d78abe66a9df48f3da0/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_shunting_yard.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-50f8ebb5d0c344e3875d418997e8dad5",
+      "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+      "project": "qb-shunting_yard",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "expected_test_count": 6,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-1a0b46c6845c4309a309a6a405355c3a",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 6,
+        "passed": 6,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "ok",
+      "verification_status": "passed",
+      "failure_class": "passed",
+      "reason": "Expected identities and complete lifecycle verified against JUnit",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data0-expected0]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data1-expected1]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data2-expected2]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data3-expected3]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data4-expected4]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data5-expected5]"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data0-expected0]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data1-expected1]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data2-expected2]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data3-expected3]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data4-expected4]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data5-expected5]"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data0-expected0]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data1-expected1]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data2-expected2]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data3-expected3]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data4-expected4]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data5-expected5]"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-cef36e49c8854d78abe66a9df48f3da0",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 6346,
+      "created_at": "2026-11-15T17:21:57.256578+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-f8ca43066fdb4194a936737656874fd5",
+      "parent_step_id": "s-e0e517b4a15d4153b0da8f58af13bb70",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-baseline"
+      ],
+      "status": "ok",
+      "verification_status": "passed",
+      "evidence_id": "test-development-1",
+      "failure_class": "passed",
+      "evidence_path": "development-1",
+      "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "registered_test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "duration_ms": 5400
+    },
+    {
+      "sequence": 6347,
+      "created_at": "2026-11-15T17:21:57.289600+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-69097cc992bb42b1aedfdec375c9fa2f",
+      "parent_step_id": "s-f8ca43066fdb4194a936737656874fd5",
+      "node_id": "detector",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 6348,
+      "created_at": "2026-11-15T17:22:03.063628+00:00",
+      "event": "guard_check",
+      "step_id": "m-7e04291198c4460395a0da77cc5cdadd-budget",
+      "parent_step_id": "s-69097cc992bb42b1aedfdec375c9fa2f",
+      "node_id": "budget_check",
+      "role": "detector",
+      "round": 1,
+      "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+      "status": "ok",
+      "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+    },
+    {
+      "sequence": 6349,
+      "created_at": "2026-11-15T17:22:03.082383+00:00",
+      "event": "agent_call",
+      "role": "detector",
+      "mode": "live",
+      "model_api_called": true,
+      "model": "deepseek-v4.1-flash-1017",
+      "call_id": "m-7e04291198c4460395a0da77cc5cdadd",
+      "status": "ok",
+      "provider_id": "personal",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "usage": {
+        "prompt_tokens": 1655,
+        "total_tokens": 1941,
+        "completion_tokens": 286,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "image_tokens": 0,
+          "text_tokens": 1655
+        },
+        "completion_tokens_details": {
+          "text_tokens": 286
+        }
+      },
+      "cost": {
+        "status": "estimated",
+        "amount_cny": "0.002799",
+        "currency": "CNY",
+        "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+        "upper_estimate": false,
+        "basis": "versioned_model_rates; not_provider_invoice"
+      },
+      "attempts": 1,
+      "max_attempts": 2,
+      "transport_request_started": true,
+      "failure_class": null,
+      "budget_check": {
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      "transport_attempts": [
+        {
+          "version": "transport-v1",
+          "outcome": "possibly_sent",
+          "error_type": null,
+          "send_started": true,
+          "response_received": true,
+          "events": [
+            "connection.connect_tcp.started",
+            "connection.connect_tcp.complete",
+            "connection.start_tls.started",
+            "connection.start_tls.complete",
+            "http11.send_request_headers.started",
+            "http11.send_request_headers.complete",
+            "http11.send_request_body.started",
+            "http11.send_request_body.complete",
+            "http11.receive_response_headers.started",
+            "http11.receive_response_headers.complete",
+            "http11.receive_response_body.started",
+            "http11.receive_response_body.complete",
+            "http11.response_closed.started",
+            "http11.response_closed.complete"
+          ],
+          "standard_transport": true
+        }
+      ],
+      "provider_model": "deepseek-v4.1-flash-1017",
+      "provider_response_id": "chatcmpl-2589cd58-18bb-9d2e-8ce5-1c411eb2cc09",
+      "finish_reason": "stop",
+      "raw_text": "{\"analysis\":\"提供的唯一开发测试证据 test-development-1 的失败分类为 passed：在代码版本 sha256:712f6657... 上收集 6 项、全部 6 通过、0 失败、0 错误、退出码 0。因此本次证据不支持“修复失败”的判断；当前观察是开发阶段测试通过，而非失败。需要注意与任务描述的差异：任务描述称需修复 shunting_yard 缺陷并使预登记原生测试通过，但该证据已显示通过，可能意味着代码版本已包含修复、测试规模/数据与预期覆盖不同，或开发证据仅为开发反馈。知识规则亦提示开发测试通过后仍需在干净副本独立重跑同一套原生测试，且开发通过不代表隐藏或全部输入覆盖；该独立复验未在给定证据中执行，故不能据此宣布独立验收通过。\",\"failure_class\":\"passed\",\"suggested_checks\":[\"确认 test-development-1 的 code_version 是否与当前候选 shunting_yard.py 内容一致\",\"若已通过，按流程在干净副本用同一冻结测试集独立重跑并记录退出码与计数\",\"检查是否仍有登记但未纳入本次开发证据的失败用例或分类信息\"],\"evidence_ids\":[\"test-development-1\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+      "duration_ms": 5736,
+      "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+      "round": 1,
+      "provenance": {
+        "role_override": {
+          "task_instruction": "",
+          "generation": {
+            "max_output_tokens": 2048,
+            "enable_thinking": false
+          }
+        },
+        "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+        "protocol": "codefix-json-v1",
+        "parser_version": "1.0.0",
+        "config_version": "1.1.0",
+        "effective_config": {
+          "config_version": "1.1.0",
+          "protocol": "codefix-json-v1",
+          "models": {
+            "locator": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "repairer": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "detector": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            },
+            "scheduler": {
+              "binding": "approved_profile",
+              "profile_ref": "personal_model"
+            }
+          },
+          "agents": [
+            {
+              "agent_id": "locator",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "locator",
+              "prompt_ref": "prompts/locator.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "project_structure",
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "LocatorOutput"
+            },
+            {
+              "agent_id": "repairer",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "repairer",
+              "prompt_ref": "prompts/repairer.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "RepairOutput"
+            },
+            {
+              "agent_id": "detector",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "detector",
+              "prompt_ref": "prompts/detector.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "DetectorOutput"
+            },
+            {
+              "agent_id": "scheduler",
+              "enabled": true,
+              "role_type": "llm",
+              "model_ref": "scheduler",
+              "prompt_ref": "prompts/scheduler.md",
+              "tool_allowlist": [
+                "read_file",
+                "search_knowledge"
+              ],
+              "knowledge_ids": [
+                "business_rules",
+                "testing",
+                "public_tasks"
+              ],
+              "output_schema": "SchedulerOutput"
+            }
+          ]
+        },
+        "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+        "prompt_ref": "prompts/detector.md",
+        "prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+        "system_prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+        "agent_instance_id": "run-4d1c4575e3d343db832af2057fdb2a41:detector",
+        "agent_contract": {
+          "contract_version": "1.0.0",
+          "agent_id": "detector",
+          "title": "检测员",
+          "input_scope": "current_candidate_development_evidence_only",
+          "receives_from": [],
+          "produces": "failure_analysis",
+          "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+          "output_schema": "DetectorOutput",
+          "permitted_action": "analyse_tool_evidence",
+          "tools": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "can_execute_code": false,
+          "can_modify_tests": false,
+          "can_approve_success": false,
+          "can_override_guards": false
+        },
+        "agent_contract_sha256": "3ab70fbb58a74bbfb1b4aca2d411143ae86aed05a136bf5ca9df020d682ac9dd",
+        "handoffs": [],
+        "messages_sha256": "3621a4e043a03b273bc22a211953fc6252f456d20c1d8dfbc4bd21f21f175bfa",
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "model_binding": {
+          "model_ref": "detector",
+          "binding": "approved_profile",
+          "profile_ref": "personal_model",
+          "mode": "live",
+          "provider_id": "personal",
+          "model": "deepseek-v4.1-flash-1017",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+          "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+          "effective_parameters": {
+            "max_tokens": 2048,
+            "enable_thinking": false
+          },
+          "request_seconds": 60,
+          "daily_shared_usd": null,
+          "input_usd_per_million": null,
+          "output_usd_per_million": null,
+          "effective_parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1",
+          "currency": "CNY",
+          "personal_pricing": {
+            "provider": "qianwen-ai",
+            "model": "deepseek-v4.1-flash-1017",
+            "region": "platform-standard",
+            "mode": "thinking",
+            "currency": "CNY",
+            "unit": "per_million_tokens",
+            "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+            "verified_at": "2026-11-11",
+            "endpoint_host": "maas.qianwenaiapi.com",
+            "tiers": [
+              {
+                "max_input_tokens": 1000000,
+                "input": "2",
+                "output": "8",
+                "cached_input": "0.2"
+              }
+            ],
+            "offpeak_discount": "0.5",
+            "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+          },
+          "daily_limit": "5",
+          "monetary_budget_enabled": true
+        }
+      },
+      "step_id": "s-69097cc992bb42b1aedfdec375c9fa2f",
+      "parent_step_id": "s-f8ca43066fdb4194a936737656874fd5",
+      "parsed_output": {
+        "analysis": "提供的唯一开发测试证据 test-development-1 的失败分类为 passed：在代码版本 sha256:712f6657... 上收集 6 项、全部 6 通过、0 失败、0 错误、退出码 0。因此本次证据不支持“修复失败”的判断；当前观察是开发阶段测试通过，而非失败。需要注意与任务描述的差异：任务描述称需修复 shunting_yard 缺陷并使预登记原生测试通过，但该证据已显示通过，可能意味着代码版本已包含修复、测试规模/数据与预期覆盖不同，或开发证据仅为开发反馈。知识规则亦提示开发测试通过后仍需在干净副本独立重跑同一套原生测试，且开发通过不代表隐藏或全部输入覆盖；该独立复验未在给定证据中执行，故不能据此宣布独立验收通过。",
+        "failure_class": "passed",
+        "suggested_checks": [
+          "确认 test-development-1 的 code_version 是否与当前候选 shunting_yard.py 内容一致",
+          "若已通过，按流程在干净副本用同一冻结测试集独立重跑并记录退出码与计数",
+          "检查是否仍有登记但未纳入本次开发证据的失败用例或分类信息"
+        ],
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "knowledge_citations": [
+          "knowledge-public_tasks",
+          "knowledge-testing"
+        ]
+      }
+    },
+    {
+      "sequence": 6350,
+      "created_at": "2026-11-15T17:22:03.106424+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-69097cc992bb42b1aedfdec375c9fa2f",
+      "parent_step_id": "s-f8ca43066fdb4194a936737656874fd5",
+      "node_id": "detector",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "call_id": "m-7e04291198c4460395a0da77cc5cdadd",
+      "artifact_path": "calls/m-7e04291198c4460395a0da77cc5cdadd",
+      "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+      "failure_class": null,
+      "agent_instance_id": "run-4d1c4575e3d343db832af2057fdb2a41:detector",
+      "agent_contract": {
+        "contract_version": "1.0.0",
+        "agent_id": "detector",
+        "title": "检测员",
+        "input_scope": "current_candidate_development_evidence_only",
+        "receives_from": [],
+        "produces": "failure_analysis",
+        "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+        "output_schema": "DetectorOutput",
+        "permitted_action": "analyse_tool_evidence",
+        "tools": [
+          "read_file",
+          "search_knowledge"
+        ],
+        "can_execute_code": false,
+        "can_modify_tests": false,
+        "can_approve_success": false,
+        "can_override_guards": false
+      },
+      "handoffs": [],
+      "resumed_loop": null,
+      "duration_ms": 5815
+    },
+    {
+      "sequence": 6351,
+      "created_at": "2026-11-15T17:22:03.130372+00:00",
+      "event": "roles_skipped",
+      "roles": [
+        "scheduler"
+      ],
+      "round": 1,
+      "reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+      "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763"
+    },
+    {
+      "sequence": 6352,
+      "created_at": "2026-11-15T17:22:03.160083+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-cae44ff38a0c4692b46d300819140e3f",
+      "parent_step_id": "s-69097cc992bb42b1aedfdec375c9fa2f",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 6353,
+      "created_at": "2026-11-15T17:22:03.176177+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-1.json",
+      "decision_id": "d-1",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "failure_class": "passed",
+      "action": "final_check",
+      "target_agent": null,
+      "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+      "retries_left": 4,
+      "rule_id": "R16",
+      "terminal_status": null,
+      "trace_version": "1.0.0",
+      "step_id": "s-cae44ff38a0c4692b46d300819140e3f",
+      "parent_step_id": "s-69097cc992bb42b1aedfdec375c9fa2f",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "program_decision": {
+        "decision_id": "d-1",
+        "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+        "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+        "evidence_ids": [
+          "test-development-1"
+        ],
+        "failure_class": "passed",
+        "action": "final_check",
+        "target_agent": null,
+        "reason": "开发测试通过，交C的评测端独立验收；还不能宣布最终成功。",
+        "retries_left": 4,
+        "rule_id": "R16",
+        "terminal_status": null
+      },
+      "model_advice": null,
+      "effective_action": "final_check",
+      "override_reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 2,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.00573",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 571.5064455000102,
+        "limits": {
+          "max_rounds": 5,
+          "max_calls": 20,
+          "total_seconds": 600
+        }
+      }
+    },
+    {
+      "sequence": 6354,
+      "created_at": "2026-11-15T17:22:03.197584+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-cae44ff38a0c4692b46d300819140e3f",
+      "parent_step_id": "s-69097cc992bb42b1aedfdec375c9fa2f",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "development",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "effective_action": "final_check",
+      "decision_id": "d-1",
+      "duration_ms": 34
+    },
+    {
+      "sequence": 6355,
+      "created_at": "2026-11-15T17:22:03.269123+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-d686b383ec2e44159f29dfae99f487a8",
+      "parent_step_id": "s-cae44ff38a0c4692b46d300819140e3f",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ]
+    },
+    {
+      "sequence": 6356,
+      "created_at": "2026-11-15T17:22:11.033339+00:00",
+      "event": "test_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-d686b383ec2e44159f29dfae99f487a8",
+      "parent_step_id": "s-cae44ff38a0c4692b46d300819140e3f",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "evidence_id": "test-final-check",
+      "evidence_path": "final-check",
+      "call_id": "codefix-f21d6caea3c64a97a5cb10e5c8143fe5",
+      "exit_code": 0,
+      "timed_out": false,
+      "duration_ms": 786,
+      "stdout_path": "trusted-run/stdout.txt",
+      "stderr_path": "trusted-run/stderr.txt",
+      "command": [
+        "/usr/local/bin/docker",
+        "run",
+        "--mount",
+        "type=volume,source=codefix-rpc-a7645544b50f4b68956bc95af3980dfb,target=/rpc,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+        "-i",
+        "--name",
+        "codefix-f21d6caea3c64a97a5cb10e5c8143fe5",
+        "--pull=never",
+        "--network=none",
+        "--read-only",
+        "--cap-drop=ALL",
+        "--security-opt=no-new-privileges",
+        "--pids-limit=64",
+        "--memory=256m",
+        "--memory-swap=256m",
+        "--cpus=1",
+        "--user=65534:65534",
+        "--ulimit=nofile=128:128",
+        "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+        "--log-driver=none",
+        "--mount",
+        "type=volume,source=codefix-out-be1ebc884afb4d35a58cd693997ac345,target=/out",
+        "--mount",
+        "type=bind,source=/opt/codefix-data/jobs/job-0865c20e239942edb745db9e73beb7b1/test/trusted-tests,target=/w,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+        "--mount",
+        "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+        "--workdir=/w",
+        "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        "--env=PYTHONDONTWRITEBYTECODE=1",
+        "--entrypoint=python",
+        "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+        "-I",
+        "-B",
+        "-X",
+        "utf8",
+        "/harness.py",
+        "python_testcases/test_shunting_yard.py"
+      ],
+      "artifact_channel": "docker-cp",
+      "artifact_error": null,
+      "artifact_detail": null,
+      "cleanup_passed": true,
+      "output_volume": "codefix-out-be1ebc884afb4d35a58cd693997ac345",
+      "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+      "project": "qb-shunting_yard",
+      "execution_mode": "remote-docker",
+      "isolation_ready": true,
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "expected_test_count": 6,
+      "junit_path": "trusted-run/output/junit.xml",
+      "structured_path": "trusted-run/output/pytest_events.json",
+      "evidence_matches_current_version": true,
+      "trust_boundary": "separate_candidate_and_test_containers",
+      "candidate_audit": {
+        "container": "codefix-candidate-3d81c1dc28ae4cfa81c01367630366d3",
+        "logs_captured": true,
+        "events": [],
+        "event_kinds": [],
+        "fake_report_output": false,
+        "violation": null,
+        "reason": null,
+        "output_limit_exceeded": false
+      },
+      "runner_classification": {
+        "status": null,
+        "verification_status": null,
+        "failure_class": null,
+        "reason": null
+      },
+      "counts": {
+        "collected": 6,
+        "passed": 6,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "status": "ok",
+      "verification_status": "passed",
+      "failure_class": "passed",
+      "reason": "Expected identities and complete lifecycle verified against JUnit",
+      "coverage": {
+        "expected_nodeids": [
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data0-expected0]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data1-expected1]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data2-expected2]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data3-expected3]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data4-expected4]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data5-expected5]"
+        ],
+        "collected_nodeids": [
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data0-expected0]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data1-expected1]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data2-expected2]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data3-expected3]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data4-expected4]",
+          "python_testcases/test_shunting_yard.py::test_shunting_yard[input_data5-expected5]"
+        ],
+        "expected_collected_match": true,
+        "junit_identities": [
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data0-expected0]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data1-expected1]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data2-expected2]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data3-expected3]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data4-expected4]"
+          ],
+          [
+            "python_testcases.test_shunting_yard",
+            "test_shunting_yard[input_data5-expected5]"
+          ]
+        ],
+        "junit_expected_match": true,
+        "session_finished": true
+      },
+      "remote_job_id": "job-0865c20e239942edb745db9e73beb7b1",
+      "execution_endpoint": "https://8.148.85.237",
+      "transport_mode": "live"
+    },
+    {
+      "sequence": 6357,
+      "created_at": "2026-11-15T17:22:11.053781+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-d686b383ec2e44159f29dfae99f487a8",
+      "parent_step_id": "s-cae44ff38a0c4692b46d300819140e3f",
+      "node_id": "pytest",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-development-1"
+      ],
+      "status": "ok",
+      "verification_status": "passed",
+      "evidence_id": "test-final-check",
+      "failure_class": "passed",
+      "evidence_path": "final-check",
+      "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "registered_test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "duration_ms": 7782
+    },
+    {
+      "sequence": 6358,
+      "created_at": "2026-11-15T17:22:11.086288+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-43f8e4f9ed064e7bb4c8e64af46669b2",
+      "parent_step_id": "s-d686b383ec2e44159f29dfae99f487a8",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ]
+    },
+    {
+      "sequence": 6359,
+      "created_at": "2026-11-15T17:22:11.104708+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-28ede7ff12c845fea36ad2a5bab89710.json",
+      "decision_id": "d-28ede7ff12c845fea36ad2a5bab89710",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "failure_class": "passed",
+      "action": "finish",
+      "target_agent": null,
+      "reason": "独立验收实际通过且证据对应最终代码版本。",
+      "retries_left": 4,
+      "rule_id": "R07",
+      "terminal_status": "success",
+      "trace_version": "1.0.0",
+      "step_id": "s-43f8e4f9ed064e7bb4c8e64af46669b2",
+      "parent_step_id": "s-d686b383ec2e44159f29dfae99f487a8",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "program_decision": {
+        "decision_id": "d-28ede7ff12c845fea36ad2a5bab89710",
+        "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+        "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+        "evidence_ids": [
+          "test-final-check"
+        ],
+        "failure_class": "passed",
+        "action": "finish",
+        "target_agent": null,
+        "reason": "独立验收实际通过且证据对应最终代码版本。",
+        "retries_left": 4,
+        "rule_id": "R07",
+        "terminal_status": "success"
+      },
+      "model_advice": null,
+      "effective_action": "finish",
+      "override_reason": null,
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 3,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.00573",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 563.5787689999997,
+        "limits": {
+          "max_rounds": 5,
+          "max_calls": 20,
+          "total_seconds": 600
+        }
+      }
+    },
+    {
+      "sequence": 6360,
+      "created_at": "2026-11-15T17:22:11.122435+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-43f8e4f9ed064e7bb4c8e64af46669b2",
+      "parent_step_id": "s-d686b383ec2e44159f29dfae99f487a8",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "status": "ok",
+      "effective_action": "finish",
+      "decision_id": "d-28ede7ff12c845fea36ad2a5bab89710",
+      "duration_ms": 34
+    },
+    {
+      "sequence": 6361,
+      "created_at": "2026-11-15T17:22:11.156166+00:00",
+      "event": "step_started",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-8de30f28a6b849eea2d9854d8ffda09c",
+      "parent_step_id": "s-43f8e4f9ed064e7bb4c8e64af46669b2",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ]
+    },
+    {
+      "sequence": 6362,
+      "created_at": "2026-11-15T17:22:11.180747+00:00",
+      "event": "decision",
+      "artifact_path": "trace/decisions/d-d3d72feadfe845ff8e85a691671db99b.json",
+      "action": "finish",
+      "rule_id": "R07",
+      "reason": "开发测试及干净副本同套原生测试均实际通过",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-8de30f28a6b849eea2d9854d8ffda09c",
+      "parent_step_id": "s-43f8e4f9ed064e7bb4c8e64af46669b2",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "decision_id": "d-d3d72feadfe845ff8e85a691671db99b",
+      "program_decision": {
+        "action": "finish",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过"
+      },
+      "model_advice": null,
+      "effective_action": "finish",
+      "target_agent": null,
+      "override_reason": null,
+      "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+      "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+      "counters": {
+        "model_calls": 2,
+        "tool_calls": 3,
+        "rounds_used": 1,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.00573",
+          "reserved_cny": "0"
+        },
+        "remaining_seconds": 563.5133903000096,
+        "limits": {
+          "max_rounds": 5,
+          "max_calls": 20,
+          "total_seconds": 600
+        }
+      }
+    },
+    {
+      "sequence": 6363,
+      "created_at": "2026-11-15T17:22:11.204285+00:00",
+      "event": "step_completed",
+      "trace_version": "1.0.0",
+      "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+      "step_id": "s-8de30f28a6b849eea2d9854d8ffda09c",
+      "parent_step_id": "s-43f8e4f9ed064e7bb4c8e64af46669b2",
+      "node_id": "program_dispatch",
+      "round": 1,
+      "phase": "final_check",
+      "strategy": "dynamic",
+      "evidence_ids": [
+        "test-final-check"
+      ],
+      "status": "ok",
+      "effective_action": "finish",
+      "decision_id": "d-d3d72feadfe845ff8e85a691671db99b",
+      "duration_ms": 50
+    },
+    {
+      "sequence": 6364,
+      "created_at": "2026-11-15T17:22:11.235938+00:00",
+      "event": "finished",
+      "status": "success",
+      "result": {
+        "final_result": "passed",
+        "dev_result": "passed",
+        "rounds_used": 1,
+        "model_calls": 2,
+        "tool_calls": 3,
+        "model_api_called": true,
+        "mode": "live",
+        "isolation_ready": true,
+        "strategy": "dynamic",
+        "project": "qb-shunting_yard",
+        "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943",
+        "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+        "code_path": "candidate-1/python_programs/shunting_yard.py",
+        "evidence_matches_current_version": true,
+        "baseline_failure_class": "assertion_failed",
+        "failure_class": "passed",
+        "rule_id": "R07",
+        "reason": "开发测试及干净副本同套原生测试均实际通过",
+        "model_attempts": 2,
+        "actual_model_requests": 2,
+        "cost": {
+          "calls": 2,
+          "status": "estimated",
+          "basis": "versioned_model_rates; not_provider_invoice",
+          "models": [
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            },
+            {
+              "model": "deepseek-v4.1-flash-1017",
+              "currency": "CNY",
+              "status": "estimated",
+              "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+              "upper_estimate": false
+            }
+          ],
+          "currency": "CNY",
+          "amount_cny": "0.00573",
+          "reserved_cny": "0"
+        },
+        "trace_version": "1.0.0"
+      }
+    }
+  ],
+  "result_summary": {
+    "schema_version": 1,
+    "run_id": "run-4d1c4575e3d343db832af2057fdb2a41",
+    "status": "success",
+    "success": true,
+    "reason": "开发测试及干净副本同套原生测试均实际通过",
+    "rounds_used": 1,
+    "max_rounds": 5,
+    "model_attempts": 2,
+    "actual_model_requests": 2,
+    "tests": [
+      {
+        "stage": "baseline",
+        "round": 0,
+        "verification_status": "failed",
+        "failure_class": "assertion_failed",
+        "counts": {
+          "collected": 6,
+          "passed": 2,
+          "failed": 4,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "缺陷已复现，可以开始修复",
+        "evidence_path": "baseline",
+        "step_id": "s-c291ba06113a4d2380d3aaf2056018d5",
+        "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+        "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943"
+      },
+      {
+        "stage": "candidate",
+        "round": 1,
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "counts": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "候选通过，待最终复验",
+        "evidence_path": "development-1",
+        "step_id": "s-f8ca43066fdb4194a936737656874fd5",
+        "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+        "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943"
+      },
+      {
+        "stage": "final",
+        "round": 1,
+        "verification_status": "passed",
+        "failure_class": "passed",
+        "counts": {
+          "collected": 6,
+          "passed": 6,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "meaning": "最终复验通过",
+        "evidence_path": "final-check",
+        "step_id": "s-d686b383ec2e44159f29dfae99f487a8",
+        "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+        "test_suite_version": "sha256:7b7dbd8cc4fe362c3993483c3eb536543707436c0433cb3f88b0ca3b5baa1943"
+      }
+    ],
+    "cost": {
+      "calls": 2,
+      "status": "estimated",
+      "basis": "versioned_model_rates; not_provider_invoice",
+      "models": [
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        },
+        {
+          "model": "deepseek-v4.1-flash-1017",
+          "currency": "CNY",
+          "status": "estimated",
+          "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+          "upper_estimate": false
+        }
+      ],
+      "currency": "CNY",
+      "amount_cny": "0.00573",
+      "reserved_cny": "0"
+    },
+    "model_output_issues": [],
+    "started_at": "2026-11-15T17:21:34.616745+00:00",
+    "finished_at": "2026-11-15T17:22:11.235938+00:00",
+    "duration_ms": 36619,
+    "before": {
+      "path": "base/python_programs/shunting_yard.py",
+      "content": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n\n\n\"\"\"\nInfix to RPN Conversion\nshunting-yard\n\n\nUses Dijkstra's shunting-yard algorithm to transform infix notation into equivalent Reverse Polish Notation.\n\nInput:\n    tokens: A list of tokens in infix notation\n\nPrecondition:\n    all(isinstance(token, int) or token in '+-*/' for token in tokens)\n\nOutput:\n    The input tokens reordered into Reverse Polish Notation\n\nExamples:\n    >>> shunting_yard([10, '-', 5, '-', 2])\n    [10, 5, '-', 2, '-']\n    >>> shunting_yard([34, '-', 12, '/', 5])\n    [34, 12, 5, '/' ,'-']\n    >>> shunting_yard([4, '+', 9, '*', 9, '-', 10, '+', 13])\n    [4, 9, 9, '*', '+', 10, '-', 13, '+']\n\"\"\"\n"
+    },
+    "after": {
+      "path": "candidate-1/python_programs/shunting_yard.py",
+      "content": "\ndef shunting_yard(tokens):\n    precedence = {\n        '+': 1,\n        '-': 1,\n        '*': 2,\n        '/': 2\n    }\n\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n        if isinstance(token, int):\n            rpntokens.append(token)\n        else:\n            while opstack and precedence[token] <= precedence[opstack[-1]]:\n                rpntokens.append(opstack.pop())\n            opstack.append(token)\n\n    while opstack:\n        rpntokens.append(opstack.pop())\n\n    return rpntokens\n\n\n\"\"\"\nInfix to RPN Conversion\nshunting-yard\n\n\nUses Dijkstra's shunting-yard algorithm to transform infix notation into equivalent Reverse Polish Notation.\n\nInput:\n    tokens: A list of tokens in infix notation\n\nPrecondition:\n    all(isinstance(token, int) or token in '+-*/' for token in tokens)\n\nOutput:\n    The input tokens reordered into Reverse Polish Notation\n\nExamples:\n    >>> shunting_yard([10, '-', 5, '-', 2])\n    [10, 5, '-', 2, '-']\n    >>> shunting_yard([34, '-', 12, '/', 5])\n    [34, 12, 5, '/' ,'-']\n    >>> shunting_yard([4, '+', 9, '*', 9, '-', 10, '+', 13])\n    [4, 9, 9, '*', '+', 10, '-', 13, '+']\n\"\"\"\n"
+    },
+    "combined_diff": "--- original/python_programs/shunting_yard.py\n+++ candidate/python_programs/shunting_yard.py\n@@ -15,6 +15,7 @@\n         else:\n             while opstack and precedence[token] <= precedence[opstack[-1]]:\n                 rpntokens.append(opstack.pop())\n+            opstack.append(token)\n \n     while opstack:\n         rpntokens.append(opstack.pop())\n",
+    "diff": {
+      "path": "patch-1/patch.diff",
+      "content": "--- a/python_programs/shunting_yard.py\n+++ b/python_programs/shunting_yard.py\n@@ -15,6 +15,7 @@\n         else:\n             while opstack and precedence[token] <= precedence[opstack[-1]]:\n                 rpntokens.append(opstack.pop())\n+            opstack.append(token)\n \n     while opstack:\n         rpntokens.append(opstack.pop())\n"
+    },
+    "explanations": [
+      {
+        "round": 1,
+        "explanation": "原实现弹出栈中优先级不低于当前的运算符后，没有把当前运算符压入opstack，导致运算符丢失并产生错误的RPN序列。补充opstack.append(token)即可按标准shunting-yard算法正确处理所有运算符配置。"
+      }
+    ],
+    "checks": [
+      {
+        "sequence": 6329,
+        "created_at": "2026-11-15T17:21:34.704016+00:00",
+        "event": "guard_check",
+        "step_id": "configuration-check",
+        "node_id": "configuration_check",
+        "status": "ok",
+        "reason": "角色配置、提示词和输出协议检查通过"
+      },
+      {
+        "sequence": 6337,
+        "created_at": "2026-11-15T17:21:51.625138+00:00",
+        "event": "guard_check",
+        "step_id": "m-2f88ecea1a354029b06f7ef1c707b6bc-budget",
+        "parent_step_id": "s-3fcb6aa411c34623b7add0e9e058fd5b",
+        "node_id": "budget_check",
+        "role": "repairer",
+        "round": 1,
+        "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      },
+      {
+        "sequence": 6338,
+        "created_at": "2026-11-15T17:21:51.648013+00:00",
+        "event": "guard_check",
+        "check": "patch_permission",
+        "step_id": "m-2f88ecea1a354029b06f7ef1c707b6bc-permission",
+        "parent_step_id": "s-3fcb6aa411c34623b7add0e9e058fd5b",
+        "node_id": "permission_check",
+        "round": 1,
+        "code_version": "sha256:e3f92f09279b567396a317fd14fe652b6534dd7609ed36e41d0f9ad59ab9576c",
+        "status": "ok",
+        "reason": "补丁路径及结构检查通过"
+      },
+      {
+        "sequence": 6348,
+        "created_at": "2026-11-15T17:22:03.063628+00:00",
+        "event": "guard_check",
+        "step_id": "m-7e04291198c4460395a0da77cc5cdadd-budget",
+        "parent_step_id": "s-69097cc992bb42b1aedfdec375c9fa2f",
+        "node_id": "budget_check",
+        "role": "detector",
+        "round": 1,
+        "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763",
+        "status": "ok",
+        "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+      }
+    ],
+    "skips": [
+      {
+        "sequence": 6351,
+        "created_at": "2026-11-15T17:22:03.130372+00:00",
+        "event": "roles_skipped",
+        "roles": [
+          "scheduler"
+        ],
+        "round": 1,
+        "reason": "隔离测试与检测分析完成；跳过非必需模型调度建议，进入干净复验",
+        "code_version": "sha256:712f6657c509875538b0d093620f84b74754164aa324ca8681640b147d884763"
+      }
+    ]
+  },
+  "configuration_snapshot": {
+    "bindings": {
+      "repairer": "personal_model",
+      "detector": "personal_model",
+      "scheduler": "personal_model",
+      "locator": "personal_model"
+    },
+    "parameters": {
+      "max_rounds": 5,
+      "max_calls": 20,
+      "total_seconds": 600
+    },
+    "strategy": "dynamic",
+    "roles": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+    "prompts_sha256": {
+      "locator": "181164028025606714ad9ad82b160bf1e6fd5be420044301cd75d057645e819e",
+      "repairer": "dd955f15073bacda9cf01e9a89f7972857c77836c8d8e37a5cf78a034cfc3873",
+      "detector": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+      "scheduler": "8b44b0ef187f1906759d71478a29d097bebbc836df11990896dc46f9a6e0bde6"
+    },
+    "note": "结构校验通过；不代表模型请求、费用预留或隔离资格通过",
+    "personal_price_snapshots": {
+      "personal_model": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      }
+    },
+    "schema_version": 2,
+    "role_overrides": {
+      "repairer": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 8192,
+          "enable_thinking": false
+        }
+      },
+      "detector": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "scheduler": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      },
+      "locator": {
+        "task_instruction": "",
+        "generation": {
+          "max_output_tokens": 2048,
+          "enable_thinking": false
+        }
+      }
+    },
+    "capabilities_sha256": "62ad69daf4539956ad609d5ed4c470c2826ce834a873c1c1600ec6ef6863a416",
+    "effective_roles": {
+      "repairer": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 8192,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "cedcee5b03398d153ab1d318f1083efa7b89ae0cc69bd0e690d697e4b92df481"
+      },
+      "detector": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      },
+      "scheduler": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      },
+      "locator": {
+        "task_instruction": "",
+        "parameters": {
+          "max_tokens": 2048,
+          "enable_thinking": false
+        },
+        "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1"
+      }
+    },
+    "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+    "effective_roles_sha256": "cbc8c805bc834d22d9cb4f0ead5a8d2c457297ac313c13fc32a64e2c7d4a9444",
+    "config_id": "cfg-5acefd312a1d8fe9a6f122a79bfd8815d07588c0c0863e1a9ec138e90931d78b",
+    "created_at": "2026-11-15T17:20:56.020837+00:00"
+  }
+}

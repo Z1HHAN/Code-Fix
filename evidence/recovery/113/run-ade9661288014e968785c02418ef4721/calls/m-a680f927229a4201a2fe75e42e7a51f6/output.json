@@ -1,0 +1,268 @@
+{
+  "role": "detector",
+  "mode": "live",
+  "model_api_called": true,
+  "model": "deepseek-v4.1-flash-1017",
+  "call_id": "m-a680f927229a4201a2fe75e42e7a51f6",
+  "status": "ok",
+  "provider_id": "personal",
+  "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+  "usage": {
+    "prompt_tokens": 1414,
+    "total_tokens": 1722,
+    "completion_tokens": 308,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "image_tokens": 0,
+      "text_tokens": 1414
+    },
+    "completion_tokens_details": {
+      "text_tokens": 308
+    }
+  },
+  "cost": {
+    "status": "estimated",
+    "amount_cny": "0.002646",
+    "currency": "CNY",
+    "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+    "upper_estimate": false,
+    "basis": "versioned_model_rates; not_provider_invoice"
+  },
+  "attempts": 1,
+  "max_attempts": 2,
+  "transport_request_started": true,
+  "failure_class": null,
+  "budget_check": {
+    "status": "ok",
+    "reason": "调用次数、未结算请求及适用费用上限检查通过，已预留"
+  },
+  "transport_attempts": [
+    {
+      "version": "transport-v1",
+      "outcome": "possibly_sent",
+      "error_type": null,
+      "send_started": true,
+      "response_received": true,
+      "events": [
+        "connection.connect_tcp.started",
+        "connection.connect_tcp.complete",
+        "connection.start_tls.started",
+        "connection.start_tls.complete",
+        "http11.send_request_headers.started",
+        "http11.send_request_headers.complete",
+        "http11.send_request_body.started",
+        "http11.send_request_body.complete",
+        "http11.receive_response_headers.started",
+        "http11.receive_response_headers.complete",
+        "http11.receive_response_body.started",
+        "http11.receive_response_body.complete",
+        "http11.response_closed.started",
+        "http11.response_closed.complete"
+      ],
+      "standard_transport": true
+    }
+  ],
+  "provider_model": "deepseek-v4.1-flash-1017",
+  "provider_response_id": "chatcmpl-86a0d41a-0e2e-922d-907a-fd6d6c420100",
+  "finish_reason": "stop",
+  "raw_text": "{\"analysis\":\"提供的唯一开发证据 test-development-1 显示，收集 7 条、通过 7 条、失败 0、错误 0，退出码为 0，stderr 为空，并出现 CODEFIX_READY。该证据的 failure_class 本身即为 passed，未提供任何失败日志、异常栈或断言差异，因此不存在可归因的失败原因。当前代码 flatten.py 通过递归生成器展平嵌套列表，与 docstring 示例语义一致；证据摘要中参数被脱敏，无法核对具体输入/预期输出，故无法确认覆盖边界（如多级嵌套、空列表、非列表类型混合）之外的输入行为。另按知识库说明，开发测试通过后仍需在干净副本独立重跑同一套冻结原生测试，未执行不得称为通过；且公开开发用例不代表全部输入已正确，不能据此宣称对所有输入正确或宣布独立验收通过。\",\"failure_class\":\"passed\",\"suggested_checks\":[\"确认 test-development-1 对应的代码版本 sha256 与待验收候选代码版本一致，避免版本漂移\",\"在干净副本上重跑同一套冻结的原生测试以完成独立复验（由有权限方执行）\",\"如后续提供失败证据，再依据具体断言差异定位 flatten 的递归展平边界问题\"],\"evidence_ids\":[\"test-development-1\"],\"knowledge_citations\":[\"knowledge-public_tasks\",\"knowledge-testing\"]}",
+  "duration_ms": 5436,
+  "code_version": "sha256:e7271e8b2f0ab8b88d09ce63bfbe9ccfc31872543264bd1376978e5f32eef155",
+  "round": 1,
+  "provenance": {
+    "role_override": {
+      "task_instruction": "",
+      "generation": {
+        "max_output_tokens": 2048,
+        "enable_thinking": false
+      }
+    },
+    "role_overrides_sha256": "8595c45a5d727eeab96e645a86002e00fee559bcb5b626614605377e9baa32c3",
+    "protocol": "codefix-json-v1",
+    "parser_version": "1.0.0",
+    "config_version": "1.1.0",
+    "effective_config": {
+      "config_version": "1.1.0",
+      "protocol": "codefix-json-v1",
+      "models": {
+        "locator": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "repairer": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "detector": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        },
+        "scheduler": {
+          "binding": "approved_profile",
+          "profile_ref": "personal_model"
+        }
+      },
+      "agents": [
+        {
+          "agent_id": "locator",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "locator",
+          "prompt_ref": "prompts/locator.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "project_structure",
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "LocatorOutput"
+        },
+        {
+          "agent_id": "repairer",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "repairer",
+          "prompt_ref": "prompts/repairer.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "RepairOutput"
+        },
+        {
+          "agent_id": "detector",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "detector",
+          "prompt_ref": "prompts/detector.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "DetectorOutput"
+        },
+        {
+          "agent_id": "scheduler",
+          "enabled": true,
+          "role_type": "llm",
+          "model_ref": "scheduler",
+          "prompt_ref": "prompts/scheduler.md",
+          "tool_allowlist": [
+            "read_file",
+            "search_knowledge"
+          ],
+          "knowledge_ids": [
+            "business_rules",
+            "testing",
+            "public_tasks"
+          ],
+          "output_schema": "SchedulerOutput"
+        }
+      ]
+    },
+    "config_sha256": "8145661ec3a1a06f08d45770154694aba4db9fd6ba6a97230f9913f108a66fab",
+    "prompt_ref": "prompts/detector.md",
+    "prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+    "system_prompt_sha256": "0b12e2fc55382f7563f505721f169e0ac30155cd441c1760ef9f32be59ce74fc",
+    "agent_instance_id": "run-ade9661288014e968785c02418ef4721:detector",
+    "agent_contract": {
+      "contract_version": "1.0.0",
+      "agent_id": "detector",
+      "title": "检测员",
+      "input_scope": "current_candidate_development_evidence_only",
+      "receives_from": [],
+      "produces": "failure_analysis",
+      "collaboration_task": "分析本候选的隔离测试证据，保持工具失败分类原义；输出分析，不修改代码。",
+      "output_schema": "DetectorOutput",
+      "permitted_action": "analyse_tool_evidence",
+      "tools": [
+        "read_file",
+        "search_knowledge"
+      ],
+      "can_execute_code": false,
+      "can_modify_tests": false,
+      "can_approve_success": false,
+      "can_override_guards": false
+    },
+    "agent_contract_sha256": "3ab70fbb58a74bbfb1b4aca2d411143ae86aed05a136bf5ca9df020d682ac9dd",
+    "handoffs": [],
+    "messages_sha256": "45ef016e05c63e6b6016e1530909c9dc341b8e67c7334f7cde6d38aa370f39a7",
+    "task_instruction_sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+    "model_binding": {
+      "model_ref": "detector",
+      "binding": "approved_profile",
+      "profile_ref": "personal_model",
+      "mode": "live",
+      "provider_id": "personal",
+      "model": "deepseek-v4.1-flash-1017",
+      "price_version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc",
+      "base_url": "https://maas.qianwenaiapi.com/compatible-mode/v1",
+      "profiles_sha256": "38fcb9089f85fc016cdd9799b4cd58517a0a221745350dc3426e6d383b087810",
+      "effective_parameters": {
+        "max_tokens": 2048,
+        "enable_thinking": false
+      },
+      "request_seconds": 60,
+      "daily_shared_usd": null,
+      "input_usd_per_million": null,
+      "output_usd_per_million": null,
+      "effective_parameters_sha256": "c0a098ad5b42037a36b611ecb24aa086b802c49177b2bf37280731cfb8c7c3d1",
+      "currency": "CNY",
+      "personal_pricing": {
+        "provider": "qianwen-ai",
+        "model": "deepseek-v4.1-flash-1017",
+        "region": "platform-standard",
+        "mode": "thinking",
+        "currency": "CNY",
+        "unit": "per_million_tokens",
+        "source_url": "https://platform.qianwenai.com/docs/models/deepseek-v4-1-flash",
+        "verified_at": "2026-11-11",
+        "endpoint_host": "maas.qianwenaiapi.com",
+        "tiers": [
+          {
+            "max_input_tokens": 1000000,
+            "input": "2",
+            "output": "8",
+            "cached_input": "0.2"
+          }
+        ],
+        "offpeak_discount": "0.5",
+        "version": "price-d80235ec2c2d75129a6f89cac05d4b20139ac3d543e441c2daaea3fb5960d2cc"
+      },
+      "daily_limit": "5",
+      "monetary_budget_enabled": true
+    }
+  },
+  "step_id": "s-f29f6027da714ba6a9acf3cc0bb9f86f",
+  "parent_step_id": "s-e37cf7822d844389bb737e15718b0ff3",
+  "parsed_output": {
+    "analysis": "提供的唯一开发证据 test-development-1 显示，收集 7 条、通过 7 条、失败 0、错误 0，退出码为 0，stderr 为空，并出现 CODEFIX_READY。该证据的 failure_class 本身即为 passed，未提供任何失败日志、异常栈或断言差异，因此不存在可归因的失败原因。当前代码 flatten.py 通过递归生成器展平嵌套列表，与 docstring 示例语义一致；证据摘要中参数被脱敏，无法核对具体输入/预期输出，故无法确认覆盖边界（如多级嵌套、空列表、非列表类型混合）之外的输入行为。另按知识库说明，开发测试通过后仍需在干净副本独立重跑同一套冻结原生测试，未执行不得称为通过；且公开开发用例不代表全部输入已正确，不能据此宣称对所有输入正确或宣布独立验收通过。",
+    "failure_class": "passed",
+    "suggested_checks": [
+      "确认 test-development-1 对应的代码版本 sha256 与待验收候选代码版本一致，避免版本漂移",
+      "在干净副本上重跑同一套冻结的原生测试以完成独立复验（由有权限方执行）",
+      "如后续提供失败证据，再依据具体断言差异定位 flatten 的递归展平边界问题"
+    ],
+    "evidence_ids": [
+      "test-development-1"
+    ],
+    "knowledge_citations": [
+      "knowledge-public_tasks",
+      "knowledge-testing"
+    ]
+  }
+}

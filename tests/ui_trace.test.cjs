@@ -58,6 +58,23 @@ function descendants(e){return [e,...e.children.flatMap(descendants)];}
 function ui(loader){const doc={createElement:tag=>new Element(tag)};const graph=new Element('div'),detail=new Element('div');
   return {graph,detail,render:trace.mount(doc,graph,detail,loader)};}
 
+test('agent inspector shows actual identity, permissions and upstream call references',()=>{
+  const page=events.slice(0,3).map(e=>({...e}));
+  page[1].provenance={agent_instance_id:'run-one:repairer',agent_contract:{permitted_action:'propose_source_patch'},
+    handoffs:[{agent_id:'locator',call_id:'m-location'}]};
+  const view=ui(async()=>{throw Error('render must not execute a request');});view.render(run,page);
+  const text=descendants(view.detail).map(e=>e.textContent).join('\n');
+  assert.match(text,/run-one:repairer/);assert.match(text,/propose_source_patch/);assert.match(text,/定位员 · m-location/);
+});
+
+test('loop inspector distinguishes planned handoff from executed nodes',()=>{
+  const page=events.slice(6,9).map(e=>({...e}));
+  page[1].self_loop={status:'planned',from_round:1,to_round:2,via:['locator','repairer']};
+  const view=ui(async()=>{throw Error('no execution');});view.render(run,page);
+  const text=descendants(view.detail).map(e=>e.textContent).join('\n');
+  assert.match(text,/计划，执行见后续节点/);assert.match(text,/第1轮 → 第2轮 · 定位员 → 修复员/);
+});
+
 test('baseline titles and inspector use baseline while original round metadata remains zero',()=>{
   const page=[{sequence:1,event:'step_started',step_id:'base',node_id:'pytest',round:0,phase:'development'}];
   const view=ui(async()=>{throw Error('no artifact requested');});view.render({...run,status:'running'},page);

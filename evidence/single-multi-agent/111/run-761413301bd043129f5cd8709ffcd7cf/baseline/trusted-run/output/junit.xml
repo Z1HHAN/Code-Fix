@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="5" time="0.078" timestamp="2026-11-15T15:26:42.205982+00:00" hostname="78c019aff42d"><testcase classname="python_testcases.test_powerset" name="test_powerset[input_data0-expected0]" time="0.002"><failure message="AssertionError: assert [['a', 'b', 'c']] == [[], ['c'], [...a', 'c'], ...]&#10;  &#10;  At index 0 diff: ['a', 'b', 'c'] != []&#10;  Right contains 7 more items, first extra item: ['c']&#10;  &#10;  Full diff:&#10;    [&#10;  -     [],...&#10;  &#10;  ...Full output truncated (27 lines hidden), use '-vv' to show">input_data = [['a', 'b', 'c']]
+expected = [[], ['c'], ['b'], ['b', 'c'], ['a'], ['a', 'c'], ...]
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_powerset(input_data, expected):
+&gt;       assert powerset(*input_data) == expected
+E       AssertionError: assert [['a', 'b', 'c']] == [[], ['c'], [...a', 'c'], ...]
+E         
+E         At index 0 diff: ['a', 'b', 'c'] != []
+E         Right contains 7 more items, first extra item: ['c']
+E         
+E         Full diff:
+E           [
+E         -     [],...
+E         
+E         ...Full output truncated (27 lines hidden), use '-vv' to show
+
+python_testcases/test_powerset.py:15: AssertionError</failure></testcase><testcase classname="python_testcases.test_powerset" name="test_powerset[input_data1-expected1]" time="0.002"><failure message="AssertionError: assert [['a', 'b']] == [[], ['b'], ['a'], ['a', 'b']]&#10;  &#10;  At index 0 diff: ['a', 'b'] != []&#10;  Right contains 3 more items, first extra item: ['b']&#10;  &#10;  Full diff:&#10;    [&#10;  -     [],...&#10;  &#10;  ...Full output truncated (11 lines hidden), use '-vv' to show">input_data = [['a', 'b']], expected = [[], ['b'], ['a'], ['a', 'b']]
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_powerset(input_data, expected):
+&gt;       assert powerset(*input_data) == expected
+E       AssertionError: assert [['a', 'b']] == [[], ['b'], ['a'], ['a', 'b']]
+E         
+E         At index 0 diff: ['a', 'b'] != []
+E         Right contains 3 more items, first extra item: ['b']
+E         
+E         Full diff:
+E           [
+E         -     [],...
+E         
+E         ...Full output truncated (11 lines hidden), use '-vv' to show
+
+python_testcases/test_powerset.py:15: AssertionError</failure></testcase><testcase classname="python_testcases.test_powerset" name="test_powerset[input_data2-expected2]" time="0.001"><failure message="AssertionError: assert [['a']] == [[], ['a']]&#10;  &#10;  At index 0 diff: ['a'] != []&#10;  Right contains one more item: ['a']&#10;  &#10;  Full diff:&#10;    [&#10;  -     [],...&#10;  &#10;  ...Full output truncated (4 lines hidden), use '-vv' to show">input_data = [['a']], expected = [[], ['a']]
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_powerset(input_data, expected):
+&gt;       assert powerset(*input_data) == expected
+E       AssertionError: assert [['a']] == [[], ['a']]
+E         
+E         At index 0 diff: ['a'] != []
+E         Right contains one more item: ['a']
+E         
+E         Full diff:
+E           [
+E         -     [],...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+python_testcases/test_powerset.py:15: AssertionError</failure></testcase><testcase classname="python_testcases.test_powerset" name="test_powerset[input_data3-expected3]" time="0.001" /><testcase classname="python_testcases.test_powerset" name="test_powerset[input_data4-expected4]" time="0.002"><failure message="AssertionError: assert [['x', 'df', 'z', 'm']] == [[], ['m'], [...f', 'm'], ...]&#10;  &#10;  At index 0 diff: ['x', 'df', 'z', 'm'] != []&#10;  Right contains 15 more items, first extra item: ['m']&#10;  &#10;  Full diff:&#10;    [&#10;  -     [],...&#10;  &#10;  ...Full output truncated (63 lines hidden), use '-vv' to show">input_data = [['x', 'df', 'z', 'm']]
+expected = [[], ['m'], ['z'], ['z', 'm'], ['df'], ['df', 'm'], ...]
+
+    @pytest.mark.parametrize("input_data,expected", testdata)
+    def test_powerset(input_data, expected):
+&gt;       assert powerset(*input_data) == expected
+E       AssertionError: assert [['x', 'df', 'z', 'm']] == [[], ['m'], [...f', 'm'], ...]
+E         
+E         At index 0 diff: ['x', 'df', 'z', 'm'] != []
+E         Right contains 15 more items, first extra item: ['m']
+E         
+E         Full diff:
+E           [
+E         -     [],...
+E         
+E         ...Full output truncated (63 lines hidden), use '-vv' to show
+
+python_testcases/test_powerset.py:15: AssertionError</failure></testcase></testsuite></testsuites>

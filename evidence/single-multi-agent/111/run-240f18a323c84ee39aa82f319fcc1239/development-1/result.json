@@ -1,0 +1,144 @@
+{
+  "call_id": "codefix-0609492e56c54fde867f759502ba5568",
+  "exit_code": 0,
+  "timed_out": false,
+  "duration_ms": 760,
+  "stdout_path": "trusted-run/stdout.txt",
+  "stderr_path": "trusted-run/stderr.txt",
+  "command": [
+    "/usr/local/bin/docker",
+    "run",
+    "--mount",
+    "type=volume,source=codefix-rpc-e0bf493f1b884f719784ef87c35ce032,target=/rpc,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/rpc_codec.py,target=/rpc_codec.py,readonly",
+    "-i",
+    "--name",
+    "codefix-0609492e56c54fde867f759502ba5568",
+    "--pull=never",
+    "--network=none",
+    "--read-only",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--pids-limit=64",
+    "--memory=256m",
+    "--memory-swap=256m",
+    "--cpus=1",
+    "--user=65534:65534",
+    "--ulimit=nofile=128:128",
+    "--tmpfs=/tmp:rw,noexec,nosuid,size=67108864",
+    "--log-driver=none",
+    "--mount",
+    "type=volume,source=codefix-out-2483cfa369114df0b79fc030cf420baf,target=/out",
+    "--mount",
+    "type=bind,source=/opt/codefix-data/jobs/job-7d9e8910c5b2401b9cd030db8a449c3d/test/trusted-tests,target=/w,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/c_runner/pytest_entry.py,target=/entry.py,readonly",
+    "--mount",
+    "type=bind,source=/opt/codefix/docker/candidate_entry.py,target=/harness.py,readonly",
+    "--workdir=/w",
+    "--env=PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+    "--env=PYTHONDONTWRITEBYTECODE=1",
+    "--entrypoint=python",
+    "sha256:86803bc0108eed2869975fdbe519e7c674e12af695eefc586e008e95136ca860",
+    "-I",
+    "-B",
+    "-X",
+    "utf8",
+    "/harness.py",
+    "python_testcases/test_detect_cycle.py"
+  ],
+  "artifact_channel": "docker-cp",
+  "artifact_error": null,
+  "artifact_detail": null,
+  "cleanup_passed": true,
+  "output_volume": "codefix-out-2483cfa369114df0b79fc030cf420baf",
+  "phase": "development",
+  "code_version": "sha256:73fc9a0a39b4e43205c28d43706a66d3f2fe596ff616932678bb66d361eaa7bf",
+  "project": "qb-detect_cycle",
+  "execution_mode": "remote-docker",
+  "isolation_ready": true,
+  "test_suite_version": "sha256:2641c649e4fbd9efead532c66d47f7ca565b0736b6cb187598469779076fe51b",
+  "expected_test_count": 6,
+  "junit_path": "trusted-run/output/junit.xml",
+  "structured_path": "trusted-run/output/pytest_events.json",
+  "evidence_matches_current_version": true,
+  "trust_boundary": "separate_candidate_and_test_containers",
+  "candidate_audit": {
+    "container": "codefix-candidate-0c7d2b2bad054721ba6d1290a09cc59b",
+    "logs_captured": true,
+    "events": [],
+    "event_kinds": [],
+    "fake_report_output": false,
+    "violation": null,
+    "reason": null,
+    "output_limit_exceeded": false
+  },
+  "runner_classification": {
+    "status": null,
+    "verification_status": null,
+    "failure_class": null,
+    "reason": null
+  },
+  "counts": {
+    "collected": 6,
+    "passed": 6,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "status": "ok",
+  "verification_status": "passed",
+  "failure_class": "passed",
+  "reason": "Expected identities and complete lifecycle verified against JUnit",
+  "coverage": {
+    "expected_nodeids": [
+      "python_testcases/test_detect_cycle.py::test1",
+      "python_testcases/test_detect_cycle.py::test2",
+      "python_testcases/test_detect_cycle.py::test3",
+      "python_testcases/test_detect_cycle.py::test4",
+      "python_testcases/test_detect_cycle.py::test5",
+      "python_testcases/test_detect_cycle.py::test6"
+    ],
+    "collected_nodeids": [
+      "python_testcases/test_detect_cycle.py::test1",
+      "python_testcases/test_detect_cycle.py::test2",
+      "python_testcases/test_detect_cycle.py::test3",
+      "python_testcases/test_detect_cycle.py::test4",
+      "python_testcases/test_detect_cycle.py::test5",
+      "python_testcases/test_detect_cycle.py::test6"
+    ],
+    "expected_collected_match": true,
+    "junit_identities": [
+      [
+        "python_testcases.test_detect_cycle",
+        "test1"
+      ],
+      [
+        "python_testcases.test_detect_cycle",
+        "test2"
+      ],
+      [
+        "python_testcases.test_detect_cycle",
+        "test3"
+      ],
+      [
+        "python_testcases.test_detect_cycle",
+        "test4"
+      ],
+      [
+        "python_testcases.test_detect_cycle",
+        "test5"
+      ],
+      [
+        "python_testcases.test_detect_cycle",
+        "test6"
+      ]
+    ],
+    "junit_expected_match": true,
+    "session_finished": true
+  },
+  "remote_job_id": "job-7d9e8910c5b2401b9cd030db8a449c3d",
+  "execution_endpoint": "https://8.148.85.237",
+  "transport_mode": "live"
+}
