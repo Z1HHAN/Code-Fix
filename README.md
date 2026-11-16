@@ -1,6 +1,6 @@
 # 验链 Code Fix
 
-117：本轮GitHub同步与main合并记录见[唯一台账](docs/2026-11-03_项目持续维护/当前开发任务台账.md)。最新代码836项Python通过、1项本机符号链接权限跳过，Node86通过；多Agent累计40题、原批次与恢复分开留证。已推送109/111/112分支，main最终推送状态以台账为准。安装包131MB不进入Git历史，发行API当前连接失败，本机0.3.5-dev保持可用；可通过[Windows构建工作流](https://github.com/Z1HHAN/Code-Fix/actions/workflows/windows-desktop.yml)手动构建选定版本。
+117：本轮GitHub同步与main合并记录见[唯一台账](docs/2026-11-03_项目持续维护/当前开发任务台账.md)。最新代码836项Python通过、1项本机符号链接权限跳过，Node86通过；多Agent累计40题、原批次与恢复分开留证。109/111/112三条分支已上传并合入远端main，合并提交`5e698df`，分支保留。安装包131MB不进入Git历史，发行API当前连接失败，本机0.3.5-dev保持可用；可通过[Windows构建工作流](https://github.com/Z1HHAN/Code-Fix/actions/workflows/windows-desktop.yml)手动构建选定版本。
 
 116：实际安装0.3.5-dev已区分当前尚未通过题目（单2/40、多0/40）与历史移交包；单Agent明确为有界迭代基线。最新累计仍为单38/40、多40/40（含3次补跑）。[人工修订参考](docs/2026-11-03_项目持续维护/论文与PPT人工修订参考.md)及[累计四指标图](evidence/comparison-display/116/materials/latest-four-metrics.png)已同步，原论文PPT不改。
 

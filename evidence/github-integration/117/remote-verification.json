@@ -1,0 +1,17 @@
+{
+  "verified_at_utc": "2026-11-16T02:44:21.036015+00:00",
+  "repository": "https://github.com/Z1HHAN/Code-Fix",
+  "merge_main_sha": "5e698dfd4dfa18663f09c60618c234881ddd639e",
+  "remote_refs": {
+    "refs/heads/codex/multi-agent-contracts-109": "155ce3b27fe486791d9281af3d967c435797e61d",
+    "refs/heads/codex/single-multi-experiment-111": "94ae20f8a50173eb20359fdb459c7958b64a8413",
+    "refs/heads/codex/transport-budget-112": "ac66b325f4d0d1897a0d1669f0fec858004e2abb",
+    "refs/heads/main": "5e698dfd4dfa18663f09c60618c234881ddd639e"
+  },
+  "all_three_branches_uploaded_and_merged": true,
+  "forced_push": false,
+  "branches_deleted": false,
+  "installer_uploaded": false,
+  "installer_reason": "GitHub release API unavailable over HTTPS (TLS connection error); 131MB EXE excluded from Git objects",
+  "installer_local": "desktop/dist-comparison-116/CodeFix-Setup-0.3.5-dev-x64.exe"
+}
