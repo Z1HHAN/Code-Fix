@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="576pt" viewBox="0 0 864 576" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-16T10:17:23.118901</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 576 
+L 864 576 
+L 864 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 77.76 229.546667 
+L 407.444211 229.546667 
+L 407.444211 103.68 
+L 77.76 103.68 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m430695546d" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m430695546d" x="142.697799" y="229.546667" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(119.301549 246.634284)">单Agent</text>
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(106.697799 259.787643)">有界迭代基线</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m430695546d" x="342.506411" y="229.546667" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(319.110161 246.540534)">多Agent</text>
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(300.506411 259.740768)">四角色证据协作</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_3">
+      <defs>
+       <path id="m86e2e060c0" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m86e2e060c0" x="77.76" y="229.546667" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="70.76" y="233.914831" transform="rotate(-0 70.76 233.914831)">0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="77.76" y="203.324444" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="70.76" y="207.692609" transform="rotate(-0 70.76 207.692609)">25</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="77.76" y="177.102222" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="70.76" y="181.470386" transform="rotate(-0 70.76 181.470386)">50</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="77.76" y="150.88" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="70.76" y="155.248164" transform="rotate(-0 70.76 155.248164)">75</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="77.76" y="124.657778" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="70.76" y="129.025942" transform="rotate(-0 70.76 129.025942)">100</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 92.745646 229.546667 
+L 192.649952 229.546667 
+L 192.649952 129.902222 
+L 92.745646 129.902222 
+z
+" clip-path="url(#pcf8c84cd56)" style="fill: #3566b7"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 292.554258 229.546667 
+L 392.458565 229.546667 
+L 392.458565 124.657778 
+L 292.554258 124.657778 
+z
+" clip-path="url(#pcf8c84cd56)" style="fill: #138675"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 77.76 229.546667 
+L 77.76 103.68 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 77.76 229.546667 
+L 407.444211 229.546667 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Arial'; text-anchor: start" x="34.901053" y="88.576" transform="rotate(-0 34.901053 88.576)">a</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="142.697799" y="119.824832" transform="rotate(-0 142.697799 119.824832)">95.0</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="342.506411" y="114.580387" transform="rotate(-0 342.506411 114.580387)">100.0</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="77.76" y="88.68" transform="rotate(-0 77.76 88.68)">累计成功覆盖率（%）</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_7">
+    <path d="M 499.755789 229.546667 
+L 829.44 229.546667 
+L 829.44 103.68 
+L 499.755789 103.68 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_3">
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m430695546d" x="564.693589" y="229.546667" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(541.297339 246.634284)">单Agent</text>
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(528.693589 259.787643)">有界迭代基线</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_9">
+      <g>
+       <use xlink:href="#m430695546d" x="764.502201" y="229.546667" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(741.105951 246.540534)">多Agent</text>
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(722.502201 259.740768)">四角色证据协作</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_6">
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="499.755789" y="229.546667" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_14">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="492.755789" y="233.914831" transform="rotate(-0 492.755789 233.914831)">0</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_11">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="499.755789" y="196.42386" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="492.755789" y="200.792024" transform="rotate(-0 492.755789 200.792024)">1</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="499.755789" y="163.301053" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_16">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="492.755789" y="167.669217" transform="rotate(-0 492.755789 167.669217)">2</text>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="499.755789" y="130.178246" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_17">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="492.755789" y="134.54641" transform="rotate(-0 492.755789 134.54641)">3</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_8">
+    <path d="M 514.741435 229.546667 
+L 614.645742 229.546667 
+L 614.645742 188.971228 
+L 514.741435 188.971228 
+z
+" clip-path="url(#p7ba800e8f5)" style="fill: #3566b7"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 714.550048 229.546667 
+L 814.454354 229.546667 
+L 814.454354 136.802807 
+L 714.550048 136.802807 
+z
+" clip-path="url(#p7ba800e8f5)" style="fill: #138675"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 499.755789 229.546667 
+L 499.755789 103.68 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 499.755789 229.546667 
+L 829.44 229.546667 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Arial'; text-anchor: start" x="456.896842" y="88.576" transform="rotate(-0 456.896842 88.576)">b</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="564.693589" y="178.893837" transform="rotate(-0 564.693589 178.893837)">1.225</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="764.502201" y="126.725416" transform="rotate(-0 764.502201 126.725416)">2.800</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="499.755789" y="88.68" transform="rotate(-0 499.755789 88.68)">平均累计模型请求（次/题）</text>
+   </g>
+  </g>
+  <g id="axes_3">
+   <g id="patch_12">
+    <path d="M 77.76 443.52 
+L 407.444211 443.52 
+L 407.444211 317.653333 
+L 77.76 317.653333 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_5">
+    <g id="xtick_5">
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#m430695546d" x="142.697799" y="443.52" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_22">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(119.301549 460.607617)">单Agent</text>
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(106.697799 473.760977)">有界迭代基线</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_15">
+      <g>
+       <use xlink:href="#m430695546d" x="342.506411" y="443.52" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_23">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(319.110161 460.513867)">多Agent</text>
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(300.506411 473.714102)">四角色证据协作</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_6">
+    <g id="ytick_10">
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="77.76" y="443.52" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_24">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="70.76" y="447.888164" transform="rotate(-0 70.76 447.888164)">0</text>
+     </g>
+    </g>
+    <g id="ytick_11">
+     <g id="line2d_17">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="77.76" y="400.117701" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_25">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="70.76" y="404.485865" transform="rotate(-0 70.76 404.485865)">20</text>
+     </g>
+    </g>
+    <g id="ytick_12">
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="77.76" y="356.715402" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_26">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="70.76" y="361.083566" transform="rotate(-0 70.76 361.083566)">40</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_13">
+    <path d="M 92.745646 443.52 
+L 192.649952 443.52 
+L 192.649952 369.387151 
+L 92.745646 369.387151 
+z
+" clip-path="url(#pcce081f64b)" style="fill: #3566b7"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 292.554258 443.52 
+L 392.458565 443.52 
+L 392.458565 348.003274 
+L 292.554258 348.003274 
+z
+" clip-path="url(#pcce081f64b)" style="fill: #138675"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 77.76 443.52 
+L 77.76 317.653333 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 77.76 443.52 
+L 407.444211 443.52 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_27">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Arial'; text-anchor: start" x="34.901053" y="302.549333" transform="rotate(-0 34.901053 302.549333)">c</text>
+   </g>
+   <g id="text_28">
+    <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="142.697799" y="359.309761" transform="rotate(-0 142.697799 359.309761)">34.161</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="342.506411" y="337.925883" transform="rotate(-0 342.506411 337.925883)">44.015</text>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="77.76" y="302.653333" transform="rotate(-0 77.76 302.653333)">平均累计任务耗时（秒/题）</text>
+   </g>
+  </g>
+  <g id="axes_4">
+   <g id="patch_17">
+    <path d="M 499.755789 443.52 
+L 829.44 443.52 
+L 829.44 317.653333 
+L 499.755789 317.653333 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_7">
+    <g id="xtick_7">
+     <g id="line2d_19">
+      <g>
+       <use xlink:href="#m430695546d" x="564.693589" y="443.52" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_31">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(541.297339 460.607617)">单Agent</text>
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(528.693589 473.760977)">有界迭代基线</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_20">
+      <g>
+       <use xlink:href="#m430695546d" x="764.502201" y="443.52" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_32">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(741.105951 460.513867)">多Agent</text>
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif" transform="translate(722.502201 473.714102)">四角色证据协作</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_8">
+    <g id="ytick_13">
+     <g id="line2d_21">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="499.755789" y="443.52" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_33">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="492.755789" y="447.888164" transform="rotate(-0 492.755789 447.888164)">0</text>
+     </g>
+    </g>
+    <g id="ytick_14">
+     <g id="line2d_22">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="499.755789" y="404.791795" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_34">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="492.755789" y="409.159959" transform="rotate(-0 492.755789 409.159959)">2</text>
+     </g>
+    </g>
+    <g id="ytick_15">
+     <g id="line2d_23">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="499.755789" y="366.06359" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_35">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="492.755789" y="370.431754" transform="rotate(-0 492.755789 370.431754)">4</text>
+     </g>
+    </g>
+    <g id="ytick_16">
+     <g id="line2d_24">
+      <g>
+       <use xlink:href="#m86e2e060c0" x="499.755789" y="327.335385" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_36">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end" x="492.755789" y="331.703549" transform="rotate(-0 492.755789 331.703549)">6</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_18">
+    <path d="M 514.741435 443.52 
+L 614.645742 443.52 
+L 614.645742 346.699487 
+L 514.741435 346.699487 
+z
+" clip-path="url(#pc768ac3b54)" style="fill: #3566b7"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 714.550048 443.52 
+L 814.454354 443.52 
+L 814.454354 443.52 
+L 714.550048 443.52 
+z
+" clip-path="url(#pc768ac3b54)" style="fill: #138675"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 499.755789 443.52 
+L 499.755789 317.653333 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_21">
+    <path d="M 499.755789 443.52 
+L 829.44 443.52 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_37">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Arial'; text-anchor: start" x="456.896842" y="302.549333" transform="rotate(-0 456.896842 302.549333)">d</text>
+   </g>
+   <g id="text_38">
+    <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="564.693589" y="336.622097" transform="rotate(-0 564.693589 336.622097)">5.0</text>
+   </g>
+   <g id="text_39">
+    <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="764.502201" y="433.442609" transform="rotate(-0 764.502201 433.442609)">0.0</text>
+   </g>
+   <g id="text_40">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="499.755789" y="302.653333" transform="rotate(-0 499.755789 302.653333)">最新尚未通过题目比例（%）</text>
+   </g>
+  </g>
+  <g id="text_41">
+   <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="77.76" y="34.56" transform="rotate(-0 77.76 34.56)">最新累计修复成果与迭代消耗</text>
+  </g>
+  <g id="text_42">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="77.76" y="63.36" transform="rotate(-0 77.76 63.36)">两组各40题；多Agent含3次关联补跑，原运行与补跑消耗均计入</text>
+  </g>
+  <g id="text_43">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="77.76" y="501.12" transform="rotate(-0 77.76 501.12)">补跑版本及资源上限发生变化，本图不是同条件首试因果对照。</text>
+  </g>
+  <g id="text_44">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="77.76" y="524.16" transform="rotate(-0 77.76 524.16)">d为最新尚未通过题目比例，非历史移交包比例，非人工实际介入率。</text>
+  </g>
+  <g id="text_45">
+   <text style="font-size: 10px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #526175" x="77.76" y="547.2" transform="rotate(-0 77.76 547.2)">来源：平台最新记录只读导出；原始80条运行与3条恢复均保留。</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pcf8c84cd56">
+   <rect x="77.76" y="103.68" width="329.684211" height="125.866667"/>
+  </clipPath>
+  <clipPath id="p7ba800e8f5">
+   <rect x="499.755789" y="103.68" width="329.684211" height="125.866667"/>
+  </clipPath>
+  <clipPath id="pcce081f64b">
+   <rect x="77.76" y="317.653333" width="329.684211" height="125.866667"/>
+  </clipPath>
+  <clipPath id="pc768ac3b54">
+   <rect x="499.755789" y="317.653333" width="329.684211" height="125.866667"/>
+  </clipPath>
+ </defs>
+</svg>

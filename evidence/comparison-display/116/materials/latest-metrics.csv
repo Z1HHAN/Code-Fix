@@ -1,0 +1,3 @@
+﻿arm,planned,success,success_percent,original_success,followup_runs,requests,average_requests,total_seconds,average_seconds,latest_unresolved,latest_unresolved_percent,human_actual_intervention_rate,historical_handoff_packages,historical_handoff_percent,known_subtotal,unknown_requests_or_runs,reserved_cny,total
+single,40,38,95,38,0,49,1.225,1366.431745,34.160793625000004,2,5,,2,5,0.147057,0,0,0.147057
+dynamic,40,40,100,37,3,112,2.8,1760.583729,44.014593225,0,0,,3,7.5,0.343609,1,0.084076,

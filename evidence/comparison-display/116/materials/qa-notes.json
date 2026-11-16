@@ -1,0 +1,13 @@
+{
+  "scope": "PPT/manual-reference derived figure, not journal submission package",
+  "backend": "Python/matplotlib; adapted project fig113, no external image asset",
+  "unit": "40 distinct tasks/arm; original80 plus all3 approved followups; no exclusion",
+  "uncertainty": "one experiment series, no repeat statistics or significance claims",
+  "fourth_panel": "latest unresolved sample coverage 5%/0%; not human intervention",
+  "alignment": "PASS",
+  "pdf_glyph_floor_pt": 10,
+  "collision_audit": "0 FAIL / 0 WARN; contained bar overlays reviewed",
+  "source_preflight": "ready; 2 reviewed warnings: no TIFF and width304.8mm; intentional PPT/reference PNG/SVG/PDF",
+  "visual_review": "all four panels and complete rendered PNG visually inspected; labels, values and footer legible",
+  "reference_sha256": "9a682a73d3b8958f591bf62146ec7358a2cfb6aee8d2b0ef0f39dccfe3cde0a4"
+}

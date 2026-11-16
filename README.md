@@ -1,5 +1,7 @@
 # 验链 Code Fix
 
+116：实际安装0.3.5-dev已区分当前尚未通过题目（单2/40、多0/40）与历史移交包；单Agent明确为有界迭代基线。最新累计仍为单38/40、多40/40（含3次补跑）。[人工修订参考](docs/2026-11-03_项目持续维护/论文与PPT人工修订参考.md)及[累计四指标图](evidence/comparison-display/116/materials/latest-four-metrics.png)已同步，原论文PPT不改。
+
 115：实验对照已更新到实际安装版0.3.4-dev，默认显示含关联补跑的最新累计结果：单Agent38/40、多Agent40/40。可切回原批次；费用分列已知小计和待核对预留，逐题可追溯原运行与补跑。累计消耗包含补跑，不作为同条件首试收益。见[唯一台账](docs/2026-11-03_项目持续维护/当前开发任务台账.md)和[实际窗口](evidence/comparison-display/115/installed/actual-installed.png)。
 
 114：实验对照页已更新至本机实际安装版0.3.3-dev，自动载入完整同条件记录，单左多右展示指标、差值和逐题证据；空计划收起到高级管理。183条任务与5份对照原记录保留，无新增模型调用。详见[唯一台账](docs/2026-11-03_项目持续维护/当前开发任务台账.md)及[实际安装截图](evidence/comparison-display/114/installed/actual-installed.png)。
