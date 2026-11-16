@@ -82,6 +82,7 @@ class ComparisonStore:
         self.store = store
         with store.connect() as db:
             db.execute('CREATE TABLE IF NOT EXISTS comparisons (comparison_id TEXT PRIMARY KEY, payload TEXT NOT NULL)')
+            db.execute('CREATE TABLE IF NOT EXISTS comparison_followups (comparison_id TEXT NOT NULL, run_id TEXT NOT NULL, project TEXT NOT NULL, arm TEXT NOT NULL, payload TEXT NOT NULL, PRIMARY KEY(comparison_id,run_id))')
 
     def _run(self, rid, project, strategy, scope):
         run = self.store.snapshot(rid)
@@ -250,7 +251,10 @@ class ComparisonStore:
                            'handoff_missing_evidence': missing,
                            'human_acceptance_records': accepted,
                            'denominator': len(rows)}
+        from .comparison_updates import latest, costs
         return {'comparison_id': identifier, 'groups': groups,
+                'latest': latest(self, identifier),
+                'cost_details': {arm: costs(self.store, [p[arm] for p in data['pairs'] if p[arm]['run_id']]) for arm in data.get('arms', STRATEGIES)},
                 'definition': '人工移交包生成比例，不表示人工实际介入或处理完成；均值按已运行任务计算'}
 
 

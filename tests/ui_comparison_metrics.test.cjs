@@ -36,3 +36,8 @@ test('means use actual recorded runs and handoff percentage needs matching evide
  s=metrics.statistics(data,'single',{comparison_id:'id',groups:{single:{handoff_rate:.5,handoff_packages:1}}});
  assert.equal(s.handoffRate,.5);assert.equal(s.handoffs,1);
 });
+
+test('latest means count original plus followup time over original sample count',()=>{
+ const data={view:'latest_cumulative',summary:{dynamic:{ran:2,requests:8,elapsed_seconds:50,cost:{cny:{total:null}}}},pairs:[{paired:true,dynamic:{run_id:'new',elapsed_seconds:10}}]};
+ const s=metrics.statistics(data,'dynamic',null);assert.equal(s.averageCalls,4);assert.equal(s.averageSeconds,25);
+});

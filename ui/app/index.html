@@ -34,7 +34,7 @@
 <div class="panel comparison-panel">
 <div class="section-head"><div><h2>单Agent与多Agent实验对照</h2><p>默认显示已有完整结果：左侧单Agent，右侧多Agent。查看、刷新和导出不会启动任务。</p></div><button id="comparison-refresh" class="btn">刷新结果</button></div>
 <div class="comparison-kinds"><label class="field">对照类型<select id="comparison-kind"><option value="agents">单Agent与多Agent</option><option value="strategies">固定顺序与动态编排</option></select></label><label class="field">结果记录<select id="comparison-record"><option value="">正在读取已有结果</option></select></label></div>
-<p id="comparison-message" role="status"></p>
+<label class="field">结果视图<select id="comparison-view"><option value="latest">最新记录（含关联补跑）</option><option value="original">原始批次记录</option></select></label><p id="comparison-message" role="status"></p>
 <div id="comparison-results" hidden><h3 id="comparison-title"></h3><p id="comparison-basis"></p><p id="comparison-progress" class="comparison-progress" role="status" hidden></p>
 <div id="comparison-scorecards" class="comparison-scorecards"></div><h3>两组指标并排比较</h3><div id="comparison-differences" class="table-scroll comparison-differences"></div>
 <p id="comparison-facts" class="comparison-facts"></p><canvas id="comparison-chart" width="1200" height="720" role="img" aria-label="两组通过率、调用、耗时、移交及费用对照；完整数值见表格"></canvas><div id="comparison-downloads" class="comparison-actions"></div>

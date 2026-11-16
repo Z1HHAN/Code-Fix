@@ -117,9 +117,12 @@ def create_app(root=None):
         return comparisons.metrics(comparison_id)
 
     @app.get('/api/v3/comparisons/{comparison_id}/export')
-    def comparison_export(comparison_id: str, format: str = 'json'):
+    def comparison_export(comparison_id: str, format: str = 'json', view: str = 'original'):
         import json
-        data = comparisons.get(comparison_id)
+        if view not in {'original', 'latest'}:
+            raise HTTPException(422, 'view须为original/latest')
+        from .comparison_updates import latest
+        data = latest(comparisons, comparison_id) if view == 'latest' else comparisons.get(comparison_id)
         if format not in {'json', 'csv'}:
             raise HTTPException(422, '服务端提供json/csv；PNG由页面使用同一快照导出')
         content = export_csv(data) if format == 'csv' else json.dumps(data, ensure_ascii=False, indent=2)

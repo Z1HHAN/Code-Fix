@@ -4,7 +4,7 @@
   function names(data){return data.kind==='agents'?{single:'单Agent · 修复员',dynamic:'多Agent · 证据协作'}:{fixed:'固定顺序',dynamic:'动态编排'};}
   function totals(data,arm){
     const rows=data.pairs.map(p=>p[arm]).filter(r=>r.run_id);
-    return {elapsed:rows.length&&rows.every(r=>r.elapsed_seconds!=null)?rows.reduce((a,r)=>a+r.elapsed_seconds,0):null,
+    return {elapsed:data.view==='latest_cumulative'?data.summary[arm].elapsed_seconds:rows.length&&rows.every(r=>r.elapsed_seconds!=null)?rows.reduce((a,r)=>a+r.elapsed_seconds,0):null,
       cost:data.summary[arm].cost.cny.total,
       unpaired:data.pairs.filter(p=>!p.paired).length};
   }
@@ -19,7 +19,7 @@
   }
   function statistics(data,arm,extra){
     const sum=data.summary[arm],t=totals(data,arm),n=sum.ran??data.pairs.filter(p=>p[arm].run_id).length;
-    const h=extra?.comparison_id===data.comparison_id?extra.groups?.[arm]:null;
+    const h=extra&&extra.comparison_id===data.comparison_id?extra.groups?.[arm]:null;
     return {...t,averageCalls:n&&Number.isFinite(sum.requests)?sum.requests/n:null,averageSeconds:n&&t.elapsed!=null?t.elapsed/n:null,
       handoffRate:h?.handoff_rate??null,handoffs:h?.handoff_packages??null};
   }
