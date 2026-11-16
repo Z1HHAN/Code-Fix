@@ -1,0 +1,36 @@
+[
+  {
+    "comparison_id": "cmp-e9de35fdb1220caf3f6eee7bfc1c200940f8065f5e31c9ac28064394dd90be63",
+    "followup_ids": [
+      "run-ade9661288014e968785c02418ef4721",
+      "run-4d1c4575e3d343db832af2057fdb2a41",
+      "run-17496b4c92ce4911a42be3b8d03c0c81"
+    ],
+    "single": 38,
+    "multi": 40,
+    "requests": 112,
+    "cost": {
+      "known_subtotal": "0.343609",
+      "unknown_requests_or_runs": 1,
+      "reserved_cny": "0.084076",
+      "total": null
+    }
+  },
+  {
+    "comparison_id": "cmp-1ad4c2e4a859ae04beadcec93d914adb20e02c72eb4ae00a4feeaf0c312c72f0",
+    "followup_ids": [
+      "run-ade9661288014e968785c02418ef4721",
+      "run-4d1c4575e3d343db832af2057fdb2a41",
+      "run-17496b4c92ce4911a42be3b8d03c0c81"
+    ],
+    "single": 38,
+    "multi": 40,
+    "requests": 112,
+    "cost": {
+      "known_subtotal": "0.343609",
+      "unknown_requests_or_runs": 1,
+      "reserved_cny": "0.084076",
+      "total": null
+    }
+  }
+]
