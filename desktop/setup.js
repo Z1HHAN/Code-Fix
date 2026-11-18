@@ -28,7 +28,7 @@ function value(){
 }
 function lock(active){busy=active;for(const element of $('settings').querySelectorAll('input,select,textarea,button'))element.disabled=active;$('confirm-prices').disabled=active||!priceDraft?.length;}
 async function check(mode){
-  if(busy)return;lock(true);$('message').textContent=mode==='test_model'?'正在发送一次模型测试，最多等待30秒，不自动重试…':'正在检查连接，不生成模型内容…';
+  if(busy)return;lock(true);$('message').textContent=mode==='test_model'?'正在检查预算和模型连接，最多等待30秒，最多发送一次测试请求…':'正在检查连接，不生成模型内容…';
   try{const r=await window.desktopSettings.check(mode,value());if(!r.ok){$('message').textContent=r.error;$('message').scrollIntoView({block:'center'});return;}
     show(r.result);$('message').textContent=r.result.ready?'本次检查通过。真实模型调用与隔离检查相互独立。':'有条件未满足，请查看逐项处理方式。';
   }catch{$('message').textContent='连接检查未完成，请重试。';}finally{lock(false);}

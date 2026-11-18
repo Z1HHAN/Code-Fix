@@ -12,6 +12,12 @@ def settings_for_profile(profile, key, base_url):
         raise ModelBlocked('个人模式尚未启用')
     usage = os.environ.get('CODE_FIX_PERSONAL_BUDGET') == 'usage'
     price = profile.get('personal_pricing')
+    authorization_id = os.environ.get('CODE_FIX_PERSONAL_AUTHORIZATION_ID')
+    authorization_limit = os.environ.get('CODE_FIX_PERSONAL_AUTHORIZATION_LIMIT')
+    if bool(authorization_id) != bool(authorization_limit):
+        raise ModelBlocked('累计授权编号和金额上限须同时配置')
+    if authorization_id and (usage or not price or price.get('currency') != 'CNY'):
+        raise ModelBlocked('原累计授权须使用人民币金额预算及对应模型价格')
     if price and not usage:
         from .personal_pricing import validate_price
         from urllib.parse import urlsplit
@@ -27,9 +33,8 @@ def settings_for_profile(profile, key, base_url):
             currency=price['currency'], personal_pricing=price,
             request_parameters=({'enable_thinking': price['mode'] == 'thinking'}
                 if profile['model'].startswith(('qwen-plus', 'qwen3.5-plus')) else None),
-            authorization_id=os.environ.get('CODE_FIX_PERSONAL_AUTHORIZATION_ID'),
-            authorization_limit=(positive_decimal(os.environ['CODE_FIX_PERSONAL_AUTHORIZATION_LIMIT'])
-                if os.environ.get('CODE_FIX_PERSONAL_AUTHORIZATION_ID') else None))
+            authorization_id=authorization_id,
+            authorization_limit=positive_decimal(authorization_limit) if authorization_id else None)
     return LiveSettings(
         api_key=key, model=profile['model'], base_url=base_url, timeout=60,
         daily_limit=None if usage else positive_decimal(os.environ.get('CODE_FIX_PERSONAL_DAILY_USD')),

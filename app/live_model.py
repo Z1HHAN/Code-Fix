@@ -122,6 +122,8 @@ class Ledger:
             if (db.execute("SELECT 1 FROM calls WHERE status IN ('pending','unknown')").fetchone()
                     or db.execute("SELECT 1 FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()
                     or db.execute("SELECT 1 FROM personal_calls WHERE status IN ('pending','unknown','reserved_unknown')").fetchone()):
+                if db.execute("SELECT 1 FROM personal_calls WHERE status='reserved_unknown'").fetchone():
+                    raise ModelBlocked('历史请求仍有费用预留，请使用原金额预算及适用累计授权，或先对账')
                 unknown = (db.execute("SELECT 1 FROM calls WHERE status='unknown'").fetchone()
                            or db.execute("SELECT 1 FROM cny_calls WHERE status='unknown'").fetchone()
                            or db.execute("SELECT 1 FROM personal_calls WHERE status='unknown'").fetchone())
@@ -211,14 +213,18 @@ class LiveModel:
         self.transport = transport
         self.mode = 'live' if transport is None else 'test_transport'
 
-    async def _request(self, messages, seconds):
+    async def _request(self, messages, seconds, *, ipv4_only=False):
         from .transport_accounting import ACTIVE_TRACE
         trace = ACTIVE_TRACE.get()
         # The outer deadline cancels headers AND the entire body stream. A peer
         # sending one byte per read timeout cannot keep this request alive.
         async with asyncio.timeout(seconds):
-            async with httpx.AsyncClient(transport=self.transport, trust_env=False,
-                                        follow_redirects=False, timeout=seconds) as client:
+            transport = self.transport
+            if transport is None and ipv4_only:
+                transport = httpx.AsyncHTTPTransport(trust_env=False, local_address='0.0.0.0')
+            timeout = httpx.Timeout(seconds, connect=min(8, seconds / 2)) if not ipv4_only else seconds
+            async with httpx.AsyncClient(transport=transport, trust_env=False,
+                                        follow_redirects=False, timeout=timeout) as client:
                 async with client.stream('POST', self.settings.base_url + '/chat/completions',
                         headers={'Authorization': 'Bearer ' + self.settings.api_key},
                         extensions={'trace': trace.callback} if trace else {},
@@ -278,7 +284,7 @@ class LiveModel:
                 token = ACTIVE_TRACE.set(trace)
                 record['attempts'] = attempt
                 try:
-                    value = asyncio.run(self._request(messages, remaining))
+                    value = asyncio.run(self._request(messages, remaining, ipv4_only=attempt == 2))
                     record['transport_attempts'].append(trace.proof())
                     break
                 except Exception as error:

@@ -27,6 +27,28 @@ def test_metadata_only_get_no_generation(value):
     assert result['ready'] and result['models']==['chosen','second']
     assert len(seen)==1 and seen[0].method=='GET' and seen[0].url.path=='/v1/models'
 
+
+def test_metadata_retries_ipv4_after_direct_connection_failure(value, monkeypatch):
+    transports = []
+
+    def make_transport(**options):
+        transports.append(options)
+
+        def fetch(request):
+            assert str(request.url) == value['base_url'] + '/models'
+            if not options.get('local_address'):
+                raise httpx.ConnectError('TLS handshake failed')
+            return httpx.Response(200, json={'data': [{'id': 'chosen'}]})
+
+        return httpx.MockTransport(fetch)
+
+    monkeypatch.setattr(httpx, 'AsyncHTTPTransport', make_transport)
+    monkeypatch.setattr('httpx._client.AsyncHTTPTransport', make_transport)
+    result = discover_models(value)
+    assert result['models'] == ['chosen']
+    assert [options.get('local_address') for options in transports] == [None, '0.0.0.0']
+    assert all(not options['trust_env'] for options in transports)
+
 @pytest.mark.parametrize('status,ready',[(401,False),(403,False),(404,True),(405,True),(429,False),(501,True)])
 def test_metadata_status_has_action(value,status,ready):
     result=discover_models(value,transport=httpx.MockTransport(lambda r:httpx.Response(status)))
@@ -66,6 +88,52 @@ def test_explicit_model_test_independent_of_execution(value,tmp_path):
     assert result['cost']['amount_usd'] is None
     evidence=list((tmp_path/'connection-tests').glob('*/model-call.json'))
     assert len(evidence)==1 and value['api_key'] not in evidence[0].read_text()
+
+
+def test_paid_check_respects_original_authorization_and_preserves_held_charge(value, tmp_path, monkeypatch):
+    import sqlite3
+    from app.connection_checks import check_ledger
+    from app.live_model import Ledger
+    from app.personal_pricing import catalog
+
+    price = next(p for p in catalog() if p['model'] == 'qwen-plus' and p['mode'] == 'non_thinking')
+    value.update(base_url='https://' + price['endpoint_host'] + '/v1', model=price['model'],
+                 model_prices={price['model']: price})
+    ledger = Ledger(tmp_path)
+    with sqlite3.connect(ledger.path) as db:
+        db.execute("""INSERT INTO personal_calls
+            (call_id, run_id, day, created_at, currency, model, price_json, reserved, status, authorization_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                   ('old', 'old', '2026-11-15', '2026-11-15T15:33:22+00:00', 'CNY',
+                    price['model'], json.dumps(price), 84076, 'reserved_unknown', 'original'))
+
+    requests = []
+
+    def fetch(request):
+        requests.append(request)
+        return httpx.Response(200, json={'choices': [{'message': {'content': 'OK'}}],
+            'usage': {'prompt_tokens': 10, 'completion_tokens': 2}})
+
+    transport = httpx.MockTransport(fetch)
+    assert '费用预留' in call_test(value, tmp_path, transport=transport)['checks'][0]['detail']
+    monkeypatch.setenv('CODE_FIX_PERSONAL_BUDGET', 'money')
+    monkeypatch.setenv('CODE_FIX_PERSONAL_DAILY_LIMIT', '5')
+    monkeypatch.setenv('CODE_FIX_PERSONAL_AUTHORIZATION_LIMIT', '5')
+    monkeypatch.setenv('CODE_FIX_PERSONAL_AUTHORIZATION_ID', 'different')
+    assert '跨授权' in call_test(value, tmp_path, transport=transport)['checks'][0]['detail']
+    monkeypatch.setenv('CODE_FIX_PERSONAL_AUTHORIZATION_ID', 'original')
+    monkeypatch.setenv('CODE_FIX_PERSONAL_AUTHORIZATION_LIMIT', '0.084076')
+    assert '累计费用授权上限' in call_test(value, tmp_path, transport=transport)['checks'][0]['detail']
+    assert requests == []
+    monkeypatch.setenv('CODE_FIX_PERSONAL_AUTHORIZATION_LIMIT', '5')
+    assert call_test(value, tmp_path, transport=transport)['ready']
+    assert len(requests) == 1
+    ledger_check = check_ledger(tmp_path)
+    assert ledger_check['status'] == 'warning' and '1条费用待核对' in ledger_check['detail']
+    with sqlite3.connect(ledger.path) as db:
+        rows = db.execute('SELECT status, reserved, actual, authorization_id FROM personal_calls ORDER BY rowid').fetchall()
+    assert rows[0] == ('reserved_unknown', 84076, None, 'original')
+    assert rows[1][0] == 'estimated' and rows[1][3] == 'original'
 
 def test_model_test_requires_consent_and_unknown_usage_blocks_retry(value,tmp_path):
     count=[]

@@ -45,8 +45,8 @@ def http_hint(status, *, model=False):
 
 
 async def _model_metadata(value, transport=None):
-    async with asyncio.timeout(12):
-        async with httpx.AsyncClient(transport=transport, trust_env=False, follow_redirects=False, timeout=8) as client:
+    async def fetch(selected_transport):
+        async with httpx.AsyncClient(transport=selected_transport, trust_env=False, follow_redirects=False, timeout=8) as client:
             async with client.stream('GET', value['base_url']+'/models',
                     headers={'Authorization': 'Bearer '+value['api_key']}) as r:
                 status = r.status_code
@@ -58,6 +58,14 @@ async def _model_metadata(value, transport=None):
                     if len(raw) > 1_048_576:
                         raise ValueError('Metadata response too large')
                 return status, json.loads(raw)
+
+    async with asyncio.timeout(12):
+        try:
+            return await fetch(transport)
+        except (httpx.ConnectError, httpx.ConnectTimeout):
+            if transport is not None:
+                raise
+            return await fetch(httpx.AsyncHTTPTransport(trust_env=False, local_address='0.0.0.0'))
 
 
 def discover_models(value, *, transport=None):
@@ -123,9 +131,9 @@ def check_execution(value, folder, *, runner=None, emit=lambda row: None):
 
 class _TestModel(LiveModel):
     http_status = None
-    async def _request(self, messages, seconds):
+    async def _request(self, messages, seconds, *, ipv4_only=False):
         try:
-            return await super()._request(messages, seconds)
+            return await super()._request(messages, seconds, ipv4_only=ipv4_only)
         except httpx.HTTPStatusError as error:
             self.http_status = error.response.status_code
             raise
@@ -138,16 +146,14 @@ def test_model(value, root, *, transport=None):
     from .personal import settings_for_profile
     from dataclasses import replace
     profile = dict(model=value['model'], max_input_tokens=64000,
-                   max_output_tokens=value['max_output_tokens'], price_version=value['price_version'],
+                   max_output_tokens=min(128, value['max_output_tokens']), price_version=value['price_version'],
                    token_limit_parameter=value['token_parameter'])
     if value.get('model_prices', {}).get(value['model']):
         profile['personal_pricing'] = value['model_prices'][value['model']]
-    settings = settings_for_profile(profile, value['api_key'], value['base_url'])
-    settings = replace(settings, timeout=30, max_output_tokens=min(128, settings.max_output_tokens))
-    ledger = Ledger(root)
-    model = _TestModel(settings, ledger, transport=transport)
     identifier = 'connection-'+uuid.uuid4().hex
     try:
+        settings = replace(settings_for_profile(profile, value['api_key'], value['base_url']), timeout=30)
+        model = _TestModel(settings, Ledger(root), transport=transport)
         record = model.call([{'role': 'user', 'content': 'Reply with OK. This is a connection test.'}],
                             run_id=identifier, call_id=identifier, max_calls=1, deadline=time.monotonic()+30)
     except ModelBlocked as error:
@@ -184,7 +190,7 @@ def check_ledger(root):
         pending += db.execute("SELECT count(*) FROM cny_calls WHERE status IN ('pending','unknown')").fetchone()[0]
         pending += db.execute("SELECT count(*) FROM personal_calls WHERE status IN ('pending','unknown')").fetchone()[0]
         held = db.execute("SELECT count(*) FROM personal_calls WHERE status='reserved_unknown'").fetchone()[0]
-    return item('usage', '调用账本', 'blocked' if pending else 'pass',
+    return item('usage', '调用账本', 'blocked' if pending else 'warning' if held else 'pass',
                 f'有{pending}条请求仍进行中或用量未知' if pending else
                 f'有{held}条费用待核对，已按上限保留预算' if held else '没有进行中或用量未知的请求',
                 '等待请求结算；历史未知需核对后处理，不会自动重试' if pending else

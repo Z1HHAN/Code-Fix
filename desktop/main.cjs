@@ -6,6 +6,13 @@ const {pathToFileURL}=require('node:url');
 const {validate,publicSettings,checkSettings}=require('./settings.cjs');
 let window,child,backendURL,backendLoaded=false,quitting=false,current=null;
 const smoke=process.argv.includes('--smoke-test');
+function modelAuthorizationEnvironment(){
+  const env={};
+  for(const key of ['CODE_FIX_PERSONAL_AUTHORIZATION_ID','CODE_FIX_PERSONAL_AUTHORIZATION_LIMIT']){
+    if(process.env[key])env[key]=process.env[key];
+  }
+  return env;
+}
 function finishSmoke(code){quitting=true;if(child)child.kill();app.exit(code);}
 if(smoke){
   console.log('Desktop smoke: disposable process starting');
@@ -58,6 +65,7 @@ app.whenReady().then(async()=>{
       }
       const resources=app.isPackaged?process.resourcesPath:path.join(__dirname,'build');
       const env={};for(const key of ['SystemRoot','WINDIR','PATH','TEMP','TMP','USERPROFILE'])if(process.env[key])env[key]=process.env[key];
+      if(mode==='test_model')Object.assign(env,modelAuthorizationEnvironment());
       env.CODE_FIX_RUN_ROOT=path.join(app.getPath('userData'),'runs');
       const result=await new Promise((resolve,reject)=>{
         const proc=spawn(path.join(resources,'python','python.exe'),['-I','-B','-X','utf8',path.join(resources,'backend','desktop-check.py')],
@@ -99,6 +107,7 @@ app.whenReady().then(async()=>{
     const env={};
     for(const key of ['SystemRoot','SYSTEMROOT','WINDIR','COMSPEC','SYSTEMDRIVE','PATH','TEMP','TMP','USERPROFILE','APPDATA','LOCALAPPDATA'])if(process.env[key])env[key]=process.env[key];
     Object.assign(env,{PYTHONUTF8:'1',PYTHONNOUSERSITE:'1',PYTHONDONTWRITEBYTECODE:'1',
+      ...modelAuthorizationEnvironment(),
       CODE_FIX_PERSONAL_MODE:'1',CODE_FIX_PERSONAL_BASE_URL:settings.base_url,CODE_FIX_PERSONAL_KEY:settings.api_key,
       CODE_FIX_PERSONAL_APPROVED:'1',CODE_FIX_LIVE_APPROVED:'1',CODE_FIX_EXECUTION_APPROVED:'1',
       CODE_FIX_EXECUTION_URL:settings.execution_url,CODE_FIX_EXECUTION_TOKEN:settings.execution_token,
