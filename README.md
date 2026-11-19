@@ -1,8 +1,17 @@
 # 验链 Code Fix
 
-本机桌面模型连接和预算自检修复见[当前开发任务台账119](docs/2026-11-03_项目持续维护/当前开发任务台账.md#t-012t-062-增量1192026-11-19)。公开下载仍为0.3.5-dev预发行。
+## 评委体验入口
 
-第一次使用请读[安装、配置与常见问题](docs/2026-11-03_项目持续维护/首次使用与常见问题.md)。[下载Windows x64安装版](https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/CodeFix-Setup-0.3.5-dev-x64.exe) · [首次使用说明TXT](https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev/FIRST-RUN-GUIDE.txt) · [预发行页面](https://github.com/Z1HHAN/Code-Fix/releases/tag/v0.3.5-dev)。0.3.5-dev为开发预发行，未数字签名；新安装不带开发者账号或历史任务。
+**验链 Code Fix** 是一个面向 Python 缺陷修复的多 Agent 验证工作台。评审时可以查看缺陷复现、角色分工、候选补丁和最终复验，并下载测试证据。
+
+| 入口 | 用途 |
+| --- | --- |
+| [下载 Windows x64 安装包](https://github.com/Z1HHAN/Code-Fix/releases/download/v0.3.5-dev-repair/CodeFix-Setup-0.3.5-dev-repair-x64.exe) | 下载安装修复版，内置 Python |
+| [评委使用说明](docs/2026-11-03_项目持续维护/首次使用与常见问题.md) | 安装、账号配置、首题试跑和结果判读 |
+| [评审素材与实验记录](docs/2026-11-03_项目持续维护/版本与演示素材索引.md) | 无需配置账号即可阅读项目证据 |
+| [GitHub 发行和校验文件](https://github.com/Z1HHAN/Code-Fix/releases/tag/v0.3.5-dev-repair) | 下载说明与 SHA-256 校验文件 |
+
+本版为未签名的开发预发行。真实试跑需要可用的模型 API、管理员发放的执行服务地址和个人访问码。生成调用可能占用模型额度。
 
 117：本轮GitHub同步与main合并记录见[唯一台账](docs/2026-11-03_项目持续维护/当前开发任务台账.md)。最新代码836项Python通过、1项本机符号链接权限跳过，Node86通过；多Agent累计40题、原批次与恢复分开留证。109/111/112三条分支已上传并合入远端main，合并提交`5e698df`，分支保留。安装包131MB不进入Git历史；117时发行API连接失败，118已解决并以发行附件上传，本机0.3.5-dev保持可用；可通过[Windows构建工作流](https://github.com/Z1HHAN/Code-Fix/actions/workflows/windows-desktop.yml)手动构建选定版本。
 
